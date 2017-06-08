@@ -5,7 +5,7 @@ namespace Appleton\Taxes\Countries\US\Alabama;
 use Appleton\Taxes\Classes\BaseTax;
 use Appleton\Taxes\Traits\HasTaxRate;
 
-class HacklebugOccupational extends BaseTax
+class HackleburgOccupational extends BaseTax
 {
     use HasTaxRate;
 
