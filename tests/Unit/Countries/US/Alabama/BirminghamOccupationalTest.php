@@ -6,7 +6,7 @@ use Appleton\Taxes\Countries\US\Alabama\BirminghamOccupational;
 
 class BirminghamOccupationalTest extends \TestCase
 {
-    public function testBirminghamOccupationalt()
+    public function testBirminghamOccupational()
     {
         $taxes = $this->app->make(BirminghamOccupational::class);
 
