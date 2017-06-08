@@ -30,6 +30,7 @@ class AlabamaUnemploymentTest extends \TestCase
 
         $this->assertSame(55.20, $result);
     }
+
     public function testAlabamaUnemploymentMetWageBase()
     {
         $taxes = $this->app->make(AlabamaUnemployment::class);
