@@ -11,6 +11,7 @@ class TaxAreasTest extends \TestCase
         parent::setUp();
         $this->artisan('migrate');
         $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\AttallaSeeder', '--database' => 'testing']);
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\AuburnSeeder', '--database' => 'testing']);
         $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\BirminghamSeeder', '--database' => 'testing']);
     }
 
@@ -23,6 +24,17 @@ class TaxAreasTest extends \TestCase
             ->compute();
 
         $this->assertSame(46.00, $result);
+    }
+
+    public function testAuburn()
+    {
+        $result = TaxArea::atPoint(32.6099, -85.4808)
+            ->first()
+            ->tax
+            ->withEarnings(2300)
+            ->compute();
+
+        $this->assertSame(23.00, $result);
     }
 
     public function testBirmingham()
