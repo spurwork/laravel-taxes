@@ -2,9 +2,9 @@
 
 namespace Appleton\Taxes\Classes;
 
-use Appleton\Taxes\Traits\Withable;
+use Appleton\Taxes\Traits\WithEarnings;
 
 abstract class BaseTax
 {
-    use Withable;
+    use WithEarnings;
 }

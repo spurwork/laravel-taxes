@@ -4,10 +4,11 @@ namespace Appleton\Taxes\Countries\US;
 
 use Appleton\Taxes\Classes\BaseTax;
 use Appleton\Taxes\Traits\HasWageBase;
+use Appleton\Taxes\Traits\WithYtdEarnings;
 
 class SocialSecurity extends BaseTax
 {
-    use HasWageBase;
+    use HasWageBase, WithYtdEarnings;
 
     const TAX_RATE = 0.062;
 

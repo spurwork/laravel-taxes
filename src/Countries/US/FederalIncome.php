@@ -3,11 +3,15 @@
 namespace Appleton\Taxes\Countries\US;
 
 use Appleton\Taxes\Classes\BaseTax;
-use Appleton\Taxes\Traits\TaxBrackets;
+use Appleton\Taxes\Traits\HasTaxBrackets;
+use Appleton\Taxes\Traits\WithExemptions;
+use Appleton\Taxes\Traits\WithFilingStatus;
+use Appleton\Taxes\Traits\WithNonResidentAlien;
+use Appleton\Taxes\Traits\WithPayPeriods;
 
 class FederalIncome extends BaseTax
 {
-    use TaxBrackets;
+    use HasTaxBrackets, WithExemptions, WithFilingStatus, WithNonResidentAlien, WithPayPeriods;
 
     const FILING_SINGLE = 0;
     const FILING_WIDOW = 1;

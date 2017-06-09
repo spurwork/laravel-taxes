@@ -4,10 +4,12 @@ namespace Appleton\Taxes\Countries\US\Alabama;
 
 use Appleton\Taxes\Classes\BaseTax;
 use Appleton\Taxes\Traits\HasWageBase;
+use Appleton\Taxes\Traits\WithTaxRate;
+use Appleton\Taxes\Traits\WithYtdEarnings;
 
 class AlabamaUnemployment extends BaseTax
 {
-    use HasWageBase;
+    use HasWageBase, WithTaxRate, WithYtdEarnings;
 
     const FUTA_CREDIT = 0.054;
 

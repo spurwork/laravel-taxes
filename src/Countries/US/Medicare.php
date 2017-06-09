@@ -3,9 +3,12 @@
 namespace Appleton\Taxes\Countries\US;
 
 use Appleton\Taxes\Classes\BaseTax;
+use Appleton\Taxes\Traits\WithYtdEarnings;
 
 class Medicare extends BaseTax
 {
+    use WithYtdEarnings;
+
     const TAX_RATE = 0.0145;
 
     const ADDITIONAL_TAX_AMOUNT = 200000;

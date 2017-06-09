@@ -23,7 +23,6 @@ class AlabamaIncomeTest extends \TestCase
 
         $result = $taxes
             ->withEarnings(66.68)
-            ->withYtdEarnings(0)
             ->withFilingStatus(AlabamaIncome::FILING_SINGLE)
             ->withPayPeriods(260)
             ->withExemptions(0)

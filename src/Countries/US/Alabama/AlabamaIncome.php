@@ -3,11 +3,15 @@
 namespace Appleton\Taxes\Countries\US\Alabama;
 
 use Appleton\Taxes\Classes\BaseTax;
-use Appleton\Taxes\Traits\TaxBrackets;
+use Appleton\Taxes\Traits\HasTaxBrackets;
+use Appleton\Taxes\Traits\WithExemptions;
+use Appleton\Taxes\Traits\WithFederalIncomeTax;
+use Appleton\Taxes\Traits\WithFilingStatus;
+use Appleton\Taxes\Traits\WithPayPeriods;
 
 class AlabamaIncome extends BaseTax
 {
-    use TaxBrackets;
+    use HasTaxBrackets, WithExemptions, WithFederalIncomeTax, WithFilingStatus, WithPayPeriods;
 
     const FILING_SINGLE = 0;
     const FILING_HEAD_OF_HOUSEHOLD = 2;

@@ -4,10 +4,12 @@ namespace Appleton\Taxes\Countries\US;
 
 use Appleton\Taxes\Classes\BaseTax;
 use Appleton\Taxes\Traits\HasWageBase;
+use Appleton\Taxes\Traits\WithCredit;
+use Appleton\Taxes\Traits\WithYtdEarnings;
 
 class FederalUnemployment extends BaseTax
 {
-    use HasWageBase;
+    use HasWageBase, WithCredit, WithYtdEarnings;
 
     const TAX_RATE = 0.06;
     const WAGE_BASE = 7000;

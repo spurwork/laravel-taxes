@@ -14,30 +14,30 @@ class TaxAreasTest extends \TestCase
 
     public function testUS()
     {
-        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\USSeeder', '--database' => 'testing']);
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\US\USSeeder', '--database' => 'testing']);
 
         $tax_areas = TaxArea::atPoint(38.9072, -77.0369)->get();
 
-        $this->assertSame('Federal Income Tax', $tax_areas[0]->name);
-        $this->assertSame('Federal Unemployment Tax', $tax_areas[1]->name);
+        $this->assertSame('Federal Income Tax', $tax_areas[4]->name);
+        $this->assertSame('Federal Unemployment Tax', $tax_areas[3]->name);
         $this->assertSame('Medicare Tax', $tax_areas[2]->name);
-        $this->assertSame('Medicare Employer Tax', $tax_areas[3]->name);
-        $this->assertSame('Social Security Tax', $tax_areas[4]->name);
+        $this->assertSame('Medicare Employer Tax', $tax_areas[1]->name);
+        $this->assertSame('Social Security Tax', $tax_areas[0]->name);
     }
 
     public function testAlabama()
     {
-        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\AlabamaSeeder', '--database' => 'testing']);
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\US\Alabama\AlabamaSeeder', '--database' => 'testing']);
 
         $tax_areas = TaxArea::atPoint(32.3182, -86.9023)->get();
 
-        $this->assertSame('Alabama Income Tax', $tax_areas[0]->name);
-        $this->assertSame('Alabama Unemployment Tax', $tax_areas[1]->name);
+        $this->assertSame('Alabama Income Tax', $tax_areas[1]->name);
+        $this->assertSame('Alabama Unemployment Tax', $tax_areas[0]->name);
     }
 
     public function testAttalla()
     {
-        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\AttallaSeeder', '--database' => 'testing']);
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\US\Alabama\AttallaSeeder', '--database' => 'testing']);
 
         $tax_areas = TaxArea::atPoint(34.0218, -86.0886)->get();
 
@@ -46,7 +46,7 @@ class TaxAreasTest extends \TestCase
 
     public function testAuburn()
     {
-        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\AuburnSeeder', '--database' => 'testing']);
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\US\Alabama\AuburnSeeder', '--database' => 'testing']);
 
         $tax_areas = TaxArea::atPoint(32.6099, -85.4808)->get();
 
@@ -55,7 +55,7 @@ class TaxAreasTest extends \TestCase
 
     public function testBearCreek()
     {
-        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\BearCreekSeeder', '--database' => 'testing']);
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\US\Alabama\BearCreekSeeder', '--database' => 'testing']);
 
         $tax_areas = TaxArea::atPoint(34.2748, -87.7006)->get();
 
@@ -64,7 +64,7 @@ class TaxAreasTest extends \TestCase
 
     public function testBessemer()
     {
-        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\BessemerSeeder', '--database' => 'testing']);
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\US\Alabama\BessemerSeeder', '--database' => 'testing']);
 
         $tax_areas = TaxArea::atPoint(33.4018, -86.9544)->get();
 
@@ -73,7 +73,7 @@ class TaxAreasTest extends \TestCase
 
     public function testBirmingham()
     {
-        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\BirminghamSeeder', '--database' => 'testing']);
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\US\Alabama\BirminghamSeeder', '--database' => 'testing']);
 
         $tax_areas = TaxArea::atPoint(33.5207, -86.8025)->get();
 
@@ -82,7 +82,7 @@ class TaxAreasTest extends \TestCase
 
     public function testBrilliant()
     {
-        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\BrilliantSeeder', '--database' => 'testing']);
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\US\Alabama\BrilliantSeeder', '--database' => 'testing']);
 
         $tax_areas = TaxArea::atPoint(34.0254, -87.7584)->get();
 
@@ -91,7 +91,7 @@ class TaxAreasTest extends \TestCase
 
     public function testFairfield()
     {
-        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\FairfieldSeeder', '--database' => 'testing']);
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\US\Alabama\FairfieldSeeder', '--database' => 'testing']);
 
         $tax_areas = TaxArea::atPoint(33.4859, -86.9119)->get();
 
@@ -100,7 +100,7 @@ class TaxAreasTest extends \TestCase
 
     public function testGadsden()
     {
-        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\GadsdenSeeder', '--database' => 'testing']);
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\US\Alabama\GadsdenSeeder', '--database' => 'testing']);
 
         $tax_areas = TaxArea::atPoint(34.0143, -86.0066)->get();
 
@@ -109,7 +109,7 @@ class TaxAreasTest extends \TestCase
 
     public function testGlencoe()
     {
-        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\GlencoeSeeder', '--database' => 'testing']);
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\US\Alabama\GlencoeSeeder', '--database' => 'testing']);
 
         $tax_areas = TaxArea::atPoint(33.9570, -85.932)->get();
 
@@ -118,7 +118,7 @@ class TaxAreasTest extends \TestCase
 
     public function testGoodwater()
     {
-        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\GoodwaterSeeder', '--database' => 'testing']);
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\US\Alabama\GoodwaterSeeder', '--database' => 'testing']);
 
         $tax_areas = TaxArea::atPoint(33.0657, -86.0533)->get();
 
@@ -127,7 +127,7 @@ class TaxAreasTest extends \TestCase
 
     public function testGuin()
     {
-        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\GuinSeeder', '--database' => 'testing']);
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\US\Alabama\GuinSeeder', '--database' => 'testing']);
 
         $tax_areas = TaxArea::atPoint(33.9657, -87.9147)->get();
 
@@ -136,7 +136,7 @@ class TaxAreasTest extends \TestCase
 
     public function testHackleburg()
     {
-        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\HackleburgSeeder', '--database' => 'testing']);
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\US\Alabama\HackleburgSeeder', '--database' => 'testing']);
 
         $tax_areas = TaxArea::atPoint(34.2773, -87.8286)->get();
 
@@ -145,7 +145,7 @@ class TaxAreasTest extends \TestCase
 
     public function testHaleyville()
     {
-        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\HaleyvilleSeeder', '--database' => 'testing']);
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\US\Alabama\HaleyvilleSeeder', '--database' => 'testing']);
 
         $tax_areas = TaxArea::atPoint(34.2265, -87.6214)->get();
 
@@ -154,7 +154,7 @@ class TaxAreasTest extends \TestCase
 
     public function testHamilton()
     {
-        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\HamiltonSeeder', '--database' => 'testing']);
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\US\Alabama\HamiltonSeeder', '--database' => 'testing']);
 
         $tax_areas = TaxArea::atPoint(34.1423, -87.9886)->get();
 
@@ -163,7 +163,7 @@ class TaxAreasTest extends \TestCase
 
     public function testLeeds()
     {
-        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\LeedsSeeder', '--database' => 'testing']);
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\US\Alabama\LeedsSeeder', '--database' => 'testing']);
 
         $tax_areas = TaxArea::atPoint(33.5482, -86.5444)->get();
 
@@ -172,7 +172,7 @@ class TaxAreasTest extends \TestCase
 
     public function testLynn()
     {
-        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\LynnSeeder', '--database' => 'testing']);
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\US\Alabama\LynnSeeder', '--database' => 'testing']);
 
         $tax_areas = TaxArea::atPoint(34.0470, -87.5497)->get();
 
@@ -181,7 +181,7 @@ class TaxAreasTest extends \TestCase
 
     public function testMidfield()
     {
-        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\MidfieldSeeder', '--database' => 'testing']);
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\US\Alabama\MidfieldSeeder', '--database' => 'testing']);
 
         $tax_areas = TaxArea::atPoint(33.4615, -86.9089)->get();
 
@@ -190,7 +190,7 @@ class TaxAreasTest extends \TestCase
 
     public function testMosses()
     {
-        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\MossesSeeder', '--database' => 'testing']);
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\US\Alabama\MossesSeeder', '--database' => 'testing']);
 
         $tax_areas = TaxArea::atPoint(32.1793, -86.6737)->get();
 
@@ -199,7 +199,7 @@ class TaxAreasTest extends \TestCase
 
     public function testOpelika()
     {
-        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\OpelikaSeeder', '--database' => 'testing']);
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\US\Alabama\OpelikaSeeder', '--database' => 'testing']);
 
         $tax_areas = TaxArea::atPoint(32.6454, -85.3783)->get();
 
@@ -208,7 +208,7 @@ class TaxAreasTest extends \TestCase
 
     public function testRainbowCity()
     {
-        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\RainbowCitySeeder', '--database' => 'testing']);
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\US\Alabama\RainbowCitySeeder', '--database' => 'testing']);
 
         $tax_areas = TaxArea::atPoint(33.9548, -86.0419)->get();
 
@@ -217,7 +217,7 @@ class TaxAreasTest extends \TestCase
 
     public function testRedBay()
     {
-        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\RedBaySeeder', '--database' => 'testing']);
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\US\Alabama\RedBaySeeder', '--database' => 'testing']);
 
         $tax_areas = TaxArea::atPoint(34.4398, -88.1409)->get();
 
@@ -226,7 +226,7 @@ class TaxAreasTest extends \TestCase
 
     public function testShorter()
     {
-        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\ShorterSeeder', '--database' => 'testing']);
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\US\Alabama\ShorterSeeder', '--database' => 'testing']);
 
         $tax_areas = TaxArea::atPoint(32.3951, -85.9184)->get();
 
@@ -235,7 +235,7 @@ class TaxAreasTest extends \TestCase
 
     public function testSouthside()
     {
-        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\SouthsideSeeder', '--database' => 'testing']);
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\US\Alabama\SouthsideSeeder', '--database' => 'testing']);
 
         $tax_areas = TaxArea::atPoint(33.9245, -86.0225)->get();
 
@@ -244,7 +244,7 @@ class TaxAreasTest extends \TestCase
 
     public function testSulligent()
     {
-        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\SulligentSeeder', '--database' => 'testing']);
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\US\Alabama\SulligentSeeder', '--database' => 'testing']);
 
         $tax_areas = TaxArea::atPoint(33.9018, -88.1345)->get();
 
@@ -253,7 +253,7 @@ class TaxAreasTest extends \TestCase
 
     public function testTuskegee()
     {
-        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\TuskegeeSeeder', '--database' => 'testing']);
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\US\Alabama\TuskegeeSeeder', '--database' => 'testing']);
 
         $tax_areas = TaxArea::atPoint(32.4302, -85.7077)->get();
 
