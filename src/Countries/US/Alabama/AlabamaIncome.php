@@ -13,6 +13,9 @@ class AlabamaIncome extends BaseTax
 {
     use HasTaxBrackets, WithExemptions, WithFederalIncomeTax, WithFilingStatus, WithPayPeriods;
 
+    const TYPE = 'state';
+    const WITHHELD = true;
+
     const FILING_SINGLE = 0;
     const FILING_HEAD_OF_HOUSEHOLD = 2;
     const FILING_MARRIED = 3;
