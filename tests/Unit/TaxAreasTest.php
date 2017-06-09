@@ -10,330 +10,253 @@ class TaxAreasTest extends \TestCase
     {
         parent::setUp();
         $this->artisan('migrate');
-        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\AttallaSeeder', '--database' => 'testing']);
-        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\AuburnSeeder', '--database' => 'testing']);
-        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\BearCreekSeeder', '--database' => 'testing']);
-        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\BessemerSeeder', '--database' => 'testing']);
-        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\BirminghamSeeder', '--database' => 'testing']);
-        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\BrilliantSeeder', '--database' => 'testing']);
-        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\FairfieldSeeder', '--database' => 'testing']);
-        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\GadsdenSeeder', '--database' => 'testing']);
-        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\GlencoeSeeder', '--database' => 'testing']);
-        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\GoodwaterSeeder', '--database' => 'testing']);
-        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\GuinSeeder', '--database' => 'testing']);
-        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\HackleburgSeeder', '--database' => 'testing']);
-        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\HaleyvilleSeeder', '--database' => 'testing']);
-        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\HamiltonSeeder', '--database' => 'testing']);
-        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\LeedsSeeder', '--database' => 'testing']);
-        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\LynnSeeder', '--database' => 'testing']);
-        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\MidfieldSeeder', '--database' => 'testing']);
-        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\MossesSeeder', '--database' => 'testing']);
-        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\OpelikaSeeder', '--database' => 'testing']);
-        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\RainbowCitySeeder', '--database' => 'testing']);
-        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\RedBaySeeder', '--database' => 'testing']);
-        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\ShorterSeeder', '--database' => 'testing']);
-        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\SouthsideSeeder', '--database' => 'testing']);
-        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\SulligentSeeder', '--database' => 'testing']);
-        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\TuskegeeSeeder', '--database' => 'testing']);
+    }
+
+    public function testUS()
+    {
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\USSeeder', '--database' => 'testing']);
+
+        $tax_areas = TaxArea::atPoint(38.9072, -77.0369)->get();
+
+        $this->assertSame('Federal Income Tax', $tax_areas[0]->name);
+        $this->assertSame('Federal Unemployment Tax', $tax_areas[1]->name);
+        $this->assertSame('Medicare Tax', $tax_areas[2]->name);
+        $this->assertSame('Medicare Employer Tax', $tax_areas[3]->name);
+        $this->assertSame('Social Security Tax', $tax_areas[4]->name);
+    }
+
+    public function testAlabama()
+    {
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\AlabamaSeeder', '--database' => 'testing']);
+
+        $tax_areas = TaxArea::atPoint(32.3182, -86.9023)->get();
+
+        $this->assertSame('Alabama Income Tax', $tax_areas[0]->name);
+        $this->assertSame('Alabama Unemployment Tax', $tax_areas[1]->name);
     }
 
     public function testAttalla()
     {
-        $tax_area = TaxArea::atPoint(34.0218, -86.0886)->first();
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\AttallaSeeder', '--database' => 'testing']);
 
-        $result = $tax_area->tax
-            ->withEarnings(2300)
-            ->compute();
+        $tax_areas = TaxArea::atPoint(34.0218, -86.0886)->get();
 
-        $this->assertSame('Attalla, AL', $tax_area->governmentalUnitArea->name);
-        $this->assertSame(46.00, $result);
+        $this->assertSame('Attalla Occupational Tax', $tax_areas[0]->name);
     }
 
     public function testAuburn()
     {
-        $tax_area = TaxArea::atPoint(32.6099, -85.4808)->first();
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\AuburnSeeder', '--database' => 'testing']);
 
-        $result = $tax_area->tax
-            ->withEarnings(2300)
-            ->compute();
+        $tax_areas = TaxArea::atPoint(32.6099, -85.4808)->get();
 
-        $this->assertSame('Auburn, AL', $tax_area->governmentalUnitArea->name);
-        $this->assertSame(23.00, $result);
+        $this->assertSame('Auburn Occupational Tax', $tax_areas[0]->name);
     }
 
     public function testBearCreek()
     {
-        $tax_area = TaxArea::atPoint(34.2748, -87.7006)->first();
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\BearCreekSeeder', '--database' => 'testing']);
 
-        $result = $tax_area->tax
-            ->withEarnings(2300)
-            ->compute();
+        $tax_areas = TaxArea::atPoint(34.2748, -87.7006)->get();
 
-        $this->assertSame('Bear Creek, AL', $tax_area->governmentalUnitArea->name);
-        $this->assertSame(23.00, $result);
+        $this->assertSame('Bear Creek Occupational Tax', $tax_areas[0]->name);
     }
 
     public function testBessemer()
     {
-        $tax_area = TaxArea::atPoint(33.4018, -86.9544)->first();
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\BessemerSeeder', '--database' => 'testing']);
 
-        $result = $tax_area->tax
-            ->withEarnings(2300)
-            ->compute();
+        $tax_areas = TaxArea::atPoint(33.4018, -86.9544)->get();
 
-        $this->assertSame('Bessemer, AL', $tax_area->governmentalUnitArea->name);
-        $this->assertSame(23.00, $result);
+        $this->assertSame('Bessemer Occupational Tax', $tax_areas[0]->name);
     }
 
     public function testBirmingham()
     {
-        $tax_area = TaxArea::atPoint(33.5207, -86.8025)->first();
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\BirminghamSeeder', '--database' => 'testing']);
 
-        $result = $tax_area->tax
-            ->withEarnings(2300)
-            ->compute();
+        $tax_areas = TaxArea::atPoint(33.5207, -86.8025)->get();
 
-        $this->assertSame('Birmingham, AL', $tax_area->governmentalUnitArea->name);
-        $this->assertSame(23.00, $result);
+        $this->assertSame('Birmingham Occupational Tax', $tax_areas[0]->name);
     }
 
     public function testBrilliant()
     {
-        $tax_area = TaxArea::atPoint(34.0254, -87.7584)->first();
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\BrilliantSeeder', '--database' => 'testing']);
 
-        $result = $tax_area->tax
-            ->withEarnings(2300)
-            ->compute();
+        $tax_areas = TaxArea::atPoint(34.0254, -87.7584)->get();
 
-        $this->assertSame('Brilliant, AL', $tax_area->governmentalUnitArea->name);
-        $this->assertSame(23.00, $result);
+        $this->assertSame('Brilliant Occupational Tax', $tax_areas[0]->name);
     }
 
     public function testFairfield()
     {
-        $tax_area = TaxArea::atPoint(33.4859, -86.9119)->first();
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\FairfieldSeeder', '--database' => 'testing']);
 
-        $result = $tax_area->tax
-            ->withEarnings(2300)
-            ->compute();
+        $tax_areas = TaxArea::atPoint(33.4859, -86.9119)->get();
 
-        $this->assertSame('Fairfield, AL', $tax_area->governmentalUnitArea->name);
-        $this->assertSame(23.00, $result);
+        $this->assertSame('Fairfield Occupational Tax', $tax_areas[0]->name);
     }
 
     public function testGadsden()
     {
-        $tax_area = TaxArea::atPoint(34.0143, -86.0066)->first();
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\GadsdenSeeder', '--database' => 'testing']);
 
-        $result = $tax_area->tax
-            ->withEarnings(2300)
-            ->compute();
+        $tax_areas = TaxArea::atPoint(34.0143, -86.0066)->get();
 
-        $this->assertSame('Gadsden, AL', $tax_area->governmentalUnitArea->name);
-        $this->assertSame(46.00, $result);
+        $this->assertSame('Gadsden Occupational Tax', $tax_areas[0]->name);
     }
 
     public function testGlencoe()
     {
-        $tax_area = TaxArea::atPoint(33.9570, -85.932)->first();
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\GlencoeSeeder', '--database' => 'testing']);
 
-        $result = $tax_area->tax
-            ->withEarnings(2300)
-            ->compute();
+        $tax_areas = TaxArea::atPoint(33.9570, -85.932)->get();
 
-        $this->assertSame('Glencoe, AL', $tax_area->governmentalUnitArea->name);
-        $this->assertSame(46.00, $result);
+        $this->assertSame('Glencoe Occupational Tax', $tax_areas[0]->name);
     }
 
     public function testGoodwater()
     {
-        $tax_area = TaxArea::atPoint(33.0657, -86.0533)->first();
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\GoodwaterSeeder', '--database' => 'testing']);
 
-        $result = $tax_area->tax
-            ->withEarnings(2300)
-            ->compute();
+        $tax_areas = TaxArea::atPoint(33.0657, -86.0533)->get();
 
-        $this->assertSame('Goodwater, AL', $tax_area->governmentalUnitArea->name);
-        $this->assertSame(17.25, $result);
+        $this->assertSame('Goodwater Occupational Tax', $tax_areas[0]->name);
     }
 
     public function testGuin()
     {
-        $tax_area = TaxArea::atPoint(33.9657, -87.9147)->first();
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\GuinSeeder', '--database' => 'testing']);
 
-        $result = $tax_area->tax
-            ->withEarnings(2300)
-            ->compute();
+        $tax_areas = TaxArea::atPoint(33.9657, -87.9147)->get();
 
-        $this->assertSame('Guin, AL', $tax_area->governmentalUnitArea->name);
-        $this->assertSame(23.00, $result);
+        $this->assertSame('Guin Occupational Tax', $tax_areas[0]->name);
     }
 
     public function testHackleburg()
     {
-        $tax_area = TaxArea::atPoint(34.2773, -87.8286)->first();
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\HackleburgSeeder', '--database' => 'testing']);
 
-        $result = $tax_area->tax
-            ->withEarnings(2300)
-            ->compute();
+        $tax_areas = TaxArea::atPoint(34.2773, -87.8286)->get();
 
-        $this->assertSame('Hackleburg, AL', $tax_area->governmentalUnitArea->name);
-        $this->assertSame(23.00, $result);
+        $this->assertSame('Hackleburg Occupational Tax', $tax_areas[0]->name);
     }
 
     public function testHaleyville()
     {
-        $tax_area = TaxArea::atPoint(34.2265, -87.6214)->first();
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\HaleyvilleSeeder', '--database' => 'testing']);
 
-        $result = $tax_area->tax
-            ->withEarnings(2300)
-            ->compute();
+        $tax_areas = TaxArea::atPoint(34.2265, -87.6214)->get();
 
-        $this->assertSame('Haleyville, AL', $tax_area->governmentalUnitArea->name);
-        $this->assertSame(23.00, $result);
+        $this->assertSame('Haleyville Occupational Tax', $tax_areas[0]->name);
     }
 
     public function testHamilton()
     {
-        $tax_area = TaxArea::atPoint(34.1423, -87.9886)->first();
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\HamiltonSeeder', '--database' => 'testing']);
 
-        $result = $tax_area->tax
-            ->withEarnings(2300)
-            ->compute();
+        $tax_areas = TaxArea::atPoint(34.1423, -87.9886)->get();
 
-        $this->assertSame('Hamilton, AL', $tax_area->governmentalUnitArea->name);
-        $this->assertSame(23.00, $result);
+        $this->assertSame('Hamilton Occupational Tax', $tax_areas[0]->name);
     }
 
     public function testLeeds()
     {
-        $tax_area = TaxArea::atPoint(33.5482, -86.5444)->first();
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\LeedsSeeder', '--database' => 'testing']);
 
-        $result = $tax_area->tax
-            ->withEarnings(2300)
-            ->compute();
+        $tax_areas = TaxArea::atPoint(33.5482, -86.5444)->get();
 
-        $this->assertSame('Leeds, AL', $tax_area->governmentalUnitArea->name);
-        $this->assertSame(23.00, $result);
+        $this->assertSame('Leeds Occupational Tax', $tax_areas[0]->name);
     }
 
     public function testLynn()
     {
-        $tax_area = TaxArea::atPoint(34.0470, -87.5497)->first();
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\LynnSeeder', '--database' => 'testing']);
 
-        $result = $tax_area->tax
-            ->withEarnings(2300)
-            ->compute();
+        $tax_areas = TaxArea::atPoint(34.0470, -87.5497)->get();
 
-        $this->assertSame('Lynn, AL', $tax_area->governmentalUnitArea->name);
-        $this->assertSame(23.00, $result);
+        $this->assertSame('Lynn Occupational Tax', $tax_areas[0]->name);
     }
 
     public function testMidfield()
     {
-        $tax_area = TaxArea::atPoint(33.4615, -86.9089)->first();
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\MidfieldSeeder', '--database' => 'testing']);
 
-        $result = $tax_area->tax
-            ->withEarnings(2300)
-            ->compute();
+        $tax_areas = TaxArea::atPoint(33.4615, -86.9089)->get();
 
-        $this->assertSame('Midfield, AL', $tax_area->governmentalUnitArea->name);
-        $this->assertSame(23.00, $result);
+        $this->assertSame('Midfield Occupational Tax', $tax_areas[0]->name);
     }
 
     public function testMosses()
     {
-        $tax_area = TaxArea::atPoint(32.1793, -86.6737)->first();
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\MossesSeeder', '--database' => 'testing']);
 
-        $result = $tax_area->tax
-            ->withEarnings(2300)
-            ->compute();
+        $tax_areas = TaxArea::atPoint(32.1793, -86.6737)->get();
 
-        $this->assertSame('Mosses, AL', $tax_area->governmentalUnitArea->name);
-        $this->assertSame(23.00, $result);
+        $this->assertSame('Mosses Occupational Tax', $tax_areas[0]->name);
     }
 
     public function testOpelika()
     {
-        $tax_area = TaxArea::atPoint(32.6454, -85.3783)->first();
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\OpelikaSeeder', '--database' => 'testing']);
 
-        $result = $tax_area->tax
-            ->withEarnings(2300)
-            ->compute();
+        $tax_areas = TaxArea::atPoint(32.6454, -85.3783)->get();
 
-        $this->assertSame('Opelika, AL', $tax_area->governmentalUnitArea->name);
-        $this->assertSame(34.5, $result);
+        $this->assertSame('Opelika Occupational Tax', $tax_areas[0]->name);
     }
 
     public function testRainbowCity()
     {
-        $tax_area = TaxArea::atPoint(33.9548, -86.0419)->first();
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\RainbowCitySeeder', '--database' => 'testing']);
 
-        $result = $tax_area->tax
-            ->withEarnings(2300)
-            ->compute();
+        $tax_areas = TaxArea::atPoint(33.9548, -86.0419)->get();
 
-        $this->assertSame('Rainbow City, AL', $tax_area->governmentalUnitArea->name);
-        $this->assertSame(46.00, $result);
+        $this->assertSame('Rainbow City Occupational Tax', $tax_areas[0]->name);
     }
 
     public function testRedBay()
     {
-        $tax_area = TaxArea::atPoint(34.4398, -88.1409)->first();
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\RedBaySeeder', '--database' => 'testing']);
 
-        $result = $tax_area->tax
-            ->withEarnings(2300)
-            ->compute();
+        $tax_areas = TaxArea::atPoint(34.4398, -88.1409)->get();
 
-        $this->assertSame('Red Bay, AL', $tax_area->governmentalUnitArea->name);
-        $this->assertSame(11.5, $result);
+        $this->assertSame('Red Bay Occupational Tax', $tax_areas[0]->name);
     }
 
     public function testShorter()
     {
-        $tax_area = TaxArea::atPoint(32.3951, -85.9184)->first();
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\ShorterSeeder', '--database' => 'testing']);
 
-        $result = $tax_area->tax
-            ->withEarnings(2300)
-            ->compute();
+        $tax_areas = TaxArea::atPoint(32.3951, -85.9184)->get();
 
-        $this->assertSame('Shorter, AL', $tax_area->governmentalUnitArea->name);
-        $this->assertSame(23.00, $result);
+        $this->assertSame('Shorter Occupational Tax', $tax_areas[0]->name);
     }
 
     public function testSouthside()
     {
-        $tax_area = TaxArea::atPoint(33.9245, -86.0225)->first();
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\SouthsideSeeder', '--database' => 'testing']);
 
-        $result = $tax_area->tax
-            ->withEarnings(2300)
-            ->compute();
+        $tax_areas = TaxArea::atPoint(33.9245, -86.0225)->get();
 
-        $this->assertSame('Southside, AL', $tax_area->governmentalUnitArea->name);
-        $this->assertSame(46.00, $result);
+        $this->assertSame('Southside Occupational Tax', $tax_areas[0]->name);
     }
 
     public function testSulligent()
     {
-        $tax_area = TaxArea::atPoint(33.9018, -88.1345)->first();
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\SulligentSeeder', '--database' => 'testing']);
 
-        $result = $tax_area->tax
-            ->withEarnings(2300)
-            ->compute();
+        $tax_areas = TaxArea::atPoint(33.9018, -88.1345)->get();
 
-        $this->assertSame('Sulligent, AL', $tax_area->governmentalUnitArea->name);
-        $this->assertSame(23.00, $result);
+        $this->assertSame('Sulligent Occupational Tax', $tax_areas[0]->name);
     }
 
     public function testTuskegee()
     {
-        $tax_area = TaxArea::atPoint(32.4302, -85.7077)->first();
+        $this->artisan('db:seed', ['--class' => 'Appleton\Taxes\Seeds\TuskegeeSeeder', '--database' => 'testing']);
 
-        $result = $tax_area->tax
-            ->withEarnings(2300)
-            ->compute();
+        $tax_areas = TaxArea::atPoint(32.4302, -85.7077)->get();
 
-        $this->assertSame('Tuskegee, AL', $tax_area->governmentalUnitArea->name);
-        $this->assertSame(46.00, $result);
+        $this->assertSame('Tuskegee Occupational Tax', $tax_areas[0]->name);
     }
 }
