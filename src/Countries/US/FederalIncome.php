@@ -12,6 +12,9 @@ use Appleton\Taxes\Traits\WithPayPeriods;
 class FederalIncome extends BaseTax
 {
     use HasTaxBrackets, WithExemptions, WithFilingStatus, WithNonResidentAlien, WithPayPeriods;
+    
+    const TYPE = 'federal';
+    const WITHHELD = true;
 
     const FILING_SINGLE = 0;
     const FILING_WIDOW = 1;

@@ -9,6 +9,9 @@ class Medicare extends BaseTax
 {
     use WithYtdEarnings;
 
+    const TYPE = 'federal';
+    const WITHHELD = true;
+
     const TAX_RATE = 0.0145;
 
     const ADDITIONAL_TAX_AMOUNT = 200000;

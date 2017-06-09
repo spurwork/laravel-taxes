@@ -18,11 +18,12 @@ class TaxAreasTest extends \TestCase
 
         $tax_areas = TaxArea::atPoint(38.9072, -77.0369)->get();
 
-        $this->assertSame('Federal Income Tax', $tax_areas[4]->name);
-        $this->assertSame('Federal Unemployment Tax', $tax_areas[3]->name);
-        $this->assertSame('Medicare Tax', $tax_areas[2]->name);
-        $this->assertSame('Medicare Employer Tax', $tax_areas[1]->name);
-        $this->assertSame('Social Security Tax', $tax_areas[0]->name);
+        $this->assertSame('Federal Income Tax', $tax_areas[5]->name);
+        $this->assertSame('Federal Unemployment Tax', $tax_areas[4]->name);
+        $this->assertSame('Medicare Tax', $tax_areas[3]->name);
+        $this->assertSame('Medicare Employer Tax', $tax_areas[2]->name);
+        $this->assertSame('Social Security Tax', $tax_areas[1]->name);
+        $this->assertSame('Social Security Employer Tax', $tax_areas[0]->name);
     }
 
     public function testAlabama()

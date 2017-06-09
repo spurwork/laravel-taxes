@@ -11,6 +11,9 @@ class FederalUnemployment extends BaseTax
 {
     use HasWageBase, WithCredit, WithYtdEarnings;
 
+    const TYPE = 'federal';
+    const WITHHELD = false;
+
     const TAX_RATE = 0.06;
     const WAGE_BASE = 7000;
     

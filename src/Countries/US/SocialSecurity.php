@@ -10,8 +10,10 @@ class SocialSecurity extends BaseTax
 {
     use HasWageBase, WithYtdEarnings;
 
-    const TAX_RATE = 0.062;
+    const TYPE = 'federal';
+    const WITHHELD = true;
 
+    const TAX_RATE = 0.062;
     const WAGE_BASE = 127200;
 
     public function compute()

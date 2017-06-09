@@ -18,6 +18,18 @@ class SocialSecurityTest extends \TestCase
         $this->assertSame(142.60, $result);
     }
 
+    public function testSocialSecurityEmployer()
+    {
+        $taxes = $this->app->make(SocialSecurityEmployer::class);
+
+        $result = $taxes
+            ->withEarnings(2300)
+            ->withYtdEarnings(0)
+            ->compute();
+
+        $this->assertSame(142.60, $result);
+    }
+
     public function testSocialSecurityMetWageBase()
     {
         $taxes = $this->app->make(SocialSecurity::class);

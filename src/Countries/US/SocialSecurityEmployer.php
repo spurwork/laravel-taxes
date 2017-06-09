@@ -3,14 +3,11 @@
 namespace Appleton\Taxes\Countries\US;
 
 use Appleton\Taxes\Classes\BaseTax;
+use Appleton\Taxes\Traits\HasWageBase;
+use Appleton\Taxes\Traits\WithYtdEarnings;
 
-class MedicareEmployer extends Medicare
+class SocialSecurityEmployer extends SocialSecurity
 {
     const TYPE = 'federal';
     const WITHHELD = false;
-
-    public function compute()
-    {
-        return round($this->earnings() * self::TAX_RATE, 2);
-    }
 }

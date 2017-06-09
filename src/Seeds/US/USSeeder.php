@@ -39,6 +39,10 @@ class USSeeder extends Seeder
             'name' => 'Social Security Tax',
             'tax' => SocialSecurity::class,
             'governmental_unit_area_id' => $id,
+        ],[
+            'name' => 'Social Security Employer Tax',
+            'tax' => SocialSecurityEmployer::class,
+            'governmental_unit_area_id' => $id,
         ]]);
     }
 }
