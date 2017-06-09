@@ -7,6 +7,7 @@ use Appleton\Taxes\Countries\US\FederalUnemployment;
 use Appleton\Taxes\Countries\US\Medicare;
 use Appleton\Taxes\Countries\US\MedicareEmployer;
 use Appleton\Taxes\Countries\US\SocialSecurity;
+use Appleton\Taxes\Countries\US\SocialSecurityEmployer;
 use DB;
 use Illuminate\Database\Seeder;
 
