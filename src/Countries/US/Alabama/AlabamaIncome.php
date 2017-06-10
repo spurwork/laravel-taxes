@@ -106,7 +106,7 @@ class AlabamaIncome extends BaseTax
         $deduction = $standard_deduction['amount'];
 
         if ($gross_earnings > $standard_deduction['base']) {
-            $deduction -= $standard_deduction['modifier'] * (($gross_earnings - $standard_deduction['base']) / $standard_deduction['per']);
+            $deduction -= $standard_deduction['modifier']['amount'] * (($gross_earnings - $standard_deduction['base']) / $standard_deduction['modifier']['per']);
         }
 
         return $deduction;
