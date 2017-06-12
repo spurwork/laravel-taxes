@@ -6,6 +6,7 @@ trait HasTaxBrackets
 {
     protected function getTaxBracket($amount, $table)
     {
+        $bracket = end($table);
         foreach ($table as $row) {
             if ($row[0] <= $amount) {
                 $bracket = $row;
