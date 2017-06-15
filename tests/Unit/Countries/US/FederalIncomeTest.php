@@ -130,4 +130,19 @@ class FederalIncomeTest extends \TestCase
 
         $this->assertSame(6.88, $result);
     }
+
+    public function testNonNegative()
+    {
+        $taxes = $this->app->make(FederalIncome::class);
+
+        $result = $taxes
+            ->withEarnings(10)
+            ->withExemptions(1)
+            ->withFilingStatus(FederalIncome::FILING_SINGLE)
+            ->withNonResidentAlien(false)
+            ->withPayPeriods(230)
+            ->compute();
+
+        $this->assertSame(0.0, $result);
+    }
 }
