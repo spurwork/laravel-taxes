@@ -31,4 +31,19 @@ class AlabamaIncomeTest extends \TestCase
 
         $this->assertSame(2.07, $result);
     }
+
+    public function testAlabamaIncomeNonNegative()
+    {
+        $taxes = $this->app->make(AlabamaIncome::class);
+
+        $result = $taxes
+            ->withEarnings(10)
+            ->withFilingStatus(AlabamaIncome::FILING_SINGLE)
+            ->withPayPeriods(230)
+            ->withExemptions(0)
+            ->withFederalIncomeTax(0)
+            ->compute();
+
+        $this->assertSame(0.0, $result);
+    }
 }

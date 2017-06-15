@@ -131,6 +131,10 @@ class AlabamaIncome extends BaseTax
     {
         $adjusted_earnings = $this->getAdjustedEarnings();
 
+        if ($adjusted_earnings <= 0) {
+            return 0.0;
+        }
+
         $tax_brackets = $this->getTaxBrackets();
 
         return round($this->getTaxAmountFromTaxBrackets($adjusted_earnings, $tax_brackets) / $this->payPeriods(), 2);
