@@ -29,7 +29,7 @@ class Medicare extends BaseTax
 
     private function getAdditionalTaxAmount()
     {
-        return $this->hasAddtionalTax() ? $this->getAdditionalEarnings() * self::ADDITIONAL_TAX_RATE : 0;
+        return $this->hasAdditionalTax() ? $this->getAdditionalEarnings() * self::ADDITIONAL_TAX_RATE : 0;
     }
 
     public function compute()
