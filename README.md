@@ -1,1 +1,1 @@
-.
+[![Build Status](https://travis-ci.org/appletonlearning/laravel-taxes.svg?branch=master)](https://travis-ci.org/appletonlearning/laravel-taxes)
