@@ -20,6 +20,6 @@ class GovernmentalUnitArea extends Model
 
     public function scopeAtPoint($query, $latitude, $longitude)
     {
-        return $query->whereRaw('ST_Contains(governmental_unit_areas.area, ST_SetSRID(ST_MakePoint(?, ?), 4326))', [$longitude, $latitude]);
+        return $query->whereRaw('ST_Contains('.config('taxes.governmental_unit_areas').'.area, ST_SetSRID(ST_MakePoint(?, ?), 4326))', [$longitude, $latitude]);
     }
 }
