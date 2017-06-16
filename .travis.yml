@@ -23,9 +23,8 @@ install:
   - composer install --prefer-dist --no-interaction
 
 before_script:
-  - psql -c 'create database taxes;' -U postgres
-  - psql -U postgres --dbname=taxes -c 'create extension postgis'
+  - psql -U postgres -c 'create database taxes'
+  - psql -U postgres -d taxes -c 'create extension postgis'
 
 script:
   - vendor/phpunit/phpunit/phpunit --stop-on-error --stop-on-failure
-  - php artisan route:cache
