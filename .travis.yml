@@ -1,0 +1,32 @@
+language: php
+
+php:
+  - 7.0
+
+sudo: false
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+
+services:
+  - postgresql
+
+addons:
+  postgresql: '9.4'
+
+before_install:
+  - phpenv config-rm xdebug.ini
+
+install:
+  - composer self-update
+  - composer install --prefer-dist --no-interaction
+
+before_script:
+  - psql -c 'create database travis_ci_test;' -U postgres
+  - psql -U postgres --dbname=travis_ci_test -c 'create extension postgis'
+  - php artisan migrate --database=testing --force
+
+script:
+  - vendor/phpunit/phpunit/phpunit --stop-on-error --stop-on-failure
+  - php artisan route:cache
