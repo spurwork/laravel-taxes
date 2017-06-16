@@ -18,8 +18,6 @@ class TaxServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../migrations/' => database_path('/migrations')
         ], 'migrations');
-
-        $this->loadMigrationsFrom(__DIR__.'/../migrations');
     }
 
     public function register()

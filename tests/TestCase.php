@@ -30,6 +30,9 @@ class TestCase extends BaseTestCase
             'prefix' => '',
             'schema' => 'public',
         ]);
+
+        $app['config']->set('taxes.governmental_unit_areas', 'governmental_unit_areas');
+        $app['config']->set('taxes.tax_areas', 'tax_areas');
     }
 
     protected function getPackageProviders($app)
