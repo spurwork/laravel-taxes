@@ -8,6 +8,11 @@ class GovernmentalUnitArea extends Model
 {
     protected $table = 'governmental_unit_areas';
 
+    public function __construct() {
+        parent::__construct();
+        $this->table = config('taxes.governmental_unit_areas');
+    }
+
     public function taxAreas()
     {
         return $this->hasMany(TaxArea::class);
