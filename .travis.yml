@@ -25,7 +25,6 @@ install:
 before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
   - psql -U postgres --dbname=travis_ci_test -c 'create extension postgis'
-  - php artisan migrate --database=testing --force
 
 script:
   - vendor/phpunit/phpunit/phpunit --stop-on-error --stop-on-failure
