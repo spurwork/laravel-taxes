@@ -4,14 +4,15 @@ namespace Appleton\Taxes\Countries\US\Alabama;
 
 use Appleton\Taxes\Classes\BaseTax;
 use Appleton\Taxes\Traits\HasTaxBrackets;
-use Appleton\Taxes\Traits\WithExemptions;
+use Appleton\Taxes\Traits\WithDependents;
 use Appleton\Taxes\Traits\WithFederalIncomeTax;
 use Appleton\Taxes\Traits\WithFilingStatus;
 use Appleton\Taxes\Traits\WithPayPeriods;
+use Appleton\Taxes\Traits\WithPersonalExemption;
 
 class AlabamaIncome extends BaseTax
 {
-    use HasTaxBrackets, WithExemptions, WithFederalIncomeTax, WithFilingStatus, WithPayPeriods;
+    use HasTaxBrackets, WithDependents, WithFederalIncomeTax, WithFilingStatus, WithPayPeriods, WithPersonalExemption;
 
     const TYPE = 'state';
     const WITHHELD = true;
@@ -85,12 +86,16 @@ class AlabamaIncome extends BaseTax
     {
         $gross_earnings = $this->getGrossEarnings();
         $dependent_exemption = $this->getTaxBracket($gross_earnings, self::DEPENDENT_EXEMPTION_BRACKETS);
-        return $dependent_exemption[1] * $this->exemptions();
+        return $dependent_exemption[1] * $this->dependents();
     }
 
     private function getPersonalExemptionAllowance()
     {
-        return array_key_exists($this->filingStatus(), self::PERSONAL_EXEMPTION_ALLOWANCES) ? self::PERSONAL_EXEMPTION_ALLOWANCES[$this->filingStatus()] : 0;
+        if ($this->personalExemption() && array_key_exists($this->filingStatus(), self::PERSONAL_EXEMPTION_ALLOWANCES)) {
+            return self::PERSONAL_EXEMPTION_ALLOWANCES[$this->filingStatus()];
+        } else {
+            return 0;
+        }
     }
 
     private function getStandardDeducation()

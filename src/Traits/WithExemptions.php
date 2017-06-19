@@ -11,7 +11,7 @@ trait WithExemptions
         return $this->exemptions;
     }
 
-    public function withexemptions($exemptions)
+    public function withExemptions($exemptions)
     {
         $this->exemptions = $exemptions;
         return $this;

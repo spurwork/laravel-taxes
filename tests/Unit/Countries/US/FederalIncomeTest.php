@@ -140,7 +140,7 @@ class FederalIncomeTest extends \TestCase
             ->withExemptions(1)
             ->withFilingStatus(FederalIncome::FILING_SINGLE)
             ->withNonResidentAlien(false)
-            ->withPayPeriods(230)
+            ->withPayPeriods(260)
             ->compute();
 
         $this->assertSame(0.0, $result);
