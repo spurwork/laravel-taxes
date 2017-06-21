@@ -1,10 +1,14 @@
 <?php
 
+use Illuminate\Contracts\Console\Kernel;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Orchestra\Database\ConsoleServiceProvider;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 
 class TestCase extends BaseTestCase
 {
+    use DatabaseTransactions;
+
     public function setUp()
     {
         parent::setUp();
@@ -13,6 +17,11 @@ class TestCase extends BaseTestCase
             '--database' => 'testing',
             '--realpath' => realpath(__DIR__.'/../src/migrations'),
         ]);
+    }
+
+    protected function addCommand($command)
+    {
+        $this->app[Kernel::class]->registerCommand(app($command));
     }
 
     protected function getEnvironmentSetUp($app)
