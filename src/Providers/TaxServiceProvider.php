@@ -4,6 +4,7 @@ namespace Appleton\Taxes\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Appleton\Taxes\Taxes;
+use Appleton\Taxes\Commands\SeedCommand;
 
 class TaxServiceProvider extends ServiceProvider
 {
@@ -18,6 +19,10 @@ class TaxServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../migrations/' => database_path('/migrations')
         ], 'migrations');
+
+        if ($this->app->runningInConsole()) {
+            $this->commands([SeedCommand::class]);
+        }
     }
 
     public function register()
