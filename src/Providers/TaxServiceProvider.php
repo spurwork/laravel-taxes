@@ -4,7 +4,7 @@ namespace Appleton\Taxes\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Appleton\Taxes\Taxes;
-use Appleton\Taxes\Commands\SeedCommand;
+use Appleton\Taxes\Commands\ImportCommand;
 
 class TaxServiceProvider extends ServiceProvider
 {
@@ -21,7 +21,7 @@ class TaxServiceProvider extends ServiceProvider
         ], 'migrations');
 
         if ($this->app->runningInConsole()) {
-            $this->commands([SeedCommand::class]);
+            $this->commands([ImportCommand::class]);
         }
     }
 
