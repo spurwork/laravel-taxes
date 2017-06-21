@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 
 class SeedCommand extends Command
 {
-    protected $signature = 'seed {country}';
+    protected $signature = 'taxes:seed {country}';
 
     protected $description = 'Seeds the database with governmental unit areas and tax areas for the specified country.';
 
