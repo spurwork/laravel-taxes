@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateGovernmentalUnitAreasTable extends Migration
 {
+    protected $governmental_unit_areas = 'governmental_unit_areas';
+
     /**
      * Run the migrations.
      *
@@ -14,9 +16,9 @@ class CreateGovernmentalUnitAreasTable extends Migration
      */
     public function up()
     {
-        Schema::create('governmental_unit_areas', function (Blueprint $table) {
+        Schema::create($this->governmental_unit_areas, function (Blueprint $table) {
                 $table->increments('id');
-                $table->string('name');
+                $table->string('name')->unique();
         });
 
         DB::statement('ALTER TABLE governmental_unit_areas ADD COLUMN area geometry');
@@ -29,6 +31,6 @@ class CreateGovernmentalUnitAreasTable extends Migration
      */
     public function down()
     {
-        Schema::drop('governmental_unit_areas');
+        Schema::drop($this->governmental_unit_areas);
     }
 }
