@@ -1,5 +1,38 @@
 <?php
 
+use Appleton\Taxes\Countries\US\FederalIncome;
+use Appleton\Taxes\Countries\US\FederalUnemployment;
+use Appleton\Taxes\Countries\US\Medicare;
+use Appleton\Taxes\Countries\US\MedicareEmployer;
+use Appleton\Taxes\Countries\US\SocialSecurity;
+use Appleton\Taxes\Countries\US\SocialSecurityEmployer;
+use Appleton\Taxes\Countries\US\Alabama\AlabamaIncome;
+use Appleton\Taxes\Countries\US\Alabama\AlabamaUnemployment;
+use Appleton\Taxes\Countries\US\Alabama\AttallaOccupational;
+use Appleton\Taxes\Countries\US\Alabama\AuburnOccupational;
+use Appleton\Taxes\Countries\US\Alabama\BearCreekOccupational;
+use Appleton\Taxes\Countries\US\Alabama\BessemerOccupational;
+use Appleton\Taxes\Countries\US\Alabama\BirminghamOccupational;
+use Appleton\Taxes\Countries\US\Alabama\BrilliantOccupational;
+use Appleton\Taxes\Countries\US\Alabama\FairfieldOccupational;
+use Appleton\Taxes\Countries\US\Alabama\GadsdenOccupational;
+use Appleton\Taxes\Countries\US\Alabama\GlencoeOccupational;
+use Appleton\Taxes\Countries\US\Alabama\GoodwaterOccupational;
+use Appleton\Taxes\Countries\US\Alabama\GuinOccupational;
+use Appleton\Taxes\Countries\US\Alabama\HackleburgOccupational;
+use Appleton\Taxes\Countries\US\Alabama\HaleyvilleOccupational;
+use Appleton\Taxes\Countries\US\Alabama\HamiltonOccupational;
+use Appleton\Taxes\Countries\US\Alabama\LeedsOccupational;
+use Appleton\Taxes\Countries\US\Alabama\LynnOccupational;
+use Appleton\Taxes\Countries\US\Alabama\MidfieldOccupational;
+use Appleton\Taxes\Countries\US\Alabama\MossesOccupational;
+use Appleton\Taxes\Countries\US\Alabama\OpelikaOccupational;
+use Appleton\Taxes\Countries\US\Alabama\RainbowCityOccupational;
+use Appleton\Taxes\Countries\US\Alabama\RedBayOccupational;
+use Appleton\Taxes\Countries\US\Alabama\ShorterOccupational;
+use Appleton\Taxes\Countries\US\Alabama\SouthsideOccupational;
+use Appleton\Taxes\Countries\US\Alabama\SulligentOccupational;
+use Appleton\Taxes\Countries\US\Alabama\TuskegeeOccupational;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
 
