@@ -7,8 +7,9 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateTaxAreasTable extends Migration
 {
+    protected $governmental_unit_areas = 'governmental_unit_areas';
     protected $tax_areas = 'tax_areas';
-    
+
     /**
      * Run the migrations.
      *
@@ -24,7 +25,7 @@ class CreateTaxAreasTable extends Migration
         });
 
         Schema::table($this->tax_areas, function (Blueprint $table) {
-            $table->foreign('governmental_unit_area_id')->references('id')->on('governmental_unit_areas')->onUpdate('restrict')->onDelete('restrict');
+            $table->foreign('governmental_unit_area_id')->references('id')->on($this->governmental_unit_areas)->onUpdate('restrict')->onDelete('restrict');
         });
     }
 
