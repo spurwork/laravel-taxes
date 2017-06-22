@@ -21,7 +21,7 @@ class CreateGovernmentalUnitAreasTable extends Migration
                 $table->string('name')->unique();
         });
 
-        DB::statement('ALTER TABLE governmental_unit_areas ADD COLUMN area geometry');
+        DB::statement('ALTER TABLE'.$this->governmental_unit_areas.'ADD COLUMN area geometry');
     }
 
     /**
