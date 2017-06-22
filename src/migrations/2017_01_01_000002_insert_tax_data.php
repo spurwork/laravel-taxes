@@ -5,8 +5,8 @@ use Illuminate\Support\Facades\DB;
 
 class InsertTaxData extends Migration
 {
-    protected $this->governmental_unit_areas = 'governmental_unit_areas';
-    protected $this->tax_areas = 'tax_areas';
+    protected $governmental_unit_areas = 'governmental_unit_areas';
+    protected $tax_areas = 'tax_areas';
 
     /**
      * Run the migrations.
