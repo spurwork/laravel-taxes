@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateTaxAreasTable extends Migration
 {
+    protected $governmental_unit_areas = 'governmental_unit_areas';
+    protected $tax_areas = 'tax_areas';
+
     /**
      * Run the migrations.
      *
@@ -14,15 +17,15 @@ class CreateTaxAreasTable extends Migration
      */
     public function up()
     {
-        Schema::create('tax_areas', function (Blueprint $table) {
+        Schema::create($this->tax_areas, function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('name')->unique();
             $table->string('tax');
-            $table->integer('governmental_unit_area_id')->nullable()->index();
+            $table->integer('governmental_unit_area_id')->index();
         });
 
-        Schema::table('tax_areas', function (Blueprint $table) {
-            $table->foreign('governmental_unit_area_id')->references('id')->on('governmental_unit_areas')->onUpdate('restrict')->onDelete('restrict');
+        Schema::table($this->tax_areas, function (Blueprint $table) {
+            $table->foreign('governmental_unit_area_id')->references('id')->on($this->governmental_unit_areas)->onUpdate('restrict')->onDelete('restrict');
         });
     }
 
@@ -33,6 +36,6 @@ class CreateTaxAreasTable extends Migration
      */
     public function down()
     {
-        Schema::drop('tax_areas');
+        Schema::drop($this->tax_areas);
     }
 }
