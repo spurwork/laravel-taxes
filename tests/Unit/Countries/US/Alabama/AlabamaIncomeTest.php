@@ -69,4 +69,30 @@ class AlabamaIncomeTest extends \TestCase
 
         $this->assertSame(2.36, $result);
     }
+
+    public function testAlabamaSupplementalWages()
+    {
+        $taxes = $this->app->make(FederalIncome::class);
+
+        $result = $taxes
+            ->withEarnings(66.68)
+            ->withExemptions(0)
+            ->withFilingStatus(FederalIncome::FILING_SINGLE)
+            ->withNonResidentAlien(false)
+            ->withPayPeriods(260)
+            ->compute();
+
+        $taxes = $this->app->make(AlabamaIncome::class);
+
+        $result = $taxes
+            ->withEarnings(66.68)
+            ->withSupplementalWages(100)
+            ->withFilingStatus(AlabamaIncome::FILING_SINGLE)
+            ->withPersonalExemption(false)
+            ->withPayPeriods(260)
+            ->withFederalIncomeTax($result)
+            ->compute();
+
+        $this->assertSame(7.36, $result);
+    }
 }

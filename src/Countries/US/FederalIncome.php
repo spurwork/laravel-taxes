@@ -3,16 +3,18 @@
 namespace Appleton\Taxes\Countries\US;
 
 use Appleton\Taxes\Classes\BaseTax;
+use Appleton\Taxes\Traits\HasSupplementalWagesTaxRate;
 use Appleton\Taxes\Traits\HasTaxBrackets;
 use Appleton\Taxes\Traits\WithExemptions;
 use Appleton\Taxes\Traits\WithFilingStatus;
 use Appleton\Taxes\Traits\WithNonResidentAlien;
 use Appleton\Taxes\Traits\WithPayPeriods;
+use Appleton\Taxes\Traits\WithSupplementalWages;
 
 class FederalIncome extends BaseTax
 {
-    use HasTaxBrackets, WithExemptions, WithFilingStatus, WithNonResidentAlien, WithPayPeriods;
-    
+    use HasSupplementalWagesTaxRate, HasTaxBrackets, WithExemptions, WithFilingStatus, WithNonResidentAlien, WithPayPeriods, WithSupplementalWages;
+
     const TYPE = 'federal';
     const WITHHELD = true;
 
@@ -21,6 +23,8 @@ class FederalIncome extends BaseTax
     const FILING_HEAD_OF_HOUSEHOLD = 2;
     const FILING_MARRIED = 3;
     const FILING_SEPERATE = 4;
+
+    const SUPPLEMENTAL_WAGES_TAX_RATE = 0.25;
 
     const EXEMPTION_AMOUNT = 4050;
     const NON_RESIDENT_ALIEN_AMOUNT = 2250;
@@ -63,6 +67,6 @@ class FederalIncome extends BaseTax
 
         $tax_brackets = $this->getTaxBrackets();
 
-        return round($this->getTaxAmountFromTaxBrackets($adjusted_earnings, $tax_brackets) / $this->payPeriods(), 2);
+        return round($this->getTaxAmountFromTaxBrackets($adjusted_earnings, $tax_brackets) / $this->payPeriods() + $this->getSupplementalWagesTax(), 2);
     }
 }

@@ -3,16 +3,18 @@
 namespace Appleton\Taxes\Countries\US\Alabama;
 
 use Appleton\Taxes\Classes\BaseTax;
+use Appleton\Taxes\Traits\HasSupplementalWagesTaxRate;
 use Appleton\Taxes\Traits\HasTaxBrackets;
 use Appleton\Taxes\Traits\WithDependents;
 use Appleton\Taxes\Traits\WithFederalIncomeTax;
 use Appleton\Taxes\Traits\WithFilingStatus;
 use Appleton\Taxes\Traits\WithPayPeriods;
 use Appleton\Taxes\Traits\WithPersonalExemption;
+use Appleton\Taxes\Traits\WithSupplementalWages;
 
 class AlabamaIncome extends BaseTax
 {
-    use HasTaxBrackets, WithDependents, WithFederalIncomeTax, WithFilingStatus, WithPayPeriods, WithPersonalExemption;
+    use HasSupplementalWagesTaxRate, HasTaxBrackets, WithDependents, WithFederalIncomeTax, WithFilingStatus, WithPayPeriods, WithPersonalExemption, WithSupplementalWages;
 
     const TYPE = 'state';
     const WITHHELD = true;
@@ -21,6 +23,8 @@ class AlabamaIncome extends BaseTax
     const FILING_HEAD_OF_HOUSEHOLD = 2;
     const FILING_MARRIED = 3;
     const FILING_SEPERATE = 4;
+
+    const SUPPLEMENTAL_WAGES_TAX_RATE = 0.05;
 
     const SINGLE_BRACKETS = [
         [0, 0.02, 0],
@@ -138,6 +142,6 @@ class AlabamaIncome extends BaseTax
 
         $tax_brackets = $this->getTaxBrackets();
 
-        return round($this->getTaxAmountFromTaxBrackets($adjusted_earnings, $tax_brackets) / $this->payPeriods(), 2);
+        return round($this->getTaxAmountFromTaxBrackets($adjusted_earnings, $tax_brackets) / $this->payPeriods() + $this->getSupplementalWagesTax(), 2);
     }
 }

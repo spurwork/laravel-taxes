@@ -145,4 +145,20 @@ class FederalIncomeTest extends \TestCase
 
         $this->assertSame(0.0, $result);
     }
+
+    public function testSupplementalWages()
+    {
+        $taxes = $this->app->make(FederalIncome::class);
+
+        $result = $taxes
+            ->withEarnings(0)
+            ->withSupplementalWages(100)
+            ->withExemptions(1)
+            ->withFilingStatus(FederalIncome::FILING_SINGLE)
+            ->withNonResidentAlien(false)
+            ->withPayPeriods(260)
+            ->compute();
+
+        $this->assertSame(25.0, $result);
+    }
 }
