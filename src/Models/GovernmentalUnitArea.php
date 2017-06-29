@@ -8,9 +8,13 @@ class GovernmentalUnitArea extends Model
 {
     protected $table = 'governmental_unit_areas';
 
+    protected $guarded = [];
+
+    public $timestamps = false;
+
     public function __construct() {
         parent::__construct();
-        $this->table = config('taxes.governmental_unit_areas');
+        $this->table = config('taxes.tables.governmental_unit_areas');
     }
 
     public function taxAreas()
@@ -20,6 +24,6 @@ class GovernmentalUnitArea extends Model
 
     public function scopeAtPoint($query, $latitude, $longitude)
     {
-        return $query->whereRaw('ST_Contains('.config('taxes.governmental_unit_areas').'.area, ST_SetSRID(ST_MakePoint(?, ?), 4326))', [$longitude, $latitude]);
+        return $query->whereRaw('ST_Contains('.config('taxes.tables.governmental_unit_areas').'.area, ST_SetSRID(ST_MakePoint(?, ?), 4326))', [$longitude, $latitude]);
     }
 }

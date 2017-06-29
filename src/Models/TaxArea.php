@@ -10,9 +10,11 @@ class TaxArea extends Model
 
     protected $guarded = [];
 
+    public $timestamps = false;
+
     public function __construct() {
         parent::__construct();
-        $this->table = config('taxes.tax_areas');
+        $this->table = config('taxes.tables.tax_areas');
     }
 
     public function governmentalUnitArea()
