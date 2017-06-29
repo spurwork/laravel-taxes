@@ -3,7 +3,7 @@
 namespace Appleton\Taxes\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Appleton\Taxes\Taxes;
+use Appleton\Taxes\Classes\Taxes;
 
 class TaxServiceProvider extends ServiceProvider
 {
