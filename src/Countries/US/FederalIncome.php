@@ -2,17 +2,11 @@
 
 namespace Appleton\Taxes\Countries\US;
 
-use Appleton\Taxes\Classes\BaseTax;
-use Appleton\Taxes\Traits\HasTaxBrackets;
-use Appleton\Taxes\Traits\WithExemptions;
-use Appleton\Taxes\Traits\WithFilingStatus;
-use Appleton\Taxes\Traits\WithNonResidentAlien;
-use Appleton\Taxes\Traits\WithPayPeriods;
+use Appleton\Taxes\Classes\BaseIncomeTax;
+use Appleton\Taxes\Models\Countries\US\FederalIncomeTaxInformation;
 
-class FederalIncome extends BaseTax
+class FederalIncome extends BaseIncomeTax
 {
-    use HasTaxBrackets, WithExemptions, WithFilingStatus, WithNonResidentAlien, WithPayPeriods;
-
     const TYPE = 'federal';
     const WITHHELD = true;
 
@@ -47,22 +41,26 @@ class FederalIncome extends BaseTax
         [479350, 0.396, 131628],
     ];
 
-    private function getAdjustedEarnings()
+    protected $earnings;
+    protected $pay_periods;
+    protected $user;
+    protected $tax_information;
+
+    public function __construct($earnings, $pay_periods, $tax_information = null, $user = null)
     {
-        return ($this->earnings() * $this->payPeriods()) - ($this->exemptions() * self::EXEMPTION_AMOUNT) + ($this->nonResidentAlien() ? self::NON_RESIDENT_ALIEN_AMOUNT : 0);
+        $this->earnings = $earnings;
+        $this->pay_periods = $pay_periods;
+        $this->user = $user;
+        $this->tax_information = $this->resolveTaxInformation(FederalIncomeTaxInformation::class, $tax_information, $user);
     }
 
-    private function getTaxBrackets()
+    public function getAdjustedEarnings()
     {
-        return ($this->filingStatus() >= self::FILING_MARRIED) ? self::MARRIED_BRACKETS : self::SINGLE_BRACKETS;
+        return ($this->earnings * $this->pay_periods) - ($this->tax_information->exemptions * self::EXEMPTION_AMOUNT) + ($this->tax_information->non_resident_alien ? self::NON_RESIDENT_ALIEN_AMOUNT : 0);
     }
 
-    public function compute()
+    public function getTaxBrackets()
     {
-        $adjusted_earnings = $this->getAdjustedEarnings();
-
-        $tax_brackets = $this->getTaxBrackets();
-
-        return round($this->getTaxAmountFromTaxBrackets($adjusted_earnings, $tax_brackets) / $this->payPeriods(), 2);
+        return ($this->tax_information->filing_status >= self::FILING_MARRIED) ? self::MARRIED_BRACKETS : self::SINGLE_BRACKETS;
     }
 }

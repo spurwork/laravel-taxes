@@ -15,6 +15,8 @@ class TestCase extends BaseTestCase
             '--database' => 'testing',
             '--realpath' => realpath(__DIR__.'/../src/migrations'),
         ]);
+
+        $this->user_model = app(config('taxes.user'));
     }
 
     protected function getEnvironmentSetUp($app)
@@ -33,10 +35,13 @@ class TestCase extends BaseTestCase
             'schema' => 'public',
         ]);
 
+        $app['config']->set('taxes.user', Illuminate\Foundation\Auth\User::class);
+
         $app['config']->set('taxes.tables.governmental_unit_areas', 'governmental_unit_areas');
         $app['config']->set('taxes.tables.tax_areas', 'tax_areas');
         $app['config']->set('taxes.tables.tax_information', 'tax_information');
         $app['config']->set('taxes.tables.us.federal_income_tax_information', 'federal_income_tax_information');
+        $app['config']->set('taxes.tables.us.alabama.alabama_income_tax_information', 'alabama_income_tax_information');
     }
 
     protected function getPackageProviders($app)

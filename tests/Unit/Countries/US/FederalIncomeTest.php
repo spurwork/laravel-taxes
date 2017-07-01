@@ -2,147 +2,134 @@
 
 namespace Appleton\Taxes\Countries\US;
 
-use Appleton\Taxes\Countries\US;
+use Appleton\Taxes\Classes\Taxes;
+use Appleton\Taxes\Models\TaxInformation;
+use Appleton\Taxes\Models\Countries\US\FederalIncomeTaxInformation;
 
 class FederalIncomeTest extends \TestCase
 {
-    public function testCompute()
+    public function setUp()
     {
-        $taxes = $this->app->make(FederalIncome::class);
+        parent::setUp();
 
-        $result = $taxes
-            ->withEarnings(2300)
-            ->withExemptions(0)
-            ->withFilingStatus(FederalIncome::FILING_SINGLE)
-            ->withNonResidentAlien(false)
-            ->withPayPeriods(1)
-            ->compute();
+        $this->user = $this->user_model->forceCreate([
+            'name' => 'Test User',
+            'email' => 'test@user.email',
+            'password' => 'password',
+        ]);
+
+        FederalIncomeTaxInformation::createForUser([
+            'exemptions' => 0,
+            'filing_status' => FederalIncome::FILING_SINGLE,
+            'non_resident_alien' => false,
+        ], $this->user);
+    }
+
+    public function testFederalIncome()
+    {
+        $result = $this->app->make(FederalIncome::class, [
+            'earnings' => 2300,
+            'pay_periods' => 1,
+            'user' => $this->user,
+        ])->compute();
 
         $this->assertSame(0.0, $result);
     }
 
     public function testNoTaxesOwed()
     {
-        $taxes = $this->app->make(FederalIncome::class);
-
-        $result = $taxes
-            ->withEarnings(2300)
-            ->withExemptions(0)
-            ->withFilingStatus(FederalIncome::FILING_SINGLE)
-            ->withNonResidentAlien(false)
-            ->withPayPeriods(1)
-            ->compute();
+        $result = $this->app->make(FederalIncome::class, [
+            'earnings' => 2300,
+            'pay_periods' => 1,
+            'user' => $this->user,
+        ])->compute();
 
         $this->assertSame(0.0, $result);
 
-        $result = $taxes
-            ->withEarnings(8650)
-            ->withExemptions(0)
-            ->withFilingStatus(FederalIncome::FILING_MARRIED)
-            ->withNonResidentAlien(false)
-            ->withPayPeriods(1)
-            ->compute();
+        FederalIncomeTaxInformation::forUser($this->user)->update(['filing_status' => FederalIncome::FILING_MARRIED]);
+
+        $result = $this->app->make(FederalIncome::class, [
+            'earnings' => 8650,
+            'pay_periods' => 1,
+            'user' => $this->user,
+        ])->compute();
 
         $this->assertSame(0.0, $result);
     }
 
     public function testTaxesOwed()
     {
-        $taxes = $this->app->make(FederalIncome::class);
-
-        $result = $taxes
-            ->withEarnings(2301)
-            ->withExemptions(0)
-            ->withFilingStatus(FederalIncome::FILING_SINGLE)
-            ->withNonResidentAlien(false)
-            ->withPayPeriods(1)
-            ->compute();
+        $result = $this->app->make(FederalIncome::class, [
+            'earnings' => 2301,
+            'pay_periods' => 1,
+            'user' => $this->user,
+        ])->compute();
 
         $this->assertSame(0.10, $result);
 
-        $result = $taxes
-            ->withEarnings(8651)
-            ->withExemptions(0)
-            ->withFilingStatus(FederalIncome::FILING_MARRIED)
-            ->withNonResidentAlien(false)
-            ->withPayPeriods(1)
-            ->compute();
+        FederalIncomeTaxInformation::forUser($this->user)->update(['filing_status' => FederalIncome::FILING_MARRIED]);
+
+        $result = $this->app->make(FederalIncome::class, [
+            'earnings' => 8651,
+            'pay_periods' => 1,
+            'user' => $this->user,
+        ])->compute();
 
         $this->assertSame(0.10, $result);
     }
 
     public function testWeekly()
     {
-        $taxes = $this->app->make(FederalIncome::class);
-
-        $result = $taxes
-            ->withEarnings(2300)
-            ->withExemptions(0)
-            ->withFilingStatus(FederalIncome::FILING_SINGLE)
-            ->withNonResidentAlien(false)
-            ->withPayPeriods(52)
-            ->compute();
+        $result = $this->app->make(FederalIncome::class, [
+            'earnings' => 2300,
+            'pay_periods' => 52,
+            'user' => $this->user,
+        ])->compute();
 
         $this->assertSame(496.65, $result);
     }
 
     public function testBimonthly()
     {
-        $taxes = $this->app->make(FederalIncome::class);
-
-        $result = $taxes
-            ->withEarnings(2300)
-            ->withExemptions(0)
-            ->withFilingStatus(FederalIncome::FILING_SINGLE)
-            ->withNonResidentAlien(false)
-            ->withPayPeriods(24)
-            ->compute();
+        $result = $this->app->make(FederalIncome::class, [
+            'earnings' => 2300,
+            'pay_periods' => 24,
+            'user' => $this->user,
+        ])->compute();
 
         $this->assertSame(373.49, $result);
     }
 
     public function testMonthly()
     {
-        $taxes = $this->app->make(FederalIncome::class);
-
-        $result = $taxes
-            ->withEarnings(2300)
-            ->withExemptions(0)
-            ->withFilingStatus(FederalIncome::FILING_SINGLE)
-            ->withNonResidentAlien(false)
-            ->withPayPeriods(12)
-            ->compute();
+        $result = $this->app->make(FederalIncome::class, [
+            'earnings' => 2300,
+            'pay_periods' => 12,
+            'user' => $this->user,
+        ])->compute();
 
         $this->assertSame(277.40, $result);
     }
 
     public function testCaseStudy1()
     {
-        $taxes = $this->app->make(FederalIncome::class);
-
-        $result = $taxes
-            ->withEarnings(66.68)
-            ->withExemptions(0)
-            ->withFilingStatus(FederalIncome::FILING_SINGLE)
-            ->withNonResidentAlien(false)
-            ->withPayPeriods(260)
-            ->compute();
+        $result = $this->app->make(FederalIncome::class, [
+            'earnings' => 66.68,
+            'pay_periods' => 260,
+            'user' => $this->user,
+        ])->compute();
 
         $this->assertSame(6.88, $result);
     }
 
     public function testNonNegative()
     {
-        $taxes = $this->app->make(FederalIncome::class);
+        $result = $this->app->make(FederalIncome::class, [
+            'earnings' => 10,
+            'pay_periods' => 260,
+            'user' => $this->user,
+        ])->compute();
 
-        $result = $taxes
-            ->withEarnings(10)
-            ->withExemptions(1)
-            ->withFilingStatus(FederalIncome::FILING_SINGLE)
-            ->withNonResidentAlien(false)
-            ->withPayPeriods(260)
-            ->compute();
-
-        $this->assertSame(0.0, $result);
+        $this->assertSame(0.12, $result);
     }
 }

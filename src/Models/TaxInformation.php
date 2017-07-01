@@ -26,4 +26,14 @@ class TaxInformation extends Model
     {
         return $this->morphTo();
     }
+
+    public function scopeForUser($query, $user)
+    {
+        return $query->where('user_id', $user->id);
+    }
+
+    public function scopeIsTypeOf($query, $information_type)
+    {
+        return $query->where('information_type', $information_type);
+    }
 }

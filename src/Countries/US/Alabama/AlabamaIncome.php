@@ -2,22 +2,17 @@
 
 namespace Appleton\Taxes\Countries\US\Alabama;
 
-use Appleton\Taxes\Classes\BaseTax;
-use Appleton\Taxes\Traits\HasTaxBrackets;
-use Appleton\Taxes\Traits\WithDependents;
-use Appleton\Taxes\Traits\WithFederalIncomeTax;
-use Appleton\Taxes\Traits\WithFilingStatus;
-use Appleton\Taxes\Traits\WithPayPeriods;
-use Appleton\Taxes\Traits\WithPersonalExemption;
+use Appleton\Taxes\Classes\BaseIncomeTax;
+use Appleton\Taxes\Countries\US\FederalIncome;
+use Appleton\Taxes\Models\Countries\US\Alabama\AlabamaIncomeTaxInformation;
 
-class AlabamaIncome extends BaseTax
+class AlabamaIncome extends BaseIncomeTax
 {
-    use HasTaxBrackets, WithDependents, WithFederalIncomeTax, WithFilingStatus, WithPayPeriods, WithPersonalExemption;
-
     const TYPE = 'state';
     const WITHHELD = true;
 
-    const FILING_SINGLE = 0;
+    const FILING_ZERO = 0;
+    const FILING_SINGLE = 1;
     const FILING_HEAD_OF_HOUSEHOLD = 2;
     const FILING_MARRIED = 3;
     const FILING_SEPERATE = 4;
@@ -82,32 +77,47 @@ class AlabamaIncome extends BaseTax
         [100000, 300]
     ];
 
-    private function getDependentExemption()
+    protected $earnings;
+    protected $federal_income_tax;
+    protected $pay_periods;
+    protected $user;
+    protected $tax_information;
+
+    public function __construct($earnings, $pay_periods, $tax_information = null, $user = null)
     {
-        $gross_earnings = $this->getGrossEarnings();
-        $dependent_exemption = $this->getTaxBracket($gross_earnings, self::DEPENDENT_EXEMPTION_BRACKETS);
-        return $dependent_exemption[1] * $this->dependents();
+        $this->earnings = $earnings;
+        $this->federal_income_tax = app()->makeWith(FederalIncome::class, [
+            'earnings' => $earnings,
+            'pay_periods' => $pay_periods,
+            'user' => $user,
+        ])->compute();
+        $this->pay_periods = $pay_periods;
+        $this->user = $user;
+        $this->tax_information = $this->resolveTaxInformation(AlabamaIncomeTaxInformation::class, $tax_information, $user);
     }
 
-    private function getPersonalExemptionAllowance()
+    public function getAdjustedEarnings()
     {
-        if ($this->personalExemption() && array_key_exists($this->filingStatus(), self::PERSONAL_EXEMPTION_ALLOWANCES)) {
-            return self::PERSONAL_EXEMPTION_ALLOWANCES[$this->filingStatus()];
-        } else {
-            return 0;
+        $adjusted_earnings = ($this->earnings * $this->pay_periods) - ($this->federal_income_tax * $this->pay_periods);
+
+        if ($this->tax_information->filing_status != self::FILING_ZERO) {
+            $adjusted_earnings = $adjusted_earnings - $this->getPersonalDeducation() - $this->getPersonalExemptionAllowance() - $this->getDependentExemption();
         }
+
+        return $adjusted_earnings;
     }
 
-    private function getStandardDeducation()
+    public function getDependentExemption()
     {
-        return self::STANDARD_DEDUCTIONS[$this->filingStatus()];
+        $gross_earnings = $this->earnings * $this->pay_periods;
+        $dependent_exemption = $this->getTaxBracket($gross_earnings, self::DEPENDENT_EXEMPTION_BRACKETS);
+        return $dependent_exemption[1] * $this->tax_information->dependents;
     }
 
-    private function getPersonalDeducation()
+    public function getPersonalDeducation()
     {
-        $gross_earnings = $this->getGrossEarnings();
-        $standard_deduction = $this->getStandardDeducation();
-
+        $gross_earnings = $this->earnings * $this->pay_periods;
+        $standard_deduction = self::STANDARD_DEDUCTIONS[$this->tax_information->filing_status];
         $deduction = $standard_deduction['amount'];
 
         if ($gross_earnings > $standard_deduction['base']) {
@@ -117,27 +127,17 @@ class AlabamaIncome extends BaseTax
         return $deduction;
     }
 
-    private function getGrossEarnings()
+    public function getPersonalExemptionAllowance()
     {
-       return $this->earnings() * $this->payPeriods();
+        if (array_key_exists($this->tax_information->filing_status, self::PERSONAL_EXEMPTION_ALLOWANCES)) {
+            return self::PERSONAL_EXEMPTION_ALLOWANCES[$this->tax_information->filing_status];
+        } else {
+            return 0;
+        }
     }
 
-    private function getAdjustedEarnings()
+    public function getTaxBrackets()
     {
-        return ($this->earnings() * $this->payPeriods()) - ($this->federalIncomeTax() * $this->payPeriods()) - $this->getPersonalDeducation() - $this->getPersonalExemptionAllowance() - $this->getDependentExemption();
-    }
-
-    private function getTaxBrackets()
-    {
-        return ($this->filingStatus() >= self::FILING_MARRIED) ? self::MARRIED_BRACKETS : self::SINGLE_BRACKETS;
-    }
-
-    public function compute()
-    {
-        $adjusted_earnings = $this->getAdjustedEarnings();
-
-        $tax_brackets = $this->getTaxBrackets();
-
-        return round($this->getTaxAmountFromTaxBrackets($adjusted_earnings, $tax_brackets) / $this->payPeriods(), 2);
+        return ($this->tax_information->filing_status >= self::FILING_MARRIED) ? self::MARRIED_BRACKETS : self::SINGLE_BRACKETS;
     }
 }

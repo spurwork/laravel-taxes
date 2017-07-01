@@ -8,7 +8,11 @@ class TaxInformationTest extends \TestCase
 {
     public function testTaxes()
     {
-        $tax_information = TaxInformation::create([]);
+        $user = $this->user_model->forceCreate([
+            'name' => 'Test User',
+            'email' => 'test@user.email',
+            'password' => 'password',
+        ]);
 
         $federal_income_tax_information = FederalIncomeTaxInformation::create([
             'exemptions' => 1,
@@ -16,8 +20,9 @@ class TaxInformationTest extends \TestCase
             'non_resident_alien' => true,
         ]);
 
+        $tax_information = TaxInformation::create([]);
         $tax_information->information()->associate($federal_income_tax_information);
-
+        $tax_information->user()->associate($user);
         $tax_information->save();
         $tax_information->fresh();
 

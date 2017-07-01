@@ -2,24 +2,9 @@
 
 namespace Appleton\Taxes\Models\Countries\US;
 
-use Appleton\Taxes\Models\TaxInformation;
-use Illuminate\Database\Eloquent\Model;
+use Appleton\Taxes\Classes\BaseTaxInformationModel;
 
-class FederalIncomeTaxInformation extends Model
+class FederalIncomeTaxInformation extends BaseTaxInformationModel
 {
-    protected $table = 'federal_income_tax_information';
-
-    protected $guarded = [];
-
-    public $timestamps = false;
-
-    public function __construct(array $attributes = array()) {
-        parent::__construct($attributes);
-        $this->table = config('taxes.tables.us.federal_income_tax_information');
-    }
-
-    public function taxInformation()
-    {
-        return $this->morphMany(TaxInformation::class, 'information');
-    }
+    protected $config_name = 'taxes.tables.us.federal_income_tax_information';
 }

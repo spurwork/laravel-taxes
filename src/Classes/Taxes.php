@@ -2,6 +2,7 @@
 
 namespace Appleton\Taxes\Classes;
 
+use Appleton\Taxes\Models\TaxInformation;
 use Closure;
 
 class Taxes
