@@ -8,50 +8,39 @@ class AlabamaUnemploymentTest extends \TestCase
 {
     public function testAlabamaUnemployment()
     {
-        $taxes = $this->app->make(AlabamaUnemployment::class);
-
-        $result = $taxes
-            ->withEarnings(2300)
-            ->withYtdEarnings(0)
-            ->compute();
+        $result = $this->app->makeWith(AlabamaUnemployment::class, [
+            'earnings' => 2300,
+        ])->compute();
 
         $this->assertSame(62.10, $result);
     }
 
     public function testAlabamaUnemploymentWithTaxRate()
     {
-        $taxes = $this->app->make(AlabamaUnemployment::class);
-
-        $result = $taxes
-            ->withEarnings(2300)
-            ->withYtdEarnings(0)
-            ->withTaxRate(0.024)
-            ->compute();
+        $result = $this->app->makeWith(AlabamaUnemployment::class, [
+            'earnings' => 2300,
+            'tax_rate' => 0.024,
+        ])->compute();
 
         $this->assertSame(55.20, $result);
     }
 
     public function testAlabamaUnemploymentMetWageBase()
     {
-        $taxes = $this->app->make(AlabamaUnemployment::class);
-
-        $result = $taxes
-            ->withEarnings(2300)
-            ->withYtdEarnings(AlabamaUnemployment::WAGE_BASE)
-            ->compute();
+        $result = $this->app->makeWith(AlabamaUnemployment::class, [
+            'earnings' => 2300,
+            'ytd_earnings' => AlabamaUnemployment::WAGE_BASE,
+        ])->compute();
 
         $this->assertSame(0.0, $result);
     }
 
     public function testCaseStudy1()
     {
-        $taxes = $this->app->make(AlabamaUnemployment::class);
-
-        $result = $taxes
-            ->withEarnings(66.68)
-            ->withYtdEarnings(0)
-            ->withTaxRate(0.019)
-            ->compute();
+        $result = $this->app->makeWith(AlabamaUnemployment::class, [
+            'earnings' => 66.68,
+            'tax_rate' => 0.019
+        ])->compute();
 
         $this->assertSame(1.27, $result);
     }
