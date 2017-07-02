@@ -25,7 +25,7 @@ class Taxes
         $this->pay_periods = $pay_periods;
     }
 
-    public function setLocation($latitude, $longitude)
+    public function setWorkLocation($latitude, $longitude)
     {
         $this->latitude = $latitude;
         $this->longitude = $longitude;
@@ -46,7 +46,7 @@ class Taxes
             ->toArray();
 
         $this->taxes = app()->make(TaxResolver::class)->resolve($this->taxes);
-        
+
         $tax_results = [];
         foreach ($this->taxes as $tax_name) {
             $tax_results[$tax_name] = app()->makeWith($tax_name, [

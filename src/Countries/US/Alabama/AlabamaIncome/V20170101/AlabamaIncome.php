@@ -82,7 +82,7 @@ class AlabamaIncome extends BaseIncomeTax
 
     public function __construct($earnings, $pay_periods, $tax_information = null, $user = null)
     {
-        $this->federal_income_tax = app()->makeWith(Taxes::resolve(FederalIncome::class), [
+        $this->federal_income_tax = app()->makeWith(FederalIncome::class, [
             'earnings' => $earnings,
             'pay_periods' => $pay_periods,
             'user' => $user,

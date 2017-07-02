@@ -35,7 +35,9 @@ class TaxResolver
 
             foreach ($strategies as $strategy) {
                 if ($date->diffInDays(Carbon::createFromFormat('Ymd', substr($strategy, 1)), false) <= 0) {
-                    $resolved[] = $namespace.'\\'.$strategy.'\\'.$basename;
+                    $resolve = $namespace.'\\'.$strategy.'\\'.$basename;
+                    $resolved[] = $resolve;
+                    app()->bind($name, $resolve);
                     $was_resolved = true;
                     break;
                 }
