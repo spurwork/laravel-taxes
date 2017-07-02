@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Classes;
 
-abstract class BaseStateUnemploymentTax extends BaseTax
+class BaseStateUnemploymentTax extends BaseTax
 {
     public static function getUnemploymentTaxCredit()
     {

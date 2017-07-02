@@ -14,12 +14,6 @@ class AlabamaIncomeTest extends \TestCase
     {
         parent::setUp();
 
-        $this->user = $this->user_model->forceCreate([
-            'name' => 'Test User',
-            'email' => 'test@user.email',
-            'password' => 'password',
-        ]);
-
         FederalIncomeTaxInformation::createForUser([
             'exemptions' => 0,
             'filing_status' => FederalIncome::FILING_SINGLE,

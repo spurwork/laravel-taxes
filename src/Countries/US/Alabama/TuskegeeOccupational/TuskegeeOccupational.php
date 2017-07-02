@@ -2,16 +2,9 @@
 
 namespace Appleton\Taxes\Countries\US\Alabama\TuskegeeOccupational;
 
-use Appleton\Taxes\Classes\BaseTaxStrategy;
+use Appleton\Taxes\Classes\BaseTax;
 
-class TuskegeeOccupational extends BaseTaxStrategy
+class TuskegeeOccupational extends BaseTax
 {
-    const STRATEGIES = [
-        '20170101',
-    ];
 
-    public function __construct($date = null, $earnings)
-    {
-        parent::__construct($date, $earnings);
-    }
 }

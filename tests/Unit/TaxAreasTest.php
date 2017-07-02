@@ -6,12 +6,6 @@ use Appleton\Taxes\Models\TaxArea;
 
 class TaxAreasTest extends \TestCase
 {
-    public function setUp()
-    {
-        parent::setUp();
-        $this->artisan('migrate');
-    }
-
     public function testUS()
     {
         $tax_areas = TaxArea::atPoint(38.9072, -77.0369)->get()->pluck('name')->toArray();

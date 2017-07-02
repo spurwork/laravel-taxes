@@ -9,12 +9,6 @@ class TaxInformationTest extends \TestCase
 {
     public function testCreateForUser()
     {
-        $user = $this->user_model->forceCreate([
-            'name' => 'Test User',
-            'email' => 'test@user.email',
-            'password' => 'password',
-        ]);
-
         FederalIncomeTaxInformation::createForUser([
             'exemptions' => 1,
             'filing_status' => FederalIncome::FILING_SINGLE,

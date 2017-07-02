@@ -2,9 +2,9 @@
 
 namespace Appleton\Taxes\Countries\US\Alabama\TuskegeeOccupational\V20170101;
 
-use Appleton\Taxes\Classes\BaseTax;
+use Appleton\Taxes\Countries\US\Alabama\TuskegeeOccupational\TuskegeeOccupational as BaseTuskegeeOccupational;
 
-class TuskegeeOccupational extends BaseTax
+class TuskegeeOccupational extends BaseTuskegeeOccupational
 {
     const TYPE = 'local';
     const WITHHELD = true;

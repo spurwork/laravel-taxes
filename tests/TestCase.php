@@ -1,5 +1,10 @@
 <?php
 
+use Appleton\Taxes\Classes\Taxes;
+use Appleton\Taxes\Countries\US\Alabama\AlabamaIncome\AlabamaIncome;
+use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome;
+use Appleton\Taxes\Models\Countries\US\Alabama\AlabamaIncomeTaxInformation;
+use Appleton\Taxes\Models\Countries\US\FederalIncomeTaxInformation;
 use Carbon\Carbon;
 use Orchestra\Database\ConsoleServiceProvider;
 use Orchestra\Testbench\TestCase as BaseTestCase;
@@ -22,6 +27,29 @@ class TestCase extends BaseTestCase
         ]);
 
         $this->user_model = app(config('taxes.user'));
+
+        $this->user = $this->user_model->forceCreate([
+            'name' => 'Test User',
+            'email' => 'test@user.email',
+            'password' => 'password',
+        ]);
+
+        $this->taxes = $this->app->make(Taxes::class);
+
+        $federal_income = Taxes::resolve(FederalIncome::class);
+
+        FederalIncomeTaxInformation::createForUser([
+            'exemptions' => 0,
+            'filing_status' => $federal_income::FILING_SINGLE,
+            'non_resident_alien' => false,
+        ], $this->user);
+
+        $alabama_income = Taxes::resolve(AlabamaIncome::class);
+
+        AlabamaIncomeTaxInformation::createForUser([
+            'dependents' => 0,
+            'filing_status' => $alabama_income::FILING_SINGLE,
+        ], $this->user);
     }
 
     protected function getEnvironmentSetUp($app)

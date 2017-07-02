@@ -3,6 +3,7 @@
 namespace Appleton\Taxes\Countries\US\Alabama\AlabamaIncome\V20170101;
 
 use Appleton\Taxes\Classes\BaseIncomeTax;
+use Appleton\Taxes\Classes\Taxes;
 use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome;
 use Appleton\Taxes\Models\Countries\US\Alabama\AlabamaIncomeTaxInformation;
 
@@ -77,16 +78,20 @@ class AlabamaIncome extends BaseIncomeTax
         [100000, 300]
     ];
 
+    protected $pay_periods;
+
     public function __construct($earnings, $pay_periods, $tax_information = null, $user = null)
     {
-        $this->earnings = $earnings;
-        $this->federal_income_tax = app()->makeWith(FederalIncome::class, [
+        $this->federal_income_tax = app()->makeWith(Taxes::resolve(FederalIncome::class), [
             'earnings' => $earnings,
             'pay_periods' => $pay_periods,
             'user' => $user,
         ])->compute();
+
+        $this->earnings = $earnings;
         $this->pay_periods = $pay_periods;
         $this->user = $user;
+
         $this->tax_information = $this->resolveTaxInformation(AlabamaIncomeTaxInformation::class, $tax_information, $user);
     }
 

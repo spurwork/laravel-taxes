@@ -8,19 +8,16 @@ use Closure;
 
 class Taxes
 {
-    public function getCredit()
-    {
-        foreach ($this->taxes as $tax_name) {
-            $class_name = $tax_name::getClassName();
-            if (is_subclass_of($class_name, BaseStateUnemploymentTax::class)) {
-                return $class_name::getUnemploymentTaxCredit();
-            }
-        }
-    }
+    protected $ytd_earnings = 0;
 
     public function setEarnings($earnings)
     {
         $this->earnings = $earnings;
+    }
+
+    public function setYtdEarnings($ytd_earnings)
+    {
+        $this->ytd_earnings = $ytd_earnings;
     }
 
     public function setPayPeriods($pay_periods)
@@ -48,13 +45,13 @@ class Taxes
             ->pluck('tax')
             ->toArray();
 
-        $this->credit = $this->getCredit();
-
+        $this->taxes = app()->make(TaxResolver::class)->resolve($this->taxes);
+        
         $tax_results = [];
         foreach ($this->taxes as $tax_name) {
             $tax_results[$tax_name] = app()->makeWith($tax_name, [
                 'earnings' => $this->earnings,
-                'credit' => $this->credit,
+                'ytd_earnings' => $this->ytd_earnings,
                 'pay_periods' => $this->pay_periods,
                 'user' => $this->user,
             ])->compute();
@@ -65,5 +62,10 @@ class Taxes
         ]);
 
         return $tax_results;
+    }
+
+    public static function resolve($name, $date = null)
+    {
+        return app()->make(TaxResolver::class)->resolve($name, $date, false)[0];
     }
 }

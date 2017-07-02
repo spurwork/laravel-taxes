@@ -2,10 +2,10 @@
 
 namespace Appleton\Taxes\Countries\US\FederalIncome\V20170101;
 
-use Appleton\Taxes\Classes\BaseIncomeTax;
+use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome as BaseFederalIncome;
 use Appleton\Taxes\Models\Countries\US\FederalIncomeTaxInformation;
 
-class FederalIncome extends BaseIncomeTax
+class FederalIncome extends BaseFederalIncome
 {
     const TYPE = 'federal';
     const WITHHELD = true;

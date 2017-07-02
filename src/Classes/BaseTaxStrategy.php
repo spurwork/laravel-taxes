@@ -4,7 +4,7 @@ namespace Appleton\Taxes\Classes;
 
 use Carbon\Carbon;
 
-abstract class BaseTaxStrategy
+class BaseTaxStrategy
 {
     protected $strategy;
 

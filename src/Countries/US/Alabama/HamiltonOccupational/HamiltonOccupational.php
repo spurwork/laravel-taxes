@@ -2,16 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\Alabama\HamiltonOccupational;
 
-use Appleton\Taxes\Classes\BaseTaxStrategy;
-
-class HamiltonOccupational extends BaseTaxStrategy
+class HamiltonOccupational
 {
-    const STRATEGIES = [
-        '20170101',
-    ];
 
-    public function __construct($date = null, $earnings)
-    {
-        parent::__construct($date, $earnings);
-    }
 }
