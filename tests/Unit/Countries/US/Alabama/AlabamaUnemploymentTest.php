@@ -1,8 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Alabama;
-
-use Appleton\Taxes\Countries\US\Alabama\AlabamaUnemployment;
+namespace Appleton\Taxes\Countries\US\Alabama\AlabamaUnemployment;
 
 class AlabamaUnemploymentTest extends \TestCase
 {
@@ -29,7 +27,7 @@ class AlabamaUnemploymentTest extends \TestCase
     {
         $result = $this->app->makeWith(AlabamaUnemployment::class, [
             'earnings' => 2300,
-            'ytd_earnings' => AlabamaUnemployment::WAGE_BASE,
+            'ytd_earnings' => 8000,
         ])->compute();
 
         $this->assertSame(0.0, $result);

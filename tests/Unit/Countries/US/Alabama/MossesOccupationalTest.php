@@ -1,8 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Alabama;
-
-use Appleton\Taxes\Countries\US\Alabama\MossesOccupational;
+namespace Appleton\Taxes\Countries\US\Alabama\MossesOccupational;
 
 class MossesOccupationalTest extends \TestCase
 {

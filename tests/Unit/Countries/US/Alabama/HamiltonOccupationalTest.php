@@ -1,8 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Alabama;
-
-use Appleton\Taxes\Countries\US\Alabama\HamiltonOccupational;
+namespace Appleton\Taxes\Countries\US\Alabama\HamiltonOccupational;
 
 class HamiltonOccupationalTest extends \TestCase
 {

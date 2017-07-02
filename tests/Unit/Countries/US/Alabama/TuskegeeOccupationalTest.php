@@ -1,8 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Alabama;
-
-use Appleton\Taxes\Countries\US\Alabama\TuskegeeOccupational;
+namespace Appleton\Taxes\Countries\US\Alabama\TuskegeeOccupational;
 
 class TuskegeeOccupationalTest extends \TestCase
 {

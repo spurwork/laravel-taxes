@@ -1,8 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Alabama;
-
-use Appleton\Taxes\Countries\US\Alabama\OpelikaOccupational;
+namespace Appleton\Taxes\Countries\US\Alabama\OpelikaOccupational;
 
 class OpelikaOccupationalTest extends \TestCase
 {

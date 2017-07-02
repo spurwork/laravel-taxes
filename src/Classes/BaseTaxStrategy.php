@@ -20,17 +20,38 @@ abstract class BaseTaxStrategy
             $attributes[$parameter->getName()] = func_get_arg($parameter->getPosition());
         }
 
-        foreach (get_called_class()::STRATEGIES as $strategy) {
-            if ($date->gte(Carbon::createFromFormat('Ymd', $strategy))) {
-                $this->strategy = $strategy;     
+        foreach (get_called_class()::STRATEGIES as $strategy_name) {
+            if ($date->gte(Carbon::createFromFormat('Ymd', $strategy_name))) {
+                $strategy = $strategy_name;
             }
         }
 
-        if (is_null($this->strategy)) {
+        if (is_null($strategy)) {
             throw new \Exception('Tax strategy could not be resolved.');
         }
 
-        $this->strategy = app()->makeWith($namespace.'\\V'.$this->strategy.'\\'.$basename, $attributes);
+        $this->strategy = app()->makeWith($namespace.'\\V'.$strategy.'\\'.$basename, $attributes);
+    }
+
+    public static function __callStatic($name, $arguments)
+    {
+        $date = !isset($arguments[0]) ? Carbon::now() : $arguments[0];
+        $basename = class_basename(get_called_class());
+        $namespace = substr(get_called_class(), 0, -strlen($basename) - 1);
+
+        foreach (get_called_class()::STRATEGIES as $strategy_name) {
+            if ($date->gte(Carbon::createFromFormat('Ymd', $strategy_name))) {
+                $strategy = $strategy_name;
+            }
+        }
+
+        if (is_null($strategy)) {
+            throw new \Exception('Tax strategy could not be resolved.');
+        }
+
+        $class = $namespace.'\\V'.$strategy.'\\'.$basename;
+
+        return $class::$name();
     }
 
     public function compute()

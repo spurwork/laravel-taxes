@@ -1,8 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Alabama;
-
-use Appleton\Taxes\Countries\US\Alabama\AttallaOccupational;
+namespace Appleton\Taxes\Countries\US\Alabama\AttallaOccupational;
 
 class AttallaOccupationalTest extends \TestCase
 {

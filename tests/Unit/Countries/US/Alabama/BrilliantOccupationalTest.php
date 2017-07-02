@@ -1,8 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Alabama;
-
-use Appleton\Taxes\Countries\US\Alabama\BrilliantOccupational;
+namespace Appleton\Taxes\Countries\US\Alabama\BrilliantOccupational;
 
 class BrilliantOccupationalTest extends \TestCase
 {

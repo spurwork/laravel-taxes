@@ -1,8 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Alabama;
-
-use Appleton\Taxes\Countries\US\Alabama\MidfieldOccupational;
+namespace Appleton\Taxes\Countries\US\Alabama\MidfieldOccupational;
 
 class MidfieldOccupationalTest extends \TestCase
 {

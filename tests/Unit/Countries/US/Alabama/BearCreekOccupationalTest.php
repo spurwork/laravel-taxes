@@ -1,8 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Alabama;
-
-use Appleton\Taxes\Countries\US\Alabama\BearCreekOccupational;
+namespace Appleton\Taxes\Countries\US\Alabama\BearCreekOccupational;
 
 class BearCreekOccupationalTest extends \TestCase
 {

@@ -1,8 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Alabama;
-
-use Appleton\Taxes\Countries\US\Alabama\GadsdenOccupational;
+namespace Appleton\Taxes\Countries\US\Alabama\GadsdenOccupational;
 
 class GadsdenOccupationalTest extends \TestCase
 {

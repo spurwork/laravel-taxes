@@ -1,8 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Alabama;
-
-use Appleton\Taxes\Countries\US\Alabama\LeedsOccupational;
+namespace Appleton\Taxes\Countries\US\Alabama\LeedsOccupational;
 
 class LeedsOccupationalTest extends \TestCase
 {

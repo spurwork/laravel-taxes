@@ -1,8 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Alabama;
-
-use Appleton\Taxes\Countries\US\Alabama\LynnOccupational;
+namespace Appleton\Taxes\Countries\US\Alabama\LynnOccupational;
 
 class LynnOccupationalTest extends \TestCase
 {

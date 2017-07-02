@@ -12,6 +12,6 @@ class SocialSecurityEmployer extends BaseTaxStrategy
 
     public function __construct($date = null, $earnings)
     {
-        parent::__construct($date = null, $earnings);
+        parent::__construct($date, $earnings);
     }
 }

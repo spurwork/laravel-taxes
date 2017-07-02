@@ -1,8 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Alabama;
-
-use Appleton\Taxes\Countries\US\Alabama\SouthsideOccupational;
+namespace Appleton\Taxes\Countries\US\Alabama\SouthsideOccupational;
 
 class SouthsideOccupationalTest extends \TestCase
 {

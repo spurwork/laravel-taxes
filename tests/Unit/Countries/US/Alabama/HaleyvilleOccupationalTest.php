@@ -1,8 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Alabama;
-
-use Appleton\Taxes\Countries\US\Alabama\HaleyvilleOccupational;
+namespace Appleton\Taxes\Countries\US\Alabama\HaleyvilleOccupational;
 
 class HaleyvilleOccupationalTest extends \TestCase
 {

@@ -1,8 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Alabama;
-
-use Appleton\Taxes\Countries\US\Alabama\BessemerOccupational;
+namespace Appleton\Taxes\Countries\US\Alabama\BessemerOccupational;
 
 class BessemerOccupationalTest extends \TestCase
 {

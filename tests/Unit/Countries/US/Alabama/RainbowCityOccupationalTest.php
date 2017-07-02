@@ -1,8 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Alabama;
-
-use Appleton\Taxes\Countries\US\Alabama\RainbowCityOccupational;
+namespace Appleton\Taxes\Countries\US\Alabama\RainbowCityOccupational;
 
 class RainbowCityOccupationalTest extends \TestCase
 {

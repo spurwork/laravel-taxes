@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US;
+namespace Appleton\Taxes\Countries\US\FederalIncome;
 
 use Appleton\Taxes\Classes\Taxes;
 use Appleton\Taxes\Models\TaxInformation;

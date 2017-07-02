@@ -1,8 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Alabama;
-
-use Appleton\Taxes\Countries\US\Alabama\GoodwaterOccupational;
+namespace Appleton\Taxes\Countries\US\Alabama\GoodwaterOccupational;
 
 class GoodwaterOccupationalTest extends \TestCase
 {

@@ -1,10 +1,9 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Alabama;
+namespace Appleton\Taxes\Countries\US\Alabama\AlabamaIncome;
 
 use Appleton\Taxes\Classes\Taxes;
-use Appleton\Taxes\Countries\US\FederalIncome;
-use Appleton\Taxes\Countries\US\Alabama\AlabamaIncome;
+use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome;
 use Appleton\Taxes\Models\TaxInformation;
 use Appleton\Taxes\Models\Countries\US\FederalIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Alabama\AlabamaIncomeTaxInformation;

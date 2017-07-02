@@ -1,8 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Alabama;
-
-use Appleton\Taxes\Countries\US\Alabama\HackleburgOccupational;
+namespace Appleton\Taxes\Countries\US\Alabama\HackleburgOccupational;
 
 class HackleburgOccupationalTest extends \TestCase
 {

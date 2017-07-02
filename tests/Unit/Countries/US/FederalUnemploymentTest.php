@@ -1,9 +1,10 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US;
+namespace Appleton\Taxes\Countries\US\FederalUnemployment;
 
 use Appleton\Taxes\Countries\US;
-use Appleton\Taxes\Countries\US\Alabama\AlabamaUnemployment;
+use Appleton\Taxes\Countries\US\Alabama\AlabamaUnemployment\AlabamaUnemployment;
+use Carbon\Carbon;
 
 class FederalUnemploymentTest extends \TestCase
 {
@@ -30,7 +31,7 @@ class FederalUnemploymentTest extends \TestCase
     {
         $result = $this->app->makeWith(FederalUnemployment::class, [
             'earnings' => 2300,
-            'credit' => AlabamaUnemployment::FUTA_CREDIT,
+            'credit' => AlabamaUnemployment::getCredit(),
         ])->compute();
 
         $this->assertSame(13.80, $result);
@@ -40,7 +41,7 @@ class FederalUnemploymentTest extends \TestCase
     {
         $result = $this->app->makeWith(FederalUnemployment::class, [
             'earnings' => 2300,
-            'ytd_earnings' => FederalUnemployment::WAGE_BASE,
+            'ytd_earnings' => 7000,
         ])->compute();
 
         $this->assertSame(0.0, $result);
@@ -50,7 +51,7 @@ class FederalUnemploymentTest extends \TestCase
     {
         $result = $this->app->makeWith(FederalUnemployment::class, [
             'earnings' => 66.68,
-            'credit' => AlabamaUnemployment::FUTA_CREDIT,
+            'credit' => AlabamaUnemployment::getCredit(),
         ])->compute();
 
         $this->assertSame(0.40, $result);

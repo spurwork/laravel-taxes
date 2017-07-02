@@ -1,8 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Alabama;
-
-use Appleton\Taxes\Countries\US\Alabama\GuinOccupational;
+namespace Appleton\Taxes\Countries\US\Alabama\GuinOccupational;
 
 class GuinOccupationalTest extends \TestCase
 {

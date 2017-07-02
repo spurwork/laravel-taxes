@@ -1,8 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Alabama;
-
-use Appleton\Taxes\Countries\US\Alabama\RedBayOccupational;
+namespace Appleton\Taxes\Countries\US\Alabama\RedBayOccupational;
 
 class RedBayOccupationalTest extends \TestCase
 {
