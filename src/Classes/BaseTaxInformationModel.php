@@ -23,7 +23,7 @@ class BaseTaxInformationModel extends Model
 
     public static function createForUser($attributes, $user)
     {
-        $tax_information = TaxInformation::create([]);
+        $tax_information = app(TaxInformation::class);
         $tax_information->user()->associate($user);
         $tax_information->information()->associate(app(get_called_class())->create($attributes));
         $tax_information->save();
