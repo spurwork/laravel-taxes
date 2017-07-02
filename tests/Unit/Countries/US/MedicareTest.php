@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US;
+namespace Appleton\Taxes\Countries\US\Medicare;
 
 use Appleton\Taxes\Countries\US;
 
@@ -19,7 +19,7 @@ class MedicareTest extends \TestCase
     {
         $result = $this->app->makeWith(Medicare::class, [
             'earnings' => 2300,
-            'ytd_earnings' => Medicare::ADDITIONAL_TAX_AMOUNT,
+            'ytd_earnings' => 200000,
         ])->compute();
 
         $this->assertSame(54.05, $result);
@@ -29,7 +29,7 @@ class MedicareTest extends \TestCase
     {
         $result = $this->app->makeWith(MedicareEmployer::class, [
             'earnings' => 2300,
-            'ytd_earnings' => Medicare::ADDITIONAL_TAX_AMOUNT,
+            'ytd_earnings' => 200000,
         ])->compute();
 
         $this->assertSame(33.35, $result);
