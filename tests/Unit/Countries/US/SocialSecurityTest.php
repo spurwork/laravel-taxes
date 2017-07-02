@@ -1,8 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US;
-
-use Appleton\Taxes\Countries\US;
+namespace Appleton\Taxes\Countries\US\SocialSecurity;
 
 class SocialSecurityTest extends \TestCase
 {
@@ -28,7 +26,7 @@ class SocialSecurityTest extends \TestCase
     {
         $result = $this->app->makeWith(SocialSecurity::class, [
             'earnings' => 2300,
-            'ytd_earnings' => SocialSecurity::WAGE_BASE,
+            'ytd_earnings' => 127200,
         ])->compute();
 
         $this->assertSame(0.0, $result);

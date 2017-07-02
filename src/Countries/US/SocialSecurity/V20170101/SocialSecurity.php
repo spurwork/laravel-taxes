@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US;
+namespace Appleton\Taxes\Countries\US\SocialSecurity\V20170101;
 
 use Appleton\Taxes\Classes\BaseTax;
 use Appleton\Taxes\Traits\HasWageBase;
