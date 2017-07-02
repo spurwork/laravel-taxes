@@ -24,7 +24,7 @@ class FederalUnemployment extends BaseTax
         $this->ytd_earnings = $ytd_earnings;
     }
 
-    private function getAdjustedEarnings()
+    public function getAdjustedEarnings()
     {
         return $this->earnings < $this->getBaseEarnings() ? $this->earnings : $this->getBaseEarnings();
     }

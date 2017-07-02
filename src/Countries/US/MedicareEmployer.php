@@ -11,6 +11,6 @@ class MedicareEmployer extends Medicare
 
     public function compute()
     {
-        return round($this->earnings() * self::TAX_RATE, 2);
+        return round($this->earnings * self::TAX_RATE, 2);
     }
 }

@@ -8,47 +8,38 @@ class MedicareTest extends \TestCase
 {
     public function testMedicare()
     {
-        $taxes = $this->app->make(Medicare::class);
-
-        $result = $taxes
-            ->withEarnings(2300)
-            ->withYtdEarnings(0)
-            ->compute();
+        $result = $this->app->makeWith(Medicare::class, [
+            'earnings' => 2300,
+        ])->compute();
 
         $this->assertSame(33.35, $result);
     }
 
     public function testMedicareWithAdditionalTax()
     {
-        $taxes = $this->app->make(Medicare::class);
-
-        $result = $taxes
-            ->withEarnings(2300)
-            ->withYtdEarnings(200000)
-            ->compute();
+        $result = $this->app->makeWith(Medicare::class, [
+            'earnings' => 2300,
+            'ytd_earnings' => Medicare::ADDITIONAL_TAX_AMOUNT,
+        ])->compute();
 
         $this->assertSame(54.05, $result);
     }
 
     public function testMedicareEmployer()
     {
-        $taxes = $this->app->make(MedicareEmployer::class);
-
-        $result = $taxes
-            ->withEarnings(2300)
-            ->compute();
+        $result = $this->app->makeWith(MedicareEmployer::class, [
+            'earnings' => 2300,
+            'ytd_earnings' => Medicare::ADDITIONAL_TAX_AMOUNT,
+        ])->compute();
 
         $this->assertSame(33.35, $result);
     }
 
     public function testCaseStudy1()
     {
-        $taxes = $this->app->make(Medicare::class);
-
-        $result = $taxes
-            ->withEarnings(66.68)
-            ->withYtdEarnings(0)
-            ->compute();
+        $result = $this->app->makeWith(Medicare::class, [
+            'earnings' => 66.68,
+        ])->compute();
 
         $this->assertSame(0.97, $result);
     }

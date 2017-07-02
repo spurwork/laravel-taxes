@@ -3,12 +3,9 @@
 namespace Appleton\Taxes\Countries\US;
 
 use Appleton\Taxes\Classes\BaseTax;
-use Appleton\Taxes\Traits\WithYtdEarnings;
 
 class Medicare extends BaseTax
 {
-    use WithYtdEarnings;
-
     const TYPE = 'federal';
     const WITHHELD = true;
 
@@ -17,23 +14,23 @@ class Medicare extends BaseTax
     const ADDITIONAL_TAX_AMOUNT = 200000;
     const ADDITIONAL_TAX_RATE = 0.009;
 
-    private function hasAdditionalTax()
+    public function __construct($earnings, $ytd_earnings = 0)
     {
-        return $this->ytdEarnings() >= self::ADDITIONAL_TAX_AMOUNT;
+        $this->earnings = $earnings;
+        $this->ytd_earnings = $ytd_earnings;
     }
 
-    private function getAdditionalEarnings()
+    public function getAdditionalTaxAmount()
     {
-        return $this->earnings() - ($this->ytdEarnings() - self::ADDITIONAL_TAX_AMOUNT);
-    }
-
-    private function getAdditionalTaxAmount()
-    {
-        return $this->hasAdditionalTax() ? $this->getAdditionalEarnings() * self::ADDITIONAL_TAX_RATE : 0;
+        if ($this->ytd_earnings >= self::ADDITIONAL_TAX_AMOUNT) {
+            return ($this->earnings - ($this->ytd_earnings - self::ADDITIONAL_TAX_AMOUNT)) * self::ADDITIONAL_TAX_RATE;
+        } else {
+            return 0;
+        }
     }
 
     public function compute()
     {
-        return round($this->earnings() * self::TAX_RATE + $this->getAdditionalTaxAmount(), 2);
+        return round($this->earnings * self::TAX_RATE + $this->getAdditionalTaxAmount(), 2);
     }
 }
