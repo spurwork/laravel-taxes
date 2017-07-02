@@ -8,11 +8,9 @@ class LynnOccupationalTest extends \TestCase
 {
     public function testLynnOccupational()
     {
-        $taxes = $this->app->make(LynnOccupational::class);
-
-        $result = $taxes
-            ->withEarnings(2300)
-            ->compute();
+        $result = $this->app->makeWith(LynnOccupational::class, [
+            'earnings' => 2300,
+        ])->compute();
 
         $this->assertSame(23.00, $result);
     }

@@ -8,11 +8,9 @@ class RedBayOccupationalTest extends \TestCase
 {
     public function testRedBayOccupational()
     {
-        $taxes = $this->app->make(RedBayOccupational::class);
-
-        $result = $taxes
-            ->withEarnings(2300)
-            ->compute();
+        $result = $this->app->makeWith(RedBayOccupational::class, [
+            'earnings' => 2300,
+        ])->compute();
 
         $this->assertSame(11.5, $result);
     }

@@ -8,11 +8,9 @@ class BessemerOccupationalTest extends \TestCase
 {
     public function testBessemerOccupational()
     {
-        $taxes = $this->app->make(BessemerOccupational::class);
-
-        $result = $taxes
-            ->withEarnings(2300)
-            ->compute();
+        $result = $this->app->makeWith(BessemerOccupational::class, [
+            'earnings' => 2300,
+        ])->compute();
 
         $this->assertSame(23.00, $result);
     }

@@ -8,11 +8,9 @@ class AuburnOccupationalTest extends \TestCase
 {
     public function testAuburnOccupational()
     {
-        $taxes = $this->app->make(AuburnOccupational::class);
-
-        $result = $taxes
-            ->withEarnings(2300)
-            ->compute();
+        $result = $this->app->makeWith(AuburnOccupational::class, [
+            'earnings' => 2300,
+        ])->compute();
 
         $this->assertSame(23.00, $result);
     }

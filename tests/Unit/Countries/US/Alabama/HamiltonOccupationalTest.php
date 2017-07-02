@@ -8,11 +8,9 @@ class HamiltonOccupationalTest extends \TestCase
 {
     public function testHamiltonOccupational()
     {
-        $taxes = $this->app->make(HamiltonOccupational::class);
-
-        $result = $taxes
-            ->withEarnings(2300)
-            ->compute();
+        $result = $this->app->makeWith(HamiltonOccupational::class, [
+            'earnings' => 2300,
+        ])->compute();
 
         $this->assertSame(23.00, $result);
     }

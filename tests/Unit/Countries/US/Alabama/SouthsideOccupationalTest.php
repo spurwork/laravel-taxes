@@ -8,11 +8,9 @@ class SouthsideOccupationalTest extends \TestCase
 {
     public function testSouthsideOccupational()
     {
-        $taxes = $this->app->make(SouthsideOccupational::class);
-
-        $result = $taxes
-            ->withEarnings(2300)
-            ->compute();
+        $result = $this->app->makeWith(SouthsideOccupational::class, [
+            'earnings' => 2300,
+        ])->compute();
 
         $this->assertSame(46.00, $result);
     }

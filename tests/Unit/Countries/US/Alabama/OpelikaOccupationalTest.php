@@ -8,11 +8,9 @@ class OpelikaOccupationalTest extends \TestCase
 {
     public function testOpelikaOccupational()
     {
-        $taxes = $this->app->make(OpelikaOccupational::class);
-
-        $result = $taxes
-            ->withEarnings(2300)
-            ->compute();
+        $result = $this->app->makeWith(OpelikaOccupational::class, [
+            'earnings' => 2300,
+        ])->compute();
 
         $this->assertSame(34.5, $result);
     }

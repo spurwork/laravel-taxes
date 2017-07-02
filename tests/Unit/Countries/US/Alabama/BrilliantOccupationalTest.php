@@ -8,11 +8,9 @@ class BrilliantOccupationalTest extends \TestCase
 {
     public function testBrilliantOccupational()
     {
-        $taxes = $this->app->make(BrilliantOccupational::class);
-
-        $result = $taxes
-            ->withEarnings(2300)
-            ->compute();
+        $result = $this->app->makeWith(BrilliantOccupational::class, [
+            'earnings' => 2300,
+        ])->compute();
 
         $this->assertSame(23.00, $result);
     }

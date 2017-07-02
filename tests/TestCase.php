@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Orchestra\Database\ConsoleServiceProvider;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 
@@ -8,6 +9,10 @@ class TestCase extends BaseTestCase
     public function setUp()
     {
         parent::setUp();
+
+        Carbon::setTestNow(
+            Carbon::parse('January 1, 2017 8am', 'America/Chicago')->setTimezone('UTC')
+        );
 
         $this->loadLaravelMigrations(['--database' => 'testing']);
 

@@ -8,11 +8,9 @@ class RainbowCityOccupationalTest extends \TestCase
 {
     public function testRainbowCityOccupational()
     {
-        $taxes = $this->app->make(RainbowCityOccupational::class);
-
-        $result = $taxes
-            ->withEarnings(2300)
-            ->compute();
+        $result = $this->app->makeWith(RainbowCityOccupational::class, [
+            'earnings' => 2300,
+        ])->compute();
 
         $this->assertSame(46.00, $result);
     }

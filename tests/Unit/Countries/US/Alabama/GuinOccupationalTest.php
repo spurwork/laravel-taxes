@@ -8,11 +8,9 @@ class GuinOccupationalTest extends \TestCase
 {
     public function testGuinOccupational()
     {
-        $taxes = $this->app->make(GuinOccupational::class);
-
-        $result = $taxes
-            ->withEarnings(2300)
-            ->compute();
+        $result = $this->app->makeWith(GuinOccupational::class, [
+            'earnings' => 2300,
+        ])->compute();
 
         $this->assertSame(23.00, $result);
     }

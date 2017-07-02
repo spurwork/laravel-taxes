@@ -8,11 +8,9 @@ class AttallaOccupationalTest extends \TestCase
 {
     public function testAttallaOccupational()
     {
-        $taxes = $this->app->make(AttallaOccupational::class);
-
-        $result = $taxes
-            ->withEarnings(2300)
-            ->compute();
+        $result = $this->app->makeWith(AttallaOccupational::class, [
+            'earnings' => 2300,
+        ])->compute();
 
         $this->assertSame(46.00, $result);
     }

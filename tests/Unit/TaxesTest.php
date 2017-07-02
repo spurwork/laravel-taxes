@@ -24,17 +24,6 @@ class TaxesTest extends \TestCase
     public function testTaxes()
     {
         $taxes = $this->app->make(Taxes::class);
-
-        $taxes->addTaxInformationToUser(FederalIncomeTaxInformation::class, [
-            'exemptions' => 0,
-            'filing_status' => FederalIncome::FILING_SINGLE,
-            'non_resident_alien' => false,
-        ], $this->user);
-
-        $taxes->addTaxInformationToUser(AlabamaIncomeTaxInformation::class, [
-            'dependents' => 0,
-            'filing_status' => AlabamaIncome::FILING_SINGLE,
-        ], $this->user);
-
+        $this->assertSame(1, $this->user_model->count());
     }
 }
