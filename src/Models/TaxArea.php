@@ -22,11 +22,6 @@ class TaxArea extends Model
         return $this->belongsTo(GovernmentalUnitArea::class);
     }
 
-    public function getTaxAttribute($value)
-    {
-        return app($value);
-    }
-
     public function scopeAtPoint($query, $latitude, $longitude)
     {
         return $query->whereHas('governmentalUnitArea', function ($query) use ($latitude, $longitude) {

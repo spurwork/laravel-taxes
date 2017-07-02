@@ -44,4 +44,27 @@ return [
 
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Rates
+    |--------------------------------------------------------------------------
+    |
+    | Specify the rate to be used for taxes here or in the env.
+    |
+    */
+
+    'rates' => [
+
+        'us' => [
+
+            'alabama' => [
+
+                'unemployment' => env('TAXES_ALABAMA_UNEMPLOYMENT_TAX_RATE', 0.027),
+
+            ],
+
+        ],
+
+    ],
+
 ];

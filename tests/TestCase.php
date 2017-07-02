@@ -47,6 +47,8 @@ class TestCase extends BaseTestCase
         $app['config']->set('taxes.tables.tax_information', 'tax_information');
         $app['config']->set('taxes.tables.us.federal_income_tax_information', 'federal_income_tax_information');
         $app['config']->set('taxes.tables.us.alabama.alabama_income_tax_information', 'alabama_income_tax_information');
+
+        $app['config']->set('taxes.rates.us.alabama.unemployment', 0.019);
     }
 
     protected function getPackageProviders($app)

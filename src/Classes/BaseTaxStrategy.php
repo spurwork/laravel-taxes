@@ -10,34 +10,28 @@ abstract class BaseTaxStrategy
 
     public function __construct($date = null)
     {
-        $attributes = [];
-        $date = is_null($date) ? Carbon::now() : $date;
-        $basename = class_basename(get_called_class());
-        $namespace = substr(get_called_class(), 0, -strlen($basename) - 1);
+        $class_name = self::getClassName(isset($arguments[0]) ? $arguments[0] : Carbon::now());
 
+        $attributes = [];
         $constructor = new \ReflectionMethod(get_called_class(), '__construct');
         foreach ($constructor->getParameters() as $parameter) {
             $attributes[$parameter->getName()] = func_get_arg($parameter->getPosition());
         }
 
-        foreach (get_called_class()::STRATEGIES as $strategy_name) {
-            if ($date->gte(Carbon::createFromFormat('Ymd', $strategy_name))) {
-                $strategy = $strategy_name;
-            }
-        }
-
-        if (is_null($strategy)) {
-            throw new \Exception('Tax strategy could not be resolved.');
-        }
-
-        $this->strategy = app()->makeWith($namespace.'\\V'.$strategy.'\\'.$basename, $attributes);
+        $this->strategy = app()->makeWith($class_name, $attributes);
     }
 
     public static function __callStatic($name, $arguments)
     {
-        $date = !isset($arguments[0]) ? Carbon::now() : $arguments[0];
-        $basename = class_basename(get_called_class());
-        $namespace = substr(get_called_class(), 0, -strlen($basename) - 1);
+        $class_name = self::getClassName(isset($arguments[0]) ? $arguments[0] : Carbon::now());
+
+        return $class_name::$name();
+    }
+
+    public static function getClassName($date = null) {
+        $date = is_null($date) ? Carbon::now() : $date;
+        $base_name = class_basename(get_called_class());
+        $namespace = substr(get_called_class(), 0, -strlen($base_name) - 1);
 
         foreach (get_called_class()::STRATEGIES as $strategy_name) {
             if ($date->gte(Carbon::createFromFormat('Ymd', $strategy_name))) {
@@ -45,13 +39,7 @@ abstract class BaseTaxStrategy
             }
         }
 
-        if (is_null($strategy)) {
-            throw new \Exception('Tax strategy could not be resolved.');
-        }
-
-        $class = $namespace.'\\V'.$strategy.'\\'.$basename;
-
-        return $class::$name();
+        return $namespace.'\\V'.$strategy.'\\'.$base_name;
     }
 
     public function compute()

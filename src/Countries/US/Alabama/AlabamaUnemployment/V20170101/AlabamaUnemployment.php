@@ -2,10 +2,10 @@
 
 namespace Appleton\Taxes\Countries\US\Alabama\AlabamaUnemployment\V20170101;
 
-use Appleton\Taxes\Classes\BaseTax;
+use Appleton\Taxes\Classes\BaseStateUnemploymentTax;
 use Appleton\Taxes\Traits\HasWageBase;
 
-class AlabamaUnemployment extends BaseTax
+class AlabamaUnemployment extends BaseStateUnemploymentTax
 {
     use HasWageBase;
 
@@ -21,13 +21,8 @@ class AlabamaUnemployment extends BaseTax
     public function __construct($earnings = 0, $ytd_earnings = 0, $tax_rate = null)
     {
         $this->earnings = $earnings;
-        $this->tax_rate = is_null($tax_rate) ? self::NEW_EMPLOYER_RATE : $tax_rate;
+        $this->tax_rate = is_null($tax_rate) ? config('taxes.rates.us.alabama.unemployment', self::NEW_EMPLOYER_RATE) : $tax_rate;
         $this->ytd_earnings = $ytd_earnings;
-    }
-
-    public static function getCredit()
-    {
-        return self::FUTA_CREDIT;
     }
 
     private function getAdjustedEarnings()
