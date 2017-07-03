@@ -1,19 +1,17 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Alabama;
-
-use Appleton\Taxes\Countries\US\Alabama\RedBayOccupational;
+namespace Appleton\Taxes\Countries\US\Alabama\RedBayOccupational;
 
 class RedBayOccupationalTest extends \TestCase
 {
     public function testRedBayOccupational()
     {
-        $taxes = $this->app->make(RedBayOccupational::class);
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us.alabama.redbay'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2300);
+        });
 
-        $result = $taxes
-            ->withEarnings(2300)
-            ->compute();
-
-        $this->assertSame(11.5, $result);
+        $this->assertSame(11.5, $results->getTax(RedBayOccupational::class));
     }
 }

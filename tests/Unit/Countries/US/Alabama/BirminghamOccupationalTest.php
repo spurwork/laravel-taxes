@@ -1,30 +1,28 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Alabama;
-
-use Appleton\Taxes\Countries\US\Alabama\BirminghamOccupational;
+namespace Appleton\Taxes\Countries\US\Alabama\BirminghamOccupational;
 
 class BirminghamOccupationalTest extends \TestCase
 {
     public function testBirminghamOccupational()
     {
-        $taxes = $this->app->make(BirminghamOccupational::class);
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us.alabama.birmingham'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2300);
+        });
 
-        $result = $taxes
-            ->withEarnings(2300)
-            ->compute();
-
-        $this->assertSame(23.00, $result);
+        $this->assertSame(23.00, $results->getTax(BirminghamOccupational::class));
     }
 
     public function testCaseStudy1()
     {
-        $taxes = $this->app->make(BirminghamOccupational::class);
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us.alabama.birmingham'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(66.68);
+        });
 
-        $result = $taxes
-            ->withEarnings(66.68)
-            ->compute();
-
-        $this->assertSame(0.67, $result);
+        $this->assertSame(0.67, $results->getTax(BirminghamOccupational::class));
     }
 }

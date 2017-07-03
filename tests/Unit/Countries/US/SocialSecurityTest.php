@@ -1,56 +1,51 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US;
-
-use Appleton\Taxes\Countries\US;
+namespace Appleton\Taxes\Countries\US\SocialSecurity;
 
 class SocialSecurityTest extends \TestCase
 {
     public function testSocialSecurity()
     {
-        $taxes = $this->app->make(SocialSecurity::class);
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2300);
+        });
 
-        $result = $taxes
-            ->withEarnings(2300)
-            ->withYtdEarnings(0)
-            ->compute();
-
-        $this->assertSame(142.60, $result);
+        $this->assertSame(142.60, $results->getTax(SocialSecurity::class));
     }
 
     public function testSocialSecurityEmployer()
     {
-        $taxes = $this->app->make(SocialSecurityEmployer::class);
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2300);
+        });
 
-        $result = $taxes
-            ->withEarnings(2300)
-            ->withYtdEarnings(0)
-            ->compute();
-
-        $this->assertSame(142.60, $result);
+        $this->assertSame(142.60, $results->getTax(SocialSecurityEmployer::class));
     }
 
     public function testSocialSecurityMetWageBase()
     {
-        $taxes = $this->app->make(SocialSecurity::class);
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2300);
+            $taxes->setYtdEarnings(127200);
+        });
 
-        $result = $taxes
-            ->withEarnings(2300)
-            ->withYtdEarnings(SocialSecurity::WAGE_BASE)
-            ->compute();
-
-        $this->assertSame(0.0, $result);
+        $this->assertSame(0.0, $results->getTax(SocialSecurity::class));
     }
 
     public function testCaseStudy1()
     {
-        $taxes = $this->app->make(SocialSecurity::class);
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(66.68);
+        });
 
-        $result = $taxes
-            ->withEarnings(66.68)
-            ->withYtdEarnings(0)
-            ->compute();
-
-        $this->assertSame(4.13, $result);
+        $this->assertSame(4.13, $results->getTax(SocialSecurity::class));
     }
 }

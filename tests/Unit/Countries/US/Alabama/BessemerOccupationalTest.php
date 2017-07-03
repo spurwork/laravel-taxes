@@ -1,19 +1,17 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Alabama;
-
-use Appleton\Taxes\Countries\US\Alabama\BessemerOccupational;
+namespace Appleton\Taxes\Countries\US\Alabama\BessemerOccupational;
 
 class BessemerOccupationalTest extends \TestCase
 {
     public function testBessemerOccupational()
     {
-        $taxes = $this->app->make(BessemerOccupational::class);
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us.alabama.bessemer'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2300);
+        });
 
-        $result = $taxes
-            ->withEarnings(2300)
-            ->compute();
-
-        $this->assertSame(23.00, $result);
+        $this->assertSame(23.00, $results->getTax(BessemerOccupational::class));
     }
 }

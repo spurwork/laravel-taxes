@@ -1,19 +1,17 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Alabama;
-
-use Appleton\Taxes\Countries\US\Alabama\RainbowCityOccupational;
+namespace Appleton\Taxes\Countries\US\Alabama\RainbowCityOccupational;
 
 class RainbowCityOccupationalTest extends \TestCase
 {
     public function testRainbowCityOccupational()
     {
-        $taxes = $this->app->make(RainbowCityOccupational::class);
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us.alabama.rainbowcity'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2300);
+        });
 
-        $result = $taxes
-            ->withEarnings(2300)
-            ->compute();
-
-        $this->assertSame(46.00, $result);
+        $this->assertSame(46.00, $results->getTax(RainbowCityOccupational::class));
     }
 }

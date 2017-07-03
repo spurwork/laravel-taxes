@@ -1,19 +1,17 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Alabama;
-
-use Appleton\Taxes\Countries\US\Alabama\GlencoeOccupational;
+namespace Appleton\Taxes\Countries\US\Alabama\GlencoeOccupational;
 
 class GlencoeOccupationalTest extends \TestCase
 {
     public function testGlencoeOccupational()
     {
-        $taxes = $this->app->make(GlencoeOccupational::class);
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us.alabama.glencoe'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2300);
+        });
 
-        $result = $taxes
-            ->withEarnings(2300)
-            ->compute();
-
-        $this->assertSame(46.00, $result);
+        $this->assertSame(46.00, $results->getTax(GlencoeOccupational::class));
     }
 }

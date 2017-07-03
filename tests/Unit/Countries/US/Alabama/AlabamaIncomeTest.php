@@ -1,72 +1,47 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Alabama;
+namespace Appleton\Taxes\Countries\US\Alabama\AlabamaIncome;
 
-use Appleton\Taxes\Countries\US\FederalIncome;
-use Appleton\Taxes\Countries\US\Alabama\AlabamaIncome;
+use Appleton\Taxes\Classes\Taxes;
+use Appleton\Taxes\Models\Countries\US\Alabama\AlabamaIncomeTaxInformation;
 
 class AlabamaIncomeTest extends \TestCase
 {
     public function testAlabamaIncome()
     {
-        $taxes = $this->app->make(FederalIncome::class);
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us.alabama'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(66.68);
+            $taxes->setPayPeriods(260);
+        });
 
-        $result = $taxes
-            ->withEarnings(66.68)
-            ->withExemptions(0)
-            ->withFilingStatus(FederalIncome::FILING_SINGLE)
-            ->withNonResidentAlien(false)
-            ->withPayPeriods(260)
-            ->compute();
-
-        $taxes = $this->app->make(AlabamaIncome::class);
-
-        $result = $taxes
-            ->withEarnings(66.68)
-            ->withFilingStatus(AlabamaIncome::FILING_SINGLE)
-            ->withPayPeriods(260)
-            ->withFederalIncomeTax($result)
-            ->compute();
-
-        $this->assertSame(2.07, $result);
+        $this->assertSame(2.07, $results->getTax(AlabamaIncome::class));
     }
 
     public function testAlabamaIncomeNonNegative()
     {
-        $taxes = $this->app->make(AlabamaIncome::class);
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us.alabama'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(10);
+            $taxes->setPayPeriods(260);
+        });
 
-        $result = $taxes
-            ->withEarnings(10)
-            ->withFilingStatus(AlabamaIncome::FILING_SINGLE)
-            ->withPayPeriods(260)
-            ->withFederalIncomeTax(0)
-            ->compute();
-
-        $this->assertSame(0.0, $result);
+        $this->assertSame(0.0, $results->getTax(AlabamaIncome::class));
     }
 
     public function testAlabamaIncomeWithNoPersonalExemption()
     {
-        $taxes = $this->app->make(FederalIncome::class);
+        AlabamaIncomeTaxInformation::forUser($this->user)->update(['filing_status' => Taxes::resolve(AlabamaIncome::class)::FILING_ZERO]);
 
-        $result = $taxes
-            ->withEarnings(66.68)
-            ->withExemptions(0)
-            ->withFilingStatus(FederalIncome::FILING_SINGLE)
-            ->withNonResidentAlien(false)
-            ->withPayPeriods(260)
-            ->compute();
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us.alabama'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(66.68);
+            $taxes->setPayPeriods(260);
+        });
 
-        $taxes = $this->app->make(AlabamaIncome::class);
-
-        $result = $taxes
-            ->withEarnings(66.68)
-            ->withFilingStatus(AlabamaIncome::FILING_SINGLE)
-            ->withPersonalExemption(false)
-            ->withPayPeriods(260)
-            ->withFederalIncomeTax($result)
-            ->compute();
-
-        $this->assertSame(2.36, $result);
+        $this->assertSame(2.84, $results->getTax(AlabamaIncome::class));
     }
 }

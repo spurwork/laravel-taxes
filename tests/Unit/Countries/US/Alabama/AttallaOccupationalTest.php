@@ -1,19 +1,17 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Alabama;
-
-use Appleton\Taxes\Countries\US\Alabama\AttallaOccupational;
+namespace Appleton\Taxes\Countries\US\Alabama\AttallaOccupational;
 
 class AttallaOccupationalTest extends \TestCase
 {
     public function testAttallaOccupational()
     {
-        $taxes = $this->app->make(AttallaOccupational::class);
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us.alabama.attalla'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2300);
+        });
 
-        $result = $taxes
-            ->withEarnings(2300)
-            ->compute();
-
-        $this->assertSame(46.00, $result);
+        $this->assertSame(46.00, $results->getTax(AttallaOccupational::class));
     }
 }

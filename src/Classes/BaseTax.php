@@ -2,12 +2,31 @@
 
 namespace Appleton\Taxes\Classes;
 
-use Appleton\Taxes\Traits\WithEarnings;
-
-abstract class BaseTax
+class BaseTax
 {
-    use WithEarnings;
+    public function built()
+    {
+        //abstract
+    }
 
-    const TYPE = 'base';
-    const WITHHELD = false;
+    public function build($parameters)
+    {
+        $this->parameters = $parameters;
+        foreach ($parameters as $key => $value) {
+            $this->$key = $value;
+        }
+        if (defined('static::TAX_INFORMATION')) {
+            $this->tax_information = (static::TAX_INFORMATION)::forUser($this->user)->first();
+            if (is_null($this->tax_information)) {
+                throw new \Exception('The tax information for that user could not be loaded.');
+            }
+        }
+        $this->built();
+        return $this;
+    }
+
+    public function compute()
+    {
+        return round($this->earnings * static::TAX_RATE, 2);
+    }
 }

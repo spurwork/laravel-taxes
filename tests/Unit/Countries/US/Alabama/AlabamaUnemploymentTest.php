@@ -1,58 +1,55 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Alabama;
-
-use Appleton\Taxes\Countries\US\Alabama\AlabamaUnemployment;
+namespace Appleton\Taxes\Countries\US\Alabama\AlabamaUnemployment;
 
 class AlabamaUnemploymentTest extends \TestCase
 {
     public function testAlabamaUnemployment()
     {
-        $taxes = $this->app->make(AlabamaUnemployment::class);
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us.alabama'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2300);
+        });
 
-        $result = $taxes
-            ->withEarnings(2300)
-            ->withYtdEarnings(0)
-            ->compute();
-
-        $this->assertSame(62.10, $result);
+        $this->assertSame(62.10, $results->getTax(AlabamaUnemployment::class));
     }
 
     public function testAlabamaUnemploymentWithTaxRate()
     {
-        $taxes = $this->app->make(AlabamaUnemployment::class);
+        config(['taxes.rates.us.alabama.unemployment' => 0.024]);
 
-        $result = $taxes
-            ->withEarnings(2300)
-            ->withYtdEarnings(0)
-            ->withTaxRate(0.024)
-            ->compute();
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us.alabama'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2300);
+        });
 
-        $this->assertSame(55.20, $result);
+        $this->assertSame(55.20, $results->getTax(AlabamaUnemployment::class));
     }
 
     public function testAlabamaUnemploymentMetWageBase()
     {
-        $taxes = $this->app->make(AlabamaUnemployment::class);
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us.alabama'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2300);
+            $taxes->setYtdEarnings(8000);
+        });
 
-        $result = $taxes
-            ->withEarnings(2300)
-            ->withYtdEarnings(AlabamaUnemployment::WAGE_BASE)
-            ->compute();
-
-        $this->assertSame(0.0, $result);
+        $this->assertSame(0.0, $results->getTax(AlabamaUnemployment::class));
     }
 
     public function testCaseStudy1()
     {
-        $taxes = $this->app->make(AlabamaUnemployment::class);
+        config(['taxes.rates.us.alabama.unemployment' => 0.019]);
 
-        $result = $taxes
-            ->withEarnings(66.68)
-            ->withYtdEarnings(0)
-            ->withTaxRate(0.019)
-            ->compute();
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us.alabama'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(66.68);
+        });
 
-        $this->assertSame(1.27, $result);
+        $this->assertSame(1.27, $results->getTax(AlabamaUnemployment::class));
     }
 }

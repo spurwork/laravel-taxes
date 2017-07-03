@@ -1,19 +1,17 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Alabama;
-
-use Appleton\Taxes\Countries\US\Alabama\ShorterOccupational;
+namespace Appleton\Taxes\Countries\US\Alabama\ShorterOccupational;
 
 class ShorterOccupationalTest extends \TestCase
 {
     public function testShorterOccupational()
     {
-        $taxes = $this->app->make(ShorterOccupational::class);
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us.alabama.shorter'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2300);
+        });
 
-        $result = $taxes
-            ->withEarnings(2300)
-            ->compute();
-
-        $this->assertSame(23.00, $result);
+        $this->assertSame(23.00, $results->getTax(ShorterOccupational::class));
     }
 }

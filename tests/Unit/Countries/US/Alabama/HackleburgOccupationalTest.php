@@ -1,19 +1,17 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Alabama;
-
-use Appleton\Taxes\Countries\US\Alabama\HackleburgOccupational;
+namespace Appleton\Taxes\Countries\US\Alabama\HackleburgOccupational;
 
 class HackleburgOccupationalTest extends \TestCase
 {
     public function testHackleburgOccupational()
     {
-        $taxes = $this->app->make(HackleburgOccupational::class);
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us.alabama.hackleburg'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2300);
+        });
 
-        $result = $taxes
-            ->withEarnings(2300)
-            ->compute();
-
-        $this->assertSame(23.00, $result);
+        $this->assertSame(23.00, $results->getTax(HackleburgOccupational::class));
     }
 }

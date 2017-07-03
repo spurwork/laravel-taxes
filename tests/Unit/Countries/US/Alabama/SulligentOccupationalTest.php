@@ -1,19 +1,17 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Alabama;
-
-use Appleton\Taxes\Countries\US\Alabama\SulligentOccupational;
+namespace Appleton\Taxes\Countries\US\Alabama\SulligentOccupational;
 
 class SulligentOccupationalTest extends \TestCase
 {
     public function testSulligentOccupational()
     {
-        $taxes = $this->app->make(SulligentOccupational::class);
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us.alabama.sulligent'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2300);
+        });
 
-        $result = $taxes
-            ->withEarnings(2300)
-            ->compute();
-
-        $this->assertSame(23.00, $result);
+        $this->assertSame(23.00, $results->getTax(SulligentOccupational::class));
     }
 }

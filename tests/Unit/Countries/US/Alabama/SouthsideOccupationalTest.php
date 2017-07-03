@@ -1,19 +1,17 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Alabama;
-
-use Appleton\Taxes\Countries\US\Alabama\SouthsideOccupational;
+namespace Appleton\Taxes\Countries\US\Alabama\SouthsideOccupational;
 
 class SouthsideOccupationalTest extends \TestCase
 {
     public function testSouthsideOccupational()
     {
-        $taxes = $this->app->make(SouthsideOccupational::class);
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us.alabama.southside'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2300);
+        });
 
-        $result = $taxes
-            ->withEarnings(2300)
-            ->compute();
-
-        $this->assertSame(46.00, $result);
+        $this->assertSame(46.00, $results->getTax(SouthsideOccupational::class));
     }
 }

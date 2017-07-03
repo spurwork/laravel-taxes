@@ -1,19 +1,17 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Alabama;
-
-use Appleton\Taxes\Countries\US\Alabama\LynnOccupational;
+namespace Appleton\Taxes\Countries\US\Alabama\LynnOccupational;
 
 class LynnOccupationalTest extends \TestCase
 {
     public function testLynnOccupational()
     {
-        $taxes = $this->app->make(LynnOccupational::class);
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us.alabama.lynn'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2300);
+        });
 
-        $result = $taxes
-            ->withEarnings(2300)
-            ->compute();
-
-        $this->assertSame(23.00, $result);
+        $this->assertSame(23.00, $results->getTax(LynnOccupational::class));
     }
 }

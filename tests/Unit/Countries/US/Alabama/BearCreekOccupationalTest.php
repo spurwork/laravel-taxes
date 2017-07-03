@@ -1,19 +1,17 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Alabama;
-
-use Appleton\Taxes\Countries\US\Alabama\BearCreekOccupational;
+namespace Appleton\Taxes\Countries\US\Alabama\BearCreekOccupational;
 
 class BearCreekOccupationalTest extends \TestCase
 {
     public function testBearCreekOccupational()
     {
-        $taxes = $this->app->make(BearCreekOccupational::class);
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us.alabama.bearcreek'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2300);
+        });
 
-        $result = $taxes
-            ->withEarnings(2300)
-            ->compute();
-
-        $this->assertSame(23.00, $result);
+        $this->assertSame(23.00, $results->getTax(BearCreekOccupational::class));
     }
 }

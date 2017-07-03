@@ -1,19 +1,19 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Alabama;
+namespace Appleton\Taxes\Countries\US\Alabama\TuskegeeOccupational;
 
-use Appleton\Taxes\Countries\US\Alabama\TuskegeeOccupational;
+use Appleton\Taxes\Models\TaxArea;
 
 class TuskegeeOccupationalTest extends \TestCase
 {
     public function testTuskegeeOccupational()
     {
-        $taxes = $this->app->make(TuskegeeOccupational::class);
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us.alabama.tuskegee'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2300);
+        });
 
-        $result = $taxes
-            ->withEarnings(2300)
-            ->compute();
-
-        $this->assertSame(46.00, $result);
+        $this->assertSame(46.00, $results->getTax(TuskegeeOccupational::class));
     }
 }

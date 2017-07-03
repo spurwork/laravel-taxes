@@ -1,19 +1,17 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Alabama;
-
-use Appleton\Taxes\Countries\US\Alabama\GoodwaterOccupational;
+namespace Appleton\Taxes\Countries\US\Alabama\GoodwaterOccupational;
 
 class GoodwaterOccupationalTest extends \TestCase
 {
     public function testGoodwaterOccupational()
     {
-        $taxes = $this->app->make(GoodwaterOccupational::class);
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us.alabama.goodwater'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2300);
+        });
 
-        $result = $taxes
-            ->withEarnings(2300)
-            ->compute();
-
-        $this->assertSame(17.25, $result);
+        $this->assertSame(17.25, $results->getTax(GoodwaterOccupational::class));
     }
 }
