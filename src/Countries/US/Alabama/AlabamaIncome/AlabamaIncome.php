@@ -2,7 +2,9 @@
 
 namespace Appleton\Taxes\Countries\US\Alabama\AlabamaIncome;
 
-class AlabamaIncome
+use Appleton\Taxes\Classes\BaseIncomeTax;
+
+class AlabamaIncome extends BaseIncomeTax
 {
 
 }

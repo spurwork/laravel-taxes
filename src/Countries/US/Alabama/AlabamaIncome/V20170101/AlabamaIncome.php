@@ -2,12 +2,11 @@
 
 namespace Appleton\Taxes\Countries\US\Alabama\AlabamaIncome\V20170101;
 
-use Appleton\Taxes\Classes\BaseIncomeTax;
-use Appleton\Taxes\Classes\Taxes;
+use Appleton\Taxes\Countries\US\Alabama\AlabamaIncome\AlabamaIncome as BaseAlabamaIncome;
 use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome;
 use Appleton\Taxes\Models\Countries\US\Alabama\AlabamaIncomeTaxInformation;
 
-class AlabamaIncome extends BaseIncomeTax
+class AlabamaIncome extends BaseAlabamaIncome
 {
     const TYPE = 'state';
     const WITHHELD = true;

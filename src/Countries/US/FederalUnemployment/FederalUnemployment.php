@@ -2,7 +2,9 @@
 
 namespace Appleton\Taxes\Countries\US\FederalUnemployment;
 
-class FederalUnemployment
+use Appleton\Taxes\Classes\BaseTax;
+
+class FederalUnemployment extends BaseTax
 {
 
 }
