@@ -79,15 +79,14 @@ class AlabamaIncome extends BaseAlabamaIncome
         [100000, 300]
     ];
 
-    public function build($parameters)
+    public function __construct(FederalIncome $federal_income)
     {
-        parent::build($parameters);
-        $this->federal_income_tax = app(FederalIncome::class)->build([
-            'earnings' => $this->earnings,
-            'pay_periods' => $this->pay_periods,
-            'user' => $this->user,
-        ])->compute();
-        return $this;
+        $this->federal_income = $federal_income;
+    }
+
+    public function built()
+    {
+        $this->federal_income_tax = $this->federal_income->build($this->parameters)->compute();
     }
 
     public function getAdjustedEarnings()

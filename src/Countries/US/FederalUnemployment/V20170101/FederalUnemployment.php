@@ -17,9 +17,14 @@ class FederalUnemployment extends BaseFederalUnemployment
 
     const WAGE_BASE = 7000;
 
-    public function __construct(BaseStateUnemploymentTax $state_unemployment = null)
+    public function __construct(BaseStateUnemploymentTax $state_unemployment)
     {
-        $this->tax_rate = is_null($state_unemployment) ? static::TAX_RATE : static::TAX_RATE - $state_unemployment->getUnemploymentTaxCredit();
+        $this->state_unemployment = $state_unemployment;
+    }
+
+    public function built()
+    {
+        $this->tax_rate = static::TAX_RATE - $this->state_unemployment->getUnemploymentTaxCredit();
     }
 
     public function getAdjustedEarnings()

@@ -14,8 +14,14 @@ class BaseTax
         return static::WITHHELD;
     }
 
+    public function built()
+    {
+        //abstract
+    }
+
     public function build($parameters)
     {
+        $this->parameters = $parameters;
         foreach ($parameters as $key => $value) {
             $this->$key = $value;
         }
@@ -25,6 +31,7 @@ class BaseTax
                 throw new \Exception('The tax information for that user could not be loaded.');
             }
         }
+        $this->built();
         return $this;
     }
 
