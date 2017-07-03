@@ -2,58 +2,52 @@
 
 namespace Appleton\Taxes\Countries\US\FederalUnemployment;
 
-use Appleton\Taxes\Countries\US;
-use Appleton\Taxes\Countries\US\Alabama\AlabamaUnemployment\AlabamaUnemployment;
 use Carbon\Carbon;
 
 class FederalUnemploymentTest extends \TestCase
 {
     public function testFederalUnemployment()
     {
-        $result = $this->app->makeWith(FederalUnemployment::class, [
-            'earnings' => 2300,
-        ])->compute();
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation(38.9072, -77.0369);
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2300);
+        });
 
-        $this->assertSame(138.0, $result);
-    }
-
-    public function testFederalUnemploymentWithCredit()
-    {
-        $result = $this->app->makeWith(FederalUnemployment::class, [
-            'earnings' => 2300,
-            'credit' => 0.01,
-        ])->compute();
-
-        $this->assertSame(115.00, $result);
+        $this->assertSame(138.0, $results->getTax(FederalUnemployment::class));
     }
 
     public function testFederalUnemploymentWithStateCredit()
     {
-        $result = $this->app->makeWith(FederalUnemployment::class, [
-            'earnings' => 2300,
-            'credit' => AlabamaUnemployment::getCredit(),
-        ])->compute();
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation(32.3182, -86.9023);
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2300);
+        });
 
-        $this->assertSame(13.80, $result);
+        $this->assertSame(13.80, $results->getTax(FederalUnemployment::class));
     }
 
     public function testFederalUnemploymentMetWageBase()
     {
-        $result = $this->app->makeWith(FederalUnemployment::class, [
-            'earnings' => 2300,
-            'ytd_earnings' => 7000,
-        ])->compute();
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation(32.3182, -86.9023);
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2300);
+            $taxes->setYtdEarnings(7000);
+        });
 
-        $this->assertSame(0.0, $result);
+        $this->assertSame(0.0, $results->getTax(FederalUnemployment::class));
     }
 
     public function testCaseStudy1()
     {
-        $result = $this->app->makeWith(FederalUnemployment::class, [
-            'earnings' => 66.68,
-            'credit' => AlabamaUnemployment::getCredit(),
-        ])->compute();
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation(32.3182, -86.9023);
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(66.68);
+        });
 
-        $this->assertSame(0.40, $result);
+        $this->assertSame(0.40, $results->getTax(FederalUnemployment::class));
     }
 }

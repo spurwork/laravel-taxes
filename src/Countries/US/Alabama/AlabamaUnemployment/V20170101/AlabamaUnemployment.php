@@ -18,11 +18,11 @@ class AlabamaUnemployment extends BaseStateUnemploymentTax
 
     const WAGE_BASE = 8000;
 
-    public function __construct($earnings = 0, $ytd_earnings = 0, $tax_rate = null)
+    public function build($parameters)
     {
-        $this->earnings = $earnings;
-        $this->tax_rate = is_null($tax_rate) ? config('taxes.rates.us.alabama.unemployment', self::NEW_EMPLOYER_RATE) : $tax_rate;
-        $this->ytd_earnings = $ytd_earnings;
+        parent::build($parameters);
+        $this->tax_rate = config('taxes.rates.us.alabama.unemployment', self::NEW_EMPLOYER_RATE);
+        return $this;
     }
 
     private function getAdjustedEarnings()

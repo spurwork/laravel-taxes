@@ -2,45 +2,51 @@
 
 namespace Appleton\Taxes\Countries\US\Medicare;
 
-use Appleton\Taxes\Countries\US;
-
 class MedicareTest extends \TestCase
 {
     public function testMedicare()
     {
-        $result = $this->app->makeWith(Medicare::class, [
-            'earnings' => 2300,
-        ])->compute();
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation(38.9072, -77.0369);
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2300);
+        });
 
-        $this->assertSame(33.35, $result);
+        $this->assertSame(33.35, $results->getTax(Medicare::class));
     }
 
     public function testMedicareWithAdditionalTax()
     {
-        $result = $this->app->makeWith(Medicare::class, [
-            'earnings' => 2300,
-            'ytd_earnings' => 200000,
-        ])->compute();
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation(38.9072, -77.0369);
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2300);
+            $taxes->setYtdEarnings(200000);
+        });
 
-        $this->assertSame(54.05, $result);
+        $this->assertSame(54.05, $results->getTax(Medicare::class));
     }
 
     public function testMedicareEmployer()
     {
-        $result = $this->app->makeWith(MedicareEmployer::class, [
-            'earnings' => 2300,
-            'ytd_earnings' => 200000,
-        ])->compute();
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation(38.9072, -77.0369);
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2300);
+            $taxes->setYtdEarnings(200000);
+        });
 
-        $this->assertSame(33.35, $result);
+        $this->assertSame(33.35, $results->getTax(MedicareEmployer::class));
     }
 
     public function testCaseStudy1()
     {
-        $result = $this->app->makeWith(Medicare::class, [
-            'earnings' => 66.68,
-        ])->compute();
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation(38.9072, -77.0369);
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(66.68);
+        });
 
-        $this->assertSame(0.97, $result);
+        $this->assertSame(0.97, $results->getTax(Medicare::class));
     }
 }

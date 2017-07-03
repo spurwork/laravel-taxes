@@ -6,38 +6,46 @@ class SocialSecurityTest extends \TestCase
 {
     public function testSocialSecurity()
     {
-        $result = $this->app->makeWith(SocialSecurity::class, [
-            'earnings' => 2300,
-        ])->compute();
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation(38.9072, -77.0369);
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2300);
+        });
 
-        $this->assertSame(142.60, $result);
+        $this->assertSame(142.60, $results->getTax(SocialSecurity::class));
     }
 
     public function testSocialSecurityEmployer()
     {
-        $result = $this->app->makeWith(SocialSecurityEmployer::class, [
-            'earnings' => 2300,
-        ])->compute();
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation(38.9072, -77.0369);
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2300);
+        });
 
-        $this->assertSame(142.60, $result);
+        $this->assertSame(142.60, $results->getTax(SocialSecurityEmployer::class));
     }
 
     public function testSocialSecurityMetWageBase()
     {
-        $result = $this->app->makeWith(SocialSecurity::class, [
-            'earnings' => 2300,
-            'ytd_earnings' => 127200,
-        ])->compute();
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation(38.9072, -77.0369);
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2300);
+            $taxes->setYtdEarnings(127200);
+        });
 
-        $this->assertSame(0.0, $result);
+        $this->assertSame(0.0, $results->getTax(SocialSecurity::class));
     }
 
     public function testCaseStudy1()
     {
-        $result = $this->app->makeWith(SocialSecurity::class, [
-            'earnings' => 66.68,
-        ])->compute();
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation(38.9072, -77.0369);
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(66.68);
+        });
 
-        $this->assertSame(4.13, $result);
+        $this->assertSame(4.13, $results->getTax(SocialSecurity::class));
     }
 }

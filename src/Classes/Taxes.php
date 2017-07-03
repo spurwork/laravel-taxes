@@ -8,6 +8,7 @@ use Closure;
 
 class Taxes
 {
+    protected $pay_periods = 1;
     protected $ytd_earnings = 0;
 
     public function setEarnings($earnings)

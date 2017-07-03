@@ -30,7 +30,7 @@ class TaxesTest extends \TestCase
         $this->assertSame(4.13, $tax_results->getTax(SocialSecurity::class));
         $this->assertSame(4.13, $tax_results->getTax(SocialSecurityEmployer::class));
         $this->assertSame(2.07, $tax_results->getTax(AlabamaIncome::class));
-        $this->assertSame(1.27, $tax_results->getTax(AlabamaUnemployment::class));
+        $this->assertSame(1.8, $tax_results->getTax(AlabamaUnemployment::class));
         $this->assertSame(0.67, $tax_results->getTax(BirminghamOccupational::class));
     }
 }

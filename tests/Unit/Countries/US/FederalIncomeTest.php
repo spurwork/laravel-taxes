@@ -14,7 +14,6 @@ class FederalIncomeTest extends \TestCase
             $taxes->setWorkLocation(38.9072, -77.0369);
             $taxes->setUser($this->user);
             $taxes->setEarnings(2300);
-            $taxes->setPayPeriods(1);
         });
 
         $this->assertSame(0.0, $results->getTax(FederalIncome::class));
@@ -23,7 +22,6 @@ class FederalIncomeTest extends \TestCase
             $taxes->setWorkLocation(38.9072, -77.0369);
             $taxes->setUser($this->user);
             $taxes->setEarnings(2300);
-            $taxes->setPayPeriods(1);
         });
 
         $this->assertSame(0.0, $results->getTax(FederalIncome::class));
@@ -35,7 +33,6 @@ class FederalIncomeTest extends \TestCase
             $taxes->setWorkLocation(38.9072, -77.0369);
             $taxes->setUser($this->user);
             $taxes->setEarnings(2300);
-            $taxes->setPayPeriods(1);
         });
 
         $this->assertSame(0.0, $results->getTax(FederalIncome::class));
@@ -46,7 +43,6 @@ class FederalIncomeTest extends \TestCase
             $taxes->setWorkLocation(38.9072, -77.0369);
             $taxes->setUser($this->user);
             $taxes->setEarnings(8650);
-            $taxes->setPayPeriods(1);
         });
 
         $this->assertSame(0.0, $results->getTax(FederalIncome::class));
@@ -58,7 +54,6 @@ class FederalIncomeTest extends \TestCase
             $taxes->setWorkLocation(38.9072, -77.0369);
             $taxes->setUser($this->user);
             $taxes->setEarnings(2301);
-            $taxes->setPayPeriods(1);
         });
 
         $this->assertSame(0.10, $results->getTax(FederalIncome::class));
@@ -69,7 +64,6 @@ class FederalIncomeTest extends \TestCase
             $taxes->setWorkLocation(38.9072, -77.0369);
             $taxes->setUser($this->user);
             $taxes->setEarnings(8651);
-            $taxes->setPayPeriods(1);
         });
 
         $this->assertSame(0.10, $results->getTax(FederalIncome::class));

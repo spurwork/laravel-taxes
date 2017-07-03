@@ -2,6 +2,7 @@
 
 namespace Appleton\Taxes\Models;
 
+use Appleton\Taxes\Classes\Taxes;
 use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome;
 use Appleton\Taxes\Models\Countries\US\FederalIncomeTaxInformation;
 
@@ -9,22 +10,16 @@ class TaxInformationTest extends \TestCase
 {
     public function testCreateForUser()
     {
-        FederalIncomeTaxInformation::createForUser([
-            'exemptions' => 1,
-            'filing_status' => FederalIncome::FILING_SINGLE,
-            'non_resident_alien' => true,
-        ], $user);
+        $federal_income_tax_information = TaxInformation::forUser($this->user)->isTypeOf(FederalIncomeTaxInformation::class)->first()->information;
 
-        $federal_income_tax_information = TaxInformation::forUser($user)->isTypeOf(FederalIncomeTaxInformation::class)->first()->information;
+        $this->assertSame(0, $federal_income_tax_information->exemptions);
+        $this->assertSame(Taxes::resolve(FederalIncome::class)::FILING_SINGLE, $federal_income_tax_information->filing_status);
+        $this->assertSame(false, $federal_income_tax_information->non_resident_alien);
 
-        $this->assertSame(1, $federal_income_tax_information->exemptions);
-        $this->assertSame(FederalIncome::FILING_SINGLE, $federal_income_tax_information->filing_status);
-        $this->assertSame(true, $federal_income_tax_information->non_resident_alien);
+        $federal_income_tax_information = FederalIncomeTaxInformation::forUser($this->user)->first();
 
-        $federal_income_tax_information = FederalIncomeTaxInformation::forUser($user)->first();
-
-        $this->assertSame(1, $federal_income_tax_information->exemptions);
-        $this->assertSame(FederalIncome::FILING_SINGLE, $federal_income_tax_information->filing_status);
-        $this->assertSame(true, $federal_income_tax_information->non_resident_alien);
+        $this->assertSame(0, $federal_income_tax_information->exemptions);
+        $this->assertSame(Taxes::resolve(FederalIncome::class)::FILING_SINGLE, $federal_income_tax_information->filing_status);
+        $this->assertSame(false, $federal_income_tax_information->non_resident_alien);
     }
 }
