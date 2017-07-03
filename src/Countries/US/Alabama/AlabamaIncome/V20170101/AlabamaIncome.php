@@ -12,6 +12,8 @@ class AlabamaIncome extends BaseIncomeTax
     const TYPE = 'state';
     const WITHHELD = true;
 
+    const TAX_INFORMATION = AlabamaIncomeTaxInformation::class;
+
     const FILING_ZERO = 0;
     const FILING_SINGLE = 1;
     const FILING_HEAD_OF_HOUSEHOLD = 2;
@@ -78,21 +80,15 @@ class AlabamaIncome extends BaseIncomeTax
         [100000, 300]
     ];
 
-    protected $pay_periods;
-
-    public function __construct($earnings, $pay_periods, $tax_information = null, $user = null)
+    public function build($parameters)
     {
-        $this->federal_income_tax = app()->makeWith(FederalIncome::class, [
-            'earnings' => $earnings,
-            'pay_periods' => $pay_periods,
-            'user' => $user,
+        parent::build($parameters);
+        $this->federal_income_tax = app(FederalIncome::class)->build([
+            'earnings' => $this->earnings,
+            'pay_periods' => $this->pay_periods,
+            'user' => $this->user,
         ])->compute();
-
-        $this->earnings = $earnings;
-        $this->pay_periods = $pay_periods;
-        $this->user = $user;
-
-        $this->tax_information = $this->resolveTaxInformation(AlabamaIncomeTaxInformation::class, $tax_information, $user);
+        return $this;
     }
 
     public function getAdjustedEarnings()
