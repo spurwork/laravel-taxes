@@ -45,7 +45,7 @@ class Taxes
             ->pluck('tax')
             ->toArray();
 
-        $this->taxes = app()->make(TaxResolver::class)->resolve($this->taxes);
+        app()->make(TaxResolver::class)->resolve($this->taxes);
 
         $tax_results = [];
         foreach ($this->taxes as $tax_name) {
@@ -64,8 +64,12 @@ class Taxes
         return $tax_results;
     }
 
-    public static function resolve($name, $date = null)
+    public static function resolve($classes, $date = null)
     {
-        return app()->make(TaxResolver::class)->resolve($name, $date, false)[0];
+        if (is_string($classes)) {
+            return app()->make(TaxResolver::class)->resolve([$classes], $date)[0];
+        } else {
+            return app()->make(TaxResolver::class)->resolve($classes, $date);
+        }
     }
 }

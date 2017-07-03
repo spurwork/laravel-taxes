@@ -12,7 +12,7 @@ class TaxResults
     public function getTax($tax)
     {
         return $this->tax_results->filter(function ($tax_result, $tax_name) use ($tax) {
-            return is_subclass_of($tax_name, $tax);
+            return $tax_name === $tax;
         })->first();
     }
 

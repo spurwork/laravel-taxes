@@ -36,19 +36,15 @@ class TestCase extends BaseTestCase
 
         $this->taxes = $this->app->make(Taxes::class);
 
-        $federal_income = Taxes::resolve(FederalIncome::class);
-
         FederalIncomeTaxInformation::createForUser([
             'exemptions' => 0,
-            'filing_status' => $federal_income::FILING_SINGLE,
+            'filing_status' => Taxes::resolve(FederalIncome::class)::FILING_SINGLE,
             'non_resident_alien' => false,
         ], $this->user);
 
-        $alabama_income = Taxes::resolve(AlabamaIncome::class);
-
         AlabamaIncomeTaxInformation::createForUser([
             'dependents' => 0,
-            'filing_status' => $alabama_income::FILING_SINGLE,
+            'filing_status' => Taxes::resolve(AlabamaIncome::class)::FILING_SINGLE,
         ], $this->user);
     }
 

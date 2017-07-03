@@ -16,7 +16,7 @@ class TaxesTest extends \TestCase
 {
     public function testTaxes()
     {
-        $tax_results = $taxes->calculate(function ($taxes) {
+        $tax_results = $this->taxes->calculate(function ($taxes) {
             $taxes->setWorkLocation(33.5207, -86.8025);
             $taxes->setUser($this->user);
             $taxes->setEarnings(66.68);
