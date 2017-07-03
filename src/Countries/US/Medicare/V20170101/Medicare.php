@@ -14,16 +14,10 @@ class Medicare extends BaseTax
     const ADDITIONAL_TAX_AMOUNT = 200000;
     const ADDITIONAL_TAX_RATE = 0.009;
 
-    public function __construct($earnings, $ytd_earnings = 0)
-    {
-        $this->earnings = $earnings;
-        $this->ytd_earnings = $ytd_earnings;
-    }
-
     public function getAdditionalTaxAmount()
     {
-        if ($this->ytd_earnings >= self::ADDITIONAL_TAX_AMOUNT) {
-            return ($this->earnings - ($this->ytd_earnings - self::ADDITIONAL_TAX_AMOUNT)) * self::ADDITIONAL_TAX_RATE;
+        if ($this->ytd_earnings >= static::ADDITIONAL_TAX_AMOUNT) {
+            return ($this->earnings - ($this->ytd_earnings - static::ADDITIONAL_TAX_AMOUNT)) * static::ADDITIONAL_TAX_RATE;
         } else {
             return 0;
         }
@@ -31,6 +25,6 @@ class Medicare extends BaseTax
 
     public function compute()
     {
-        return round($this->earnings * self::TAX_RATE + $this->getAdditionalTaxAmount(), 2);
+        return round($this->earnings * static::TAX_RATE + $this->getAdditionalTaxAmount(), 2);
     }
 }

@@ -3,12 +3,9 @@
 namespace Appleton\Taxes\Countries\US\Alabama\TuskegeeOccupational;
 
 use Appleton\Taxes\Models\TaxArea;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class TuskegeeOccupationalTest extends \TestCase
 {
-    use DatabaseTransactions;
-
     public function testTuskegeeOccupational()
     {
         $results = $this->taxes->calculate(function ($taxes) {

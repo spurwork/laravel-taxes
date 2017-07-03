@@ -26,6 +26,7 @@ class TaxResolver
 
     private function getDependencies($class)
     {
+        if (!method_exists($class, '__construct')) return;
         $constructor = new \ReflectionMethod($class, '__construct');
         foreach ($constructor->getParameters() as $parameter) {
             if ($parameter->hasType()) {

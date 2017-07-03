@@ -10,6 +10,8 @@ class FederalIncome extends BaseFederalIncome
     const TYPE = 'federal';
     const WITHHELD = true;
 
+    const TAX_INFORMATION = FederalIncomeTaxInformation::class;
+
     const FILING_SINGLE = 0;
     const FILING_WIDOW = 1;
     const FILING_HEAD_OF_HOUSEHOLD = 2;
@@ -40,14 +42,6 @@ class FederalIncome extends BaseFederalIncome
         [425350, 0.35, 112728],
         [479350, 0.396, 131628],
     ];
-
-    public function __construct($earnings, $pay_periods, $tax_information = null, $user = null)
-    {
-        $this->earnings = $earnings;
-        $this->pay_periods = $pay_periods;
-        $this->user = $user;
-        $this->tax_information = $this->resolveTaxInformation(FederalIncomeTaxInformation::class, $tax_information, $user);
-    }
 
     public function getAdjustedEarnings()
     {

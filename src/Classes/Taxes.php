@@ -49,7 +49,7 @@ class Taxes
 
         $tax_results = [];
         foreach ($this->taxes as $tax_name) {
-            $tax_results[$tax_name] = app()->makeWith($tax_name, [
+            $tax_results[$tax_name] = app()->make($tax_name)->build([
                 'earnings' => $this->earnings,
                 'ytd_earnings' => $this->ytd_earnings,
                 'pay_periods' => $this->pay_periods,

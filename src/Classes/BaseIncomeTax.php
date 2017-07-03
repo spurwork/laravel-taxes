@@ -20,7 +20,6 @@ class BaseIncomeTax extends BaseTax
     {
         $adjusted_earnings = $this->getAdjustedEarnings();
         $tax_brackets = $this->getTaxBrackets();
-        // error_log(var_dump($this));
         return round($this->getTaxAmountFromTaxBrackets($adjusted_earnings, $tax_brackets) / $this->pay_periods, 2);
     }
 

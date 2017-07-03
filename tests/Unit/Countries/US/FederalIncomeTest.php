@@ -8,122 +8,130 @@ use Appleton\Taxes\Models\Countries\US\FederalIncomeTaxInformation;
 
 class FederalIncomeTest extends \TestCase
 {
-    public function setUp()
-    {
-        parent::setUp();
-
-        FederalIncomeTaxInformation::createForUser([
-            'exemptions' => 0,
-            'filing_status' => FederalIncome::FILING_SINGLE,
-            'non_resident_alien' => false,
-        ], $this->user);
-    }
-
     public function testFederalIncome()
     {
-        $result = $this->app->make(FederalIncome::class, [
-            'earnings' => 2300,
-            'pay_periods' => 1,
-            'user' => $this->user,
-        ])->compute();
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation(38.9072, -77.0369);
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2300);
+            $taxes->setPayPeriods(1);
+        });
 
-        $this->assertSame(0.0, $result);
+        $this->assertSame(0.0, $results->getTax(FederalIncome::class));
+
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation(38.9072, -77.0369);
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2300);
+            $taxes->setPayPeriods(1);
+        });
+
+        $this->assertSame(0.0, $results->getTax(FederalIncome::class));
     }
 
     public function testNoTaxesOwed()
     {
-        $result = $this->app->make(FederalIncome::class, [
-            'earnings' => 2300,
-            'pay_periods' => 1,
-            'user' => $this->user,
-        ])->compute();
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation(38.9072, -77.0369);
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2300);
+            $taxes->setPayPeriods(1);
+        });
 
-        $this->assertSame(0.0, $result);
+        $this->assertSame(0.0, $results->getTax(FederalIncome::class));
 
-        FederalIncomeTaxInformation::forUser($this->user)->update(['filing_status' => FederalIncome::FILING_MARRIED]);
+        FederalIncomeTaxInformation::forUser($this->user)->update(['filing_status' => Taxes::resolve(FederalIncome::class)::FILING_MARRIED]);
 
-        $result = $this->app->make(FederalIncome::class, [
-            'earnings' => 8650,
-            'pay_periods' => 1,
-            'user' => $this->user,
-        ])->compute();
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation(38.9072, -77.0369);
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(8650);
+            $taxes->setPayPeriods(1);
+        });
 
-        $this->assertSame(0.0, $result);
+        $this->assertSame(0.0, $results->getTax(FederalIncome::class));
     }
 
     public function testTaxesOwed()
     {
-        $result = $this->app->make(FederalIncome::class, [
-            'earnings' => 2301,
-            'pay_periods' => 1,
-            'user' => $this->user,
-        ])->compute();
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation(38.9072, -77.0369);
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2301);
+            $taxes->setPayPeriods(1);
+        });
 
-        $this->assertSame(0.10, $result);
+        $this->assertSame(0.10, $results->getTax(FederalIncome::class));
 
-        FederalIncomeTaxInformation::forUser($this->user)->update(['filing_status' => FederalIncome::FILING_MARRIED]);
+        FederalIncomeTaxInformation::forUser($this->user)->update(['filing_status' => Taxes::resolve(FederalIncome::class)::FILING_MARRIED]);
 
-        $result = $this->app->make(FederalIncome::class, [
-            'earnings' => 8651,
-            'pay_periods' => 1,
-            'user' => $this->user,
-        ])->compute();
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation(38.9072, -77.0369);
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(8651);
+            $taxes->setPayPeriods(1);
+        });
 
-        $this->assertSame(0.10, $result);
+        $this->assertSame(0.10, $results->getTax(FederalIncome::class));
     }
 
     public function testWeekly()
     {
-        $result = $this->app->make(FederalIncome::class, [
-            'earnings' => 2300,
-            'pay_periods' => 52,
-            'user' => $this->user,
-        ])->compute();
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation(38.9072, -77.0369);
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2300);
+            $taxes->setPayPeriods(52);
+        });
 
-        $this->assertSame(496.65, $result);
+        $this->assertSame(496.65, $results->getTax(FederalIncome::class));
     }
 
     public function testBimonthly()
     {
-        $result = $this->app->make(FederalIncome::class, [
-            'earnings' => 2300,
-            'pay_periods' => 24,
-            'user' => $this->user,
-        ])->compute();
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation(38.9072, -77.0369);
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2300);
+            $taxes->setPayPeriods(24);
+        });
 
-        $this->assertSame(373.49, $result);
+        $this->assertSame(373.49, $results->getTax(FederalIncome::class));
     }
 
     public function testMonthly()
     {
-        $result = $this->app->make(FederalIncome::class, [
-            'earnings' => 2300,
-            'pay_periods' => 12,
-            'user' => $this->user,
-        ])->compute();
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation(38.9072, -77.0369);
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2300);
+            $taxes->setPayPeriods(12);
+        });
 
-        $this->assertSame(277.40, $result);
-    }
-
-    public function testCaseStudy1()
-    {
-        $result = $this->app->make(FederalIncome::class, [
-            'earnings' => 66.68,
-            'pay_periods' => 260,
-            'user' => $this->user,
-        ])->compute();
-
-        $this->assertSame(6.88, $result);
+        $this->assertSame(277.40, $results->getTax(FederalIncome::class));
     }
 
     public function testNonNegative()
     {
-        $result = $this->app->make(FederalIncome::class, [
-            'earnings' => 10,
-            'pay_periods' => 260,
-            'user' => $this->user,
-        ])->compute();
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation(38.9072, -77.0369);
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(10);
+            $taxes->setPayPeriods(260);
+        });
 
-        $this->assertSame(0.12, $result);
+        $this->assertSame(0.12, $results->getTax(FederalIncome::class));
+    }
+
+    public function testCaseStudy1()
+    {
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation(38.9072, -77.0369);
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(66.68);
+            $taxes->setPayPeriods(260);
+        });
+
+        $this->assertSame(6.88, $results->getTax(FederalIncome::class));
     }
 }

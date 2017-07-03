@@ -6,6 +6,6 @@ class BaseStateUnemploymentTax extends BaseTax
 {
     public static function getUnemploymentTaxCredit()
     {
-        return get_called_class()::FUTA_CREDIT;
+        return defined('static::FUTA_CREDIT') ? static::FUTA_CREDIT : 0;
     }
 }

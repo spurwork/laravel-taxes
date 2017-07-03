@@ -15,12 +15,6 @@ class SocialSecurity extends BaseTax
     const TAX_RATE = 0.062;
     const WAGE_BASE = 127200;
 
-    public function __construct($earnings, $ytd_earnings = 0)
-    {
-        $this->earnings = $earnings;
-        $this->ytd_earnings = $ytd_earnings;
-    }
-
     public function getAdjustedEarnings()
     {
         return $this->earnings < $this->getBaseEarnings() ? $this->earnings : $this->getBaseEarnings();
@@ -28,6 +22,6 @@ class SocialSecurity extends BaseTax
 
     public function compute()
     {
-        return round($this->getAdjustedEarnings() * self::TAX_RATE, 2);
+        return round($this->getAdjustedEarnings() * static::TAX_RATE, 2);
     }
 }
