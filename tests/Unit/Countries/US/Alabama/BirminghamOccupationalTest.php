@@ -6,19 +6,23 @@ class BirminghamOccupationalTest extends \TestCase
 {
     public function testBirminghamOccupational()
     {
-        $result = $this->app->makeWith(BirminghamOccupational::class, [
-            'earnings' => 2300,
-        ])->compute();
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation(33.5207, -86.8025);
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2300);
+        });
 
-        $this->assertSame(23.00, $result);
+        $this->assertSame(23.00, $results->getTax(BirminghamOccupational::class));
     }
 
     public function testCaseStudy1()
     {
-        $result = $this->app->makeWith(BirminghamOccupational::class, [
-            'earnings' => 66.68,
-        ])->compute();
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation(33.5207, -86.8025);
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(66.68);
+        });
 
-        $this->assertSame(0.67, $result);
+        $this->assertSame(0.67, $results->getTax(BirminghamOccupational::class));
     }
 }

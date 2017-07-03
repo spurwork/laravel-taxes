@@ -12,7 +12,6 @@ class TuskegeeOccupationalTest extends \TestCase
             $taxes->setWorkLocation(32.4302, -85.7077);
             $taxes->setUser($this->user);
             $taxes->setEarnings(2300);
-            $taxes->setPayPeriods(260);
         });
 
         $this->assertSame(46.00, $results->getTax(TuskegeeOccupational::class));

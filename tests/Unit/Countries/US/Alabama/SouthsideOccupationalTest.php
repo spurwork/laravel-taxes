@@ -6,10 +6,12 @@ class SouthsideOccupationalTest extends \TestCase
 {
     public function testSouthsideOccupational()
     {
-        $result = $this->app->makeWith(SouthsideOccupational::class, [
-            'earnings' => 2300,
-        ])->compute();
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation(33.9245, -86.0225);
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2300);
+        });
 
-        $this->assertSame(46.00, $result);
+        $this->assertSame(46.00, $results->getTax(SouthsideOccupational::class));
     }
 }

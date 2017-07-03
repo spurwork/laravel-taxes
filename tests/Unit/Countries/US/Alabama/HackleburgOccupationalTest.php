@@ -6,10 +6,12 @@ class HackleburgOccupationalTest extends \TestCase
 {
     public function testHackleburgOccupational()
     {
-        $result = $this->app->makeWith(HackleburgOccupational::class, [
-            'earnings' => 2300,
-        ])->compute();
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation(34.2773, -87.8286);
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2300);
+        });
 
-        $this->assertSame(23.00, $result);
+        $this->assertSame(23.00, $results->getTax(HackleburgOccupational::class));
     }
 }

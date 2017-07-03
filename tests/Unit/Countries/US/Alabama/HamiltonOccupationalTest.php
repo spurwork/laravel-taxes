@@ -6,10 +6,12 @@ class HamiltonOccupationalTest extends \TestCase
 {
     public function testHamiltonOccupational()
     {
-        $result = $this->app->makeWith(HamiltonOccupational::class, [
-            'earnings' => 2300,
-        ])->compute();
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation(34.1423, -87.9886);
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2300);
+        });
 
-        $this->assertSame(23.00, $result);
+        $this->assertSame(23.00, $results->getTax(HamiltonOccupational::class));
     }
 }

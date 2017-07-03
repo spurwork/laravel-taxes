@@ -6,10 +6,12 @@ class FairfieldOccupationalTest extends \TestCase
 {
     public function testFairfieldOccupational()
     {
-        $result = $this->app->makeWith(FairfieldOccupational::class, [
-            'earnings' => 2300,
-        ])->compute();
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation(33.4859, -86.9119);
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2300);
+        });
 
-        $this->assertSame(23.00, $result);
+        $this->assertSame(23.00, $results->getTax(FairfieldOccupational::class));
     }
 }

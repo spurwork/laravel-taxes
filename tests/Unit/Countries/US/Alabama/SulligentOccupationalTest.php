@@ -6,10 +6,12 @@ class SulligentOccupationalTest extends \TestCase
 {
     public function testSulligentOccupational()
     {
-        $result = $this->app->makeWith(SulligentOccupational::class, [
-            'earnings' => 2300,
-        ])->compute();
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation(33.9018, -88.1345);
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2300);
+        });
 
-        $this->assertSame(23.00, $result);
+        $this->assertSame(23.00, $results->getTax(SulligentOccupational::class));
     }
 }

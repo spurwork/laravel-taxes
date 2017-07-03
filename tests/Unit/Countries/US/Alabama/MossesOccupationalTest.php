@@ -6,10 +6,12 @@ class MossesOccupationalTest extends \TestCase
 {
     public function testMossesOccupational()
     {
-        $result = $this->app->makeWith(MossesOccupational::class, [
-            'earnings' => 2300,
-        ])->compute();
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation(32.1793, -86.6737);
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2300);
+        });
 
-        $this->assertSame(23.00, $result);
+        $this->assertSame(23.00, $results->getTax(MossesOccupational::class));
     }
 }

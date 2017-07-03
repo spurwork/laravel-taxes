@@ -6,10 +6,12 @@ class BessemerOccupationalTest extends \TestCase
 {
     public function testBessemerOccupational()
     {
-        $result = $this->app->makeWith(BessemerOccupational::class, [
-            'earnings' => 2300,
-        ])->compute();
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation(33.4018, -86.9544);
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2300);
+        });
 
-        $this->assertSame(23.00, $result);
+        $this->assertSame(23.00, $results->getTax(BessemerOccupational::class));
     }
 }

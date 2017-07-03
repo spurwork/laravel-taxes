@@ -6,10 +6,12 @@ class LeedsOccupationalTest extends \TestCase
 {
     public function testLeedsOccupational()
     {
-        $result = $this->app->makeWith(LeedsOccupational::class, [
-            'earnings' => 2300,
-        ])->compute();
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation(33.5482, -86.5444);
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2300);
+        });
 
-        $this->assertSame(23.00, $result);
+        $this->assertSame(23.00, $results->getTax(LeedsOccupational::class));
     }
 }

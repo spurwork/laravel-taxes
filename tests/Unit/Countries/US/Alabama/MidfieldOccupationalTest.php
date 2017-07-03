@@ -6,10 +6,12 @@ class MidfieldOccupationalTest extends \TestCase
 {
     public function testMidfieldOccupational()
     {
-        $result = $this->app->makeWith(MidfieldOccupational::class, [
-            'earnings' => 2300,
-        ])->compute();
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation(33.4615, -86.9089);
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2300);
+        });
 
-        $this->assertSame(23.00, $result);
+        $this->assertSame(23.00, $results->getTax(MidfieldOccupational::class));
     }
 }

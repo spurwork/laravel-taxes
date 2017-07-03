@@ -6,10 +6,12 @@ class AttallaOccupationalTest extends \TestCase
 {
     public function testAttallaOccupational()
     {
-        $result = $this->app->makeWith(AttallaOccupational::class, [
-            'earnings' => 2300,
-        ])->compute();
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation(34.0218, -86.0886);
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2300);
+        });
 
-        $this->assertSame(46.00, $result);
+        $this->assertSame(46.00, $results->getTax(AttallaOccupational::class));
     }
 }

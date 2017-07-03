@@ -6,10 +6,12 @@ class GlencoeOccupationalTest extends \TestCase
 {
     public function testGlencoeOccupational()
     {
-        $result = $this->app->makeWith(GlencoeOccupational::class, [
-            'earnings' => 2300,
-        ])->compute();
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation(33.9570, -85.932);
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2300);
+        });
 
-        $this->assertSame(46.00, $result);
+        $this->assertSame(46.00, $results->getTax(GlencoeOccupational::class));
     }
 }

@@ -6,10 +6,12 @@ class BearCreekOccupationalTest extends \TestCase
 {
     public function testBearCreekOccupational()
     {
-        $result = $this->app->makeWith(BearCreekOccupational::class, [
-            'earnings' => 2300,
-        ])->compute();
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation(34.2748, -87.7006);
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2300);
+        });
 
-        $this->assertSame(23.00, $result);
+        $this->assertSame(23.00, $results->getTax(BearCreekOccupational::class));
     }
 }

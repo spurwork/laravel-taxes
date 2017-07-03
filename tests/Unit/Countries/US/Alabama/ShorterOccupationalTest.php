@@ -6,10 +6,12 @@ class ShorterOccupationalTest extends \TestCase
 {
     public function testShorterOccupational()
     {
-        $result = $this->app->makeWith(ShorterOccupational::class, [
-            'earnings' => 2300,
-        ])->compute();
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation(32.3951, -85.9184);
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2300);
+        });
 
-        $this->assertSame(23.00, $result);
+        $this->assertSame(23.00, $results->getTax(ShorterOccupational::class));
     }
 }

@@ -6,10 +6,12 @@ class GoodwaterOccupationalTest extends \TestCase
 {
     public function testGoodwaterOccupational()
     {
-        $result = $this->app->makeWith(GoodwaterOccupational::class, [
-            'earnings' => 2300,
-        ])->compute();
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation(33.0657, -86.0533);
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2300);
+        });
 
-        $this->assertSame(17.25, $result);
+        $this->assertSame(17.25, $results->getTax(GoodwaterOccupational::class));
     }
 }

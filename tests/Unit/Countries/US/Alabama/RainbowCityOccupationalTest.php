@@ -6,10 +6,12 @@ class RainbowCityOccupationalTest extends \TestCase
 {
     public function testRainbowCityOccupational()
     {
-        $result = $this->app->makeWith(RainbowCityOccupational::class, [
-            'earnings' => 2300,
-        ])->compute();
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation(33.9548, -86.0419);
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2300);
+        });
 
-        $this->assertSame(46.00, $result);
+        $this->assertSame(46.00, $results->getTax(RainbowCityOccupational::class));
     }
 }
