@@ -41,7 +41,7 @@ class TaxResolver
 
     private function getStrategies($class)
     {
-        return array_map('basename', glob(dirname((new \ReflectionClass($class))->getFileName()).'/V*', GLOB_ONLYDIR));
+        return array_reverse(array_map('basename', glob(dirname((new \ReflectionClass($class))->getFileName()).'/V*', GLOB_ONLYDIR)));
     }
 
     private function resolveDependencies()
