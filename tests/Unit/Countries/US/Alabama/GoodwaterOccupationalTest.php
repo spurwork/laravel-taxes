@@ -7,7 +7,7 @@ class GoodwaterOccupationalTest extends \TestCase
     public function testGoodwaterOccupational()
     {
         $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setWorkLocation(33.0657, -86.0533);
+            $taxes->setWorkLocation($this->getLocation('us.alabama.goodwater'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(2300);
         });

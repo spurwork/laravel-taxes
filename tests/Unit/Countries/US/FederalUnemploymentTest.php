@@ -9,7 +9,7 @@ class FederalUnemploymentTest extends \TestCase
     public function testFederalUnemployment()
     {
         $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setWorkLocation(38.9072, -77.0369);
+            $taxes->setWorkLocation($this->getLocation('us'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(2300);
         });
@@ -20,7 +20,7 @@ class FederalUnemploymentTest extends \TestCase
     public function testFederalUnemploymentWithStateCredit()
     {
         $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setWorkLocation(32.3182, -86.9023);
+            $taxes->setWorkLocation($this->getLocation('us.alabama'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(2300);
         });
@@ -31,7 +31,7 @@ class FederalUnemploymentTest extends \TestCase
     public function testFederalUnemploymentMetWageBase()
     {
         $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setWorkLocation(32.3182, -86.9023);
+            $taxes->setWorkLocation($this->getLocation('us.alabama'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(2300);
             $taxes->setYtdEarnings(7000);
@@ -43,7 +43,7 @@ class FederalUnemploymentTest extends \TestCase
     public function testCaseStudy1()
     {
         $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setWorkLocation(32.3182, -86.9023);
+            $taxes->setWorkLocation($this->getLocation('us.alabama'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(66.68);
         });

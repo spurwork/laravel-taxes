@@ -7,7 +7,7 @@ class OpelikaOccupationalTest extends \TestCase
     public function testOpelikaOccupational()
     {
         $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setWorkLocation(32.6454, -85.3783);
+            $taxes->setWorkLocation($this->getLocation('us.alabama.opelika'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(2300);
         });

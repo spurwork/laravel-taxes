@@ -6,6 +6,6 @@ trait HasWageBase
 {
     private function getBaseEarnings()
     {
-        return ($this->ytd_earnings >= self::WAGE_BASE) ? 0 : self::WAGE_BASE - $this->ytd_earnings;
+        return ($this->ytd_earnings >= static::WAGE_BASE) ? 0 : static::WAGE_BASE - $this->ytd_earnings;
     }
 }

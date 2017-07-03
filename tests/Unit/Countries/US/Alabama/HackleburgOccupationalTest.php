@@ -7,7 +7,7 @@ class HackleburgOccupationalTest extends \TestCase
     public function testHackleburgOccupational()
     {
         $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setWorkLocation(34.2773, -87.8286);
+            $taxes->setWorkLocation($this->getLocation('us.alabama.hackleburg'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(2300);
         });

@@ -7,7 +7,7 @@ class HamiltonOccupationalTest extends \TestCase
     public function testHamiltonOccupational()
     {
         $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setWorkLocation(34.1423, -87.9886);
+            $taxes->setWorkLocation($this->getLocation('us.alabama.hamilton'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(2300);
         });

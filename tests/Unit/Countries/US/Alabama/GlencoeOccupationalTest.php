@@ -7,7 +7,7 @@ class GlencoeOccupationalTest extends \TestCase
     public function testGlencoeOccupational()
     {
         $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setWorkLocation(33.9570, -85.932);
+            $taxes->setWorkLocation($this->getLocation('us.alabama.glencoe'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(2300);
         });

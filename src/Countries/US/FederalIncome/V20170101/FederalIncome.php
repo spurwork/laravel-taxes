@@ -45,11 +45,11 @@ class FederalIncome extends BaseFederalIncome
 
     public function getAdjustedEarnings()
     {
-        return ($this->earnings * $this->pay_periods) - ($this->tax_information->exemptions * self::EXEMPTION_AMOUNT) + ($this->tax_information->non_resident_alien ? self::NON_RESIDENT_ALIEN_AMOUNT : 0);
+        return ($this->earnings * $this->pay_periods) - ($this->tax_information->exemptions * static::EXEMPTION_AMOUNT) + ($this->tax_information->non_resident_alien ? static::NON_RESIDENT_ALIEN_AMOUNT : 0);
     }
 
     public function getTaxBrackets()
     {
-        return ($this->tax_information->filing_status >= self::FILING_MARRIED) ? self::MARRIED_BRACKETS : self::SINGLE_BRACKETS;
+        return ($this->tax_information->filing_status >= static::FILING_MARRIED) ? static::MARRIED_BRACKETS : static::SINGLE_BRACKETS;
     }
 }

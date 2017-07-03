@@ -94,7 +94,7 @@ class AlabamaIncome extends BaseAlabamaIncome
     {
         $adjusted_earnings = ($this->earnings * $this->pay_periods) - ($this->federal_income_tax * $this->pay_periods);
 
-        if ($this->tax_information->filing_status != self::FILING_ZERO) {
+        if ($this->tax_information->filing_status != static::FILING_ZERO) {
             $adjusted_earnings = $adjusted_earnings - $this->getPersonalDeducation() - $this->getPersonalExemptionAllowance() - $this->getDependentExemption();
         }
 
@@ -104,14 +104,14 @@ class AlabamaIncome extends BaseAlabamaIncome
     public function getDependentExemption()
     {
         $gross_earnings = $this->earnings * $this->pay_periods;
-        $dependent_exemption = $this->getTaxBracket($gross_earnings, self::DEPENDENT_EXEMPTION_BRACKETS);
+        $dependent_exemption = $this->getTaxBracket($gross_earnings, static::DEPENDENT_EXEMPTION_BRACKETS);
         return $dependent_exemption[1] * $this->tax_information->dependents;
     }
 
     public function getPersonalDeducation()
     {
         $gross_earnings = $this->earnings * $this->pay_periods;
-        $standard_deduction = self::STANDARD_DEDUCTIONS[$this->tax_information->filing_status];
+        $standard_deduction = static::STANDARD_DEDUCTIONS[$this->tax_information->filing_status];
         $deduction = $standard_deduction['amount'];
 
         if ($gross_earnings > $standard_deduction['base']) {
@@ -123,8 +123,8 @@ class AlabamaIncome extends BaseAlabamaIncome
 
     public function getPersonalExemptionAllowance()
     {
-        if (array_key_exists($this->tax_information->filing_status, self::PERSONAL_EXEMPTION_ALLOWANCES)) {
-            return self::PERSONAL_EXEMPTION_ALLOWANCES[$this->tax_information->filing_status];
+        if (array_key_exists($this->tax_information->filing_status, static::PERSONAL_EXEMPTION_ALLOWANCES)) {
+            return static::PERSONAL_EXEMPTION_ALLOWANCES[$this->tax_information->filing_status];
         } else {
             return 0;
         }
@@ -132,6 +132,6 @@ class AlabamaIncome extends BaseAlabamaIncome
 
     public function getTaxBrackets()
     {
-        return ($this->tax_information->filing_status >= self::FILING_MARRIED) ? self::MARRIED_BRACKETS : self::SINGLE_BRACKETS;
+        return ($this->tax_information->filing_status >= static::FILING_MARRIED) ? static::MARRIED_BRACKETS : static::SINGLE_BRACKETS;
     }
 }

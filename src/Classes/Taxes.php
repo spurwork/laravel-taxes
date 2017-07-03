@@ -26,10 +26,10 @@ class Taxes
         $this->pay_periods = $pay_periods;
     }
 
-    public function setWorkLocation($latitude, $longitude)
+    public function setWorkLocation($location)
     {
-        $this->latitude = $latitude;
-        $this->longitude = $longitude;
+        $this->latitude = $location[0];
+        $this->longitude = $location[1];
     }
 
     public function setUser($user)

@@ -7,7 +7,7 @@ class LeedsOccupationalTest extends \TestCase
     public function testLeedsOccupational()
     {
         $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setWorkLocation(33.5482, -86.5444);
+            $taxes->setWorkLocation($this->getLocation('us.alabama.leeds'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(2300);
         });

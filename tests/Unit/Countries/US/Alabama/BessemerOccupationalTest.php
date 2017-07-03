@@ -7,7 +7,7 @@ class BessemerOccupationalTest extends \TestCase
     public function testBessemerOccupational()
     {
         $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setWorkLocation(33.4018, -86.9544);
+            $taxes->setWorkLocation($this->getLocation('us.alabama.bessemer'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(2300);
         });

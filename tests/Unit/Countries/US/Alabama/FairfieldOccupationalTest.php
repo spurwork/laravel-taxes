@@ -7,7 +7,7 @@ class FairfieldOccupationalTest extends \TestCase
     public function testFairfieldOccupational()
     {
         $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setWorkLocation(33.4859, -86.9119);
+            $taxes->setWorkLocation($this->getLocation('us.alabama.fairfield'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(2300);
         });

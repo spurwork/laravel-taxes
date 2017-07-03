@@ -7,7 +7,7 @@ class SouthsideOccupationalTest extends \TestCase
     public function testSouthsideOccupational()
     {
         $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setWorkLocation(33.9245, -86.0225);
+            $taxes->setWorkLocation($this->getLocation('us.alabama.southside'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(2300);
         });

@@ -10,7 +10,7 @@ class AlabamaIncomeTest extends \TestCase
     public function testAlabamaIncome()
     {
         $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setWorkLocation(32.3182, -86.9023);
+            $taxes->setWorkLocation($this->getLocation('us.alabama'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(66.68);
             $taxes->setPayPeriods(260);
@@ -22,7 +22,7 @@ class AlabamaIncomeTest extends \TestCase
     public function testAlabamaIncomeNonNegative()
     {
         $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setWorkLocation(32.3182, -86.9023);
+            $taxes->setWorkLocation($this->getLocation('us.alabama'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(10);
             $taxes->setPayPeriods(260);
@@ -36,7 +36,7 @@ class AlabamaIncomeTest extends \TestCase
         AlabamaIncomeTaxInformation::forUser($this->user)->update(['filing_status' => Taxes::resolve(AlabamaIncome::class)::FILING_ZERO]);
 
         $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setWorkLocation(32.3182, -86.9023);
+            $taxes->setWorkLocation($this->getLocation('us.alabama'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(66.68);
             $taxes->setPayPeriods(260);

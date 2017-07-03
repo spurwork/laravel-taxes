@@ -7,7 +7,7 @@ class MidfieldOccupationalTest extends \TestCase
     public function testMidfieldOccupational()
     {
         $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setWorkLocation(33.4615, -86.9089);
+            $taxes->setWorkLocation($this->getLocation('us.alabama.midfield'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(2300);
         });

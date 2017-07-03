@@ -6,12 +6,12 @@ class BaseTax
 {
     public static function getType()
     {
-        return get_called_class()::TYPE;
+        return static::TYPE;
     }
 
     public static function getWithheld()
     {
-        return get_called_class()::WITHHELD;
+        return static::WITHHELD;
     }
 
     public function build($parameters)
@@ -30,6 +30,6 @@ class BaseTax
 
     public function compute()
     {
-        return round($this->earnings * get_called_class()::TAX_RATE, 2);
+        return round($this->earnings * static::TAX_RATE, 2);
     }
 }

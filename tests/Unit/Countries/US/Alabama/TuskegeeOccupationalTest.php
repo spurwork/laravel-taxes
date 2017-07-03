@@ -9,7 +9,7 @@ class TuskegeeOccupationalTest extends \TestCase
     public function testTuskegeeOccupational()
     {
         $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setWorkLocation(32.4302, -85.7077);
+            $taxes->setWorkLocation($this->getLocation('us.alabama.tuskegee'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(2300);
         });

@@ -7,7 +7,7 @@ class AttallaOccupationalTest extends \TestCase
     public function testAttallaOccupational()
     {
         $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setWorkLocation(34.0218, -86.0886);
+            $taxes->setWorkLocation($this->getLocation('us.alabama.attalla'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(2300);
         });

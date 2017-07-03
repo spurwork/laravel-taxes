@@ -7,7 +7,7 @@ class HaleyvilleOccupationalTest extends \TestCase
     public function testHaleyvilleOccupational()
     {
         $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setWorkLocation(34.2265, -87.6214);
+            $taxes->setWorkLocation($this->getLocation('us.alabama.haleyville'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(2300);
         });
