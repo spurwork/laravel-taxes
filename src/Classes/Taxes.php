@@ -46,11 +46,11 @@ class Taxes
             ->pluck('tax')
             ->toArray();
 
-        app()->make(TaxResolver::class)->resolve($this->taxes);
+        app(TaxResolver::class)->resolve($this->taxes);
 
         $tax_results = [];
         foreach ($this->taxes as $tax_name) {
-            $tax_results[$tax_name] = app()->make($tax_name)->build([
+            $tax_results[$tax_name] = app($tax_name)->build([
                 'earnings' => $this->earnings,
                 'ytd_earnings' => $this->ytd_earnings,
                 'pay_periods' => $this->pay_periods,
@@ -68,9 +68,9 @@ class Taxes
     public static function resolve($classes, $date = null)
     {
         if (is_string($classes)) {
-            return app()->make(TaxResolver::class)->resolve([$classes], $date)[0];
+            return app(TaxResolver::class)->resolve([$classes], $date)[0];
         } else {
-            return app()->make(TaxResolver::class)->resolve($classes, $date);
+            return app(TaxResolver::class)->resolve($classes, $date);
         }
     }
 }
