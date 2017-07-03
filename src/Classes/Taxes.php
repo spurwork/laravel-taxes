@@ -8,8 +8,14 @@ use Closure;
 
 class Taxes
 {
+    protected $date = null;
     protected $pay_periods = 1;
     protected $ytd_earnings = 0;
+
+    public function setDate($date)
+    {
+        $this->date = $date;
+    }
 
     public function setEarnings($earnings)
     {
@@ -46,7 +52,7 @@ class Taxes
             ->pluck('tax')
             ->toArray();
 
-        app(TaxResolver::class)->resolve($this->taxes);
+        app(TaxResolver::class)->resolve($this->taxes, $this->date);
 
         $tax_results = [];
         foreach ($this->taxes as $tax_name) {
@@ -59,7 +65,8 @@ class Taxes
         }
 
         $tax_results = app()->makeWith(TaxResults::class, [
-            'tax_results' => $tax_results
+            'tax_results' => $tax_results,
+            'date' => $this->date,
         ]);
 
         return $tax_results;

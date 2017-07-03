@@ -4,16 +4,6 @@ namespace Appleton\Taxes\Classes;
 
 class BaseTax
 {
-    public static function getType()
-    {
-        return static::TYPE;
-    }
-
-    public static function getWithheld()
-    {
-        return static::WITHHELD;
-    }
-
     public function built()
     {
         //abstract

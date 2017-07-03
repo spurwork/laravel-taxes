@@ -11,6 +11,7 @@ use Appleton\Taxes\Countries\US\Medicare\Medicare;
 use Appleton\Taxes\Countries\US\Medicare\MedicareEmployer;
 use Appleton\Taxes\Countries\US\SocialSecurity\SocialSecurity;
 use Appleton\Taxes\Countries\US\SocialSecurity\SocialSecurityEmployer;
+use Carbon\Carbon;
 
 class TaxesTest extends \TestCase
 {
@@ -21,6 +22,7 @@ class TaxesTest extends \TestCase
             $taxes->setUser($this->user);
             $taxes->setEarnings(66.68);
             $taxes->setPayPeriods(260);
+            $taxes->setDate(Carbon::now()->addMonth());
         });
 
         $this->assertSame(6.88, $results->getTax(FederalIncome::class));
