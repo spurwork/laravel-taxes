@@ -35,4 +35,17 @@ class TaxesTest extends \TestCase
         $this->assertSame(1.80, $results->getTax(AlabamaUnemployment::class));
         $this->assertSame(0.67, $results->getTax(BirminghamOccupational::class));
     }
+
+    public function testTaxesUnresolvableDate()
+    {
+        $this->expectExceptionMessage('The strategy could not be found.');
+
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us.alabama.birmingham'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(66.68);
+            $taxes->setPayPeriods(260);
+            $taxes->setDate(Carbon::now()->subMonth());
+        });
+    }
 }
