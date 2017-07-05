@@ -18,6 +18,7 @@ class CreateFederalIncomeTaxInformationTable extends Migration
     {
         Schema::create($this->federal_income_tax_information, function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('additional_withholding');
             $table->integer('exemptions');
             $table->integer('filing_status');
             $table->boolean('non_resident_alien');

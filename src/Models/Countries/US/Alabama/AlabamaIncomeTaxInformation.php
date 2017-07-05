@@ -17,4 +17,14 @@ class AlabamaIncomeTaxInformation extends BaseTaxInformationModel
         $tax_information->filing_status = Taxes::resolve(AlabamaIncome::class, $date)::FILING_SINGLE;
         return $tax_information;
     }
+
+    public function getAdditionalWithholding($value)
+    {
+        return $value * 100;
+    }
+
+    public function setAdditionalWithholding($value)
+    {
+        $this->attributes['additional_withholding'] = round($value / 100);
+    }
 }

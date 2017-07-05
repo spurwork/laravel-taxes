@@ -18,4 +18,14 @@ class FederalIncomeTaxInformation extends BaseTaxInformationModel
         $tax_information->non_resident_alien = false;
         return $tax_information;
     }
+
+    public function getAdditionalWithholding($value)
+    {
+        return $value * 100;
+    }
+
+    public function setAdditionalWithholding($value)
+    {
+        $this->attributes['additional_withholding'] = round($value / 100);
+    }
 }
