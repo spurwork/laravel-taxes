@@ -18,8 +18,8 @@ class CreateAlabamaIncomeTaxInformationTable extends Migration
     {
         Schema::create($this->alabama_income_tax_information, function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('filing_status');
             $table->integer('dependents');
+            $table->integer('filing_status');
         });
     }
 
