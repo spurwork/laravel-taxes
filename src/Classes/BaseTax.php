@@ -17,7 +17,7 @@ class BaseTax
         }
         if (defined('static::TAX_INFORMATION')) {
             if (is_null($this->user)) {
-                $this->tax_information = app(static::TAX_INFORMATION)::getDefault($this->date);
+                $this->tax_information = (static::TAX_INFORMATION)::getDefault($this->date);
             } else {
                 $this->tax_information = (static::TAX_INFORMATION)::forUser($this->user)->first();
                 if (is_null($this->tax_information)) {
