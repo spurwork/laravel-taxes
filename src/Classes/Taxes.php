@@ -57,10 +57,11 @@ class Taxes
         $tax_results = [];
         foreach ($this->taxes as $tax_name) {
             $tax_results[$tax_name] = app($tax_name)->build([
+                'date' => $this->date,
                 'earnings' => $this->earnings,
-                'ytd_earnings' => $this->ytd_earnings,
                 'pay_periods' => $this->pay_periods,
                 'user' => $this->user,
+                'ytd_earnings' => $this->ytd_earnings,
             ])->compute();
         }
 
