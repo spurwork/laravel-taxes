@@ -8,7 +8,7 @@ use Appleton\Taxes\Models\Countries\US\FederalIncomeTaxInformation;
 
 class FederalIncomeTest extends \TestCase
 {
-    public function testFederalIncome()
+    public function testCalledTwice()
     {
         $results = $this->taxes->calculate(function ($taxes) {
             $taxes->setWorkLocation($this->getLocation('us'));
@@ -67,6 +67,32 @@ class FederalIncomeTest extends \TestCase
         });
 
         $this->assertSame(0.10, $results->getTax(FederalIncome::class));
+    }
+
+    public function testAdditionalWithholding()
+    {
+        FederalIncomeTaxInformation::forUser($this->user)->update(['additional_withholding' => 10]);
+
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2301);
+        });
+
+        $this->assertSame(10.10, $results->getTax(FederalIncome::class));
+
+        FederalIncomeTaxInformation::forUser($this->user)->update([
+            'additional_withholding' => 20,
+            'filing_status' => Taxes::resolve(FederalIncome::class)::FILING_MARRIED
+        ]);
+
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(8651);
+        });
+
+        $this->assertSame(20.10, $results->getTax(FederalIncome::class));
     }
 
     public function testWeekly()

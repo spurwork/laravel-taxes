@@ -19,6 +19,20 @@ class AlabamaIncomeTest extends \TestCase
         $this->assertSame(2.07, $results->getTax(AlabamaIncome::class));
     }
 
+    public function testAdditionalWithholding()
+    {
+        AlabamaIncomeTaxInformation::forUser($this->user)->update(['additional_withholding' => 10]);
+
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us.alabama'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(66.68);
+            $taxes->setPayPeriods(260);
+        });
+
+        $this->assertSame(12.07, $results->getTax(AlabamaIncome::class));
+    }
+
     public function testAlabamaIncomeNonNegative()
     {
         $results = $this->taxes->calculate(function ($taxes) {
