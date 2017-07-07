@@ -4,6 +4,7 @@ namespace Appleton\Taxes\Classes;
 
 use Appleton\Taxes\Models\TaxArea;
 use Appleton\Taxes\Models\TaxInformation;
+use Carbon;
 use Closure;
 
 class Taxes
@@ -47,7 +48,11 @@ class Taxes
     {
         $closure($this);
 
-        $this->date = env('TAXES_TEST_NOW', $date);
+        $test_now = env('TAXES_TEST_NOW');
+
+        if ($test_now) {
+            $this->date = Carbon::parse($test_now);
+        }
 
         $this->taxes = TaxArea::atPoint($this->latitude, $this->longitude)
             ->get()
