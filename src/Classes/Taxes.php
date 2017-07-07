@@ -10,14 +10,11 @@ class Taxes
 {
     protected $date = null;
     protected $pay_periods = 1;
-    protected $testing = false;
     protected $ytd_earnings = 0;
 
     public function setDate($date)
     {
-        if (!$this->testing) {
-            $this->date = $date;
-        }
+        $this->date = $date;
     }
 
     public function setEarnings($earnings)
@@ -35,12 +32,6 @@ class Taxes
         $this->pay_periods = $pay_periods;
     }
 
-    public function setTestNow($date)
-    {
-        $this->testing = true;
-        $this->date = $date;
-    }
-
     public function setUser($user)
     {
         $this->user = $user;
@@ -55,6 +46,8 @@ class Taxes
     public function calculate(Closure $closure)
     {
         $closure($this);
+
+        $this->date = env('TAXES_TEST_NOW', $date);
 
         $this->taxes = TaxArea::atPoint($this->latitude, $this->longitude)
             ->get()
