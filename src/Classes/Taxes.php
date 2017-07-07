@@ -4,6 +4,7 @@ namespace Appleton\Taxes\Classes;
 
 use Appleton\Taxes\Models\TaxArea;
 use Appleton\Taxes\Models\TaxInformation;
+use Carbon\Carbon;
 use Closure;
 
 class Taxes
@@ -32,15 +33,15 @@ class Taxes
         $this->pay_periods = $pay_periods;
     }
 
+    public function setUser($user)
+    {
+        $this->user = $user;
+    }
+
     public function setWorkLocation($location)
     {
         $this->latitude = $location[0];
         $this->longitude = $location[1];
-    }
-
-    public function setUser($user)
-    {
-        $this->user = $user;
     }
 
     public function calculate(Closure $closure)
@@ -52,12 +53,12 @@ class Taxes
             ->pluck('tax')
             ->toArray();
 
-        app(TaxResolver::class)->resolve($this->taxes, $this->date);
+        app(TaxResolver::class)->resolve($this->taxes, static::checkTestDate($this->date));
 
         $tax_results = [];
         foreach ($this->taxes as $tax_name) {
             $tax_results[$tax_name] = app($tax_name)->build([
-                'date' => $this->date,
+                'date' => static::checkTestDate($this->date),
                 'earnings' => $this->earnings,
                 'pay_periods' => $this->pay_periods,
                 'user' => $this->user,
@@ -67,18 +68,24 @@ class Taxes
 
         $tax_results = app()->makeWith(TaxResults::class, [
             'tax_results' => $tax_results,
-            'date' => $this->date,
+            'date' => static::checkTestDate($this->date),
         ]);
 
         return $tax_results;
     }
 
+    public static function checkTestDate($date)
+    {
+        $test_now = env('TAXES_TEST_NOW');
+        return is_null($test_now) ? $date : Carbon::parse($test_now);
+    }
+
     public static function resolve($classes, $date = null)
     {
         if (is_string($classes)) {
-            return app(TaxResolver::class)->resolve([$classes], $date)[0];
+            return app(TaxResolver::class)->resolve([$classes], static::checkTestDate($date))[0];
         } else {
-            return app(TaxResolver::class)->resolve($classes, $date);
+            return app(TaxResolver::class)->resolve($classes, static::checkTestDate($date));
         }
     }
 }
