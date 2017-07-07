@@ -13,12 +13,6 @@ class Taxes
     protected $pay_periods = 1;
     protected $ytd_earnings = 0;
 
-    private function checkTestDate($date)
-    {
-        $test_now = env('TAXES_TEST_NOW');
-        return is_null($test_now) ? $date : Carbon::parse($test_now);
-    }
-
     public function setDate($date)
     {
         $this->date = $date;
@@ -59,12 +53,12 @@ class Taxes
             ->pluck('tax')
             ->toArray();
 
-        app(TaxResolver::class)->resolve($this->taxes, $this->checkTestDate($this->date));
+        app(TaxResolver::class)->resolve($this->taxes, static::checkTestDate($this->date));
 
         $tax_results = [];
         foreach ($this->taxes as $tax_name) {
             $tax_results[$tax_name] = app($tax_name)->build([
-                'date' => $this->checkTestDate($this->date),
+                'date' => static::checkTestDate($this->date),
                 'earnings' => $this->earnings,
                 'pay_periods' => $this->pay_periods,
                 'user' => $this->user,
@@ -74,18 +68,24 @@ class Taxes
 
         $tax_results = app()->makeWith(TaxResults::class, [
             'tax_results' => $tax_results,
-            'date' => $this->checkTestDate($this->date),
+            'date' => static::checkTestDate($this->date),
         ]);
 
         return $tax_results;
     }
 
+    public static function checkTestDate($date)
+    {
+        $test_now = env('TAXES_TEST_NOW');
+        return is_null($test_now) ? $date : Carbon::parse($test_now);
+    }
+
     public static function resolve($classes, $date = null)
     {
         if (is_string($classes)) {
-            return app(TaxResolver::class)->resolve([$classes], $this->checkTestDate($date))[0];
+            return app(TaxResolver::class)->resolve([$classes], static::checkTestDate($date))[0];
         } else {
-            return app(TaxResolver::class)->resolve($classes, $this->checkTestDate($date));
+            return app(TaxResolver::class)->resolve($classes, static::checkTestDate($date));
         }
     }
 }
