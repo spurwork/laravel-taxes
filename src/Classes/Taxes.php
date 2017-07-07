@@ -10,11 +10,14 @@ class Taxes
 {
     protected $date = null;
     protected $pay_periods = 1;
+    protected $testing = false;
     protected $ytd_earnings = 0;
 
     public function setDate($date)
     {
-        $this->date = $date;
+        if (!$this->testing) {
+            $this->date = $date;
+        }
     }
 
     public function setEarnings($earnings)
@@ -32,15 +35,21 @@ class Taxes
         $this->pay_periods = $pay_periods;
     }
 
-    public function setWorkLocation($location)
+    public function setTestNow($date)
     {
-        $this->latitude = $location[0];
-        $this->longitude = $location[1];
+        $this->testing = true;
+        $this->date = $date;
     }
 
     public function setUser($user)
     {
         $this->user = $user;
+    }
+
+    public function setWorkLocation($location)
+    {
+        $this->latitude = $location[0];
+        $this->longitude = $location[1];
     }
 
     public function calculate(Closure $closure)
