@@ -95,6 +95,18 @@ class FederalIncomeTest extends \TestCase
         $this->assertSame(20.10, $results->getTax(FederalIncome::class));
     }
 
+    public function testSupplemental()
+    {
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(100);
+            $taxes->setSupplementalEarnings(100);
+        });
+
+        $this->assertSame(25.00, $results->getTax(FederalIncome::class));
+    }
+
     public function testWeekly()
     {
         $results = $this->taxes->calculate(function ($taxes) {

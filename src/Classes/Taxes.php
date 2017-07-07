@@ -11,6 +11,7 @@ class Taxes
 {
     protected $date = null;
     protected $pay_periods = 1;
+    protected $supplemental_earnings = 0;
     protected $ytd_earnings = 0;
 
     public function setDate($date)
@@ -23,14 +24,14 @@ class Taxes
         $this->earnings = $earnings;
     }
 
-    public function setYtdEarnings($ytd_earnings)
-    {
-        $this->ytd_earnings = $ytd_earnings;
-    }
-
     public function setPayPeriods($pay_periods)
     {
         $this->pay_periods = $pay_periods;
+    }
+
+    public function setSupplementalEarnings($supplemental_earnings)
+    {
+        $this->supplemental_earnings = $supplemental_earnings;
     }
 
     public function setUser($user)
@@ -42,6 +43,11 @@ class Taxes
     {
         $this->latitude = $location[0];
         $this->longitude = $location[1];
+    }
+
+    public function setYtdEarnings($ytd_earnings)
+    {
+        $this->ytd_earnings = $ytd_earnings;
     }
 
     public function calculate(Closure $closure)
@@ -61,6 +67,7 @@ class Taxes
                 'date' => static::checkTestDate($this->date),
                 'earnings' => $this->earnings,
                 'pay_periods' => $this->pay_periods,
+                'supplemental_earnings' => $this->supplemental_earnings,
                 'user' => $this->user,
                 'ytd_earnings' => $this->ytd_earnings,
             ])->compute();

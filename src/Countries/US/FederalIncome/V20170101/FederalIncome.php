@@ -18,6 +18,8 @@ class FederalIncome extends BaseFederalIncome
     const FILING_MARRIED = 3;
     const FILING_SEPERATE = 4;
 
+    const SUPPLEMENTAL_TAX_RATE = 0.25;
+
     const EXEMPTION_AMOUNT = 4050;
     const NON_RESIDENT_ALIEN_AMOUNT = 2250;
 
@@ -45,7 +47,7 @@ class FederalIncome extends BaseFederalIncome
 
     public function getAdjustedEarnings()
     {
-        return ($this->earnings * $this->pay_periods) - ($this->tax_information->exemptions * static::EXEMPTION_AMOUNT) + ($this->tax_information->non_resident_alien ? static::NON_RESIDENT_ALIEN_AMOUNT : 0);
+        return (($this->earnings - $this->supplemental_earnings) * $this->pay_periods) - ($this->tax_information->exemptions * static::EXEMPTION_AMOUNT) + ($this->tax_information->non_resident_alien ? static::NON_RESIDENT_ALIEN_AMOUNT : 0);
     }
 
     public function getTaxBrackets()
