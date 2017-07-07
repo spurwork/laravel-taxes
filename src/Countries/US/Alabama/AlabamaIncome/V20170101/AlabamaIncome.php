@@ -19,6 +19,8 @@ class AlabamaIncome extends BaseAlabamaIncome
     const FILING_MARRIED = 3;
     const FILING_SEPERATE = 4;
 
+    const SUPPLEMENTAL_TAX_RATE = 0.05;
+
     const SINGLE_BRACKETS = [
         [0, 0.02, 0],
         [500, 0.04, 10],
@@ -91,7 +93,7 @@ class AlabamaIncome extends BaseAlabamaIncome
 
     public function getAdjustedEarnings()
     {
-        $adjusted_earnings = ($this->earnings * $this->pay_periods) - ($this->federal_income_tax * $this->pay_periods);
+        $adjusted_earnings = (($this->earnings - $this->supplemental_earnings) * $this->pay_periods) - ($this->federal_income_tax * $this->pay_periods);
 
         if ($this->tax_information->filing_status != static::FILING_ZERO) {
             $adjusted_earnings = $adjusted_earnings - $this->getPersonalDeducation() - $this->getPersonalExemptionAllowance() - $this->getDependentExemption();
@@ -102,14 +104,14 @@ class AlabamaIncome extends BaseAlabamaIncome
 
     public function getDependentExemption()
     {
-        $gross_earnings = $this->earnings * $this->pay_periods;
+        $gross_earnings = ($this->earnings - $this->supplemental_earnings) * $this->pay_periods;
         $dependent_exemption = $this->getTaxBracket($gross_earnings, static::DEPENDENT_EXEMPTION_BRACKETS);
         return $dependent_exemption[1] * $this->tax_information->dependents;
     }
 
     public function getPersonalDeducation()
     {
-        $gross_earnings = $this->earnings * $this->pay_periods;
+        $gross_earnings = ($this->earnings - $this->supplemental_earnings) * $this->pay_periods;
         $standard_deduction = static::STANDARD_DEDUCTIONS[$this->tax_information->filing_status];
         $deduction = $standard_deduction['amount'];
 
