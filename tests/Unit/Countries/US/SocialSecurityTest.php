@@ -31,8 +31,35 @@ class SocialSecurityTest extends \TestCase
         $results = $this->taxes->calculate(function ($taxes) {
             $taxes->setWorkLocation($this->getLocation('us'));
             $taxes->setUser($this->user);
-            $taxes->setEarnings(2300);
+            $taxes->setEarnings(100);
+            $taxes->setYtdEarnings(127100);
+        });
+
+        $this->assertSame(6.20, $results->getTax(SocialSecurity::class));
+
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(100);
+            $taxes->setYtdEarnings(127150);
+        });
+
+        $this->assertSame(3.10, $results->getTax(SocialSecurity::class));
+
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(100);
             $taxes->setYtdEarnings(127200);
+        });
+
+        $this->assertSame(0.0, $results->getTax(SocialSecurity::class));
+
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(100);
+            $taxes->setYtdEarnings(127250);
         });
 
         $this->assertSame(0.0, $results->getTax(SocialSecurity::class));
