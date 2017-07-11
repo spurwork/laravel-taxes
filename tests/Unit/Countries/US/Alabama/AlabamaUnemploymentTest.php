@@ -33,8 +33,35 @@ class AlabamaUnemploymentTest extends \TestCase
         $results = $this->taxes->calculate(function ($taxes) {
             $taxes->setWorkLocation($this->getLocation('us.alabama'));
             $taxes->setUser($this->user);
-            $taxes->setEarnings(2300);
+            $taxes->setEarnings(100);
+            $taxes->setYtdEarnings(7800);
+        });
+
+        $this->assertSame(2.70, $results->getTax(AlabamaUnemployment::class));
+
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us.alabama'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(100);
+            $taxes->setYtdEarnings(7950);
+        });
+
+        $this->assertSame(1.35, $results->getTax(AlabamaUnemployment::class));
+
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us.alabama'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(100);
             $taxes->setYtdEarnings(8000);
+        });
+
+        $this->assertSame(0.0, $results->getTax(AlabamaUnemployment::class));
+
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us.alabama'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(100);
+            $taxes->setYtdEarnings(8050);
         });
 
         $this->assertSame(0.0, $results->getTax(AlabamaUnemployment::class));

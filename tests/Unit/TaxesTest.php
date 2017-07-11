@@ -37,6 +37,83 @@ class TaxesTest extends \TestCase
         $this->assertSame(0.67, $results->getTax(BirminghamOccupational::class));
     }
 
+    public function testTaxesYtdEarnings()
+    {
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us.alabama.birmingham'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(66.68);
+            $taxes->setSupplementalEarnings(6.68);
+            $taxes->setYtdEarnings(7000);
+            $taxes->setPayPeriods(260);
+            $taxes->setDate(Carbon::now()->addMonth());
+        });
+
+        $this->assertSame(0.0, $results->getTax(FederalUnemployment::class));
+
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us.alabama.birmingham'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(66.68);
+            $taxes->setSupplementalEarnings(6.68);
+            $taxes->setYtdEarnings(8000);
+            $taxes->setPayPeriods(260);
+            $taxes->setDate(Carbon::now()->addMonth());
+        });
+
+        $this->assertSame(0.0, $results->getTax(FederalUnemployment::class));
+        $this->assertSame(0.0, $results->getTax(AlabamaUnemployment::class));
+
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us.alabama.birmingham'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(66.68);
+            $taxes->setSupplementalEarnings(6.68);
+            $taxes->setYtdEarnings(127200);
+            $taxes->setPayPeriods(260);
+            $taxes->setDate(Carbon::now()->addMonth());
+        });
+
+        $this->assertSame(0.0, $results->getTax(FederalUnemployment::class));
+        $this->assertSame(0.0, $results->getTax(AlabamaUnemployment::class));
+        $this->assertSame(0.0, $results->getTax(SocialSecurity::class));
+        $this->assertSame(0.0, $results->getTax(SocialSecurityEmployer::class));
+
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us.alabama.birmingham'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(66.68);
+            $taxes->setSupplementalEarnings(6.68);
+            $taxes->setYtdEarnings(200000);
+            $taxes->setPayPeriods(260);
+            $taxes->setDate(Carbon::now()->addMonth());
+        });
+
+        $this->assertSame(7.55, $results->getTax(FederalIncome::class));
+        $this->assertSame(1.57, $results->getTax(Medicare::class));
+        $this->assertSame(0.97, $results->getTax(MedicareEmployer::class));
+        $this->assertSame(2.03, $results->getTax(AlabamaIncome::class));
+        $this->assertSame(0.0, $results->getTax(AlabamaUnemployment::class));
+        $this->assertSame(0.67, $results->getTax(BirminghamOccupational::class));
+
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us.alabama.birmingham'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(66.68);
+            $taxes->setSupplementalEarnings(6.68);
+            $taxes->setYtdEarnings(500000);
+            $taxes->setPayPeriods(260);
+            $taxes->setDate(Carbon::now()->addMonth());
+        });
+
+        $this->assertSame(7.55, $results->getTax(FederalIncome::class));
+        $this->assertSame(1.57, $results->getTax(Medicare::class));
+        $this->assertSame(0.97, $results->getTax(MedicareEmployer::class));
+        $this->assertSame(2.03, $results->getTax(AlabamaIncome::class));
+        $this->assertSame(0.0, $results->getTax(AlabamaUnemployment::class));
+        $this->assertSame(0.67, $results->getTax(BirminghamOccupational::class));
+    }
+
     public function testTaxesUnresolvableDate()
     {
         $this->expectExceptionMessage('The strategy could not be found.');
