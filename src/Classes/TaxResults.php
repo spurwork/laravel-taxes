@@ -4,10 +4,9 @@ namespace Appleton\Taxes\Classes;
 
 class TaxResults
 {
-    public function __construct($tax_results, $date)
+    public function __construct($tax_results)
     {
         $this->tax_results = collect($tax_results);
-        $this->date = $date;
     }
 
     public function getAllTaxes()
@@ -18,28 +17,28 @@ class TaxResults
     public function getEmployeeTaxes()
     {
         return $this->tax_results->filter(function ($tax_result, $tax_name) {
-            return Taxes::resolve($tax_name, $this->date)::WITHHELD;
+            return app($tax_name)::WITHHELD;
         });
     }
 
     public function getEmployerTaxes()
     {
         return $this->tax_results->filter(function ($tax_result, $tax_name) {
-            return !Taxes::resolve($tax_name, $this->date)::WITHHELD;
+            return !app($tax_name)::WITHHELD;
         });
     }
 
     public function getFederalTaxes()
     {
         return $this->tax_results->filter(function ($tax_result, $tax_name) {
-            return Taxes::resolve($tax_name, $this->date)::TYPE === 'federal';
+            return app($tax_name)::TYPE === 'federal';
         });
     }
 
     public function getStateAndLocalTaxes()
     {
         return $this->tax_results->filter(function ($tax_result, $tax_name) {
-            return in_array(Taxes::resolve($tax_name, $this->date)::TYPE, ['state', 'local']);
+            return in_array(app($tax_name)::TYPE, ['state', 'local']);
         });
     }
 

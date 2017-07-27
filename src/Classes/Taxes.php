@@ -14,6 +14,12 @@ class Taxes
     protected $supplemental_earnings = 0;
     protected $ytd_earnings = 0;
 
+    public function getDate()
+    {
+        $test_now = env('TAXES_TEST_NOW');
+        return is_null($test_now) ? $this->date : Carbon::parse($test_now);
+    }
+
     public function setDate($date)
     {
         $this->date = $date;
@@ -54,45 +60,26 @@ class Taxes
     {
         $closure($this);
 
+        app()->instance(Payroll::class, new Payroll([
+            'date' => $this->getDate(),
+            'earnings' => $this->earnings,
+            'pay_periods' => $this->pay_periods,
+            'supplemental_earnings' => $this->supplemental_earnings,
+            'user' => $this->user,
+            'ytd_earnings' => $this->ytd_earnings,
+        ]));
+
         $this->taxes = TaxArea::atPoint($this->latitude, $this->longitude)
             ->get()
             ->pluck('tax')
             ->toArray();
 
-        app(TaxResolver::class)->resolve($this->taxes, static::checkTestDate($this->date));
-
         $tax_results = [];
+
         foreach ($this->taxes as $tax_name) {
-            $tax_results[$tax_name] = app($tax_name)->build([
-                'date' => static::checkTestDate($this->date),
-                'earnings' => $this->earnings,
-                'pay_periods' => $this->pay_periods,
-                'supplemental_earnings' => $this->supplemental_earnings,
-                'user' => $this->user,
-                'ytd_earnings' => $this->ytd_earnings,
-            ])->compute();
+            $tax_results[$tax_name] = app($tax_name)->compute();
         }
 
-        $tax_results = app()->makeWith(TaxResults::class, [
-            'tax_results' => $tax_results,
-            'date' => static::checkTestDate($this->date),
-        ]);
-
-        return $tax_results;
-    }
-
-    public static function checkTestDate($date)
-    {
-        $test_now = env('TAXES_TEST_NOW');
-        return is_null($test_now) ? $date : Carbon::parse($test_now);
-    }
-
-    public static function resolve($classes, $date = null)
-    {
-        if (is_string($classes)) {
-            return app(TaxResolver::class)->resolve([$classes], static::checkTestDate($date))[0];
-        } else {
-            return app(TaxResolver::class)->resolve($classes, static::checkTestDate($date));
-        }
+        return new TaxResults($tax_results);
     }
 }

@@ -3,6 +3,7 @@
 namespace Appleton\Taxes\Countries\US\FederalUnemployment\V20170101;
 
 use Appleton\Taxes\Classes\BaseStateUnemploymentTax;
+use Appleton\Taxes\Classes\Payroll;
 use Appleton\Taxes\Countries\US\FederalUnemployment\FederalUnemployment as BaseFederalUnemployment;
 use Appleton\Taxes\Traits\HasWageBase;
 
@@ -17,20 +18,17 @@ class FederalUnemployment extends BaseFederalUnemployment
 
     const WAGE_BASE = 7000;
 
-    public function __construct(BaseStateUnemploymentTax $state_unemployment)
+    public function __construct(Payroll $payroll)
     {
-        $this->state_unemployment = $state_unemployment;
-    }
-
-    public function built()
-    {
-        $this->tax_rate = static::TAX_RATE - $this->state_unemployment->getUnemploymentTaxCredit();
+        parent::__construct($payroll);
+        $this->state_unemployment_tax_credit = 0.054;
+        $this->tax_rate = static::TAX_RATE - $this->state_unemployment_tax_credit;
         $this->wage_base = static::WAGE_BASE;
     }
 
     public function getAdjustedEarnings()
     {
-        return $this->earnings < $this->getBaseEarnings() ? $this->earnings : $this->getBaseEarnings();
+        return $this->payroll->earnings < $this->getBaseEarnings() ? $this->payroll->earnings : $this->getBaseEarnings();
     }
 
     public function compute()

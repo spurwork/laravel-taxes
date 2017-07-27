@@ -28,5 +28,7 @@ class TaxServiceProvider extends ServiceProvider
             $taxes = new Taxes($app);
             return $taxes;
         });
+
+        $this->app->register(TaxesServiceProvider::class);
     }
 }
