@@ -2,6 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\Alabama\AlabamaIncome\V20170101;
 
+use Appleton\Taxes\Classes\Payroll;
 use Appleton\Taxes\Countries\US\Alabama\AlabamaIncome\AlabamaIncome as BaseAlabamaIncome;
 use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome;
 use Appleton\Taxes\Models\Countries\US\Alabama\AlabamaIncomeTaxInformation;
@@ -10,8 +11,6 @@ class AlabamaIncome extends BaseAlabamaIncome
 {
     const TYPE = 'state';
     const WITHHELD = true;
-
-    const TAX_INFORMATION = AlabamaIncomeTaxInformation::class;
 
     const FILING_ZERO = 0;
     const FILING_SINGLE = 1;
@@ -81,19 +80,16 @@ class AlabamaIncome extends BaseAlabamaIncome
         [100000, 300]
     ];
 
-    public function __construct(FederalIncome $federal_income)
+    public function __construct(AlabamaIncomeTaxInformation $tax_information, FederalIncome $federal_income, Payroll $payroll)
     {
-        $this->federal_income = $federal_income;
-    }
-
-    public function built()
-    {
-        $this->federal_income_tax = $this->federal_income->build($this->parameters)->compute();
+        parent::__construct($payroll);
+        $this->federal_income_tax = $federal_income->compute();
+        $this->tax_information = $tax_information;
     }
 
     public function getAdjustedEarnings()
     {
-        $adjusted_earnings = (($this->earnings - $this->supplemental_earnings) * $this->pay_periods) - ($this->federal_income_tax * $this->pay_periods);
+        $adjusted_earnings = (($this->payroll->earnings - $this->payroll->supplemental_earnings) * $this->payroll->pay_periods) - ($this->federal_income_tax * $this->payroll->pay_periods);
 
         if ($this->tax_information->filing_status != static::FILING_ZERO) {
             $adjusted_earnings = $adjusted_earnings - $this->getPersonalDeducation() - $this->getPersonalExemptionAllowance() - $this->getDependentExemption();
@@ -104,14 +100,14 @@ class AlabamaIncome extends BaseAlabamaIncome
 
     public function getDependentExemption()
     {
-        $gross_earnings = ($this->earnings - $this->supplemental_earnings) * $this->pay_periods;
+        $gross_earnings = ($this->payroll->earnings - $this->payroll->supplemental_earnings) * $this->payroll->pay_periods;
         $dependent_exemption = $this->getTaxBracket($gross_earnings, static::DEPENDENT_EXEMPTION_BRACKETS);
         return $dependent_exemption[1] * $this->tax_information->dependents;
     }
 
     public function getPersonalDeducation()
     {
-        $gross_earnings = ($this->earnings - $this->supplemental_earnings) * $this->pay_periods;
+        $gross_earnings = ($this->payroll->earnings - $this->payroll->supplemental_earnings) * $this->payroll->pay_periods;
         $standard_deduction = static::STANDARD_DEDUCTIONS[$this->tax_information->filing_status];
         $deduction = $standard_deduction['amount'];
 

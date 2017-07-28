@@ -3,6 +3,7 @@
 namespace Appleton\Taxes\Countries\US\SocialSecurity\V20170101;
 
 use Appleton\Taxes\Classes\BaseTax;
+use Appleton\Taxes\Classes\Payroll;
 use Appleton\Taxes\Traits\HasWageBase;
 
 class SocialSecurity extends BaseTax
@@ -15,14 +16,15 @@ class SocialSecurity extends BaseTax
     const TAX_RATE = 0.062;
     const WAGE_BASE = 127200;
 
-    public function built()
+    public function __construct(Payroll $payroll)
     {
+        parent::__construct($payroll);
         $this->wage_base = static::WAGE_BASE;
     }
 
     public function getAdjustedEarnings()
     {
-        return $this->earnings < $this->getBaseEarnings() ? $this->earnings : $this->getBaseEarnings();
+        return $this->payroll->earnings < $this->getBaseEarnings() ? $this->payroll->earnings : $this->getBaseEarnings();
     }
 
     public function compute()

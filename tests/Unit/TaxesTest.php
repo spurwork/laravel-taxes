@@ -116,7 +116,7 @@ class TaxesTest extends \TestCase
 
     public function testTaxesUnresolvableDate()
     {
-        $this->expectExceptionMessage('The strategy could not be found.');
+        $this->expectExceptionMessage('The implementation could not be found.');
 
         $results = $this->taxes->calculate(function ($taxes) {
             $taxes->setWorkLocation($this->getLocation('us.alabama.birmingham'));

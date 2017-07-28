@@ -5,6 +5,7 @@ use Appleton\Taxes\Countries\US\Alabama\AlabamaIncome\AlabamaIncome;
 use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome;
 use Appleton\Taxes\Models\Countries\US\Alabama\AlabamaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\FederalIncomeTaxInformation;
+use Appleton\Taxes\Providers\TaxesServiceProvider;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Orchestra\Database\ConsoleServiceProvider;
@@ -42,17 +43,17 @@ class TestCase extends BaseTestCase
         FederalIncomeTaxInformation::createForUser([
             'additional_withholding' => 0,
             'exemptions' => 0,
-            'filing_status' => Taxes::resolve(FederalIncome::class)::FILING_SINGLE,
+            'filing_status' => FederalIncomeTaxInformation::FILING_SINGLE,
             'non_resident_alien' => false,
         ], $this->user);
 
         AlabamaIncomeTaxInformation::createForUser([
             'additional_withholding' => 0,
             'dependents' => 0,
-            'filing_status' => Taxes::resolve(AlabamaIncome::class)::FILING_SINGLE,
+            'filing_status' => AlabamaIncomeTaxInformation::FILING_SINGLE,
         ], $this->user);
     }
-    
+
     protected function getLocation($name)
     {
         $locations = [
@@ -117,6 +118,7 @@ class TestCase extends BaseTestCase
     {
         return [
             ConsoleServiceProvider::class,
+            TaxesServiceProvider::class,
         ];
     }
 }

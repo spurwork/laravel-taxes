@@ -5,7 +5,7 @@ namespace Appleton\Taxes\Classes;
 use Appleton\Taxes\Models\TaxInformation;
 use Exception;
 
-class BaseIncomeTax extends BaseTax
+class BaseIncome extends BaseTax
 {
     public function getAdjustedEarnings() {
         return 0;
@@ -20,7 +20,7 @@ class BaseIncomeTax extends BaseTax
     {
         $adjusted_earnings = $this->getAdjustedEarnings();
         $tax_brackets = $this->getTaxBrackets();
-        return round($this->getTaxAmountFromTaxBrackets($adjusted_earnings, $tax_brackets) / $this->pay_periods + $this->supplemental_earnings * static::SUPPLEMENTAL_TAX_RATE + $this->tax_information->additional_withholding, 2);
+        return round($this->getTaxAmountFromTaxBrackets($adjusted_earnings, $tax_brackets) / $this->payroll->pay_periods + $this->payroll->supplemental_earnings * static::SUPPLEMENTAL_TAX_RATE + $this->tax_information->additional_withholding, 2);
     }
 
     public function getTaxBracket($amount, $table)
