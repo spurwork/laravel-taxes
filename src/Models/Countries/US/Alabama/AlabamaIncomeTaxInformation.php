@@ -16,9 +16,9 @@ class AlabamaIncomeTaxInformation extends BaseTaxInformationModel
 
     protected $config_name = 'taxes.tables.us.alabama.alabama_income_tax_information';
 
-    public static function getDefault($date)
+    public static function getDefault()
     {
-        $tax_information = app(static::class);
+        $tax_information = new self();
         $tax_information->dependents = 0;
         $tax_information->filing_status = static::FILING_SINGLE;
         return $tax_information;

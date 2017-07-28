@@ -2,6 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\FederalIncome\V20170101;
 
+use Appleton\Taxes\Classes\Payroll;
 use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome as BaseFederalIncome;
 use Appleton\Taxes\Models\Countries\US\FederalIncomeTaxInformation;
 
@@ -9,8 +10,6 @@ class FederalIncome extends BaseFederalIncome
 {
     const TYPE = 'federal';
     const WITHHELD = true;
-
-    const TAX_INFORMATION = FederalIncomeTaxInformation::class;
 
     const FILING_SINGLE = 0;
     const FILING_WIDOW = 1;
@@ -44,6 +43,12 @@ class FederalIncome extends BaseFederalIncome
         [425350, 0.35, 112728],
         [479350, 0.396, 131628],
     ];
+
+    public function __construct(FederalIncomeTaxInformation $tax_information, Payroll $payroll)
+    {
+        parent::__construct($payroll);
+        $this->tax_information = $tax_information;
+    }
 
     public function getAdjustedEarnings()
     {

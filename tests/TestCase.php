@@ -5,7 +5,7 @@ use Appleton\Taxes\Countries\US\Alabama\AlabamaIncome\AlabamaIncome;
 use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome;
 use Appleton\Taxes\Models\Countries\US\Alabama\AlabamaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\FederalIncomeTaxInformation;
-use Appleton\Taxes\Providers\TaxServiceProvider;
+use Appleton\Taxes\Providers\TaxesServiceProvider;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Orchestra\Database\ConsoleServiceProvider;
@@ -118,7 +118,7 @@ class TestCase extends BaseTestCase
     {
         return [
             ConsoleServiceProvider::class,
-            TaxServiceProvider::class,
+            TaxesServiceProvider::class,
         ];
     }
 }

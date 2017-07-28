@@ -12,8 +12,6 @@ class AlabamaIncome extends BaseAlabamaIncome
     const TYPE = 'state';
     const WITHHELD = true;
 
-    const TAX_INFORMATION = AlabamaIncomeTaxInformation::class;
-
     const FILING_ZERO = 0;
     const FILING_SINGLE = 1;
     const FILING_HEAD_OF_HOUSEHOLD = 2;
@@ -82,10 +80,11 @@ class AlabamaIncome extends BaseAlabamaIncome
         [100000, 300]
     ];
 
-    public function __construct(FederalIncome $federal_income, Payroll $payroll)
+    public function __construct(AlabamaIncomeTaxInformation $tax_information, FederalIncome $federal_income, Payroll $payroll)
     {
         parent::__construct($payroll);
         $this->federal_income_tax = $federal_income->compute();
+        $this->tax_information = $tax_information;
     }
 
     public function getAdjustedEarnings()
