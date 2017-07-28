@@ -59,7 +59,7 @@ class AlabamaIncomeTest extends \TestCase
 
     public function testAlabamaIncomeWithNoPersonalExemption()
     {
-        AlabamaIncomeTaxInformation::forUser($this->user)->update(['filing_status' => Taxes::resolve(AlabamaIncome::class)::FILING_ZERO]);
+        AlabamaIncomeTaxInformation::forUser($this->user)->update(['filing_status' => AlabamaIncomeTaxInformation::FILING_ZERO]);
 
         $results = $this->taxes->calculate(function ($taxes) {
             $taxes->setWorkLocation($this->getLocation('us.alabama'));

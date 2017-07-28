@@ -5,7 +5,7 @@ namespace Appleton\Taxes\Classes;
 use Appleton\Taxes\Models\TaxInformation;
 use Exception;
 
-class BaseIncomeTax extends BaseTax
+class BaseIncome extends BaseTax
 {
     public function getAdjustedEarnings() {
         return 0;

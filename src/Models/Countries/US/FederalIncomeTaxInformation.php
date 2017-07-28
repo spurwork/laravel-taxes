@@ -20,7 +20,7 @@ class FederalIncomeTaxInformation extends BaseTaxInformationModel
     {
         $tax_information = app(static::class);
         $tax_information->exemptions = 0;
-        $tax_information->filing_status = Taxes::resolve(FederalIncome::class, $date)::FILING_SINGLE;
+        $tax_information->filing_status = static::FILING_SINGLE;
         $tax_information->non_resident_alien = false;
         return $tax_information;
     }

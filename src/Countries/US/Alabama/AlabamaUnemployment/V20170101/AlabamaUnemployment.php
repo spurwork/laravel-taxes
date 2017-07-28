@@ -3,10 +3,10 @@
 namespace Appleton\Taxes\Countries\US\Alabama\AlabamaUnemployment\V20170101;
 
 use Appleton\Taxes\Classes\Payroll;
-use Appleton\Taxes\Classes\BaseTax;
+use Appleton\Taxes\Countries\US\Alabama\AlabamaUnemployment\AlabamaUnemployment as BaseAlabamaUnemployment;
 use Appleton\Taxes\Traits\HasWageBase;
 
-class AlabamaUnemployment extends BaseTax
+class AlabamaUnemployment extends BaseAlabamaUnemployment
 {
     use HasWageBase;
 

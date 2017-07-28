@@ -17,7 +17,8 @@ class Taxes
     public function getDate()
     {
         $test_now = env('TAXES_TEST_NOW');
-        return is_null($test_now) ? $this->date : Carbon::parse($test_now);
+        $date = is_null($test_now) ? $this->date : Carbon::parse($test_now);
+        return  is_null($date) ? Carbon::now() : $date;
     }
 
     public function setDate($date)
@@ -75,6 +76,12 @@ class Taxes
             ->toArray();
 
         $tax_results = [];
+
+        foreach ($this->taxes as $tax_name) {
+            foreach (class_implements($tax_name) as $interface) {
+                app()->bind($interface, $tax_name);
+            }
+        }
 
         foreach ($this->taxes as $tax_name) {
             $tax_results[$tax_name] = app($tax_name)->compute();

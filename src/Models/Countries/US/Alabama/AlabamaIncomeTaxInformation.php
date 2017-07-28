@@ -20,7 +20,7 @@ class AlabamaIncomeTaxInformation extends BaseTaxInformationModel
     {
         $tax_information = app(static::class);
         $tax_information->dependents = 0;
-        $tax_information->filing_status = Taxes::resolve(AlabamaIncome::class, $date)::FILING_SINGLE;
+        $tax_information->filing_status = static::FILING_SINGLE;
         return $tax_information;
     }
 

@@ -4,7 +4,6 @@ namespace Appleton\Taxes\Providers;
 
 use Carbon\Carbon;
 use Illuminate\Support\ServiceProvider;
-use Appleton\Taxes\Classes\BaseStateUnemploymentTax;
 use Appleton\Taxes\Classes\Taxes;
 use Appleton\Taxes\Classes\Payroll;
 
@@ -67,8 +66,13 @@ class TaxesServiceProvider extends ServiceProvider
 
     public function register()
     {
+        $this->app->bind(
+            \Appleton\Taxes\Countries\US\FederalUnemployment\StateUnemployment::class,
+            \Appleton\Taxes\Countries\US\FederalUnemployment\BaseStateUnemployment::class
+        );
+
         foreach ($this->interfaces as $interface) {
-            $this->app->singleton($interface, function ($app, $parameters) use ($interface) {
+            $this->app->bind($interface, function ($app, $parameters) use ($interface) {
                 $payroll = $app->make(Payroll::class);
                 $implementation = $this->resolveImplementation($interface, $payroll->date);
                 return $app->make($implementation);
