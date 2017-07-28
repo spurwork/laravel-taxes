@@ -24,11 +24,11 @@ class TaxServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'taxes');
 
+        $this->app->register(TaxesServiceProvider::class);
+
         $this->app->singleton('taxes', function ($app) {
             $taxes = new Taxes($app);
             return $taxes;
         });
-
-        $this->app->register(TaxesServiceProvider::class);
     }
 }

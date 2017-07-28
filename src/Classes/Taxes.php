@@ -14,13 +14,6 @@ class Taxes
     protected $supplemental_earnings = 0;
     protected $ytd_earnings = 0;
 
-    public function getDate()
-    {
-        $test_now = env('TAXES_TEST_NOW');
-        $date = is_null($test_now) ? $this->date : Carbon::parse($test_now);
-        return  is_null($date) ? Carbon::now() : $date;
-    }
-
     public function setDate($date)
     {
         $this->date = $date;
@@ -61,6 +54,24 @@ class Taxes
     {
         $closure($this);
 
+        $this->bindPayrollData();
+        $this->getTaxes();
+        $this->bindInterfaces();
+
+        return $this->compute();
+    }
+
+    private function bindInterfaces()
+    {
+        foreach ($this->taxes as $tax_name) {
+            foreach (class_implements($tax_name) as $interface) {
+                app()->bind($interface, $tax_name);
+            }
+        }
+    }
+
+    private function bindPayrollData()
+    {
         app()->instance(Payroll::class, new Payroll([
             'date' => $this->getDate(),
             'earnings' => $this->earnings,
@@ -69,24 +80,35 @@ class Taxes
             'user' => $this->user,
             'ytd_earnings' => $this->ytd_earnings,
         ]));
+    }
 
+    private function compute()
+    {
+        $tax_results = [];
+
+        foreach ($this->taxes as $tax_name) {
+            $tax = app($tax_name);
+            $tax_results[$tax_name] = [
+                'tax' => $tax,
+                'amount' => $tax->compute(),
+            ];
+        }
+
+        return new TaxResults($tax_results);
+    }
+
+    private function getDate()
+    {
+        $test_now = env('TAXES_TEST_NOW');
+        $date = is_null($test_now) ? $this->date : Carbon::parse($test_now);
+        return  is_null($date) ? Carbon::now() : $date;
+    }
+
+    private function getTaxes()
+    {
         $this->taxes = TaxArea::atPoint($this->latitude, $this->longitude)
             ->get()
             ->pluck('tax')
             ->toArray();
-
-        $tax_results = [];
-
-        foreach ($this->taxes as $tax_name) {
-            foreach (class_implements($tax_name) as $interface) {
-                app()->bind($interface, $tax_name);
-            }
-        }
-
-        foreach ($this->taxes as $tax_name) {
-            $tax_results[$tax_name] = app($tax_name)->compute();
-        }
-
-        return new TaxResults($tax_results);
     }
 }

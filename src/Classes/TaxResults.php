@@ -4,48 +4,63 @@ namespace Appleton\Taxes\Classes;
 
 class TaxResults
 {
-    public function __construct($tax_results)
+    public function __construct($results)
     {
-        $this->tax_results = collect($tax_results);
+        $this->results = collect($results);
+    }
+
+    private function transform($results)
+    {
+        return $results->map(function($result) {
+            return $result['amount'];
+        });
     }
 
     public function getAllTaxes()
     {
-        return $this->tax_results;
+        return $this->transform($this->results);
     }
 
     public function getEmployeeTaxes()
     {
-        return $this->tax_results->filter(function ($tax_result, $tax_name) {
-            return app($tax_name)::WITHHELD;
+        $results = $this->results->filter(function ($result) {
+            return $result['tax']::WITHHELD;
         });
+
+        return $this->transform($results);
     }
 
     public function getEmployerTaxes()
     {
-        return $this->tax_results->filter(function ($tax_result, $tax_name) {
-            return !app($tax_name)::WITHHELD;
+        $results = $this->results->filter(function ($result) {
+            return !$result['tax']::WITHHELD;
         });
+
+        return $this->transform($results);
     }
 
     public function getFederalTaxes()
     {
-        return $this->tax_results->filter(function ($tax_result, $tax_name) {
-            return app($tax_name)::TYPE === 'federal';
+        $results = $this->results->filter(function ($result) {
+            return $result['tax']::TYPE === 'federal';
         });
+
+        return $this->transform($results);
     }
 
     public function getStateAndLocalTaxes()
     {
-        return $this->tax_results->filter(function ($tax_result, $tax_name) {
-            return in_array(app($tax_name)::TYPE, ['state', 'local']);
+        $results = $this->results->filter(function ($result) {
+            return in_array($result['tax']::TYPE, ['state', 'local']);
         });
+
+        return $this->transform($results);
     }
 
     public function getTax($tax)
     {
-        return $this->tax_results->filter(function ($tax_result, $tax_name) use ($tax) {
+        return $this->transform($this->results->filter(function ($result, $tax_name) use ($tax) {
             return $tax_name === $tax;
-        })->first();
+        }))->first();
     }
 }
