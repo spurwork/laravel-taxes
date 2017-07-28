@@ -4,7 +4,7 @@ namespace Appleton\Taxes\Countries\US\FederalIncome;
 
 use Appleton\Taxes\Classes\BaseIncome;
 
-class FederalIncome extends BaseIncome
+abstract class FederalIncome extends BaseIncome
 {
 
 }

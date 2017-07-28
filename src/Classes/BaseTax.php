@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Classes;
 
-class BaseTax
+abstract class BaseTax
 {
     public function __construct(Payroll $payroll)
     {

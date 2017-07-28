@@ -22,7 +22,6 @@ class FederalUnemployment extends BaseFederalUnemployment
     {
         parent::__construct($payroll);
         $this->tax_rate = static::TAX_RATE - $state_unemployment->getTaxCredit();
-        $this->wage_base = static::WAGE_BASE;
     }
 
     public function getAdjustedEarnings()

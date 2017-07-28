@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\Alabama\SouthsideOccupational;
 
-class SouthsideOccupational
+abstract class SouthsideOccupational
 {
 
 }

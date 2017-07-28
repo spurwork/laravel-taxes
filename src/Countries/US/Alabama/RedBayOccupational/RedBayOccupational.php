@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\Alabama\RedBayOccupational;
 
-class RedBayOccupational
+abstract class RedBayOccupational
 {
 
 }

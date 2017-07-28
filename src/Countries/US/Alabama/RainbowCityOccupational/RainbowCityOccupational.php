@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\Alabama\RainbowCityOccupational;
 
-class RainbowCityOccupational
+abstract class RainbowCityOccupational
 {
 
 }

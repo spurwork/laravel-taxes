@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\Alabama\HaleyvilleOccupational;
 
-class HaleyvilleOccupational
+abstract class HaleyvilleOccupational
 {
 
 }

@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\Medicare;
 
-class Medicare
+abstract class Medicare
 {
 
 }

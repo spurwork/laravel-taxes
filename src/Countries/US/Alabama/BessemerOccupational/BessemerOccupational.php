@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\Alabama\BessemerOccupational;
 
-class BessemerOccupational
+abstract class BessemerOccupational
 {
 
 }

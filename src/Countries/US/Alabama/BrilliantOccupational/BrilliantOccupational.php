@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\Alabama\BrilliantOccupational;
 
-class BrilliantOccupational
+abstract class BrilliantOccupational
 {
 
 }

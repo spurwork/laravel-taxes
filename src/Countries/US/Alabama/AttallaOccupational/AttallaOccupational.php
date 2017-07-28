@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\Alabama\AttallaOccupational;
 
-class AttallaOccupational
+abstract class AttallaOccupational
 {
 
 }

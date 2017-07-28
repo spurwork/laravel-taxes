@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\Alabama\GoodwaterOccupational;
 
-class GoodwaterOccupational
+abstract class GoodwaterOccupational
 {
 
 }

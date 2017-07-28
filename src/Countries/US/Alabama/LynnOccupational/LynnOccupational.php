@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\Alabama\LynnOccupational;
 
-class LynnOccupational
+abstract class LynnOccupational
 {
 
 }

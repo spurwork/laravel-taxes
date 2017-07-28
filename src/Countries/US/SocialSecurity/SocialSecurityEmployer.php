@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\SocialSecurity;
 
-class SocialSecurityEmployer
+abstract class SocialSecurityEmployer extends SocialSecurity
 {
 
 }

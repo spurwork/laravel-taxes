@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\Alabama\MidfieldOccupational;
 
-class MidfieldOccupational
+abstract class MidfieldOccupational
 {
 
 }
