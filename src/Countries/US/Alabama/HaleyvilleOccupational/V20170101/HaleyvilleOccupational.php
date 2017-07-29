@@ -2,12 +2,9 @@
 
 namespace Appleton\Taxes\Countries\US\Alabama\HaleyvilleOccupational\V20170101;
 
-use Appleton\Taxes\Classes\BaseTax;
+use Appleton\Taxes\Countries\US\Alabama\HaleyvilleOccupational\HaleyvilleOccupational as BaseHaleyvilleOccupational;
 
-class HaleyvilleOccupational extends BaseTax
+class HaleyvilleOccupational extends BaseHaleyvilleOccupational
 {
-    const TYPE = 'local';
-    const WITHHELD = true;
-
     const TAX_RATE = 0.01;
 }

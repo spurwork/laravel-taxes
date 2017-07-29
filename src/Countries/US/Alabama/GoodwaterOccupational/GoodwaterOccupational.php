@@ -2,7 +2,9 @@
 
 namespace Appleton\Taxes\Countries\US\Alabama\GoodwaterOccupational;
 
-abstract class GoodwaterOccupational
+use Appleton\Taxes\Classes\BaseOccupational;
+
+abstract class GoodwaterOccupational extends BaseOccupational
 {
 
 }

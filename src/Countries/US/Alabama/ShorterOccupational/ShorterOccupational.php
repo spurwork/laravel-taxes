@@ -2,7 +2,9 @@
 
 namespace Appleton\Taxes\Countries\US\Alabama\ShorterOccupational;
 
-abstract class ShorterOccupational
+use Appleton\Taxes\Classes\BaseOccupational;
+
+abstract class ShorterOccupational extends BaseOccupational
 {
 
 }

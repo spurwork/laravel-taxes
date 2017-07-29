@@ -2,12 +2,9 @@
 
 namespace Appleton\Taxes\Countries\US\Alabama\ShorterOccupational\V20170101;
 
-use Appleton\Taxes\Classes\BaseTax;
+use Appleton\Taxes\Countries\US\Alabama\ShorterOccupational\ShorterOccupational as BaseShorterOccupational;
 
-class ShorterOccupational extends BaseTax
+class ShorterOccupational extends BaseShorterOccupational
 {
-    const TYPE = 'local';
-    const WITHHELD = true;
-
     const TAX_RATE = 0.01;
 }

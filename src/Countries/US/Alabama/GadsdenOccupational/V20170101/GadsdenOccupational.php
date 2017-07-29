@@ -2,12 +2,9 @@
 
 namespace Appleton\Taxes\Countries\US\Alabama\GadsdenOccupational\V20170101;
 
-use Appleton\Taxes\Classes\BaseTax;
+use Appleton\Taxes\Countries\US\Alabama\GadsdenOccupational\GadsdenOccupational as BaseGadsdenOccupational;
 
-class GadsdenOccupational extends BaseTax
+class GadsdenOccupational extends BaseGadsdenOccupational
 {
-    const TYPE = 'local';
-    const WITHHELD = true;
-
     const TAX_RATE = 0.02;
 }

@@ -2,7 +2,9 @@
 
 namespace Appleton\Taxes\Countries\US\Alabama\SulligentOccupational;
 
-abstract class SulligentOccupational
+use Appleton\Taxes\Classes\BaseOccupational;
+
+abstract class SulligentOccupational extends BaseOccupational
 {
 
 }

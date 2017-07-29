@@ -2,13 +2,10 @@
 
 namespace Appleton\Taxes\Countries\US\Medicare\V20170101;
 
-use Appleton\Taxes\Classes\BaseTax;
+use Appleton\Taxes\Countries\US\Medicare\Medicare as BaseMedicare;
 
-class Medicare extends BaseTax
+class Medicare extends BaseMedicare
 {
-    const TYPE = 'federal';
-    const WITHHELD = true;
-
     const TAX_RATE = 0.0145;
 
     const ADDITIONAL_TAX_AMOUNT = 200000;

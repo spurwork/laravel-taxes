@@ -2,7 +2,9 @@
 
 namespace Appleton\Taxes\Countries\US\Alabama\LeedsOccupational;
 
-abstract class LeedsOccupational
+use Appleton\Taxes\Classes\BaseOccupational;
+
+abstract class LeedsOccupational extends BaseOccupational
 {
 
 }

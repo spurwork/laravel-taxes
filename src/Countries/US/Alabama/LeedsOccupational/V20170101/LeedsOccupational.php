@@ -2,12 +2,9 @@
 
 namespace Appleton\Taxes\Countries\US\Alabama\LeedsOccupational\V20170101;
 
-use Appleton\Taxes\Classes\BaseTax;
+use Appleton\Taxes\Countries\US\Alabama\LeedsOccupational\LeedsOccupational as BaseLeedsOccupational;
 
-class LeedsOccupational extends BaseTax
+class LeedsOccupational extends BaseLeedsOccupational
 {
-    const TYPE = 'local';
-    const WITHHELD = true;
-
     const TAX_RATE = 0.01;
 }

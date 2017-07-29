@@ -6,5 +6,6 @@ use Appleton\Taxes\Countries\US\FederalUnemployment\BaseStateUnemployment;
 
 abstract class AlabamaUnemployment extends BaseStateUnemployment
 {
-
+    const TYPE = 'state';
+    const WITHHELD = false;
 }

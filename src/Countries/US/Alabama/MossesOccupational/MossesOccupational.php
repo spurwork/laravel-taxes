@@ -2,7 +2,9 @@
 
 namespace Appleton\Taxes\Countries\US\Alabama\MossesOccupational;
 
-abstract class MossesOccupational
+use Appleton\Taxes\Classes\BaseOccupational;
+
+abstract class MossesOccupational extends BaseOccupational
 {
 
 }

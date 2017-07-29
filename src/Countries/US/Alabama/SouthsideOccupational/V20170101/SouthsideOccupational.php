@@ -2,12 +2,9 @@
 
 namespace Appleton\Taxes\Countries\US\Alabama\SouthsideOccupational\V20170101;
 
-use Appleton\Taxes\Classes\BaseTax;
+use Appleton\Taxes\Countries\US\Alabama\SouthsideOccupational\SouthsideOccupational as BaseSouthsideOccupational;
 
-class SouthsideOccupational extends BaseTax
+class SouthsideOccupational extends BaseSouthsideOccupational
 {
-    const TYPE = 'local';
-    const WITHHELD = true;
-
     const TAX_RATE = 0.02;
 }

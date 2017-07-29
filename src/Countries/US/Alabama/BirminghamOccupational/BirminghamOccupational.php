@@ -2,7 +2,9 @@
 
 namespace Appleton\Taxes\Countries\US\Alabama\BirminghamOccupational;
 
-abstract class BirminghamOccupational
+use Appleton\Taxes\Classes\BaseOccupational;
+
+abstract class BirminghamOccupational extends BaseOccupational
 {
 
 }

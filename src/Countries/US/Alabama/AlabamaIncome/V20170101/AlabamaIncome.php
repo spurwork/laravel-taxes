@@ -9,9 +9,6 @@ use Appleton\Taxes\Models\Countries\US\Alabama\AlabamaIncomeTaxInformation;
 
 class AlabamaIncome extends BaseAlabamaIncome
 {
-    const TYPE = 'state';
-    const WITHHELD = true;
-
     const FILING_ZERO = 0;
     const FILING_SINGLE = 1;
     const FILING_HEAD_OF_HOUSEHOLD = 2;

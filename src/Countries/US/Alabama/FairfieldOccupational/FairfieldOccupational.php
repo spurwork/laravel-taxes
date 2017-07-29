@@ -2,7 +2,9 @@
 
 namespace Appleton\Taxes\Countries\US\Alabama\FairfieldOccupational;
 
-abstract class FairfieldOccupational
+use Appleton\Taxes\Classes\BaseOccupational;
+
+abstract class FairfieldOccupational extends BaseOccupational
 {
 
 }

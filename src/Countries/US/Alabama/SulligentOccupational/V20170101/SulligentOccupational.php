@@ -2,12 +2,9 @@
 
 namespace Appleton\Taxes\Countries\US\Alabama\SulligentOccupational\V20170101;
 
-use Appleton\Taxes\Classes\BaseTax;
+use Appleton\Taxes\Countries\US\Alabama\SulligentOccupational\SulligentOccupational as BaseSulligentOccupational;
 
-class SulligentOccupational extends BaseTax
+class SulligentOccupational extends BaseSulligentOccupational
 {
-    const TYPE = 'local';
-    const WITHHELD = true;
-
     const TAX_RATE = 0.01;
 }

@@ -2,12 +2,9 @@
 
 namespace Appleton\Taxes\Countries\US\Alabama\BessemerOccupational\V20170101;
 
-use Appleton\Taxes\Classes\BaseTax;
+use Appleton\Taxes\Countries\US\Alabama\BessemerOccupational\BessemerOccupational as BaseBessemerOccupational;
 
-class BessemerOccupational extends BaseTax
+class BessemerOccupational extends BaseBessemerOccupational
 {
-    const TYPE = 'local';
-    const WITHHELD = true;
-
     const TAX_RATE = 0.01;
 }

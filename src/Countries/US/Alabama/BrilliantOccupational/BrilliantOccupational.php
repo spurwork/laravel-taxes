@@ -2,7 +2,9 @@
 
 namespace Appleton\Taxes\Countries\US\Alabama\BrilliantOccupational;
 
-abstract class BrilliantOccupational
+use Appleton\Taxes\Classes\BaseOccupational;
+
+abstract class BrilliantOccupational extends BaseOccupational
 {
 
 }

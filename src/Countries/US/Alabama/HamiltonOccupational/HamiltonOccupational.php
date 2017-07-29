@@ -2,7 +2,9 @@
 
 namespace Appleton\Taxes\Countries\US\Alabama\HamiltonOccupational;
 
-abstract class HamiltonOccupational
+use Appleton\Taxes\Classes\BaseOccupational;
+
+abstract class HamiltonOccupational extends BaseOccupational
 {
 
 }

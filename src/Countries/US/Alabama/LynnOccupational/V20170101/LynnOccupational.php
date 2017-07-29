@@ -2,12 +2,9 @@
 
 namespace Appleton\Taxes\Countries\US\Alabama\LynnOccupational\V20170101;
 
-use Appleton\Taxes\Classes\BaseTax;
+use Appleton\Taxes\Countries\US\Alabama\LynnOccupational\LynnOccupational as BaseLynnOccupational;
 
-class LynnOccupational extends BaseTax
+class LynnOccupational extends BaseLynnOccupational
 {
-    const TYPE = 'local';
-    const WITHHELD = true;
-
     const TAX_RATE = 0.01;
 }

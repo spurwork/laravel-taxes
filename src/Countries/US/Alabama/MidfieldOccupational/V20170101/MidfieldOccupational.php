@@ -2,12 +2,9 @@
 
 namespace Appleton\Taxes\Countries\US\Alabama\MidfieldOccupational\V20170101;
 
-use Appleton\Taxes\Classes\BaseTax;
+use Appleton\Taxes\Countries\US\Alabama\MidfieldOccupational\MidfieldOccupational as BaseMidfieldOccupational;
 
-class MidfieldOccupational extends BaseTax
+class MidfieldOccupational extends BaseMidfieldOccupational
 {
-    const TYPE = 'local';
-    const WITHHELD = true;
-
     const TAX_RATE = 0.01;
 }

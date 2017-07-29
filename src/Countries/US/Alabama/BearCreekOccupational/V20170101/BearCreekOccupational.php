@@ -2,12 +2,9 @@
 
 namespace Appleton\Taxes\Countries\US\Alabama\BearCreekOccupational\V20170101;
 
-use Appleton\Taxes\Classes\BaseTax;
+use Appleton\Taxes\Countries\US\Alabama\BearCreekOccupational\BearCreekOccupational as BaseBearCreekOccupational;
 
-class BearCreekOccupational extends BaseTax
+class BearCreekOccupational extends BaseBearCreekOccupational
 {
-    const TYPE = 'local';
-    const WITHHELD = true;
-
     const TAX_RATE = 0.01;
 }

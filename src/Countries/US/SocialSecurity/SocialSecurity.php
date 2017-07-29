@@ -6,5 +6,6 @@ use Appleton\Taxes\Classes\BaseTax;
 
 abstract class SocialSecurity extends BaseTax
 {
-
+    const TYPE = 'federal';
+    const WITHHELD = true;
 }

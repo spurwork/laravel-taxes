@@ -2,6 +2,7 @@
 
 namespace Appleton\Taxes\Classes;
 
+use Appleton\Taxes\Classes\Payroll;
 use Appleton\Taxes\Countries\US\Alabama\AlabamaIncome\AlabamaIncome;
 use Appleton\Taxes\Countries\US\Alabama\AlabamaUnemployment\AlabamaUnemployment;
 use Appleton\Taxes\Countries\US\Alabama\BirminghamOccupational\BirminghamOccupational;
@@ -12,6 +13,7 @@ use Appleton\Taxes\Countries\US\Medicare\MedicareEmployer;
 use Appleton\Taxes\Countries\US\SocialSecurity\SocialSecurity;
 use Appleton\Taxes\Countries\US\SocialSecurity\SocialSecurityEmployer;
 use Carbon\Carbon;
+use Illuminate\Contracts\Container\BindingResolutionException;
 
 class TaxesTest extends \TestCase
 {
@@ -146,5 +148,26 @@ class TaxesTest extends \TestCase
         $this->assertSame(2.07, $results->getTax(AlabamaIncome::class));
         $this->assertSame(1.80, $results->getTax(AlabamaUnemployment::class));
         $this->assertSame(0.67, $results->getTax(BirminghamOccupational::class));
+    }
+
+    public function testUnbindsPayrollAfter()
+    {
+        $this->expectException(BindingResolutionException::class);
+
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us.alabama.birmingham'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(66.68);
+            $taxes->setSupplementalEarnings(6.68);
+            $taxes->setPayPeriods(260);
+            $taxes->setDate(Carbon::now()->addMonth());
+        });
+
+        app(Payroll::class);
+    }
+
+    public function testNoPayroll()
+    {
+        $this->assertTrue(FederalIncome::WITHHELD);
     }
 }

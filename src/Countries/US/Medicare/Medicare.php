@@ -2,7 +2,10 @@
 
 namespace Appleton\Taxes\Countries\US\Medicare;
 
-abstract class Medicare
-{
+use Appleton\Taxes\Classes\BaseTax;
 
+abstract class Medicare extends BaseTax
+{
+    const TYPE = 'federal';
+    const WITHHELD = true;
 }

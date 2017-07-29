@@ -2,12 +2,9 @@
 
 namespace Appleton\Taxes\Countries\US\Alabama\OpelikaOccupational\V20170101;
 
-use Appleton\Taxes\Classes\BaseTax;
+use Appleton\Taxes\Countries\US\Alabama\OpelikaOccupational\OpelikaOccupational as BaseOpelikaOccupational;
 
-class OpelikaOccupational extends BaseTax
+class OpelikaOccupational extends BaseOpelikaOccupational
 {
-    const TYPE = 'local';
-    const WITHHELD = true;
-
     const TAX_RATE = 0.015;
 }

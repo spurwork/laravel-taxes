@@ -10,9 +10,6 @@ class SocialSecurity extends BaseSocialSecurity
 {
     use HasWageBase;
 
-    const TYPE = 'federal';
-    const WITHHELD = true;
-
     const TAX_RATE = 0.062;
     const WAGE_BASE = 127200;
 

@@ -2,12 +2,9 @@
 
 namespace Appleton\Taxes\Countries\US\Alabama\BrilliantOccupational\V20170101;
 
-use Appleton\Taxes\Classes\BaseTax;
+use Appleton\Taxes\Countries\US\Alabama\BrilliantOccupational\BrilliantOccupational as BaseBrilliantOccupational;
 
-class BrilliantOccupational extends BaseTax
+class BrilliantOccupational extends BaseBrilliantOccupational
 {
-    const TYPE = 'local';
-    const WITHHELD = true;
-
     const TAX_RATE = 0.01;
 }

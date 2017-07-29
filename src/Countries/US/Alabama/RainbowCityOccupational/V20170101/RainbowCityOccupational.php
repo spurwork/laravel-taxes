@@ -2,12 +2,9 @@
 
 namespace Appleton\Taxes\Countries\US\Alabama\RainbowCityOccupational\V20170101;
 
-use Appleton\Taxes\Classes\BaseTax;
+use Appleton\Taxes\Countries\US\Alabama\RainbowCityOccupational\RainbowCityOccupational as BaseRainbowCityOccupational;
 
-class RainbowCityOccupational extends BaseTax
+class RainbowCityOccupational extends BaseRainbowCityOccupational
 {
-    const TYPE = 'local';
-    const WITHHELD = true;
-
     const TAX_RATE = 0.02;
 }

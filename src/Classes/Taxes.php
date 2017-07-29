@@ -58,7 +58,11 @@ class Taxes
         $this->getTaxes();
         $this->bindInterfaces();
 
-        return $this->compute();
+        $results = $this->compute();
+
+        $this->unbindPayrollData();
+
+        return $results;
     }
 
     private function bindInterfaces()
@@ -110,5 +114,10 @@ class Taxes
             ->get()
             ->pluck('tax')
             ->toArray();
+    }
+
+    private function unbindPayrollData()
+    {
+        app()->forgetInstance(Payroll::class);
     }
 }

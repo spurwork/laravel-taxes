@@ -2,7 +2,9 @@
 
 namespace Appleton\Taxes\Countries\US\Alabama\OpelikaOccupational;
 
-abstract class OpelikaOccupational
+use Appleton\Taxes\Classes\BaseOccupational;
+
+abstract class OpelikaOccupational extends BaseOccupational
 {
 
 }

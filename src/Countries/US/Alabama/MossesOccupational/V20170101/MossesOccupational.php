@@ -2,12 +2,9 @@
 
 namespace Appleton\Taxes\Countries\US\Alabama\MossesOccupational\V20170101;
 
-use Appleton\Taxes\Classes\BaseTax;
+use Appleton\Taxes\Countries\US\Alabama\MossesOccupational\MossesOccupational as BaseMossesOccupational;
 
-class MossesOccupational extends BaseTax
+class MossesOccupational extends BaseMossesOccupational
 {
-    const TYPE = 'local';
-    const WITHHELD = true;
-
     const TAX_RATE = 0.01;
 }

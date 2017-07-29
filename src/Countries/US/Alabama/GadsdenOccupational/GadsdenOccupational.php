@@ -2,7 +2,9 @@
 
 namespace Appleton\Taxes\Countries\US\Alabama\GadsdenOccupational;
 
-abstract class GadsdenOccupational
+use Appleton\Taxes\Classes\BaseOccupational;
+
+abstract class GadsdenOccupational extends BaseOccupational
 {
 
 }

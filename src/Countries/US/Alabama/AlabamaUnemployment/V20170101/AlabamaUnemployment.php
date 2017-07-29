@@ -10,9 +10,6 @@ class AlabamaUnemployment extends BaseAlabamaUnemployment
 {
     use HasWageBase;
 
-    const TYPE = 'state';
-    const WITHHELD = false;
-
     const FUTA_CREDIT = 0.054;
 
     const NEW_EMPLOYER_RATE = 0.027;

@@ -6,5 +6,6 @@ use Appleton\Taxes\Classes\BaseTax;
 
 abstract class FederalUnemployment extends BaseTax
 {
-
+    const TYPE = 'federal';
+    const WITHHELD = false;
 }
