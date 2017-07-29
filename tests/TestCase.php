@@ -43,14 +43,14 @@ class TestCase extends BaseTestCase
         FederalIncomeTaxInformation::createForUser([
             'additional_withholding' => 0,
             'exemptions' => 0,
-            'filing_status' => FederalIncomeTaxInformation::FILING_SINGLE,
+            'filing_status' => FederalIncome::FILING_SINGLE,
             'non_resident_alien' => false,
         ], $this->user);
 
         AlabamaIncomeTaxInformation::createForUser([
             'additional_withholding' => 0,
             'dependents' => 0,
-            'filing_status' => AlabamaIncomeTaxInformation::FILING_SINGLE,
+            'filing_status' => AlabamaIncome::FILING_SINGLE,
         ], $this->user);
     }
 

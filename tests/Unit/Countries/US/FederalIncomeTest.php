@@ -37,7 +37,7 @@ class FederalIncomeTest extends \TestCase
 
         $this->assertSame(0.0, $results->getTax(FederalIncome::class));
 
-        FederalIncomeTaxInformation::forUser($this->user)->update(['filing_status' => FederalIncomeTaxInformation::FILING_MARRIED]);
+        FederalIncomeTaxInformation::forUser($this->user)->update(['filing_status' => FederalIncome::FILING_MARRIED]);
 
         $results = $this->taxes->calculate(function ($taxes) {
             $taxes->setWorkLocation($this->getLocation('us'));
@@ -58,7 +58,7 @@ class FederalIncomeTest extends \TestCase
 
         $this->assertSame(0.10, $results->getTax(FederalIncome::class));
 
-        FederalIncomeTaxInformation::forUser($this->user)->update(['filing_status' => FederalIncomeTaxInformation::FILING_MARRIED]);
+        FederalIncomeTaxInformation::forUser($this->user)->update(['filing_status' => FederalIncome::FILING_MARRIED]);
 
         $results = $this->taxes->calculate(function ($taxes) {
             $taxes->setWorkLocation($this->getLocation('us'));
@@ -83,7 +83,7 @@ class FederalIncomeTest extends \TestCase
 
         FederalIncomeTaxInformation::forUser($this->user)->update([
             'additional_withholding' => 20,
-            'filing_status' => FederalIncomeTaxInformation::FILING_MARRIED
+            'filing_status' => FederalIncome::FILING_MARRIED
         ]);
 
         $results = $this->taxes->calculate(function ($taxes) {

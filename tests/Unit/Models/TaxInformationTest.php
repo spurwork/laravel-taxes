@@ -13,13 +13,13 @@ class TaxInformationTest extends \TestCase
         $federal_income_tax_information = TaxInformation::forUser($this->user)->isTypeOf(FederalIncomeTaxInformation::class)->first()->information;
 
         $this->assertSame(0, $federal_income_tax_information->exemptions);
-        $this->assertSame(FederalIncomeTaxInformation::FILING_SINGLE, $federal_income_tax_information->filing_status);
+        $this->assertSame(FederalIncome::FILING_SINGLE, $federal_income_tax_information->filing_status);
         $this->assertSame(false, $federal_income_tax_information->non_resident_alien);
 
         $federal_income_tax_information = FederalIncomeTaxInformation::forUser($this->user)->first();
 
         $this->assertSame(0, $federal_income_tax_information->exemptions);
-        $this->assertSame(FederalIncomeTaxInformation::FILING_SINGLE, $federal_income_tax_information->filing_status);
+        $this->assertSame(FederalIncome::FILING_SINGLE, $federal_income_tax_information->filing_status);
         $this->assertSame(false, $federal_income_tax_information->non_resident_alien);
     }
 }
