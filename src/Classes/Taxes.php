@@ -99,6 +99,7 @@ class Taxes
             ->filter(function ($tax_name) use ($type) {
                 return $tax_name::TYPE == $type;
             })
+            ->sort()
             ->each(function ($tax_name) use (&$results) {
                 $tax = app($tax_name);
                 $results[$tax_name] = [
