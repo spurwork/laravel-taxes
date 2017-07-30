@@ -76,6 +76,30 @@ class FederalIncomeTest extends \TestCase
         $results = $this->taxes->calculate(function ($taxes) {
             $taxes->setWorkLocation($this->getLocation('us'));
             $taxes->setUser($this->user);
+            $taxes->setEarnings(0);
+        });
+
+        $this->assertSame(0.0, $results->getTax(FederalIncome::class));
+
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(1);
+        });
+
+        $this->assertSame(1.0, $results->getTax(FederalIncome::class));
+
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(10);
+        });
+
+        $this->assertSame(10.0, $results->getTax(FederalIncome::class));
+
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us'));
+            $taxes->setUser($this->user);
             $taxes->setEarnings(2301);
         });
 

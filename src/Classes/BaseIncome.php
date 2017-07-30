@@ -7,14 +7,23 @@ use Exception;
 
 abstract class BaseIncome extends BaseTax
 {
+    const WITHHELD = true;
+
     abstract public function getAdjustedEarnings();
     abstract public function getTaxBrackets();
 
     public function compute()
     {
-        $adjusted_earnings = $this->getAdjustedEarnings();
-        $tax_brackets = $this->getTaxBrackets();
-        return round($this->getTaxAmountFromTaxBrackets($adjusted_earnings, $tax_brackets) / $this->payroll->pay_periods + $this->payroll->supplemental_earnings * static::SUPPLEMENTAL_TAX_RATE + $this->tax_information->additional_withholding, 2);
+        $this->tax_total = $this->payroll->withholdTax($this->getTaxAmountFromTaxBrackets($this->getAdjustedEarnings(), $this->getTaxBrackets()) / $this->payroll->pay_periods) +
+            $this->payroll->withholdTax($this->payroll->supplemental_earnings * static::SUPPLEMENTAL_TAX_RATE) +
+            $this->payroll->withholdTax($this->getAdditionalWithholding());
+
+        return round($this->tax_total, 2);
+    }
+
+    public function getAdditionalWithholding()
+    {
+        return min($this->payroll->getNetEarnings(), $this->tax_information->additional_withholding);
     }
 
     public function getTaxBracket($amount, $table)
