@@ -2,13 +2,10 @@
 
 namespace Appleton\Taxes\Countries\US\Alabama\AlabamaIncome;
 
-use Appleton\Taxes\Classes\BaseIncome;
+use Appleton\Taxes\Classes\BaseStateIncome;
 
-abstract class AlabamaIncome extends BaseIncome
+abstract class AlabamaIncome extends BaseStateIncome
 {
-    const TYPE = 'state';
-    const WITHHELD = true;
-
     const FILING_ZERO = 0;
     const FILING_SINGLE = 1;
     const FILING_HEAD_OF_HOUSEHOLD = 2;

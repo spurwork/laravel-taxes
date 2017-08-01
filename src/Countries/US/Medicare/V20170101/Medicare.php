@@ -18,6 +18,7 @@ class Medicare extends BaseMedicare
 
     public function compute()
     {
-        return round($this->payroll->earnings * static::TAX_RATE + $this->getAdditionalTaxAmount(), 2);
+        $this->tax_total = $this->payroll->withholdTax($this->payroll->earnings * static::TAX_RATE + $this->getAdditionalTaxAmount());
+        return round($this->tax_total, 2);
     }
 }

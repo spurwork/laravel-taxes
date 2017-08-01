@@ -58,8 +58,13 @@ class Taxes
         $this->getTaxes();
         $this->bindInterfaces();
 
-        $results = $this->compute();
+        $results = new TaxResults(
+            $this->compute('federal')
+            + $this->compute('state')
+            + $this->compute('local')
+        );
 
+        $this->unbindTaxes();
         $this->unbindPayrollData();
 
         return $results;
@@ -86,19 +91,25 @@ class Taxes
         ]));
     }
 
-    private function compute()
+    private function compute($type)
     {
-        $tax_results = [];
+        $results = [];
 
-        foreach ($this->taxes as $tax_name) {
-            $tax = app($tax_name);
-            $tax_results[$tax_name] = [
-                'tax' => $tax,
-                'amount' => $tax->compute(),
-            ];
-        }
+        $this->taxes
+            ->filter(function ($tax_name) use ($type) {
+                return $tax_name::TYPE == $type;
+            })
+            ->sort()
+            ->each(function ($tax_name) use (&$results) {
+                $tax = app($tax_name);
+                $results[$tax_name] = [
+                    'tax' => $tax,
+                    'amount' => $tax->compute(),
+                ];
+                app()->instance($tax_name, $tax);
+            });
 
-        return new TaxResults($tax_results);
+        return $results;
     }
 
     private function getDate()
@@ -112,12 +123,19 @@ class Taxes
     {
         $this->taxes = TaxArea::atPoint($this->latitude, $this->longitude)
             ->get()
-            ->pluck('tax')
-            ->toArray();
+            ->pluck('tax');
     }
 
     private function unbindPayrollData()
     {
         app()->forgetInstance(Payroll::class);
+    }
+
+    private function unbindTaxes()
+    {
+        $this->taxes
+            ->each(function ($tax_name) {
+                app()->forgetInstance($tax_name);
+            });
     }
 }

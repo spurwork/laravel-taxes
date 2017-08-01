@@ -20,6 +20,7 @@ class SocialSecurity extends BaseSocialSecurity
 
     public function compute()
     {
-        return round($this->getAdjustedEarnings() * static::TAX_RATE, 2);
+        $this->tax_total = $this->payroll->withholdTax($this->getAdjustedEarnings() * static::TAX_RATE);
+        return round($this->tax_total, 2);
     }
 }

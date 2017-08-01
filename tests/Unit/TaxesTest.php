@@ -12,6 +12,8 @@ use Appleton\Taxes\Countries\US\Medicare\Medicare;
 use Appleton\Taxes\Countries\US\Medicare\MedicareEmployer;
 use Appleton\Taxes\Countries\US\SocialSecurity\SocialSecurity;
 use Appleton\Taxes\Countries\US\SocialSecurity\SocialSecurityEmployer;
+use Appleton\Taxes\Models\Countries\US\Alabama\AlabamaIncomeTaxInformation;
+use Appleton\Taxes\Models\Countries\US\FederalIncomeTaxInformation;
 use Carbon\Carbon;
 use Illuminate\Contracts\Container\BindingResolutionException;
 
@@ -169,5 +171,29 @@ class TaxesTest extends \TestCase
     public function testNoPayroll()
     {
         $this->assertTrue(FederalIncome::WITHHELD);
+    }
+
+    public function testAdditionalWithholding()
+    {
+        FederalIncomeTaxInformation::forUser($this->user)->update(['additional_withholding' => 10]);
+        AlabamaIncomeTaxInformation::forUser($this->user)->update(['additional_withholding' => 10]);
+
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us.alabama.birmingham'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(10);
+        });
+
+        $this->assertSame(10.0, $results->getTax(FederalIncome::class));
+        $this->assertSame(0.0, $results->getTax(AlabamaIncome::class));
+
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us.alabama.birmingham'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(11);
+        });
+
+        $this->assertSame(10.0, $results->getTax(FederalIncome::class));
+        $this->assertSame(0.16, $results->getTax(AlabamaIncome::class));
     }
 }

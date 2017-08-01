@@ -26,6 +26,33 @@ class AlabamaIncomeTest extends \TestCase
         $results = $this->taxes->calculate(function ($taxes) {
             $taxes->setWorkLocation($this->getLocation('us.alabama'));
             $taxes->setUser($this->user);
+            $taxes->setEarnings(0);
+            $taxes->setPayPeriods(260);
+        });
+
+        $this->assertSame(0.0, $results->getTax(AlabamaIncome::class));
+
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us.alabama'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(1);
+            $taxes->setPayPeriods(260);
+        });
+
+        $this->assertSame(0.92, $results->getTax(AlabamaIncome::class));
+
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us.alabama'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(10);
+            $taxes->setPayPeriods(260);
+        });
+
+        $this->assertSame(9.12, $results->getTax(AlabamaIncome::class));
+
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us.alabama'));
+            $taxes->setUser($this->user);
             $taxes->setEarnings(66.68);
             $taxes->setPayPeriods(260);
         });
