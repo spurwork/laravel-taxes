@@ -23,7 +23,7 @@ abstract class BaseIncome extends BaseTax
 
     public function getAdditionalWithholding()
     {
-        return min($this->payroll->getNetEarnings(), $this->tax_information->additional_withholding);
+        return max(min($this->payroll->getNetEarnings(), $this->tax_information->additional_withholding), 0);
     }
 
     public function getTaxBracket($amount, $table)
