@@ -15,6 +15,11 @@ class TestCase extends BaseTestCase
 {
     use DatabaseTransactions;
 
+    public function date($date)
+    {
+        return Carbon::parse($date);
+    }
+
     public function setUp()
     {
         parent::setUp();
