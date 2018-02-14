@@ -11,7 +11,7 @@ class FederalIncome extends BaseFederalIncome
     const SUPPLEMENTAL_TAX_RATE = 0.25;
 
     const EXEMPTION_AMOUNT = 4050;
-    const NON_RESIDENT_ALIEN_AMOUNT = 2250;
+    const NON_RESIDENT_ALIEN_AMOUNT = 2300;
 
     const SINGLE_BRACKETS = [
         [0, 0.0, 0],
