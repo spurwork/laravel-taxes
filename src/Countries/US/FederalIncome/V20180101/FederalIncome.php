@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\FederalIncome\V20170101;
+namespace Appleton\Taxes\Countries\US\FederalIncome\V20180101;
 
 use Appleton\Taxes\Classes\Payroll;
 use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome as BaseFederalIncome;
@@ -8,31 +8,31 @@ use Appleton\Taxes\Models\Countries\US\FederalIncomeTaxInformation;
 
 class FederalIncome extends BaseFederalIncome
 {
-    const SUPPLEMENTAL_TAX_RATE = 0.25;
+    const SUPPLEMENTAL_TAX_RATE = 0.22;
 
-    const EXEMPTION_AMOUNT = 4050;
-    const NON_RESIDENT_ALIEN_AMOUNT = 2300;
+    const EXEMPTION_AMOUNT = 4150;
+    const NON_RESIDENT_ALIEN_AMOUNT = 7850;
 
     const SINGLE_BRACKETS = [
         [0, 0.0, 0],
-        [2300, 0.1, 0],
-        [11625, 0.15, 932.5],
-        [40250, 0.25, 5226.25],
-        [94200, 0.28, 18713.75],
-        [193950, 0.33, 46643.75],
-        [419000, 0.35, 120910.25],
-        [420700, 0.396, 121505.25],
+        [3700, 0.1, 0],
+        [13225, 0.12, 952.5],
+        [42400, 0.22, 4453.50],
+        [86200, 0.24, 14089.5],
+        [161200, 0.32, 32089.5],
+        [203700, 0.35, 45689.5],
+        [503700, 0.37, 150689.5],
     ];
 
     const MARRIED_BRACKETS = [
         [0, 0.0, 0],
-        [8650, 0.1, 0],
-        [27300, 0.15, 1885],
-        [84550, 0.25, 10452.5],
-        [161750, 0.28, 29752.5],
-        [242000, 0.33, 52222.5],
-        [425350, 0.35, 112728],
-        [479350, 0.396, 131628],
+        [11550, 0.1, 0],
+        [30600, 0.12, 1905],
+        [88950, 0.22, 8907],
+        [176550, 0.24, 28179],
+        [326550, 0.32, 64179],
+        [411550, 0.35, 91379],
+        [611550, 0.37, 161379],
     ];
 
     public function __construct(FederalIncomeTaxInformation $tax_information, Payroll $payroll)
@@ -48,6 +48,6 @@ class FederalIncome extends BaseFederalIncome
 
     public function getTaxBrackets()
     {
-        return ($this->tax_information->filing_status >= static::FILING_MARRIED) ? static::MARRIED_BRACKETS : static::SINGLE_BRACKETS;
+        return ($this->tax_information->filing_status === static::FILING_MARRIED) ? static::MARRIED_BRACKETS : static::SINGLE_BRACKETS;
     }
 }
