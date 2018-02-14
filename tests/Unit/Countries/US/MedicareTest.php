@@ -76,4 +76,34 @@ class MedicareTest extends \TestCase
 
         $this->assertSame(0.97, $results->getTax(Medicare::class));
     }
+
+    // 2018
+
+    public function testCaseStudyA()
+    {
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(271.67);
+            $taxes->setYtdEarnings(24897.33);
+            $taxes->setDate($this->date('2018-01-01'));
+        });
+
+        $this->assertSame(3.94, $results->getTax(Medicare::class));
+        $this->assertSame(3.94, $results->getTax(MedicareEmployer::class));
+    }
+
+    public function testCaseStudyB()
+    {
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(765.12);
+            $taxes->setYtdEarnings(200100);
+            $taxes->setDate($this->date('2018-01-01'));
+        });
+
+        $this->assertSame(17.98, $results->getTax(Medicare::class));
+        $this->assertSame(11.09, $results->getTax(MedicareEmployer::class));
+    }
 }
