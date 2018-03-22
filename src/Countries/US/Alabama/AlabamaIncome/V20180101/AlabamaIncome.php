@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Alabama\AlabamaIncome\V20170101;
+namespace Appleton\Taxes\Countries\US\Alabama\AlabamaIncome\V20180101;
 
 use Appleton\Taxes\Classes\Payroll;
 use Appleton\Taxes\Countries\US\Alabama\AlabamaIncome\AlabamaIncome as BaseAlabamaIncome;
