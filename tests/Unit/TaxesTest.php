@@ -36,7 +36,7 @@ class TaxesTest extends \TestCase
         $this->assertSame(0.97, $results->getTax(MedicareEmployer::class));
         $this->assertSame(4.13, $results->getTax(SocialSecurity::class));
         $this->assertSame(4.13, $results->getTax(SocialSecurityEmployer::class));
-        $this->assertSame(2.03, $results->getTax(AlabamaIncome::class));
+        $this->assertSame(2.37, $results->getTax(AlabamaIncome::class));
         $this->assertSame(1.80, $results->getTax(AlabamaUnemployment::class));
         $this->assertSame(0.67, $results->getTax(BirminghamOccupational::class));
     }
@@ -96,7 +96,7 @@ class TaxesTest extends \TestCase
         $this->assertSame(7.55, $results->getTax(FederalIncome::class));
         $this->assertSame(1.57, $results->getTax(Medicare::class));
         $this->assertSame(0.97, $results->getTax(MedicareEmployer::class));
-        $this->assertSame(2.03, $results->getTax(AlabamaIncome::class));
+        $this->assertSame(2.37, $results->getTax(AlabamaIncome::class));
         $this->assertSame(0.0, $results->getTax(AlabamaUnemployment::class));
         $this->assertSame(0.67, $results->getTax(BirminghamOccupational::class));
 
@@ -113,7 +113,7 @@ class TaxesTest extends \TestCase
         $this->assertSame(7.55, $results->getTax(FederalIncome::class));
         $this->assertSame(1.57, $results->getTax(Medicare::class));
         $this->assertSame(0.97, $results->getTax(MedicareEmployer::class));
-        $this->assertSame(2.03, $results->getTax(AlabamaIncome::class));
+        $this->assertSame(2.37, $results->getTax(AlabamaIncome::class));
         $this->assertSame(0.0, $results->getTax(AlabamaUnemployment::class));
         $this->assertSame(0.67, $results->getTax(BirminghamOccupational::class));
     }
