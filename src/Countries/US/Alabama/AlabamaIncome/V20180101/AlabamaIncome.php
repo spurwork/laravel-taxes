@@ -27,6 +27,7 @@ class AlabamaIncome extends BaseAlabamaIncome
         self::FILING_SINGLE => [
             'base' => 20499.99,
             'amount' => 2500,
+            'floor' => 2000,
             'modifier' => [
                 'amount' => 25,
                 'per' => 500,
@@ -35,6 +36,7 @@ class AlabamaIncome extends BaseAlabamaIncome
         self::FILING_SEPERATE => [
             'base' => 10249.99,
             'amount' => 3750,
+            'floor' => 2000,
             'modifier' => [
                 'amount' => 88,
                 'per' => 250,
@@ -43,6 +45,7 @@ class AlabamaIncome extends BaseAlabamaIncome
         self::FILING_MARRIED => [
             'base' => 20499.99,
             'amount' => 7500,
+            'floor' => 4000,
             'modifier' => [
                 'amount' => 175,
                 'per' => 500,
@@ -51,6 +54,7 @@ class AlabamaIncome extends BaseAlabamaIncome
         self::FILING_HEAD_OF_HOUSEHOLD => [
             'base' => 20499.99,
             'amount' => 4700,
+            'floor' => 2000,
             'modifier' => [
                 'amount' => 135,
                 'per' => 500,
@@ -106,7 +110,7 @@ class AlabamaIncome extends BaseAlabamaIncome
             $deduction -= $standard_deduction['modifier']['amount'] * ceil(($gross_earnings - $standard_deduction['base']) / $standard_deduction['modifier']['per']);
         }
 
-        return $deduction;
+        return $deduction < $standard_deduction['floor'] ? $standard_deduction['floor'] : $deduction;
     }
 
     public function getPersonalExemptionAllowance()
