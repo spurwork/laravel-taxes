@@ -22,13 +22,13 @@ class AlabamaUnemployment extends BaseAlabamaUnemployment
         $this->tax_rate = config('taxes.rates.us.alabama.unemployment', static::NEW_EMPLOYER_RATE);
     }
 
-    private function getAdjustedEarnings()
-    {
-        return $this->payroll->earnings < $this->getBaseEarnings() ? $this->payroll->earnings : $this->getBaseEarnings();
-    }
-
     public function compute()
     {
         return round($this->getAdjustedEarnings() * $this->tax_rate, 2);
+    }
+
+    private function getAdjustedEarnings()
+    {
+        return $this->payroll->earnings < $this->getBaseEarnings() ? $this->payroll->earnings : $this->getBaseEarnings();
     }
 }

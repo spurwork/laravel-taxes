@@ -3,10 +3,10 @@
 namespace Appleton\Taxes\Countries\US\Georgia\GeorgiaUnemployment\V20180101;
 
 use Appleton\Taxes\Classes\Payroll;
-use Appleton\Taxes\Countries\US\Alabama\AlabamaUnemployment\AlabamaUnemployment as BaseAlabamaUnemployment;
+use Appleton\Taxes\Countries\US\Georgia\GeorgiaUnemployment\GeorgiaUnemployment as BaseGeorgiaUnemployment;
 use Appleton\Taxes\Traits\HasWageBase;
 
-class GeorgiaUnemployment extends BaseAlabamaUnemployment
+class GeorgiaUnemployment extends BaseGeorgiaUnemployment
 {
     use HasWageBase;
 
@@ -22,13 +22,13 @@ class GeorgiaUnemployment extends BaseAlabamaUnemployment
         $this->tax_rate = config('taxes.rates.us.georgia.unemployment', static::NEW_EMPLOYER_RATE);
     }
 
-    private function getAdjustedEarnings()
-    {
-        return $this->payroll->earnings < $this->getBaseEarnings() ? $this->payroll->earnings : $this->getBaseEarnings();
-    }
-
     public function compute()
     {
         return round($this->getAdjustedEarnings() * $this->tax_rate, 2);
+    }
+
+    private function getAdjustedEarnings()
+    {
+        return $this->payroll->earnings < $this->getBaseEarnings() ? $this->payroll->earnings : $this->getBaseEarnings();
     }
 }
