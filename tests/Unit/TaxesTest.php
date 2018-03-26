@@ -4,6 +4,7 @@ namespace Appleton\Taxes\Classes;
 
 use Appleton\Taxes\Classes\Payroll;
 use Appleton\Taxes\Countries\US\Alabama\AlabamaIncome\AlabamaIncome;
+use Appleton\Taxes\Countries\US\Georgia\GeorgiaIncome\GeorgiaIncome;
 use Appleton\Taxes\Countries\US\Alabama\AlabamaUnemployment\AlabamaUnemployment;
 use Appleton\Taxes\Countries\US\Alabama\BirminghamOccupational\BirminghamOccupational;
 use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome;
@@ -37,6 +38,7 @@ class TaxesTest extends \TestCase
         $this->assertSame(4.13, $results->getTax(SocialSecurity::class));
         $this->assertSame(4.13, $results->getTax(SocialSecurityEmployer::class));
         $this->assertSame(2.03, $results->getTax(AlabamaIncome::class));
+        $this->assertSame(2.74, $results->getTax(GeorgiaIncome::class));
         $this->assertSame(1.80, $results->getTax(AlabamaUnemployment::class));
         $this->assertSame(0.67, $results->getTax(BirminghamOccupational::class));
     }

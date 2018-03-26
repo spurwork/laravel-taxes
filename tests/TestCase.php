@@ -2,8 +2,10 @@
 
 use Appleton\Taxes\Classes\Taxes;
 use Appleton\Taxes\Countries\US\Alabama\AlabamaIncome\AlabamaIncome;
+use Appleton\Taxes\Countries\US\Georgia\GeorgiaIncome\GeorgiaIncome;
 use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome;
 use Appleton\Taxes\Models\Countries\US\Alabama\AlabamaIncomeTaxInformation;
+use Appleton\Taxes\Models\Countries\US\Georgia\GeorgiaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\FederalIncomeTaxInformation;
 use Appleton\Taxes\Providers\TaxesServiceProvider;
 use Carbon\Carbon;
@@ -56,6 +58,12 @@ class TestCase extends BaseTestCase
             'additional_withholding' => 0,
             'dependents' => 0,
             'filing_status' => AlabamaIncome::FILING_SINGLE,
+        ], $this->user);
+
+        GeorgiaIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'allowances' => 0,
+            'filing_status' => GeorgiaIncome::FILING_SINGLE,
         ], $this->user);
     }
 
