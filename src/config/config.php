@@ -40,6 +40,10 @@ return [
 
             ],
 
+            'georgia' => [
+                'georgia_income_tax_information' => env('TAXES_GEORGIA_INCOME_TAX_INFORMATION', 'georgia_income_tax_information'),
+            ],
+
         ],
 
     ],
