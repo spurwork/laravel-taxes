@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Alabama\AlabamaIncome\V20170101;
+namespace Appleton\Taxes\Countries\US\Alabama\AlabamaIncome\V20180101;
 
 use Appleton\Taxes\Classes\Payroll;
 use Appleton\Taxes\Countries\US\Alabama\AlabamaIncome\AlabamaIncome as BaseAlabamaIncome;
@@ -34,7 +34,7 @@ class AlabamaIncome extends BaseAlabamaIncome
             ],
         ],
         self::FILING_SEPERATE => [
-            'base' => 10249.99,
+            'base' => 10749.99,
             'amount' => 3750,
             'floor' => 2000,
             'modifier' => [
@@ -43,7 +43,7 @@ class AlabamaIncome extends BaseAlabamaIncome
             ]
         ],
         self::FILING_MARRIED => [
-            'base' => 20499.99,
+            'base' => 23499.99,
             'amount' => 7500,
             'floor' => 4000,
             'modifier' => [
