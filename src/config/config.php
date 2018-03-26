@@ -67,6 +67,12 @@ return [
 
             ],
 
+            'georgia' => [
+
+                'unemployment' => env('TAXES_GEORGIA_UNEMPLOYMENT_TAX_RATE', 0.027),
+
+            ],
+
         ],
 
     ],

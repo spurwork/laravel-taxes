@@ -63,6 +63,8 @@ class TestCase extends BaseTestCase
         GeorgiaIncomeTaxInformation::createForUser([
             'additional_withholding' => 0,
             'allowances' => 0,
+            'dependents' => 0,
+            'personal_allowances' => 0,
             'filing_status' => GeorgiaIncome::FILING_SINGLE,
         ], $this->user);
     }
@@ -97,6 +99,7 @@ class TestCase extends BaseTestCase
             'us.alabama.southside' => [33.9245, -86.0225],
             'us.alabama.sulligent' => [33.9018, -88.1345],
             'us.alabama.tuskegee' => [32.4302, -85.7077],
+            'us.georgia' => [33.7490, -84.3880],
         ];
 
         return $locations[$name];
@@ -125,6 +128,7 @@ class TestCase extends BaseTestCase
         $app['config']->set('taxes.tables.tax_information', 'tax_information');
         $app['config']->set('taxes.tables.us.federal_income_tax_information', 'federal_income_tax_information');
         $app['config']->set('taxes.tables.us.alabama.alabama_income_tax_information', 'alabama_income_tax_information');
+        $app['config']->set('taxes.tables.us.georgia.georgia_income_tax_information', 'georgia_income_tax_information');
     }
 
     protected function getPackageProviders($app)

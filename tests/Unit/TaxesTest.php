@@ -38,9 +38,23 @@ class TaxesTest extends \TestCase
         $this->assertSame(4.13, $results->getTax(SocialSecurity::class));
         $this->assertSame(4.13, $results->getTax(SocialSecurityEmployer::class));
         $this->assertSame(2.37, $results->getTax(AlabamaIncome::class));
-        $this->assertSame(2.74, $results->getTax(GeorgiaIncome::class));
         $this->assertSame(1.80, $results->getTax(AlabamaUnemployment::class));
         $this->assertSame(0.67, $results->getTax(BirminghamOccupational::class));
+
+        Carbon::setTestNow(
+            Carbon::parse('January 1, 2018 8am', 'America/Chicago')->setTimezone('UTC')
+        );
+
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us.georgia'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(66.68);
+            $taxes->setSupplementalEarnings(0);
+            $taxes->setPayPeriods(260);
+            $taxes->setDate(Carbon::now()->addMonth());
+        });
+
+        $this->assertSame(2.74, $results->getTax(GeorgiaIncome::class));
     }
 
     public function testTaxesYtdEarnings()
