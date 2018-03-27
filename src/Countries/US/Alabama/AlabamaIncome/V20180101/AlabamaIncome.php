@@ -25,7 +25,7 @@ class AlabamaIncome extends BaseAlabamaIncome
 
     const STANDARD_DEDUCTIONS = [
         self::FILING_SINGLE => [
-            'base' => 20499.99,
+            'base' => 23499.99,
             'amount' => 2500,
             'floor' => 2000,
             'modifier' => [
@@ -52,7 +52,7 @@ class AlabamaIncome extends BaseAlabamaIncome
             ]
         ],
         self::FILING_HEAD_OF_HOUSEHOLD => [
-            'base' => 20499.99,
+            'base' => 23499.99,
             'amount' => 4700,
             'floor' => 2000,
             'modifier' => [
