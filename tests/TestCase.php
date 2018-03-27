@@ -2,8 +2,10 @@
 
 use Appleton\Taxes\Classes\Taxes;
 use Appleton\Taxes\Countries\US\Alabama\AlabamaIncome\AlabamaIncome;
+use Appleton\Taxes\Countries\US\Georgia\GeorgiaIncome\GeorgiaIncome;
 use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome;
 use Appleton\Taxes\Models\Countries\US\Alabama\AlabamaIncomeTaxInformation;
+use Appleton\Taxes\Models\Countries\US\Georgia\GeorgiaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\FederalIncomeTaxInformation;
 use Appleton\Taxes\Providers\TaxesServiceProvider;
 use Carbon\Carbon;
@@ -57,6 +59,14 @@ class TestCase extends BaseTestCase
             'dependents' => 0,
             'filing_status' => AlabamaIncome::FILING_SINGLE,
         ], $this->user);
+
+        GeorgiaIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'allowances' => 0,
+            'dependents' => 0,
+            'personal_allowances' => 0,
+            'filing_status' => GeorgiaIncome::FILING_SINGLE,
+        ], $this->user);
     }
 
     protected function getLocation($name)
@@ -89,6 +99,7 @@ class TestCase extends BaseTestCase
             'us.alabama.southside' => [33.9245, -86.0225],
             'us.alabama.sulligent' => [33.9018, -88.1345],
             'us.alabama.tuskegee' => [32.4302, -85.7077],
+            'us.georgia' => [33.7490, -84.3880],
         ];
 
         return $locations[$name];
@@ -117,6 +128,7 @@ class TestCase extends BaseTestCase
         $app['config']->set('taxes.tables.tax_information', 'tax_information');
         $app['config']->set('taxes.tables.us.federal_income_tax_information', 'federal_income_tax_information');
         $app['config']->set('taxes.tables.us.alabama.alabama_income_tax_information', 'alabama_income_tax_information');
+        $app['config']->set('taxes.tables.us.georgia.georgia_income_tax_information', 'georgia_income_tax_information');
     }
 
     protected function getPackageProviders($app)

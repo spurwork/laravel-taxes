@@ -40,6 +40,10 @@ return [
 
             ],
 
+            'georgia' => [
+                'georgia_income_tax_information' => env('TAXES_GEORGIA_INCOME_TAX_INFORMATION', 'georgia_income_tax_information'),
+            ],
+
         ],
 
     ],
@@ -60,6 +64,12 @@ return [
             'alabama' => [
 
                 'unemployment' => env('TAXES_ALABAMA_UNEMPLOYMENT_TAX_RATE', 0.027),
+
+            ],
+
+            'georgia' => [
+
+                'unemployment' => env('TAXES_GEORGIA_UNEMPLOYMENT_TAX_RATE', 0.027),
 
             ],
 
