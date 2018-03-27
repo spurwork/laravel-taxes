@@ -9,6 +9,7 @@ use Appleton\Taxes\Countries\US\Alabama\AlabamaUnemployment\AlabamaUnemployment;
 use Appleton\Taxes\Countries\US\Alabama\BirminghamOccupational\BirminghamOccupational;
 use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome;
 use Appleton\Taxes\Countries\US\FederalUnemployment\FederalUnemployment;
+use Appleton\Taxes\Countries\US\Georgia\GeorgiaUnemployment\GeorgiaUnemployment;
 use Appleton\Taxes\Countries\US\Medicare\Medicare;
 use Appleton\Taxes\Countries\US\Medicare\MedicareEmployer;
 use Appleton\Taxes\Countries\US\SocialSecurity\SocialSecurity;
@@ -55,6 +56,7 @@ class TaxesTest extends \TestCase
         });
 
         $this->assertSame(2.74, $results->getTax(GeorgiaIncome::class));
+        $this->assertSame(1.80, $results->getTax(GeorgiaUnemployment::class));
     }
 
     public function testTaxesYtdEarnings()
