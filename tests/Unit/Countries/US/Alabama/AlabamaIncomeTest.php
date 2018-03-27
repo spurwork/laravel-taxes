@@ -2,8 +2,8 @@
 
 namespace Appleton\Taxes\Countries\US\Alabama\AlabamaIncome;
 
-use Appleton\Taxes\Classes\Taxes;
 use Appleton\Taxes\Models\Countries\US\Alabama\AlabamaIncomeTaxInformation;
+use Carbon\Carbon;
 
 class AlabamaIncomeTest extends \TestCase
 {
@@ -17,6 +17,19 @@ class AlabamaIncomeTest extends \TestCase
         });
 
         $this->assertSame(2.07, $results->getTax(AlabamaIncome::class));
+
+        Carbon::setTestNow(
+            Carbon::parse('January 1, 2018 8am', 'America/Chicago')->setTimezone('UTC')
+        );
+
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us.alabama'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(66.68);
+            $taxes->setPayPeriods(260);
+        });
+
+        $this->assertSame(2.13, $results->getTax(AlabamaIncome::class));
     }
 
     public function testAlabamaAdditionalWithholding()
