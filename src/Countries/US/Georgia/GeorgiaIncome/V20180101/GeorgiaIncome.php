@@ -71,7 +71,7 @@ class GeorgiaIncome extends BaseGeorgiaIncome
 
     public function getAdjustedEarnings()
     {
-        $adjusted_earnings = $this->payroll->earnings * $this->payroll->pay_periods;
+        $adjusted_earnings = $this->getGrossEarnings();
 
         if ($this->tax_information->filing_status != static::FILING_ZERO) {
             $adjusted_earnings = $adjusted_earnings - $this->getStandardDeduction() - $this->getPersonalAllowance() - $this->getDependentExemption();
