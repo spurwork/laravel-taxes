@@ -2,7 +2,6 @@
 
 namespace Appleton\Taxes\Countries\US\Georgia\GeorgiaIncome;
 
-use Appleton\Taxes\Classes\Taxes;
 use Appleton\Taxes\Models\Countries\US\Georgia\GeorgiaIncomeTaxInformation;
 use Carbon\Carbon;
 
