@@ -93,11 +93,6 @@ class AlabamaIncome extends BaseAlabamaIncome
         return $adjusted_earnings;
     }
 
-    public function getSupplementalIncomeTax()
-    {
-        return $this->payroll->supplemental_earnings * static::SUPPLEMENTAL_TAX_RATE;
-    }
-
     public function getDependentExemption()
     {
         $gross_earnings = $this->getGrossEarnings();

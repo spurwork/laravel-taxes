@@ -11,7 +11,6 @@ abstract class BaseIncome extends BaseTax
 
     abstract public function getAdjustedEarnings();
     abstract public function getTaxBrackets();
-    abstract public function getSupplementalIncomeTax();
 
     public function compute()
     {
@@ -25,6 +24,11 @@ abstract class BaseIncome extends BaseTax
     public function getAdditionalWithholding()
     {
         return max(min($this->payroll->getNetEarnings(), $this->tax_information->additional_withholding), 0);
+    }
+
+    public function getSupplementalIncomeTax()
+    {
+        return $this->payroll->supplemental_earnings * static::SUPPLEMENTAL_TAX_RATE;
     }
 
     public function getTaxBracket($amount, $table)
