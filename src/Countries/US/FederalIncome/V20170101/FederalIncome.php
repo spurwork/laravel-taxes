@@ -50,4 +50,9 @@ class FederalIncome extends BaseFederalIncome
     {
         return ($this->tax_information->filing_status >= static::FILING_MARRIED) ? static::MARRIED_BRACKETS : static::SINGLE_BRACKETS;
     }
+
+    public function getSupplementalIncomeTax()
+    {
+        return $this->payroll->supplemental_earnings * self::SUPPLEMENTAL_TAX_RATE;
+    }
 }

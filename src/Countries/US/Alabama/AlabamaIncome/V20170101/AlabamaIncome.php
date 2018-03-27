@@ -84,7 +84,7 @@ class AlabamaIncome extends BaseAlabamaIncome
 
     public function getAdjustedEarnings()
     {
-        $adjusted_earnings = ($this->payroll->earnings * $this->payroll->pay_periods) - ($this->federal_income_tax * $this->payroll->pay_periods);
+        $adjusted_earnings = $this->getGrossEarnings() - ($this->federal_income_tax * $this->payroll->pay_periods);
 
         if ($this->tax_information->filing_status != static::FILING_ZERO) {
             $adjusted_earnings = $adjusted_earnings - $this->getStandardDeduction() - $this->getPersonalExemptionAllowance() - $this->getDependentExemption();
@@ -93,16 +93,21 @@ class AlabamaIncome extends BaseAlabamaIncome
         return $adjusted_earnings;
     }
 
+    public function getSupplementalIncomeTax()
+    {
+        return $this->payroll->supplemental_earnings * static::SUPPLEMENTAL_TAX_RATE;
+    }
+
     public function getDependentExemption()
     {
-        $gross_earnings = $this->payroll->earnings * $this->payroll->pay_periods;
+        $gross_earnings = $this->getGrossEarnings();
         $dependent_exemption = $this->getTaxBracket($gross_earnings, static::DEPENDENT_EXEMPTION_BRACKETS);
         return $dependent_exemption[1] * $this->tax_information->dependents;
     }
 
     public function getStandardDeduction()
     {
-        $gross_earnings = $this->payroll->earnings * $this->payroll->pay_periods;
+        $gross_earnings = $this->getGrossEarnings();
         $standard_deduction = static::STANDARD_DEDUCTIONS[$this->tax_information->filing_status];
         $deduction = $standard_deduction['amount'];
 
@@ -125,5 +130,10 @@ class AlabamaIncome extends BaseAlabamaIncome
     public function getTaxBrackets()
     {
         return ($this->tax_information->filing_status === static::FILING_MARRIED) ? static::MARRIED_BRACKETS : static::SINGLE_BRACKETS;
+    }
+
+    private function getGrossEarnings()
+    {
+        return ($this->payroll->earnings - $this->payroll->supplemental_earnings) * $this->payroll->pay_periods;
     }
 }

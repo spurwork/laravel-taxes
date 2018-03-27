@@ -9,7 +9,13 @@ use Appleton\Taxes\Models\Countries\US\Georgia\GeorgiaIncomeTaxInformation;
 
 class GeorgiaIncome extends BaseGeorgiaIncome
 {
-    const SUPPLEMENTAL_TAX_RATE = 0.05;
+    const SUPPLEMENTAL_TAX_BRACKETS = [
+        [15001, .06],
+        [12001, .05],
+        [10001, .04],
+        [8000, .03],
+        [0, .02],
+    ];
 
     const SINGLE_BRACKETS = [
         [0, 0.01, 0],
@@ -74,6 +80,19 @@ class GeorgiaIncome extends BaseGeorgiaIncome
         return $adjusted_earnings;
     }
 
+    public function getSupplementalIncomeTax()
+    {
+        $annual_income = $this->getGrossEarnings();
+
+        foreach (self::SUPPLEMENTAL_TAX_BRACKETS as $bracket) {
+            if ($annual_income >= $bracket[0]) {
+                return $this->payroll->supplemental_earnings * $bracket[1];
+            }
+        }
+
+        return 0;
+    }
+
     public function getTaxBrackets()
     {
         if ($this->tax_information->filing_status === static::FILING_SINGLE || $this->tax_information->filing_status === static::FILING_HEAD_OF_HOUSEHOLD) {
@@ -110,5 +129,10 @@ class GeorgiaIncome extends BaseGeorgiaIncome
     private function getDependentExemption()
     {
         return $this->tax_information->allowances * self::DEPENDENT_ALLOWANCE_AMOUNT;
+    }
+
+    private function getGrossEarnings()
+    {
+        return ($this->payroll->earnings - $this->payroll->supplemental_earnings) * $this->payroll->pay_periods;
     }
 }

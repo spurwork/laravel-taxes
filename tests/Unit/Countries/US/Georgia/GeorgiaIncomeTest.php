@@ -60,7 +60,7 @@ class GeorgiaIncomeTest extends \TestCase
             $taxes->setSupplementalEarnings(100);
         });
 
-        $this->assertSame(5.00, $results->getTax(GeorgiaIncome::class));
+        $this->assertSame(2.00, $results->getTax(GeorgiaIncome::class));
     }
 
     public function testGeorgiaIncomeNonNegative()
