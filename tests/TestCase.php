@@ -90,6 +90,7 @@ class TestCase extends BaseTestCase
             'us.alabama.hamilton' => [34.1423, -87.9886],
             'us.alabama.leeds' => [33.5482, -86.5444],
             'us.alabama.lynn' => [34.0470, -87.5497],
+            'us.alabama.maconcounty' => [32.3731, -85.6846],
             'us.alabama.midfield' => [33.4615, -86.9089],
             'us.alabama.mosses' => [32.1793, -86.6737],
             'us.alabama.opelika' => [32.6454, -85.3783],

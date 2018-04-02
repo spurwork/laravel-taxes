@@ -35,6 +35,7 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\Alabama\HamiltonOccupational\HamiltonOccupational::class,
         \Appleton\Taxes\Countries\US\Alabama\LeedsOccupational\LeedsOccupational::class,
         \Appleton\Taxes\Countries\US\Alabama\LynnOccupational\LynnOccupational::class,
+        \Appleton\Taxes\Countries\US\Alabama\MaconCountyOccupational\MaconCountyOccupational::class,
         \Appleton\Taxes\Countries\US\Alabama\MidfieldOccupational\MidfieldOccupational::class,
         \Appleton\Taxes\Countries\US\Alabama\MossesOccupational\MossesOccupational::class,
         \Appleton\Taxes\Countries\US\Alabama\OpelikaOccupational\OpelikaOccupational::class,
