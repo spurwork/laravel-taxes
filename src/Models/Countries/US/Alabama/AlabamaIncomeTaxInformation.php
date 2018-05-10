@@ -26,4 +26,9 @@ class AlabamaIncomeTaxInformation extends BaseTaxInformationModel
     {
         $this->attributes['additional_withholding'] = round($value / 100);
     }
+
+    public static function getTax()
+    {
+        return AlabamaIncome::class;
+    }
 }
