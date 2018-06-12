@@ -9,10 +9,10 @@ class TaxResults
         $this->results = collect($results);
     }
 
-    private function transform($results)
+    private function transform($results, $field = 'amount')
     {
-        return $results->map(function($result) {
-            return $result['amount'];
+        return $results->map(function($result) use ($field) {
+            return $result[$field];
         });
     }
 
@@ -62,5 +62,12 @@ class TaxResults
         return $this->transform($this->results->filter(function ($result, $tax_name) use ($tax) {
             return $tax_name === $tax;
         }))->first();
+    }
+
+    public function getAdjustedEarnings($tax)
+    {
+        return $this->transform($this->results->filter(function ($result, $tax_name) use ($tax) {
+            return $tax_name === $tax;
+        }), 'adjusted_earnings')->first();
     }
 }

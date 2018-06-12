@@ -105,6 +105,7 @@ class Taxes
                 $results[$tax_name] = [
                     'tax' => $tax,
                     'amount' => $tax->compute(),
+                    'adjusted_earnings' => $tax->getAdjustedEarnings(),
                 ];
                 app()->instance($tax_name, $tax);
             });

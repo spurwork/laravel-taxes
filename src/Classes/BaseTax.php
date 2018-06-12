@@ -17,6 +17,11 @@ abstract class BaseTax
         return round($this->tax_total, 2);
     }
 
+    public function getAdjustedEarnings()
+    {
+        return $this->payroll->earnings;
+    }
+
     public function getAmount()
     {
         return $this->tax_total;
