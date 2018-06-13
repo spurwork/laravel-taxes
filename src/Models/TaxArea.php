@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class TaxArea extends Model
 {
+    const BASED_ON_HOME_LOCATION = 'home';
+    const BASED_ON_WORK_LOCATION = 'work';
+
     protected $table = 'tax_areas';
 
     protected $guarded = [];
@@ -27,5 +30,15 @@ class TaxArea extends Model
         return $query->whereHas('governmentalUnitArea', function ($query) use ($latitude, $longitude) {
             $query->atPoint($latitude, $longitude);
         });
+    }
+
+    public function scopeBasedOnHomeLocation($query)
+    {
+        return $query->where('based', TaxArea::BASED_ON_HOME_LOCATION);
+    }
+
+    public function scopeBasedOnWorkLocation($query)
+    {
+        return $query->where('based', TaxArea::BASED_ON_WORK_LOCATION);
     }
 }

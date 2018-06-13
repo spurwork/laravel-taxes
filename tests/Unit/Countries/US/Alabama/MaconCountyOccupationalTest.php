@@ -7,6 +7,7 @@ class MaconCountyOccupationalTest extends \TestCase
     public function testMaconCountyOccupational()
     {
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.alabama.maconcounty'));
             $taxes->setWorkLocation($this->getLocation('us.alabama.maconcounty'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(300);

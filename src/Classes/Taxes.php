@@ -24,6 +24,11 @@ class Taxes
         $this->earnings = $earnings;
     }
 
+    public function setHomeLocation($location)
+    {
+        $this->home_location = $location;
+    }
+
     public function setPayPeriods($pay_periods)
     {
         $this->pay_periods = $pay_periods;
@@ -41,8 +46,7 @@ class Taxes
 
     public function setWorkLocation($location)
     {
-        $this->latitude = $location[0];
-        $this->longitude = $location[1];
+        $this->work_location = $location;
     }
 
     public function setYtdEarnings($ytd_earnings)
@@ -122,7 +126,17 @@ class Taxes
 
     private function getTaxes()
     {
-        $this->taxes = TaxArea::atPoint($this->latitude, $this->longitude)
+        $this->taxes = TaxArea::
+            where(function ($query) {
+                $query
+                    ->where('based', 'home')
+                    ->atPoint($this->home_location[0], $this->home_location[1]);
+            })
+            ->orWhere(function ($query) {
+                $query
+                    ->where('based', 'work')
+                    ->atPoint($this->work_location[0], $this->work_location[1]);
+            })
             ->get()
             ->pluck('tax');
     }

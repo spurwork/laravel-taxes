@@ -7,6 +7,7 @@ class ShorterOccupationalTest extends \TestCase
     public function testShorterOccupational()
     {
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.alabama.shorter'));
             $taxes->setWorkLocation($this->getLocation('us.alabama.shorter'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(2300);

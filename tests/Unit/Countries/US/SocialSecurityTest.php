@@ -7,6 +7,7 @@ class SocialSecurityTest extends \TestCase
     public function testSocialSecurity()
     {
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us'));
             $taxes->setWorkLocation($this->getLocation('us'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(2300);
@@ -18,6 +19,7 @@ class SocialSecurityTest extends \TestCase
     public function testSocialSecurityEmployer()
     {
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us'));
             $taxes->setWorkLocation($this->getLocation('us'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(2300);
@@ -29,6 +31,7 @@ class SocialSecurityTest extends \TestCase
     public function testSocialSecurityMetWageBase()
     {
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us'));
             $taxes->setWorkLocation($this->getLocation('us'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(100);
@@ -38,6 +41,7 @@ class SocialSecurityTest extends \TestCase
         $this->assertSame(6.20, $results->getTax(SocialSecurity::class));
 
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us'));
             $taxes->setWorkLocation($this->getLocation('us'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(100);
@@ -47,6 +51,7 @@ class SocialSecurityTest extends \TestCase
         $this->assertSame(3.10, $results->getTax(SocialSecurity::class));
 
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us'));
             $taxes->setWorkLocation($this->getLocation('us'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(100);
@@ -56,6 +61,7 @@ class SocialSecurityTest extends \TestCase
         $this->assertSame(0.0, $results->getTax(SocialSecurity::class));
 
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us'));
             $taxes->setWorkLocation($this->getLocation('us'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(100);
@@ -68,6 +74,7 @@ class SocialSecurityTest extends \TestCase
     public function testCaseStudy1()
     {
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us'));
             $taxes->setWorkLocation($this->getLocation('us'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(66.68);
@@ -81,6 +88,7 @@ class SocialSecurityTest extends \TestCase
     public function testCaseStudy2018A()
     {
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us'));
             $taxes->setWorkLocation($this->getLocation('us'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(640);
@@ -94,6 +102,7 @@ class SocialSecurityTest extends \TestCase
     public function testCaseStudy2018B()
     {
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us'));
             $taxes->setWorkLocation($this->getLocation('us'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(774.28);
@@ -107,6 +116,7 @@ class SocialSecurityTest extends \TestCase
     public function testCaseStudy2018C()
     {
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us'));
             $taxes->setWorkLocation($this->getLocation('us'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(640);
@@ -121,6 +131,7 @@ class SocialSecurityTest extends \TestCase
     public function testCaseStudy2018D()
     {
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us'));
             $taxes->setWorkLocation($this->getLocation('us'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(774.28);

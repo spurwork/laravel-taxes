@@ -9,6 +9,7 @@ class FederalUnemploymentTest extends \TestCase
     public function testFederalUnemployment()
     {
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us'));
             $taxes->setWorkLocation($this->getLocation('us'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(2300);
@@ -20,6 +21,7 @@ class FederalUnemploymentTest extends \TestCase
     public function testFederalUnemploymentWithStateCredit()
     {
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.alabama'));
             $taxes->setWorkLocation($this->getLocation('us.alabama'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(2300);
@@ -31,6 +33,7 @@ class FederalUnemploymentTest extends \TestCase
     public function testFederalUnemploymentMetWageBase()
     {
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.alabama'));
             $taxes->setWorkLocation($this->getLocation('us.alabama'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(100);
@@ -40,6 +43,7 @@ class FederalUnemploymentTest extends \TestCase
         $this->assertSame(0.60, $results->getTax(FederalUnemployment::class));
 
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.alabama'));
             $taxes->setWorkLocation($this->getLocation('us.alabama'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(100);
@@ -49,6 +53,7 @@ class FederalUnemploymentTest extends \TestCase
         $this->assertSame(0.30, $results->getTax(FederalUnemployment::class));
 
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.alabama'));
             $taxes->setWorkLocation($this->getLocation('us.alabama'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(100);
@@ -58,6 +63,7 @@ class FederalUnemploymentTest extends \TestCase
         $this->assertSame(0.0, $results->getTax(FederalUnemployment::class));
 
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.alabama'));
             $taxes->setWorkLocation($this->getLocation('us.alabama'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(100);
@@ -70,6 +76,7 @@ class FederalUnemploymentTest extends \TestCase
     public function testCaseStudy1()
     {
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.alabama'));
             $taxes->setWorkLocation($this->getLocation('us.alabama'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(66.68);

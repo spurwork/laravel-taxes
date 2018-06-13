@@ -7,6 +7,7 @@ class GadsdenOccupationalTest extends \TestCase
     public function testGadsdenOccupational()
     {
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.alabama.gadsden'));
             $taxes->setWorkLocation($this->getLocation('us.alabama.gadsden'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(2300);

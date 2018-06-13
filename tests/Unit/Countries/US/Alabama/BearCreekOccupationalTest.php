@@ -7,6 +7,7 @@ class BearCreekOccupationalTest extends \TestCase
     public function testBearCreekOccupational()
     {
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.alabama.bearcreek'));
             $taxes->setWorkLocation($this->getLocation('us.alabama.bearcreek'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(2300);
