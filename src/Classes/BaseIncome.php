@@ -9,7 +9,6 @@ abstract class BaseIncome extends BaseTax
 {
     const WITHHELD = true;
 
-    abstract public function getAdjustedEarnings();
     abstract public function getTaxBrackets();
 
     public function compute()
@@ -31,6 +30,13 @@ abstract class BaseIncome extends BaseTax
         return $this->payroll->supplemental_earnings * static::SUPPLEMENTAL_TAX_RATE;
     }
 
+    public function getTaxAmountFromTaxBrackets($amount, $table)
+    {
+        $bracket = $this->getTaxBracket($amount, $table);
+        $tax_amount = isset($bracket) ? ($amount - $bracket[0]) * $bracket[1] + $bracket[2] : 0;
+        return $tax_amount > 0 ? $tax_amount : 0;
+    }
+
     public function getTaxBracket($amount, $table)
     {
         $bracket = end($table);
@@ -40,13 +46,6 @@ abstract class BaseIncome extends BaseTax
             }
         }
         return $bracket;
-    }
-
-    public function getTaxAmountFromTaxBrackets($amount, $table)
-    {
-        $bracket = $this->getTaxBracket($amount, $table);
-        $tax_amount = isset($bracket) ? ($amount - $bracket[0]) * $bracket[1] + $bracket[2] : 0;
-        return $tax_amount > 0 ? $tax_amount : 0;
     }
 
     public function resolveTaxInformation($information_type, $tax_information, $user)

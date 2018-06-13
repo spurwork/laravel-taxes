@@ -67,4 +67,18 @@ class TaxResultsTest extends \TestCase
 
         $this->assertEquals(0.67, $results->getTax(BirminghamOccupational::class));
     }
+
+    public function testAdjustedEarnings()
+    {
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setWorkLocation($this->getLocation('us.alabama.birmingham'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(10000);
+            $taxes->setPayPeriods(260);
+        });
+
+        $this->assertEquals(10000, $results->getEarnings(FederalIncome::class));
+        $this->assertEquals(7000, $results->getEarnings(FederalUnemployment::class));
+        $this->assertEquals(8000, $results->getEarnings(AlabamaUnemployment::class));
+    }
 }
