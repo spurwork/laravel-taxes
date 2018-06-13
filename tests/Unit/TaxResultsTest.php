@@ -77,7 +77,8 @@ class TaxResultsTest extends \TestCase
             $taxes->setPayPeriods(260);
         });
 
-        $this->assertEquals(7000, $results->getAdjustedEarnings(FederalUnemployment::class));
-        $this->assertEquals(8000, $results->getAdjustedEarnings(AlabamaUnemployment::class));
+        $this->assertEquals(10000, $results->getEarnings(FederalIncome::class));
+        $this->assertEquals(7000, $results->getEarnings(FederalUnemployment::class));
+        $this->assertEquals(8000, $results->getEarnings(AlabamaUnemployment::class));
     }
 }

@@ -64,10 +64,10 @@ class TaxResults
         }))->first();
     }
 
-    public function getAdjustedEarnings($tax)
+    public function getEarnings($tax)
     {
         return $this->transform($this->results->filter(function ($result, $tax_name) use ($tax) {
             return $tax_name === $tax;
-        }), 'adjusted_earnings')->first();
+        }), 'earnings')->first();
     }
 }
