@@ -2,6 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\Georgia\GeorgiaUnemployment;
 
+use Appleton\Taxes\Countries\US\Georgia\GeorgiaIncome;
 use Carbon\Carbon;
 
 class GeorgiaUnemploymentTest extends \TestCase
@@ -95,6 +96,21 @@ class GeorgiaUnemploymentTest extends \TestCase
             $taxes->setEarnings(66.68);
         });
 
+        $this->assertSame(1.27, $results->getTax(GeorgiaUnemployment::class));
+    }
+
+    public function testWorkOutOfState()
+    {
+        config(['taxes.rates.us.georgia.unemployment' => 0.019]);
+
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.georgia'));
+            $taxes->setWorkLocation($this->getLocation('us'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(66.68);
+        });
+
+        $this->assertNull($results->getTax(GeorgiaIncome::class));
         $this->assertSame(1.27, $results->getTax(GeorgiaUnemployment::class));
     }
 }

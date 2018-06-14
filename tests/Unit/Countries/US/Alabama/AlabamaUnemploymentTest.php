@@ -2,6 +2,8 @@
 
 namespace Appleton\Taxes\Countries\US\Alabama\AlabamaUnemployment;
 
+use Appleton\Taxes\Countries\US\Alabama\AlabamaIncome;
+
 class AlabamaUnemploymentTest extends \TestCase
 {
     public function testAlabamaUnemployment()
@@ -85,5 +87,18 @@ class AlabamaUnemploymentTest extends \TestCase
         });
 
         $this->assertSame(1.27, $results->getTax(AlabamaUnemployment::class));
+    }
+
+    public function testWorkOutOfState()
+    {
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.alabama'));
+            $taxes->setWorkLocation($this->getLocation('us'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2300);
+        });
+
+        $this->assertNull($results->getTax(AlabamaIncome::class));
+        $this->assertSame(62.10, $results->getTax(AlabamaUnemployment::class));
     }
 }
