@@ -24,6 +24,7 @@ class TaxesTest extends \TestCase
     public function testTaxes()
     {
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.alabama.birmingham'));
             $taxes->setWorkLocation($this->getLocation('us.alabama.birmingham'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(66.68);
@@ -47,6 +48,7 @@ class TaxesTest extends \TestCase
         );
 
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.georgia'));
             $taxes->setWorkLocation($this->getLocation('us.georgia'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(66.68);
@@ -62,6 +64,7 @@ class TaxesTest extends \TestCase
     public function testTaxesYtdEarnings()
     {
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.alabama.birmingham'));
             $taxes->setWorkLocation($this->getLocation('us.alabama.birmingham'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(66.68);
@@ -74,6 +77,7 @@ class TaxesTest extends \TestCase
         $this->assertSame(0.0, $results->getTax(FederalUnemployment::class));
 
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.alabama.birmingham'));
             $taxes->setWorkLocation($this->getLocation('us.alabama.birmingham'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(66.68);
@@ -87,6 +91,7 @@ class TaxesTest extends \TestCase
         $this->assertSame(0.0, $results->getTax(AlabamaUnemployment::class));
 
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.alabama.birmingham'));
             $taxes->setWorkLocation($this->getLocation('us.alabama.birmingham'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(66.68);
@@ -102,6 +107,7 @@ class TaxesTest extends \TestCase
         $this->assertSame(0.0, $results->getTax(SocialSecurityEmployer::class));
 
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.alabama.birmingham'));
             $taxes->setWorkLocation($this->getLocation('us.alabama.birmingham'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(66.68);
@@ -119,6 +125,7 @@ class TaxesTest extends \TestCase
         $this->assertSame(0.67, $results->getTax(BirminghamOccupational::class));
 
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.alabama.birmingham'));
             $taxes->setWorkLocation($this->getLocation('us.alabama.birmingham'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(66.68);
@@ -141,6 +148,7 @@ class TaxesTest extends \TestCase
         $this->expectExceptionMessage('The implementation could not be found.');
 
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.alabama.birmingham'));
             $taxes->setWorkLocation($this->getLocation('us.alabama.birmingham'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(66.68);
@@ -152,6 +160,7 @@ class TaxesTest extends \TestCase
     public function testTaxesNoUser()
     {
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.alabama.birmingham'));
             $taxes->setWorkLocation($this->getLocation('us.alabama.birmingham'));
             $taxes->setUser(null);
             $taxes->setEarnings(66.68);
@@ -175,6 +184,7 @@ class TaxesTest extends \TestCase
         $this->expectException(BindingResolutionException::class);
 
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.alabama.birmingham'));
             $taxes->setWorkLocation($this->getLocation('us.alabama.birmingham'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(66.68);
@@ -197,6 +207,7 @@ class TaxesTest extends \TestCase
         AlabamaIncomeTaxInformation::forUser($this->user)->update(['additional_withholding' => 10]);
 
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.alabama.birmingham'));
             $taxes->setWorkLocation($this->getLocation('us.alabama.birmingham'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(10);
@@ -206,6 +217,7 @@ class TaxesTest extends \TestCase
         $this->assertSame(0.0, $results->getTax(AlabamaIncome::class));
 
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.alabama.birmingham'));
             $taxes->setWorkLocation($this->getLocation('us.alabama.birmingham'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(11);
@@ -221,6 +233,7 @@ class TaxesTest extends \TestCase
         AlabamaIncomeTaxInformation::forUser($this->user)->update(['additional_withholding' => -10]);
 
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.alabama.birmingham'));
             $taxes->setWorkLocation($this->getLocation('us.alabama.birmingham'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(10);
@@ -230,6 +243,7 @@ class TaxesTest extends \TestCase
         $this->assertSame(0.0, $results->getTax(AlabamaIncome::class));
 
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.alabama.birmingham'));
             $taxes->setWorkLocation($this->getLocation('us.alabama.birmingham'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(11);

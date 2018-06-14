@@ -7,6 +7,7 @@ class BrilliantOccupationalTest extends \TestCase
     public function testBrilliantOccupational()
     {
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.alabama.brilliant'));
             $taxes->setWorkLocation($this->getLocation('us.alabama.brilliant'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(2300);

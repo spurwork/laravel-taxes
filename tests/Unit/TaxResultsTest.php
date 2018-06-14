@@ -17,6 +17,7 @@ class TaxResultsTest extends \TestCase
     public function testTaxes()
     {
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.alabama.birmingham'));
             $taxes->setWorkLocation($this->getLocation('us.alabama.birmingham'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(66.68);
@@ -71,6 +72,7 @@ class TaxResultsTest extends \TestCase
     public function testAdjustedEarnings()
     {
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.alabama.birmingham'));
             $taxes->setWorkLocation($this->getLocation('us.alabama.birmingham'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(10000);

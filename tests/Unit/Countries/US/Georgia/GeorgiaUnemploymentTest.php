@@ -2,6 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\Georgia\GeorgiaUnemployment;
 
+use Appleton\Taxes\Countries\US\Georgia\GeorgiaIncome;
 use Carbon\Carbon;
 
 class GeorgiaUnemploymentTest extends \TestCase
@@ -18,6 +19,7 @@ class GeorgiaUnemploymentTest extends \TestCase
     public function testGeorgiaUnemployment()
     {
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.georgia'));
             $taxes->setWorkLocation($this->getLocation('us.georgia'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(2300);
@@ -31,6 +33,7 @@ class GeorgiaUnemploymentTest extends \TestCase
         config(['taxes.rates.us.georgia.unemployment' => 0.024]);
 
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.georgia'));
             $taxes->setWorkLocation($this->getLocation('us.georgia'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(2300);
@@ -42,6 +45,7 @@ class GeorgiaUnemploymentTest extends \TestCase
     public function testGeorgiaUnemploymentMetWageBase()
     {
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.georgia'));
             $taxes->setWorkLocation($this->getLocation('us.georgia'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(100);
@@ -51,6 +55,7 @@ class GeorgiaUnemploymentTest extends \TestCase
         $this->assertSame(2.70, $results->getTax(GeorgiaUnemployment::class));
 
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.georgia'));
             $taxes->setWorkLocation($this->getLocation('us.georgia'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(100);
@@ -60,6 +65,7 @@ class GeorgiaUnemploymentTest extends \TestCase
         $this->assertSame(1.35, $results->getTax(GeorgiaUnemployment::class));
 
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.georgia'));
             $taxes->setWorkLocation($this->getLocation('us.georgia'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(100);
@@ -69,6 +75,7 @@ class GeorgiaUnemploymentTest extends \TestCase
         $this->assertSame(0.0, $results->getTax(GeorgiaUnemployment::class));
 
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.georgia'));
             $taxes->setWorkLocation($this->getLocation('us.georgia'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(100);
@@ -83,11 +90,27 @@ class GeorgiaUnemploymentTest extends \TestCase
         config(['taxes.rates.us.georgia.unemployment' => 0.019]);
 
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.georgia'));
             $taxes->setWorkLocation($this->getLocation('us.georgia'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(66.68);
         });
 
+        $this->assertSame(1.27, $results->getTax(GeorgiaUnemployment::class));
+    }
+
+    public function testWorkOutOfState()
+    {
+        config(['taxes.rates.us.georgia.unemployment' => 0.019]);
+
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.georgia'));
+            $taxes->setWorkLocation($this->getLocation('us'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(66.68);
+        });
+
+        $this->assertNull($results->getTax(GeorgiaIncome::class));
         $this->assertSame(1.27, $results->getTax(GeorgiaUnemployment::class));
     }
 }

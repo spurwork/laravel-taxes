@@ -19,6 +19,7 @@ class GeorgiaIncomeTest extends \TestCase
     public function testGeorgiaIncome()
     {
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.georgia'));
             $taxes->setWorkLocation($this->getLocation('us.georgia'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(66.68);
@@ -33,6 +34,7 @@ class GeorgiaIncomeTest extends \TestCase
         GeorgiaIncomeTaxInformation::forUser($this->user)->update(['additional_withholding' => 10]);
 
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.georgia'));
             $taxes->setWorkLocation($this->getLocation('us.georgia'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(0);
@@ -42,6 +44,7 @@ class GeorgiaIncomeTest extends \TestCase
         $this->assertSame(0.0, $results->getTax(GeorgiaIncome::class));
 
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.georgia'));
             $taxes->setWorkLocation($this->getLocation('us.georgia'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(66.68);
@@ -54,6 +57,7 @@ class GeorgiaIncomeTest extends \TestCase
     public function testGeorgiaSupplemental()
     {
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.georgia'));
             $taxes->setWorkLocation($this->getLocation('us.georgia'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(100);
@@ -66,6 +70,7 @@ class GeorgiaIncomeTest extends \TestCase
     public function testGeorgiaIncomeNonNegative()
     {
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.georgia'));
             $taxes->setWorkLocation($this->getLocation('us.georgia'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(10);

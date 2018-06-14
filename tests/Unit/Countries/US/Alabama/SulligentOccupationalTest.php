@@ -7,6 +7,7 @@ class SulligentOccupationalTest extends \TestCase
     public function testSulligentOccupational()
     {
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.alabama.sulligent'));
             $taxes->setWorkLocation($this->getLocation('us.alabama.sulligent'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(2300);

@@ -7,6 +7,7 @@ class RainbowCityOccupationalTest extends \TestCase
     public function testRainbowCityOccupational()
     {
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.alabama.rainbowcity'));
             $taxes->setWorkLocation($this->getLocation('us.alabama.rainbowcity'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(2300);

@@ -7,6 +7,7 @@ class LynnOccupationalTest extends \TestCase
     public function testLynnOccupational()
     {
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.alabama.lynn'));
             $taxes->setWorkLocation($this->getLocation('us.alabama.lynn'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(2300);

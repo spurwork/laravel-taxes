@@ -7,6 +7,7 @@ class AuburnOccupationalTest extends \TestCase
     public function testAuburnOccupational()
     {
         $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.alabama.auburn'));
             $taxes->setWorkLocation($this->getLocation('us.alabama.auburn'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(2300);
