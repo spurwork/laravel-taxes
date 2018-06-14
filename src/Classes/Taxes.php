@@ -126,15 +126,14 @@ class Taxes
 
     private function getTaxes()
     {
-        $this->taxes = TaxArea::
-            where(function ($query) {
-                $query
-                    ->where('based', 'home')
-                    ->atPoint($this->home_location[0], $this->home_location[1]);
-            })
+        $this->taxes = TaxArea::where(function ($query) {
+            $query
+                ->where('based', TaxArea::BASED_ON_HOME_LOCATION)
+                ->atPoint($this->home_location[0], $this->home_location[1]);
+        })
             ->orWhere(function ($query) {
                 $query
-                    ->where('based', 'work')
+                    ->where('based', TaxArea::BASED_ON_WORK_LOCATION)
                     ->atPoint($this->work_location[0], $this->work_location[1]);
             })
             ->get()
