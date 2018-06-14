@@ -62,7 +62,7 @@ class AddBasedToTaxAreas extends Migration
                 AlabamaUnemployment::class,
                 GeorgiaUnemployment::class,
             ])
-            ->update(['based' => 'home']);
+            ->update(['based' => TaxArea::BASED_ON_HOME_LOCATION]);
 
         DB::table($this->tax_areas)
             ->whereIn('tax', [
@@ -101,7 +101,7 @@ class AddBasedToTaxAreas extends Migration
                 TuskegeeOccupational::class,
                 GeorgiaIncome::class,
             ])
-            ->update(['based' => 'work']);
+            ->update(['based' => TaxArea::BASED_ON_WORK_LOCATION]);
     }
 
     /**
