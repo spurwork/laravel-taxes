@@ -128,12 +128,12 @@ class Taxes
     {
         $this->taxes = TaxArea::where(function ($query) {
             $query
-                ->where('based', TaxArea::BASED_ON_HOME_LOCATION)
+                ->basedOnHomeLocation()
                 ->atPoint($this->home_location[0], $this->home_location[1]);
         })
             ->orWhere(function ($query) {
                 $query
-                    ->where('based', TaxArea::BASED_ON_WORK_LOCATION)
+                    ->basedOnWorkLocation()
                     ->atPoint($this->work_location[0], $this->work_location[1]);
             })
             ->get()
