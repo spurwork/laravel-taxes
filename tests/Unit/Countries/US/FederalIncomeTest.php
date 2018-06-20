@@ -315,4 +315,19 @@ class FederalIncomeTest extends \TestCase
 
         $this->assertSame(64.64, $results->getTax(FederalIncome::class));
     }
+
+    public function testFederalIncomeUseDefault() {
+        FederalIncomeTaxInformation::forUser($this->user)->delete();
+
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us'));
+            $taxes->setWorkLocation($this->getLocation('us'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(800);
+            $taxes->setPayPeriods(52);
+            $taxes->setDate($this->date('2018-01-01'));
+        });
+
+        $this->assertSame(83.8, $results->getTax(FederalIncome::class));
+    }
 }
