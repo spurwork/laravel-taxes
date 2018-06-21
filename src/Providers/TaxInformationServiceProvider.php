@@ -27,7 +27,7 @@ class TaxInformationServiceProvider extends ServiceProvider
                     } else {
                         $tax_information = $interface::forUser($payroll->user)->first();
                         if (is_null($tax_information)) {
-                            throw new \Exception('The tax information for that user could not be loaded.');
+                            $tax_information = $interface::getDefault();
                         }
                     }
                 } else {

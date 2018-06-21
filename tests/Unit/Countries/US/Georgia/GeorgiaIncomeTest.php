@@ -79,4 +79,30 @@ class GeorgiaIncomeTest extends \TestCase
 
         $this->assertSame(0.01, $results->getTax(GeorgiaIncome::class));
     }
+
+    public function testGeorgiaIncomeUseDefault()
+    {
+        GeorgiaIncomeTaxInformation::forUser($this->user)->delete();
+
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.georgia'));
+            $taxes->setWorkLocation($this->getLocation('us.georgia'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(0);
+            $taxes->setPayPeriods(260);
+        });
+
+        $this->assertSame(0.0, $results->getTax(GeorgiaIncome::class));
+
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.georgia'));
+            $taxes->setWorkLocation($this->getLocation('us.georgia'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(66.68);
+            $taxes->setPayPeriods(260);
+        });
+
+        $this->assertSame(2.74, $results->getTax(GeorgiaIncome::class));
+    }
+
 }
