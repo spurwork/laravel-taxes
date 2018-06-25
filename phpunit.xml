@@ -32,6 +32,6 @@
         <env name="TEST_DB_HOST" value="127.0.0.1"/>
         <env name="TEST_DB_DATABASE" value="taxes"/>
         <env name="TEST_DB_USERNAME" value="postgres"/>
-        <env name="TEST_DB_PASSWORD" value="password"/>
+        <env name="TEST_DB_PASSWORD" value="secret"/>
     </php>
 </phpunit>
