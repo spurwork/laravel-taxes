@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class AddExemptToStateIncomeTaxInformations extends Migration
+class AddExemptToIncomeTaxInformation extends Migration
 {
     private $alabama_income_tax_information = 'alabama_income_tax_information';
     private $georgia_income_tax_information = 'georgia_income_tax_information';
