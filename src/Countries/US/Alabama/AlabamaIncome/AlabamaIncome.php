@@ -3,6 +3,9 @@
 namespace Appleton\Taxes\Countries\US\Alabama\AlabamaIncome;
 
 use Appleton\Taxes\Classes\BaseStateIncome;
+use Appleton\Taxes\Classes\Payroll;
+use Appleton\Taxes\Models\Countries\US\Alabama\AlabamaIncomeTaxInformation;
+
 
 abstract class AlabamaIncome extends BaseStateIncome
 {
@@ -19,4 +22,15 @@ abstract class AlabamaIncome extends BaseStateIncome
         self::FILING_MARRIED => 'FILING_MARRIED',
         self::FILING_SEPERATE => 'FILING_SEPERATE',
     ];
+
+    public function __construct(AlabamaIncomeTaxInformation $tax_information, Payroll $payroll)
+    {
+        parent::__construct($payroll);
+        $this->tax_information = $tax_information;
+    }
+
+    public function isExempt(): bool 
+    {
+        return $this->tax_information->exempt;
+    }
 }

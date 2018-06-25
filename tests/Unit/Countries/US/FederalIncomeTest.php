@@ -330,4 +330,35 @@ class FederalIncomeTest extends \TestCase
 
         $this->assertSame(83.8, $results->getTax(FederalIncome::class));
     }
+
+    public function testFederalIncomeClaimExempt()
+    {
+        FederalIncomeTaxInformation::forUser($this->user)->update([
+            'exempt' => true
+        ]);
+
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us'));
+            $taxes->setWorkLocation($this->getLocation('us'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2300);
+            $taxes->setPayPeriods(24);
+        });
+
+        $this->assertSame(0.00, $results->getTax(FederalIncome::class));
+
+        FederalIncomeTaxInformation::forUser($this->user)->update([
+            'exempt' => false
+        ]);
+
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us'));
+            $taxes->setWorkLocation($this->getLocation('us'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(2300);
+            $taxes->setPayPeriods(24);
+        });
+
+        $this->assertSame(373.49, $results->getTax(FederalIncome::class));
+    }
 }

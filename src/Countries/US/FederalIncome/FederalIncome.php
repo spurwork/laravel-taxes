@@ -3,6 +3,8 @@
 namespace Appleton\Taxes\Countries\US\FederalIncome;
 
 use Appleton\Taxes\Classes\BaseIncome;
+use Appleton\Taxes\Classes\Payroll;
+use Appleton\Taxes\Models\Countries\US\FederalIncomeTaxInformation;
 
 abstract class FederalIncome extends BaseIncome
 {
@@ -22,4 +24,15 @@ abstract class FederalIncome extends BaseIncome
         self::FILING_MARRIED => 'FILING_MARRIED',
         self::FILING_SEPERATE => 'FILING_SEPERATE',
     ];
+
+    public function __construct(FederalIncomeTaxInformation $tax_information, Payroll $payroll)
+    {
+        parent::__construct($payroll);
+        $this->tax_information = $tax_information;
+    }
+
+    public function isExempt(): bool
+    {
+        return $this->tax_information->exempt;
+    }
 }

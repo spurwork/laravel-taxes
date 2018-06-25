@@ -14,6 +14,7 @@ class AlabamaIncomeTaxInformation extends BaseTaxInformationModel
         $tax_information = new self();
         $tax_information->dependents = 0;
         $tax_information->filing_status = AlabamaIncome::FILING_SINGLE;
+        $tax_information->exempt = false;
         return $tax_information;
     }
 
