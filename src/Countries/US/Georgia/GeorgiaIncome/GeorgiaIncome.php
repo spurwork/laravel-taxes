@@ -30,7 +30,7 @@ abstract class GeorgiaIncome extends BaseStateIncome
         $this->tax_information = $tax_information;
     }
 
-    public function isExempt(): bool 
+    public function isUserClaimingExemption(): bool
     {
         return $this->tax_information->exempt;
     }
