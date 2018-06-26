@@ -3,6 +3,7 @@
 namespace Appleton\Taxes\Countries\US\Wisconsin\WisconsinIncome\V20180101;
 
 use Appleton\Taxes\Classes\Payroll;
+use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome;
 use Appleton\Taxes\Countries\US\Wisconsin\WisconsinIncome\WisconsinIncome as BaseWisconsinIncome;
 use Appleton\Taxes\Models\Countries\US\Wisconsin\WisconsinIncomeTaxInformation;
 
@@ -12,7 +13,7 @@ class WisconsinIncome extends BaseWisconsinIncome
         self::FILING_SINGLE => [
             [0, 0.04, 0],
             [11230, 0.0584, 449.20],
-            [22470, 0.0627, 1105.62],
+            [22470, 0.0627, 1105.616],
             [247350, 0.0765, 15205.59],
         ],
         self::FILING_MARRIED => [
@@ -55,9 +56,10 @@ class WisconsinIncome extends BaseWisconsinIncome
         ],
     ];
 
-    public function __construct(WisconsinIncomeTaxInformation $tax_information, Payroll $payroll)
+    public function __construct(WisconsinIncomeTaxInformation $tax_information, FederalIncome $federal_income, Payroll $payroll)
     {
         parent::__construct($payroll);
+        $this->federal_income_tax = $federal_income->getAmount();
         $this->tax_information = $tax_information;
     }
 
@@ -89,16 +91,16 @@ class WisconsinIncome extends BaseWisconsinIncome
 
     private function getStandardDeduction()
     {
-        if (array_key_exists($this->tax_information->filing_status, static::STANDARD_DEDUCTIONS)) {
-            $brackets = array_get(static::STANDARD_DEDUCTIONS, $this->tax_information->filing_status);
-            $gross_earnings = $this->getGrossEarnings();
-
-            foreach($brackets as $bracket) {
-                if ($gross_earnings >= $bracket[0] && $gross_earnings < $bracket[1]) {
-                    return $bracket[2] - ($bracket[3] * ($gross_earnings - $bracket[4]));
-                }
-            }
-        }
+//        if (array_key_exists($this->tax_information->filing_status, static::STANDARD_DEDUCTIONS)) {
+//            $brackets = array_get(static::STANDARD_DEDUCTIONS, $this->tax_information->filing_status);
+//            $gross_earnings = $this->getGrossEarnings();
+//
+//            foreach($brackets as $bracket) {
+//                if ($gross_earnings >= $bracket[0] && $gross_earnings < $bracket[1]) {
+//                    return $bracket[2] - ($bracket[3] * ($gross_earnings - $bracket[4]));
+//                }
+//            }
+//        }
 
         return 0;
     }
