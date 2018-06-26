@@ -13,6 +13,8 @@ class WisconsinIncomeTaxInformation extends BaseTaxInformationModel
     {
         $tax_information = new self();
         $tax_information->filing_status = WisconsinIncome::FILING_SINGLE;
+        $tax_information->exemptions = 0;
+        $tax_information->additional_withholding = 0;
         return $tax_information;
     }
 

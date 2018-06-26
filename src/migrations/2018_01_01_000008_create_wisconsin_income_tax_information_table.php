@@ -24,6 +24,7 @@ class CreateWisconsinIncomeTaxInformationTable extends Migration
         Schema::create($this->wisconsin_income_tax_information, function (Blueprint $table) {
             $table->increments('id');
             $table->integer('additional_withholding');
+            $table->integer('exemptions');
             $table->integer('filing_status');
         });
 

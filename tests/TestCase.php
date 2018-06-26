@@ -72,6 +72,7 @@ class TestCase extends BaseTestCase
 
         WisconsinIncomeTaxInformation::createForUser([
             'additional_withholding' => 0,
+            'exemptions' => 0,
             'filing_status' => WisconsinIncome::FILING_SINGLE,
         ], $this->user);
     }
