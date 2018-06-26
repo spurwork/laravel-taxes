@@ -16,7 +16,7 @@ abstract class BaseIncome extends BaseTax
     {
         if ($this->isUserClaimingExemption())
         {
-            return round(0, 2);    
+            return 0.00;
         }
         
         $this->tax_total = $this->payroll->withholdTax($this->getTaxAmountFromTaxBrackets($this->getAdjustedEarnings(), $this->getTaxBrackets()) / $this->payroll->pay_periods) +
