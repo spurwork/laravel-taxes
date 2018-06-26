@@ -21,11 +21,11 @@ class WisconsinIncomeTest extends \TestCase
             $taxes->setHomeLocation($this->getLocation('us.wisconsin'));
             $taxes->setWorkLocation($this->getLocation('us.wisconsin'));
             $taxes->setUser($this->user);
-            $taxes->setEarnings(66.68);
+            $taxes->setEarnings(100);
             $taxes->setPayPeriods(260);
         });
 
-        $this->assertSame(2.74, $results->getTax(WisconsinIncome::class));
+        $this->assertSame(4.07, $results->getTax(WisconsinIncome::class));
     }
 
 //    public function testGeorgiaAdditionalWithholding()

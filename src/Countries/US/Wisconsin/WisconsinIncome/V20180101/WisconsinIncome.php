@@ -81,6 +81,12 @@ class WisconsinIncome extends BaseWisconsinIncome
         return static::BRACKETS[static::FILING_SINGLE];
     }
 
+    public function getSupplementalIncomeTax()
+    {
+        // TODO
+        return 0;
+    }
+
     private function getStandardDeduction()
     {
         if (array_key_exists($this->tax_information->filing_status, static::STANDARD_DEDUCTIONS)) {
