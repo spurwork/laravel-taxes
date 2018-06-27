@@ -134,4 +134,17 @@ class AlabamaIncomeTest extends \TestCase
 
         $this->assertSame(2.07, $results->getTax(AlabamaIncome::class));
     }
+
+    public function testAlabamaIncomeWorkInTennessee()
+    {
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.alabama'));
+            $taxes->setWorkLocation($this->getLocation('us.tennessee'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(66.68);
+            $taxes->setPayPeriods(260);
+        });
+
+        $this->assertSame(2.07, $results->getTax(AlabamaIncome::class));
+    }
 }
