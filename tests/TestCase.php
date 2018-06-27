@@ -101,6 +101,7 @@ class TestCase extends BaseTestCase
             'us.alabama.sulligent' => [33.9018, -88.1345],
             'us.alabama.tuskegee' => [32.4302, -85.7077],
             'us.georgia' => [33.7490, -84.3880],
+            'us.north_carolina' => [35.7596, -79.0193],
             'us.tennessee' => [35.5175, -86.5804],
         ];
 

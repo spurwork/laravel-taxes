@@ -55,7 +55,7 @@ class CreateNorthCarolinaIncomeTaxInformationTable extends Migration
      */
     public function down()
     {
-        Schema::drop($this->NorthCarolina_income_tax_information);
+        Schema::drop($this->north_carolina_income_tax_information);
 
         DB::table($this->tax_areas)->where('name', 'North Carolina Income Tax')->delete();
         DB::table($this->tax_areas)->where('name', 'North Carolina Unemployment Tax')->delete();

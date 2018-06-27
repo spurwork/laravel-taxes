@@ -9,9 +9,9 @@ class NorthCarolinaUnemployment extends BaseNorthCarolinaUnemployment
 {
     const FUTA_CREDIT = 0.054;
 
-    const NEW_EMPLOYER_RATE = 0.027;
+    const NEW_EMPLOYER_RATE = 0.01;
 
-    const WAGE_BASE = 9500;
+    const WAGE_BASE = 23500;
 
     public function __construct(Payroll $payroll)
     {

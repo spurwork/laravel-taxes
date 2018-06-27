@@ -155,10 +155,10 @@ class Taxes
     {
         $state_income_tax = TaxArea::atPoint($this->home_location[0], $this->home_location[1])
             ->get()
-            ->search(function ($tax) {
+            ->pluck('tax')
+            ->first(function ($tax) {
                 return is_subclass_of($tax, BaseStateIncome::class);
-            })
-            ->pluck('tax');
+            });
 
         if ($state_income_tax) {
             $this->taxes->push($state_income_tax);
