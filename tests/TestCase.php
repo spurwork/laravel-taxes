@@ -109,7 +109,7 @@ class TestCase extends BaseTestCase
             'us.alabama.sulligent' => [33.9018, -88.1345],
             'us.alabama.tuskegee' => [32.4302, -85.7077],
             'us.georgia' => [33.7490, -84.3880],
-            'us.wisconsin' => [43.0849721,-89.4764603],
+            'us.wisconsin' => [43.0849721, -89.4764603],
         ];
 
         return $locations[$name];
