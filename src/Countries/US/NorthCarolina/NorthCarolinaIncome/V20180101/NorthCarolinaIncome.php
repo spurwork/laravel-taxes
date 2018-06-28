@@ -9,58 +9,51 @@ use Appleton\Taxes\Models\Countries\US\NorthCarolina\NorthCarolinaIncomeTaxInfor
 
 class NorthCarolinaIncome extends BaseNorthCarolinaIncome
 {
-    const SUPPLEMENTAL_TAX_BRACKETS = [
-        [15001, .06],
-        [12001, .05],
-        [10001, .04],
-        [8000, .03],
-        [0, .02],
-    ];
+    const SUPPLEMENTAL_TAX_RATE = 0.05599;
 
-    const SINGLE_BRACKETS = [
-        [0, 0.01, 0],
-        [750, 0.02, 7.5],
-        [2250, 0.03, 37.5],
-        [3750, 0.04, 82.5],
-        [5250, 0.05, 142.5],
-        [7000, 0.06, 230],
-    ];
-
-    const BOTH_WORKING_BRACKETS = [
-        [0, 0.01, 0],
-        [500, 0.02, 5],
-        [1500, 0.03, 25],
-        [2500, 0.04, 55],
-        [3500, 0.05, 95],
-        [5000, 0.06, 170],
-    ];
-
-    const SINGLE_WORKING_BRACKETS = [
-        [0, 0.01, 0],
-        [1000, 0.02, 10],
-        [3000, 0.03, 50],
-        [5000, 0.04, 110],
-        [7000, 0.05, 190],
-        [10000, 0.06, 340],
-    ];
+    const TAX_RATE = 0.05499;
 
     const STANDARD_DEDUCTIONS = [
-        self::FILING_SINGLE => 2300,
-        self::FILING_HEAD_OF_HOUSEHOLD => 2300,
-        self::FILING_MARRIED_SEPARATE => 1500,
-        self::FILING_MARRIED_JOINT_BOTH_WORKING => 1500,
-        self::FILING_MARRIED_JOINT_ONE_WORKING => 3000,
+        self::FILING_SINGLE => 8750,
+        self::FILING_HEAD_OF_HOUSEHOLD => 14000,
+        self::FILING_MARRIED => 17500,
+        self::FILING_SEPERATE => 8750,
     ];
 
-    const PERSONAL_EXEMPTION_ALLOWANCES = [
-        self::FILING_SINGLE => 2700,
-        self::FILING_HEAD_OF_HOUSEHOLD => 2700,
-        self::FILING_MARRIED_SEPARATE => 3700,
-        self::FILING_MARRIED_JOINT_BOTH_WORKING => 3700,
-        self::FILING_MARRIED_JOINT_ONE_WORKING => 3700,
+    const DEPENDENT_EXEMPTION_BRACKETS = [
+        self::FILING_SINGLE => [
+            [0, 2500],
+            [20000, 2000],
+            [30000, 1500],
+            [40000, 1000],
+            [50000, 500],
+            [60000, 0],
+        ],
+        self::FILING_HEAD_OF_HOUSEHOLD => [
+            [0, 2500],
+            [30000, 2000],
+            [45000, 1500],
+            [60000, 1000],
+            [75000, 500],
+            [90000, 0],
+        ],
+        self::FILING_MARRIED => [
+            [0, 2500],
+            [40000, 2000],
+            [60000, 1500],
+            [80000, 1000],
+            [100000, 500],
+            [120000, 0],
+        ],
+        self::FILING_SEPERATE => [
+            [0, 2500],
+            [20000, 2000],
+            [30000, 1500],
+            [40000, 1000],
+            [50000, 500],
+            [60000, 0],
+        ],
     ];
-
-    const DEPENDENT_ALLOWANCE_AMOUNT = 3000;
 
     public function __construct(NorthCarolinaIncomeTaxInformation $tax_information, FederalIncome $federal_income, Payroll $payroll)
     {
@@ -73,9 +66,7 @@ class NorthCarolinaIncome extends BaseNorthCarolinaIncome
     {
         $adjusted_earnings = $this->getGrossEarnings();
 
-        if ($this->tax_information->filing_status != static::FILING_ZERO) {
-            $adjusted_earnings = $adjusted_earnings - $this->getStandardDeduction() - $this->getPersonalAllowance() - $this->getDependentExemption();
-        }
+        $adjusted_earnings = $adjusted_earnings - $this->getStandardDeduction() - $this->getDependentExemption();
 
         return $adjusted_earnings;
     }
@@ -84,24 +75,12 @@ class NorthCarolinaIncome extends BaseNorthCarolinaIncome
     {
         $annual_income = $this->getGrossEarnings();
 
-        foreach (self::SUPPLEMENTAL_TAX_BRACKETS as $bracket) {
-            if ($annual_income >= $bracket[0]) {
-                return $this->payroll->supplemental_earnings * $bracket[1];
-            }
-        }
-
-        return 0;
+        return $this->payroll->supplemental_earnings * self::SUPPLEMENTAL_TAX_RATE;
     }
 
     public function getTaxBrackets()
     {
-        if ($this->tax_information->filing_status === static::FILING_SINGLE || $this->tax_information->filing_status === static::FILING_HEAD_OF_HOUSEHOLD) {
-            return static::SINGLE_BRACKETS;
-        } else if ($this->tax_information->filing_status === static::FILING_MARRIED_JOINT_ONE_WORKING) {
-            return static::SINGLE_WORKING_BRACKETS;
-        } else {
-            return static::BOTH_WORKING_BRACKETS;
-        }
+        return [[0, self::TAX_RATE, 0]];
     }
 
     private function getStandardDeduction()
@@ -113,22 +92,11 @@ class NorthCarolinaIncome extends BaseNorthCarolinaIncome
         return 0;
     }
 
-    private function getPersonalAllowance()
-    {
-        if ($this->tax_information->personal_allowances === 0 || !array_key_exists($this->tax_information->filing_status, static::PERSONAL_EXEMPTION_ALLOWANCES)) {
-            return 0;
-        }
-
-        if ($this->tax_information->filing_status === static::FILING_MARRIED_JOINT_ONE_WORKING) {
-            return static::PERSONAL_EXEMPTION_ALLOWANCES[$this->tax_information->filing_status] * $this->tax_information->personal_allowances;
-        }
-
-        return static::PERSONAL_EXEMPTION_ALLOWANCES[$this->tax_information->filing_status];
-    }
-
     private function getDependentExemption()
     {
-        return $this->tax_information->allowances * self::DEPENDENT_ALLOWANCE_AMOUNT;
+        $gross_earnings = $this->getGrossEarnings();
+        $dependent_exemption = $this->getTaxBracket($gross_earnings, static::DEPENDENT_EXEMPTION_BRACKETS[$this->tax_information->filing_status]);
+        return $this->tax_information->allowances * $dependent_exemption[1];
     }
 
     private function getGrossEarnings()
