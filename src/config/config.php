@@ -44,6 +44,9 @@ return [
                 'georgia_income_tax_information' => env('TAXES_GEORGIA_INCOME_TAX_INFORMATION', 'georgia_income_tax_information'),
             ],
 
+            'wisconsin' => [
+                'wisconsin_income_tax_information' => env('TAXES_WISCONSIN_INCOME_TAX_INFORMATION', 'wisconsin_income_tax_information'),
+            ],
         ],
 
     ],
@@ -73,6 +76,11 @@ return [
 
             ],
 
+            'wisconsin' => [
+
+                'unemployment' => env('TAXES_WISCONSIN_UNEMPLOYMENT_TAX_RATE', 0.0305),
+
+            ],
         ],
 
     ],

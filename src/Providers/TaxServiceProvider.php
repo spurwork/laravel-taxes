@@ -47,6 +47,8 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\Alabama\TuskegeeOccupational\TuskegeeOccupational::class,
         \Appleton\Taxes\Countries\US\Georgia\GeorgiaIncome\GeorgiaIncome::class,
         \Appleton\Taxes\Countries\US\Georgia\GeorgiaUnemployment\GeorgiaUnemployment::class,
+        \Appleton\Taxes\Countries\US\Wisconsin\WisconsinIncome\WisconsinIncome::class,
+        \Appleton\Taxes\Countries\US\Wisconsin\WisconsinUnemployment\WisconsinUnemployment::class,
     ];
 
     private function getImplementations($interface)
