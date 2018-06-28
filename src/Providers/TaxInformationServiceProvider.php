@@ -15,6 +15,7 @@ class TaxInformationServiceProvider extends ServiceProvider
         \Appleton\Taxes\Models\Countries\US\Alabama\AlabamaIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\Georgia\GeorgiaIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\NorthCarolina\NorthCarolinaIncomeTaxInformation::class,
+        \Appleton\Taxes\Models\Countries\US\Wisconsin\WisconsinIncomeTaxInformation::class,
     ];
 
     public function register()

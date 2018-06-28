@@ -5,10 +5,12 @@ use Appleton\Taxes\Countries\US\Alabama\AlabamaIncome\AlabamaIncome;
 use Appleton\Taxes\Countries\US\Georgia\GeorgiaIncome\GeorgiaIncome;
 use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome;
 use Appleton\Taxes\Countries\US\NorthCarolina\NorthCarolinaIncome\NorthCarolinaIncome;
+use Appleton\Taxes\Countries\US\Wisconsin\WisconsinIncome\WisconsinIncome;
 use Appleton\Taxes\Models\Countries\US\Alabama\AlabamaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Georgia\GeorgiaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\FederalIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\NorthCarolina\NorthCarolinaIncomeTaxInformation;
+use Appleton\Taxes\Models\Countries\US\Wisconsin\WisconsinIncomeTaxInformation;
 use Appleton\Taxes\Providers\TaxesServiceProvider;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -75,6 +77,12 @@ class TestCase extends BaseTestCase
             'dependents' => 0,
             'filing_status' => NorthCarolinaIncome::FILING_SINGLE,
         ], $this->user);
+
+        WisconsinIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'exemptions' => 0,
+            'filing_status' => WisconsinIncome::FILING_SINGLE,
+        ], $this->user);
     }
 
     protected function getLocation($name)
@@ -111,6 +119,7 @@ class TestCase extends BaseTestCase
             'us.georgia' => [33.7490, -84.3880],
             'us.north_carolina' => [35.7596, -79.0193],
             'us.tennessee' => [35.5175, -86.5804],
+            'us.wisconsin' => [43.0849721, -89.4764603],
         ];
 
         return $locations[$name];
@@ -140,6 +149,7 @@ class TestCase extends BaseTestCase
         $app['config']->set('taxes.tables.us.federal_income_tax_information', 'federal_income_tax_information');
         $app['config']->set('taxes.tables.us.alabama.alabama_income_tax_information', 'alabama_income_tax_information');
         $app['config']->set('taxes.tables.us.georgia.georgia_income_tax_information', 'georgia_income_tax_information');
+        $app['config']->set('taxes.tables.us.wisconsin.wisconsin_income_tax_information', 'wisconsin_income_tax_information');
     }
 
     protected function getPackageProviders($app)
