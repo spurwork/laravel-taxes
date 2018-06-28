@@ -78,7 +78,7 @@ return [
 
             'wisconsin' => [
 
-                'unemployment' => env('TAXES_WISCONSIN_UNEMPLOYMENT_TAX_RATE', 0.027),
+                'unemployment' => env('TAXES_WISCONSIN_UNEMPLOYMENT_TAX_RATE', 0.0305),
 
             ],
         ],
