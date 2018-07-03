@@ -10,9 +10,15 @@ abstract class BaseIncome extends BaseTax
     const WITHHELD = true;
 
     abstract public function getTaxBrackets();
+    abstract public function isUserClaimingExemption();
 
     public function compute()
     {
+        if ($this->isUserClaimingExemption())
+        {
+            return 0.00;
+        }
+        
         $this->tax_total = $this->payroll->withholdTax($this->getTaxAmountFromTaxBrackets($this->getAdjustedEarnings(), $this->getTaxBrackets()) / $this->payroll->pay_periods) +
             $this->payroll->withholdTax($this->getSupplementalIncomeTax()) +
             $this->payroll->withholdTax($this->getAdditionalWithholding());

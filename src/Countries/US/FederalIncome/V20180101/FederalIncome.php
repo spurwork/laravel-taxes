@@ -37,7 +37,7 @@ class FederalIncome extends BaseFederalIncome
 
     public function __construct(FederalIncomeTaxInformation $tax_information, Payroll $payroll)
     {
-        parent::__construct($payroll);
+        parent::__construct($tax_information, $payroll);
         $this->tax_information = $tax_information;
     }
 
