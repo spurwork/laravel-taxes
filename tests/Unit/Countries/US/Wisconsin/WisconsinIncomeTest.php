@@ -68,4 +68,36 @@ class WisconsinIncomeTest extends \TestCase
         $this->assertSame(56.39, $results->getTax(WisconsinIncome::class));
     }
 
+    public function testWisconsinIncomeClaimExempt()
+    {
+        $wisconsin_income_tax_information = WisconsinIncomeTaxInformation::forUser($this->user);
+        $wisconsin_income_tax_information->update([
+            'exemptions' => 1,
+            'exempt' => true
+        ]);
+
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.wisconsin'));
+            $taxes->setWorkLocation($this->getLocation('us.wisconsin'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(1000);
+            $taxes->setPayPeriods(52);
+        });
+
+        $this->assertSame(0.00, $results->getTax(WisconsinIncome::class));
+
+        $wisconsin_income_tax_information->update([
+            'exempt' => false
+        ]);
+
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.wisconsin'));
+            $taxes->setWorkLocation($this->getLocation('us.wisconsin'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(1000);
+            $taxes->setPayPeriods(52);
+        });
+
+        $this->assertSame(56.39, $results->getTax(WisconsinIncome::class));
+    }
 }
