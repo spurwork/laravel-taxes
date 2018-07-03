@@ -3,6 +3,8 @@
 namespace Appleton\Taxes\Countries\US\Wisconsin\WisconsinIncome;
 
 use Appleton\Taxes\Classes\BaseStateIncome;
+use Appleton\Taxes\Classes\Payroll;
+use Appleton\Taxes\Models\Countries\US\Wisconsin\WisconsinIncomeTaxInformation;
 
 abstract class WisconsinIncome extends BaseStateIncome
 {
@@ -17,4 +19,15 @@ abstract class WisconsinIncome extends BaseStateIncome
         self::FILING_MARRIED => 'FILING_MARRIED',
         self::FILING_SEPERATE => 'FILING_SEPERATE',
     ];
+
+    public function __construct(WisconsinIncomeTaxInformation $tax_information, Payroll $payroll)
+    {
+        parent::__construct($payroll);
+        $this->tax_information = $tax_information;
+    }
+
+    public function isUserClaimingExemption(): bool
+    {
+        return $this->tax_information->exempt;
+    }
 }

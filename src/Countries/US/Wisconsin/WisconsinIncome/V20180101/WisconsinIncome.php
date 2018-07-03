@@ -40,7 +40,7 @@ class WisconsinIncome extends BaseWisconsinIncome
 
     public function __construct(WisconsinIncomeTaxInformation $tax_information, FederalIncome $federal_income, Payroll $payroll)
     {
-        parent::__construct($payroll);
+        parent::__construct($tax_information, $payroll);
         $this->federal_income_tax = $federal_income->getAmount();
         $this->tax_information = $tax_information;
     }
