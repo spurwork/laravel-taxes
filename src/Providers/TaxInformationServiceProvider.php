@@ -2,7 +2,6 @@
 
 namespace Appleton\Taxes\Providers;
 
-use Carbon\Carbon;
 use Illuminate\Support\ServiceProvider;
 use Appleton\Taxes\Classes\Payroll;
 
@@ -13,6 +12,7 @@ class TaxInformationServiceProvider extends ServiceProvider
     protected $interfaces = [
         \Appleton\Taxes\Models\Countries\US\FederalIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\Alabama\AlabamaIncomeTaxInformation::class,
+        \Appleton\Taxes\Models\Countries\US\Arizona\ArizonaIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\Georgia\GeorgiaIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\Wisconsin\WisconsinIncomeTaxInformation::class,
     ];
