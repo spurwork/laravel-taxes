@@ -18,6 +18,27 @@ class ArizonaIncome extends BaseArizonaIncome
 
     public function getTaxBrackets()
     {
-        return $this->tax_information->percentage_withheld;
+        return [
+            [0, $this->tax_information->percentage_withheld / 100, 0]
+        ];
+    }
+
+    public function getTaxAmountFromTaxBrackets($amount, $table)
+    {
+        $bracket = $this->getTaxBracket($amount, $table);
+        $tax_amount = isset($bracket) ? ($amount - $bracket[0]) * $bracket[1] + $bracket[2] : 0;
+        return $tax_amount > 0 ? $tax_amount : 0;
+    }
+
+    public function getAdjustedEarnings()
+    {
+        return $this->payroll->earnings * $this->payroll->pay_periods;
+    }
+
+    public function getSupplementalIncomeTax()
+    {
+        // I don't think Arizona has one?
+
+        return 0;
     }
 }
