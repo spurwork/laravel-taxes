@@ -2,10 +2,12 @@
 
 use Appleton\Taxes\Classes\Taxes;
 use Appleton\Taxes\Countries\US\Alabama\AlabamaIncome\AlabamaIncome;
+use Appleton\Taxes\Countries\US\Colorado\ColoradoIncome\ColoradoIncome;
 use Appleton\Taxes\Countries\US\Georgia\GeorgiaIncome\GeorgiaIncome;
 use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome;
 use Appleton\Taxes\Models\Countries\US\Alabama\AlabamaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Arizona\ArizonaIncomeTaxInformation;
+use Appleton\Taxes\Models\Countries\US\Colorado\ColoradoIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Georgia\GeorgiaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\FederalIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Wisconsin\WisconsinIncomeTaxInformation;
@@ -68,6 +70,12 @@ class TestCase extends BaseTestCase
             'percentage_withheld' => 0,
         ], $this->user);
 
+        ColoradoIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'exemptions' => 0,
+            'filing_status' => ColoradoIncome::FILING_SINGLE,
+        ], $this->user);
+
         GeorgiaIncomeTaxInformation::createForUser([
             'additional_withholding' => 0,
             'allowances' => 0,
@@ -115,6 +123,7 @@ class TestCase extends BaseTestCase
             'us.alabama.sulligent' => [33.9018, -88.1345],
             'us.alabama.tuskegee' => [32.4302, -85.7077],
             'us.arizona' => [33.6050991,-112.4052392],
+            'us.colorado' => [39.7640021,-105.1352965],
             'us.georgia' => [33.7490, -84.3880],
             'us.wisconsin' => [43.0849721, -89.4764603],
         ];
@@ -146,6 +155,7 @@ class TestCase extends BaseTestCase
         $app['config']->set('taxes.tables.us.federal_income_tax_information', 'federal_income_tax_information');
         $app['config']->set('taxes.tables.us.alabama.alabama_income_tax_information', 'alabama_income_tax_information');
         $app['config']->set('taxes.tables.us.arizona.arizona_income_tax_information', 'arizona_income_tax_information');
+        $app['config']->set('taxes.tables.us.colorado.colorado_income_tax_information', 'colorado_income_tax_information');
         $app['config']->set('taxes.tables.us.georgia.georgia_income_tax_information', 'georgia_income_tax_information');
         $app['config']->set('taxes.tables.us.wisconsin.wisconsin_income_tax_information', 'wisconsin_income_tax_information');
     }
