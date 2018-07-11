@@ -9,6 +9,8 @@ use Appleton\Taxes\Models\Countries\US\Arizona\ArizonaIncomeTaxInformation;
 
 class ArizonaIncome extends BaseArizonaIncome
 {
+    const SUPPLEMENTAL_TAX_RATE = 0;
+
     public function __construct(ArizonaIncomeTaxInformation $tax_information, FederalIncome $federal_income, Payroll $payroll)
     {
         parent::__construct($tax_information, $payroll);
@@ -33,12 +35,5 @@ class ArizonaIncome extends BaseArizonaIncome
     public function getAdjustedEarnings()
     {
         return $this->payroll->earnings * $this->payroll->pay_periods;
-    }
-
-    public function getSupplementalIncomeTax()
-    {
-        // I don't think Arizona has one?
-
-        return 0;
     }
 }
