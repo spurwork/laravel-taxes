@@ -147,4 +147,35 @@ class AlabamaIncomeTest extends \TestCase
 
         $this->assertSame(2.07, $results->getTax(AlabamaIncome::class));
     }
+
+    public function testAlabamaIncomeClaimExempt()
+    {
+        $alabama_income_tax_information = AlabamaIncomeTaxInformation::forUser($this->user);
+        $alabama_income_tax_information->update([
+            'exempt' => true
+        ]);
+
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.alabama'));
+            $taxes->setWorkLocation($this->getLocation('us.alabama'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(66.68);
+            $taxes->setPayPeriods(260);
+        });
+
+        $this->assertSame(0.00, $results->getTax(AlabamaIncome::class));
+
+        $alabama_income_tax_information->update([
+            'exempt' => false
+        ]);
+
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.alabama'));
+            $taxes->setWorkLocation($this->getLocation('us.alabama'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(66.68);
+            $taxes->setPayPeriods(260);
+        });
+        $this->assertSame(2.07,  $results->getTax(AlabamaIncome::class));
+    }
 }

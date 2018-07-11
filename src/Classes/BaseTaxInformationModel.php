@@ -5,11 +5,13 @@ namespace Appleton\Taxes\Classes;
 use Appleton\Taxes\Models\TaxInformation;
 use Illuminate\Database\Eloquent\Model;
 
-class BaseTaxInformationModel extends Model
+abstract class BaseTaxInformationModel extends Model
 {
     protected $guarded = [];
 
     public $timestamps = false;
+
+    public abstract static function getDefault();
 
     public function __construct(array $attributes = array()) {
         parent::__construct($attributes);

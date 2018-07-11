@@ -16,6 +16,7 @@ class GeorgiaIncomeTaxInformation extends BaseTaxInformationModel
         $tax_information->allowances = 0;
         $tax_information->dependents = 0;
         $tax_information->filing_status = GeorgiaIncome::FILING_SINGLE;
+        $tax_information->exempt = false;
         return $tax_information;
     }
 

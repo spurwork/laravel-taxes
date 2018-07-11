@@ -3,6 +3,8 @@
 namespace Appleton\Taxes\Countries\US\Georgia\GeorgiaIncome;
 
 use Appleton\Taxes\Classes\BaseStateIncome;
+use Appleton\Taxes\Classes\Payroll;
+use Appleton\Taxes\Models\Countries\US\Georgia\GeorgiaIncomeTaxInformation;
 
 abstract class GeorgiaIncome extends BaseStateIncome
 {
@@ -21,4 +23,15 @@ abstract class GeorgiaIncome extends BaseStateIncome
         self::FILING_MARRIED_SEPARATE => 'FILING_MARRIED_SEPARATE',
         self::FILING_HEAD_OF_HOUSEHOLD => 'FILING_HEAD_OF_HOUSEHOLD',
     ];
+
+    public function __construct(GeorgiaIncomeTaxInformation $tax_information, Payroll $payroll)
+    {
+        parent::__construct($payroll);
+        $this->tax_information = $tax_information;
+    }
+
+    public function isUserClaimingExemption(): bool
+    {
+        return $this->tax_information->exempt;
+    }
 }
