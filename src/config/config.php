@@ -52,6 +52,10 @@ return [
 
             ],
 
+            'north_carolina' => [
+                'north_carolina_income_tax_information' => env('TAXES_NORTH_CAROLINA_INCOME_TAX_INFORMATION', 'north_carolina_income_tax_information'),
+            ],
+
             'wisconsin' => [
 
                 'wisconsin_income_tax_information' => env('TAXES_WISCONSIN_INCOME_TAX_INFORMATION', 'wisconsin_income_tax_information'),
@@ -89,6 +93,12 @@ return [
             'georgia' => [
 
                 'unemployment' => env('TAXES_GEORGIA_UNEMPLOYMENT_TAX_RATE', 0.027),
+
+            ],
+
+            'north_carolina' => [
+
+                'unemployment' => env('TAXES_NORTH_CAROLINA_UNEMPLOYMENT_TAX_RATE', 0.01),
 
             ],
 

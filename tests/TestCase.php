@@ -5,13 +5,15 @@ use Appleton\Taxes\Countries\US\Alabama\AlabamaIncome\AlabamaIncome;
 use Appleton\Taxes\Countries\US\Colorado\ColoradoIncome\ColoradoIncome;
 use Appleton\Taxes\Countries\US\Georgia\GeorgiaIncome\GeorgiaIncome;
 use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome;
+use Appleton\Taxes\Countries\US\NorthCarolina\NorthCarolinaIncome\NorthCarolinaIncome;
+use Appleton\Taxes\Countries\US\Wisconsin\WisconsinIncome\WisconsinIncome;
 use Appleton\Taxes\Models\Countries\US\Alabama\AlabamaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Arizona\ArizonaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Colorado\ColoradoIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Georgia\GeorgiaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\FederalIncomeTaxInformation;
+use Appleton\Taxes\Models\Countries\US\NorthCarolina\NorthCarolinaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Wisconsin\WisconsinIncomeTaxInformation;
-use Appleton\Taxes\Countries\US\Wisconsin\WisconsinIncome\WisconsinIncome;
 use Appleton\Taxes\Providers\TaxesServiceProvider;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -84,6 +86,12 @@ class TestCase extends BaseTestCase
             'filing_status' => GeorgiaIncome::FILING_SINGLE,
         ], $this->user);
 
+        NorthCarolinaIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'dependents' => 0,
+            'filing_status' => NorthCarolinaIncome::FILING_SINGLE,
+        ], $this->user);
+
         WisconsinIncomeTaxInformation::createForUser([
             'additional_withholding' => 0,
             'exemptions' => 0,
@@ -125,6 +133,8 @@ class TestCase extends BaseTestCase
             'us.arizona' => [33.6050991,-112.4052392],
             'us.colorado' => [39.7640021,-105.1352965],
             'us.georgia' => [33.7490, -84.3880],
+            'us.north_carolina' => [35.7596, -79.0193],
+            'us.tennessee' => [35.5175, -86.5804],
             'us.wisconsin' => [43.0849721, -89.4764603],
         ];
 

@@ -136,5 +136,4 @@ class GeorgiaIncomeTest extends \TestCase
 
         $this->assertSame(2.21, $results->getTax(GeorgiaIncome::class));
     }
-
 }

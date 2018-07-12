@@ -29,9 +29,4 @@ abstract class GeorgiaIncome extends BaseStateIncome
         parent::__construct($payroll);
         $this->tax_information = $tax_information;
     }
-
-    public function isUserClaimingExemption(): bool
-    {
-        return $this->tax_information->exempt;
-    }
 }
