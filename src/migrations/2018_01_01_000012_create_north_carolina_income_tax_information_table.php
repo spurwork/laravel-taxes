@@ -26,6 +26,7 @@ class CreateNorthCarolinaIncomeTaxInformationTable extends Migration
             $table->integer('additional_withholding');
             $table->integer('dependents');
             $table->integer('filing_status');
+            $table->boolean('exempt')->default(false);
         });
 
         $id = DB::table($this->governmental_unit_areas)->insertGetId([

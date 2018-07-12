@@ -30,9 +30,4 @@ abstract class FederalIncome extends BaseIncome
         parent::__construct($payroll);
         $this->tax_information = $tax_information;
     }
-
-    public function isUserClaimingExemption(): bool
-    {
-        return $this->tax_information->exempt;
-    }
 }

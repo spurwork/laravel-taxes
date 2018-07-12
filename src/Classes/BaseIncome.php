@@ -10,7 +10,6 @@ abstract class BaseIncome extends BaseTax
     const WITHHELD = true;
 
     abstract public function getTaxBrackets();
-    abstract public function isUserClaimingExemption();
 
     public function compute()
     {
@@ -52,6 +51,11 @@ abstract class BaseIncome extends BaseTax
             }
         }
         return $bracket;
+    }
+
+    public function isUserClaimingExemption(): bool
+    {
+        return $this->tax_information->exempt;
     }
 
     public function resolveTaxInformation($information_type, $tax_information, $user)
