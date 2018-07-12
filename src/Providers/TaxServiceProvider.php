@@ -2,7 +2,6 @@
 
 namespace Appleton\Taxes\Providers;
 
-use Appleton\Taxes\Countries\US\Colorado\ColoradoIncome\ColoradoIncome;
 use Carbon\Carbon;
 use Illuminate\Support\ServiceProvider;
 use Appleton\Taxes\Classes\Payroll;
@@ -46,6 +45,8 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\Alabama\SouthsideOccupational\SouthsideOccupational::class,
         \Appleton\Taxes\Countries\US\Alabama\SulligentOccupational\SulligentOccupational::class,
         \Appleton\Taxes\Countries\US\Alabama\TuskegeeOccupational\TuskegeeOccupational::class,
+        \Appleton\Taxes\Countries\US\Arizona\ArizonaIncome\ArizonaIncome::class,
+        \Appleton\Taxes\Countries\US\Arizona\ArizonaUnemployment\ArizonaUnemployment::class,
         \Appleton\Taxes\Countries\US\Colorado\ColoradoIncome\ColoradoIncome::class,
         \Appleton\Taxes\Countries\US\Colorado\ColoradoUnemployment\ColoradoUnemployment::class,
         \Appleton\Taxes\Countries\US\Georgia\GeorgiaIncome\GeorgiaIncome::class,
