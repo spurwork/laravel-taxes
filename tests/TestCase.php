@@ -130,11 +130,13 @@ class TestCase extends BaseTestCase
             'us.alabama.southside' => [33.9245, -86.0225],
             'us.alabama.sulligent' => [33.9018, -88.1345],
             'us.alabama.tuskegee' => [32.4302, -85.7077],
-            'us.arizona' => [33.6050991,-112.4052392],
-            'us.colorado' => [39.7640021,-105.1352965],
+            'us.arizona' => [33.6050991, -112.4052392],
+            'us.colorado' => [39.7640021, -105.1352965],
             'us.georgia' => [33.7490, -84.3880],
+            'us.florida' => [27.6648, -81.5158],
             'us.north_carolina' => [35.7596, -79.0193],
             'us.tennessee' => [35.5175, -86.5804],
+            'us.texas' => [31.9686, -99.9018],
             'us.wisconsin' => [43.0849721, -89.4764603],
         ];
 
