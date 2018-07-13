@@ -134,9 +134,9 @@ class TestCase extends BaseTestCase
             'us.colorado' => [39.7640021, -105.1352965],
             'us.georgia' => [33.7490, -84.3880],
             'us.florida' => [27.6648, -81.5158],
-            'us.texas' => [31.9686, -99.9018],
             'us.north_carolina' => [35.7596, -79.0193],
             'us.tennessee' => [35.5175, -86.5804],
+            'us.texas' => [31.9686, -99.9018],
             'us.wisconsin' => [43.0849721, -89.4764603],
         ];
 
