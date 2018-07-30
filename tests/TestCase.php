@@ -129,6 +129,7 @@ class TestCase extends BaseTestCase
             'us.alabama.shorter' => [32.3951, -85.9184],
             'us.alabama.southside' => [33.9245, -86.0225],
             'us.alabama.sulligent' => [33.9018, -88.1345],
+            'us.alabama.tarrant' => [33.5868, -86.7718],
             'us.alabama.tuskegee' => [32.4302, -85.7077],
             'us.arizona' => [33.6050991, -112.4052392],
             'us.colorado' => [39.7640021, -105.1352965],

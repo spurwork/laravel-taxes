@@ -44,6 +44,7 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\Alabama\ShorterOccupational\ShorterOccupational::class,
         \Appleton\Taxes\Countries\US\Alabama\SouthsideOccupational\SouthsideOccupational::class,
         \Appleton\Taxes\Countries\US\Alabama\SulligentOccupational\SulligentOccupational::class,
+        \Appleton\Taxes\Countries\US\Alabama\TarrantOccupational\TarrantOccupational::class,
         \Appleton\Taxes\Countries\US\Alabama\TuskegeeOccupational\TuskegeeOccupational::class,
         \Appleton\Taxes\Countries\US\Arizona\ArizonaIncome\ArizonaIncome::class,
         \Appleton\Taxes\Countries\US\Arizona\ArizonaUnemployment\ArizonaUnemployment::class,
