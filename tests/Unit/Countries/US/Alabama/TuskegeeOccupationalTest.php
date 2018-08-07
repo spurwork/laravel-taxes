@@ -15,6 +15,6 @@ class TuskegeeOccupationalTest extends \TestCase
             $taxes->setEarnings(2300);
         });
 
-        $this->assertSame(46.00, $results->getTax(TuskegeeOccupational::class));
+        $this->assertSame(69.00, $results->getTax(TuskegeeOccupational::class));
     }
 }

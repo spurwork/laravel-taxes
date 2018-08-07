@@ -6,5 +6,5 @@ use Appleton\Taxes\Countries\US\Alabama\TuskegeeOccupational\TuskegeeOccupationa
 
 class TuskegeeOccupational extends BaseTuskegeeOccupational
 {
-    const TAX_RATE = 0.02;
+    const TAX_RATE = 0.03;
 }
