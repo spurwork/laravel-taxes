@@ -213,7 +213,12 @@ class TaxesTest extends \TestCase
             $taxes->setEarnings(10);
         });
 
-        $this->assertSame(10.0, $results->getTax(FederalIncome::class));
+        $this->assertSame(6, $results->getFederalTaxes()->count());
+        $this->assertSame(0.15, $results->getTax(Medicare::class));
+        $this->assertSame(0.62, $results->getTax(SocialSecurity::class));
+        $this->assertSame(0.15, $results->getTax(MedicareEmployer::class));
+        $this->assertSame(0.62, $results->getTax(SocialSecurityEmployer::class));
+        $this->assertSame(9.24, $results->getTax(FederalIncome::class));
         $this->assertSame(0.0, $results->getTax(AlabamaIncome::class));
 
         $results = $this->taxes->calculate(function ($taxes) {
