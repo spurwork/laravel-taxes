@@ -14,4 +14,6 @@ abstract class Medicare extends BaseTax
     const FILING_HEAD_OF_HOUSEHOLD = 2;
     const FILING_MARRIED = 3;
     const FILING_SEPERATE = 4;
+
+    const PRIORITY = 0;
 }

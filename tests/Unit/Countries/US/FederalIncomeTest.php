@@ -95,7 +95,7 @@ class FederalIncomeTest extends \TestCase
             $taxes->setEarnings(1);
         });
 
-        $this->assertSame(1.0, $results->getTax(FederalIncome::class));
+        $this->assertSame(0.92, $results->getTax(FederalIncome::class));
 
         $results = $this->taxes->calculate(function ($taxes) {
             $taxes->setHomeLocation($this->getLocation('us'));
@@ -104,7 +104,7 @@ class FederalIncomeTest extends \TestCase
             $taxes->setEarnings(10);
         });
 
-        $this->assertSame(10.0, $results->getTax(FederalIncome::class));
+        $this->assertSame(9.24, $results->getTax(FederalIncome::class));
 
         $results = $this->taxes->calculate(function ($taxes) {
             $taxes->setHomeLocation($this->getLocation('us'));

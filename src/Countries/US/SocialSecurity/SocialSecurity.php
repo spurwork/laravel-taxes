@@ -8,4 +8,5 @@ abstract class SocialSecurity extends BaseTax
 {
     const TYPE = 'federal';
     const WITHHELD = true;
+    const PRIORITY = 0;
 }
