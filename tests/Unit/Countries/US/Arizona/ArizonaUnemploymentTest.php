@@ -16,7 +16,7 @@ class ArizonaUnemploymentTest extends \TestCase
         );
     }
 
-    public function testGeorgiaUnemployment()
+    public function testArizonaUnemployment()
     {
         $results = $this->taxes->calculate(function ($taxes) {
             $taxes->setHomeLocation($this->getLocation('us.arizona'));
@@ -28,7 +28,7 @@ class ArizonaUnemploymentTest extends \TestCase
         $this->assertSame(46.00, $results->getTax(ArizonaUnemployment::class));
     }
 
-    public function testGeorgiaUnemploymentWithTaxRate()
+    public function testArizonaUnemploymentWithTaxRate()
     {
         config(['taxes.rates.us.arizona.unemployment' => 0.024]);
 
@@ -42,7 +42,7 @@ class ArizonaUnemploymentTest extends \TestCase
         $this->assertSame(55.20, $results->getTax(ArizonaUnemployment::class));
     }
 
-    public function testGeorgiaUnemploymentMetWageBase()
+    public function testArizonaUnemploymentMetWageBase()
     {
         $results = $this->taxes->calculate(function ($taxes) {
             $taxes->setHomeLocation($this->getLocation('us.arizona'));

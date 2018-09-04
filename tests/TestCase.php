@@ -5,6 +5,7 @@ use Appleton\Taxes\Countries\US\Alabama\AlabamaIncome\AlabamaIncome;
 use Appleton\Taxes\Countries\US\Colorado\ColoradoIncome\ColoradoIncome;
 use Appleton\Taxes\Countries\US\Georgia\GeorgiaIncome\GeorgiaIncome;
 use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome;
+use Appleton\Taxes\Countries\US\NewMexico\NewMexicoIncome\NewMexicoIncome;
 use Appleton\Taxes\Countries\US\NorthCarolina\NorthCarolinaIncome\NorthCarolinaIncome;
 use Appleton\Taxes\Countries\US\Wisconsin\WisconsinIncome\WisconsinIncome;
 use Appleton\Taxes\Models\Countries\US\Alabama\AlabamaIncomeTaxInformation;
@@ -12,6 +13,7 @@ use Appleton\Taxes\Models\Countries\US\Arizona\ArizonaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Colorado\ColoradoIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Georgia\GeorgiaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\FederalIncomeTaxInformation;
+use Appleton\Taxes\Models\Countries\US\NewMexico\NewMexicoIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\NorthCarolina\NorthCarolinaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Wisconsin\WisconsinIncomeTaxInformation;
 use Appleton\Taxes\Providers\TaxesServiceProvider;
@@ -86,6 +88,12 @@ class TestCase extends BaseTestCase
             'filing_status' => GeorgiaIncome::FILING_SINGLE,
         ], $this->user);
 
+        NewMexicoIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'exemptions' => 0,
+            'filing_status' => NewMexicoIncome::FILING_SINGLE,
+        ], $this->user);
+
         NorthCarolinaIncomeTaxInformation::createForUser([
             'additional_withholding' => 0,
             'dependents' => 0,
@@ -139,6 +147,7 @@ class TestCase extends BaseTestCase
             'us.colorado' => [39.7640021, -105.1352965],
             'us.georgia' => [33.7490, -84.3880],
             'us.florida' => [27.6648, -81.5158],
+            'us.new_mexico' => [34.5199, -105.8701],
             'us.north_carolina' => [35.7596, -79.0193],
             'us.tennessee' => [35.5175, -86.5804],
             'us.texas' => [31.9686, -99.9018],

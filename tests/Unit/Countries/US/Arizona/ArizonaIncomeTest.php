@@ -2,7 +2,6 @@
 
 namespace Appleton\Taxes\Countries\US\Arizona\ArizonaIncome;
 
-use Appleton\Taxes\Models\Countries\US\Alabama\AlabamaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Arizona\ArizonaIncomeTaxInformation;
 use Carbon\Carbon;
 
@@ -37,4 +36,5 @@ class ArizonaIncomeTest extends \TestCase
         });
 
         $this->assertSame(4.2, $results->getTax(ArizonaIncome::class));
-    }}
+    }
+}
