@@ -64,11 +64,7 @@ class NorthCarolinaIncome extends BaseNorthCarolinaIncome
 
     public function getAdjustedEarnings()
     {
-        $adjusted_earnings = $this->getGrossEarnings();
-
-        $adjusted_earnings = $adjusted_earnings - $this->getStandardDeduction() - $this->getDependentExemption();
-
-        return $adjusted_earnings;
+        return $this->getGrossEarnings() - ($this->federal_income_tax * $this->payroll->pay_periods)  - $this->getStandardDeduction() - $this->getDependentExemption();
     }
 
     public function getSupplementalIncomeTax()

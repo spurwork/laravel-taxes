@@ -48,7 +48,7 @@ class WisconsinIncome extends BaseWisconsinIncome
     public function getAdjustedEarnings()
     {
         // For Wisconsin, standard deduction is built into the tables.
-        return $this->getGrossEarnings() - ($this->tax_information->exemptions * self::EXEMPTION_AMOUNT);
+        return $this->getGrossEarnings() - ($this->federal_income_tax * $this->payroll->pay_periods) - ($this->tax_information->exemptions * self::EXEMPTION_AMOUNT);
     }
 
     public function getTaxBrackets()

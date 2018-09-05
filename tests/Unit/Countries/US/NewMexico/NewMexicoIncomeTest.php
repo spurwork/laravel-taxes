@@ -21,6 +21,6 @@ class NewMexicoIncomeTest extends \TestCase
             $taxes->setPayPeriods(52);
         });
 
-        $this->assertSame(0.95, $results->getTax(NewMexicoIncome::class));
+        $this->assertSame(0.9, $results->getTax(NewMexicoIncome::class));
     }
 }

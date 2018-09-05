@@ -44,7 +44,7 @@ class NewMexicoIncome extends BaseNewMexicoIncome
 
     public function getAdjustedEarnings()
     {
-        return $this->getGrossEarnings() - $this->getAllowanceExemption();
+        return $this->getGrossEarnings() - ($this->federal_income_tax * $this->payroll->pay_periods) - $this->getAllowanceExemption();
     }
 
     public function getTaxBrackets()
