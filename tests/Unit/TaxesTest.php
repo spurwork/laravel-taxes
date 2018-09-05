@@ -57,7 +57,7 @@ class TaxesTest extends \TestCase
             $taxes->setDate(Carbon::now()->addMonth());
         });
 
-        $this->assertSame(2.21, $results->getTax(GeorgiaIncome::class));
+        $this->assertSame(1.87, $results->getTax(GeorgiaIncome::class));
         $this->assertSame(1.80, $results->getTax(GeorgiaUnemployment::class));
     }
 

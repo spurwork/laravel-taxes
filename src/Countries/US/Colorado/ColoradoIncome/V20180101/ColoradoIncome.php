@@ -49,7 +49,7 @@ class ColoradoIncome extends BaseColoradoIncome
 
     public function getAdjustedEarnings()
     {
-        $adjusted_earnings = $this->getGrossEarnings() - $this->getExemptionAllowance();
+        $adjusted_earnings = $this->getGrossEarnings() - ($this->federal_income_tax * $this->payroll->pay_periods) - $this->getExemptionAllowance();
 
         return $adjusted_earnings;
     }

@@ -2,7 +2,6 @@
 
 namespace Appleton\Taxes\Countries\US\Arizona\ArizonaIncome;
 
-use Appleton\Taxes\Models\Countries\US\Alabama\AlabamaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Arizona\ArizonaIncomeTaxInformation;
 use Carbon\Carbon;
 
@@ -24,7 +23,7 @@ class ArizonaIncomeTest extends \TestCase
             $taxes->setPayPeriods(52);
         });
 
-        $this->assertSame(1.30, $results->getTax(ArizonaIncome::class));
+        $this->assertSame(1.26, $results->getTax(ArizonaIncome::class));
 
         ArizonaIncomeTaxInformation::forUser($this->user)->update(['percentage_withheld' => 4.2]);
 
@@ -36,5 +35,6 @@ class ArizonaIncomeTest extends \TestCase
             $taxes->setPayPeriods(52);
         });
 
-        $this->assertSame(4.2, $results->getTax(ArizonaIncome::class));
-    }}
+        $this->assertSame(4.08, $results->getTax(ArizonaIncome::class));
+    }
+}

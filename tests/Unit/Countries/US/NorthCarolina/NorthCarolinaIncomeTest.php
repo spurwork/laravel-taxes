@@ -26,7 +26,7 @@ class NorthCarolinaIncomeTest extends \TestCase
             $taxes->setPayPeriods(260);
         });
 
-        $this->assertSame(1.82, $results->getTax(NorthCarolinaIncome::class));
+        $this->assertSame(1.51, $results->getTax(NorthCarolinaIncome::class));
     }
 
     public function testNorthCarolinaAdditionalWithholding()
@@ -51,7 +51,7 @@ class NorthCarolinaIncomeTest extends \TestCase
             $taxes->setPayPeriods(260);
         });
 
-        $this->assertSame(11.82, $results->getTax(NorthCarolinaIncome::class));
+        $this->assertSame(11.51, $results->getTax(NorthCarolinaIncome::class));
     }
 
     public function testNorthCarolinaSupplemental()
@@ -102,7 +102,7 @@ class NorthCarolinaIncomeTest extends \TestCase
             $taxes->setPayPeriods(260);
         });
 
-        $this->assertSame(1.82, $results->getTax(NorthCarolinaIncome::class));
+        $this->assertSame(1.51, $results->getTax(NorthCarolinaIncome::class));
     }
 
     public function testNorthCarolinaIncomeWorkInTennessee()
@@ -115,6 +115,6 @@ class NorthCarolinaIncomeTest extends \TestCase
             $taxes->setPayPeriods(260);
         });
 
-        $this->assertSame(1.82, $results->getTax(NorthCarolinaIncome::class));
+        $this->assertSame(1.51, $results->getTax(NorthCarolinaIncome::class));
     }
 }

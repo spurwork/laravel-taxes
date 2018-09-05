@@ -2,6 +2,8 @@
 
 namespace Appleton\Taxes\Countries\US\Georgia\GeorgiaIncome;
 
+use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome;
+use Appleton\Taxes\Models\Countries\US\FederalIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Georgia\GeorgiaIncomeTaxInformation;
 use Carbon\Carbon;
 
@@ -26,7 +28,7 @@ class GeorgiaIncomeTest extends \TestCase
             $taxes->setPayPeriods(260);
         });
 
-        $this->assertSame(2.21, $results->getTax(GeorgiaIncome::class));
+        $this->assertSame(1.87, $results->getTax(GeorgiaIncome::class));
     }
 
     public function testGeorgiaAdditionalWithholding()
@@ -51,7 +53,7 @@ class GeorgiaIncomeTest extends \TestCase
             $taxes->setPayPeriods(260);
         });
 
-        $this->assertSame(12.21, $results->getTax(GeorgiaIncome::class));
+        $this->assertSame(11.87, $results->getTax(GeorgiaIncome::class));
     }
 
     public function testGeorgiaSupplemental()
@@ -102,7 +104,7 @@ class GeorgiaIncomeTest extends \TestCase
             $taxes->setPayPeriods(260);
         });
 
-        $this->assertSame(2.21, $results->getTax(GeorgiaIncome::class));
+        $this->assertSame(1.87, $results->getTax(GeorgiaIncome::class));
     }
 
     public function testGeorgiaIncomeClaimExempt()
@@ -134,6 +136,30 @@ class GeorgiaIncomeTest extends \TestCase
             $taxes->setPayPeriods(260);
         });
 
-        $this->assertSame(2.21, $results->getTax(GeorgiaIncome::class));
+        $this->assertSame(1.87, $results->getTax(GeorgiaIncome::class));
+    }
+
+    public function testGeorgiaIncomeTestCase1()
+    {
+        FederalIncomeTaxInformation::forUser($this->user)->update([
+            'exemptions' => 1,
+            'filing_status' => FederalIncome::FILING_MARRIED,
+        ]);
+
+        GeorgiaIncomeTaxInformation::forUser($this->user)->update([
+            'allowances' => 0,
+            'personal_allowances' => 1,
+            'filing_status' => GeorgiaIncome::FILING_MARRIED_JOINT_BOTH_WORKING,
+        ]);
+
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.georgia'));
+            $taxes->setWorkLocation($this->getLocation('us.georgia'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(412.5);
+            $taxes->setPayPeriods(52);
+        });
+
+        $this->assertSame(13.86, $results->getTax(GeorgiaIncome::class));
     }
 }
