@@ -17,7 +17,7 @@ class AlabamaIncomeTest extends \TestCase
             $taxes->setPayPeriods(260);
         });
 
-        $this->assertSame(2.07, $results->getTax(AlabamaIncome::class));
+        $this->assertSame(2.06, $results->getTax(AlabamaIncome::class));
 
         Carbon::setTestNow(
             Carbon::parse('January 1, 2018 8am', 'America/Chicago')->setTimezone('UTC')
@@ -66,7 +66,7 @@ class AlabamaIncomeTest extends \TestCase
             $taxes->setPayPeriods(260);
         });
 
-        $this->assertSame(9.12, $results->getTax(AlabamaIncome::class));
+        $this->assertSame(9.11, $results->getTax(AlabamaIncome::class));
 
         $results = $this->taxes->calculate(function ($taxes) {
             $taxes->setHomeLocation($this->getLocation('us.alabama'));
@@ -76,7 +76,7 @@ class AlabamaIncomeTest extends \TestCase
             $taxes->setPayPeriods(260);
         });
 
-        $this->assertSame(12.07, $results->getTax(AlabamaIncome::class));
+        $this->assertSame(12.06, $results->getTax(AlabamaIncome::class));
     }
 
     public function testAlabamaSupplemental()
@@ -117,7 +117,7 @@ class AlabamaIncomeTest extends \TestCase
             $taxes->setPayPeriods(260);
         });
 
-        $this->assertSame(2.84, $results->getTax(AlabamaIncome::class));
+        $this->assertSame(2.83, $results->getTax(AlabamaIncome::class));
     }
 
     public function testAlabamaIncomeUseDefault()
@@ -132,7 +132,7 @@ class AlabamaIncomeTest extends \TestCase
             $taxes->setPayPeriods(260);
         });
 
-        $this->assertSame(2.07, $results->getTax(AlabamaIncome::class));
+        $this->assertSame(2.06, $results->getTax(AlabamaIncome::class));
     }
 
     public function testAlabamaIncomeWorkInTennessee()
@@ -145,7 +145,7 @@ class AlabamaIncomeTest extends \TestCase
             $taxes->setPayPeriods(260);
         });
 
-        $this->assertSame(2.07, $results->getTax(AlabamaIncome::class));
+        $this->assertSame(2.06, $results->getTax(AlabamaIncome::class));
     }
 
     public function testAlabamaIncomeClaimExempt()
@@ -176,6 +176,6 @@ class AlabamaIncomeTest extends \TestCase
             $taxes->setEarnings(66.68);
             $taxes->setPayPeriods(260);
         });
-        $this->assertSame(2.07,  $results->getTax(AlabamaIncome::class));
+        $this->assertSame(2.06,  $results->getTax(AlabamaIncome::class));
     }
 }

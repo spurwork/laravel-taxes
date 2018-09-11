@@ -35,6 +35,6 @@ class ArizonaIncomeTest extends \TestCase
             $taxes->setPayPeriods(52);
         });
 
-        $this->assertSame(4.08, $results->getTax(ArizonaIncome::class));
+        $this->assertSame(4.07, $results->getTax(ArizonaIncome::class));
     }
 }

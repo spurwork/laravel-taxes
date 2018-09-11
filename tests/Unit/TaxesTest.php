@@ -33,7 +33,7 @@ class TaxesTest extends \TestCase
             $taxes->setDate(Carbon::now()->addMonth());
         });
 
-        $this->assertSame(7.55, $results->getTax(FederalIncome::class));
+        $this->assertSame(7.54, $results->getTax(FederalIncome::class));
         $this->assertSame(0.40, $results->getTax(FederalUnemployment::class));
         $this->assertSame(0.97, $results->getTax(Medicare::class));
         $this->assertSame(0.97, $results->getTax(MedicareEmployer::class));
@@ -117,7 +117,7 @@ class TaxesTest extends \TestCase
             $taxes->setDate(Carbon::now()->addMonth());
         });
 
-        $this->assertSame(7.55, $results->getTax(FederalIncome::class));
+        $this->assertSame(7.54, $results->getTax(FederalIncome::class));
         $this->assertSame(1.57, $results->getTax(Medicare::class));
         $this->assertSame(0.97, $results->getTax(MedicareEmployer::class));
         $this->assertSame(2.03, $results->getTax(AlabamaIncome::class));
@@ -135,7 +135,7 @@ class TaxesTest extends \TestCase
             $taxes->setDate(Carbon::now()->addMonth());
         });
 
-        $this->assertSame(7.55, $results->getTax(FederalIncome::class));
+        $this->assertSame(7.54, $results->getTax(FederalIncome::class));
         $this->assertSame(1.57, $results->getTax(Medicare::class));
         $this->assertSame(0.97, $results->getTax(MedicareEmployer::class));
         $this->assertSame(2.03, $results->getTax(AlabamaIncome::class));
@@ -174,7 +174,7 @@ class TaxesTest extends \TestCase
         $this->assertSame(0.97, $results->getTax(MedicareEmployer::class));
         $this->assertSame(4.13, $results->getTax(SocialSecurity::class));
         $this->assertSame(4.13, $results->getTax(SocialSecurityEmployer::class));
-        $this->assertSame(2.07, $results->getTax(AlabamaIncome::class));
+        $this->assertSame(2.06, $results->getTax(AlabamaIncome::class));
         $this->assertSame(1.80, $results->getTax(AlabamaUnemployment::class));
         $this->assertSame(0.67, $results->getTax(BirminghamOccupational::class));
     }
@@ -218,7 +218,7 @@ class TaxesTest extends \TestCase
         $this->assertSame(0.62, $results->getTax(SocialSecurity::class));
         $this->assertSame(0.15, $results->getTax(MedicareEmployer::class));
         $this->assertSame(0.62, $results->getTax(SocialSecurityEmployer::class));
-        $this->assertSame(9.24, $results->getTax(FederalIncome::class));
+        $this->assertSame(9.23, $results->getTax(FederalIncome::class));
         $this->assertSame(0.0, $results->getTax(AlabamaIncome::class));
 
         $results = $this->taxes->calculate(function ($taxes) {
@@ -229,7 +229,7 @@ class TaxesTest extends \TestCase
         });
 
         $this->assertSame(10.0, $results->getTax(FederalIncome::class));
-        $this->assertSame(0.16, $results->getTax(AlabamaIncome::class));
+        $this->assertSame(0.15, $results->getTax(AlabamaIncome::class));
     }
 
     public function testNegativeAdditionalWithholding()

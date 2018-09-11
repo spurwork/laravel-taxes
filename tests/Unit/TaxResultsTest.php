@@ -31,7 +31,7 @@ class TaxResultsTest extends \TestCase
             MedicareEmployer::class => 0.97,
             SocialSecurity::class => 4.13,
             SocialSecurityEmployer::class => 4.13,
-            AlabamaIncome::class => 2.07,
+            AlabamaIncome::class => 2.06,
             AlabamaUnemployment::class => 1.8,
             BirminghamOccupational::class => 0.67,
         ], $results->getAllTaxes()->toArray());
@@ -40,7 +40,7 @@ class TaxResultsTest extends \TestCase
             FederalIncome::class => 6.88,
             Medicare::class => 0.97,
             SocialSecurity::class => 4.13,
-            AlabamaIncome::class => 2.07,
+            AlabamaIncome::class => 2.06,
             BirminghamOccupational::class => 0.67,
         ], $results->getEmployeeTaxes()->toArray());
 
@@ -61,7 +61,7 @@ class TaxResultsTest extends \TestCase
         ], $results->getFederalTaxes()->toArray());
 
         $this->assertEquals([
-            AlabamaIncome::class => 2.07,
+            AlabamaIncome::class => 2.06,
             AlabamaUnemployment::class => 1.8,
             BirminghamOccupational::class => 0.67,
         ], $results->getStateAndLocalTaxes()->toArray());

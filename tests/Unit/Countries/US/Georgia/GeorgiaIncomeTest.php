@@ -160,6 +160,6 @@ class GeorgiaIncomeTest extends \TestCase
             $taxes->setPayPeriods(52);
         });
 
-        $this->assertSame(13.86, $results->getTax(GeorgiaIncome::class));
+        $this->assertSame(13.85, $results->getTax(GeorgiaIncome::class));
     }
 }
