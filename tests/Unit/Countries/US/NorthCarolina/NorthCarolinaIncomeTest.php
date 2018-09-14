@@ -64,7 +64,7 @@ class NorthCarolinaIncomeTest extends \TestCase
             $taxes->setSupplementalEarnings(100);
         });
 
-        $this->assertSame(5.60, $results->getTax(NorthCarolinaIncome::class));
+        $this->assertSame(5.59, $results->getTax(NorthCarolinaIncome::class));
     }
 
     public function testNorthCarolinaIncomeNonNegative()

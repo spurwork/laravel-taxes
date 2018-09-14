@@ -104,7 +104,7 @@ class FederalIncomeTest extends \TestCase
             $taxes->setEarnings(10);
         });
 
-        $this->assertSame(9.24, $results->getTax(FederalIncome::class));
+        $this->assertSame(9.23, $results->getTax(FederalIncome::class));
 
         $results = $this->taxes->calculate(function ($taxes) {
             $taxes->setHomeLocation($this->getLocation('us'));
@@ -153,7 +153,7 @@ class FederalIncomeTest extends \TestCase
             $taxes->setPayPeriods(52);
         });
 
-        $this->assertSame(496.65, $results->getTax(FederalIncome::class));
+        $this->assertSame(496.64, $results->getTax(FederalIncome::class));
     }
 
     public function testBimonthly()
@@ -166,7 +166,7 @@ class FederalIncomeTest extends \TestCase
             $taxes->setPayPeriods(24);
         });
 
-        $this->assertSame(373.49, $results->getTax(FederalIncome::class));
+        $this->assertSame(373.48, $results->getTax(FederalIncome::class));
     }
 
     public function testMonthly()
@@ -179,7 +179,7 @@ class FederalIncomeTest extends \TestCase
             $taxes->setPayPeriods(12);
         });
 
-        $this->assertSame(277.40, $results->getTax(FederalIncome::class));
+        $this->assertSame(277.39, $results->getTax(FederalIncome::class));
     }
 
     public function testNonNegative()
@@ -192,7 +192,7 @@ class FederalIncomeTest extends \TestCase
             $taxes->setPayPeriods(260);
         });
 
-        $this->assertSame(0.12, $results->getTax(FederalIncome::class));
+        $this->assertSame(0.11, $results->getTax(FederalIncome::class));
     }
 
     public function testCaseStudy1()
@@ -328,7 +328,7 @@ class FederalIncomeTest extends \TestCase
             $taxes->setDate($this->date('2018-01-01'));
         });
 
-        $this->assertSame(83.8, $results->getTax(FederalIncome::class));
+        $this->assertSame(83.79, $results->getTax(FederalIncome::class));
     }
 
     public function testFederalIncomeClaimExempt()
@@ -359,6 +359,6 @@ class FederalIncomeTest extends \TestCase
             $taxes->setPayPeriods(24);
         });
 
-        $this->assertSame(373.49, $results->getTax(FederalIncome::class));
+        $this->assertSame(373.48, $results->getTax(FederalIncome::class));
     }
 }

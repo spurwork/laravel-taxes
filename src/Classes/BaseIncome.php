@@ -22,7 +22,7 @@ abstract class BaseIncome extends BaseTax
             $this->payroll->withholdTax($this->getSupplementalIncomeTax()) +
             $this->payroll->withholdTax($this->getAdditionalWithholding());
 
-        return round($this->tax_total, 2);
+        return round(intval($this->tax_total * 100) / 100, 2);
     }
 
     public function getAdditionalWithholding()
