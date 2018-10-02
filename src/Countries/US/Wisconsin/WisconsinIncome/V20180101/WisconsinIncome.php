@@ -3,7 +3,6 @@
 namespace Appleton\Taxes\Countries\US\Wisconsin\WisconsinIncome\V20180101;
 
 use Appleton\Taxes\Classes\Payroll;
-use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome;
 use Appleton\Taxes\Countries\US\Wisconsin\WisconsinIncome\WisconsinIncome as BaseWisconsinIncome;
 use Appleton\Taxes\Models\Countries\US\Wisconsin\WisconsinIncomeTaxInformation;
 
@@ -38,17 +37,16 @@ class WisconsinIncome extends BaseWisconsinIncome
         ],
     ];
 
-    public function __construct(WisconsinIncomeTaxInformation $tax_information, FederalIncome $federal_income, Payroll $payroll)
+    public function __construct(WisconsinIncomeTaxInformation $tax_information, Payroll $payroll)
     {
         parent::__construct($tax_information, $payroll);
-        $this->federal_income_tax = $federal_income->getAmount();
         $this->tax_information = $tax_information;
     }
 
     public function getAdjustedEarnings()
     {
         // For Wisconsin, standard deduction is built into the tables.
-        return $this->getGrossEarnings() - ($this->federal_income_tax * $this->payroll->pay_periods) - ($this->tax_information->exemptions * self::EXEMPTION_AMOUNT);
+        return $this->getGrossEarnings() - ($this->tax_information->exemptions * self::EXEMPTION_AMOUNT);
     }
 
     public function getTaxBrackets()

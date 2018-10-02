@@ -4,7 +4,6 @@ namespace Appleton\Taxes\Countries\US\Colorado\ColoradoIncome\V20180101;
 
 use Appleton\Taxes\Classes\Payroll;
 use Appleton\Taxes\Countries\US\Colorado\ColoradoIncome\ColoradoIncome as BaseColoradoIncome;
-use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome;
 use Appleton\Taxes\Models\Countries\US\Colorado\ColoradoIncomeTaxInformation;
 
 class ColoradoIncome extends BaseColoradoIncome
@@ -33,10 +32,9 @@ class ColoradoIncome extends BaseColoradoIncome
         10 => 18900,
     ];
 
-    public function __construct(ColoradoIncomeTaxInformation $tax_information, FederalIncome $federal_income, Payroll $payroll)
+    public function __construct(ColoradoIncomeTaxInformation $tax_information, Payroll $payroll)
     {
         parent::__construct($tax_information, $payroll);
-        $this->federal_income_tax = $federal_income->getAmount();
         $this->tax_information = $tax_information;
     }
 
@@ -49,7 +47,7 @@ class ColoradoIncome extends BaseColoradoIncome
 
     public function getAdjustedEarnings()
     {
-        $adjusted_earnings = $this->getGrossEarnings() - ($this->federal_income_tax * $this->payroll->pay_periods) - $this->getExemptionAllowance();
+        $adjusted_earnings = $this->getGrossEarnings() - $this->getExemptionAllowance();
 
         return $adjusted_earnings;
     }

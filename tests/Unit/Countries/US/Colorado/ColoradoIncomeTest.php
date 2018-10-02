@@ -26,7 +26,7 @@ class ColoradoIncomeTest extends \TestCase
             $taxes->setPayPeriods(52);
         });
 
-        $this->assertSame(38.00, $results->getTax(ColoradoIncome::class));
+        $this->assertSame(44.00, $results->getTax(ColoradoIncome::class));
 
         ColoradoIncomeTaxInformation::forUser($this->user)->update(['filing_status' => ColoradoIncome::FILING_MARRIED]);
 
@@ -38,7 +38,7 @@ class ColoradoIncomeTest extends \TestCase
             $taxes->setPayPeriods(52);
         });
 
-        $this->assertSame(33.00, $results->getTax(ColoradoIncome::class));
+        $this->assertSame(39.00, $results->getTax(ColoradoIncome::class));
     }
 
     public function testIncomeExemptions()
@@ -53,6 +53,6 @@ class ColoradoIncomeTest extends \TestCase
             $taxes->setPayPeriods(52);
         });
 
-        $this->assertSame(35.00, $results->getTax(ColoradoIncome::class));
+        $this->assertSame(41.00, $results->getTax(ColoradoIncome::class));
     }
 }

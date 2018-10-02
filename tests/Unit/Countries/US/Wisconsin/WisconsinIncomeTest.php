@@ -26,7 +26,7 @@ class WisconsinIncomeTest extends \TestCase
             $taxes->setPayPeriods(52);
         });
 
-        $this->assertSame(48.95, $results->getTax(WisconsinIncome::class));
+        $this->assertSame(56.86, $results->getTax(WisconsinIncome::class));
 
         WisconsinIncomeTaxInformation::forUser($this->user)->update(['filing_status' => WisconsinIncome::FILING_MARRIED]);
 
@@ -38,7 +38,7 @@ class WisconsinIncomeTest extends \TestCase
             $taxes->setPayPeriods(52);
         });
 
-        $this->assertSame(47.0, $results->getTax(WisconsinIncome::class));
+        $this->assertSame(54.92, $results->getTax(WisconsinIncome::class));
 
         WisconsinIncomeTaxInformation::forUser($this->user)->update(['filing_status' => WisconsinIncome::FILING_SEPERATE]);
 
@@ -50,7 +50,7 @@ class WisconsinIncomeTest extends \TestCase
             $taxes->setPayPeriods(52);
         });
 
-        $this->assertSame(50.89, $results->getTax(WisconsinIncome::class));
+        $this->assertSame(58.81, $results->getTax(WisconsinIncome::class));
     }
 
     public function testIncomeExemptions()
@@ -65,7 +65,7 @@ class WisconsinIncomeTest extends \TestCase
             $taxes->setPayPeriods(52);
         });
 
-        $this->assertSame(48.46, $results->getTax(WisconsinIncome::class));
+        $this->assertSame(56.38, $results->getTax(WisconsinIncome::class));
     }
 
     public function testWisconsinIncomeClaimExempt()
@@ -98,6 +98,6 @@ class WisconsinIncomeTest extends \TestCase
             $taxes->setPayPeriods(52);
         });
 
-        $this->assertSame(48.46, $results->getTax(WisconsinIncome::class));
+        $this->assertSame(56.38, $results->getTax(WisconsinIncome::class));
     }
 }
