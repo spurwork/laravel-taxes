@@ -4,7 +4,6 @@ namespace Appleton\Taxes\Countries\US\NorthCarolina\NorthCarolinaIncome\V2018010
 
 use Appleton\Taxes\Classes\Payroll;
 use Appleton\Taxes\Countries\US\NorthCarolina\NorthCarolinaIncome\NorthCarolinaIncome as BaseNorthCarolinaIncome;
-use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome;
 use Appleton\Taxes\Models\Countries\US\NorthCarolina\NorthCarolinaIncomeTaxInformation;
 
 class NorthCarolinaIncome extends BaseNorthCarolinaIncome
@@ -55,16 +54,15 @@ class NorthCarolinaIncome extends BaseNorthCarolinaIncome
         ],
     ];
 
-    public function __construct(NorthCarolinaIncomeTaxInformation $tax_information, FederalIncome $federal_income, Payroll $payroll)
+    public function __construct(NorthCarolinaIncomeTaxInformation $tax_information, Payroll $payroll)
     {
         parent::__construct($payroll);
-        $this->federal_income_tax = $federal_income->getAmount();
         $this->tax_information = $tax_information;
     }
 
     public function getAdjustedEarnings()
     {
-        return $this->getGrossEarnings() - ($this->federal_income_tax * $this->payroll->pay_periods)  - $this->getStandardDeduction() - $this->getDependentExemption();
+        return $this->getGrossEarnings() - $this->getStandardDeduction() - $this->getDependentExemption();
     }
 
     public function getSupplementalIncomeTax()

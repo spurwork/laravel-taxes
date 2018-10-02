@@ -4,7 +4,6 @@ namespace Appleton\Taxes\Countries\US\Georgia\GeorgiaIncome\V20180101;
 
 use Appleton\Taxes\Classes\Payroll;
 use Appleton\Taxes\Countries\US\Georgia\GeorgiaIncome\GeorgiaIncome as BaseGeorgiaIncome;
-use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome;
 use Appleton\Taxes\Models\Countries\US\Georgia\GeorgiaIncomeTaxInformation;
 
 class GeorgiaIncome extends BaseGeorgiaIncome
@@ -62,16 +61,15 @@ class GeorgiaIncome extends BaseGeorgiaIncome
 
     const DEPENDENT_ALLOWANCE_AMOUNT = 3000;
 
-    public function __construct(GeorgiaIncomeTaxInformation $tax_information, FederalIncome $federal_income, Payroll $payroll)
+    public function __construct(GeorgiaIncomeTaxInformation $tax_information, Payroll $payroll)
     {
         parent::__construct($tax_information, $payroll);
-        $this->federal_income_tax = $federal_income->getAmount();
         $this->tax_information = $tax_information;
     }
 
     public function getAdjustedEarnings()
     {
-        $adjusted_earnings = $this->getGrossEarnings() - ($this->federal_income_tax * $this->payroll->pay_periods);
+        $adjusted_earnings = $this->getGrossEarnings();
 
         if ($this->tax_information->filing_status != static::FILING_ZERO) {
             $adjusted_earnings = $adjusted_earnings - $this->getStandardDeduction() - $this->getPersonalAllowance() - $this->getDependentExemption();

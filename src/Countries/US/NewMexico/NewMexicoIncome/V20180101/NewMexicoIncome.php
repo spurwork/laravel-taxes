@@ -4,7 +4,6 @@ namespace Appleton\Taxes\Countries\US\NewMexico\NewMexicoIncome\V20180101;
 
 use Appleton\Taxes\Classes\Payroll;
 use Appleton\Taxes\Countries\US\NewMexico\NewMexicoIncome\NewMexicoIncome as BaseNewMexicoIncome;
-use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome;
 use Appleton\Taxes\Models\Countries\US\NewMexico\NewMexicoIncomeTaxInformation;
 
 class NewMexicoIncome extends BaseNewMexicoIncome
@@ -35,16 +34,15 @@ class NewMexicoIncome extends BaseNewMexicoIncome
 
     const EXEMPTION_ALLOWANCE_AMOUNT = 4150;
 
-    public function __construct(NewMexicoIncomeTaxInformation $tax_information, FederalIncome $federal_income, Payroll $payroll)
+    public function __construct(NewMexicoIncomeTaxInformation $tax_information, Payroll $payroll)
     {
         parent::__construct($tax_information, $payroll);
-        $this->federal_income_tax = $federal_income->getAmount();
         $this->tax_information = $tax_information;
     }
 
     public function getAdjustedEarnings()
     {
-        return $this->getGrossEarnings() - ($this->federal_income_tax * $this->payroll->pay_periods) - $this->getAllowanceExemption();
+        return $this->getGrossEarnings() - $this->getAllowanceExemption();
     }
 
     public function getTaxBrackets()
