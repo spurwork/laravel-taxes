@@ -44,11 +44,11 @@ class GeorgiaIncome extends BaseGeorgiaIncome
     ];
 
     const STANDARD_DEDUCTIONS = [
-        self::FILING_SINGLE => 4600,
-        self::FILING_HEAD_OF_HOUSEHOLD => 4600,
-        self::FILING_MARRIED_SEPARATE => 3000,
-        self::FILING_MARRIED_JOINT_BOTH_WORKING => 3000,
-        self::FILING_MARRIED_JOINT_ONE_WORKING => 6000,
+        self::FILING_SINGLE => 2300,
+        self::FILING_HEAD_OF_HOUSEHOLD => 2300,
+        self::FILING_MARRIED_SEPARATE => 1500,
+        self::FILING_MARRIED_JOINT_BOTH_WORKING => 1500,
+        self::FILING_MARRIED_JOINT_ONE_WORKING => 3000,
     ];
 
     const PERSONAL_EXEMPTION_ALLOWANCES = [
