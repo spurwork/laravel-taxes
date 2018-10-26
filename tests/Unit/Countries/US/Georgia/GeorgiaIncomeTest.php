@@ -28,7 +28,7 @@ class GeorgiaIncomeTest extends \TestCase
             $taxes->setPayPeriods(260);
         });
 
-        $this->assertSame(2.20, $results->getTax(GeorgiaIncome::class));
+        $this->assertSame(2.73, $results->getTax(GeorgiaIncome::class));
     }
 
     public function testGeorgiaAdditionalWithholding()
@@ -53,7 +53,7 @@ class GeorgiaIncomeTest extends \TestCase
             $taxes->setPayPeriods(260);
         });
 
-        $this->assertSame(12.20, $results->getTax(GeorgiaIncome::class));
+        $this->assertSame(12.73, $results->getTax(GeorgiaIncome::class));
     }
 
     public function testGeorgiaSupplemental()
@@ -75,7 +75,7 @@ class GeorgiaIncomeTest extends \TestCase
             $taxes->setHomeLocation($this->getLocation('us.georgia'));
             $taxes->setWorkLocation($this->getLocation('us.georgia'));
             $taxes->setUser($this->user);
-            $taxes->setEarnings(10);
+            $taxes->setEarnings(9);
             $taxes->setPayPeriods(260);
         });
 
@@ -104,7 +104,7 @@ class GeorgiaIncomeTest extends \TestCase
             $taxes->setPayPeriods(260);
         });
 
-        $this->assertSame(2.20, $results->getTax(GeorgiaIncome::class));
+        $this->assertSame(2.73, $results->getTax(GeorgiaIncome::class));
     }
 
     public function testGeorgiaIncomeClaimExempt()
@@ -136,7 +136,7 @@ class GeorgiaIncomeTest extends \TestCase
             $taxes->setPayPeriods(260);
         });
 
-        $this->assertSame(2.20, $results->getTax(GeorgiaIncome::class));
+        $this->assertSame(2.73, $results->getTax(GeorgiaIncome::class));
     }
 
     public function testGeorgiaIncomeTestCase1()
@@ -160,6 +160,6 @@ class GeorgiaIncomeTest extends \TestCase
             $taxes->setPayPeriods(52);
         });
 
-        $this->assertSame(14.51, $results->getTax(GeorgiaIncome::class));
+        $this->assertSame(16.25, $results->getTax(GeorgiaIncome::class));
     }
 }
