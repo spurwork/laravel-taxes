@@ -16,6 +16,8 @@ class CreateGovernmentalUnitAreasTable extends Migration
      */
     public function up()
     {
+       DB::statement('CREATE EXTENSION IF NOT EXISTS postgis;');
+
         Schema::create($this->governmental_unit_areas, function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('name')->unique();
