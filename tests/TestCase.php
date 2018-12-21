@@ -21,6 +21,7 @@ use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Orchestra\Database\ConsoleServiceProvider;
 use Orchestra\Testbench\TestCase as BaseTestCase;
+use Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables;
 
 class TestCase extends BaseTestCase
 {
@@ -159,6 +160,11 @@ class TestCase extends BaseTestCase
 
     protected function getEnvironmentSetUp($app)
     {
+
+        $app->useEnvironmentPath(__DIR__.'/..');
+        $app->bootstrapWith([LoadEnvironmentVariables::class]);
+        parent::getEnvironmentSetUp($app);
+
         $app['config']->set('database.default', 'testing');
 
         $app['config']->set('database.connections.testing', [

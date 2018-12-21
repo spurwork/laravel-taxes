@@ -26,12 +26,4 @@
         <log type="coverage-text" target="build/coverage.txt"/>
         <log type="coverage-clover" target="build/logs/clover.xml"/>
     </logging>
-    <php>
-        <env name="APP_DEBUG" value="true"/>
-        <env name="APP_ENV" value="testing"/>
-        <env name="TEST_DB_HOST" value="127.0.0.1"/>
-        <env name="TEST_DB_DATABASE" value="taxes"/>
-        <env name="TEST_DB_USERNAME" value="postgres"/>
-        <env name="TEST_DB_PASSWORD" value="secret"/>
-    </php>
 </phpunit>

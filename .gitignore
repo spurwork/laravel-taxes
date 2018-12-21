@@ -3,4 +3,5 @@ build
 shapes
 vendor
 
+.env
 .idea/
