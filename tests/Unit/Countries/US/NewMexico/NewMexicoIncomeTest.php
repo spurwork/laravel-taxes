@@ -2,6 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\NewMexico\NewMexicoIncome;
 
+use Appleton\Taxes\Models\Countries\US\NewMexico\NewMexicoIncomeTaxInformation;
 use Carbon\Carbon;
 
 class NewMexicoIncomeTest extends \TestCase
