@@ -106,6 +106,7 @@ class TestCase extends BaseTestCase
             'exemptions' => 0,
             'filing_status' => WisconsinIncome::FILING_SINGLE,
         ], $this->user);
+
     }
 
     protected function getLocation($name)
@@ -198,5 +199,450 @@ class TestCase extends BaseTestCase
             ConsoleServiceProvider::class,
             TaxesServiceProvider::class,
         ];
+    }
+
+    protected function emptyWorker()
+    {
+        return $this->user_model->forceCreate([
+            'name' => 'Worker Dude',
+            'email' => 'worker_dudeA@user.email',
+            'password' => 'password',
+        ]);
+    }
+
+    protected function createWorkerA()
+    {
+        // Defaults
+        $workerA = $this->user_model->forceCreate([
+            'name' => 'Worker A',
+            'email' => 'workerA@user.email',
+            'password' => 'password',
+        ]);
+
+        FederalIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'exemptions' => 0,
+            'filing_status' => FederalIncome::FILING_SINGLE,
+            'non_resident_alien' => false,
+        ], $workerA);
+
+        AlabamaIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'dependents' => 0,
+            'filing_status' => AlabamaIncome::FILING_SINGLE,
+        ], $workerA);
+
+        ArizonaIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'percentage_withheld' => 0,
+        ], $workerA);
+
+        ColoradoIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'exemptions' => 0,
+            'filing_status' => ColoradoIncome::FILING_SINGLE,
+        ], $workerA);
+
+        GeorgiaIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'allowances' => 0,
+            'dependents' => 0,
+            'personal_allowances' => 0,
+            'filing_status' => GeorgiaIncome::FILING_SINGLE,
+        ], $workerA);
+
+        NewMexicoIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'exemptions' => 0,
+            'filing_status' => NewMexicoIncome::FILING_SINGLE,
+        ], $workerA);
+
+        NorthCarolinaIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'dependents' => 0,
+            'filing_status' => NorthCarolinaIncome::FILING_SINGLE,
+        ], $workerA);
+
+        WisconsinIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'exemptions' => 0,
+            'filing_status' => WisconsinIncome::FILING_SINGLE,
+        ], $workerA);
+
+        return $workerA;
+    }
+
+    protected function createWorkerB()
+    {
+        // Defaults
+        $workerB = $this->user_model->forceCreate([
+            'name' => 'Worker A',
+            'email' => 'workerA@user.email',
+            'password' => 'password',
+        ]);
+
+        FederalIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'exemptions' => 3,
+            'filing_status' => FederalIncome::FILING_SINGLE,
+            'non_resident_alien' => false,
+        ], $workerB);
+
+        AlabamaIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'dependents' => 3,
+            'filing_status' => AlabamaIncome::FILING_SINGLE,
+        ], $workerB);
+
+        ArizonaIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'percentage_withheld' => 0,
+        ], $workerB);
+
+        ColoradoIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'exemptions' => 3,
+            'filing_status' => ColoradoIncome::FILING_SINGLE,
+        ], $workerB);
+
+        GeorgiaIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'allowances' => 3,
+            'dependents' => 0,
+            'personal_allowances' => 0,
+            'filing_status' => GeorgiaIncome::FILING_SINGLE,
+        ], $workerB);
+
+        NewMexicoIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'exemptions' => 3,
+            'filing_status' => NewMexicoIncome::FILING_SINGLE,
+        ], $workerB);
+
+        NorthCarolinaIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'dependents' => 3,
+            'filing_status' => NorthCarolinaIncome::FILING_SINGLE,
+        ], $workerB);
+
+        WisconsinIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'exemptions' => 3,
+            'filing_status' => WisconsinIncome::FILING_SINGLE,
+        ], $workerB);
+
+        return $workerB;
+    }
+
+    protected function createWorkerC()
+    {
+        // Defaults
+        $workerC = $this->user_model->forceCreate([
+            'name' => 'Worker A',
+            'email' => 'workerA@user.email',
+            'password' => 'password',
+        ]);
+
+        FederalIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'exemptions' => 0,
+            'filing_status' => FederalIncome::FILING_MARRIED,
+            'non_resident_alien' => false,
+        ], $workerC);
+
+        AlabamaIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'dependents' => 0,
+            'filing_status' => AlabamaIncome::FILING_MARRIED,
+        ], $workerC);
+
+        ArizonaIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'percentage_withheld' => 0,
+        ], $workerC);
+
+        ColoradoIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'exemptions' => 0,
+            'filing_status' => ColoradoIncome::FILING_MARRIED,
+        ], $workerC);
+
+        GeorgiaIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'allowances' => 0,
+            'dependents' => 0,
+            'personal_allowances' => 0,
+            'filing_status' => GeorgiaIncome::FILING_MARRIED_JOINT_BOTH_WORKING,
+        ], $workerC);
+
+        NewMexicoIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'exemptions' => 0,
+            'filing_status' => NewMexicoIncome::FILING_MARRIED,
+        ], $workerC);
+
+        NorthCarolinaIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'dependents' => 0,
+            'filing_status' => NorthCarolinaIncome::FILING_MARRIED,
+        ], $workerC);
+
+        WisconsinIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'exemptions' => 0,
+            'filing_status' => WisconsinIncome::FILING_MARRIED,
+        ], $workerC);
+
+        return $workerC;
+    }
+
+    protected function createWorkerD()
+    {
+        // Defaults
+        $worker = $this->user_model->forceCreate([
+            'name' => 'Worker A',
+            'email' => 'workerA@user.email',
+            'password' => 'password',
+        ]);
+
+        FederalIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'exemptions' => 0,
+            'filing_status' => FederalIncome::FILING_MARRIED,
+            'non_resident_alien' => false,
+        ], $worker);
+
+        AlabamaIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'dependents' => 0,
+            'filing_status' => AlabamaIncome::FILING_MARRIED,
+        ], $worker);
+
+        ArizonaIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'percentage_withheld' => 0,
+        ], $worker);
+
+        ColoradoIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'exemptions' => 0,
+            'filing_status' => ColoradoIncome::FILING_MARRIED,
+        ], $worker);
+
+        GeorgiaIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'allowances' => 0,
+            'dependents' => 0,
+            'personal_allowances' => 0,
+            'filing_status' => GeorgiaIncome::FILING_MARRIED_JOINT_BOTH_WORKING,
+        ], $worker);
+
+        NewMexicoIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'exemptions' => 0,
+            'filing_status' => NewMexicoIncome::FILING_MARRIED,
+        ], $worker);
+
+        NorthCarolinaIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'dependents' => 0,
+            'filing_status' => NorthCarolinaIncome::FILING_MARRIED,
+        ], $worker);
+
+        WisconsinIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'exemptions' => 0,
+            'filing_status' => WisconsinIncome::FILING_MARRIED,
+        ], $worker);
+
+        return $worker;
+    }
+
+    protected function createWorkerE()
+    {
+        // Defaults
+        $worker = $this->user_model->forceCreate([
+            'name' => 'Worker A',
+            'email' => 'workerA@user.email',
+            'password' => 'password',
+        ]);
+
+        FederalIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'exemptions' => 0,
+            'filing_status' => FederalIncome::FILING_MARRIED,
+            'non_resident_alien' => false,
+        ], $worker);
+
+        AlabamaIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'dependents' => 0,
+            'filing_status' => AlabamaIncome::FILING_MARRIED,
+        ], $worker);
+
+        ArizonaIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'percentage_withheld' => 0,
+        ], $worker);
+
+        ColoradoIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'exemptions' => 0,
+            'filing_status' => ColoradoIncome::FILING_MARRIED,
+        ], $worker);
+
+        GeorgiaIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'allowances' => 0,
+            'dependents' => 0,
+            'personal_allowances' => 0,
+            'filing_status' => GeorgiaIncome::FILING_MARRIED_JOINT_BOTH_WORKING,
+        ], $worker);
+
+        NewMexicoIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'exemptions' => 0,
+            'filing_status' => NewMexicoIncome::FILING_MARRIED,
+        ], $worker);
+
+        NorthCarolinaIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'dependents' => 0,
+            'filing_status' => NorthCarolinaIncome::FILING_MARRIED,
+        ], $worker);
+
+        WisconsinIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'exemptions' => 0,
+            'filing_status' => WisconsinIncome::FILING_MARRIED,
+        ], $worker);
+
+        return $worker;
+    }
+
+
+    protected function createWorkerF()
+    {
+        // Defaults
+        $worker = $this->user_model->forceCreate([
+            'name' => 'Worker A',
+            'email' => 'workerA@user.email',
+            'password' => 'password',
+        ]);
+
+        FederalIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'exemptions' => 0,
+            'filing_status' => FederalIncome::FILING_MARRIED,
+            'non_resident_alien' => false,
+        ], $worker);
+
+        AlabamaIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'dependents' => 0,
+            'filing_status' => AlabamaIncome::FILING_MARRIED,
+        ], $worker);
+
+        ArizonaIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'percentage_withheld' => 0,
+        ], $worker);
+
+        ColoradoIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'exemptions' => 0,
+            'filing_status' => ColoradoIncome::FILING_MARRIED,
+        ], $worker);
+
+        GeorgiaIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'allowances' => 0,
+            'dependents' => 0,
+            'personal_allowances' => 0,
+            'filing_status' => GeorgiaIncome::FILING_MARRIED_JOINT_BOTH_WORKING,
+        ], $worker);
+
+        NewMexicoIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'exemptions' => 0,
+            'filing_status' => NewMexicoIncome::FILING_MARRIED,
+        ], $worker);
+
+        NorthCarolinaIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'dependents' => 0,
+            'filing_status' => NorthCarolinaIncome::FILING_MARRIED,
+        ], $worker);
+
+        WisconsinIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'exemptions' => 0,
+            'filing_status' => WisconsinIncome::FILING_MARRIED,
+        ], $worker);
+
+        return $worker;
+    }
+
+
+    protected function createWorkerG()
+    {
+        // Defaults
+        $worker = $this->user_model->forceCreate([
+            'name' => 'Worker A',
+            'email' => 'workerA@user.email',
+            'password' => 'password',
+        ]);
+
+        FederalIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'exemptions' => 0,
+            'filing_status' => FederalIncome::FILING_MARRIED,
+            'non_resident_alien' => false,
+        ], $worker);
+
+        AlabamaIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'dependents' => 0,
+            'filing_status' => AlabamaIncome::FILING_MARRIED,
+        ], $worker);
+
+        ArizonaIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'percentage_withheld' => 0,
+        ], $worker);
+
+        ColoradoIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'exemptions' => 0,
+            'filing_status' => ColoradoIncome::FILING_MARRIED,
+        ], $worker);
+
+        GeorgiaIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'allowances' => 0,
+            'dependents' => 0,
+            'personal_allowances' => 0,
+            'filing_status' => GeorgiaIncome::FILING_MARRIED_JOINT_BOTH_WORKING,
+        ], $worker);
+
+        NewMexicoIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'exemptions' => 8,
+            'filing_status' => NewMexicoIncome::FILING_MARRIED,
+        ], $worker);
+
+        NorthCarolinaIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'dependents' => 0,
+            'filing_status' => NorthCarolinaIncome::FILING_MARRIED,
+        ], $worker);
+
+        WisconsinIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'exemptions' => 0,
+            'filing_status' => WisconsinIncome::FILING_MARRIED,
+        ], $worker);
+
+        return $worker;
     }
 }
