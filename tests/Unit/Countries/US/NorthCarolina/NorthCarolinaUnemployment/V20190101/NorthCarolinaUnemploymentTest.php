@@ -1,18 +1,19 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\NorthCarolina\NorthCarolinaUnemployment;
+namespace Appleton\Taxes\Countries\US\NorthCarolina\NorthCarolinaUnemployment\V20190101;
 
-use Appleton\Taxes\Countries\US\NorthCarolina\NorthCarolinaIncome;
 use Carbon\Carbon;
+use Appleton\Taxes\Countries\US\NorthCarolina\NorthCarolinaUnemployment\NorthCarolinaUnemployment as ParentNorthCarolinaUnemployment;
 
-class NorthCarolinaUnemploymentV20180101Test extends \TestCase
+
+class NorthCarolinaUnemploymentTest extends \TestCase
 {
     public function setUp()
     {
         parent::setUp();
 
         Carbon::setTestNow(
-            Carbon::parse('January 1, 2018 8am', 'America/Chicago')->setTimezone('UTC')
+            Carbon::parse('January 1, 2019 8am', 'America/Chicago')->setTimezone('UTC')
         );
     }
 
@@ -25,7 +26,7 @@ class NorthCarolinaUnemploymentV20180101Test extends \TestCase
             $taxes->setEarnings(2300);
         });
 
-        $this->assertSame(23.00, $results->getTax(NorthCarolinaUnemployment::class));
+        $this->assertSame(23.00, $results->getTax(ParentNorthCarolinaUnemployment::class));
     }
 
     public function testNorthCarolinaUnemploymentWithTaxRate()
@@ -39,7 +40,7 @@ class NorthCarolinaUnemploymentV20180101Test extends \TestCase
             $taxes->setEarnings(2300);
         });
 
-        $this->assertSame(55.20, $results->getTax(NorthCarolinaUnemployment::class));
+        $this->assertSame(55.20, $results->getTax(ParentNorthCarolinaUnemployment::class));
     }
 
     public function testNorthCarolinaUnemploymentMetWageBase()
@@ -49,40 +50,40 @@ class NorthCarolinaUnemploymentV20180101Test extends \TestCase
             $taxes->setWorkLocation($this->getLocation('us.north_carolina'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(100);
-            $taxes->setYtdEarnings(23300);
+            $taxes->setYtdEarnings(24200);
         });
 
-        $this->assertSame(1.00, $results->getTax(NorthCarolinaUnemployment::class));
+        $this->assertSame(1.00, $results->getTax(ParentNorthCarolinaUnemployment::class));
 
         $results = $this->taxes->calculate(function ($taxes) {
             $taxes->setHomeLocation($this->getLocation('us.north_carolina'));
             $taxes->setWorkLocation($this->getLocation('us.north_carolina'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(100);
-            $taxes->setYtdEarnings(23450);
+            $taxes->setYtdEarnings(24250);
         });
 
-        $this->assertSame(0.50, $results->getTax(NorthCarolinaUnemployment::class));
+        $this->assertSame(0.50, $results->getTax(ParentNorthCarolinaUnemployment::class));
 
         $results = $this->taxes->calculate(function ($taxes) {
             $taxes->setHomeLocation($this->getLocation('us.north_carolina'));
             $taxes->setWorkLocation($this->getLocation('us.north_carolina'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(100);
-            $taxes->setYtdEarnings(23500);
+            $taxes->setYtdEarnings(24300);
         });
 
-        $this->assertSame(0.0, $results->getTax(NorthCarolinaUnemployment::class));
+        $this->assertSame(0.0, $results->getTax(ParentNorthCarolinaUnemployment::class));
 
         $results = $this->taxes->calculate(function ($taxes) {
             $taxes->setHomeLocation($this->getLocation('us.north_carolina'));
             $taxes->setWorkLocation($this->getLocation('us.north_carolina'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(100);
-            $taxes->setYtdEarnings(23550);
+            $taxes->setYtdEarnings(24350);
         });
 
-        $this->assertSame(0.0, $results->getTax(NorthCarolinaUnemployment::class));
+        $this->assertSame(0.0, $results->getTax(ParentNorthCarolinaUnemployment::class));
     }
 
     public function testCaseStudy1()
@@ -96,7 +97,7 @@ class NorthCarolinaUnemploymentV20180101Test extends \TestCase
             $taxes->setEarnings(66.68);
         });
 
-        $this->assertSame(1.27, $results->getTax(NorthCarolinaUnemployment::class));
+        $this->assertSame(1.27, $results->getTax(ParentNorthCarolinaUnemployment::class));
     }
 
     public function testWorkOutOfState()
@@ -111,6 +112,6 @@ class NorthCarolinaUnemploymentV20180101Test extends \TestCase
         });
 
         $this->assertNull($results->getTax(NorthCarolinaIncome::class));
-        $this->assertSame(1.27, $results->getTax(NorthCarolinaUnemployment::class));
+        $this->assertSame(1.27, $results->getTax(ParentNorthCarolinaUnemployment::class));
     }
 }
