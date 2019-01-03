@@ -13,7 +13,7 @@ class NorthCarolinaIncome extends BaseNorthCarolinaIncome
     const TAX_RATE = 0.0535;
 
     const STANDARD_DEDUCTIONS = [
-        self::FILING_SINGLE => 8750,
+        self::FILING_SINGLE => 10000,
         self::FILING_HEAD_OF_HOUSEHOLD => 14000,
         self::FILING_MARRIED => 17500,
         self::FILING_SEPERATE => 10000,
