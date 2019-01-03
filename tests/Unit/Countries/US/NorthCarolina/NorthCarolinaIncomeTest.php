@@ -225,6 +225,6 @@ class NorthCarolinaIncomeTest extends \TestCase
             $taxes->setDate($this->date('2019-01-01'));
         });
 
-        $this->assertSame(1.76, $results->getTax(NorthCarolinaIncome::class));
+        $this->assertSame(1.5, $results->getTax(NorthCarolinaIncome::class));
     }
 }

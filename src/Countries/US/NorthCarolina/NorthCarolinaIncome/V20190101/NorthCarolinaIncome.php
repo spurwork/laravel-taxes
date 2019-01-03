@@ -16,7 +16,7 @@ class NorthCarolinaIncome extends BaseNorthCarolinaIncome
         self::FILING_SINGLE => 10000,
         self::FILING_HEAD_OF_HOUSEHOLD => 14000,
         self::FILING_MARRIED => 17500,
-        self::FILING_SEPERATE => 10000,
+        self::FILING_SEPERATE => 8750,
     ];
 
     const DEPENDENT_EXEMPTION_BRACKETS = [
