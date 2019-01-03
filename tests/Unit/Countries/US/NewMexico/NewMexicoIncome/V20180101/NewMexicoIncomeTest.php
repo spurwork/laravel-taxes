@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\NewMexico\NewMexicoIncome;
+namespace Appleton\Taxes\Countries\US\NewMexico\NewMexicoIncome\V20180101;
 
-use Appleton\Taxes\Models\Countries\US\NewMexico\NewMexicoIncomeTaxInformation;
+use Appleton\Taxes\Countries\US\NewMexico\NewMexicoIncome\NewMexicoIncome as ParentNewMexicoIncome;
 use Carbon\Carbon;
 
 class NewMexicoIncomeTest extends \TestCase
@@ -21,6 +21,6 @@ class NewMexicoIncomeTest extends \TestCase
             $taxes->setPayPeriods(52);
         });
 
-        $this->assertSame(0.49, $results->getTax(NewMexicoIncome::class));
+        $this->assertSame(0.49, $results->getTax(ParentNewMexicoIncome::class));
     }
 }
