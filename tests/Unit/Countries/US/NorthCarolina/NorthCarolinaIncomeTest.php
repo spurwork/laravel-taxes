@@ -29,6 +29,20 @@ class NorthCarolinaIncomeTest extends \TestCase
         $this->assertSame(1.81, $results->getTax(NorthCarolinaIncome::class));
     }
 
+    public function testNorthCarolinaIncome2019()
+    {
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.north_carolina'));
+            $taxes->setWorkLocation($this->getLocation('us.north_carolina'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(66.68);
+            $taxes->setPayPeriods(260);
+            $taxes->setDate($this->date('2019-01-01'));
+        });
+
+        $this->assertSame(1.76, $results->getTax(NorthCarolinaIncome::class));
+    }
+
     public function testNorthCarolinaAdditionalWithholding()
     {
         NorthCarolinaIncomeTaxInformation::forUser($this->user)->update(['additional_withholding' => 10]);
@@ -54,6 +68,33 @@ class NorthCarolinaIncomeTest extends \TestCase
         $this->assertSame(11.81, $results->getTax(NorthCarolinaIncome::class));
     }
 
+    public function testNorthCarolinaAdditionalWithholding2019()
+    {
+        NorthCarolinaIncomeTaxInformation::forUser($this->user)->update(['additional_withholding' => 10]);
+
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.north_carolina'));
+            $taxes->setWorkLocation($this->getLocation('us.north_carolina'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(0);
+            $taxes->setPayPeriods(260);
+            $taxes->setDate($this->date('2019-01-01'));
+        });
+
+        $this->assertSame(0.0, $results->getTax(NorthCarolinaIncome::class));
+
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.north_carolina'));
+            $taxes->setWorkLocation($this->getLocation('us.north_carolina'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(66.68);
+            $taxes->setPayPeriods(260);
+            $taxes->setDate($this->date('2019-01-01'));
+        });
+
+        $this->assertSame(11.76, $results->getTax(NorthCarolinaIncome::class));
+    }
+
     public function testNorthCarolinaSupplemental()
     {
         $results = $this->taxes->calculate(function ($taxes) {
@@ -67,6 +108,20 @@ class NorthCarolinaIncomeTest extends \TestCase
         $this->assertSame(5.59, $results->getTax(NorthCarolinaIncome::class));
     }
 
+    public function testNorthCarolinaSupplemental2019()
+    {
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.north_carolina'));
+            $taxes->setWorkLocation($this->getLocation('us.north_carolina'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(100);
+            $taxes->setSupplementalEarnings(100);
+            $taxes->setDate($this->date('2019-01-01'));
+        });
+
+        $this->assertSame(5.59, $results->getTax(NorthCarolinaIncome::class));
+    }
+
     public function testNorthCarolinaIncomeNonNegative()
     {
         $results = $this->taxes->calculate(function ($taxes) {
@@ -75,6 +130,20 @@ class NorthCarolinaIncomeTest extends \TestCase
             $taxes->setUser($this->user);
             $taxes->setEarnings(10);
             $taxes->setPayPeriods(260);
+        });
+
+        $this->assertSame(0.00, $results->getTax(NorthCarolinaIncome::class));
+    }
+
+    public function testNorthCarolinaIncomeNonNegative2019()
+    {
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.north_carolina'));
+            $taxes->setWorkLocation($this->getLocation('us.north_carolina'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(10);
+            $taxes->setPayPeriods(260);
+            $taxes->setDate($this->date('2019-01-01'));
         });
 
         $this->assertSame(0.00, $results->getTax(NorthCarolinaIncome::class));
@@ -105,6 +174,33 @@ class NorthCarolinaIncomeTest extends \TestCase
         $this->assertSame(1.81, $results->getTax(NorthCarolinaIncome::class));
     }
 
+    public function testNorthCarolinaIncomeUseDefault2019()
+    {
+        NorthCarolinaIncomeTaxInformation::forUser($this->user)->delete();
+
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.north_carolina'));
+            $taxes->setWorkLocation($this->getLocation('us.north_carolina'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(0);
+            $taxes->setPayPeriods(260);
+            $taxes->setDate($this->date('2019-01-01'));
+        });
+
+        $this->assertSame(0.0, $results->getTax(NorthCarolinaIncome::class));
+
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.north_carolina'));
+            $taxes->setWorkLocation($this->getLocation('us.north_carolina'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(66.68);
+            $taxes->setPayPeriods(260);
+            $taxes->setDate($this->date('2019-01-01'));
+        });
+
+        $this->assertSame(1.76, $results->getTax(NorthCarolinaIncome::class));
+    }
+
     public function testNorthCarolinaIncomeWorkInTennessee()
     {
         $results = $this->taxes->calculate(function ($taxes) {
@@ -116,5 +212,19 @@ class NorthCarolinaIncomeTest extends \TestCase
         });
 
         $this->assertSame(1.81, $results->getTax(NorthCarolinaIncome::class));
+    }
+
+    public function testNorthCarolinaIncomeWorkInTennessee2019()
+    {
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.north_carolina'));
+            $taxes->setWorkLocation($this->getLocation('us.tennessee'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(66.68);
+            $taxes->setPayPeriods(260);
+            $taxes->setDate($this->date('2019-01-01'));
+        });
+
+        $this->assertSame(1.76, $results->getTax(NorthCarolinaIncome::class));
     }
 }
