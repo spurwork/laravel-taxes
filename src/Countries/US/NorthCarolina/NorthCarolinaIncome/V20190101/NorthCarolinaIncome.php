@@ -8,15 +8,15 @@ use Appleton\Taxes\Models\Countries\US\NorthCarolina\NorthCarolinaIncomeTaxInfor
 
 class NorthCarolinaIncome extends BaseNorthCarolinaIncome
 {
-    const SUPPLEMENTAL_TAX_RATE = 0.05599;
+    const SUPPLEMENTAL_TAX_RATE = 0.0535;
 
     const TAX_RATE = 0.0535;
 
     const STANDARD_DEDUCTIONS = [
         self::FILING_SINGLE => 10000,
-        self::FILING_HEAD_OF_HOUSEHOLD => 14000,
-        self::FILING_MARRIED => 17500,
-        self::FILING_SEPERATE => 8750,
+        self::FILING_HEAD_OF_HOUSEHOLD => 15000,
+        self::FILING_MARRIED => 10000,
+        self::FILING_SEPERATE => 10000,
     ];
 
     const DEPENDENT_EXEMPTION_BRACKETS = [
@@ -67,14 +67,18 @@ class NorthCarolinaIncome extends BaseNorthCarolinaIncome
 
     public function getSupplementalIncomeTax()
     {
-        $annual_income = $this->getGrossEarnings();
-
         return $this->payroll->supplemental_earnings * self::SUPPLEMENTAL_TAX_RATE;
     }
 
     public function getTaxBrackets()
     {
         return [[0, self::TAX_RATE, 0]];
+    }
+
+    public function compute()
+    {
+        $result = parent::compute();
+        return round($result, 0);
     }
 
     private function getStandardDeduction()
