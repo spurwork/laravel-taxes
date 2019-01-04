@@ -90,7 +90,7 @@ class NorthCarolinaIncome extends BaseNorthCarolinaIncome
     {
         $gross_earnings = $this->getGrossEarnings();
         $dependent_exemption = $this->getTaxBracket($gross_earnings, static::DEPENDENT_EXEMPTION_BRACKETS[$this->tax_information->filing_status]);
-        return $this->tax_information->allowances * $dependent_exemption[1];
+        return $this->tax_information->dependents * $dependent_exemption[1];
     }
 
     private function getGrossEarnings()

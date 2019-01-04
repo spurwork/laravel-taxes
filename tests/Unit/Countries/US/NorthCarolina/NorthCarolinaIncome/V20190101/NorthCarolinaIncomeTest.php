@@ -1,7 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\NorthCarolina\NorthCarolinaIncome;
+namespace Appleton\Taxes\Countries\US\NorthCarolina\NorthCarolinaIncome\NorthCarolinaIncome\V20190101;
 
+use Appleton\Taxes\Countries\US\NorthCarolina\NorthCarolinaIncome\NorthCarolinaIncome as ParentNorthCarolinaIncome;
 use Appleton\Taxes\Models\Countries\US\NorthCarolina\NorthCarolinaIncomeTaxInformation;
 use Carbon\Carbon;
 
@@ -21,7 +22,7 @@ class NorthCarolinaIncomeTest extends \TestCase
         NorthCarolinaIncomeTaxInformation::forUser($this->user)->update([
             'additional_withholding' => 0,
             'dependents' => 0,
-            'filing_status' => NorthCarolinaIncome::FILING_SINGLE,
+            'filing_status' => ParentNorthCarolinaIncome::FILING_SINGLE,
         ]);
 
         $results = $this->taxes->calculate(function ($taxes) {
@@ -34,7 +35,7 @@ class NorthCarolinaIncomeTest extends \TestCase
             $taxes->setDate($this->date('2019-01-01'));
         });
 
-        $this->assertEquals(4.00, $results->getTax(NorthCarolinaIncome::class));
+        $this->assertEquals(4.00, $results->getTax(ParentNorthCarolinaIncome::class));
     }
 
     public function testCaseStudy2019B()
@@ -42,7 +43,7 @@ class NorthCarolinaIncomeTest extends \TestCase
         NorthCarolinaIncomeTaxInformation::forUser($this->user)->update([
             'additional_withholding' => 0,
             'dependents' => 3,
-            'filing_status' => NorthCarolinaIncome::FILING_SINGLE,
+            'filing_status' => ParentNorthCarolinaIncome::FILING_SINGLE,
         ]);
 
         $results = $this->taxes->calculate(function ($taxes) {
@@ -56,7 +57,7 @@ class NorthCarolinaIncomeTest extends \TestCase
         });
 
         // spreadsheet has 24
-        $this->assertEquals(29.00, $results->getTax(NorthCarolinaIncome::class));
+        $this->assertEquals(29.00, $results->getTax(ParentNorthCarolinaIncome::class));
     }
 
     public function testCaseStudy2019C()
@@ -64,7 +65,7 @@ class NorthCarolinaIncomeTest extends \TestCase
         NorthCarolinaIncomeTaxInformation::forUser($this->user)->update([
             'additional_withholding' => 0,
             'dependents' => 0,
-            'filing_status' => NorthCarolinaIncome::FILING_MARRIED,
+            'filing_status' => ParentNorthCarolinaIncome::FILING_MARRIED,
         ]);
 
         $results = $this->taxes->calculate(function ($taxes) {
@@ -77,7 +78,7 @@ class NorthCarolinaIncomeTest extends \TestCase
             $taxes->setDate($this->date('2019-01-01'));
         });
 
-        $this->assertEquals(0.00, $results->getTax(NorthCarolinaIncome::class));
+        $this->assertEquals(0.00, $results->getTax(ParentNorthCarolinaIncome::class));
     }
 
     public function testCaseStudy2019D()
@@ -85,7 +86,7 @@ class NorthCarolinaIncomeTest extends \TestCase
         NorthCarolinaIncomeTaxInformation::forUser($this->user)->update([
             'additional_withholding' => 15.00,
             'dependents' => 5,
-            'filing_status' => NorthCarolinaIncome::FILING_MARRIED,
+            'filing_status' => ParentNorthCarolinaIncome::FILING_MARRIED,
         ]);
 
         $results = $this->taxes->calculate(function ($taxes) {
@@ -98,7 +99,7 @@ class NorthCarolinaIncomeTest extends \TestCase
             $taxes->setDate($this->date('2019-01-01'));
         });
 
-        $this->assertEquals(15.00, $results->getTax(NorthCarolinaIncome::class));
+        $this->assertEquals(15.00, $results->getTax(ParentNorthCarolinaIncome::class));
     }
 
     public function testCaseStudy2019E()
@@ -106,7 +107,7 @@ class NorthCarolinaIncomeTest extends \TestCase
         NorthCarolinaIncomeTaxInformation::forUser($this->user)->update([
             'additional_withholding' => 25.00,
             'dependents' => 1,
-            'filing_status' => NorthCarolinaIncome::FILING_SINGLE,
+            'filing_status' => ParentNorthCarolinaIncome::FILING_SINGLE,
         ]);
 
         $results = $this->taxes->calculate(function ($taxes) {
@@ -120,7 +121,7 @@ class NorthCarolinaIncomeTest extends \TestCase
         });
 
         // spreadsheet has 36
-        $this->assertEquals(37.00, $results->getTax(NorthCarolinaIncome::class));
+        $this->assertEquals(37.00, $results->getTax(ParentNorthCarolinaIncome::class));
     }
 
     public function testCaseStudy2019F()
@@ -128,7 +129,7 @@ class NorthCarolinaIncomeTest extends \TestCase
         NorthCarolinaIncomeTaxInformation::forUser($this->user)->update([
             'additional_withholding' => 0,
             'dependents' => 0,
-            'filing_status' => NorthCarolinaIncome::FILING_MARRIED,
+            'filing_status' => ParentNorthCarolinaIncome::FILING_MARRIED,
         ]);
 
         $results = $this->taxes->calculate(function ($taxes) {
@@ -141,7 +142,7 @@ class NorthCarolinaIncomeTest extends \TestCase
             $taxes->setDate($this->date('2019-01-01'));
         });
 
-        $this->assertEquals(9.00, $results->getTax(NorthCarolinaIncome::class));
+        $this->assertEquals(9.00, $results->getTax(ParentNorthCarolinaIncome::class));
     }
 
     public function testCaseStudy2019G()
@@ -149,7 +150,7 @@ class NorthCarolinaIncomeTest extends \TestCase
         NorthCarolinaIncomeTaxInformation::forUser($this->user)->update([
             'additional_withholding' => 0,
             'dependents' => 8,
-            'filing_status' => NorthCarolinaIncome::FILING_SINGLE,
+            'filing_status' => ParentNorthCarolinaIncome::FILING_SINGLE,
         ]);
 
         $results = $this->taxes->calculate(function ($taxes) {
@@ -162,6 +163,6 @@ class NorthCarolinaIncomeTest extends \TestCase
             $taxes->setDate($this->date('2019-01-01'));
         });
 
-        $this->assertEquals(11.00, $results->getTax(NorthCarolinaIncome::class));
+        $this->assertEquals(11.00, $results->getTax(ParentNorthCarolinaIncome::class));
     }
 }

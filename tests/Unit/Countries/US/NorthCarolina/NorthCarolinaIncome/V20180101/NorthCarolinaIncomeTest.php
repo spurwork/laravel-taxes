@@ -1,7 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\NorthCarolina\NorthCarolinaIncome;
+namespace Appleton\Taxes\Countries\US\NorthCarolina\NorthCarolinaIncome\NorthCarolinaIncome\V20180101;
 
+use Appleton\Taxes\Countries\US\NorthCarolina\NorthCarolinaIncome\NorthCarolinaIncome;
 use Appleton\Taxes\Models\Countries\US\NorthCarolina\NorthCarolinaIncomeTaxInformation;
 use Carbon\Carbon;
 
