@@ -94,6 +94,7 @@ class TestCase extends BaseTestCase
         MassachusettsIncomeTaxInformation::createForUser([
             'additional_withholding' => 0,
             'exemptions' => 0,
+            'blind' => 0,
             'filing_status' => MassachusettsIncome::FILING_SINGLE,
             'exempt' => false,
         ], $this->user);

@@ -18,6 +18,8 @@ class MassachusettsIncome extends BaseMassachusettsIncome
 
     const EXEMPTION_ALLOWANCE_BASE = 3400;
 
+    const HEAD_OF_HOUSEHOLD_DEDUCTION = 2400;
+
     public function __construct(MassachusettsIncomeTaxInformation $tax_information, Medicare $medicare, SocialSecurity $social_security, Payroll $payroll)
     {
         parent::__construct($tax_information, $payroll);
@@ -28,7 +30,11 @@ class MassachusettsIncome extends BaseMassachusettsIncome
 
     public function getAdjustedEarnings()
     {
-        return $this->getGrossEarnings() - $this->getAllowanceExemption() - ($this->medicare * $this->payroll->pay_periods) - ($this->social_security * $this->payroll->pay_periods);
+        return $this->getGrossEarnings()
+            - $this->getAllowanceExemption()
+            - ($this->medicare * $this->payroll->pay_periods)
+            - ($this->social_security * $this->payroll->pay_periods)
+            - ($this->tax_information->filing_status === self::FILING_HEAD_OF_HOUSEHOLD ? self::HEAD_OF_HOUSEHOLD_DEDUCTION : 0);
     }
 
     public function getTaxBrackets()

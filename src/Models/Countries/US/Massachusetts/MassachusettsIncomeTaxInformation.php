@@ -13,6 +13,7 @@ class MassachusettsIncomeTaxInformation extends BaseTaxInformationModel
     {
         $tax_information = new self();
         $tax_information->additional_withholding = 0;
+        $tax_information->blind = 0;
         $tax_information->exemptions = 0;
         $tax_information->filing_status = MassachusettsIncome::FILING_SINGLE;
         $tax_information->exempt = false;

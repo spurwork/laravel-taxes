@@ -27,7 +27,7 @@ class CreateMassachusettsIncomeTaxInformationTable extends Migration
             $table->decimal('additional_withholding');
             $table->integer('exemptions');
             $table->integer('filing_status');
-            $table->boolean('blind')->default(false);
+            $table->integer('blind');
             $table->boolean('exempt')->default(false);
         });
 
