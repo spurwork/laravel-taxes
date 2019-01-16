@@ -20,6 +20,8 @@ class MassachusettsIncome extends BaseMassachusettsIncome
 
     const HEAD_OF_HOUSEHOLD_DEDUCTION = 2400;
 
+    const BLIND_DEDUCTION = 2200;
+
     public function __construct(MassachusettsIncomeTaxInformation $tax_information, Medicare $medicare, SocialSecurity $social_security, Payroll $payroll)
     {
         parent::__construct($tax_information, $payroll);
@@ -34,7 +36,8 @@ class MassachusettsIncome extends BaseMassachusettsIncome
             - $this->getAllowanceExemption()
             - ($this->medicare * $this->payroll->pay_periods)
             - ($this->social_security * $this->payroll->pay_periods)
-            - ($this->tax_information->filing_status === self::FILING_HEAD_OF_HOUSEHOLD ? self::HEAD_OF_HOUSEHOLD_DEDUCTION : 0);
+            - ($this->tax_information->filing_status === self::FILING_HEAD_OF_HOUSEHOLD ? self::HEAD_OF_HOUSEHOLD_DEDUCTION : 0)
+            - ($this->tax_information->blind * self::BLIND_DEDUCTION);
     }
 
     public function getTaxBrackets()
