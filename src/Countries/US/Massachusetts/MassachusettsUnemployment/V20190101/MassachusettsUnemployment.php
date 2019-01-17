@@ -9,13 +9,13 @@ class MassachusettsUnemployment extends BaseMassachusettsUnemployment
 {
     const FUTA_CREDIT = 0.054;
 
-    const NEW_EMPLOYER_RATE = 0.01;
+    const NEW_EMPLOYER_RATE = 0.0242;
 
-    const WAGE_BASE = 24200;
+    const WAGE_BASE = 15000;
 
     public function __construct(Payroll $payroll)
     {
         parent::__construct($payroll);
-        $this->tax_rate = config('taxes.rates.us.new_mexico.unemployment', static::NEW_EMPLOYER_RATE);
+        $this->tax_rate = config('taxes.rates.us.massachusetts.unemployment', static::NEW_EMPLOYER_RATE);
     }
 }
