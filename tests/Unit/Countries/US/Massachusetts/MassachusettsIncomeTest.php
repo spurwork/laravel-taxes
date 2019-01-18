@@ -31,8 +31,7 @@ class MassachusettsIncomeTest extends \TestCase
             $taxes->setPayPeriods(52);
         });
 
-        // $this->assertSame($result, $results->getTax(MassachusettsIncome::class));
-        $this->assertSame(true, true);
+        $this->assertSame($result, $results->getTax(MassachusettsIncome::class));
     }
 
     public function provideTestData()
