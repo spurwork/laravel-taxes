@@ -20,15 +20,12 @@ use Appleton\Taxes\Models\Countries\US\NorthCarolina\NorthCarolinaIncomeTaxInfor
 use Appleton\Taxes\Models\Countries\US\Wisconsin\WisconsinIncomeTaxInformation;
 use Appleton\Taxes\Providers\TaxesServiceProvider;
 use Carbon\Carbon;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Orchestra\Database\ConsoleServiceProvider;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 use Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables;
 
 class TestCase extends BaseTestCase
 {
-    use DatabaseMigrations;
-
     public function date($date)
     {
         return Carbon::parse($date);

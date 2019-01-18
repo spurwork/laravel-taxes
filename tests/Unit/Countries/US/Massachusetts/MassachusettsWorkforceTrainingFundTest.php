@@ -6,12 +6,17 @@ use Carbon\Carbon;
 
 class MassachusettsWorkforceTrainingFundTest extends \TestCase
 {
-    public function testMassachusettsWorkforceTrainingFund()
+    public function setUp()
     {
+        parent::setUp();
+
         Carbon::setTestNow(
             Carbon::parse('January 1, 2019 8am', 'America/Chicago')->setTimezone('UTC')
         );
+    }
 
+    public function testMassachusettsWorkforceTrainingFund()
+    {
         $results = $this->taxes->calculate(function ($taxes) {
             $taxes->setHomeLocation($this->getLocation('us.massachusetts'));
             $taxes->setWorkLocation($this->getLocation('us.massachusetts'));
@@ -24,10 +29,6 @@ class MassachusettsWorkforceTrainingFundTest extends \TestCase
 
     public function testMassachusettsWorkforceTrainingFundMetWageBase()
     {
-        Carbon::setTestNow(
-            Carbon::parse('January 1, 2019 8am', 'America/Chicago')->setTimezone('UTC')
-        );
-
         $results = $this->taxes->calculate(function ($taxes) {
             $taxes->setHomeLocation($this->getLocation('us.massachusetts'));
             $taxes->setWorkLocation($this->getLocation('us.massachusetts'));
