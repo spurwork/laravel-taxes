@@ -5,6 +5,7 @@ use Appleton\Taxes\Countries\US\Alabama\AlabamaIncome\AlabamaIncome;
 use Appleton\Taxes\Countries\US\Colorado\ColoradoIncome\ColoradoIncome;
 use Appleton\Taxes\Countries\US\Georgia\GeorgiaIncome\GeorgiaIncome;
 use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome;
+use Appleton\Taxes\Countries\US\Massachusetts\MassachusettsIncome\MassachusettsIncome;
 use Appleton\Taxes\Countries\US\NewMexico\NewMexicoIncome\NewMexicoIncome;
 use Appleton\Taxes\Countries\US\NorthCarolina\NorthCarolinaIncome\NorthCarolinaIncome;
 use Appleton\Taxes\Countries\US\Wisconsin\WisconsinIncome\WisconsinIncome;
@@ -13,20 +14,19 @@ use Appleton\Taxes\Models\Countries\US\Arizona\ArizonaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Colorado\ColoradoIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Georgia\GeorgiaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\FederalIncomeTaxInformation;
+use Appleton\Taxes\Models\Countries\US\Massachusetts\MassachusettsIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\NewMexico\NewMexicoIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\NorthCarolina\NorthCarolinaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Wisconsin\WisconsinIncomeTaxInformation;
 use Appleton\Taxes\Providers\TaxesServiceProvider;
 use Carbon\Carbon;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use DB;
+use Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables;
 use Orchestra\Database\ConsoleServiceProvider;
 use Orchestra\Testbench\TestCase as BaseTestCase;
-use Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables;
 
 class TestCase extends BaseTestCase
 {
-    use DatabaseTransactions;
-
     public function date($date)
     {
         return Carbon::parse($date);
@@ -89,6 +89,14 @@ class TestCase extends BaseTestCase
             'filing_status' => GeorgiaIncome::FILING_SINGLE,
         ], $this->user);
 
+        MassachusettsIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'exemptions' => 0,
+            'blind' => 0,
+            'filing_status' => MassachusettsIncome::FILING_SINGLE,
+            'exempt' => false,
+        ], $this->user);
+
         NewMexicoIncomeTaxInformation::createForUser([
             'additional_withholding' => 0,
             'exemptions' => 0,
@@ -149,6 +157,7 @@ class TestCase extends BaseTestCase
             'us.colorado' => [39.7640021, -105.1352965],
             'us.georgia' => [33.7490, -84.3880],
             'us.florida' => [27.6648, -81.5158],
+            'us.massachusetts' => [42.4072, -71.3824],
             'us.new_mexico' => [34.5199, -105.8701],
             'us.north_carolina' => [35.7596, -79.0193],
             'us.tennessee' => [35.5175, -86.5804],
@@ -161,9 +170,10 @@ class TestCase extends BaseTestCase
 
     protected function getEnvironmentSetUp($app)
     {
-
         $app->useEnvironmentPath(__DIR__.'/..');
+
         $app->bootstrapWith([LoadEnvironmentVariables::class]);
+
         parent::getEnvironmentSetUp($app);
 
         $app['config']->set('database.default', 'testing');
@@ -190,6 +200,7 @@ class TestCase extends BaseTestCase
         $app['config']->set('taxes.tables.us.arizona.arizona_income_tax_information', 'arizona_income_tax_information');
         $app['config']->set('taxes.tables.us.colorado.colorado_income_tax_information', 'colorado_income_tax_information');
         $app['config']->set('taxes.tables.us.georgia.georgia_income_tax_information', 'georgia_income_tax_information');
+        $app['config']->set('taxes.tables.us.massachusetts.massachusetts_income_tax_information', 'massachusetts_income_tax_information');
         $app['config']->set('taxes.tables.us.wisconsin.wisconsin_income_tax_information', 'wisconsin_income_tax_information');
     }
 
