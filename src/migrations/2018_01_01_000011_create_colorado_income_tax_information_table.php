@@ -10,6 +10,8 @@ use Appleton\Taxes\Models\TaxArea;
 
 class CreateColoradoIncomeTaxInformationTable extends Migration
 {
+    public $withinTransaction = false;
+
     protected $colorado_income_tax_information = 'colorado_income_tax_information';
     protected $governmental_unit_areas = 'governmental_unit_areas';
     protected $tax_areas = 'tax_areas';

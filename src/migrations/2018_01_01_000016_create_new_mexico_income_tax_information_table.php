@@ -10,6 +10,8 @@ use Appleton\Taxes\Models\TaxArea;
 
 class CreateNewMexicoIncomeTaxInformationTable extends Migration
 {
+    public $withinTransaction = false;
+
     protected $new_mexico_income_tax_information = 'new_mexico_income_tax_information';
     protected $governmental_unit_areas = 'governmental_unit_areas';
     protected $tax_areas = 'tax_areas';

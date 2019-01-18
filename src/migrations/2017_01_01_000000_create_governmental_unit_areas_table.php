@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateGovernmentalUnitAreasTable extends Migration
 {
+    public $withinTransaction = false;
+
     protected $governmental_unit_areas = 'governmental_unit_areas';
 
     /**

@@ -44,6 +44,8 @@ use Illuminate\Support\Facades\Schema;
 
 class AddBasedToTaxAreas extends Migration
 {
+    public $withinTransaction = false;
+
     protected $tax_areas = 'tax_areas';
 
     /**

@@ -8,6 +8,8 @@ use Appleton\Taxes\Countries\US\Alabama\MaconCountyOccupational\MaconCountyOccup
 
 class InsertMaconCountyAlTax extends Migration
 {
+    public $withinTransaction = false;
+
     protected $governmental_unit_areas = 'governmental_unit_areas';
     protected $tax_areas = 'tax_areas';
 

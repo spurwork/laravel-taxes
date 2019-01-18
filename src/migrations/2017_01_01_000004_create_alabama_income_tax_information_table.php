@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateAlabamaIncomeTaxInformationTable extends Migration
 {
+    public $withinTransaction = false;
+
     protected $alabama_income_tax_information = 'alabama_income_tax_information';
 
     /**
