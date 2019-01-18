@@ -55,7 +55,7 @@ abstract class BaseIncome extends BaseTax
 
     public function isUserClaimingExemption(): bool
     {
-        return $this->tax_information->exempt;
+        return (bool) $this->tax_information->exempt;
     }
 
     public function resolveTaxInformation($information_type, $tax_information, $user)

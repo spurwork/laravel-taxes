@@ -3,7 +3,7 @@ language: php
 php:
   - 7.1
 
-sudo: false
+sudo: true
 
 cache:
   directories:
@@ -19,6 +19,7 @@ addons:
       - postgresql-9.6-postgis-2.3
 
 before_install:
+  - sudo mount -o remount,size=50% /var/ramfs
   - phpenv config-rm xdebug.ini
 
 install:
