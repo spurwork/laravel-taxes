@@ -20,6 +20,7 @@ use Appleton\Taxes\Models\Countries\US\NorthCarolina\NorthCarolinaIncomeTaxInfor
 use Appleton\Taxes\Models\Countries\US\Wisconsin\WisconsinIncomeTaxInformation;
 use Appleton\Taxes\Providers\TaxesServiceProvider;
 use Carbon\Carbon;
+use DB;
 use Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables;
 use Orchestra\Database\ConsoleServiceProvider;
 use Orchestra\Testbench\TestCase as BaseTestCase;
@@ -38,6 +39,11 @@ class TestCase extends BaseTestCase
         Carbon::setTestNow(
             Carbon::parse('January 1, 2017 8am', 'America/Chicago')->setTimezone('UTC')
         );
+
+        foreach (array_column(DB::select('SELECT tablename FROM pg_catalog.pg_tables WHERE schemaname=\'public\''), 'tablename') as $table) {
+            if ($table === 'spatial_ref_sys') continue;
+            DB::statement('drop table '.$table.' cascade');
+        }
 
         $this->loadLaravelMigrations(['--database' => 'testing']);
 
