@@ -7,8 +7,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateTaxInformationTable extends Migration
 {
-    public $withinTransaction = false;
-
     protected $tax_information = 'tax_information';
     protected $users = 'users';
 

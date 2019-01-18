@@ -38,8 +38,6 @@ use Illuminate\Support\Facades\DB;
 
 class InsertTaxData extends Migration
 {
-    public $withinTransaction = false;
-
     protected $governmental_unit_areas = 'governmental_unit_areas';
     protected $tax_areas = 'tax_areas';
 

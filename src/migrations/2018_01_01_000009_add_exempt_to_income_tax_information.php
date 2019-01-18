@@ -7,8 +7,6 @@ use Illuminate\Support\Facades\Schema;
 
 class AddExemptToIncomeTaxInformation extends Migration
 {
-    public $withinTransaction = false;
-
     private $alabama_income_tax_information = 'alabama_income_tax_information';
     private $georgia_income_tax_information = 'georgia_income_tax_information';
     private $federal_income_tax_information = 'federal_income_tax_information';

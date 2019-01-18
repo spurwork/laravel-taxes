@@ -7,8 +7,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateFederalIncomeTaxInformationTable extends Migration
 {
-    public $withinTransaction = false;
-
     protected $federal_income_tax_information = 'federal_income_tax_information';
 
     /**

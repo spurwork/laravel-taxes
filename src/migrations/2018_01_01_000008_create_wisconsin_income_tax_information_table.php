@@ -10,8 +10,6 @@ use Appleton\Taxes\Models\TaxArea;
 
 class CreateWisconsinIncomeTaxInformationTable extends Migration
 {
-    public $withinTransaction = false;
-
     protected $wisconsin_income_tax_information = 'wisconsin_income_tax_information';
     protected $governmental_unit_areas = 'governmental_unit_areas';
     protected $tax_areas = 'tax_areas';

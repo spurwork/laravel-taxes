@@ -9,8 +9,6 @@ use Appleton\Taxes\Countries\US\Georgia\GeorgiaUnemployment\GeorgiaUnemployment;
 
 class CreateGeorgiaIncomeTaxInformationTable extends Migration
 {
-    public $withinTransaction = false;
-
     protected $georgia_income_tax_information = 'georgia_income_tax_information';
     protected $governmental_unit_areas = 'governmental_unit_areas';
     protected $tax_areas = 'tax_areas';
