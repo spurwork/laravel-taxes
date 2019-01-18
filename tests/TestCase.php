@@ -40,11 +40,6 @@ class TestCase extends BaseTestCase
             Carbon::parse('January 1, 2017 8am', 'America/Chicago')->setTimezone('UTC')
         );
 
-        foreach (array_column(DB::select('SELECT tablename FROM pg_catalog.pg_tables WHERE schemaname=\'public\''), 'tablename') as $table) {
-            if ($table === 'spatial_ref_sys') continue;
-            DB::statement('drop table '.$table.' cascade');
-        }
-
         $this->loadLaravelMigrations(['--database' => 'testing']);
 
         $this->loadMigrationsFrom([
