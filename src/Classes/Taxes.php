@@ -181,12 +181,13 @@ class Taxes
             });
     }
 
-    public function getStateIncomeClass($class, Carbon $date = null)
+    public function getStateIncomeClass($class, $user, Carbon $date = null)
     {
         $date = is_null($date) ? Carbon::now() : $date;
 
         app()->instance(Payroll::class, new Payroll([
             'date' => $date,
+            'user' => $user,
         ]));
 
         try {
