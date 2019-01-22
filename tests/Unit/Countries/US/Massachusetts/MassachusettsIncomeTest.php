@@ -47,13 +47,21 @@ class MassachusettsIncomeTest extends \TestCase
             ],
             '1' => [
                 'January 1, 2019 8am',
+                MassachusettsIncome::FILING_SINGLE,
+                0,
+                1,
+                125,
+                0.0,
+            ],
+            '2' => [
+                'January 1, 2019 8am',
                 MassachusettsIncome::FILING_HEAD_OF_HOUSEHOLD,
                 0,
                 0,
                 125,
                 3.49,
             ],
-            '2' => [
+            '3' => [
                 'January 1, 2019 8am',
                 MassachusettsIncome::FILING_HEAD_OF_HOUSEHOLD,
                 0,
@@ -61,7 +69,7 @@ class MassachusettsIncomeTest extends \TestCase
                 125,
                 0.0,
             ],
-            '3' => [
+            '4' => [
                 'January 1, 2019 8am',
                 MassachusettsIncome::FILING_SINGLE,
                 1,
@@ -69,7 +77,7 @@ class MassachusettsIncomeTest extends \TestCase
                 125,
                 3.69,
             ],
-            '4' => [
+            '5' => [
                 'January 1, 2019 8am',
                 MassachusettsIncome::FILING_SINGLE,
                 2,
@@ -77,7 +85,7 @@ class MassachusettsIncomeTest extends \TestCase
                 125,
                 1.55,
             ],
-            '5' => [
+            '6' => [
                 'January 1, 2019 8am',
                 MassachusettsIncome::FILING_SINGLE,
                 0,
@@ -85,7 +93,7 @@ class MassachusettsIncomeTest extends \TestCase
                 500,
                 19.04,
             ],
-            '6' => [
+            '7' => [
                 'January 1, 2019 8am',
                 MassachusettsIncome::FILING_HEAD_OF_HOUSEHOLD,
                 0,
@@ -93,7 +101,7 @@ class MassachusettsIncomeTest extends \TestCase
                 500,
                 15.74,
             ],
-            '7' => [
+            '8' => [
                 'January 1, 2019 8am',
                 MassachusettsIncome::FILING_HEAD_OF_HOUSEHOLD,
                 2,
