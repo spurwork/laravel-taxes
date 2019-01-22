@@ -192,13 +192,11 @@ class Taxes
 
         try {
             $class = app($class);
-            $this->unbindTaxes();
             $this->unbindPayrollData();
 
             return $class;
         } catch (\Exception $e)
         {
-            $this->unbindTaxes();
             $this->unbindPayrollData();
             return null;
         }
