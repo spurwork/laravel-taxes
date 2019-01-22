@@ -22,6 +22,8 @@ class MassachusettsIncome extends BaseMassachusettsIncome
 
     const BLIND_DEDUCTION = 2200;
 
+    const MIN_WAGES_WITH_EXEMPTIONS = 8008;
+
     public function __construct(MassachusettsIncomeTaxInformation $tax_information, Medicare $medicare, SocialSecurity $social_security, Payroll $payroll)
     {
         parent::__construct($tax_information, $payroll);
@@ -32,6 +34,11 @@ class MassachusettsIncome extends BaseMassachusettsIncome
 
     public function getAdjustedEarnings()
     {
+        if ($this->getGrossEarnings() < self::MIN_WAGES_WITH_EXEMPTIONS
+            && $this->tax_information->exemptions >= 1) {
+                return 0;
+        }
+
         return $this->getGrossEarnings()
             - $this->getAllowanceExemption()
             - ($this->medicare * $this->payroll->pay_periods)
