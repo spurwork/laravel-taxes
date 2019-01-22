@@ -4,12 +4,13 @@ namespace Appleton\Taxes\Classes;
 
 use Appleton\Taxes\Classes\Payroll;
 use Appleton\Taxes\Countries\US\Alabama\AlabamaIncome\AlabamaIncome;
-use Appleton\Taxes\Countries\US\Georgia\GeorgiaIncome\GeorgiaIncome;
 use Appleton\Taxes\Countries\US\Alabama\AlabamaUnemployment\AlabamaUnemployment;
 use Appleton\Taxes\Countries\US\Alabama\BirminghamOccupational\BirminghamOccupational;
 use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome;
 use Appleton\Taxes\Countries\US\FederalUnemployment\FederalUnemployment;
 use Appleton\Taxes\Countries\US\Georgia\GeorgiaUnemployment\GeorgiaUnemployment;
+use Appleton\Taxes\Countries\US\Georgia\GeorgiaIncome\V20180101\GeorgiaIncome;
+use Appleton\Taxes\Countries\US\Georgia\GeorgiaIncome\GeorgiaIncome as ParentGeorgiaIncome;
 use Appleton\Taxes\Countries\US\Medicare\Medicare;
 use Appleton\Taxes\Countries\US\Medicare\MedicareEmployer;
 use Appleton\Taxes\Countries\US\SocialSecurity\SocialSecurity;
@@ -57,7 +58,7 @@ class TaxesTest extends \TestCase
             $taxes->setDate(Carbon::now()->addMonth());
         });
 
-        $this->assertSame(2.73, $results->getTax(GeorgiaIncome::class));
+        $this->assertSame(2.73, $results->getTax(ParentGeorgiaIncome::class));
         $this->assertSame(1.80, $results->getTax(GeorgiaUnemployment::class));
     }
 
@@ -256,5 +257,12 @@ class TaxesTest extends \TestCase
 
         $this->assertSame(0.0, $results->getTax(FederalIncome::class));
         $this->assertSame(0.0, $results->getTax(AlabamaIncome::class));
+    }
+
+    public function testStateIncomeClass()
+    {
+        $class = $this->taxes->getStateIncomeClass("Appleton\Taxes\Countries\US\Georgia\GeorgiaIncome\GeorgiaIncome", $this->user, Carbon::parse('2018-01-01'));
+
+        $this->assertSame(GeorgiaIncome::DEPENDENT_ALLOWANCE_AMOUNT, $class::DEPENDENT_ALLOWANCE_AMOUNT);
     }
 }

@@ -15,18 +15,17 @@ class Payroll
 
     public function __construct($parameters) {
         $this->date = $parameters['date'];
-        $this->earnings = $parameters['earnings'];
-        $this->pay_periods = $parameters['pay_periods'];
-        $this->supplemental_earnings = $parameters['supplemental_earnings'];
+        $this->earnings = $parameters['earnings'] ?? 0;
+        $this->pay_periods = $parameters['pay_periods'] ?? 52;
+        $this->supplemental_earnings = $parameters['supplemental_earnings'] ?? 0;
         $this->user = $parameters['user'];
-        $this->ytd_earnings = $parameters['ytd_earnings'];
+        $this->ytd_earnings = $parameters['ytd_earnings'] ?? 0;
 
         $this->amount_withheld = 0;
     }
 
     public function withholdTax($amount)
     {
-        // var_dump([$amount, $this->getNetEarnings(), max(min($this->getNetEarnings(), $amount), 0)]);
         $amount = min($this->getNetEarnings(), $amount);
         $this->amount_withheld += $amount;
         return $amount;

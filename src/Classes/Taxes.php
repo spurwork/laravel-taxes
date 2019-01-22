@@ -180,4 +180,25 @@ class Taxes
                 app()->forgetInstance($tax_name);
             });
     }
+
+    public function getStateIncomeClass($class, $user, Carbon $date = null)
+    {
+        $date = is_null($date) ? Carbon::now() : $date;
+
+        app()->instance(Payroll::class, new Payroll([
+            'date' => $date,
+            'user' => $user,
+        ]));
+
+        try {
+            $class = app($class);
+            $this->unbindPayrollData();
+
+            return $class;
+        } catch (\Exception $e)
+        {
+            $this->unbindPayrollData();
+            return null;
+        }
+    }
 }
