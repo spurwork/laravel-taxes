@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\NewMexico\NewMexicoUnemployment\V20180101;
+namespace Appleton\Taxes\Countries\US\NewMexico\NewMexicoUnemployment\V20190101;
 
 use Appleton\Taxes\Countries\US\NewMexico\NewMexicoUnemployment\NewMexicoUnemployment as ParentNewMexicoUnemployment;
 use Carbon\Carbon;
