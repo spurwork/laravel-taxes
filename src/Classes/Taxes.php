@@ -12,6 +12,7 @@ class Taxes
     protected $date = null;
     protected $pay_periods = 1;
     protected $supplemental_earnings = 0;
+    protected $wtd_earnings = 0;
     protected $ytd_earnings = 0;
 
     public function setDate($date)
@@ -47,6 +48,11 @@ class Taxes
     public function setWorkLocation($location)
     {
         $this->work_location = $location;
+    }
+
+    public function setWtdEarnings($wtd_earnings)
+    {
+        $this->wtd_earnings = $wtd_earnings;
     }
 
     public function setYtdEarnings($ytd_earnings)
@@ -91,6 +97,7 @@ class Taxes
             'pay_periods' => $this->pay_periods,
             'supplemental_earnings' => $this->supplemental_earnings,
             'user' => $this->user,
+            'wtd_earnings' => $this->wtd_earnings,
             'ytd_earnings' => $this->ytd_earnings,
         ]));
     }

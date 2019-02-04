@@ -9,6 +9,7 @@ class Payroll
     public $pay_periods;
     public $supplemental_earnings;
     public $user;
+    public $wtd_earnings;
     public $ytd_earnings;
 
     protected $tax_amount;
@@ -19,6 +20,7 @@ class Payroll
         $this->pay_periods = $parameters['pay_periods'] ?? 52;
         $this->supplemental_earnings = $parameters['supplemental_earnings'] ?? 0;
         $this->user = $parameters['user'];
+        $this->wtd_earnings = $parameters['wtd_earnings'] ?? 0;
         $this->ytd_earnings = $parameters['ytd_earnings'] ?? 0;
 
         $this->amount_withheld = 0;
