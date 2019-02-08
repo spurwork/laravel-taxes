@@ -213,7 +213,7 @@ class GeorgiaIncomeTest extends \TestCase
                 'supplemental_earnings' => 0,
                 'pay_periods' => 52,
                 'use_default' => false,
-                'result' => 0.88,
+                'result' => 4.30,
             ],
             [
                 'date' => 'January 1, 2019 8am',
