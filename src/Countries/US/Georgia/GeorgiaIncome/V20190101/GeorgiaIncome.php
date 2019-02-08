@@ -55,7 +55,7 @@ class GeorgiaIncome extends BaseGeorgiaIncome
         self::FILING_SINGLE => 2700,
         self::FILING_HEAD_OF_HOUSEHOLD => 2700,
         self::FILING_MARRIED_SEPARATE => 3700,
-        self::FILING_MARRIED_JOINT_BOTH_WORKING => 7400,
+        self::FILING_MARRIED_JOINT_BOTH_WORKING => 3700,
         self::FILING_MARRIED_JOINT_ONE_WORKING => 7400,
     ];
 
