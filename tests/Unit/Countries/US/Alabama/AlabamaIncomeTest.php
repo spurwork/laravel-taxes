@@ -2,6 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\Alabama\AlabamaIncome;
 
+use Appleton\Taxes\Models\Tax;
 use Appleton\Taxes\Models\Countries\US\Alabama\AlabamaIncomeTaxInformation;
 use Carbon\Carbon;
 
@@ -16,6 +17,8 @@ class AlabamaIncomeTest extends \TestCase
             $taxes->setEarnings(66.68);
             $taxes->setPayPeriods(260);
         });
+
+        // dd($results);
 
         $this->assertSame(2.06, $results->getTax(AlabamaIncome::class));
 

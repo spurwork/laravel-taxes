@@ -40,7 +40,7 @@ class TaxArea extends Model
 
     public function scopeAtPoint($query, $home_location, $work_location)
     {
-        $query
+        return $query
             ->where(function($query) use ($home_location) {
                 $query
                     ->where('based', self::BASED_ON_HOME_LOCATION)

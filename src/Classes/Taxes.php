@@ -139,7 +139,7 @@ class Taxes
     {
         $this->taxes = Tax::atPoint($this->home_location, $this->work_location)
             ->get()
-            ->pluck('tax');
+            ->pluck('class');
 
         if (!$this->hasStateIncomeTax()) {
             $this->getStateIncomeTax();
@@ -157,7 +157,7 @@ class Taxes
     {
         $state_income_tax = Tax::atPoint($this->home_location, $this->work_location)
             ->get()
-            ->pluck('tax')
+            ->pluck('class')
             ->first(function ($tax) {
                 return is_subclass_of($tax, BaseStateIncome::class);
             });
