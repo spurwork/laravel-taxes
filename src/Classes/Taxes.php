@@ -155,7 +155,7 @@ class Taxes
 
     private function getStateIncomeTax()
     {
-        $state_income_tax = Tax::atPoint($this->home_location, $this->work_location)
+        $state_income_tax = Tax::atPoint($this->home_location, $this->home_location)
             ->get()
             ->pluck('class')
             ->first(function ($tax) {
