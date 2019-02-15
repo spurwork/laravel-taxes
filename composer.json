@@ -22,6 +22,7 @@
         "nesbot/carbon": "^1.21"
     },
     "require-dev": {
+        "doctrine/dbal": "^2.9",
         "mockery/mockery": "^0.9.9",
         "orchestra/database": "^3.6",
         "orchestra/testbench": "~3.6",

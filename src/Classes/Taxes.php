@@ -2,6 +2,7 @@
 
 namespace Appleton\Taxes\Classes;
 
+use Appleton\Taxes\Models\Tax;
 use Appleton\Taxes\Models\TaxArea;
 use Appleton\Taxes\Models\TaxInformation;
 use Carbon\Carbon;
@@ -136,16 +137,7 @@ class Taxes
 
     private function getTaxes()
     {
-        $this->taxes = TaxArea::where(function ($query) {
-            $query
-                ->basedOnHomeLocation()
-                ->atPoint($this->home_location[0], $this->home_location[1]);
-        })
-            ->orWhere(function ($query) {
-                $query
-                    ->basedOnWorkLocation()
-                    ->atPoint($this->work_location[0], $this->work_location[1]);
-            })
+        $this->taxes = Tax::atPoint($this->home_location, $this->work_location)
             ->get()
             ->pluck('tax');
 
@@ -163,7 +155,7 @@ class Taxes
 
     private function getStateIncomeTax()
     {
-        $state_income_tax = TaxArea::atPoint($this->home_location[0], $this->home_location[1])
+        $state_income_tax = Tax::atPoint($this->home_location, $this->work_location)
             ->get()
             ->pluck('tax')
             ->first(function ($tax) {
