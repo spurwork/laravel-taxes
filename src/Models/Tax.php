@@ -8,8 +8,6 @@ class Tax extends Model
 {
     protected $table = 'taxes';
 
-    protected $fillable = ['name', 'class'];
-
     protected $guarded = [];
 
     public $timestamps = false;
