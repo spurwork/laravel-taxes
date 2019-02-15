@@ -18,8 +18,6 @@ class AlabamaIncomeTest extends \TestCase
             $taxes->setPayPeriods(260);
         });
 
-        // dd($results);
-
         $this->assertSame(2.06, $results->getTax(AlabamaIncome::class));
 
         Carbon::setTestNow(
