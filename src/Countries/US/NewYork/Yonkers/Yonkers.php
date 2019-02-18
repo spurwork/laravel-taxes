@@ -2,11 +2,9 @@
 
 namespace Appleton\Taxes\Countries\US\NewYork\Yonkers;
 
-use Appleton\Taxes\Classes\BaseIncome;
-use Appleton\Taxes\Classes\Payroll;
-use Appleton\Taxes\Models\Countries\US\NewYork\NewYorkIncomeTaxInformation;
+use Appleton\Taxes\Classes\BaseTax;
 
-abstract class Yonkers extends BaseIncome
+abstract class Yonkers extends BaseTax
 {
     const TYPE = 'local';
 
@@ -17,10 +15,4 @@ abstract class Yonkers extends BaseIncome
         self::FILING_SINGLE => 'FILING_SINGLE',
         self::FILING_MARRIED => 'FILING_MARRIED',
     ];
-
-    public function __construct(NewYorkIncomeTaxInformation $tax_information, Payroll $payroll)
-    {
-        parent::__construct($payroll);
-        $this->tax_information = $tax_information;
-    }
 }

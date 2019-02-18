@@ -90,11 +90,14 @@ class TaxArea extends Model
             ->orWhere(function($query) use ($home_location, $work_location) {
                 $query
                     ->where('based', self::BASED_ON_EITHER_LOCATION)
-                    ->whereHas('homeGovernmentalUnitArea', function ($query) use ($home_location) {
-                        $query->atPoint($home_location[0], $home_location[1]);
-                    })
-                    ->orWhereHas('workGovernmentalUnitArea', function ($query) use ($work_location) {
-                        $query->atPoint($work_location[0], $work_location[1]);
+                    ->where(function($query) use ($home_location, $work_location) {
+                        $query
+                            ->whereHas('homeGovernmentalUnitArea', function ($query) use ($home_location) {
+                                $query->atPoint($home_location[0], $home_location[1]);
+                            })
+                            ->orWhereHas('workGovernmentalUnitArea', function ($query) use ($work_location) {
+                                $query->atPoint($work_location[0], $work_location[1]);
+                            });
                     });
             });
     }
