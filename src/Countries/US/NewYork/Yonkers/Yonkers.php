@@ -2,11 +2,10 @@
 
 namespace Appleton\Taxes\Countries\US\NewYork\Yonkers;
 
-use Appleton\Taxes\Classes\BaseTax;
-
-abstract class Yonkers extends BaseTax
+abstract class Yonkers
 {
     const TYPE = 'local';
+    const PRIORITY = 9999;
 
     const FILING_SINGLE = 0;
     const FILING_MARRIED = 1;
@@ -15,4 +14,6 @@ abstract class Yonkers extends BaseTax
         self::FILING_SINGLE => 'FILING_SINGLE',
         self::FILING_MARRIED => 'FILING_MARRIED',
     ];
+
+    public $tax_total = 0;
 }

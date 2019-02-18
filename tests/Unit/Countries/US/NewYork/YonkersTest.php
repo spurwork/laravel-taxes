@@ -125,7 +125,7 @@ class YonkersTest extends \TestCase
                 NewYorkIncome::FILING_SINGLE,
                 0,
                 500,
-                2.41,
+                2.40,
             ],
             '10' => [
                 'January 1, 2019 8am',
