@@ -70,6 +70,7 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\NewYork\NewYorkFamilyMedicalLeave\NewYorkFamilyMedicalLeave::class,
         \Appleton\Taxes\Countries\US\NewYork\NewYorkIncome\NewYorkIncome::class,
         \Appleton\Taxes\Countries\US\NewYork\NewYorkUnemployment\NewYorkUnemployment::class,
+        \Appleton\Taxes\Countries\US\NewYork\Yonkers\Yonkers::class,
         \Appleton\Taxes\Countries\US\NorthCarolina\NorthCarolinaIncome\NorthCarolinaIncome::class,
         \Appleton\Taxes\Countries\US\NorthCarolina\NorthCarolinaUnemployment\NorthCarolinaUnemployment::class,
         \Appleton\Taxes\Countries\US\Wisconsin\WisconsinIncome\WisconsinIncome::class,

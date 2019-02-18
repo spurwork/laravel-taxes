@@ -8,6 +8,8 @@ class TaxArea extends Model
 {
     const BASED_ON_HOME_LOCATION = 'home';
     const BASED_ON_WORK_LOCATION = 'work';
+    const BASED_ON_HOME_AND_NOT_WORK_LOCATION = 'home_not_work';
+    const BASED_ON_WORK_AND_NOT_HOME_LOCATION = 'work_not_home';
     const BASED_ON_BOTH_LOCATIONS = 'both';
     const BASED_ON_EITHER_LOCATION = 'either';
 
@@ -51,6 +53,26 @@ class TaxArea extends Model
             ->orWhere(function($query) use ($work_location) {
                 $query
                     ->where('based', self::BASED_ON_WORK_LOCATION)
+                    ->whereHas('workGovernmentalUnitArea', function ($query) use ($work_location) {
+                        $query->atPoint($work_location[0], $work_location[1]);
+                    });
+            })
+            ->orWhere(function($query) use ($home_location, $work_location) {
+                $query
+                    ->where('based', self::BASED_ON_HOME_AND_NOT_WORK_LOCATION)
+                    ->whereHas('homeGovernmentalUnitArea', function ($query) use ($home_location) {
+                        $query->atPoint($home_location[0], $home_location[1]);
+                    })
+                    ->whereDoesntHave('workGovernmentalUnitArea', function ($query) use ($work_location) {
+                        $query->atPoint($work_location[0], $work_location[1]);
+                    });
+            })
+            ->orWhere(function($query) use ($home_location, $work_location) {
+                $query
+                    ->where('based', self::BASED_ON_WORK_AND_NOT_HOME_LOCATION)
+                    ->whereDoesntHave('homeGovernmentalUnitArea', function ($query) use ($home_location) {
+                        $query->atPoint($home_location[0], $home_location[1]);
+                    })
                     ->whereHas('workGovernmentalUnitArea', function ($query) use ($work_location) {
                         $query->atPoint($work_location[0], $work_location[1]);
                     });
