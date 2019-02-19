@@ -12,7 +12,8 @@ class TaxInformation extends Model
 
     public $timestamps = false;
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         $this->table = config('taxes.tables.tax_information');
     }
