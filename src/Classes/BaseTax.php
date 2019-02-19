@@ -5,8 +5,8 @@ namespace Appleton\Taxes\Classes;
 abstract class BaseTax
 {
     const PRIORITY = 9999;
-    public $tax_total = 0;
 
+    public $tax_total = 0;
 
     public function __construct(Payroll $payroll)
     {
