@@ -2,10 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\Georgia\GeorgiaIncome;
 
-use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome;
-use Appleton\Taxes\Models\Countries\US\FederalIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Georgia\GeorgiaIncomeTaxInformation;
-use Appleton\Taxes\Countries\US\Georgia\GeorgiaIncome\GeorgiaIncome;
 use Carbon\Carbon;
 
 class GeorgiaIncomeTest extends \TestCase
@@ -227,6 +224,19 @@ class GeorgiaIncomeTest extends \TestCase
                 'pay_periods' => 52,
                 'use_default' => false,
                 'result' => 2.8,
+            ],
+            [
+                'date' => 'January 1, 2019 8am',
+                'filing_status' => GeorgiaIncome::FILING_MARRIED_JOINT_BOTH_WORKING,
+                'allowances' => 1,
+                'personal_allowances' => 2,
+                'additional_withholding' => 0,
+                'exempt' => false,
+                'earnings' => 300,
+                'supplemental_earnings' => 0,
+                'pay_periods' => 52,
+                'use_default' => false,
+                'result' => 0.88,
             ],
         ];
     }

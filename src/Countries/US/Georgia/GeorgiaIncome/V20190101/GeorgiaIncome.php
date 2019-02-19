@@ -113,18 +113,21 @@ class GeorgiaIncome extends BaseGeorgiaIncome
 
     private function getPersonalAllowance()
     {
-        if ($this->tax_information->personal_allowances === 0 || !array_key_exists($this->tax_information->filing_status, self::PERSONAL_EXEMPTION_ALLOWANCES)) {
+        $personal_allowances = $this->tax_information->personal_allowances;
+        $filing_status = $this->tax_information->filing_status;
+
+        if ($personal_allowances === 0 || !array_key_exists($filing_status, self::PERSONAL_EXEMPTION_ALLOWANCES)) {
             return 0;
         }
 
-        if ($this->tax_information->filing_status === self::FILING_MARRIED_JOINT_ONE_WORKING) {
-            if ($this->tax_information->personal_allowances === 1) {
+        if ($filing_status === self::FILING_MARRIED_JOINT_ONE_WORKING) {
+            if ($personal_allowances === 1) {
                 return self::PERSONAL_EXEMPTION_ALLOWANCES[self::FILING_MARRIED_SEPARATE];
             }
-            return self::PERSONAL_EXEMPTION_ALLOWANCES[$this->tax_information->filing_status] * $this->tax_information->personal_allowances;
+            return self::PERSONAL_EXEMPTION_ALLOWANCES[$filing_status] * $personal_allowances;
         }
 
-        return self::PERSONAL_EXEMPTION_ALLOWANCES[$this->tax_information->filing_status];
+        return self::PERSONAL_EXEMPTION_ALLOWANCES[$filing_status] * $personal_allowances;
     }
 
     private function getDependentExemption()
