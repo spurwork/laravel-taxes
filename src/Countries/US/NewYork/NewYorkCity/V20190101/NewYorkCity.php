@@ -4,19 +4,60 @@ namespace Appleton\Taxes\Countries\US\NewYork\NewYorkCity\V20190101;
 
 use Appleton\Taxes\Classes\Payroll;
 use Appleton\Taxes\Countries\US\NewYork\NewYorkCity\NewYorkCity as BaseNewYorkCity;
+use Appleton\Taxes\Countries\US\NewYork\NewYorkIncome\NewYorkIncome;
 use Appleton\Taxes\Models\Countries\US\NewYork\NewYorkIncomeTaxInformation;
 
 class NewYorkCity extends BaseNewYorkCity
 {
+    const SUPPLEMENTAL_TAX_RATE = 0.0425;
+
+    const BRACKETS = [
+        [0, 0.0205, 0],
+        [8000, 0.0280, 164],
+        [8700, 0.0325, 184],
+        [15000, 0.0395, 388],
+        [25000, 0.0415, 783],
+        [60000, 0.0425, 2236],
+    ];
+
+    const SINGLE_DEDUCTION_ALLOWANCE_AMOUNT = 5000;
+
+    const MARRIED_DEDUCTION_ALLOWANCE_AMOUNT = 5500;
+
+    const EXEMPTION_ALLOWANCE_AMOUNT = 1000;
+
     public function __construct(NewYorkIncomeTaxInformation $tax_information, Payroll $payroll)
     {
         parent::__construct($tax_information, $payroll);
         $this->tax_information = $tax_information;
     }
 
-    public function compute()
+    public function getAdjustedEarnings()
     {
-        $this->tax_total = 0;
-        return round($this->tax_total, 2);
+        return $this->getGrossEarnings() - $this->getExemptionAllowance() - $this->getDeductionAllowance();
+    }
+
+    public function getTaxBrackets()
+    {
+        return static::BRACKETS;
+    }
+
+    private function getExemptionAllowance()
+    {
+        return $this->tax_information->exemptions * static::EXEMPTION_ALLOWANCE_AMOUNT;
+    }
+
+    public function getDeductionAllowance()
+    {
+        if ($this->tax_information->filing_status === NewYorkIncome::FILING_SINGLE) {
+            return static::SINGLE_DEDUCTION_ALLOWANCE_AMOUNT;
+        } else {
+            return static::MARRIED_DEDUCTION_ALLOWANCE_AMOUNT;
+        }
+    }
+
+    private function getGrossEarnings()
+    {
+        return ($this->payroll->earnings - $this->payroll->supplemental_earnings) * $this->payroll->pay_periods;
     }
 }
