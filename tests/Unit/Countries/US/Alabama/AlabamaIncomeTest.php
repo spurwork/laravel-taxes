@@ -2,6 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\Alabama\AlabamaIncome;
 
+use Appleton\Taxes\Models\Tax;
 use Appleton\Taxes\Models\Countries\US\Alabama\AlabamaIncomeTaxInformation;
 use Carbon\Carbon;
 

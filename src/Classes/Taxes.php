@@ -2,6 +2,7 @@
 
 namespace Appleton\Taxes\Classes;
 
+use Appleton\Taxes\Models\Tax;
 use Appleton\Taxes\Models\TaxArea;
 use Appleton\Taxes\Models\TaxInformation;
 use Carbon\Carbon;
@@ -12,6 +13,7 @@ class Taxes
     protected $date = null;
     protected $pay_periods = 1;
     protected $supplemental_earnings = 0;
+    protected $wtd_earnings = 0;
     protected $ytd_earnings = 0;
 
     public function setDate($date)
@@ -49,6 +51,11 @@ class Taxes
         $this->work_location = $location;
     }
 
+    public function setWtdEarnings($wtd_earnings)
+    {
+        $this->wtd_earnings = $wtd_earnings;
+    }
+
     public function setYtdEarnings($ytd_earnings)
     {
         $this->ytd_earnings = $ytd_earnings;
@@ -76,7 +83,7 @@ class Taxes
 
     private function bindInterfaces()
     {
-        foreach ($this->taxes as $tax_name) {
+        foreach ($this->taxes->pluck('class') as $tax_name) {
             foreach (class_implements($tax_name) as $interface) {
                 app()->bind($interface, $tax_name);
             }
@@ -91,6 +98,7 @@ class Taxes
             'pay_periods' => $this->pay_periods,
             'supplemental_earnings' => $this->supplemental_earnings,
             'user' => $this->user,
+            'wtd_earnings' => $this->wtd_earnings,
             'ytd_earnings' => $this->ytd_earnings,
         ]));
     }
@@ -100,21 +108,21 @@ class Taxes
         $results = [];
 
         $this->taxes
-            ->filter(function ($tax_name) use ($type) {
-                return $tax_name::TYPE == $type;
+            ->filter(function ($tax) use ($type) {
+                return ($tax->class)::TYPE == $type;
             })
-            ->sort() // by classname
-            ->sortBy(function ($tax_name) {
-                return $tax_name::PRIORITY;
+            ->sortBy('class')
+            ->sortBy(function ($tax) {
+                return ($tax->class)::PRIORITY;
             })
-            ->each(function ($tax_name) use (&$results) {
-                $tax = app($tax_name);
-                $results[$tax_name] = [
-                    'tax' => $tax,
-                    'amount' => $tax->compute(),
-                    'earnings' => method_exists($tax, 'getBaseEarnings') ? $tax->getBaseEarnings() : $this->earnings,
+            ->each(function ($tax) use (&$results) {
+                $tax_implementation = app($tax->class);
+                $results[$tax->class] = [
+                    'tax' => $tax_implementation,
+                    'amount' => $tax_implementation->compute($tax->taxAreas),
+                    'earnings' => method_exists($tax_implementation, 'getBaseEarnings') ? $tax_implementation->getBaseEarnings() : $this->earnings,
                 ];
-                app()->instance($tax_name, $tax);
+                app()->instance($tax->class, $tax_implementation);
             });
 
         return $results;
@@ -129,18 +137,11 @@ class Taxes
 
     private function getTaxes()
     {
-        $this->taxes = TaxArea::where(function ($query) {
-            $query
-                ->basedOnHomeLocation()
-                ->atPoint($this->home_location[0], $this->home_location[1]);
-        })
-            ->orWhere(function ($query) {
-                $query
-                    ->basedOnWorkLocation()
-                    ->atPoint($this->work_location[0], $this->work_location[1]);
-            })
-            ->get()
-            ->pluck('tax');
+        $this->taxes = Tax::atPoint($this->home_location, $this->work_location)
+            ->with(['taxAreas' => function($query) {
+               $query->atPoint($this->home_location, $this->work_location);
+            }])
+            ->get();
 
         if (!$this->hasStateIncomeTax()) {
             $this->getStateIncomeTax();
@@ -149,18 +150,17 @@ class Taxes
 
     private function hasStateIncomeTax()
     {
-        return $this->taxes->contains(function ($tax) {
+        return $this->taxes->pluck('class')->contains(function ($tax) {
             return is_subclass_of($tax, BaseStateIncome::class);
         });
     }
 
     private function getStateIncomeTax()
     {
-        $state_income_tax = TaxArea::atPoint($this->home_location[0], $this->home_location[1])
+        $state_income_tax = Tax::atPoint($this->home_location, $this->home_location)
             ->get()
-            ->pluck('tax')
             ->first(function ($tax) {
-                return is_subclass_of($tax, BaseStateIncome::class);
+                return is_subclass_of($tax->class, BaseStateIncome::class);
             });
 
         if ($state_income_tax) {
@@ -176,6 +176,7 @@ class Taxes
     private function unbindTaxes()
     {
         $this->taxes
+            ->pluck('class')
             ->each(function ($tax_name) {
                 app()->forgetInstance($tax_name);
             });

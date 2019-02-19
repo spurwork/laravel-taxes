@@ -47,7 +47,7 @@ class GeorgiaIncome extends BaseGeorgiaIncome
         self::FILING_SINGLE => 4600,
         self::FILING_HEAD_OF_HOUSEHOLD => 4600,
         self::FILING_MARRIED_SEPARATE => 3000,
-        self::FILING_MARRIED_JOINT_BOTH_WORKING => 7400,
+        self::FILING_MARRIED_JOINT_BOTH_WORKING => 3000,
         self::FILING_MARRIED_JOINT_ONE_WORKING => 6000,
     ];
 
@@ -56,7 +56,7 @@ class GeorgiaIncome extends BaseGeorgiaIncome
         self::FILING_HEAD_OF_HOUSEHOLD => 2700,
         self::FILING_MARRIED_SEPARATE => 3700,
         self::FILING_MARRIED_JOINT_BOTH_WORKING => 3700,
-        self::FILING_MARRIED_JOINT_ONE_WORKING => 3700,
+        self::FILING_MARRIED_JOINT_ONE_WORKING => 7400,
     ];
 
     const DEPENDENT_ALLOWANCE_AMOUNT = 3000;
@@ -71,7 +71,7 @@ class GeorgiaIncome extends BaseGeorgiaIncome
     {
         $adjusted_earnings = $this->getGrossEarnings();
 
-        if ($this->tax_information->filing_status != static::FILING_ZERO) {
+        if ($this->tax_information->filing_status != self::FILING_ZERO) {
             $adjusted_earnings = $adjusted_earnings - $this->getStandardDeduction() - $this->getPersonalAllowance() - $this->getDependentExemption();
         }
 
@@ -93,19 +93,19 @@ class GeorgiaIncome extends BaseGeorgiaIncome
 
     public function getTaxBrackets()
     {
-        if ($this->tax_information->filing_status === static::FILING_SINGLE || $this->tax_information->filing_status === static::FILING_HEAD_OF_HOUSEHOLD) {
-            return static::SINGLE_BRACKETS;
-        } else if ($this->tax_information->filing_status === static::FILING_MARRIED_JOINT_ONE_WORKING) {
-            return static::SINGLE_WORKING_BRACKETS;
+        if ($this->tax_information->filing_status === self::FILING_SINGLE || $this->tax_information->filing_status === self::FILING_HEAD_OF_HOUSEHOLD) {
+            return self::SINGLE_BRACKETS;
+        } else if ($this->tax_information->filing_status === self::FILING_MARRIED_JOINT_ONE_WORKING) {
+            return self::SINGLE_WORKING_BRACKETS;
         } else {
-            return static::BOTH_WORKING_BRACKETS;
+            return self::BOTH_WORKING_BRACKETS;
         }
     }
 
     private function getStandardDeduction()
     {
-        if (array_key_exists($this->tax_information->filing_status, static::STANDARD_DEDUCTIONS)) {
-            return static::STANDARD_DEDUCTIONS[$this->tax_information->filing_status];
+        if (array_key_exists($this->tax_information->filing_status, self::STANDARD_DEDUCTIONS)) {
+            return self::STANDARD_DEDUCTIONS[$this->tax_information->filing_status];
         }
 
         return 0;
@@ -113,15 +113,18 @@ class GeorgiaIncome extends BaseGeorgiaIncome
 
     private function getPersonalAllowance()
     {
-        if ($this->tax_information->personal_allowances === 0 || !array_key_exists($this->tax_information->filing_status, static::PERSONAL_EXEMPTION_ALLOWANCES)) {
+        if ($this->tax_information->personal_allowances === 0 || !array_key_exists($this->tax_information->filing_status, self::PERSONAL_EXEMPTION_ALLOWANCES)) {
             return 0;
         }
 
-        if ($this->tax_information->filing_status === static::FILING_MARRIED_JOINT_ONE_WORKING) {
-            return static::PERSONAL_EXEMPTION_ALLOWANCES[$this->tax_information->filing_status] * $this->tax_information->personal_allowances;
+        if ($this->tax_information->filing_status === self::FILING_MARRIED_JOINT_ONE_WORKING) {
+            if ($this->tax_information->personal_allowances === 1) {
+                return self::PERSONAL_EXEMPTION_ALLOWANCES[self::FILING_MARRIED_SEPARATE];
+            }
+            return self::PERSONAL_EXEMPTION_ALLOWANCES[$this->tax_information->filing_status] * $this->tax_information->personal_allowances;
         }
 
-        return static::PERSONAL_EXEMPTION_ALLOWANCES[$this->tax_information->filing_status];
+        return self::PERSONAL_EXEMPTION_ALLOWANCES[$this->tax_information->filing_status];
     }
 
     private function getDependentExemption()
