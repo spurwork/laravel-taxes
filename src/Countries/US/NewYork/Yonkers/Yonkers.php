@@ -6,6 +6,7 @@ abstract class Yonkers
 {
     const TYPE = 'local';
     const PRIORITY = 9999;
+    const WITHHELD = true;
 
     const FILING_SINGLE = 0;
     const FILING_MARRIED = 1;
