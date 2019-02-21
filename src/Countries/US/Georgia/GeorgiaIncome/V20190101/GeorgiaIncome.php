@@ -124,7 +124,7 @@ class GeorgiaIncome extends BaseGeorgiaIncome
             return self::PERSONAL_EXEMPTION_ALLOWANCES[$this->tax_information->filing_status] * $this->tax_information->personal_allowances;
         }
 
-        return self::PERSONAL_EXEMPTION_ALLOWANCES[$this->tax_information->filing_status];
+        return self::PERSONAL_EXEMPTION_ALLOWANCES[$this->tax_information->filing_status] * $this->tax_information->personal_allowances;
     }
 
     private function getDependentExemption()
