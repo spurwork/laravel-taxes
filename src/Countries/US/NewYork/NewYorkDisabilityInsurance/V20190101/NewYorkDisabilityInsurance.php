@@ -11,7 +11,7 @@ class NewYorkDisabilityInsurance extends BaseNewYorkDisabilityInsurance
 
     public function getBaseEarnings()
     {
-        return max(min(static::WAGE_BASE - $this->payroll->wtd_earnings, $this->payroll->earnings), 0);
+        return max(min(static::WAGE_BASE - $this->payroll->wtd_earnings, $this->payroll->getEarnings()), 0);
     }
 
     public function compute()

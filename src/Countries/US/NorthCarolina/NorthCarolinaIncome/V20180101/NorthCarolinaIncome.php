@@ -69,7 +69,7 @@ class NorthCarolinaIncome extends BaseNorthCarolinaIncome
     {
         $annual_income = $this->getGrossEarnings();
 
-        return $this->payroll->supplemental_earnings * self::SUPPLEMENTAL_TAX_RATE;
+        return $this->payroll->getSupplementalEarnings() * self::SUPPLEMENTAL_TAX_RATE;
     }
 
     public function getTaxBrackets()
@@ -95,6 +95,6 @@ class NorthCarolinaIncome extends BaseNorthCarolinaIncome
 
     private function getGrossEarnings()
     {
-        return ($this->payroll->earnings - $this->payroll->supplemental_earnings) * $this->payroll->pay_periods;
+        return ($this->payroll->getEarnings() - $this->payroll->getSupplementalEarnings()) * $this->payroll->pay_periods;
     }
 }

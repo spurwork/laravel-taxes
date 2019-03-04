@@ -10,18 +10,18 @@ abstract class BaseTax
 
     public function __construct(Payroll $payroll)
     {
-        $this->payroll = $payroll;
+        $this->payroll = $payroll->exemptEarnings(get_parent_class($this));
     }
 
     public function compute()
     {
-        $this->tax_total = $this->payroll->earnings * static::TAX_RATE;
+        $this->tax_total = $this->payroll->getEarnings() * static::TAX_RATE;
         return round($this->tax_total, 2);
     }
 
     public function getAdjustedEarnings()
     {
-        return $this->payroll->earnings;
+        return $this->payroll->getEarnings();
     }
 
     public function getAmount()

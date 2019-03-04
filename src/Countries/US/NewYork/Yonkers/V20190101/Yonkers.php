@@ -29,7 +29,7 @@ class Yonkers extends BaseYonkers
 
     public function getAdjustedEarnings()
     {
-        $adjusted_earnings = $this->payroll->earnings * $this->payroll->pay_periods;
+        $adjusted_earnings = $this->payroll->getEarnings() * $this->payroll->pay_periods;
 
         if ($adjusted_earnings <= static::NONRESIDENT_MINIMUM_ANNUALIZED_WAGES) {
             $adjusted_earnings = 0;

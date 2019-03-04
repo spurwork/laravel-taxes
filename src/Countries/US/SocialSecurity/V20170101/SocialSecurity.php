@@ -15,7 +15,7 @@ class SocialSecurity extends BaseSocialSecurity
 
     public function getAdjustedEarnings()
     {
-        return $this->payroll->earnings < $this->getBaseEarnings() ? $this->payroll->earnings : $this->getBaseEarnings();
+        return min($this->payroll->getEarnings(), $this->getBaseEarnings());
     }
 
     public function compute()

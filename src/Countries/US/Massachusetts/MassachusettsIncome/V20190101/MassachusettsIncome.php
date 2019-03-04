@@ -59,6 +59,6 @@ class MassachusettsIncome extends BaseMassachusettsIncome
 
     private function getGrossEarnings()
     {
-        return $this->payroll->earnings * $this->payroll->pay_periods;
+        return $this->payroll->getEarnings() * $this->payroll->pay_periods;
     }
 }

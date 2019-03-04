@@ -32,7 +32,7 @@ abstract class BaseIncome extends BaseTax
 
     public function getSupplementalIncomeTax()
     {
-        return $this->payroll->supplemental_earnings * static::SUPPLEMENTAL_TAX_RATE;
+        return $this->payroll->getSupplementalEarnings() * static::SUPPLEMENTAL_TAX_RATE;
     }
 
     public function getTaxAmountFromTaxBrackets($amount, $table)

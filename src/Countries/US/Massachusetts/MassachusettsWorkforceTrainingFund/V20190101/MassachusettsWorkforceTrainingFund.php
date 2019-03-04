@@ -20,6 +20,6 @@ class MassachusettsWorkforceTrainingFund extends BaseMassachusettsWorkforceTrain
 
     public function getAdjustedEarnings()
     {
-        return min($this->payroll->earnings, $this->getBaseEarnings());
+        return min($this->payroll->getEarnings(), $this->getBaseEarnings());
     }
 }

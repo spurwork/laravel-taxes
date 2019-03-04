@@ -265,4 +265,30 @@ class TaxesTest extends \TestCase
 
         $this->assertSame(GeorgiaIncome::DEPENDENT_ALLOWANCE_AMOUNT, $class::DEPENDENT_ALLOWANCE_AMOUNT);
     }
+
+    public function testPretaxDeductions()
+    {
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.alabama.birmingham'));
+            $taxes->setWorkLocation($this->getLocation('us.alabama.birmingham'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(66.68);
+            $taxes->setSupplementalEarnings(6.68);
+            $taxes->setPayPeriods(260);
+            $taxes->setDate(Carbon::now()->addMonth());
+            $taxes->setExemptions([
+                FederalIncome::class => 50,
+            ]);
+        });
+
+        $this->assertSame(1.78, $results->getTax(FederalIncome::class));
+        $this->assertSame(0.40, $results->getTax(FederalUnemployment::class));
+        $this->assertSame(0.97, $results->getTax(Medicare::class));
+        $this->assertSame(0.97, $results->getTax(MedicareEmployer::class));
+        $this->assertSame(4.13, $results->getTax(SocialSecurity::class));
+        $this->assertSame(4.13, $results->getTax(SocialSecurityEmployer::class));
+        $this->assertSame(2.32, $results->getTax(AlabamaIncome::class));
+        $this->assertSame(1.80, $results->getTax(AlabamaUnemployment::class));
+        $this->assertSame(0.67, $results->getTax(BirminghamOccupational::class));
+    }
 }

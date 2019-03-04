@@ -86,6 +86,6 @@ class NewYorkIncome extends BaseNewYorkIncome
 
     private function getGrossEarnings()
     {
-        return ($this->payroll->earnings - $this->payroll->supplemental_earnings) * $this->payroll->pay_periods;
+        return ($this->payroll->getEarnings() - $this->payroll->getSupplementalEarnings()) * $this->payroll->pay_periods;
     }
 }

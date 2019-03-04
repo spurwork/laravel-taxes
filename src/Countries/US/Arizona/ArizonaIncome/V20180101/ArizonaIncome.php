@@ -32,6 +32,6 @@ class ArizonaIncome extends BaseArizonaIncome
 
     public function getAdjustedEarnings()
     {
-        return $this->payroll->earnings * $this->payroll->pay_periods;
+        return $this->payroll->getEarnings() * $this->payroll->pay_periods;
     }
 }

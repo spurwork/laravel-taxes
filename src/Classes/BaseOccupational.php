@@ -9,7 +9,7 @@ abstract class BaseOccupational extends BaseTax
 
     public function compute()
     {
-        $this->tax_total = $this->payroll->withholdTax($this->payroll->earnings * static::TAX_RATE);
+        $this->tax_total = $this->payroll->withholdTax($this->payroll->getEarnings() * static::TAX_RATE);
         return round($this->tax_total, 2);
     }
 }

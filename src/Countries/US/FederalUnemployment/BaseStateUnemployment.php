@@ -16,7 +16,7 @@ class BaseStateUnemployment extends BaseTax implements StateUnemployment
 
     public function getAdjustedEarnings()
     {
-        return min($this->payroll->earnings, $this->getBaseEarnings());
+        return min($this->payroll->getEarnings(), $this->getBaseEarnings());
     }
 
     public function getTaxCredit() {
