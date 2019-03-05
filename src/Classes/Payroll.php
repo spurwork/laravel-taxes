@@ -18,7 +18,7 @@ class Payroll
     public function __construct($parameters) {
         $this->date = $parameters['date'];
         $this->earnings = $parameters['earnings'] ?? 0;
-        $this->exemptions = $parameters['exemptions'] ?? [];
+        $this->exemptions = collect($parameters['exemptions'] ?? []);
         $this->pay_periods = $parameters['pay_periods'] ?? 52;
         $this->supplemental_earnings = $parameters['supplemental_earnings'] ?? 0;
         $this->user = $parameters['user'];
@@ -30,7 +30,7 @@ class Payroll
 
     public function exemptEarnings($class_name)
     {
-        $max_amount_exempt = array_key_exists($class_name, $this->exemptions) ? $this->exemptions[$class_name] : 0;
+        $max_amount_exempt = $this->exemptions->get($class_name, 0);
         $this->exempted_earnings = min($max_amount_exempt, $this->earnings);
         $this->exempted_supplemental_earnings = min($max_amount_exempt - $this->exempted_earnings, $this->supplemental_earnings);
         return $this;
