@@ -30,7 +30,13 @@ class Payroll
 
     public function exemptEarnings($class_name)
     {
-        $max_amount_exempt = $this->exemptions->get($class_name, 0);
+        if ($this->exemptions->has($class_name)) {
+            $max_amount_exempt = $this->exemptions->get($class_name, 0);
+        } else {
+            $max_amount_exempt = $this->exemptions->first(function ($value, $key) use ($class_name) {
+                return is_subclass_of($class_name, $key);
+            }, 0);
+        }
         $this->exempted_earnings = min($max_amount_exempt, $this->earnings);
         $this->exempted_supplemental_earnings = min($max_amount_exempt - $this->exempted_earnings, $this->supplemental_earnings);
         return $this;
