@@ -51,7 +51,7 @@ class Payroll
 
     public function getNetEarnings()
     {
-        return $this->getEarnings() - $this->amount_withheld;
+        return max($this->getEarnings() - $this->amount_withheld, 0);
     }
 
     public function getEarnings()
