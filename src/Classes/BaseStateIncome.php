@@ -2,7 +2,13 @@
 
 namespace Appleton\Taxes\Classes;
 
-abstract class BaseStateIncome extends BaseIncome
+use Appleton\Taxes\Traits\HasIncome;
+
+abstract class BaseStateIncome extends BaseState
 {
-    const TYPE = 'state';
+    use HasIncome;
+
+    const WITHHELD = true;
+
+    abstract public function getTaxBrackets();
 }

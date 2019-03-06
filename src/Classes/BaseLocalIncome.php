@@ -2,10 +2,9 @@
 
 namespace Appleton\Taxes\Classes;
 
-use Appleton\Taxes\Models\TaxInformation;
 use Appleton\Taxes\Traits\HasIncome;
 
-abstract class BaseIncome extends BaseTax
+abstract class BaseLocalIncome extends BaseLocal
 {
     use HasIncome;
 

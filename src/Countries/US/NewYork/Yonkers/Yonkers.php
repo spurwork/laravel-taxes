@@ -2,12 +2,10 @@
 
 namespace Appleton\Taxes\Countries\US\NewYork\Yonkers;
 
-abstract class Yonkers
-{
-    const TYPE = 'local';
-    const PRIORITY = 9999;
-    const WITHHELD = true;
+use Appleton\Taxes\Classes\BaseLocalIncome;
 
+abstract class Yonkers extends BaseLocalIncome
+{
     const FILING_SINGLE = 0;
     const FILING_MARRIED = 1;
 

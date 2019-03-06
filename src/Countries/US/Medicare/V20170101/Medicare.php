@@ -6,6 +6,8 @@ use Appleton\Taxes\Classes\Payroll;
 use Appleton\Taxes\Countries\US\Medicare\Medicare as BaseMedicare;
 use Appleton\Taxes\Models\Countries\US\FederalIncomeTaxInformation;
 
+use Illuminate\Database\Eloquent\Collection;
+
 class Medicare extends BaseMedicare
 {
     const TAX_RATE = 0.0145;
@@ -31,7 +33,7 @@ class Medicare extends BaseMedicare
         return max($this->payroll->getEarnings() - max(static::ADDITIONAL_TAX_AMOUNT[$this->tax_information->filing_status] - $this->payroll->ytd_earnings, 0), 0) * static::ADDITIONAL_TAX_RATE;
     }
 
-    public function compute()
+    public function compute(Collection $tax_areas)
     {
         $this->tax_total = $this->payroll->withholdTax($this->payroll->getEarnings() * static::TAX_RATE + $this->getAdditionalTaxAmount());
         return round($this->tax_total, 2);

@@ -5,6 +5,7 @@ namespace Appleton\Taxes\Countries\US\Colorado\ColoradoIncome\V20180101;
 use Appleton\Taxes\Classes\Payroll;
 use Appleton\Taxes\Countries\US\Colorado\ColoradoIncome\ColoradoIncome as BaseColoradoIncome;
 use Appleton\Taxes\Models\Countries\US\Colorado\ColoradoIncomeTaxInformation;
+use Illuminate\Database\Eloquent\Collection;
 
 class ColoradoIncome extends BaseColoradoIncome
 {
@@ -38,9 +39,9 @@ class ColoradoIncome extends BaseColoradoIncome
         $this->tax_information = $tax_information;
     }
 
-    public function compute()
+    public function compute(Collection $tax_areas)
     {
-        $amount = parent::compute();
+        $amount = parent::compute($tax_areas);
 
         return round($amount, 0);
     }

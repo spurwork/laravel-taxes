@@ -51,6 +51,11 @@ class Yonkers extends BaseYonkers
         return $bracket[2];
     }
 
+    public function getTaxBrackets()
+    {
+        return [[0, self::TAX_RATE, 0]];
+    }
+
     public function compute(Collection $tax_areas)
     {
         $resident = $tax_areas->contains(function($tax_area) {

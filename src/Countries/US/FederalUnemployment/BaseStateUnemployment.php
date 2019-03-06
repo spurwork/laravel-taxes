@@ -4,12 +4,13 @@ namespace Appleton\Taxes\Countries\US\FederalUnemployment;
 
 use Appleton\Taxes\Classes\BaseTax;
 use Appleton\Taxes\Traits\HasWageBase;
+use Illuminate\Database\Eloquent\Collection;
 
 class BaseStateUnemployment extends BaseTax implements StateUnemployment
 {
     use HasWageBase;
 
-    public function compute()
+    public function compute(Collection $tax_areas)
     {
         return round($this->getAdjustedEarnings() * $this->tax_rate, 2);
     }

@@ -5,6 +5,7 @@ namespace Appleton\Taxes\Countries\US\Massachusetts\MassachusettsWorkforceTraini
 use Appleton\Taxes\Classes\Payroll;
 use Appleton\Taxes\Countries\US\Massachusetts\MassachusettsWorkforceTrainingFund\MassachusettsWorkforceTrainingFund as BaseMassachusettsWorkforceTrainingFund;
 use Appleton\Taxes\Traits\HasWageBase;
+use Illuminate\Database\Eloquent\Collection;
 
 class MassachusettsWorkforceTrainingFund extends BaseMassachusettsWorkforceTrainingFund
 {
@@ -13,7 +14,7 @@ class MassachusettsWorkforceTrainingFund extends BaseMassachusettsWorkforceTrain
     const WAGE_BASE = 15000;
     const TAX_RATE = 0.00056;
 
-    public function compute()
+    public function compute(Collection $tax_areas)
     {
         return round($this->getAdjustedEarnings() * self::TAX_RATE, 2);
     }

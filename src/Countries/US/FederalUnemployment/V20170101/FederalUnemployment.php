@@ -6,6 +6,7 @@ use Appleton\Taxes\Classes\Payroll;
 use Appleton\Taxes\Countries\US\FederalUnemployment\StateUnemployment;
 use Appleton\Taxes\Countries\US\FederalUnemployment\FederalUnemployment as BaseFederalUnemployment;
 use Appleton\Taxes\Traits\HasWageBase;
+use Illuminate\Database\Eloquent\Collection;
 
 class FederalUnemployment extends BaseFederalUnemployment
 {
@@ -26,7 +27,7 @@ class FederalUnemployment extends BaseFederalUnemployment
         return min($this->payroll->getEarnings(), $this->getBaseEarnings());
     }
 
-    public function compute()
+    public function compute(Collection $tax_areas)
     {
         return round($this->getAdjustedEarnings() * $this->tax_rate, 2);
     }

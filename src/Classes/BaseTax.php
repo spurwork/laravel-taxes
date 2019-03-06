@@ -2,6 +2,8 @@
 
 namespace Appleton\Taxes\Classes;
 
+use Illuminate\Database\Eloquent\Collection;
+
 abstract class BaseTax
 {
     const PRIORITY = 9999;
@@ -13,7 +15,7 @@ abstract class BaseTax
         $this->payroll = $payroll->exemptEarnings(get_parent_class($this));
     }
 
-    public function compute()
+    public function compute(Collection $tax_areas)
     {
         $this->tax_total = $this->payroll->getEarnings() * static::TAX_RATE;
         return round($this->tax_total, 2);
