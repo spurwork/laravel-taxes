@@ -98,8 +98,8 @@ class TaxServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(
-            \Appleton\Taxes\Countries\US\FederalUnemployment\StateUnemployment::class,
-            \Appleton\Taxes\Countries\US\FederalUnemployment\BaseStateUnemployment::class
+            \Appleton\Taxes\Classes\StateUnemployment::class,
+            \Appleton\Taxes\Classes\BaseStateUnemployment::class
         );
 
         foreach ($this->interfaces as $interface) {

@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\Arizona\ArizonaUnemployment;
 
-use Appleton\Taxes\Countries\US\FederalUnemployment\BaseStateUnemployment;
+use Appleton\Taxes\Classes\BaseStateUnemployment;
 
 abstract class ArizonaUnemployment extends BaseStateUnemployment
 {

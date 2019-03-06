@@ -293,7 +293,6 @@ class TaxesTest extends \TestCase
         $this->assertSame(0.67, $results->getTax(BirminghamOccupational::class));
     }
 
-
     public function testPretaxDeductionsBaseClass()
     {
         $results = $this->taxes->calculate(function ($taxes) {

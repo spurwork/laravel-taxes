@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\Texas\TexasUnemployment;
 
-use Appleton\Taxes\Countries\US\FederalUnemployment\BaseStateUnemployment;
+use Appleton\Taxes\Classes\BaseStateUnemployment;
 
 abstract class TexasUnemployment extends BaseStateUnemployment
 {
