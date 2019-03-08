@@ -30,4 +30,9 @@ abstract class BaseTax
     {
         return $this->tax_total;
     }
+
+    public function getEarnings()
+    {
+        return method_exists($this, 'getBaseEarnings') ? $this->getBaseEarnings() : $this->payroll->getEarnings();
+    }
 }

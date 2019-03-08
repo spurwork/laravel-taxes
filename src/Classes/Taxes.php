@@ -127,7 +127,7 @@ class Taxes
                 $results[$tax->class] = [
                     'tax' => $tax_implementation,
                     'amount' => $tax_implementation->compute($tax->taxAreas),
-                    'earnings' => method_exists($tax_implementation, 'getBaseEarnings') ? $tax_implementation->getBaseEarnings() : $this->earnings,
+                    'earnings' => $tax_implementation->getEarnings(),
                 ];
                 app()->instance($tax->class, $tax_implementation);
             });
