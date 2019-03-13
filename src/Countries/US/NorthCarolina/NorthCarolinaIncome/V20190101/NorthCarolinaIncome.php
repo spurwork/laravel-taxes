@@ -5,6 +5,7 @@ namespace Appleton\Taxes\Countries\US\NorthCarolina\NorthCarolinaIncome\V2019010
 use Appleton\Taxes\Classes\Payroll;
 use Appleton\Taxes\Countries\US\NorthCarolina\NorthCarolinaIncome\NorthCarolinaIncome as BaseNorthCarolinaIncome;
 use Appleton\Taxes\Models\Countries\US\NorthCarolina\NorthCarolinaIncomeTaxInformation;
+use Illuminate\Database\Eloquent\Collection;
 
 class NorthCarolinaIncome extends BaseNorthCarolinaIncome
 {
@@ -67,7 +68,7 @@ class NorthCarolinaIncome extends BaseNorthCarolinaIncome
 
     public function getSupplementalIncomeTax()
     {
-        return $this->payroll->supplemental_earnings * self::SUPPLEMENTAL_TAX_RATE;
+        return $this->payroll->getSupplementalEarnings() * self::SUPPLEMENTAL_TAX_RATE;
     }
 
     public function getTaxBrackets()
@@ -75,9 +76,9 @@ class NorthCarolinaIncome extends BaseNorthCarolinaIncome
         return [[0, self::TAX_RATE, 0]];
     }
 
-    public function compute()
+    public function compute(Collection $tax_areas)
     {
-        $result = parent::compute();
+        $result = parent::compute($tax_areas);
         return round($result, 0);
     }
 
@@ -99,6 +100,6 @@ class NorthCarolinaIncome extends BaseNorthCarolinaIncome
 
     private function getGrossEarnings()
     {
-        return ($this->payroll->earnings - $this->payroll->supplemental_earnings) * $this->payroll->pay_periods;
+        return ($this->payroll->getEarnings() - $this->payroll->getSupplementalEarnings()) * $this->payroll->pay_periods;
     }
 }

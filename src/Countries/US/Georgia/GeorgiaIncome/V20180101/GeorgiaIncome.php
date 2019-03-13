@@ -84,7 +84,7 @@ class GeorgiaIncome extends BaseGeorgiaIncome
 
         foreach (self::SUPPLEMENTAL_TAX_BRACKETS as $bracket) {
             if ($annual_income >= $bracket[0]) {
-                return $this->payroll->supplemental_earnings * $bracket[1];
+                return $this->payroll->getSupplementalEarnings() * $bracket[1];
             }
         }
 
@@ -131,6 +131,6 @@ class GeorgiaIncome extends BaseGeorgiaIncome
 
     private function getGrossEarnings()
     {
-        return ($this->payroll->earnings - $this->payroll->supplemental_earnings) * $this->payroll->pay_periods;
+        return ($this->payroll->getEarnings() - $this->payroll->getSupplementalEarnings()) * $this->payroll->pay_periods;
     }
 }

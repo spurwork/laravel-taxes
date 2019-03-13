@@ -2,14 +2,15 @@
 
 namespace Appleton\Taxes\Classes;
 
-abstract class BaseOccupational extends BaseTax
+use Illuminate\Database\Eloquent\Collection;
+
+abstract class BaseOccupational extends BaseLocal
 {
-    const TYPE = 'local';
     const WITHHELD = true;
 
-    public function compute()
+    public function compute(Collection $tax_areas)
     {
-        $this->tax_total = $this->payroll->withholdTax($this->payroll->earnings * static::TAX_RATE);
+        $this->tax_total = $this->payroll->withholdTax($this->payroll->getEarnings() * static::TAX_RATE);
         return round($this->tax_total, 2);
     }
 }

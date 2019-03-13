@@ -3,9 +3,10 @@
 namespace Appleton\Taxes\Countries\US\FederalUnemployment\V20170101;
 
 use Appleton\Taxes\Classes\Payroll;
-use Appleton\Taxes\Countries\US\FederalUnemployment\StateUnemployment;
+use Appleton\Taxes\Classes\StateUnemployment;
 use Appleton\Taxes\Countries\US\FederalUnemployment\FederalUnemployment as BaseFederalUnemployment;
 use Appleton\Taxes\Traits\HasWageBase;
+use Illuminate\Database\Eloquent\Collection;
 
 class FederalUnemployment extends BaseFederalUnemployment
 {
@@ -23,10 +24,10 @@ class FederalUnemployment extends BaseFederalUnemployment
 
     public function getAdjustedEarnings()
     {
-        return $this->payroll->earnings < $this->getBaseEarnings() ? $this->payroll->earnings : $this->getBaseEarnings();
+        return min($this->payroll->getEarnings(), $this->getBaseEarnings());
     }
 
-    public function compute()
+    public function compute(Collection $tax_areas)
     {
         return round($this->getAdjustedEarnings() * $this->tax_rate, 2);
     }

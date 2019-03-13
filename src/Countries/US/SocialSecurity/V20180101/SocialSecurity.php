@@ -5,6 +5,7 @@ namespace Appleton\Taxes\Countries\US\SocialSecurity\V20180101;
 use Appleton\Taxes\Countries\US\SocialSecurity\SocialSecurity as BaseSocialSecurity;
 use Appleton\Taxes\Classes\Payroll;
 use Appleton\Taxes\Traits\HasWageBase;
+use Illuminate\Database\Eloquent\Collection;
 
 class SocialSecurity extends BaseSocialSecurity
 {
@@ -15,10 +16,10 @@ class SocialSecurity extends BaseSocialSecurity
 
     public function getAdjustedEarnings()
     {
-        return $this->payroll->earnings < $this->getBaseEarnings() ? $this->payroll->earnings : $this->getBaseEarnings();
+        return min($this->payroll->getEarnings(), $this->getBaseEarnings());
     }
 
-    public function compute()
+    public function compute(Collection $tax_areas)
     {
         $this->tax_total = $this->payroll->withholdTax($this->getAdjustedEarnings() * static::TAX_RATE);
         return round($this->tax_total, 2);

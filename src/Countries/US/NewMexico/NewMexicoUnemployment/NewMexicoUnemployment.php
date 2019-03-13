@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\NewMexico\NewMexicoUnemployment;
 
-use Appleton\Taxes\Countries\US\FederalUnemployment\BaseStateUnemployment;
+use Appleton\Taxes\Classes\BaseStateUnemployment;
 
 abstract class NewMexicoUnemployment extends BaseStateUnemployment
 {

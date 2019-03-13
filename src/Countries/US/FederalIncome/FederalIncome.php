@@ -9,7 +9,6 @@ use Appleton\Taxes\Models\Countries\US\FederalIncomeTaxInformation;
 abstract class FederalIncome extends BaseIncome
 {
     const TYPE = 'federal';
-    const WITHHELD = true;
 
     const FILING_SINGLE = 0;
     const FILING_WIDOW = 1;

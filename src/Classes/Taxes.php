@@ -11,6 +11,7 @@ use Closure;
 class Taxes
 {
     protected $date = null;
+    protected $exemptions = [];
     protected $pay_periods = 1;
     protected $supplemental_earnings = 0;
     protected $wtd_earnings = 0;
@@ -24,6 +25,11 @@ class Taxes
     public function setEarnings($earnings)
     {
         $this->earnings = $earnings;
+    }
+
+    public function setExemptions($exemptions)
+    {
+        $this->exemptions = $exemptions;
     }
 
     public function setHomeLocation($location)
@@ -95,6 +101,7 @@ class Taxes
         app()->instance(Payroll::class, new Payroll([
             'date' => $this->getDate(),
             'earnings' => $this->earnings,
+            'exemptions' => $this->exemptions,
             'pay_periods' => $this->pay_periods,
             'supplemental_earnings' => $this->supplemental_earnings,
             'user' => $this->user,
@@ -120,7 +127,7 @@ class Taxes
                 $results[$tax->class] = [
                     'tax' => $tax_implementation,
                     'amount' => $tax_implementation->compute($tax->taxAreas),
-                    'earnings' => method_exists($tax_implementation, 'getBaseEarnings') ? $tax_implementation->getBaseEarnings() : $this->earnings,
+                    'earnings' => $tax_implementation->getEarnings(),
                 ];
                 app()->instance($tax->class, $tax_implementation);
             });

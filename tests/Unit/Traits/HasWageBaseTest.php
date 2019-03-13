@@ -18,6 +18,10 @@ class HasWageBaseTest extends \TestCase
                 $this->payroll = new class {
                     public $earnings = 1;
                     public $ytd_earnings = 95;
+                    public function getEarnings()
+                    {
+                        return $this->earnings;
+                    }
                 };
             }
         };
