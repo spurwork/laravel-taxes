@@ -13,6 +13,7 @@ class Taxes
     protected $date = null;
     protected $exemptions = [];
     protected $pay_periods = 1;
+    protected $reciprocal_agreements;
     protected $supplemental_earnings = 0;
     protected $wtd_earnings = 0;
     protected $ytd_earnings = 0;
@@ -40,6 +41,11 @@ class Taxes
     public function setPayPeriods($pay_periods)
     {
         $this->pay_periods = $pay_periods;
+    }
+
+    public function setReciprocalAgreements($reciprocal_agreements)
+    {
+        $this->reciprocal_agreements = $reciprocal_agreements;
     }
 
     public function setSupplementalEarnings($supplemental_earnings)
@@ -153,6 +159,48 @@ class Taxes
         if (!$this->hasStateIncomeTax()) {
             $this->getStateIncomeTax();
         }
+
+        $this->replaceTaxes();
+    }
+
+    private function replaceTaxes()
+    {
+        $this->reciprocal_agreements->each(function ($reciprocal_agreement) {
+            list($resident_state, $reciprocal_state) = $reciprocal_agreement;
+
+            $resident_state_taxes = Tax::atPoint($this->home_location, $resident_state)
+                ->with(['taxAreas' => function($query) use ($resident_state) {
+                  $query->atPoint($this->home_location, $resident_state);
+                }])
+                ->get();
+
+            $reciprocal_state_taxes = Tax::atPoint($this->home_location, $reciprocal_state)
+                ->with(['taxAreas' => function($query) use ($reciprocal_state) {
+                  $query->atPoint($this->home_location, $reciprocal_state);
+                }])
+                ->get();
+
+            $add_taxes = $resident_state_taxes->filter(function ($resident_state_tax) use ($reciprocal_state_taxes) {
+                return $reciprocal_state_taxes->search(function ($reciprocal_state_tax) use ($resident_state_tax) {
+                    return $reciprocal_state_tax->class === $resident_state_tax->class;
+                }) === false;
+            });
+
+            $remove_taxes = $reciprocal_state_taxes->filter(function ($reciprocal_state_tax) use ($resident_state_taxes) {
+                return $resident_state_taxes->search(function ($resident_state_tax) use ($reciprocal_state_tax) {
+                    return $resident_state_tax->class === $reciprocal_state_tax->class;
+                }) === false;
+            });
+
+            $remove_taxes
+                ->each(function ($remove_tax) {
+                    $this->taxes = $this->taxes->reject(function ($tax) use ($remove_tax) {
+                        return $tax->class === $remove_tax->class;
+                    });
+                });
+
+            $this->taxes = $this->taxes->concat($add_taxes)->unique('class');
+        });
     }
 
     private function hasStateIncomeTax()

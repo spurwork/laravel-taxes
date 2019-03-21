@@ -318,4 +318,30 @@ class TaxesTest extends \TestCase
         $this->assertSame(1.80, $results->getTax(AlabamaUnemployment::class));
         $this->assertSame(0.17, $results->getTax(BirminghamOccupational::class));
     }
+
+    public function testReciprocalAgreement()
+    {
+        Carbon::setTestNow(
+            Carbon::parse('January 1, 2018 8am', 'America/Chicago')->setTimezone('UTC')
+        );
+
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.alabama'));
+            $taxes->setWorkLocation($this->getLocation('us.georgia'));
+            $taxes->setUser($this->user);
+            $taxes->setReciprocalAgreements(collect([
+                [
+                    $this->getLocation('us.alabama'),
+                    $this->getLocation('us.georgia'),
+                ]
+            ]));
+            $taxes->setEarnings(66.68);
+            $taxes->setSupplementalEarnings(0);
+            $taxes->setPayPeriods(260);
+            $taxes->setDate(Carbon::now()->addMonth());
+        });
+
+        $this->assertSame(null, $results->getTax(ParentGeorgiaIncome::class));
+        $this->assertSame(2.13, $results->getTax(AlabamaIncome::class));
+    }
 }
