@@ -13,7 +13,7 @@ class Taxes
     protected $date = null;
     protected $exemptions = [];
     protected $pay_periods = 1;
-    protected $reciprocal_agreements;
+    protected $reciprocal_agreements = [];
     protected $supplemental_earnings = 0;
     protected $wtd_earnings = 0;
     protected $ytd_earnings = 0;
@@ -76,6 +76,8 @@ class Taxes
     public function calculate(Closure $closure)
     {
         $closure($this);
+
+        $this->reciprocal_agreements = collect($this->reciprocal_agreements);
 
         $this->bindPayrollData();
         $this->getTaxes();
@@ -180,26 +182,14 @@ class Taxes
                 }])
                 ->get();
 
-            $add_taxes = $resident_state_taxes->filter(function ($resident_state_tax) use ($reciprocal_state_taxes) {
-                return $reciprocal_state_taxes->search(function ($reciprocal_state_tax) use ($resident_state_tax) {
-                    return $reciprocal_state_tax->class === $resident_state_tax->class;
-                }) === false;
-            });
-
-            $remove_taxes = $reciprocal_state_taxes->filter(function ($reciprocal_state_tax) use ($resident_state_taxes) {
-                return $resident_state_taxes->search(function ($resident_state_tax) use ($reciprocal_state_tax) {
-                    return $resident_state_tax->class === $reciprocal_state_tax->class;
-                }) === false;
-            });
-
-            $remove_taxes
-                ->each(function ($remove_tax) {
-                    $this->taxes = $this->taxes->reject(function ($tax) use ($remove_tax) {
-                        return $tax->class === $remove_tax->class;
+            $reciprocal_state_taxes
+                ->each(function ($reciprocal_state_tax) {
+                    $this->taxes = $this->taxes->reject(function ($tax) use ($reciprocal_state_tax) {
+                        return $tax->class === $reciprocal_state_tax->class;
                     });
                 });
 
-            $this->taxes = $this->taxes->concat($add_taxes)->unique('class');
+            $this->taxes = $this->taxes->concat($resident_state_taxes)->unique('class');
         });
     }
 
