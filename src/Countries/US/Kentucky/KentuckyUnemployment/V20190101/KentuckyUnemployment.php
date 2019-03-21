@@ -8,10 +8,9 @@ use Appleton\Taxes\Countries\US\Kentucky\KentuckyUnemployment\KentuckyUnemployme
 class KentuckyUnemployment extends BaseKentuckyUnemployment
 {
     public const FUTA_CREDIT = 0.054;
+    public const WAGE_BASE = 10500;
 
     private const NEW_EMPLOYER_RATE = 0.027;
-
-    protected const WAGE_BASE = 10500;
 
     public function __construct(Payroll $payroll)
     {
