@@ -2,9 +2,9 @@
 
 namespace Appleton\Taxes\Providers;
 
+use Appleton\Taxes\Classes\Payroll;
 use Carbon\Carbon;
 use Illuminate\Support\ServiceProvider;
-use Appleton\Taxes\Classes\Payroll;
 
 class TaxServiceProvider extends ServiceProvider
 {
@@ -59,6 +59,8 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\Florida\FloridaUnemployment\FloridaUnemployment::class,
         \Appleton\Taxes\Countries\US\Tennessee\TennesseeUnemployment\TennesseeUnemployment::class,
         \Appleton\Taxes\Countries\US\Texas\TexasUnemployment\TexasUnemployment::class,
+        \Appleton\Taxes\Countries\US\Kentucky\KentuckyIncome\KentuckyIncome::class,
+        \Appleton\Taxes\Countries\US\Kentucky\KentuckyUnemployment\KentuckyUnemployment::class,
         \Appleton\Taxes\Countries\US\Massachusetts\MassachusettsFamilyMedicalLeave\MassachusettsFamilyMedicalLeave::class,
         \Appleton\Taxes\Countries\US\Massachusetts\MassachusettsFamilyMedicalLeaveEmployer\MassachusettsFamilyMedicalLeaveEmployer::class,
         \Appleton\Taxes\Countries\US\Massachusetts\MassachusettsIncome\MassachusettsIncome::class,
