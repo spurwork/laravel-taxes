@@ -2,8 +2,8 @@
 
 namespace Appleton\Taxes\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use Appleton\Taxes\Classes\Payroll;
+use Illuminate\Support\ServiceProvider;
 
 class TaxInformationServiceProvider extends ServiceProvider
 {
@@ -15,6 +15,7 @@ class TaxInformationServiceProvider extends ServiceProvider
         \Appleton\Taxes\Models\Countries\US\Arizona\ArizonaIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\Colorado\ColoradoIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\Georgia\GeorgiaIncomeTaxInformation::class,
+        \Appleton\Taxes\Models\Countries\US\Kentucky\KentuckyIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\Massachusetts\MassachusettsIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\NewMexico\NewMexicoIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\NewYork\NewYorkIncomeTaxInformation::class,

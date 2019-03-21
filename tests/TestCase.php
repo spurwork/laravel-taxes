@@ -3,8 +3,8 @@
 use Appleton\Taxes\Classes\Taxes;
 use Appleton\Taxes\Countries\US\Alabama\AlabamaIncome\AlabamaIncome;
 use Appleton\Taxes\Countries\US\Colorado\ColoradoIncome\ColoradoIncome;
-use Appleton\Taxes\Countries\US\Georgia\GeorgiaIncome\GeorgiaIncome;
 use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome;
+use Appleton\Taxes\Countries\US\Georgia\GeorgiaIncome\GeorgiaIncome;
 use Appleton\Taxes\Countries\US\Massachusetts\MassachusettsIncome\MassachusettsIncome;
 use Appleton\Taxes\Countries\US\NewMexico\NewMexicoIncome\NewMexicoIncome;
 use Appleton\Taxes\Countries\US\NewYork\NewYorkIncome\NewYorkIncome;
@@ -13,8 +13,9 @@ use Appleton\Taxes\Countries\US\Wisconsin\WisconsinIncome\WisconsinIncome;
 use Appleton\Taxes\Models\Countries\US\Alabama\AlabamaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Arizona\ArizonaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Colorado\ColoradoIncomeTaxInformation;
-use Appleton\Taxes\Models\Countries\US\Georgia\GeorgiaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\FederalIncomeTaxInformation;
+use Appleton\Taxes\Models\Countries\US\Georgia\GeorgiaIncomeTaxInformation;
+use Appleton\Taxes\Models\Countries\US\Kentucky\KentuckyIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Massachusetts\MassachusettsIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\NewMexico\NewMexicoIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\NewYork\NewYorkIncomeTaxInformation;
@@ -93,6 +94,11 @@ class TestCase extends BaseTestCase
             'filing_status' => GeorgiaIncome::FILING_SINGLE,
         ], $this->user);
 
+        KentuckyIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'exemptions' => 0,
+        ], $this->user);
+
         MassachusettsIncomeTaxInformation::createForUser([
             'additional_withholding' => 0,
             'exemptions' => 0,
@@ -166,6 +172,7 @@ class TestCase extends BaseTestCase
             'us.arizona' => [33.6050991, -112.4052392],
             'us.colorado' => [39.7640021, -105.1352965],
             'us.georgia' => [33.7490, -84.3880],
+            'us.kentucky' => [37.8393, -84.2700],
             'us.florida' => [27.6648, -81.5158],
             'us.massachusetts' => [42.4072, -71.3824],
             'us.new_mexico' => [34.5199, -105.8701],
@@ -212,6 +219,7 @@ class TestCase extends BaseTestCase
         $app['config']->set('taxes.tables.us.arizona.arizona_income_tax_information', 'arizona_income_tax_information');
         $app['config']->set('taxes.tables.us.colorado.colorado_income_tax_information', 'colorado_income_tax_information');
         $app['config']->set('taxes.tables.us.georgia.georgia_income_tax_information', 'georgia_income_tax_information');
+        $app['config']->set('taxes.tables.us.kentucky.kentucky_income_tax_information', 'kentucky_income_tax_information');
         $app['config']->set('taxes.tables.us.massachusetts.massachusetts_income_tax_information', 'massachusetts_income_tax_information');
         $app['config']->set('taxes.tables.us.new_york.new_york_income_tax_information', 'new_york_income_tax_information');
         $app['config']->set('taxes.tables.us.wisconsin.wisconsin_income_tax_information', 'wisconsin_income_tax_information');
@@ -279,6 +287,11 @@ class TestCase extends BaseTestCase
             'dependents' => 0,
             'personal_allowances' => 0,
             'filing_status' => GeorgiaIncome::FILING_SINGLE,
+        ], $worker);
+
+        KentuckyIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'exemptions' => 0,
         ], $worker);
 
         NewMexicoIncomeTaxInformation::createForUser([
@@ -350,6 +363,11 @@ class TestCase extends BaseTestCase
             'filing_status' => GeorgiaIncome::FILING_SINGLE,
         ], $worker);
 
+        KentuckyIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'exemptions' => 3,
+        ], $worker);
+
         NewMexicoIncomeTaxInformation::createForUser([
             'additional_withholding' => 0,
             'exemptions' => 3,
@@ -416,6 +434,11 @@ class TestCase extends BaseTestCase
             'dependents' => 0,
             'personal_allowances' => 0,
             'filing_status' => GeorgiaIncome::FILING_MARRIED_JOINT_BOTH_WORKING,
+        ], $worker);
+
+        KentuckyIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'exemptions' => 0,
         ], $worker);
 
         NewMexicoIncomeTaxInformation::createForUser([
@@ -487,6 +510,11 @@ class TestCase extends BaseTestCase
             'filing_status' => GeorgiaIncome::FILING_MARRIED_JOINT_BOTH_WORKING,
         ], $worker);
 
+        KentuckyIncomeTaxInformation::createForUser([
+            'additional_withholding' => 15.0,
+            'exemptions' => 5,
+        ], $worker);
+
         NewMexicoIncomeTaxInformation::createForUser([
             'additional_withholding' => 15,
             'exemptions' => 5,
@@ -554,6 +582,11 @@ class TestCase extends BaseTestCase
             'dependents' => 0,
             'personal_allowances' => 0,
             'filing_status' => GeorgiaIncome::FILING_SINGLE,
+        ], $worker);
+
+        KentuckyIncomeTaxInformation::createForUser([
+            'additional_withholding' => 25,
+            'exemptions' => 1,
         ], $worker);
 
         NewMexicoIncomeTaxInformation::createForUser([
@@ -624,6 +657,11 @@ class TestCase extends BaseTestCase
             'filing_status' => GeorgiaIncome::FILING_MARRIED_JOINT_BOTH_WORKING,
         ], $worker);
 
+        KentuckyIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'exemptions' => 0,
+        ], $worker);
+
         NewMexicoIncomeTaxInformation::createForUser([
             'additional_withholding' => 0,
             'exemptions' => 0,
@@ -690,6 +728,11 @@ class TestCase extends BaseTestCase
             'dependents' => 0,
             'personal_allowances' => 0,
             'filing_status' => GeorgiaIncome::FILING_SINGLE,
+        ], $worker);
+
+        KentuckyIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'exemptions' => 8,
         ], $worker);
 
         NewMexicoIncomeTaxInformation::createForUser([
