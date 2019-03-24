@@ -15,7 +15,7 @@ class Taxes
     protected $date = null;
     protected $exemptions = [];
     protected $pay_periods = 1;
-    protected $reciprocal_agreements = [];
+    protected $reciprocal_agreement = false;
     protected $location_overrides = [];
     protected $supplemental_earnings = 0;
     protected $suta_location = null;
@@ -47,9 +47,9 @@ class Taxes
         $this->pay_periods = $pay_periods;
     }
 
-    public function setReciprocalAgreements($reciprocal_agreements)
+    public function setReciprocalAgreement($reciprocal_agreement)
     {
-        $this->reciprocal_agreements = $reciprocal_agreements;
+        $this->reciprocal_agreement = $reciprocal_agreement;
     }
 
     public function setSUTALocation($suta_location)
@@ -210,20 +210,17 @@ class Taxes
     {
         $this->location_overrides = collect([]);
 
-        collect($this->reciprocal_agreements)
-            ->each(function ($reciprocal_agreement) {
-                $this->location_overrides->push(new LocationOverride([
-                    'to_work_location' => $reciprocal_agreement->resident_location,
-                    'from_work_location' => $reciprocal_agreement->reciprocal_location,
-                    'to_tax_class' => BaseStateIncome::class,
-                    'from_tax_class' => BaseStateIncome::class,
-                ]));
+        if ($this->reciprocal_agreement) {
+            $this->location_overrides->push(new LocationOverride([
+                'to_work_location' => $this->home_location,
+                'to_tax_class' => BaseStateIncome::class,
+                'from_tax_class' => BaseStateIncome::class,
+            ]));
 
-                $this->location_overrides->push(new LocationOverride([
-                    'from_work_location' => $reciprocal_agreement->reciprocal_location,
-                    'from_tax_class' => BaseLocal::class,
-                ]));
-            });
+            $this->location_overrides->push(new LocationOverride([
+                'from_tax_class' => BaseLocal::class,
+            ]));
+        }
 
         if (!is_null($this->suta_location)) {
             $this->location_overrides->push(new LocationOverride([

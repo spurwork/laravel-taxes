@@ -347,15 +347,11 @@ class TaxesTest extends \TestCase
             Carbon::parse('January 1, 2018 8am', 'America/Chicago')->setTimezone('UTC')
         );
 
-        $reciprocal_agreements = [
-            new ReciprocalAgreement($this->getLocation('us.alabama'), $this->getLocation('us.georgia')),
-        ];
-
-        $results = $this->taxes->calculate(function ($taxes) use ($reciprocal_agreements) {
+        $results = $this->taxes->calculate(function ($taxes) {
             $taxes->setHomeLocation($this->getLocation('us.alabama'));
             $taxes->setWorkLocation($this->getLocation('us.georgia'));
             $taxes->setUser($this->user);
-            $taxes->setReciprocalAgreements($reciprocal_agreements);
+            $taxes->setReciprocalAgreement(true);
             $taxes->setEarnings(66.68);
             $taxes->setSupplementalEarnings(0);
             $taxes->setPayPeriods(260);
