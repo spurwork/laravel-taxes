@@ -2,6 +2,8 @@
 
 namespace Appleton\Taxes\Classes;
 
+use Appleton\Taxes\Classes\BaseStateUnemployment;
+use Appleton\Taxes\Classes\LocationOverride;
 use Appleton\Taxes\Models\Tax;
 use Appleton\Taxes\Models\TaxArea;
 use Appleton\Taxes\Models\TaxInformation;
@@ -14,7 +16,9 @@ class Taxes
     protected $exemptions = [];
     protected $pay_periods = 1;
     protected $reciprocal_agreements = [];
+    protected $location_overrides = [];
     protected $supplemental_earnings = 0;
+    protected $suta_location = null;
     protected $wtd_earnings = 0;
     protected $ytd_earnings = 0;
 
@@ -48,6 +52,11 @@ class Taxes
         $this->reciprocal_agreements = $reciprocal_agreements;
     }
 
+    public function setSUTALocation($suta_location)
+    {
+        $this->suta_location = $suta_location;
+    }
+
     public function setSupplementalEarnings($supplemental_earnings)
     {
         $this->supplemental_earnings = $supplemental_earnings;
@@ -77,8 +86,7 @@ class Taxes
     {
         $closure($this);
 
-        $this->reciprocal_agreements = collect($this->reciprocal_agreements);
-
+        $this->createLocationOverrides();
         $this->bindPayrollData();
         $this->getTaxes();
         $this->bindInterfaces();
@@ -162,35 +170,77 @@ class Taxes
             $this->getStateIncomeTax();
         }
 
-        $this->replaceTaxes();
+        $this->overrideLocations();
     }
 
-    private function replaceTaxes()
+    private function overrideLocations()
     {
-        $this->reciprocal_agreements->each(function ($reciprocal_agreement) {
-            list($resident_state, $reciprocal_state) = $reciprocal_agreement;
+        $this->location_overrides->each(function ($location_override) {
 
-            $resident_state_taxes = Tax::atPoint($this->home_location, $resident_state)
-                ->with(['taxAreas' => function($query) use ($resident_state) {
-                  $query->atPoint($this->home_location, $resident_state);
+            $to_taxes = Tax::atPoint($location_override->to_home_location, $location_override->to_work_location)
+                ->with(['taxAreas' => function($query) use ($location_override) {
+                  $query->atPoint($location_override->to_home_location, $location_override->to_work_location);
                 }])
-                ->get();
+                ->get()
+                ->filter(function ($to_tax) use ($location_override) {
+                  return $to_tax->class === $location_override->to_tax_class || is_subclass_of($to_tax->class, $location_override->to_tax_class);
+                });
 
-            $reciprocal_state_taxes = Tax::atPoint($this->home_location, $reciprocal_state)
-                ->with(['taxAreas' => function($query) use ($reciprocal_state) {
-                  $query->atPoint($this->home_location, $reciprocal_state);
+            $from_taxes = Tax::atPoint($location_override->from_home_location, $location_override->from_work_location)
+                ->with(['taxAreas' => function($query) use ($location_override) {
+                  $query->atPoint($location_override->from_home_location, $location_override->from_work_location);
                 }])
-                ->get();
+                ->get()
+                ->filter(function ($from_tax) use ($location_override) {
+                   return $from_tax->class === $location_override->from_tax_class || is_subclass_of($from_tax->class, $location_override->from_tax_class);
+                });
 
-            $reciprocal_state_taxes
-                ->each(function ($reciprocal_state_tax) {
-                    $this->taxes = $this->taxes->reject(function ($tax) use ($reciprocal_state_tax) {
-                        return $tax->class === $reciprocal_state_tax->class;
+            $from_taxes
+                ->each(function ($from_tax) {
+                    $this->taxes = $this->taxes->reject(function ($tax) use ($from_tax) {
+                        return $tax->class === $from_tax->class;
                     });
                 });
 
-            $this->taxes = $this->taxes->concat($resident_state_taxes)->unique('class');
+            $this->taxes = $this->taxes->concat($to_taxes)->unique('class');
         });
+    }
+
+    private function createLocationOverrides()
+    {
+        $this->location_overrides = collect([]);
+
+        collect($this->reciprocal_agreements)
+            ->each(function ($reciprocal_agreement) {
+                $this->location_overrides->push(new LocationOverride([
+                    'to_work_location' => $reciprocal_agreement->resident_location,
+                    'from_work_location' => $reciprocal_agreement->reciprocal_location,
+                    'to_tax_class' => BaseStateIncome::class,
+                    'from_tax_class' => BaseStateIncome::class,
+                ]));
+
+                $this->location_overrides->push(new LocationOverride([
+                    'from_work_location' => $reciprocal_agreement->reciprocal_location,
+                    'from_tax_class' => BaseLocal::class,
+                ]));
+            });
+
+        if (!is_null($this->suta_location)) {
+            $this->location_overrides->push(new LocationOverride([
+                'to_home_location' => $this->suta_location,
+                'to_tax_class' => BaseStateUnemployment::class,
+                'from_tax_class' => BaseStateUnemployment::class,
+            ]));
+        }
+
+        $this->location_overrides = $this->location_overrides
+            ->map(function ($location_override) {
+                $location_override->to_home_location = $location_override->to_home_location ?? $this->home_location;
+                $location_override->from_home_location = $location_override->from_home_location ?? $this->home_location;
+                $location_override->to_work_location = $location_override->to_work_location ?? $this->work_location;
+                $location_override->from_work_location = $location_override->from_work_location ?? $this->work_location;
+                return $location_override;
+            });
     }
 
     private function hasStateIncomeTax()
