@@ -36,18 +36,44 @@ class CreateMarylandIncomeTaxInformationTable extends Migration
             'class' => MarylandUnemployment::class,
         ]);
 
-        $id = DB::table($this->governmental_unit_areas)->where('name', 'Maryland')->first()->id;
+        $maryland_gua_id = DB::table($this->governmental_unit_areas)
+            ->where('name', 'Maryland')
+            ->first()
+            ->id;
+
+        $delaware_gua_id = DB::table($this->governmental_unit_areas)
+            ->where('name', 'Delaware')
+            ->first()
+            ->id;
 
         DB::table($this->tax_areas)->insert([
             'tax_id' => $income_tax_id,
-            'work_governmental_unit_area_id' => $id,
-            'based' => TaxArea::BASED_ON_WORK_LOCATION,
+            'work_governmental_unit_area_id' => $maryland_gua_id,
+            'based' => TaxArea::BASED_ON_WORK_AND_NOT_HOME_LOCATION,
+        ]);
+
+        DB::table($this->tax_areas)->insert([
+            'tax_id' => $income_tax_id,
+            'home_governmental_unit_area_id' => $maryland_gua_id,
+            'work_governmental_unit_area_id' => $delaware_gua_id,
+            'based' => TaxArea::BASED_ON_BOTH_LOCATIONS,
         ]);
 
         DB::table($this->tax_areas)->insert([
             'tax_id' => $unemployment_tax_id,
-            'home_governmental_unit_area_id' => $id,
+            'home_governmental_unit_area_id' => $maryland_gua_id,
             'based' => TaxArea::BASED_ON_HOME_LOCATION,
         ]);
+    }
+
+    public function down()
+    {
+        $maryland_income_tax_id = DB::table('taxes')
+            ->where('class', MarylandIncome::class)
+            ->first()
+            ->id;
+
+        DB::table($this->tax_areas)->where('tax_id', $maryland_income_tax_id)->delete();
+        DB::table('taxes')->where('name', 'Maryland Income Tax')->delete();
     }
 }

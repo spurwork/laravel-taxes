@@ -181,6 +181,7 @@ class TestCase extends BaseTestCase
             'us.alabama.tuskegee' => [32.4302, -85.7077],
             'us.arizona' => [33.6050991, -112.4052392],
             'us.colorado' => [39.7640021, -105.1352965],
+            'us.delaware' => [39.1582, -75.5244],
             'us.georgia' => [33.7490, -84.3880],
             'us.kentucky' => [37.8393, -84.2700],
             'us.florida' => [27.6648, -81.5158],
