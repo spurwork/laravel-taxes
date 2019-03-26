@@ -2,6 +2,8 @@
 
 namespace Appleton\Taxes\Classes;
 
+use Appleton\Taxes\Classes\BaseStateUnemployment;
+use Appleton\Taxes\Classes\LocationOverride;
 use Appleton\Taxes\Models\Tax;
 use Appleton\Taxes\Models\TaxArea;
 use Appleton\Taxes\Models\TaxInformation;
@@ -13,7 +15,10 @@ class Taxes
     protected $date = null;
     protected $exemptions = [];
     protected $pay_periods = 1;
+    protected $reciprocal_agreement = false;
+    protected $location_overrides = [];
     protected $supplemental_earnings = 0;
+    protected $suta_location = null;
     protected $wtd_earnings = 0;
     protected $ytd_earnings = 0;
 
@@ -40,6 +45,16 @@ class Taxes
     public function setPayPeriods($pay_periods)
     {
         $this->pay_periods = $pay_periods;
+    }
+
+    public function setReciprocalAgreement($reciprocal_agreement)
+    {
+        $this->reciprocal_agreement = $reciprocal_agreement;
+    }
+
+    public function setSUTALocation($suta_location)
+    {
+        $this->suta_location = $suta_location;
     }
 
     public function setSupplementalEarnings($supplemental_earnings)
@@ -71,6 +86,7 @@ class Taxes
     {
         $closure($this);
 
+        $this->createLocationOverrides();
         $this->bindPayrollData();
         $this->getTaxes();
         $this->bindInterfaces();
@@ -153,6 +169,75 @@ class Taxes
         if (!$this->hasStateIncomeTax()) {
             $this->getStateIncomeTax();
         }
+
+        $this->overrideLocations();
+    }
+
+    private function overrideLocations()
+    {
+        $this->location_overrides->each(function ($location_override) {
+
+            $to_taxes = Tax::atPoint($location_override->to_home_location, $location_override->to_work_location)
+                ->with(['taxAreas' => function($query) use ($location_override) {
+                  $query->atPoint($location_override->to_home_location, $location_override->to_work_location);
+                }])
+                ->get()
+                ->filter(function ($to_tax) use ($location_override) {
+                  return $to_tax->class === $location_override->to_tax_class || is_subclass_of($to_tax->class, $location_override->to_tax_class);
+                });
+
+            $from_taxes = Tax::atPoint($location_override->from_home_location, $location_override->from_work_location)
+                ->with(['taxAreas' => function($query) use ($location_override) {
+                  $query->atPoint($location_override->from_home_location, $location_override->from_work_location);
+                }])
+                ->get()
+                ->filter(function ($from_tax) use ($location_override) {
+                   return $from_tax->class === $location_override->from_tax_class || is_subclass_of($from_tax->class, $location_override->from_tax_class);
+                });
+
+            $from_taxes
+                ->each(function ($from_tax) {
+                    $this->taxes = $this->taxes->reject(function ($tax) use ($from_tax) {
+                        return $tax->class === $from_tax->class;
+                    });
+                });
+
+            $this->taxes = $this->taxes->concat($to_taxes)->unique('class');
+        });
+    }
+
+    private function createLocationOverrides()
+    {
+        $this->location_overrides = collect([]);
+
+        if ($this->reciprocal_agreement) {
+            $this->location_overrides->push(new LocationOverride([
+                'to_work_location' => $this->home_location,
+                'to_tax_class' => BaseStateIncome::class,
+                'from_tax_class' => BaseStateIncome::class,
+            ]));
+
+            $this->location_overrides->push(new LocationOverride([
+                'from_tax_class' => BaseLocal::class,
+            ]));
+        }
+
+        if (!is_null($this->suta_location)) {
+            $this->location_overrides->push(new LocationOverride([
+                'to_home_location' => $this->suta_location,
+                'to_tax_class' => BaseStateUnemployment::class,
+                'from_tax_class' => BaseStateUnemployment::class,
+            ]));
+        }
+
+        $this->location_overrides = $this->location_overrides
+            ->map(function ($location_override) {
+                $location_override->to_home_location = $location_override->to_home_location ?? $this->home_location;
+                $location_override->from_home_location = $location_override->from_home_location ?? $this->home_location;
+                $location_override->to_work_location = $location_override->to_work_location ?? $this->work_location;
+                $location_override->from_work_location = $location_override->from_work_location ?? $this->work_location;
+                return $location_override;
+            });
     }
 
     private function hasStateIncomeTax()
