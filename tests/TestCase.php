@@ -187,6 +187,7 @@ class TestCase extends BaseTestCase
             'us.florida' => [27.6648, -81.5158],
             'us.massachusetts' => [42.4072, -71.3824],
             'us.maryland' => [38.9784, -76.4922],
+            'us.maryland.allegany' => [39.6255, -78.6115],
             'us.new_mexico' => [34.5199, -105.8701],
             'us.new_york' => [40.7128, -74.0060],
             'us.new_york.yonkers' => [40.9312, -73.8987],

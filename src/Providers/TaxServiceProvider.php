@@ -63,6 +63,7 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\Kentucky\KentuckyUnemployment\KentuckyUnemployment::class,
         \Appleton\Taxes\Countries\US\Maryland\MarylandIncome\MarylandIncome::class,
         \Appleton\Taxes\Countries\US\Maryland\MarylandUnemployment\MarylandUnemployment::class,
+        \Appleton\Taxes\Countries\US\Maryland\Allegany\Allegany::class,
         \Appleton\Taxes\Countries\US\Massachusetts\MassachusettsFamilyMedicalLeave\MassachusettsFamilyMedicalLeave::class,
         \Appleton\Taxes\Countries\US\Massachusetts\MassachusettsFamilyMedicalLeaveEmployer\MassachusettsFamilyMedicalLeaveEmployer::class,
         \Appleton\Taxes\Countries\US\Massachusetts\MassachusettsIncome\MassachusettsIncome::class,
