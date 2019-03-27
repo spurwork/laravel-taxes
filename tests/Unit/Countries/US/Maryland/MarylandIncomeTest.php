@@ -405,6 +405,16 @@ class MarylandIncomeTest extends TestCase
                 1.24,
                 Worcester::class,
             ],
+            '32' => [
+                'January 1, 2019 8am',
+                MarylandIncome::FILING_SINGLE,
+                'us.maryland',
+                'us.delaware',
+                0,
+                300.00,
+                17.31,
+                MarylandIncome::class,
+            ],
         ];
     }
 }
