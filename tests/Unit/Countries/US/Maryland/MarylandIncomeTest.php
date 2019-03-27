@@ -172,7 +172,7 @@ class MarylandIncomeTest extends TestCase
                 'us.maryland',
                 0,
                 300.00,
-                2.05,
+                7.83,
                 Allegany::class,
             ],
             '9' => [
@@ -252,7 +252,7 @@ class MarylandIncomeTest extends TestCase
                 'us.maryland',
                 0,
                 100.00,
-                2.25,
+                2.15,
                 Charles::class,
             ],
             '17' => [
