@@ -10,6 +10,11 @@ class TaxServiceProvider extends ServiceProvider
 {
     protected $defer = true;
 
+    private function getImplementations($interface)
+    {
+        return array_reverse(array_map('basename', glob(dirname((new \ReflectionClass($interface))->getFileName()).'/V*', GLOB_ONLYDIR)));
+    }
+
     protected $interfaces = [
         \Appleton\Taxes\Countries\US\FederalIncome\FederalIncome::class,
         \Appleton\Taxes\Countries\US\FederalUnemployment\FederalUnemployment::class,
@@ -64,6 +69,16 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\Maryland\MarylandIncome\MarylandIncome::class,
         \Appleton\Taxes\Countries\US\Maryland\MarylandUnemployment\MarylandUnemployment::class,
         \Appleton\Taxes\Countries\US\Maryland\Allegany\Allegany::class,
+        \Appleton\Taxes\Countries\US\Maryland\AnneArundel\AnneArundel::class,
+        \Appleton\Taxes\Countries\US\Maryland\Baltimore\Baltimore::class,
+        \Appleton\Taxes\Countries\US\Maryland\BaltimoreCity\BaltimoreCity::class,
+        \Appleton\Taxes\Countries\US\Maryland\Calvert\Calvert::class,
+        \Appleton\Taxes\Countries\US\Maryland\Caroline\Caroline::class,
+        \Appleton\Taxes\Countries\US\Maryland\Carroll\Carroll::class,
+        \Appleton\Taxes\Countries\US\Maryland\Cecil\Cecil::class,
+        \Appleton\Taxes\Countries\US\Maryland\Charles\Charles::class,
+        \Appleton\Taxes\Countries\US\Maryland\Dorchester\Dorchester::class,
+        \Appleton\Taxes\Countries\US\Maryland\Frederick\Frederick::class,
         \Appleton\Taxes\Countries\US\Massachusetts\MassachusettsFamilyMedicalLeave\MassachusettsFamilyMedicalLeave::class,
         \Appleton\Taxes\Countries\US\Massachusetts\MassachusettsFamilyMedicalLeaveEmployer\MassachusettsFamilyMedicalLeaveEmployer::class,
         \Appleton\Taxes\Countries\US\Massachusetts\MassachusettsIncome\MassachusettsIncome::class,
@@ -83,11 +98,6 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\Wisconsin\WisconsinUnemployment\WisconsinUnemployment::class,
     ];
 
-    private function getImplementations($interface)
-    {
-        return array_reverse(array_map('basename', glob(dirname((new \ReflectionClass($interface))->getFileName()).'/V*', GLOB_ONLYDIR)));
-    }
-
     private function resolveImplementation($interface, $date)
     {
         $basename = class_basename($interface);
@@ -97,6 +107,8 @@ class TaxServiceProvider extends ServiceProvider
                 return $namespace.'\\'.$implementation.'\\'.$basename;
             }
         }
+        dump($basename);
+        dump($interface);
         throw new \Exception('The implementation could not be found.');
     }
 

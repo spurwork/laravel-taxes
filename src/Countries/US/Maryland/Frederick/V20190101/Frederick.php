@@ -1,18 +1,18 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Maryland\Allegany\V20190101;
+namespace Appleton\Taxes\Countries\US\Maryland\Frederick\V20190101;
 
 use Appleton\Taxes\Classes\Payroll;
-use Appleton\Taxes\Countries\US\Maryland\Allegany\Allegany as BaseAllegany;
+use Appleton\Taxes\Countries\US\Maryland\Frederick\Frederick as BaseFredrick;
 use Appleton\Taxes\Countries\US\Maryland\MarylandIncome\HasMarylandIncome;
 use Appleton\Taxes\Models\Countries\US\Maryland\MarylandIncomeTaxInformation;
 
-class Allegany extends BaseAllegany
+class Frederick extends BaseFredrick
 {
     use HasMarylandIncome;
 
     const SUPPLEMENTAL_TAX_RATE = 0.05;
-    const TAX_RATE = 0.0305;
+    const TAX_RATE = 0.0296;
 
     const STANDARD_DEDUCTION = [
         'min' => 1500,
