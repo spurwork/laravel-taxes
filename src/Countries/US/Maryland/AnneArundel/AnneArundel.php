@@ -2,9 +2,9 @@
 
 namespace Appleton\Taxes\Countries\US\Maryland\AnneArundel;
 
-use Appleton\Taxes\Classes\BaseLocalIncome;
+use Appleton\Taxes\Countries\US\Maryland\BaseMarylandLocalIncome;
 
-abstract class AnneArundel extends BaseLocalIncome
+abstract class AnneArundel extends BaseMarylandLocalIncome
 {
 
 }

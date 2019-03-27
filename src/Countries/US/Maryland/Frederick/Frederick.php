@@ -2,9 +2,9 @@
 
 namespace Appleton\Taxes\Countries\US\Maryland\Frederick;
 
-use Appleton\Taxes\Classes\BaseLocalIncome;
+use Appleton\Taxes\Countries\US\Maryland\BaseMarylandLocalIncome;
 
-abstract class Frederick extends BaseLocalIncome
+abstract class Frederick extends BaseMarylandLocalIncome
 {
 
 }

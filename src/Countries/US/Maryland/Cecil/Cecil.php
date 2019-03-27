@@ -2,9 +2,8 @@
 
 namespace Appleton\Taxes\Countries\US\Maryland\Cecil;
 
-use Appleton\Taxes\Classes\BaseLocalIncome;
+use Appleton\Taxes\Countries\US\Maryland\BaseMarylandLocalIncome;
 
-abstract class Cecil extends BaseLocalIncome
+abstract class Cecil extends BaseMarylandLocalIncome
 {
-
 }

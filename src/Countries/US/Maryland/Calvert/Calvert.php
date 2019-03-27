@@ -2,9 +2,8 @@
 
 namespace Appleton\Taxes\Countries\US\Maryland\Calvert;
 
-use Appleton\Taxes\Classes\BaseLocalIncome;
+use Appleton\Taxes\Countries\US\Maryland\BaseMarylandLocalIncome;
 
-abstract class Calvert extends BaseLocalIncome
+abstract class Calvert extends BaseMarylandLocalIncome
 {
-
 }

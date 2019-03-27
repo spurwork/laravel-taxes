@@ -2,9 +2,8 @@
 
 namespace Appleton\Taxes\Countries\US\Maryland\Baltimore;
 
-use Appleton\Taxes\Classes\BaseLocalIncome;
+use Appleton\Taxes\Countries\US\Maryland\BaseMarylandLocalIncome;
 
-abstract class Baltimore extends BaseLocalIncome
+abstract class Baltimore extends BaseMarylandLocalIncome
 {
-
 }

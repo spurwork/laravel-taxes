@@ -2,8 +2,8 @@
 
 namespace Appleton\Taxes\Countries\US\Maryland\Allegany;
 
-use Appleton\Taxes\Classes\BaseLocalIncome;
+use Appleton\Taxes\Countries\US\Maryland\BaseMarylandLocalIncome;
 
-abstract class Allegany extends BaseLocalIncome
+abstract class Allegany extends BaseMarylandLocalIncome
 {
 }

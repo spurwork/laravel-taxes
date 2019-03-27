@@ -2,9 +2,8 @@
 
 namespace Appleton\Taxes\Countries\US\Maryland\Dorchester;
 
-use Appleton\Taxes\Classes\BaseLocalIncome;
+use Appleton\Taxes\Countries\US\Maryland\BaseMarylandLocalIncome;
 
-abstract class Dorchester extends BaseLocalIncome
+abstract class Dorchester extends BaseMarylandLocalIncome
 {
-
 }

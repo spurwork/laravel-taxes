@@ -2,9 +2,8 @@
 
 namespace Appleton\Taxes\Countries\US\Maryland\Carroll;
 
-use Appleton\Taxes\Classes\BaseLocalIncome;
+use Appleton\Taxes\Countries\US\Maryland\BaseMarylandLocalIncome;
 
-abstract class Carroll extends BaseLocalIncome
+abstract class Carroll extends BaseMarylandLocalIncome
 {
-
 }
