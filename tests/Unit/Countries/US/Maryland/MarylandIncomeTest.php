@@ -20,6 +20,13 @@ use Appleton\Taxes\Countries\US\Maryland\Kent\Kent;
 use Appleton\Taxes\Countries\US\Maryland\MarylandIncome\MarylandIncome;
 use Appleton\Taxes\Countries\US\Maryland\Montgomery\Montgomery;
 use Appleton\Taxes\Countries\US\Maryland\PrinceGeorges\PrinceGeorges;
+use Appleton\Taxes\Countries\US\Maryland\QueenAnnes\QueenAnnes;
+use Appleton\Taxes\Countries\US\Maryland\Somerset\Somerset;
+use Appleton\Taxes\Countries\US\Maryland\StMarys\StMarys;
+use Appleton\Taxes\Countries\US\Maryland\Talbot\Talbot;
+use Appleton\Taxes\Countries\US\Maryland\Washington\Washington;
+use Appleton\Taxes\Countries\US\Maryland\Wicomico\Wicomico;
+use Appleton\Taxes\Countries\US\Maryland\Worcester\Worcester;
 use Appleton\Taxes\Models\Countries\US\Maryland\MarylandIncomeTaxInformation;
 use Carbon\Carbon;
 use Nexmo\Message\Shortcode\Alert;
@@ -46,59 +53,6 @@ class MarylandIncomeTest extends TestCase
         });
 
         $this->assertThat(3.37, self::identicalTo($results->getTax(MarylandIncome::class)));
-    }
-
-    public function testMarylandIncomeSingleOverOneHundredThousandWithDependants()
-    {
-        MarylandIncomeTaxInformation::forUser($this->user)->update([
-            'additional_withholding' => 0,
-            'dependents' => 1,
-            'filing_status' => MarylandIncome::FILING_SINGLE,
-            'exempt' => false,
-        ]);
-
-        $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us.maryland'));
-            $taxes->setWorkLocation($this->getLocation('us.maryland'));
-            $taxes->setUser($this->user);
-            $taxes->setEarnings(2000.00);
-            $taxes->setPayPeriods(self::PAY_PERIODS);
-        });
-
-        $this->assertThat(90.02, self::identicalTo($results->getTax(MarylandIncome::class)));
-    }
-
-    public function testMarylandIncomeWorkInDelaware()
-    {
-        $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us.maryland'));
-            $taxes->setWorkLocation($this->getLocation('us.delaware'));
-            $taxes->setUser($this->user);
-            $taxes->setEarnings(100.00);
-            $taxes->setPayPeriods(self::PAY_PERIODS);
-        });
-
-        $this->assertThat(4.83, self::identicalTo($results->getTax(MarylandIncome::class)));
-    }
-
-    public function testAllegany()
-    {
-        MarylandIncomeTaxInformation::forUser($this->user)->update([
-            'additional_withholding' => 0,
-            'dependents' => 0,
-            'filing_status' => MarylandIncome::FILING_SINGLE,
-            'exempt' => false,
-        ]);
-
-        $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us.maryland.allegany'));
-            $taxes->setWorkLocation($this->getLocation('us.maryland'));
-            $taxes->setUser($this->user);
-            $taxes->setEarnings(300.00);
-            $taxes->setPayPeriods(self::PAY_PERIODS);
-        });
-
-        $this->assertThat(7.83, self::identicalTo($results->getTax(Allegany::class)));
     }
 
     /**
@@ -380,6 +334,76 @@ class MarylandIncomeTest extends TestCase
                 100.00,
                 2.27,
                 PrinceGeorges::class,
+            ],
+            '25' => [
+                'January 1, 2019 8am',
+                MarylandIncome::FILING_SINGLE,
+                'us.maryland.queenannes',
+                'us.maryland',
+                0,
+                100.00,
+                2.27,
+                QueenAnnes::class,
+            ],
+            '26' => [
+                'January 1, 2019 8am',
+                MarylandIncome::FILING_SINGLE,
+                'us.maryland.stmarys',
+                'us.maryland',
+                0,
+                100.00,
+                2.13,
+                StMarys::class,
+            ],
+            '27' => [
+                'January 1, 2019 8am',
+                MarylandIncome::FILING_SINGLE,
+                'us.maryland.somerset',
+                'us.maryland',
+                0,
+                100.00,
+                2.27,
+                Somerset::class,
+            ],
+            '28' => [
+                'January 1, 2019 8am',
+                MarylandIncome::FILING_SINGLE,
+                'us.maryland.talbot',
+                'us.maryland',
+                0,
+                100.00,
+                1.70,
+                Talbot::class,
+            ],
+            '29' => [
+                'January 1, 2019 8am',
+                MarylandIncome::FILING_SINGLE,
+                'us.maryland.washington',
+                'us.maryland',
+                0,
+                100.00,
+                1.99,
+                Washington::class,
+            ],
+            '30' => [
+                'January 1, 2019 8am',
+                MarylandIncome::FILING_SINGLE,
+                'us.maryland.wicomico',
+                'us.maryland',
+                0,
+                100.00,
+                2.27,
+                Wicomico::class,
+            ],
+            '31' => [
+                'January 1, 2019 8am',
+                MarylandIncome::FILING_SINGLE,
+                'us.maryland.worcester',
+                'us.maryland',
+                0,
+                100.00,
+                1.24,
+                Worcester::class,
             ],
         ];
     }
