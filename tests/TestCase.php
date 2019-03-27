@@ -104,8 +104,6 @@ class TestCase extends BaseTestCase
         MarylandIncomeTaxInformation::createForUser([
             'additional_withholding' => 0,
             'dependents' => 0,
-            'allowances' => 0,
-            'personal_allowances' => 0,
             'filing_status' => MarylandIncome::FILING_SINGLE,
         ], $this->user);
 

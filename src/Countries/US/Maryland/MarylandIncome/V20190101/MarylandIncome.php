@@ -3,11 +3,9 @@
 namespace Appleton\Taxes\Countries\US\Maryland\MarylandIncome\V20190101;
 
 use Appleton\Taxes\Classes\Payroll;
-use Appleton\Taxes\Classes\Taxes;
 use Appleton\Taxes\Countries\US\Maryland\MarylandIncome\HasMarylandIncome;
 use Appleton\Taxes\Countries\US\Maryland\MarylandIncome\MarylandIncome as BaseMarylandIncome;
 use Appleton\Taxes\Models\Countries\US\Maryland\MarylandIncomeTaxInformation;
-use Illuminate\Database\Eloquent\Collection;
 
 class MarylandIncome extends BaseMarylandIncome
 {
@@ -53,7 +51,7 @@ class MarylandIncome extends BaseMarylandIncome
     const STANDARD_DEDUCTION = [
         'min' => 1500,
         'max' => 2250,
-        'percentange' => 0.015,
+        'percentange' => 0.15,
     ];
 
     public function __construct(MarylandIncomeTaxInformation $tax_information, Payroll $payroll)

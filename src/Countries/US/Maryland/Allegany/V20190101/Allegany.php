@@ -19,7 +19,7 @@ class Allegany extends BaseAllegany
     const STANDARD_DEDUCTION = [
         'min' => 1500,
         'max' => 2250,
-        'percentange' => 0.015,
+        'percentange' => 0.15,
     ];
 
     public function __construct(MarylandIncomeTaxInformation $tax_information, Payroll $payroll)

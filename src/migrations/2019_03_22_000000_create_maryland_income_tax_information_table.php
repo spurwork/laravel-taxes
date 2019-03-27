@@ -20,8 +20,6 @@ class CreateMarylandIncomeTaxInformationTable extends Migration
             $table->increments('id');
             $table->integer('additional_withholding');
             $table->integer('dependents');
-            $table->integer('personal_allowances');
-            $table->integer('allowances');
             $table->integer('filing_status');
             $table->boolean('exempt')->default(false);
         });

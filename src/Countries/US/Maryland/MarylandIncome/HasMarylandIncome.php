@@ -33,18 +33,16 @@ trait HasMarylandIncome
 
     private function getDependentExemption()
     {
-        $amount = 3200 * $this->tax_information->dependents;
-        return $amount;
+        return 3200 * $this->tax_information->dependents;
     }
 
     public function compute(Collection $tax_areas)
     {
-        if ($this->isUserClaimingExemption())
-        {
+        if ($this->isUserClaimingExemption()) {
             return 0.00;
         }
 
-        $this->worked_in_delaware = $tax_areas->contains(function($tax_area) {
+        $this->worked_in_delaware = $tax_areas->contains(function ($tax_area) {
             return ($tax_area->homeGovernmentalUnitArea && $tax_area->workGovernmentalUnitArea)
                 && $tax_area->homeGovernmentalUnitArea->id !== $tax_area->workGovernmentalUnitArea->id;
         });

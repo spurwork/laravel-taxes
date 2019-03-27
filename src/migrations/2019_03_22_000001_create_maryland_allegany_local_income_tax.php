@@ -30,11 +30,6 @@ class CreateMarylandAlleganyLocalIncomeTax extends Migration
             'class' => Allegany::class,
         ]);
 
-        $maryland_gua_id = DB::table($this->governmental_unit_areas)
-            ->where('name', 'Maryland')
-            ->first()
-            ->id;
-
         DB::table($this->tax_areas)->insert([[
             'tax_id' => $allegany_tax_id,
             'home_governmental_unit_area_id' => $allegany_gua_id,
