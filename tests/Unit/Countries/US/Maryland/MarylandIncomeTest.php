@@ -13,7 +13,13 @@ use Appleton\Taxes\Countries\US\Maryland\Cecil\Cecil;
 use Appleton\Taxes\Countries\US\Maryland\Charles\Charles;
 use Appleton\Taxes\Countries\US\Maryland\Dorchester\Dorchester;
 use Appleton\Taxes\Countries\US\Maryland\Frederick\Frederick;
+use Appleton\Taxes\Countries\US\Maryland\Garrett\Garrett;
+use Appleton\Taxes\Countries\US\Maryland\Harford\Harford;
+use Appleton\Taxes\Countries\US\Maryland\Howard\Howard;
+use Appleton\Taxes\Countries\US\Maryland\Kent\Kent;
 use Appleton\Taxes\Countries\US\Maryland\MarylandIncome\MarylandIncome;
+use Appleton\Taxes\Countries\US\Maryland\Montgomery\Montgomery;
+use Appleton\Taxes\Countries\US\Maryland\PrinceGeorges\PrinceGeorges;
 use Appleton\Taxes\Models\Countries\US\Maryland\MarylandIncomeTaxInformation;
 use Carbon\Carbon;
 use Nexmo\Message\Shortcode\Alert;
@@ -314,6 +320,66 @@ class MarylandIncomeTest extends TestCase
                 100.00,
                 2.10,
                 Frederick::class,
+            ],
+            '19' => [
+                'January 1, 2019 8am',
+                MarylandIncome::FILING_SINGLE,
+                'us.maryland.garrett',
+                'us.maryland',
+                0,
+                100.00,
+                1.88,
+                Garrett::class,
+            ],
+            '20' => [
+                'January 1, 2019 8am',
+                MarylandIncome::FILING_SINGLE,
+                'us.maryland.harford',
+                'us.maryland',
+                0,
+                100.00,
+                2.17,
+                Harford::class,
+            ],
+            '21' => [
+                'January 1, 2019 8am',
+                MarylandIncome::FILING_SINGLE,
+                'us.maryland.howard',
+                'us.maryland',
+                0,
+                100.00,
+                2.27,
+                Howard::class,
+            ],
+            '22' => [
+                'January 1, 2019 8am',
+                MarylandIncome::FILING_SINGLE,
+                'us.maryland.kent',
+                'us.maryland',
+                0,
+                100.00,
+                2.02,
+                Kent::class,
+            ],
+            '23' => [
+                'January 1, 2019 8am',
+                MarylandIncome::FILING_SINGLE,
+                'us.maryland.montgomery',
+                'us.maryland',
+                0,
+                100.00,
+                2.27,
+                Montgomery::class,
+            ],
+            '24' => [
+                'January 1, 2019 8am',
+                MarylandIncome::FILING_SINGLE,
+                'us.maryland.princegeorges',
+                'us.maryland',
+                0,
+                100.00,
+                2.27,
+                PrinceGeorges::class,
             ],
         ];
     }
