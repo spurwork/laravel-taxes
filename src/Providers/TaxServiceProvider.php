@@ -10,11 +10,6 @@ class TaxServiceProvider extends ServiceProvider
 {
     protected $defer = true;
 
-    private function getImplementations($interface)
-    {
-        return array_reverse(array_map('basename', glob(dirname((new \ReflectionClass($interface))->getFileName()).'/V*', GLOB_ONLYDIR)));
-    }
-
     protected $interfaces = [
         \Appleton\Taxes\Countries\US\FederalIncome\FederalIncome::class,
         \Appleton\Taxes\Countries\US\FederalUnemployment\FederalUnemployment::class,
@@ -110,6 +105,11 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\Wisconsin\WisconsinIncome\WisconsinIncome::class,
         \Appleton\Taxes\Countries\US\Wisconsin\WisconsinUnemployment\WisconsinUnemployment::class,
     ];
+
+    private function getImplementations($interface)
+    {
+        return array_reverse(array_map('basename', glob(dirname((new \ReflectionClass($interface))->getFileName()).'/V*', GLOB_ONLYDIR)));
+    }
 
     private function resolveImplementation($interface, $date)
     {
