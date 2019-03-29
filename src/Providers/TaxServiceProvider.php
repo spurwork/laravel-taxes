@@ -120,8 +120,6 @@ class TaxServiceProvider extends ServiceProvider
                 return $namespace.'\\'.$implementation.'\\'.$basename;
             }
         }
-        dump($basename);
-        dump($interface);
         throw new \Exception('The implementation could not be found.');
     }
 

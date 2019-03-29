@@ -46,7 +46,6 @@ class CreateMarylandIncomeTaxInformationTable extends Migration
 
         DB::table($this->tax_areas)->insert([
             'tax_id' => $income_tax_id,
-//            'home_governmental_unit_area_id' => $maryland_gua_id,
             'work_governmental_unit_area_id' => $maryland_gua_id,
             'based' => TaxArea::BASED_ON_WORK_LOCATION,
         ]);
