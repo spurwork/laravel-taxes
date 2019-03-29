@@ -16,6 +16,7 @@ class TaxInformationServiceProvider extends ServiceProvider
         \Appleton\Taxes\Models\Countries\US\Colorado\ColoradoIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\Georgia\GeorgiaIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\Kentucky\KentuckyIncomeTaxInformation::class,
+        \Appleton\Taxes\Models\Countries\US\Maryland\MarylandIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\Massachusetts\MassachusettsIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\NewMexico\NewMexicoIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\NewYork\NewYorkIncomeTaxInformation::class,

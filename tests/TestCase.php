@@ -17,6 +17,8 @@ use Appleton\Taxes\Models\Countries\US\FederalIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Georgia\GeorgiaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Kentucky\KentuckyIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Massachusetts\MassachusettsIncomeTaxInformation;
+use Appleton\Taxes\Countries\US\Maryland\MarylandIncome\MarylandIncome;
+use Appleton\Taxes\Models\Countries\US\Maryland\MarylandIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\NewMexico\NewMexicoIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\NewYork\NewYorkIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\NorthCarolina\NorthCarolinaIncomeTaxInformation;
@@ -99,6 +101,12 @@ class TestCase extends BaseTestCase
             'exemptions' => 0,
         ], $this->user);
 
+        MarylandIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'dependents' => 0,
+            'filing_status' => MarylandIncome::FILING_SINGLE,
+        ], $this->user);
+
         MassachusettsIncomeTaxInformation::createForUser([
             'additional_withholding' => 0,
             'exemptions' => 0,
@@ -171,10 +179,36 @@ class TestCase extends BaseTestCase
             'us.alabama.tuskegee' => [32.4302, -85.7077],
             'us.arizona' => [33.6050991, -112.4052392],
             'us.colorado' => [39.7640021, -105.1352965],
+            'us.delaware' => [39.1582, -75.5244],
             'us.georgia' => [33.7490, -84.3880],
             'us.kentucky' => [37.8393, -84.2700],
             'us.florida' => [27.6648, -81.5158],
             'us.massachusetts' => [42.4072, -71.3824],
+            'us.maryland' => [38.9784, -76.4922],
+            'us.maryland.allegany' => [39.6255, -78.6115],
+            'us.maryland.annearundel' => [38.9530, -76.5488],
+            'us.maryland.baltimore' => [39.4648, -76.7337],
+            'us.maryland.baltimorecity' => [39.2904, -76.6122],
+            'us.maryland.calvert' => [38.4950, -76.5026],
+            'us.maryland.caroline' => [38.9105, -75.8534],
+            'us.maryland.carroll' => [39.5423, -77.0564],
+            'us.maryland.cecil' => [39.5739, -75.9463],
+            'us.maryland.charles' => [38.5222, -77.1025],
+            'us.maryland.dorchester' => [38.4153, -76.1784],
+            'us.maryland.frederick' => [39.384, -77.4702],
+            'us.maryland.garrett' => [39.5681, -79.2902],
+            'us.maryland.harford' => [39.5839, -76.363],
+            'us.maryland.howard' => [39.2873, -76.9643],
+            'us.maryland.kent' => [39.2189, -76.06904],
+            'us.maryland.montgomery' => [39.1547, -77.2405],
+            'us.maryland.princegeorges' => [38.7849, -76.8721],
+            'us.maryland.queenannes' => [39.0264, -76.1320],
+            'us.maryland.stmarys' => [38.1060, -76.3637],
+            'us.maryland.somerset' => [38.0862, -75.8534],
+            'us.maryland.talbot' => [38.7804, -76.1320],
+            'us.maryland.washington' => [39.6418, -77.7200],
+            'us.maryland.wicomico' => [38.3942, -75.6674],
+            'us.maryland.worcester' => [38.1584, -75.4345],
             'us.new_mexico' => [34.5199, -105.8701],
             'us.new_york' => [40.7128, -74.0060],
             'us.new_york.yonkers' => [40.9312, -73.8987],
@@ -220,6 +254,7 @@ class TestCase extends BaseTestCase
         $app['config']->set('taxes.tables.us.colorado.colorado_income_tax_information', 'colorado_income_tax_information');
         $app['config']->set('taxes.tables.us.georgia.georgia_income_tax_information', 'georgia_income_tax_information');
         $app['config']->set('taxes.tables.us.kentucky.kentucky_income_tax_information', 'kentucky_income_tax_information');
+        $app['config']->set('taxes.tables.us.maryland.maryland_income_tax_information', 'maryland_income_tax_information');
         $app['config']->set('taxes.tables.us.massachusetts.massachusetts_income_tax_information', 'massachusetts_income_tax_information');
         $app['config']->set('taxes.tables.us.new_york.new_york_income_tax_information', 'new_york_income_tax_information');
         $app['config']->set('taxes.tables.us.wisconsin.wisconsin_income_tax_information', 'wisconsin_income_tax_information');
@@ -292,6 +327,14 @@ class TestCase extends BaseTestCase
         KentuckyIncomeTaxInformation::createForUser([
             'additional_withholding' => 0,
             'exemptions' => 0,
+        ], $worker);
+
+        MarylandIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'dependents' => 0,
+            'allowances' => 0,
+            'personal_allowances' => 0,
+            'filing_status' => MarylandIncome::FILING_SINGLE,
         ], $worker);
 
         NewMexicoIncomeTaxInformation::createForUser([

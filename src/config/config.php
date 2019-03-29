@@ -52,6 +52,10 @@ return [
 
             ],
 
+            'maryland' => [
+                'maryland_income_tax_information' => env('TAXES_MARYLAND_INCOME_TAX_INFORMATION', 'maryland_income_tax_information'),
+            ],
+
             'new_mexico' => [
 
                 'new_mexico_income_tax_information' => env('TAXES_NEW_MEXICO_INCOME_TAX_INFORMATION', 'new_mexico_income_tax_information'),
@@ -102,6 +106,10 @@ return [
 
                 'unemployment' => env('TAXES_GEORGIA_UNEMPLOYMENT_TAX_RATE', 0.027),
 
+            ],
+
+            'maryland' => [
+                'unemployment' => env('TAXES_MARYLAND_UNEMPLOYMENT_TAX_RATE', 0.026),
             ],
 
             'new_mexico' => [
