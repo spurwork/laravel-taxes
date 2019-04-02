@@ -26,7 +26,7 @@ class MarylandIncome extends BaseMarylandIncome
 
     const MARRIED_BRACKETS_DELAWARE = [
         [0, 0.065, 0],
-        [15000, 0.0675, 9750.00],
+        [150000, 0.0675, 9750.00],
         [175000, 0.07, 11437.50],
         [225000, 0.0725, 14937.50],
         [300000, 0.75, 20375.00],
