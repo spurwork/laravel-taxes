@@ -3,6 +3,7 @@
 namespace Appleton\Taxes\Classes;
 
 use Appleton\Taxes\Classes\BaseLocal;
+use Appleton\Taxes\Classes\BaseStateIncome;
 use Appleton\Taxes\Classes\Payroll;
 use Appleton\Taxes\Countries\US\Alabama\AlabamaIncome\AlabamaIncome;
 use Appleton\Taxes\Countries\US\Alabama\AlabamaUnemployment\AlabamaUnemployment;
@@ -317,5 +318,47 @@ class TaxesTest extends \TestCase
         $this->assertSame(2.03, $results->getTax(AlabamaIncome::class));
         $this->assertSame(1.80, $results->getTax(AlabamaUnemployment::class));
         $this->assertSame(0.17, $results->getTax(BirminghamOccupational::class));
+    }
+
+    public function testSUTALocation()
+    {
+        Carbon::setTestNow(
+            Carbon::parse('January 1, 2018 8am', 'America/Chicago')->setTimezone('UTC')
+        );
+
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.georgia'));
+            $taxes->setWorkLocation($this->getLocation('us.georgia'));
+            $taxes->setUser($this->user);
+            $taxes->setSUTALocation($this->getLocation('us.alabama'));
+            $taxes->setEarnings(66.68);
+            $taxes->setSupplementalEarnings(0);
+            $taxes->setPayPeriods(260);
+            $taxes->setDate(Carbon::now()->addMonth());
+        });
+
+        $this->assertSame(null, $results->getTax(GeorgiaUnemployment::class));
+        $this->assertSame(1.8, $results->getTax(AlabamaUnemployment::class));
+    }
+
+    public function testReciprocalAgreement()
+    {
+        Carbon::setTestNow(
+            Carbon::parse('January 1, 2018 8am', 'America/Chicago')->setTimezone('UTC')
+        );
+
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.alabama'));
+            $taxes->setWorkLocation($this->getLocation('us.georgia'));
+            $taxes->setUser($this->user);
+            $taxes->setReciprocalAgreement(true);
+            $taxes->setEarnings(66.68);
+            $taxes->setSupplementalEarnings(0);
+            $taxes->setPayPeriods(260);
+            $taxes->setDate(Carbon::now()->addMonth());
+        });
+
+        $this->assertSame(null, $results->getTax(ParentGeorgiaIncome::class));
+        $this->assertSame(2.13, $results->getTax(AlabamaIncome::class));
     }
 }
