@@ -20,6 +20,7 @@ use Appleton\Taxes\Models\Countries\US\Massachusetts\MassachusettsIncomeTaxInfor
 use Appleton\Taxes\Models\Countries\US\NewMexico\NewMexicoIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\NewYork\NewYorkIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\NorthCarolina\NorthCarolinaIncomeTaxInformation;
+use Appleton\Taxes\Models\Countries\US\Virginia\VirginiaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Wisconsin\WisconsinIncomeTaxInformation;
 use Appleton\Taxes\Providers\TaxesServiceProvider;
 use Carbon\Carbon;
@@ -28,9 +29,16 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Orchestra\Database\ConsoleServiceProvider;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 
+/**
+ * @property Taxes $taxes
+ */
 class TestCase extends BaseTestCase
 {
     use DatabaseMigrations;
+
+    protected $user_model;
+    protected $user;
+    protected $taxes;
 
     public function date($date)
     {
@@ -125,6 +133,12 @@ class TestCase extends BaseTestCase
             'filing_status' => NorthCarolinaIncome::FILING_SINGLE,
         ], $this->user);
 
+        VirginiaIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'exemptions' => 0,
+            'sixty_five_plus_or_blind_exemptions' => 0,
+        ], $this->user);
+
         WisconsinIncomeTaxInformation::createForUser([
             'additional_withholding' => 0,
             'exemptions' => 0,
@@ -181,6 +195,7 @@ class TestCase extends BaseTestCase
             'us.north_carolina' => [35.7596, -79.0193],
             'us.tennessee' => [35.5175, -86.5804],
             'us.texas' => [31.9686, -99.9018],
+            'us.virginia' => [37.5407, -77.4360],
             'us.wisconsin' => [43.0849721, -89.4764603],
         ];
 
@@ -222,6 +237,7 @@ class TestCase extends BaseTestCase
         $app['config']->set('taxes.tables.us.kentucky.kentucky_income_tax_information', 'kentucky_income_tax_information');
         $app['config']->set('taxes.tables.us.massachusetts.massachusetts_income_tax_information', 'massachusetts_income_tax_information');
         $app['config']->set('taxes.tables.us.new_york.new_york_income_tax_information', 'new_york_income_tax_information');
+        $app['config']->set('taxes.tables.us.virginia.virginia_income_tax_information', 'virginia_income_tax_information');
         $app['config']->set('taxes.tables.us.wisconsin.wisconsin_income_tax_information', 'wisconsin_income_tax_information');
     }
 
@@ -306,6 +322,12 @@ class TestCase extends BaseTestCase
             'filing_status' => NorthCarolinaIncome::FILING_SINGLE,
         ], $worker);
 
+        VirginiaIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'exemptions' => 0,
+            'sixty_five_plus_or_blind_exemptions' => 0,
+        ], $worker);
+
         WisconsinIncomeTaxInformation::createForUser([
             'additional_withholding' => 0,
             'exemptions' => 0,
@@ -378,6 +400,12 @@ class TestCase extends BaseTestCase
             'additional_withholding' => 0,
             'dependents' => 0,
             'filing_status' => NorthCarolinaIncome::FILING_SINGLE,
+        ], $worker);
+
+        VirginiaIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'exemptions' => 3,
+            'sixty_five_plus_or_blind_exemptions' => 0,
         ], $worker);
 
         WisconsinIncomeTaxInformation::createForUser([
@@ -453,6 +481,12 @@ class TestCase extends BaseTestCase
             'filing_status' => NorthCarolinaIncome::FILING_MARRIED,
         ], $worker);
 
+        VirginiaIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'exemptions' => 0,
+            'sixty_five_plus_or_blind_exemptions' => 0,
+        ], $worker);
+
         WisconsinIncomeTaxInformation::createForUser([
             'additional_withholding' => 0,
             'exemptions' => 0,
@@ -525,6 +559,12 @@ class TestCase extends BaseTestCase
             'additional_withholding' => 15,
             'dependents' => 0,
             'filing_status' => NorthCarolinaIncome::FILING_MARRIED,
+        ], $worker);
+
+        VirginiaIncomeTaxInformation::createForUser([
+            'additional_withholding' => 15,
+            'exemptions' => 5,
+            'sixty_five_plus_or_blind_exemptions' => 0,
         ], $worker);
 
         WisconsinIncomeTaxInformation::createForUser([
@@ -607,6 +647,12 @@ class TestCase extends BaseTestCase
             'filing_status' => WisconsinIncome::FILING_SINGLE,
         ], $worker);
 
+        VirginiaIncomeTaxInformation::createForUser([
+            'additional_withholding' => 25,
+            'exemptions' => 1,
+            'sixty_five_plus_or_blind_exemptions' => 0,
+        ], $worker);
+
         return $worker;
     }
 
@@ -680,6 +726,12 @@ class TestCase extends BaseTestCase
             'filing_status' => WisconsinIncome::FILING_SINGLE,
         ], $worker);
 
+        VirginiaIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'exemptions' => 0,
+            'sixty_five_plus_or_blind_exemptions' => 0,
+        ], $worker);
+
         return $worker;
     }
 
@@ -751,6 +803,12 @@ class TestCase extends BaseTestCase
             'additional_withholding' => 0,
             'exemptions' => 8,
             'filing_status' => WisconsinIncome::FILING_SINGLE,
+        ], $worker);
+
+        VirginiaIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'exemptions' => 8,
+            'sixty_five_plus_or_blind_exemptions' => 0,
         ], $worker);
 
         return $worker;
