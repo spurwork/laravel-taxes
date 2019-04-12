@@ -113,6 +113,10 @@ class UpdateTaxAreasTable extends Migration
                     ->where('id', $tax_area->tax_id)
                     ->first();
 
+                if (!$tax) {
+                    return;
+                }
+
                 DB::table($this->tax_areas)
                     ->where('id', $tax_area->id)
                     ->update([
@@ -120,6 +124,8 @@ class UpdateTaxAreasTable extends Migration
                         'tax' => $tax->class,
                     ]);
             });
+
+        DB::table($this->tax_areas)->whereNull('name')->delete();
 
         Schema::table($this->tax_areas, function (Blueprint $table) {
             $table->string('name')->nullable(false)->change();
