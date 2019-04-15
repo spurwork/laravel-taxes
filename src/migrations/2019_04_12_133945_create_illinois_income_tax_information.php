@@ -10,9 +10,9 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateIllinoisIncomeTaxInformation extends Migration
 {
-    public function up()
+    public function up(): void
     {
-        Schema::create('illinois_income_tax_information', function (Blueprint $table) {
+        Schema::create('illinois_income_tax_information', static function (Blueprint $table) {
             $table->increments('id');
             $table->decimal('basic_allowances')->default(0);
             $table->decimal('additional_allowances')->default(0);
@@ -46,17 +46,13 @@ class CreateIllinoisIncomeTaxInformation extends Migration
 
     public function down(): void
     {
-        $illinois_id = DB::table('governmental_unit_areas')->where('name', 'Illinois')
-            ->first()->id;
         $income_tax_id = DB::table('taxes')->where('class', IllinoisIncome::class)
             ->first()->id;
+        DB::table('tax_areas')->where('tax_id', $income_tax_id)->delete();
+
         $unemployment_tax_id = DB::table('taxes')->where('class', IllinoisUnemployment::class)
             ->first()->id;
-
-        DB::table('tax_areas')->where('tax_id', $illinois_id)
-            ->where('tax_id', $income_tax_id)->delete();
-        DB::table('tax_areas')->where('tax_id', $illinois_id)
-            ->where('tax_id', $unemployment_tax_id)->delete();
+        DB::table('tax_areas')->where('tax_id', $unemployment_tax_id)->delete();
 
         DB::table('taxes')->where('id', $income_tax_id)->delete();
         DB::table('taxes')->where('id', $unemployment_tax_id)->delete();
