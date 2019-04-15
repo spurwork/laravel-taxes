@@ -119,7 +119,6 @@ class UpdateTaxAreasTable extends Migration
                         'name' => $tax->name,
                         'tax' => $tax->class,
                     ]);
-
             });
 
         Schema::table($this->tax_areas, function (Blueprint $table) {
