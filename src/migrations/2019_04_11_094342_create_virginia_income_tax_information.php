@@ -47,17 +47,13 @@ class CreateVirginiaIncomeTaxInformation extends Migration
 
     public function down(): void
     {
-        $virginia_id = DB::table('governmental_unit_areas')->where('name', 'Virginia')
-            ->first()->id;
         $income_tax_id = DB::table('taxes')->where('class', VirginiaIncome::class)
             ->first()->id;
         $unemployment_tax_id = DB::table('taxes')->where('class', VirginiaUnemployment::class)
             ->first()->id;
 
-        DB::table('tax_areas')->where('tax_id', $virginia_id)
-            ->where('tax_id', $income_tax_id)->delete();
-        DB::table('tax_areas')->where('tax_id', $virginia_id)
-            ->where('tax_id', $unemployment_tax_id)->delete();
+        DB::table('tax_areas')->where('tax_id', $income_tax_id)->delete();
+        DB::table('tax_areas')->where('tax_id', $unemployment_tax_id)->delete();
 
         DB::table('taxes')->where('id', $income_tax_id)->delete();
         DB::table('taxes')->where('id', $unemployment_tax_id)->delete();
