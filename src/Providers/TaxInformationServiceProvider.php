@@ -22,6 +22,7 @@ class TaxInformationServiceProvider extends ServiceProvider
         \Appleton\Taxes\Models\Countries\US\NewMexico\NewMexicoIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\NewYork\NewYorkIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\NorthCarolina\NorthCarolinaIncomeTaxInformation::class,
+        \Appleton\Taxes\Models\Countries\US\Virginia\VirginiaIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\Wisconsin\WisconsinIncomeTaxInformation::class,
     ];
 

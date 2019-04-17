@@ -105,6 +105,8 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\NewYork\Yonkers\Yonkers::class,
         \Appleton\Taxes\Countries\US\NorthCarolina\NorthCarolinaIncome\NorthCarolinaIncome::class,
         \Appleton\Taxes\Countries\US\NorthCarolina\NorthCarolinaUnemployment\NorthCarolinaUnemployment::class,
+        \Appleton\Taxes\Countries\US\Virginia\VirginiaIncome\VirginiaIncome::class,
+        \Appleton\Taxes\Countries\US\Virginia\VirginiaUnemployment\VirginiaUnemployment::class,
         \Appleton\Taxes\Countries\US\Wisconsin\WisconsinIncome\WisconsinIncome::class,
         \Appleton\Taxes\Countries\US\Wisconsin\WisconsinUnemployment\WisconsinUnemployment::class,
     ];
