@@ -5,6 +5,7 @@ use Appleton\Taxes\Countries\US\Alabama\AlabamaIncome\AlabamaIncome;
 use Appleton\Taxes\Countries\US\Colorado\ColoradoIncome\ColoradoIncome;
 use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome;
 use Appleton\Taxes\Countries\US\Georgia\GeorgiaIncome\GeorgiaIncome;
+use Appleton\Taxes\Countries\US\Maryland\MarylandIncome\MarylandIncome;
 use Appleton\Taxes\Countries\US\Massachusetts\MassachusettsIncome\MassachusettsIncome;
 use Appleton\Taxes\Countries\US\NewMexico\NewMexicoIncome\NewMexicoIncome;
 use Appleton\Taxes\Countries\US\NewYork\NewYorkIncome\NewYorkIncome;
@@ -15,7 +16,9 @@ use Appleton\Taxes\Models\Countries\US\Arizona\ArizonaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Colorado\ColoradoIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\FederalIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Georgia\GeorgiaIncomeTaxInformation;
+use Appleton\Taxes\Models\Countries\US\Illinois\IllinoisIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Kentucky\KentuckyIncomeTaxInformation;
+use Appleton\Taxes\Models\Countries\US\Maryland\MarylandIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Massachusetts\MassachusettsIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\NewMexico\NewMexicoIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\NewYork\NewYorkIncomeTaxInformation;
@@ -102,9 +105,22 @@ class TestCase extends BaseTestCase
             'filing_status' => GeorgiaIncome::FILING_SINGLE,
         ], $this->user);
 
+        IllinoisIncomeTaxInformation::createForUser([
+            'basic_allowances' => 0,
+            'additional_allowances' => 0,
+            'additional_withholding' => 0,
+            'exempt' => false,
+        ], $this->user);
+
         KentuckyIncomeTaxInformation::createForUser([
             'additional_withholding' => 0,
             'exemptions' => 0,
+        ], $this->user);
+
+        MarylandIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'dependents' => 0,
+            'filing_status' => MarylandIncome::FILING_SINGLE,
         ], $this->user);
 
         MassachusettsIncomeTaxInformation::createForUser([
@@ -185,10 +201,37 @@ class TestCase extends BaseTestCase
             'us.alabama.tuskegee' => [32.4302, -85.7077],
             'us.arizona' => [33.6050991, -112.4052392],
             'us.colorado' => [39.7640021, -105.1352965],
+            'us.delaware' => [39.1582, -75.5244],
             'us.georgia' => [33.7490, -84.3880],
+            'us.illinois' => [39.7817, -89.6501],
             'us.kentucky' => [37.8393, -84.2700],
             'us.florida' => [27.6648, -81.5158],
             'us.massachusetts' => [42.4072, -71.3824],
+            'us.maryland' => [38.9784, -76.4922],
+            'us.maryland.allegany' => [39.6255, -78.6115],
+            'us.maryland.annearundel' => [38.9530, -76.5488],
+            'us.maryland.baltimore' => [39.4648, -76.7337],
+            'us.maryland.baltimorecity' => [39.2904, -76.6122],
+            'us.maryland.calvert' => [38.4950, -76.5026],
+            'us.maryland.caroline' => [38.9105, -75.8534],
+            'us.maryland.carroll' => [39.5423, -77.0564],
+            'us.maryland.cecil' => [39.5739, -75.9463],
+            'us.maryland.charles' => [38.5222, -77.1025],
+            'us.maryland.dorchester' => [38.4153, -76.1784],
+            'us.maryland.frederick' => [39.384, -77.4702],
+            'us.maryland.garrett' => [39.5681, -79.2902],
+            'us.maryland.harford' => [39.5839, -76.363],
+            'us.maryland.howard' => [39.2873, -76.9643],
+            'us.maryland.kent' => [39.2189, -76.06904],
+            'us.maryland.montgomery' => [39.1547, -77.2405],
+            'us.maryland.princegeorges' => [38.7849, -76.8721],
+            'us.maryland.queenannes' => [39.0264, -76.1320],
+            'us.maryland.stmarys' => [38.1060, -76.3637],
+            'us.maryland.somerset' => [38.0862, -75.8534],
+            'us.maryland.talbot' => [38.7804, -76.1320],
+            'us.maryland.washington' => [39.6418, -77.7200],
+            'us.maryland.wicomico' => [38.3942, -75.6674],
+            'us.maryland.worcester' => [38.1584, -75.4345],
             'us.new_mexico' => [34.5199, -105.8701],
             'us.new_york' => [40.7128, -74.0060],
             'us.new_york.yonkers' => [40.9312, -73.8987],
@@ -234,7 +277,9 @@ class TestCase extends BaseTestCase
         $app['config']->set('taxes.tables.us.arizona.arizona_income_tax_information', 'arizona_income_tax_information');
         $app['config']->set('taxes.tables.us.colorado.colorado_income_tax_information', 'colorado_income_tax_information');
         $app['config']->set('taxes.tables.us.georgia.georgia_income_tax_information', 'georgia_income_tax_information');
+        $app['config']->set('taxes.tables.us.illinois.illinois_income_tax_information', 'illinois_income_tax_information');
         $app['config']->set('taxes.tables.us.kentucky.kentucky_income_tax_information', 'kentucky_income_tax_information');
+        $app['config']->set('taxes.tables.us.maryland.maryland_income_tax_information', 'maryland_income_tax_information');
         $app['config']->set('taxes.tables.us.massachusetts.massachusetts_income_tax_information', 'massachusetts_income_tax_information');
         $app['config']->set('taxes.tables.us.new_york.new_york_income_tax_information', 'new_york_income_tax_information');
         $app['config']->set('taxes.tables.us.virginia.virginia_income_tax_information', 'virginia_income_tax_information');
@@ -247,570 +292,5 @@ class TestCase extends BaseTestCase
             ConsoleServiceProvider::class,
             TaxesServiceProvider::class,
         ];
-    }
-
-    protected function emptyWorker()
-    {
-        return $this->user_model->forceCreate([
-            'name' => 'Worker Dude',
-            'email' => 'worker_dudeA@user.email',
-            'password' => 'password',
-        ]);
-    }
-
-    protected function createWorkerA()
-    {
-        // Worker A
-        // YTD              $7,340.50
-        // Filing Status    Single
-        // Allowances       0
-        // ADD Withholding  0
-        // Gross Wages      $270.00
-
-        $worker = $this->user_model->forceCreate([
-            'name' => 'Worker A',
-            'email' => 'workerA@user.email',
-            'password' => 'password',
-        ]);
-
-        FederalIncomeTaxInformation::createForUser([
-            'additional_withholding' => 0,
-            'exemptions' => 0,
-            'filing_status' => FederalIncome::FILING_SINGLE,
-            'non_resident_alien' => false,
-        ], $worker);
-
-        AlabamaIncomeTaxInformation::createForUser([
-            'additional_withholding' => 0,
-            'dependents' => 0,
-            'filing_status' => AlabamaIncome::FILING_SINGLE,
-        ], $worker);
-
-        ArizonaIncomeTaxInformation::createForUser([
-            'additional_withholding' => 0,
-            'percentage_withheld' => 0,
-        ], $worker);
-
-        ColoradoIncomeTaxInformation::createForUser([
-            'additional_withholding' => 0,
-            'exemptions' => 0,
-            'filing_status' => ColoradoIncome::FILING_SINGLE,
-        ], $worker);
-
-        GeorgiaIncomeTaxInformation::createForUser([
-            'additional_withholding' => 0,
-            'allowances' => 0,
-            'dependents' => 0,
-            'personal_allowances' => 0,
-            'filing_status' => GeorgiaIncome::FILING_SINGLE,
-        ], $worker);
-
-        KentuckyIncomeTaxInformation::createForUser([
-            'additional_withholding' => 0,
-            'exemptions' => 0,
-        ], $worker);
-
-        NewMexicoIncomeTaxInformation::createForUser([
-            'additional_withholding' => 0,
-            'exemptions' => 0,
-            'filing_status' => NewMexicoIncome::FILING_SINGLE,
-        ], $worker);
-
-        NorthCarolinaIncomeTaxInformation::createForUser([
-            'additional_withholding' => 0,
-            'dependents' => 0,
-            'filing_status' => NorthCarolinaIncome::FILING_SINGLE,
-        ], $worker);
-
-        VirginiaIncomeTaxInformation::createForUser([
-            'additional_withholding' => 0,
-            'exemptions' => 0,
-            'sixty_five_plus_or_blind_exemptions' => 0,
-        ], $worker);
-
-        WisconsinIncomeTaxInformation::createForUser([
-            'additional_withholding' => 0,
-            'exemptions' => 0,
-            'filing_status' => WisconsinIncome::FILING_SINGLE,
-        ], $worker);
-
-        return $worker;
-    }
-
-
-    protected function createWorkerB()
-    {
-        // Worker B
-        // YTD              $17,845.00
-        // Filing Status    Single
-        // Allowances       3
-        // ADD Withholding  0
-        // Gross Wages      $785.00
-
-        $worker = $this->user_model->forceCreate([
-            'name' => 'Worker B',
-            'email' => 'workerB@user.email',
-            'password' => 'password',
-        ]);
-
-        FederalIncomeTaxInformation::createForUser([
-            'additional_withholding' => 0,
-            'exemptions' => 3,
-            'filing_status' => FederalIncome::FILING_SINGLE,
-            'non_resident_alien' => false,
-        ], $worker);
-
-        AlabamaIncomeTaxInformation::createForUser([
-            'additional_withholding' => 0,
-            'dependents' => 0,
-            'filing_status' => AlabamaIncome::FILING_SINGLE,
-        ], $worker);
-
-        ArizonaIncomeTaxInformation::createForUser([
-            'additional_withholding' => 0,
-            'percentage_withheld' => 0,
-        ], $worker);
-
-        ColoradoIncomeTaxInformation::createForUser([
-            'additional_withholding' => 0,
-            'exemptions' => 3,
-            'filing_status' => ColoradoIncome::FILING_SINGLE,
-        ], $worker);
-
-        GeorgiaIncomeTaxInformation::createForUser([
-            'additional_withholding' => 0,
-            'allowances' => 3,
-            'dependents' => 0,
-            'personal_allowances' => 0,
-            'filing_status' => GeorgiaIncome::FILING_SINGLE,
-        ], $worker);
-
-        KentuckyIncomeTaxInformation::createForUser([
-            'additional_withholding' => 0,
-            'exemptions' => 3,
-        ], $worker);
-
-        NewMexicoIncomeTaxInformation::createForUser([
-            'additional_withholding' => 0,
-            'exemptions' => 3,
-            'filing_status' => NewMexicoIncome::FILING_SINGLE,
-        ], $worker);
-
-        NorthCarolinaIncomeTaxInformation::createForUser([
-            'additional_withholding' => 0,
-            'dependents' => 0,
-            'filing_status' => NorthCarolinaIncome::FILING_SINGLE,
-        ], $worker);
-
-        VirginiaIncomeTaxInformation::createForUser([
-            'additional_withholding' => 0,
-            'exemptions' => 3,
-            'sixty_five_plus_or_blind_exemptions' => 0,
-        ], $worker);
-
-        WisconsinIncomeTaxInformation::createForUser([
-            'additional_withholding' => 0,
-            'exemptions' => 3,
-            'filing_status' => WisconsinIncome::FILING_SINGLE,
-        ], $worker);
-
-        return $worker;
-    }
-
-    protected function createWorkerC()
-    {
-        // Worker C
-        // YTD              $255.00
-        // Filing Status    Married
-        // Allowances       0
-        // ADD Withholding  0
-        // Gross Wages      $160.80
-
-        $worker = $this->user_model->forceCreate([
-            'name' => 'Worker C',
-            'email' => 'workerC@user.email',
-            'password' => 'password',
-        ]);
-
-        FederalIncomeTaxInformation::createForUser([
-            'additional_withholding' => 0,
-            'exemptions' => 0,
-            'filing_status' => FederalIncome::FILING_MARRIED,
-            'non_resident_alien' => false,
-        ], $worker);
-
-        AlabamaIncomeTaxInformation::createForUser([
-            'additional_withholding' => 0,
-            'dependents' => 0,
-            'filing_status' => AlabamaIncome::FILING_MARRIED,
-        ], $worker);
-
-        ArizonaIncomeTaxInformation::createForUser([
-            'additional_withholding' => 0,
-            'percentage_withheld' => 0,
-        ], $worker);
-
-        ColoradoIncomeTaxInformation::createForUser([
-            'additional_withholding' => 0,
-            'exemptions' => 0,
-            'filing_status' => ColoradoIncome::FILING_MARRIED,
-        ], $worker);
-
-        GeorgiaIncomeTaxInformation::createForUser([
-            'additional_withholding' => 0,
-            'allowances' => 0,
-            'dependents' => 0,
-            'personal_allowances' => 0,
-            'filing_status' => GeorgiaIncome::FILING_MARRIED_JOINT_BOTH_WORKING,
-        ], $worker);
-
-        KentuckyIncomeTaxInformation::createForUser([
-            'additional_withholding' => 0,
-            'exemptions' => 0,
-        ], $worker);
-
-        NewMexicoIncomeTaxInformation::createForUser([
-            'additional_withholding' => 0,
-            'exemptions' => 0,
-            'filing_status' => NewMexicoIncome::FILING_MARRIED,
-        ], $worker);
-
-        NorthCarolinaIncomeTaxInformation::createForUser([
-            'additional_withholding' => 0,
-            'dependents' => 0,
-            'filing_status' => NorthCarolinaIncome::FILING_MARRIED,
-        ], $worker);
-
-        VirginiaIncomeTaxInformation::createForUser([
-            'additional_withholding' => 0,
-            'exemptions' => 0,
-            'sixty_five_plus_or_blind_exemptions' => 0,
-        ], $worker);
-
-        WisconsinIncomeTaxInformation::createForUser([
-            'additional_withholding' => 0,
-            'exemptions' => 0,
-            'filing_status' => WisconsinIncome::FILING_MARRIED,
-        ], $worker);
-
-        return $worker;
-    }
-
-
-    protected function createWorkerD()
-    {
-        // Worker D
-        // YTD              $0.00
-        // Filing Status    Married
-        // Allowances       5
-        // ADD Withholding  $15
-        // Gross Wages      $280.00
-
-        $worker = $this->user_model->forceCreate([
-            'name' => 'Worker D',
-            'email' => 'workerD@user.email',
-            'password' => 'password',
-        ]);
-
-        FederalIncomeTaxInformation::createForUser([
-            'additional_withholding' => 15,
-            'exemptions' => 5,
-            'filing_status' => FederalIncome::FILING_MARRIED,
-            'non_resident_alien' => false,
-        ], $worker);
-
-        AlabamaIncomeTaxInformation::createForUser([
-            'additional_withholding' => 15,
-            'dependents' => 0,
-            'filing_status' => AlabamaIncome::FILING_MARRIED,
-        ], $worker);
-
-        ArizonaIncomeTaxInformation::createForUser([
-            'additional_withholding' => 15,
-            'percentage_withheld' => 0,
-        ], $worker);
-
-        ColoradoIncomeTaxInformation::createForUser([
-            'additional_withholding' => 15,
-            'exemptions' => 5,
-            'filing_status' => ColoradoIncome::FILING_MARRIED,
-        ], $worker);
-
-        GeorgiaIncomeTaxInformation::createForUser([
-            'additional_withholding' => 15,
-            'allowances' => 5,
-            'dependents' => 0,
-            'personal_allowances' => 0,
-            'filing_status' => GeorgiaIncome::FILING_MARRIED_JOINT_BOTH_WORKING,
-        ], $worker);
-
-        KentuckyIncomeTaxInformation::createForUser([
-            'additional_withholding' => 15.0,
-            'exemptions' => 5,
-        ], $worker);
-
-        NewMexicoIncomeTaxInformation::createForUser([
-            'additional_withholding' => 15,
-            'exemptions' => 5,
-            'filing_status' => NewMexicoIncome::FILING_MARRIED,
-        ], $worker);
-
-        NorthCarolinaIncomeTaxInformation::createForUser([
-            'additional_withholding' => 15,
-            'dependents' => 0,
-            'filing_status' => NorthCarolinaIncome::FILING_MARRIED,
-        ], $worker);
-
-        VirginiaIncomeTaxInformation::createForUser([
-            'additional_withholding' => 15,
-            'exemptions' => 5,
-            'sixty_five_plus_or_blind_exemptions' => 0,
-        ], $worker);
-
-        WisconsinIncomeTaxInformation::createForUser([
-            'additional_withholding' => 15,
-            'exemptions' => 5,
-            'filing_status' => WisconsinIncome::FILING_MARRIED,
-        ], $worker);
-
-        return $worker;
-    }
-
-
-    protected function createWorkerE()
-    {
-        // Worker E
-        // YTD              $5,432.12
-        // Filing Status    Single
-        // Allowances       1
-        // ADD Withholding  $25
-        // Gross Wages      $455.00
-
-        $worker = $this->user_model->forceCreate([
-            'name' => 'Worker E',
-            'email' => 'workerE@user.email',
-            'password' => 'password',
-        ]);
-
-        FederalIncomeTaxInformation::createForUser([
-            'additional_withholding' => 25,
-            'exemptions' => 1,
-            'filing_status' => FederalIncome::FILING_SINGLE,
-            'non_resident_alien' => false,
-        ], $worker);
-
-        AlabamaIncomeTaxInformation::createForUser([
-            'additional_withholding' => 25,
-            'dependents' => 0,
-            'filing_status' => AlabamaIncome::FILING_SINGLE,
-        ], $worker);
-
-        ArizonaIncomeTaxInformation::createForUser([
-            'additional_withholding' => 25,
-            'percentage_withheld' => 0,
-        ], $worker);
-
-        ColoradoIncomeTaxInformation::createForUser([
-            'additional_withholding' => 25,
-            'exemptions' => 1,
-            'filing_status' => ColoradoIncome::FILING_SINGLE,
-        ], $worker);
-
-        GeorgiaIncomeTaxInformation::createForUser([
-            'additional_withholding' => 25,
-            'allowances' => 1,
-            'dependents' => 0,
-            'personal_allowances' => 0,
-            'filing_status' => GeorgiaIncome::FILING_SINGLE,
-        ], $worker);
-
-        KentuckyIncomeTaxInformation::createForUser([
-            'additional_withholding' => 25,
-            'exemptions' => 1,
-        ], $worker);
-
-        NewMexicoIncomeTaxInformation::createForUser([
-            'additional_withholding' => 25,
-            'exemptions' => 1,
-            'filing_status' => NewMexicoIncome::FILING_SINGLE,
-        ], $worker);
-
-        NorthCarolinaIncomeTaxInformation::createForUser([
-            'additional_withholding' => 25,
-            'dependents' => 0,
-            'filing_status' => NorthCarolinaIncome::FILING_SINGLE,
-        ], $worker);
-
-        WisconsinIncomeTaxInformation::createForUser([
-            'additional_withholding' => 25,
-            'exemptions' => 1,
-            'filing_status' => WisconsinIncome::FILING_SINGLE,
-        ], $worker);
-
-        VirginiaIncomeTaxInformation::createForUser([
-            'additional_withholding' => 25,
-            'exemptions' => 1,
-            'sixty_five_plus_or_blind_exemptions' => 0,
-        ], $worker);
-
-        return $worker;
-    }
-
-    protected function createWorkerF()
-    {
-        // Worker F
-        // YTD              $10,432.12
-        // Filing Status    Married
-        // Allowances       0
-        // ADD Withholding  $0
-        // Gross Wages      $365.00
-
-        $worker = $this->user_model->forceCreate([
-            'name' => 'Worker F',
-            'email' => 'workerF@user.email',
-            'password' => 'password',
-        ]);
-
-        FederalIncomeTaxInformation::createForUser([
-            'additional_withholding' => 0,
-            'exemptions' => 0,
-            'filing_status' => FederalIncome::FILING_MARRIED,
-            'non_resident_alien' => false,
-        ], $worker);
-
-        AlabamaIncomeTaxInformation::createForUser([
-            'additional_withholding' => 0,
-            'dependents' => 0,
-            'filing_status' => AlabamaIncome::FILING_MARRIED,
-        ], $worker);
-
-        ArizonaIncomeTaxInformation::createForUser([
-            'additional_withholding' => 0,
-            'percentage_withheld' => 0,
-        ], $worker);
-
-        ColoradoIncomeTaxInformation::createForUser([
-            'additional_withholding' => 0,
-            'exemptions' => 0,
-            'filing_status' => ColoradoIncome::FILING_MARRIED,
-        ], $worker);
-
-        GeorgiaIncomeTaxInformation::createForUser([
-            'additional_withholding' => 0,
-            'allowances' => 0,
-            'dependents' => 0,
-            'personal_allowances' => 0,
-            'filing_status' => GeorgiaIncome::FILING_MARRIED_JOINT_BOTH_WORKING,
-        ], $worker);
-
-        KentuckyIncomeTaxInformation::createForUser([
-            'additional_withholding' => 0,
-            'exemptions' => 0,
-        ], $worker);
-
-        NewMexicoIncomeTaxInformation::createForUser([
-            'additional_withholding' => 0,
-            'exemptions' => 0,
-            'filing_status' => NewMexicoIncome::FILING_MARRIED,
-        ], $worker);
-
-        NorthCarolinaIncomeTaxInformation::createForUser([
-            'additional_withholding' => 0,
-            'dependents' => 0,
-            'filing_status' => NorthCarolinaIncome::FILING_SINGLE,
-        ], $worker);
-
-        WisconsinIncomeTaxInformation::createForUser([
-            'additional_withholding' => 0,
-            'exemptions' => 0,
-            'filing_status' => WisconsinIncome::FILING_SINGLE,
-        ], $worker);
-
-        VirginiaIncomeTaxInformation::createForUser([
-            'additional_withholding' => 0,
-            'exemptions' => 0,
-            'sixty_five_plus_or_blind_exemptions' => 0,
-        ], $worker);
-
-        return $worker;
-    }
-
-    protected function createWorkerG()
-    {
-        // Worker E
-        // YTD              $20,000.00
-        // Filing Status    Single
-        // Allowances       8
-        // ADD Withholding  $0
-        // Gross Wages      $625.00
-
-        $worker = $this->user_model->forceCreate([
-            'name' => 'Worker E',
-            'email' => 'workerE@user.email',
-            'password' => 'password',
-        ]);
-
-        FederalIncomeTaxInformation::createForUser([
-            'additional_withholding' => 0,
-            'exemptions' => 8,
-            'filing_status' => FederalIncome::FILING_SINGLE,
-            'non_resident_alien' => false,
-        ], $worker);
-
-        AlabamaIncomeTaxInformation::createForUser([
-            'additional_withholding' => 0,
-            'dependents' => 0,
-            'filing_status' => AlabamaIncome::FILING_SINGLE,
-        ], $worker);
-
-        ArizonaIncomeTaxInformation::createForUser([
-            'additional_withholding' => 0,
-            'percentage_withheld' => 0,
-        ], $worker);
-
-        ColoradoIncomeTaxInformation::createForUser([
-            'additional_withholding' => 0,
-            'exemptions' => 8,
-            'filing_status' => ColoradoIncome::FILING_SINGLE,
-        ], $worker);
-
-        GeorgiaIncomeTaxInformation::createForUser([
-            'additional_withholding' => 0,
-            'allowances' => 8,
-            'dependents' => 0,
-            'personal_allowances' => 0,
-            'filing_status' => GeorgiaIncome::FILING_SINGLE,
-        ], $worker);
-
-        KentuckyIncomeTaxInformation::createForUser([
-            'additional_withholding' => 0,
-            'exemptions' => 8,
-        ], $worker);
-
-        NewMexicoIncomeTaxInformation::createForUser([
-            'additional_withholding' => 0,
-            'exemptions' => 8,
-            'filing_status' => NewMexicoIncome::FILING_SINGLE,
-        ], $worker);
-
-        NorthCarolinaIncomeTaxInformation::createForUser([
-            'additional_withholding' => 0,
-            'dependents' => 0,
-            'filing_status' => NorthCarolinaIncome::FILING_SINGLE,
-        ], $worker);
-
-        WisconsinIncomeTaxInformation::createForUser([
-            'additional_withholding' => 0,
-            'exemptions' => 8,
-            'filing_status' => WisconsinIncome::FILING_SINGLE,
-        ], $worker);
-
-        VirginiaIncomeTaxInformation::createForUser([
-            'additional_withholding' => 0,
-            'exemptions' => 8,
-            'sixty_five_plus_or_blind_exemptions' => 0,
-        ], $worker);
-
-        return $worker;
     }
 }

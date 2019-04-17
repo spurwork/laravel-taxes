@@ -99,5 +99,6 @@ class InsertNycTax extends Migration
         DB::table($this->governmental_unit_areas)->where('name', 'Kings County, NY')->delete();
         DB::table($this->governmental_unit_areas)->where('name', 'New York County, NY')->delete();
         DB::table($this->governmental_unit_areas)->where('name', 'Queens County, NY')->delete();
+        DB::table($this->governmental_unit_areas)->where('name', 'Richmond County, NY')->delete();
     }
 }
