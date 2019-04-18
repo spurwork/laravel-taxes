@@ -19,22 +19,22 @@ class MiamiIncomeTest extends TestCase
 
     /**
      * Weekly Pay               $300.00
-     * Personal Exemptions      1
-     * Dependent Exemptions     2
-     * Tax Due                  $5.67
+     * Personal Exemptions      2
+     * Dependent Exemptions     1
+     * Tax Due                  $5.91
      *
      * Math:
-     * 1 personal exemptions * 1000 = 1000
-     * 2 dependent exemptions * 1500 = 3000
-     * 4000 total allowances / 52 weeks = 76.9231
-     * 300 - 76.9231 = 223.0769 taxable wages
-     * round(223.0769 * .0254) = 5.67 tax
+     * 2 personal exemptions * 1000 = 2000
+     * 1 dependent exemptions * 1500 = 1500
+     * 3500 total allowances / 52 weeks = 67.307692
+     * 300 - 67.307692 = 232.69231 taxable wages
+     * round(232.69231 * .0254) = 5.91 tax
      */
     public function testMiamiIncome(): void
     {
         IndianaIncomeTaxInformation::createForUser([
-            'personal_exemptions' => 1,
-            'dependent_exemptions' => 2,
+            'personal_exemptions' => 2,
+            'dependent_exemptions' => 1,
             'exempt' => false,
             'additional_withholding' => 0,
         ], $this->user);
@@ -47,6 +47,6 @@ class MiamiIncomeTest extends TestCase
             $taxes->setPayPeriods(52);
         });
 
-        $this->assertThat(5.66, self::identicalTo($results->getTax(MiamiIncome::class)));
+        $this->assertThat(5.91, self::identicalTo($results->getTax(MiamiIncome::class)));
     }
 }

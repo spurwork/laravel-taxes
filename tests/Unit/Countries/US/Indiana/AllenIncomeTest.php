@@ -19,22 +19,22 @@ class AllenIncomeTest extends TestCase
 
     /**
      * Weekly Pay               $300.00
-     * Personal Exemptions      1
-     * Dependent Exemptions     0
-     * Tax Due                  $4.15
+     * Personal Exemptions      0
+     * Dependent Exemptions     1
+     * Tax Due                  $4.01
      *
      * Math:
-     * 1 personal exemptions * 1000 = 1000
-     * 0 dependent exemptions * 1500 = 0
-     * 1000 total allowances / 52 weeks = 19.2308
-     * 300 - 19.2308 = 280.7692 taxable wages
-     * round(280.7692 * .00148) = 4.15 tax
+     * 0 personal exemptions * 1000 = 0
+     * 1 dependent exemptions * 1500 = 1500
+     * 1500 total allowances / 52 weeks = 28.846154
+     * 300 - 28.846154 = 271.15385 taxable wages
+     * round(271.15385 * .0148) = 4.01 tax
      */
     public function testAllenIncome(): void
     {
         IndianaIncomeTaxInformation::createForUser([
-            'personal_exemptions' => 1,
-            'dependent_exemptions' => 0,
+            'personal_exemptions' => 0,
+            'dependent_exemptions' => 1,
             'exempt' => false,
             'additional_withholding' => 0,
         ], $this->user);
@@ -47,6 +47,6 @@ class AllenIncomeTest extends TestCase
             $taxes->setPayPeriods(52);
         });
 
-        $this->assertThat(4.15, self::identicalTo($results->getTax(AllenIncome::class)));
+        $this->assertThat(4.01, self::identicalTo($results->getTax(AllenIncome::class)));
     }
 }

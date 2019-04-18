@@ -19,16 +19,16 @@ class GreeneIncomeTest extends TestCase
 
     /**
      * Weekly Pay               $300.00
-     * Personal Exemptions      2
-     * Dependent Exemptions     1
-     * Tax Due                  $4.07
+     * Personal Exemptions      1
+     * Dependent Exemptions     2
+     * Tax Due                  $3.90
      *
      * Math:
-     * 2 personal exemptions * 1000 = 2000
-     * 1 dependent exemptions * 1500 = 1500
-     * 3500 total allowances / 52 weeks = 67.3077
-     * 300 - 67.3077 = 232.6923 taxable wages
-     * round(232.6923 * .0175) = 4.07 tax
+     * 1 personal exemptions * 1000 = 1000
+     * 2 dependent exemptions * 1500 = 3000
+     * 4000 total allowances / 52 weeks = 76.923077
+     * 300 - 76.923077 = 223.07692 taxable wages
+     * round(223.07692 * .0175) = 3.90 tax
      */
     public function testGreeneIncome(): void
     {

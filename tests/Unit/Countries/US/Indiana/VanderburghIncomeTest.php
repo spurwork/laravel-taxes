@@ -19,23 +19,23 @@ class VanderburghIncomeTest extends TestCase
 
     /**
      * Weekly Pay               $300.00
-     * Personal Exemptions      0
-     * Dependent Exemptions     1
-     * Tax Due                  $2.56
+     * Personal Exemptions      1
+     * Dependent Exemptions     0
+     * Tax Due                  $3.37
      *
      *
      * Math:
-     * 0 personal exemptions * 1000 = 0
-     * 1 dependent exemptions * 1500 = 1500
-     * 1500 total allowances / 52 weeks = 23.8462
-     * 300 - 23.8462 = 271.1539 taxable wages
-     * round(271.1539 * .012) = 3.25 tax
+     * 1 personal exemptions * 1000 = 1000
+     * 0 dependent exemptions * 1500 = 0
+     * 1000 total allowances / 52 weeks = 19.230769
+     * 300 - 19.230769 = 280.76923 taxable wages
+     * round(280.76923 * .012) = 3.37 tax
      */
     public function testVanderburghIncome(): void
     {
         IndianaIncomeTaxInformation::createForUser([
-            'personal_exemptions' => 0,
-            'dependent_exemptions' => 1,
+            'personal_exemptions' => 1,
+            'dependent_exemptions' => 0,
             'exempt' => false,
             'additional_withholding' => 0,
         ], $this->user);
@@ -48,6 +48,6 @@ class VanderburghIncomeTest extends TestCase
             $taxes->setPayPeriods(52);
         });
 
-        $this->assertThat(3.25, self::identicalTo($results->getTax(VanderburghIncome::class)));
+        $this->assertThat(3.36, self::identicalTo($results->getTax(VanderburghIncome::class)));
     }
 }
