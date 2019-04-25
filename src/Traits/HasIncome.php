@@ -9,8 +9,7 @@ trait HasIncome
 {
     public function compute(Collection $tax_areas)
     {
-        if ($this->isUserClaimingExemption())
-        {
+        if ($this->isUserClaimingExemption()) {
             return 0.00;
         }
 
@@ -35,6 +34,7 @@ trait HasIncome
     {
         $bracket = $this->getTaxBracket($amount, $table);
         $tax_amount = isset($bracket) ? ($amount - $bracket[0]) * $bracket[1] + $bracket[2] : 0;
+
         return $tax_amount > 0 ? $tax_amount : 0;
     }
 
@@ -46,6 +46,7 @@ trait HasIncome
                 $bracket = $row;
             }
         }
+
         return $bracket;
     }
 

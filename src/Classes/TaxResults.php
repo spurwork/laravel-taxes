@@ -11,7 +11,7 @@ class TaxResults
 
     private function transform($results, $field = 'amount')
     {
-        return $results->map(function($result) use ($field) {
+        return $results->map(function ($result) use ($field) {
             return $result[$field];
         });
     }

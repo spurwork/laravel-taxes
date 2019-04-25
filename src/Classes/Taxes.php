@@ -2,11 +2,7 @@
 
 namespace Appleton\Taxes\Classes;
 
-use Appleton\Taxes\Classes\BaseStateUnemployment;
-use Appleton\Taxes\Classes\LocationOverride;
 use Appleton\Taxes\Models\Tax;
-use Appleton\Taxes\Models\TaxArea;
-use Appleton\Taxes\Models\TaxInformation;
 use Carbon\Carbon;
 use Closure;
 
@@ -129,11 +125,10 @@ class Taxes
     private function compute($type)
     {
         $results = [];
-
         $this->taxes
-            ->filter(function ($tax) use ($type) {
-                return ($tax->class)::TYPE == $type;
-            })
+        ->filter(function ($tax) use ($type) {
+            return ($tax->class)::TYPE == $type;
+        })
             ->sortBy('class')
             ->sortBy(function ($tax) {
                 return ($tax->class)::PRIORITY;
@@ -155,14 +150,15 @@ class Taxes
     {
         $test_now = env('TAXES_TEST_NOW');
         $date = is_null($test_now) ? $this->date : Carbon::parse($test_now);
+
         return  is_null($date) ? Carbon::now() : $date;
     }
 
     private function getTaxes()
     {
         $this->taxes = Tax::atPoint($this->home_location, $this->work_location)
-            ->with(['taxAreas' => function($query) {
-               $query->atPoint($this->home_location, $this->work_location);
+            ->with(['taxAreas' => function ($query) {
+                $query->atPoint($this->home_location, $this->work_location);
             }])
             ->get();
 
@@ -176,23 +172,22 @@ class Taxes
     private function overrideLocations()
     {
         $this->location_overrides->each(function ($location_override) {
-
             $to_taxes = Tax::atPoint($location_override->to_home_location, $location_override->to_work_location)
-                ->with(['taxAreas' => function($query) use ($location_override) {
-                  $query->atPoint($location_override->to_home_location, $location_override->to_work_location);
+                ->with(['taxAreas' => function ($query) use ($location_override) {
+                    $query->atPoint($location_override->to_home_location, $location_override->to_work_location);
                 }])
                 ->get()
                 ->filter(function ($to_tax) use ($location_override) {
-                  return $to_tax->class === $location_override->to_tax_class || is_subclass_of($to_tax->class, $location_override->to_tax_class);
+                    return $to_tax->class === $location_override->to_tax_class || is_subclass_of($to_tax->class, $location_override->to_tax_class);
                 });
 
             $from_taxes = Tax::atPoint($location_override->from_home_location, $location_override->from_work_location)
-                ->with(['taxAreas' => function($query) use ($location_override) {
-                  $query->atPoint($location_override->from_home_location, $location_override->from_work_location);
+                ->with(['taxAreas' => function ($query) use ($location_override) {
+                    $query->atPoint($location_override->from_home_location, $location_override->from_work_location);
                 }])
                 ->get()
                 ->filter(function ($from_tax) use ($location_override) {
-                   return $from_tax->class === $location_override->from_tax_class || is_subclass_of($from_tax->class, $location_override->from_tax_class);
+                    return $from_tax->class === $location_override->from_tax_class || is_subclass_of($from_tax->class, $location_override->from_tax_class);
                 });
 
             $from_taxes
@@ -236,6 +231,7 @@ class Taxes
                 $location_override->from_home_location = $location_override->from_home_location ?? $this->home_location;
                 $location_override->to_work_location = $location_override->to_work_location ?? $this->work_location;
                 $location_override->from_work_location = $location_override->from_work_location ?? $this->work_location;
+
                 return $location_override;
             });
     }
@@ -288,9 +284,9 @@ class Taxes
             $this->unbindPayrollData();
 
             return $class;
-        } catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             $this->unbindPayrollData();
+
             return null;
         }
     }
