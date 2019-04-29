@@ -2,12 +2,10 @@
 
 namespace Appleton\Taxes\Countries\US\Michigan\MichiganIncome\V20190101;
 
-use Appleton\Taxes\Countries\US\Michigan\MichiganIncome\HasMichiganIncome;
 use Appleton\Taxes\Countries\US\Michigan\MichiganIncome\MichiganIncome as BaseMichiganIncome;
 
 class MichiganIncome extends BaseMichiganIncome
 {
-    // use HasMichiganIncome;
     public const SUPPLEMENTAL_TAX_RATE = 0;
     private const TAX_RATE = 0.0425;
     private const ANNUAL_ALLOWANCE_AMOUNT = 4400;
