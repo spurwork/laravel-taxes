@@ -6,7 +6,7 @@ use Appleton\Taxes\Countries\US\Michigan\MichiganIncome\MichiganIncome as BaseMi
 
 class MichiganIncome extends BaseMichiganIncome
 {
-    public const SUPPLEMENTAL_TAX_RATE = 0;
+    public const SUPPLEMENTAL_TAX_RATE = 0.0425;
     private const TAX_RATE = 0.0425;
     private const ANNUAL_ALLOWANCE_AMOUNT = 4400;
 
