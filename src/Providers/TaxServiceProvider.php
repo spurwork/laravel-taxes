@@ -186,8 +186,10 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\Massachusetts\MassachusettsFamilyMedicalLeave\MassachusettsFamilyMedicalLeave::class,
         \Appleton\Taxes\Countries\US\Massachusetts\MassachusettsFamilyMedicalLeaveEmployer\MassachusettsFamilyMedicalLeaveEmployer::class,
         \Appleton\Taxes\Countries\US\Massachusetts\MassachusettsIncome\MassachusettsIncome::class,
-        \Appleton\Taxes\Countries\US\Massachusetts\MassachusettsUnemployment\MassachusettsUnemployment::class,
         \Appleton\Taxes\Countries\US\Massachusetts\MassachusettsWorkforceTrainingFund\MassachusettsWorkforceTrainingFund::class,
+        \Appleton\Taxes\Countries\US\Massachusetts\MassachusettsUnemployment\MassachusettsUnemployment::class,
+        \Appleton\Taxes\Countries\US\Michigan\MichiganIncome\MichiganIncome::class,
+        \Appleton\Taxes\Countries\US\Michigan\MichiganUnemployment\MichiganUnemployment::class,
         \Appleton\Taxes\Countries\US\NewMexico\NewMexicoIncome\NewMexicoIncome::class,
         \Appleton\Taxes\Countries\US\NewMexico\NewMexicoUnemployment\NewMexicoUnemployment::class,
         \Appleton\Taxes\Countries\US\NewYork\NewYorkCity\NewYorkCity::class,
@@ -233,6 +235,7 @@ class TaxServiceProvider extends ServiceProvider
             $this->app->bind($interface, function ($app) use ($interface) {
                 $payroll = $app->make(Payroll::class);
                 $implementation = $this->resolveImplementation($interface, $payroll->date);
+
                 return $app->make($implementation);
             });
         }

@@ -2,7 +2,6 @@
 
 namespace Appleton\Taxes\Countries\US\Alabama\AlabamaIncome;
 
-use Appleton\Taxes\Models\Tax;
 use Appleton\Taxes\Models\Countries\US\Alabama\AlabamaIncomeTaxInformation;
 use Carbon\Carbon;
 
@@ -153,7 +152,7 @@ class AlabamaIncomeTest extends \TestCase
     {
         $alabama_income_tax_information = AlabamaIncomeTaxInformation::forUser($this->user);
         $alabama_income_tax_information->update([
-            'exempt' => true
+            'exempt' => true,
         ]);
 
         $results = $this->taxes->calculate(function ($taxes) {
@@ -167,7 +166,7 @@ class AlabamaIncomeTest extends \TestCase
         $this->assertSame(0.00, $results->getTax(AlabamaIncome::class));
 
         $alabama_income_tax_information->update([
-            'exempt' => false
+            'exempt' => false,
         ]);
 
         $results = $this->taxes->calculate(function ($taxes) {
@@ -177,6 +176,6 @@ class AlabamaIncomeTest extends \TestCase
             $taxes->setEarnings(66.68);
             $taxes->setPayPeriods(260);
         });
-        $this->assertSame(2.06,  $results->getTax(AlabamaIncome::class));
+        $this->assertSame(2.06, $results->getTax(AlabamaIncome::class));
     }
 }
