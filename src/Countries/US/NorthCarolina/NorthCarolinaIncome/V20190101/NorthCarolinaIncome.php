@@ -17,7 +17,7 @@ class NorthCarolinaIncome extends BaseNorthCarolinaIncome
         self::FILING_SINGLE => 10000,
         self::FILING_HEAD_OF_HOUSEHOLD => 15000,
         self::FILING_MARRIED => 10000,
-        self::FILING_SEPERATE => 10000,
+        self::FILING_SEPARATE => 10000,
     ];
 
     const DEPENDENT_EXEMPTION_BRACKETS = [
@@ -45,7 +45,7 @@ class NorthCarolinaIncome extends BaseNorthCarolinaIncome
             [100000, 500],
             [120000, 0],
         ],
-        self::FILING_SEPERATE => [
+        self::FILING_SEPARATE => [
             [0, 2500],
             [20000, 2000],
             [30000, 1500],

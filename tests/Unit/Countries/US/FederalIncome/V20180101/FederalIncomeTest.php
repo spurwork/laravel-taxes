@@ -62,7 +62,7 @@ class FederalIncomeTest extends \TestCase
 
     public function testTaxesOwed2018D()
     {
-        FederalIncomeTaxInformation::forUser($this->user)->update(['filing_status' => ParentFederalIncome::FILING_SEPERATE]);
+        FederalIncomeTaxInformation::forUser($this->user)->update(['filing_status' => ParentFederalIncome::FILING_SEPARATE]);
 
         $results = $this->taxes->calculate(function ($taxes) {
             $taxes->setHomeLocation($this->getLocation('us'));

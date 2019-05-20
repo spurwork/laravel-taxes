@@ -40,7 +40,7 @@ class WisconsinIncomeTest extends \TestCase
 
         $this->assertSame(54.92, $results->getTax(WisconsinIncome::class));
 
-        WisconsinIncomeTaxInformation::forUser($this->user)->update(['filing_status' => WisconsinIncome::FILING_SEPERATE]);
+        WisconsinIncomeTaxInformation::forUser($this->user)->update(['filing_status' => WisconsinIncome::FILING_SEPARATE]);
 
         $results = $this->taxes->calculate(function ($taxes) {
             $taxes->setHomeLocation($this->getLocation('us.wisconsin'));

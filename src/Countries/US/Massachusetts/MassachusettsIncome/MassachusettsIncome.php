@@ -10,13 +10,13 @@ abstract class MassachusettsIncome extends BaseStateIncome
 {
     const FILING_SINGLE = 0;
     const FILING_MARRIED = 1;
-    const FILING_SEPERATE = 2;
+    const FILING_SEPARATE = 2;
     const FILING_HEAD_OF_HOUSEHOLD = 3;
 
     const FILING_STATUSES = [
         self::FILING_SINGLE => 'FILING_SINGLE',
         self::FILING_MARRIED => 'FILING_MARRIED',
-        self::FILING_SEPERATE => 'FILING_SEPERATE',
+        self::FILING_SEPARATE => 'FILING_SEPARATE',
         self::FILING_HEAD_OF_HOUSEHOLD => 'FILING_HEAD_OF_HOUSEHOLD',
     ];
 

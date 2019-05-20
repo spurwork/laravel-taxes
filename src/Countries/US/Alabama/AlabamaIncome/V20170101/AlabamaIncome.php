@@ -33,7 +33,7 @@ class AlabamaIncome extends BaseAlabamaIncome
                 'per' => 500,
             ],
         ],
-        self::FILING_SEPERATE => [
+        self::FILING_SEPARATE => [
             'base' => 10249.99,
             'amount' => 3750,
             'floor' => 2000,
@@ -66,7 +66,7 @@ class AlabamaIncome extends BaseAlabamaIncome
         self::FILING_SINGLE => 1500,
         self::FILING_HEAD_OF_HOUSEHOLD => 3000,
         self::FILING_MARRIED => 3000,
-        self::FILING_SEPERATE => 1500,
+        self::FILING_SEPARATE => 1500,
     ];
 
     const DEPENDENT_EXEMPTION_BRACKETS = [

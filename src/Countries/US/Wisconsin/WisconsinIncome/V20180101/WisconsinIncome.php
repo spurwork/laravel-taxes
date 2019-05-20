@@ -23,7 +23,7 @@ class WisconsinIncome extends BaseWisconsinIncome
             [29960, 0.0627, 1474.03],
             [329810, 0.0765, 20274.63],
         ],
-        self::FILING_SEPERATE => [
+        self::FILING_SEPARATE => [
             [0, 0.04, 0],
             [7490, 0.0584, 299.60],
             [14980, 0.0627, 737.02],
