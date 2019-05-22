@@ -20,7 +20,8 @@ class BaseStateUnemployment extends BaseTax implements StateUnemployment
         return min($this->payroll->getEarnings(), $this->getBaseEarnings());
     }
 
-    public function getTaxCredit() {
+    public function getTaxCredit()
+    {
         return defined('static::FUTA_CREDIT') ? static::FUTA_CREDIT : 0;
     }
 }

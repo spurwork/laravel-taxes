@@ -43,21 +43,21 @@ class TaxArea extends Model
     public function scopeAtPoint($query, $home_location, $work_location)
     {
         return $query
-            ->where(function($query) use ($home_location) {
+            ->where(function ($query) use ($home_location) {
                 $query
                     ->where('based', self::BASED_ON_HOME_LOCATION)
                     ->whereHas('homeGovernmentalUnitArea', function ($query) use ($home_location) {
                         $query->atPoint($home_location[0], $home_location[1]);
                     });
             })
-            ->orWhere(function($query) use ($work_location) {
+            ->orWhere(function ($query) use ($work_location) {
                 $query
                     ->where('based', self::BASED_ON_WORK_LOCATION)
                     ->whereHas('workGovernmentalUnitArea', function ($query) use ($work_location) {
                         $query->atPoint($work_location[0], $work_location[1]);
                     });
             })
-            ->orWhere(function($query) use ($home_location, $work_location) {
+            ->orWhere(function ($query) use ($home_location, $work_location) {
                 $query
                     ->where('based', self::BASED_ON_HOME_AND_NOT_WORK_LOCATION)
                     ->whereHas('homeGovernmentalUnitArea', function ($query) use ($home_location) {
@@ -67,7 +67,7 @@ class TaxArea extends Model
                         $query->atPoint($work_location[0], $work_location[1]);
                     });
             })
-            ->orWhere(function($query) use ($home_location, $work_location) {
+            ->orWhere(function ($query) use ($home_location, $work_location) {
                 $query
                     ->where('based', self::BASED_ON_WORK_AND_NOT_HOME_LOCATION)
                     ->whereDoesntHave('homeGovernmentalUnitArea', function ($query) use ($home_location) {
@@ -77,7 +77,7 @@ class TaxArea extends Model
                         $query->atPoint($work_location[0], $work_location[1]);
                     });
             })
-            ->orWhere(function($query) use ($home_location, $work_location) {
+            ->orWhere(function ($query) use ($home_location, $work_location) {
                 $query
                     ->where('based', self::BASED_ON_BOTH_LOCATIONS)
                     ->whereHas('homeGovernmentalUnitArea', function ($query) use ($home_location) {
@@ -87,10 +87,10 @@ class TaxArea extends Model
                         $query->atPoint($work_location[0], $work_location[1]);
                     });
             })
-            ->orWhere(function($query) use ($home_location, $work_location) {
+            ->orWhere(function ($query) use ($home_location, $work_location) {
                 $query
                     ->where('based', self::BASED_ON_EITHER_LOCATION)
-                    ->where(function($query) use ($home_location, $work_location) {
+                    ->where(function ($query) use ($home_location, $work_location) {
                         $query
                             ->whereHas('homeGovernmentalUnitArea', function ($query) use ($home_location) {
                                 $query->atPoint($home_location[0], $home_location[1]);

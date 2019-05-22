@@ -155,6 +155,7 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\Florida\FloridaUnemployment\FloridaUnemployment::class,
         \Appleton\Taxes\Countries\US\Tennessee\TennesseeUnemployment\TennesseeUnemployment::class,
         \Appleton\Taxes\Countries\US\Texas\TexasUnemployment\TexasUnemployment::class,
+        \Appleton\Taxes\Countries\US\Kentucky\JeffersonCounty\JeffersonCounty::class,
         \Appleton\Taxes\Countries\US\Kentucky\KentuckyIncome\KentuckyIncome::class,
         \Appleton\Taxes\Countries\US\Kentucky\KentuckyUnemployment\KentuckyUnemployment::class,
         \Appleton\Taxes\Countries\US\Maryland\MarylandIncome\MarylandIncome::class,
@@ -209,7 +210,7 @@ class TaxServiceProvider extends ServiceProvider
 
     private function getImplementations($interface)
     {
-        return array_reverse(array_map('basename', glob(dirname((new \ReflectionClass($interface))->getFileName()).'/V*', GLOB_ONLYDIR)));
+        return array_reverse(array_map('basename', glob(dirname((new \ReflectionClass($interface))->getFileName()) . '/V*', GLOB_ONLYDIR)));
     }
 
     private function resolveImplementation($interface, $date)
@@ -218,7 +219,7 @@ class TaxServiceProvider extends ServiceProvider
         $namespace = substr($interface, 0, -strlen($basename) - 1);
         foreach ($this->getImplementations($interface) as $implementation) {
             if ($date->diffInDays(Carbon::createFromFormat('Ymd', substr($implementation, 1)), false) <= 0) {
-                return $namespace.'\\'.$implementation.'\\'.$basename;
+                return $namespace . '\\' . $implementation . '\\' . $basename;
             }
         }
         throw new \Exception('The implementation could not be found.');
