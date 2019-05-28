@@ -37,16 +37,16 @@ class InsertJeffersonCountyKyTax extends Migration
 
         DB::table($this->tax_areas)->insert([[
             'tax_id' => $jefferson_county_tax_id,
-            'home_governmental_unit_area_id' => $jefferson_county_gua_id,
-            'work_governmental_unit_area_id' => $kentucky_gua_id,
-            'based' => TaxArea::BASED_ON_BOTH_LOCATIONS,
+            'home_governmental_unit_area_id' => $kentucky_gua_id,
+            'work_governmental_unit_area_id' => $jefferson_county_gua_id,
+            'based' => TaxArea::BASED_ON_WORK_LOCATION,
         ]]);
 
         DB::table($this->tax_areas)->insert([[
             'tax_id' => $jefferson_county_tax_id,
             'home_governmental_unit_area_id' => $jefferson_county_gua_id,
             'work_governmental_unit_area_id' => $jefferson_county_gua_id,
-            'based' => TaxArea::BASED_ON_WORK_AND_NOT_HOME_LOCATION,
+            'based' => TaxArea::BASED_ON_HOME_LOCATION,
         ]]);
     }
 

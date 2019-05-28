@@ -11,17 +11,16 @@ class JeffersonCountyTest extends \TestCase
     /**
      * @dataProvider provideTestData
      */
-    public function testJeffersonCounty($date, $home_location, $work_location, $additional_withholding, $exemptions, $earnings, $result)
+    public function testJeffersonCounty($date, $home_location, $work_location, $earnings, $result)
     {
         Carbon::setTestNow(
             Carbon::parse($date, 'America/Chicago')->setTimezone('UTC')
         );
 
-        KentuckyIncomeTaxInformation::forUser($this->user)
-            ->update([
-                'exemptions' => $exemptions,
-                'additional_withholding' => $additional_withholding,
-            ]);
+        // KentuckyIncomeTaxInformation::forUser($this->user)
+        //     ->update([
+        //         'exempt' => true,
+        //     ]);
 
         $results = $this->taxes->calculate(function ($taxes) use ($home_location, $work_location, $earnings) {
             $taxes->setHomeLocation($home_location);
@@ -42,111 +41,25 @@ class JeffersonCountyTest extends \TestCase
                 'January 1, 2019 8am',
                 $this->getLocation('us.kentucky.jefferson_county'),
                 $this->getLocation('us.kentucky.jefferson_county'),
-                0,
-                4,
                 300,
                 6.60,
             ],
-            // non-resident
+            // non-resident in state
             '1' => [
                 'January 1, 2019 8am',
                 $this->getLocation('us.kentucky'),
                 $this->getLocation('us.kentucky.jefferson_county'),
-                0,
-                4,
                 300,
                 4.35,
             ],
-            // '2' => [
-            //     'January 1, 2019 8am',
-            //     $this->getLocation('us.kentucky.jefferson_county'),
-            //     $this->getLocation('us.kentucky.jefferson_county'),
-            //     0,
-            //     12,
-            //     500,
-            //     0.85,
-            // ],
-            // '3' => [
-            //     'January 1, 2019 8am',
-            //     $this->getLocation('us.kentucky.jefferson_county'),
-            //     $this->getLocation('us.kentucky.jefferson_county'),
-            //     JeffersonCounty::FILING_MARRIED,
-            //     3,
-            //     700,
-            //     4.17,
-            // ],
-            // '4' => [
-            //     'January 1, 2019 8am',
-            //     $this->getLocation('us.kentucky.jefferson_county'),
-            //     $this->getLocation('us.kentucky.jefferson_county'),
-            //     JeffersonCounty::FILING_MARRIED,
-            //     5,
-            //     900,
-            //     5.85,
-            // ],
-            // '5' => [
-            //     'January 1, 2019 8am',
-            //     $this->getLocation('us.kentucky.jefferson_county'),
-            //     $this->getLocation('us.kentucky.jefferson_county'),
-            //     JeffersonCounty::FILING_MARRIED,
-            //     2,
-            //     2000,
-            //     18.01,
-            // ],
-            // '6' => [
-            //     'January 1, 2019 8am',
-            //     $this->getLocation('us.kentucky.jefferson_county'),
-            //     $this->getLocation('us.kentucky.jefferson_county'),
-            //     JeffersonCounty::FILING_MARRIED,
-            //     11,
-            //     1000,
-            //     5.69,
-            // ],
-            // '7' => [
-            //     'January 1, 2019 8am',
-            //     $this->getLocation('us.alabama'),
-            //     $this->getLocation('us.kentucky.jefferson_county'),
-            //     0,
-            //     0,
-            //     50,
-            //     0.0,
-            // ],
-            // '8' => [
-            //     'January 1, 2019 8am',
-            //     $this->getLocation('us.alabama'),
-            //     $this->getLocation('us.kentucky.jefferson_county'),
-            //     0,
-            //     0,
-            //     250,
-            //     1.06,
-            // ],
-            '9' => [
+            // non-resident out of state
+            '2' => [
                 'January 1, 2019 8am',
                 $this->getLocation('us.alabama'),
                 $this->getLocation('us.kentucky.jefferson_county'),
-                0,
-                0,
                 300,
                 4.35,
             ],
-            // '10' => [
-            //     'January 1, 2019 8am',
-            //     $this->getLocation('us.alabama'),
-            //     $this->getLocation('us.kentucky.jefferson_county'),
-            //     0,
-            //     0,
-            //     700,
-            //     3.50,
-            // ],
-            // '11' => [
-            //     'January 1, 2019 8am',
-            //     $this->getLocation('us.alabama'),
-            //     $this->getLocation('us.kentucky.jefferson_county'),
-            //     0,
-            //     0,
-            //     900,
-            //     4.50,
-            // ],
         ];
     }
 }

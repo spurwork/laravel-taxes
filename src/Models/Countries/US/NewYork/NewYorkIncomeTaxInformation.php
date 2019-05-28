@@ -2,8 +2,8 @@
 
 namespace Appleton\Taxes\Models\Countries\US\NewYork;
 
-use Appleton\Taxes\Countries\US\NewYork\NewYorkIncome\NewYorkIncome;
 use Appleton\Taxes\Classes\BaseTaxInformationModel;
+use Appleton\Taxes\Countries\US\NewYork\NewYorkIncome\NewYorkIncome;
 
 class NewYorkIncomeTaxInformation extends BaseTaxInformationModel
 {
