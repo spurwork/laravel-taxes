@@ -13,10 +13,9 @@ class JeffersonCounty extends BaseJeffersonCounty
     const TAX_RATE = 0.022;
     const NONRESIDENT_TAX_RATE = 0.0145;
 
-    public function __construct(Payroll $payroll, KentuckyIncomeTaxInformation $kentucky_income)
+    public function __construct(KentuckyIncomeTaxInformation $tax_information, Payroll $payroll)
     {
-        $this->payroll = $payroll;
-        $this->kentucky_income = $kentucky_income;
+        parent::__construct($tax_information, $payroll);
     }
 
     public function getTaxBrackets()
@@ -26,6 +25,10 @@ class JeffersonCounty extends BaseJeffersonCounty
 
     public function compute(Collection $tax_areas)
     {
+        if ($this->tax_information->exempt) {
+            return 0.00;
+        }
+
         $resident = $tax_areas->contains(function ($tax_area) {
             return $tax_area->homeGovernmentalUnitArea->id !== $tax_area->workGovernmentalUnitArea->id;
         });
