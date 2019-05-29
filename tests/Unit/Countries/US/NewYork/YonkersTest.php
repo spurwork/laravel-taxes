@@ -3,6 +3,7 @@
 namespace Appleton\Taxes\Countries\US\NewYork\Yonkers;
 
 use Appleton\Taxes\Countries\US\NewYork\NewYorkIncome\NewYorkIncome;
+use Appleton\Taxes\Countries\US\NewYork\Yonkers\Yonkers;
 use Appleton\Taxes\Models\Countries\US\NewYork\NewYorkIncomeTaxInformation;
 use Carbon\Carbon;
 

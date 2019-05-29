@@ -52,7 +52,7 @@ trait HasIncome
 
     public function isUserClaimingExemption(): bool
     {
-        return (bool) $this->tax_information->exempt;
+        return (bool)$this->tax_information->exempt;
     }
 
     public function resolveTaxInformation($information_type, $tax_information, $user)

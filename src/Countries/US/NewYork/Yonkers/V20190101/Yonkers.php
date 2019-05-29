@@ -58,7 +58,7 @@ class Yonkers extends BaseYonkers
 
     public function compute(Collection $tax_areas)
     {
-        $resident = $tax_areas->contains(function($tax_area) {
+        $resident = $tax_areas->contains(function ($tax_area) {
             return $tax_area->homeGovernmentalUnitArea->id !== $tax_area->workGovernmentalUnitArea->id;
         });
 

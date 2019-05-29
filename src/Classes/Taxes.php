@@ -89,8 +89,8 @@ class Taxes
 
         $results = new TaxResults(
             $this->compute('federal')
-            + $this->compute('state')
-            + $this->compute('local')
+                + $this->compute('state')
+                + $this->compute('local')
         );
 
         $this->unbindTaxes();
@@ -126,9 +126,9 @@ class Taxes
     {
         $results = [];
         $this->taxes
-        ->filter(function ($tax) use ($type) {
-            return ($tax->class)::TYPE == $type;
-        })
+            ->filter(function ($tax) use ($type) {
+                return ($tax->class)::TYPE == $type;
+            })
             ->sortBy('class')
             ->sortBy(function ($tax) {
                 return ($tax->class)::PRIORITY;
