@@ -37,8 +37,13 @@ class JeffersonCountyTest extends \TestCase
 
     public function provideTestData()
     {
+        // home location
+        // work location
+        // earnings
+        // exempt
+        // result
         return [
-            // resident
+            // Live and work in Jefferson County
             '0' => [
                 'January 1, 2019 8am',
                 $this->getLocation('us.kentucky.jefferson_county'),
@@ -47,7 +52,7 @@ class JeffersonCountyTest extends \TestCase
                 false,
                 6.60,
             ],
-            // non-resident in state
+            // Work in Kentucky live in Jefferson county in state
             '1' => [
                 'January 1, 2019 8am',
                 $this->getLocation('us.kentucky'),
@@ -65,7 +70,7 @@ class JeffersonCountyTest extends \TestCase
                 false,
                 4.35,
             ],
-            // resident - exempt
+            // Live and work in Jefferson County - exempt
             '3' => [
                 'January 1, 2019 8am',
                 $this->getLocation('us.kentucky.jefferson_county'),
@@ -74,7 +79,7 @@ class JeffersonCountyTest extends \TestCase
                 true,
                 0.0,
             ],
-            // non-resident in state - exempt
+            // Live in Kentucky work in Jefferson County - exempt
             '4' => [
                 'January 1, 2019 8am',
                 $this->getLocation('us.kentucky'),
@@ -83,7 +88,7 @@ class JeffersonCountyTest extends \TestCase
                 true,
                 0.0,
             ],
-            // non-resident out of state - exempt
+            // Live in Alabama work in Jefferson County Kentucky - exempt
             '5' => [
                 'January 1, 2019 8am',
                 $this->getLocation('us.alabama'),
@@ -91,6 +96,24 @@ class JeffersonCountyTest extends \TestCase
                 300,
                 true,
                 0.0,
+            ],
+            // live in Jefferson county work in Kentucky. Should be null
+            '6' => [
+                'January 1, 2019 8am',
+                $this->getLocation('us.kentucky.jefferson_county'),
+                $this->getLocation('us.kentucky'),
+                300,
+                false,
+                null,
+            ],
+            // live in Kentucky work in Kentucky. Should be null
+            '7' => [
+                'January 1, 2019 8am',
+                $this->getLocation('us.kentucky'),
+                $this->getLocation('us.kentucky'),
+                300,
+                false,
+                null,
             ],
         ];
     }

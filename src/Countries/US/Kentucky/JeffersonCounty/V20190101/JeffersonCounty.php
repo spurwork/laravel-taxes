@@ -5,6 +5,7 @@ namespace Appleton\Taxes\Countries\US\Kentucky\JeffersonCounty\V20190101;
 use Appleton\Taxes\Classes\Payroll;
 use Appleton\Taxes\Countries\US\Kentucky\JeffersonCounty\JeffersonCounty as BaseJeffersonCounty;
 use Appleton\Taxes\Models\Countries\US\Kentucky\KentuckyIncomeTaxInformation;
+use Appleton\Taxes\Models\TaxArea;
 use Illuminate\Database\Eloquent\Collection;
 
 class JeffersonCounty extends BaseJeffersonCounty
@@ -29,7 +30,7 @@ class JeffersonCounty extends BaseJeffersonCounty
         }
 
         $resident = $tax_areas->contains(function ($tax_area) {
-            return $tax_area->homeGovernmentalUnitArea->id !== $tax_area->workGovernmentalUnitArea->id;
+            return $tax_area->based === TaxArea::BASED_ON_BOTH_LOCATIONS;
         });
 
         if ($resident) {
