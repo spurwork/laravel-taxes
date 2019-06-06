@@ -9,7 +9,7 @@ use Appleton\Taxes\Models\Countries\US\Indiana\IndianaIncomeTaxInformation;
 use Carbon\Carbon;
 use TestCase;
 
-class IndianaIncomeTest extends TestCase
+class IndianaLocalIncomeTest extends TestCase
 {
     public function setUp(): void
     {
