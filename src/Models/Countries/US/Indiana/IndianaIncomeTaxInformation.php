@@ -17,8 +17,6 @@ class IndianaIncomeTaxInformation extends BaseTaxInformationModel
         $tax_information->additional_withholding = 0;
         $tax_information->additional_county_withholding = 0;
         $tax_information->exempt = false;
-        $tax_information->county_of_residence = '';
-        $tax_information->county_of_employment = '';
 
         return $tax_information;
     }
