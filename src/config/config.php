@@ -51,6 +51,10 @@ return [
                 'michigan_income_tax_information' => env('TAXES_MICHIGAN_INCOME_TAX_INFORMATION', 'michigan_income_tax_information'),
             ],
 
+            'new_jersey' => [
+                'new_jersey_income_tax_information' => env('TAXES_NEW_JERSEY_INCOME_TAX_INFORMATION', 'new_jersey_income_tax_information'),
+            ],
+
             'new_mexico' => [
                 'new_mexico_income_tax_information' => env('TAXES_NEW_MEXICO_INCOME_TAX_INFORMATION', 'new_mexico_income_tax_information'),
             ],
@@ -90,6 +94,10 @@ return [
 
             'maryland' => [
                 'unemployment' => env('TAXES_MARYLAND_UNEMPLOYMENT_TAX_RATE', 0.026),
+            ],
+
+            'new_jersey' => [
+                'unemployment' => env('TAXES_NEW_JERSEY_UNEMPLOYMENT_TAX_RATE', 0.003825),
             ],
 
             'new_mexico' => [
