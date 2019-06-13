@@ -5,6 +5,7 @@ namespace Appleton\Taxes\Countries\US\NewJersey\NewJerseyIncome\V20190101;
 use Appleton\Taxes\Classes\Payroll;
 use Appleton\Taxes\Countries\US\NewJersey\NewJerseyIncome\NewJerseyIncome as BaseNewJerseyIncome;
 use Appleton\Taxes\Models\Countries\US\NewJersey\NewJerseyIncomeTaxInformation;
+use Illuminate\Database\Eloquent\Collection;
 
 class NewJerseyIncome extends BaseNewJerseyIncome
 {
@@ -39,6 +40,25 @@ class NewJerseyIncome extends BaseNewJerseyIncome
     public function __construct(NewJerseyIncomeTaxInformation $tax_information, Payroll $payroll)
     {
         parent::__construct($tax_information, $payroll);
+    }
+
+    public function compute(Collection $tax_areas)
+    {
+        if ($this->isUserClaimingExemption()) {
+            return 0.00;
+        }
+
+        $this->tax_total = $this->payroll->withholdTax($this->getTaxAmountFromTaxBrackets($this->getAdjustedEarnings() - $this->getDependentExemption(), $this->getTaxBrackets()) / $this->payroll->pay_periods) +
+            $this->payroll->withholdTax($this->getSupplementalIncomeTax()) +
+            $this->payroll->withholdTax($this->getAdditionalWithholding());
+
+        return round(intval($this->tax_total * 100) / 100, 2);
+    }
+
+    public function getAdjustedEarnings(): int
+    {
+        $gross_wages = $this->payroll->getEarnings() * $this->payroll->pay_periods;
+        return $gross_wages;
     }
 
     public function getDependentExemption()

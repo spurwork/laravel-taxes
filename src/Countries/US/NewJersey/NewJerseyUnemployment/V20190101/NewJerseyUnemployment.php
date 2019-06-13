@@ -11,7 +11,7 @@ class NewJerseyUnemployment extends BaseNewJerseyUnemployment
 
     const NEW_EMPLOYER_RATE = 0.028;
 
-    const WAGE_BASE = 344000;
+    const WAGE_BASE = 34400;
 
     public function __construct(Payroll $payroll)
     {

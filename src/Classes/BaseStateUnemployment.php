@@ -12,7 +12,6 @@ class BaseStateUnemployment extends BaseTax implements StateUnemployment
 
     public function compute(Collection $tax_areas)
     {
-        dump($this->tax_rate);
         return round($this->getAdjustedEarnings() * $this->tax_rate, 2);
     }
 

@@ -8,5 +8,4 @@ class NewJerseyUnemployment extends BaseStateUnemployment
 {
     const TYPE = 'state';
     const WITHHELD = false;
-    const WAGE_BASE = 1;
 }
