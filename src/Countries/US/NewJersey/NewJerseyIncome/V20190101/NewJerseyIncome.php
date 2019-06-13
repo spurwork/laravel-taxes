@@ -8,7 +8,8 @@ use Appleton\Taxes\Models\Countries\US\NewJersey\NewJerseyIncomeTaxInformation;
 
 class NewJerseyIncome extends BaseNewJerseyIncome
 {
-    const SUPPLEMENTAL_TAX_RATE = 0.05;
+    const SUPPLEMENTAL_TAX_RATE = 0;
+    const TAX_RATE = 0.05;
 
     const SINGLE_BRACKETS = [
         [0, 0.015, 0],

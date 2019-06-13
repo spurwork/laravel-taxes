@@ -19,6 +19,16 @@ class NewJerseyIncomeTaxInformation extends BaseTaxInformationModel
         return $tax_information;
     }
 
+    public function getAdditionalWithholding($value)
+    {
+        return $value * 100;
+    }
+
+    public function setAdditionalWithholding($value)
+    {
+        $this->attributes['additional_withholding'] = round($value / 100);
+    }
+
     public static function getTax()
     {
         return NewJerseyIncome::class;

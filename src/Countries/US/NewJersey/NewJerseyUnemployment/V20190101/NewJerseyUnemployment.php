@@ -9,9 +9,9 @@ class NewJerseyUnemployment extends BaseNewJerseyUnemployment
 {
     const FUTA_CREDIT = 0.054;
 
-    const NEW_EMPLOYER_RATE = 0.027;
+    const NEW_EMPLOYER_RATE = 0.028;
 
-    const WAGE_BASE = 7000;
+    const WAGE_BASE = 344000;
 
     public function __construct(Payroll $payroll)
     {

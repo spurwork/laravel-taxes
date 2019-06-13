@@ -97,7 +97,7 @@ return [
             ],
 
             'new_jersey' => [
-                'unemployment' => env('TAXES_NEW_JERSEY_UNEMPLOYMENT_TAX_RATE', 0.003825),
+                'unemployment' => env('TAXES_NEW_JERSEY_UNEMPLOYMENT_TAX_RATE', 0.03825),
             ],
 
             'new_mexico' => [
