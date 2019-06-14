@@ -17,6 +17,7 @@ class AddNewJerseyIncomeTaxInformationTable extends Migration
             $table->decimal('exemptions')->default(0);
             $table->integer('additional_withholding')->default(0);
             $table->string('filing_status');
+            $table->string('tax_rate_table')->nullable();
             $table->boolean('exempt')->default(false);
         });
 
