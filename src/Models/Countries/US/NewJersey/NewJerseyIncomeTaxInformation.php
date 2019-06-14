@@ -15,6 +15,7 @@ class NewJerseyIncomeTaxInformation extends BaseTaxInformationModel
         $tax_information->exemptions = 0;
         $tax_information->additional_withholding = 0;
         $tax_information->filing_status = NewJerseyIncome::FILING_SINGLE;
+        $tax_information->tax_rate_table = null;
 
         return $tax_information;
     }

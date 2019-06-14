@@ -154,6 +154,7 @@ class TestCase extends BaseTestCase
             'additional_withholding' => 0,
             'exemptions' => 0,
             'filing_status' => NewJerseyIncome::FILING_SINGLE,
+            'tax_rate_table' => null,
         ], $this->user);
 
         NewMexicoIncomeTaxInformation::createForUser([
