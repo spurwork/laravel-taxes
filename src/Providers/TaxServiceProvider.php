@@ -158,6 +158,8 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\Kentucky\JeffersonCounty\JeffersonCounty::class,
         \Appleton\Taxes\Countries\US\Kentucky\KentuckyIncome\KentuckyIncome::class,
         \Appleton\Taxes\Countries\US\Kentucky\KentuckyUnemployment\KentuckyUnemployment::class,
+        \Appleton\Taxes\Countries\US\Louisiana\LouisianaIncome\LouisianaIncome::class,
+        \Appleton\Taxes\Countries\US\Louisiana\LouisianaUnemployment\LouisianaUnemployment::class,
         \Appleton\Taxes\Countries\US\Maryland\MarylandIncome\MarylandIncome::class,
         \Appleton\Taxes\Countries\US\Maryland\MarylandUnemployment\MarylandUnemployment::class,
         \Appleton\Taxes\Countries\US\Maryland\Allegany\Allegany::class,
