@@ -13,6 +13,7 @@ use Appleton\Taxes\Countries\US\NewMexico\NewMexicoIncome\NewMexicoIncome;
 use Appleton\Taxes\Countries\US\NewJersey\NewJerseyIncome\NewJerseyIncome;
 use Appleton\Taxes\Countries\US\NewYork\NewYorkIncome\NewYorkIncome;
 use Appleton\Taxes\Countries\US\NorthCarolina\NorthCarolinaIncome\NorthCarolinaIncome;
+use Appleton\Taxes\Countries\US\Oklahoma\OklahomaIncome\OklahomaIncome;
 use Appleton\Taxes\Countries\US\Wisconsin\WisconsinIncome\WisconsinIncome;
 use Appleton\Taxes\Models\Countries\US\Alabama\AlabamaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Arizona\ArizonaIncomeTaxInformation;
@@ -30,6 +31,7 @@ use Appleton\Taxes\Models\Countries\US\NewJersey\NewJerseyIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\NewMexico\NewMexicoIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\NewYork\NewYorkIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\NorthCarolina\NorthCarolinaIncomeTaxInformation;
+use Appleton\Taxes\Models\Countries\US\Oklahoma\OklahomaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Virginia\VirginiaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Wisconsin\WisconsinIncomeTaxInformation;
 use Appleton\Taxes\Providers\TaxesServiceProvider;
@@ -182,6 +184,12 @@ class TestCase extends BaseTestCase
             'additional_withholding' => 0,
             'dependents' => 0,
             'filing_status' => NorthCarolinaIncome::FILING_SINGLE,
+        ], $this->user);
+
+        OklahomaIncomeTaxInformation::createForUser([
+            'dependents' => 0,
+            'exempt' => false,
+            'filing_status' => OklahomaIncome::FILING_SINGLE,
         ], $this->user);
 
         VirginiaIncomeTaxInformation::createForUser([
@@ -367,6 +375,7 @@ class TestCase extends BaseTestCase
             'us.new_york' => [40.7128, -74.0060],
             'us.new_york.yonkers' => [40.9312, -73.8987],
             'us.north_carolina' => [35.7596, -79.0193],
+            'us.oklahoma' => [35.4676, -97.5164],
             'us.tennessee' => [35.5175, -86.5804],
             'us.texas' => [31.9686, -99.9018],
             'us.virginia' => [37.5407, -77.4360],
@@ -417,6 +426,7 @@ class TestCase extends BaseTestCase
         $app['config']->set('taxes.tables.us.michigan.michigan_income_tax_information', 'michigan_income_tax_information');
         $app['config']->set('taxes.tables.us.new_jersey.new_jersey_income_tax_information', 'new_jersey_income_tax_information');
         $app['config']->set('taxes.tables.us.new_york.new_york_income_tax_information', 'new_york_income_tax_information');
+        $app['config']->set('taxes.tables.us.oklahoma.oklahoma_income_tax_information', 'oklahoma_income_tax_information');
         $app['config']->set('taxes.tables.us.virginia.virginia_income_tax_information', 'virginia_income_tax_information');
         $app['config']->set('taxes.tables.us.wisconsin.wisconsin_income_tax_information', 'wisconsin_income_tax_information');
     }
