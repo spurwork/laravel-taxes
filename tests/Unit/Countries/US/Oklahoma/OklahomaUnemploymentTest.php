@@ -24,7 +24,7 @@ class OklahomaUnemploymentTest extends TestCase
             $taxes->setEarnings(200.0);
         });
 
-        // round(200.0 * .015, 2) = 5.60;
+        // round(200.0 * .015, 2) = 3.0;
         $this->assertThat(3, self::identicalTo($results->getTax(OklahomaUnemployment::class)));
     }
 
@@ -57,7 +57,7 @@ class OklahomaUnemploymentTest extends TestCase
         // 18000 + 200 = 18200
         // 100 over 18100 wage base so only 200 taxable
         // round(100.0 * .015, 2) = 1.5;
-        $this->assertThat(1, self::identicalTo($results->getTax(OklahomaUnemployment::class)));
+        $this->assertThat(2, self::identicalTo($results->getTax(OklahomaUnemployment::class)));
     }
 
     public function testOklahomaUnemployment_exceedWageBase(): void

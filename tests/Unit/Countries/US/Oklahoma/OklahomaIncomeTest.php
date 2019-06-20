@@ -39,6 +39,7 @@ class OklahomaIncomeTest extends TestCase
     {
         // date
         // filing status
+        // exempt
         // dependents
         // earnings
         // results

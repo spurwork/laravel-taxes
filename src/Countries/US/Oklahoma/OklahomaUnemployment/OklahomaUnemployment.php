@@ -12,6 +12,6 @@ class OklahomaUnemployment extends BaseStateUnemployment
 
     public function compute(Collection $tax_areas)
     {
-        return (int)round($this->getAdjustedEarnings() * $this->tax_rate, 2);
+        return (int)round(intval(($this->getAdjustedEarnings() * $this->tax_rate) * 100) / 100, 0);
     }
 }
