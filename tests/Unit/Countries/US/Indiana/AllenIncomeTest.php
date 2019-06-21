@@ -30,18 +30,42 @@ class AllenIncomeTest extends TestCase
      * 300 - 28.846154 = 271.15385 taxable wages
      * round(271.15385 * .0148) = 4.01 tax
      */
-    public function testAllenIncome(): void
+    public function testAllenIncomeCountyLived(): void
     {
         IndianaIncomeTaxInformation::createForUser([
             'personal_exemptions' => 0,
             'dependent_exemptions' => 1,
             'exempt' => false,
             'additional_withholding' => 0,
+            'county_lived' => 2,
+            'county_worked' => 3,
         ], $this->user);
 
         $results = $this->taxes->calculate(function (Taxes $taxes) {
-            $taxes->setHomeLocation($this->getLocation('us.indiana.allen'));
-            $taxes->setWorkLocation($this->getLocation('us.indiana.allen'));
+            $taxes->setHomeLocation($this->getLocation('us.indiana'));
+            $taxes->setWorkLocation($this->getLocation('us.indiana'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(300);
+            $taxes->setPayPeriods(52);
+        });
+
+        $this->assertThat(4.01, self::identicalTo($results->getTax(AllenIncome::class)));
+    }
+
+    public function testAllenIncomeCountyWorked(): void
+    {
+        IndianaIncomeTaxInformation::createForUser([
+            'personal_exemptions' => 0,
+            'dependent_exemptions' => 1,
+            'exempt' => false,
+            'additional_withholding' => 0,
+            'county_lived' => 0,
+            'county_worked' => 2,
+        ], $this->user);
+
+        $results = $this->taxes->calculate(function (Taxes $taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.alabama'));
+            $taxes->setWorkLocation($this->getLocation('us.indiana'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(300);
             $taxes->setPayPeriods(52);
