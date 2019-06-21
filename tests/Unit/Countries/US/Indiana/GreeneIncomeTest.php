@@ -37,6 +37,30 @@ class GreeneIncomeTest extends TestCase
             'dependent_exemptions' => 1,
             'exempt' => false,
             'additional_withholding' => 0,
+            'county_lived' => 28,
+            'county_worked' => 27,
+        ], $this->user);
+
+        $results = $this->taxes->calculate(function (Taxes $taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.indiana.greene'));
+            $taxes->setWorkLocation($this->getLocation('us.indiana.greene'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(300);
+            $taxes->setPayPeriods(52);
+        });
+
+        $this->assertThat(4.07, self::identicalTo($results->getTax(GreeneIncome::class)));
+    }
+
+    public function testGreeneIncomeCountyWorked(): void
+    {
+        IndianaIncomeTaxInformation::createForUser([
+            'personal_exemptions' => 2,
+            'dependent_exemptions' => 1,
+            'exempt' => false,
+            'additional_withholding' => 0,
+            'county_lived' => 0,
+            'county_worked' => 28,
         ], $this->user);
 
         $results = $this->taxes->calculate(function (Taxes $taxes) {

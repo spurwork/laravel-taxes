@@ -28,6 +28,30 @@ class PorterIncomeTest extends TestCase
             'dependent_exemptions' => 0,
             'exempt' => false,
             'additional_withholding' => 0,
+            'county_lived' => 64,
+            'county_worked' => 63,
+        ], $this->user);
+
+        $results = $this->taxes->calculate(function (Taxes $taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.indiana.porter'));
+            $taxes->setWorkLocation($this->getLocation('us.indiana.porter'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(300);
+            $taxes->setPayPeriods(52);
+        });
+
+        $this->assertThat(1.50, self::identicalTo($results->getTax(PorterIncome::class)));
+    }
+
+    public function testPorterIncomeCountyWorked(): void
+    {
+        IndianaIncomeTaxInformation::createForUser([
+            'personal_exemptions' => 0,
+            'dependent_exemptions' => 0,
+            'exempt' => false,
+            'additional_withholding' => 0,
+            'county_lived' => 0,
+            'county_worked' => 64,
         ], $this->user);
 
         $results = $this->taxes->calculate(function (Taxes $taxes) {

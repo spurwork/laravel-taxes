@@ -28,6 +28,30 @@ class SullivanIncomeTest extends TestCase
             'dependent_exemptions' => 0,
             'exempt' => false,
             'additional_withholding' => 0,
+            'county_lived' => 77,
+            'county_worked' => 76,
+        ], $this->user);
+
+        $results = $this->taxes->calculate(function (Taxes $taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.indiana.sullivan'));
+            $taxes->setWorkLocation($this->getLocation('us.indiana.sullivan'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(300);
+            $taxes->setPayPeriods(52);
+        });
+
+        $this->assertThat(1.80, self::identicalTo($results->getTax(SullivanIncome::class)));
+    }
+
+    public function testSullivanIncomeCountyWorked(): void
+    {
+        IndianaIncomeTaxInformation::createForUser([
+            'personal_exemptions' => 0,
+            'dependent_exemptions' => 0,
+            'exempt' => false,
+            'additional_withholding' => 0,
+            'county_lived' => 0,
+            'county_worked' => 77,
         ], $this->user);
 
         $results = $this->taxes->calculate(function (Taxes $taxes) {

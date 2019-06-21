@@ -28,6 +28,30 @@ class NobleIncomeTest extends TestCase
             'dependent_exemptions' => 0,
             'exempt' => false,
             'additional_withholding' => 0,
+            'county_lived' => 57,
+            'county_worked' => 56,
+        ], $this->user);
+
+        $results = $this->taxes->calculate(function (Taxes $taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.indiana.noble'));
+            $taxes->setWorkLocation($this->getLocation('us.indiana.noble'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(300);
+            $taxes->setPayPeriods(52);
+        });
+
+        $this->assertThat(5.25, self::identicalTo($results->getTax(NobleIncome::class)));
+    }
+
+    public function testNobleIncomeCountyWorked(): void
+    {
+        IndianaIncomeTaxInformation::createForUser([
+            'personal_exemptions' => 0,
+            'dependent_exemptions' => 0,
+            'exempt' => false,
+            'additional_withholding' => 0,
+            'county_lived' => 0,
+            'county_worked' => 57,
         ], $this->user);
 
         $results = $this->taxes->calculate(function (Taxes $taxes) {

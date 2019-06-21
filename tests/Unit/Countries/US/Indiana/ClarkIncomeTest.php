@@ -28,6 +28,30 @@ class ClarkIncomeTest extends TestCase
             'dependent_exemptions' => 0,
             'exempt' => false,
             'additional_withholding' => 0,
+            'county_lived' => 10,
+            'county_worked' => 9,
+        ], $this->user);
+
+        $results = $this->taxes->calculate(function (Taxes $taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.indiana.clark'));
+            $taxes->setWorkLocation($this->getLocation('us.indiana.clark'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(300);
+            $taxes->setPayPeriods(52);
+        });
+
+        $this->assertThat(6.00, self::identicalTo($results->getTax(ClarkIncome::class)));
+    }
+
+    public function testClarkIncomeCountyWorked(): void
+    {
+        IndianaIncomeTaxInformation::createForUser([
+            'personal_exemptions' => 0,
+            'dependent_exemptions' => 0,
+            'exempt' => false,
+            'additional_withholding' => 0,
+            'county_lived' => 0,
+            'county_worked' => 10,
         ], $this->user);
 
         $results = $this->taxes->calculate(function (Taxes $taxes) {
