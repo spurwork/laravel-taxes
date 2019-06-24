@@ -7,18 +7,24 @@ use Illuminate\Database\Eloquent\Collection;
 
 class NewJerseyFamilyMedicalLeave extends BaseNewJerseyFamilyMedicalLeave
 {
-    const TAX_RATE = 0.0017;
+    const TAX_RATE = 0.0008;
     const WAGE_BASE = 34400;
 
     public function getBaseEarnings()
     {
-        dump('herer1');
-        return max(min(static::WAGE_BASE - $this->payroll->wtd_earnings, $this->payroll->getEarnings()), 0);
+        if (($this->payroll->earnings + $this->payroll->wtd_earnings) < self::WAGE_BASE) {
+            return $this->payroll->wtd_earnings;
+        } elseif (($this->payroll->earnings + $this->payroll->wtd_earnings) >= self::WAGE_BASE) {
+            $total = ($this->payroll->earnings + $this->payroll->wtd_earnings) - self::WAGE_BASE;
+
+            return $total > 0 ? $total : 0;
+        }
+
+        return 0;
     }
 
     public function compute(Collection $tax_areas)
     {
-        dump('herer');
         $this->tax_total = $this->payroll->withholdTax($this->getBaseEarnings() * static::TAX_RATE);
         return round($this->tax_total, 2);
     }

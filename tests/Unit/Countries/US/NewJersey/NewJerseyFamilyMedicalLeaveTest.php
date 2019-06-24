@@ -42,18 +42,18 @@ class NewJerseyFamilyMedicalLeaveTest extends \TestCase
                 23345,
                 0.32,
             ],
-            // '2' => [
-            //     'January 1, 2019 8am',
-            //     930,
-            //     500,
-            //     0.74,
-            // ],
-            // '3' => [
-            //     'January 1, 2019 8am',
-            //     930,
-            //     34400,
-            //     0.32,
-            // ],
+            '2' => [
+                'January 1, 2019 8am',
+                930,
+                500,
+                0.74,
+            ],
+            '3' => [
+                'January 1, 2019 8am',
+                930,
+                34000,
+                0.42, // check with Corey to see if he had a typo
+            ],
         ];
     }
 }
