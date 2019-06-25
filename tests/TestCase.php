@@ -341,6 +341,8 @@ class TestCase extends BaseTestCase
             'us.indiana.white' => [40.6766, -86.9824],
             'us.indiana.whitley' => [41.1136, -85.5200],
             'us.kentucky' => [37.8393, -84.2700],
+            'us.kentucky.boone_county' => [38.9941, -84.7316],
+            'us.kentucky.florence_city' => [38.9989, -84.6266],
             'us.kentucky.jefferson_county' => [38.1938, -85.6435],
             'us.massachusetts' => [42.4072, -71.3824],
             'us.louisiana' => [30.9843, -91.9623],
