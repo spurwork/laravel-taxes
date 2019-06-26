@@ -44,8 +44,6 @@ class MississippiIncome extends BaseMississippiIncome
 
     public function getAdditionalWithholding()
     {
-        // needs to check to see if it's a percentage or number and return it
-        // $this->tax_information->additional_withholding
-        return 0;
+        return $this->tax_information->additional_withholding;
     }
 }
