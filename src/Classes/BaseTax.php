@@ -17,7 +17,7 @@ abstract class BaseTax
 
     public function compute(Collection $tax_areas)
     {
-        $this->tax_total = $this->payroll->getEarnings() * static::TAX_RATE;
+        $this->tax_total = $this->payroll->withholdTax($this->payroll->getEarnings() * static::TAX_RATE);
         return round($this->tax_total, 2);
     }
 
