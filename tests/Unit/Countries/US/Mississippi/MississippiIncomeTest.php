@@ -46,7 +46,7 @@ class MississippiIncomeTest extends TestCase
         // earnings
         // results
         return [
-            // exempt, should be null
+            // exempt, should be 0
             '0' => [
                 'January 1, 2019 8am',
                 MississippiIncome::FILING_SINGLE,
@@ -54,7 +54,7 @@ class MississippiIncomeTest extends TestCase
                 0,
                 0,
                 300,
-                0.0,
+                0,
             ],
             '1' => [
                 'January 1, 2019 8am',
@@ -101,42 +101,42 @@ class MississippiIncomeTest extends TestCase
                 1000,
                 38,
             ],
-            // '6' => [
-            //     'January 1, 2019 8am',
-            //     MississippiIncome::FILING_MARRIED,
-            //     false,
-            //     10000,
-            //     0,
-            //     300,
-            //     0,
-            // ],
-            // '7' => [
-            //     'January 1, 2019 8am',
-            //     MississippiIncome::FILING_HEAD_OF_HOUSEHOLD,
-            //     false,
-            //     50,
-            //     0,
-            //     300,
-            //     8,
-            // ],
-            // '8' => [
-            //     'January 1, 2019 8am',
-            //     MississippiIncome::FILING_HEAD_OF_HOUSEHOLD,
-            //     false,
-            //     4000,
-            //     0,
-            //     1000,
-            //     39,
-            // ],
-            // '9' => [
-            //     'January 1, 2019 8am',
-            //     MississippiIncome::FILING_HEAD_OF_HOUSEHOLD,
-            //     false,
-            //     10000,
-            //     0,
-            //     300,
-            //     0,
-            // ],
+            '6' => [
+                'January 1, 2019 8am',
+                MississippiIncome::FILING_MARRIED,
+                false,
+                10000,
+                0,
+                300,
+                0,
+            ],
+            '7' => [
+                'January 1, 2019 8am',
+                MississippiIncome::FILING_HEAD_OF_HOUSEHOLD,
+                false,
+                50,
+                0,
+                300,
+                8,
+            ],
+            '8' => [
+                'January 1, 2019 8am',
+                MississippiIncome::FILING_HEAD_OF_HOUSEHOLD,
+                false,
+                4000,
+                0,
+                1000,
+                39,
+            ],
+            '9' => [
+                'January 1, 2019 8am',
+                MississippiIncome::FILING_HEAD_OF_HOUSEHOLD,
+                false,
+                10000,
+                0,
+                300,
+                0,
+            ],
             '10' => [
                 'January 1, 2019 8am',
                 MississippiIncome::FILING_MARRIED,
