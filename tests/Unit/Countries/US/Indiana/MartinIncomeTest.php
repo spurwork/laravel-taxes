@@ -37,6 +37,30 @@ class MartinIncomeTest extends TestCase
             'dependent_exemptions' => 1,
             'exempt' => false,
             'additional_withholding' => 0,
+            'county_lived' => 51,
+            'county_worked' => 50,
+        ], $this->user);
+
+        $results = $this->taxes->calculate(function (Taxes $taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.indiana.martin'));
+            $taxes->setWorkLocation($this->getLocation('us.indiana.martin'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(300);
+            $taxes->setPayPeriods(52);
+        });
+
+        $this->assertThat(4.40, self::identicalTo($results->getTax(MartinIncome::class)));
+    }
+
+    public function testMartinIncomeCountyWorked(): void
+    {
+        IndianaIncomeTaxInformation::createForUser([
+            'personal_exemptions' => 1,
+            'dependent_exemptions' => 1,
+            'exempt' => false,
+            'additional_withholding' => 0,
+            'county_lived' => 0,
+            'county_worked' => 51,
         ], $this->user);
 
         $results = $this->taxes->calculate(function (Taxes $taxes) {

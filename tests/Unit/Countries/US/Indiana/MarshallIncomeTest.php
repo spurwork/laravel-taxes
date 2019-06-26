@@ -28,6 +28,30 @@ class MarshallIncomeTest extends TestCase
             'dependent_exemptions' => 0,
             'exempt' => false,
             'additional_withholding' => 0,
+            'county_lived' => 50,
+            'county_worked' => 49,
+        ], $this->user);
+
+        $results = $this->taxes->calculate(function (Taxes $taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.indiana.marshall'));
+            $taxes->setWorkLocation($this->getLocation('us.indiana.marshall'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(300);
+            $taxes->setPayPeriods(52);
+        });
+
+        $this->assertThat(3.75, self::identicalTo($results->getTax(MarshallIncome::class)));
+    }
+
+    public function testMarshallIncomeCountyWorked(): void
+    {
+        IndianaIncomeTaxInformation::createForUser([
+            'personal_exemptions' => 0,
+            'dependent_exemptions' => 0,
+            'exempt' => false,
+            'additional_withholding' => 0,
+            'county_lived' => 0,
+            'county_worked' => 50,
         ], $this->user);
 
         $results = $this->taxes->calculate(function (Taxes $taxes) {

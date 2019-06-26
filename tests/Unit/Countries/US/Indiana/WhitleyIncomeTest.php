@@ -28,6 +28,30 @@ class WhitleyIncomeTest extends TestCase
             'dependent_exemptions' => 0,
             'exempt' => false,
             'additional_withholding' => 0,
+            'county_lived' => 92,
+            'county_worked' => 91,
+        ], $this->user);
+
+        $results = $this->taxes->calculate(function (Taxes $taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.indiana.whitley'));
+            $taxes->setWorkLocation($this->getLocation('us.indiana.whitley'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(300);
+            $taxes->setPayPeriods(52);
+        });
+
+        $this->assertThat(4.44, self::identicalTo($results->getTax(WhitleyIncome::class)));
+    }
+
+    public function testWhitleyIncomeCountyWorked(): void
+    {
+        IndianaIncomeTaxInformation::createForUser([
+            'personal_exemptions' => 0,
+            'dependent_exemptions' => 0,
+            'exempt' => false,
+            'additional_withholding' => 0,
+            'county_lived' => 0,
+            'county_worked' => 92,
         ], $this->user);
 
         $results = $this->taxes->calculate(function (Taxes $taxes) {

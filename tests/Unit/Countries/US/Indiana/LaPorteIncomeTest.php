@@ -28,6 +28,30 @@ class LaPorteIncomeTest extends TestCase
             'dependent_exemptions' => 0,
             'exempt' => false,
             'additional_withholding' => 0,
+            'county_lived' => 46,
+            'county_worked' => 45,
+        ], $this->user);
+
+        $results = $this->taxes->calculate(function (Taxes $taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.indiana.laporte'));
+            $taxes->setWorkLocation($this->getLocation('us.indiana.laporte'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(300);
+            $taxes->setPayPeriods(52);
+        });
+
+        $this->assertThat(2.84, self::identicalTo($results->getTax(LaPorteIncome::class)));
+    }
+
+    public function testLaPorteIncomeCountyWorked(): void
+    {
+        IndianaIncomeTaxInformation::createForUser([
+            'personal_exemptions' => 0,
+            'dependent_exemptions' => 0,
+            'exempt' => false,
+            'additional_withholding' => 0,
+            'county_lived' => 0,
+            'county_worked' => 46,
         ], $this->user);
 
         $results = $this->taxes->calculate(function (Taxes $taxes) {

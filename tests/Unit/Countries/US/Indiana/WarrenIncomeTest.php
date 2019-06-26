@@ -28,6 +28,30 @@ class WarrenIncomeTest extends TestCase
             'dependent_exemptions' => 0,
             'exempt' => false,
             'additional_withholding' => 0,
+            'county_lived' => 86,
+            'county_worked' => 85,
+        ], $this->user);
+
+        $results = $this->taxes->calculate(function (Taxes $taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.indiana.warren'));
+            $taxes->setWorkLocation($this->getLocation('us.indiana.warren'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(300);
+            $taxes->setPayPeriods(52);
+        });
+
+        $this->assertThat(6.36, self::identicalTo($results->getTax(WarrenIncome::class)));
+    }
+
+    public function testWarrenIncomeCountyWorked(): void
+    {
+        IndianaIncomeTaxInformation::createForUser([
+            'personal_exemptions' => 0,
+            'dependent_exemptions' => 0,
+            'exempt' => false,
+            'additional_withholding' => 0,
+            'county_lived' => 0,
+            'county_worked' => 86,
         ], $this->user);
 
         $results = $this->taxes->calculate(function (Taxes $taxes) {

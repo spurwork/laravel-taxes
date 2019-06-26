@@ -128,6 +128,8 @@ class TestCase extends BaseTestCase
             'dependent_exemptions' => 0,
             'additional_withholding' => 0,
             'additional_county_withholding' => 0,
+            'county_lived' => 11,
+            'county_worked' => 11,
         ], $this->user);
 
         KentuckyIncomeTaxInformation::createForUser([

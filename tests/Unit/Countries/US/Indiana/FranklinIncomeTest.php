@@ -28,6 +28,30 @@ class FranklinIncomeTest extends TestCase
             'dependent_exemptions' => 0,
             'exempt' => false,
             'additional_withholding' => 0,
+            'county_lived' => 24,
+            'county_worked' => 23,
+        ], $this->user);
+
+        $results = $this->taxes->calculate(function (Taxes $taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.indiana.franklin'));
+            $taxes->setWorkLocation($this->getLocation('us.indiana.franklin'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(300);
+            $taxes->setPayPeriods(52);
+        });
+
+        $this->assertThat(4.50, self::identicalTo($results->getTax(FranklinIncome::class)));
+    }
+
+    public function testFranklinIncomeCountyWorked(): void
+    {
+        IndianaIncomeTaxInformation::createForUser([
+            'personal_exemptions' => 0,
+            'dependent_exemptions' => 0,
+            'exempt' => false,
+            'additional_withholding' => 0,
+            'county_lived' => 0,
+            'county_worked' => 24,
         ], $this->user);
 
         $results = $this->taxes->calculate(function (Taxes $taxes) {

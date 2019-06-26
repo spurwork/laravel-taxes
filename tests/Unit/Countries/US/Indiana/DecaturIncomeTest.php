@@ -28,6 +28,30 @@ class DecaturIncomeTest extends TestCase
             'dependent_exemptions' => 0,
             'exempt' => false,
             'additional_withholding' => 0,
+            'county_lived' => 16,
+            'county_worked' => 15,
+        ], $this->user);
+
+        $results = $this->taxes->calculate(function (Taxes $taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.indiana.decatur'));
+            $taxes->setWorkLocation($this->getLocation('us.indiana.decatur'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(300);
+            $taxes->setPayPeriods(52);
+        });
+
+        $this->assertThat(7.05, self::identicalTo($results->getTax(DecaturIncome::class)));
+    }
+
+    public function testDecaturIncomeCountyWorked(): void
+    {
+        IndianaIncomeTaxInformation::createForUser([
+            'personal_exemptions' => 0,
+            'dependent_exemptions' => 0,
+            'exempt' => false,
+            'additional_withholding' => 0,
+            'county_lived' => 0,
+            'county_worked' => 16,
         ], $this->user);
 
         $results = $this->taxes->calculate(function (Taxes $taxes) {
