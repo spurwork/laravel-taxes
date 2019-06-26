@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Colorado\ColoradoIncome\V20180101;
+namespace Appleton\Taxes\Countries\US\Colorado\ColoradoIncome\V20190101;
 
 use Appleton\Taxes\Classes\Payroll;
 use Appleton\Taxes\Countries\US\Colorado\ColoradoIncome\ColoradoIncome as BaseColoradoIncome;
@@ -10,26 +10,26 @@ class ColoradoIncome extends BaseColoradoIncome
 {
     private const SINGLE_BRACKETS = [
         [0, 0, 0],
-        [2300, 0.0463, 0],
+        [3800, 0.0463, 0],
     ];
 
     private const MARRIED_BRACKETS = [
         [0, 0, 0],
-        [8650, 0.0463, 0],
+        [11800, 0.0463, 0],
     ];
 
     private const EXEMPTION_AMOUNTS = [
         0 => 0,
-        1 => 4050,
-        2 => 8100,
-        3 => 12150,
-        4 => 16200,
-        5 => 20250,
-        6 => 24300,
-        7 => 22950,
-        8 => 21600,
-        9 => 20250,
-        10 => 18900,
+        1 => 4200,
+        2 => 8400,
+        3 => 12600,
+        4 => 16800,
+        5 => 21000,
+        6 => 25200,
+        7 => 25200,
+        8 => 25200,
+        9 => 25200,
+        10 => 25200,
     ];
 
     public function __construct(ColoradoIncomeTaxInformation $tax_information, Payroll $payroll)
