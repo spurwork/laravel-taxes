@@ -28,6 +28,30 @@ class RipleyIncomeTest extends TestCase
             'dependent_exemptions' => 0,
             'exempt' => false,
             'additional_withholding' => 0,
+            'county_lived' => 69,
+            'county_worked' => 68,
+        ], $this->user);
+
+        $results = $this->taxes->calculate(function (Taxes $taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.indiana.ripley'));
+            $taxes->setWorkLocation($this->getLocation('us.indiana.ripley'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(300);
+            $taxes->setPayPeriods(52);
+        });
+
+        $this->assertThat(4.13, self::identicalTo($results->getTax(RipleyIncome::class)));
+    }
+
+    public function testRipleyIncomeCountyWorked(): void
+    {
+        IndianaIncomeTaxInformation::createForUser([
+            'personal_exemptions' => 0,
+            'dependent_exemptions' => 0,
+            'exempt' => false,
+            'additional_withholding' => 0,
+            'county_lived' => 0,
+            'county_worked' => 69,
         ], $this->user);
 
         $results = $this->taxes->calculate(function (Taxes $taxes) {

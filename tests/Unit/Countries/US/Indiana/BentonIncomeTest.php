@@ -28,11 +28,35 @@ class BentonIncomeTest extends TestCase
             'dependent_exemptions' => 0,
             'exempt' => false,
             'additional_withholding' => 0,
+            'county_lived' => 4,
+            'county_worked' => 2,
         ], $this->user);
 
         $results = $this->taxes->calculate(function (Taxes $taxes) {
-            $taxes->setHomeLocation($this->getLocation('us.indiana.benton'));
-            $taxes->setWorkLocation($this->getLocation('us.indiana.benton'));
+            $taxes->setHomeLocation($this->getLocation('us.indiana'));
+            $taxes->setWorkLocation($this->getLocation('us.indiana'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(300);
+            $taxes->setPayPeriods(52);
+        });
+
+        $this->assertThat(5.37, self::identicalTo($results->getTax(BentonIncome::class)));
+    }
+
+    public function testBentonIncomeCountyWorked(): void
+    {
+        IndianaIncomeTaxInformation::createForUser([
+            'personal_exemptions' => 0,
+            'dependent_exemptions' => 0,
+            'exempt' => false,
+            'additional_withholding' => 0,
+            'county_lived' => 0,
+            'county_worked' => 4,
+        ], $this->user);
+
+        $results = $this->taxes->calculate(function (Taxes $taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.indiana'));
+            $taxes->setWorkLocation($this->getLocation('us.indiana'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(300);
             $taxes->setPayPeriods(52);

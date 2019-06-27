@@ -15,7 +15,8 @@ class Payroll
 
     protected $amount_withheld;
 
-    public function __construct($parameters) {
+    public function __construct($parameters)
+    {
         $this->date = $parameters['date'];
         $this->earnings = $parameters['earnings'] ?? 0;
         $this->exemptions = collect($parameters['exemptions'] ?? []);

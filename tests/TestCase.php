@@ -5,12 +5,17 @@ use Appleton\Taxes\Countries\US\Alabama\AlabamaIncome\AlabamaIncome;
 use Appleton\Taxes\Countries\US\Colorado\ColoradoIncome\ColoradoIncome;
 use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome;
 use Appleton\Taxes\Countries\US\Georgia\GeorgiaIncome\GeorgiaIncome;
+use Appleton\Taxes\Countries\US\Louisiana\LouisianaIncome\LouisianaIncome;
 use Appleton\Taxes\Countries\US\Maryland\MarylandIncome\MarylandIncome;
 use Appleton\Taxes\Countries\US\Massachusetts\MassachusettsIncome\MassachusettsIncome;
 use Appleton\Taxes\Countries\US\Michigan\MichiganIncome\MichiganIncome;
+use Appleton\Taxes\Countries\US\Mississippi\MississippiIncome\MississippiIncome;
+use Appleton\Taxes\Countries\US\NewJersey\NewJerseyIncome\NewJerseyIncome;
 use Appleton\Taxes\Countries\US\NewMexico\NewMexicoIncome\NewMexicoIncome;
 use Appleton\Taxes\Countries\US\NewYork\NewYorkIncome\NewYorkIncome;
 use Appleton\Taxes\Countries\US\NorthCarolina\NorthCarolinaIncome\NorthCarolinaIncome;
+use Appleton\Taxes\Countries\US\Oklahoma\OklahomaIncome\OklahomaIncome;
+use Appleton\Taxes\Countries\US\WashingtonDC\WashingtonDCIncome\WashingtonDCIncome;
 use Appleton\Taxes\Countries\US\Wisconsin\WisconsinIncome\WisconsinIncome;
 use Appleton\Taxes\Models\Countries\US\Alabama\AlabamaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Arizona\ArizonaIncomeTaxInformation;
@@ -20,13 +25,18 @@ use Appleton\Taxes\Models\Countries\US\Georgia\GeorgiaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Illinois\IllinoisIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Indiana\IndianaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Kentucky\KentuckyIncomeTaxInformation;
+use Appleton\Taxes\Models\Countries\US\Louisiana\LouisianaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Maryland\MarylandIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Massachusetts\MassachusettsIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Michigan\MichiganIncomeTaxInformation;
+use Appleton\Taxes\Models\Countries\US\Mississippi\MississippiIncomeTaxInformation;
+use Appleton\Taxes\Models\Countries\US\NewJersey\NewJerseyIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\NewMexico\NewMexicoIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\NewYork\NewYorkIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\NorthCarolina\NorthCarolinaIncomeTaxInformation;
+use Appleton\Taxes\Models\Countries\US\Oklahoma\OklahomaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Virginia\VirginiaIncomeTaxInformation;
+use Appleton\Taxes\Models\Countries\US\WashingtonDC\WashingtonDCIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Wisconsin\WisconsinIncomeTaxInformation;
 use Appleton\Taxes\Providers\TaxesServiceProvider;
 use Carbon\Carbon;
@@ -120,11 +130,20 @@ class TestCase extends BaseTestCase
             'dependent_exemptions' => 0,
             'additional_withholding' => 0,
             'additional_county_withholding' => 0,
+            'county_lived' => 11,
+            'county_worked' => 11,
         ], $this->user);
 
         KentuckyIncomeTaxInformation::createForUser([
             'additional_withholding' => 0,
             'exemptions' => 0,
+        ], $this->user);
+
+        LouisianaIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'dependents' => 0,
+            'exemptions' => 0,
+            'filing_status' => LouisianaIncome::FILING_SINGLE,
         ], $this->user);
 
         MarylandIncomeTaxInformation::createForUser([
@@ -148,6 +167,20 @@ class TestCase extends BaseTestCase
             'exempt' => false,
         ], $this->user);
 
+        MississippiIncomeTaxInformation::createForUser([
+            'personal_exemptions' => 0,
+            'additional_withholding' => 0,
+            'filing_status' => MississippiIncome::FILING_SINGLE,
+            'exempt' => false,
+        ], $this->user);
+
+        NewJerseyIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'exemptions' => 0,
+            'filing_status' => NewJerseyIncome::FILING_SINGLE,
+            'tax_rate_table' => null,
+        ], $this->user);
+
         NewMexicoIncomeTaxInformation::createForUser([
             'additional_withholding' => 0,
             'exemptions' => 0,
@@ -166,10 +199,22 @@ class TestCase extends BaseTestCase
             'filing_status' => NorthCarolinaIncome::FILING_SINGLE,
         ], $this->user);
 
+        OklahomaIncomeTaxInformation::createForUser([
+            'dependents' => 0,
+            'exempt' => false,
+            'filing_status' => OklahomaIncome::FILING_SINGLE,
+        ], $this->user);
+
         VirginiaIncomeTaxInformation::createForUser([
             'additional_withholding' => 0,
             'exemptions' => 0,
             'sixty_five_plus_or_blind_exemptions' => 0,
+        ], $this->user);
+
+        WashingtonDCIncomeTaxInformation::createForUser([
+            'dependents' => 0,
+            'exempt' => false,
+            'filing_status' => WashingtonDCIncome::FILING_SINGLE,
         ], $this->user);
 
         WisconsinIncomeTaxInformation::createForUser([
@@ -182,7 +227,7 @@ class TestCase extends BaseTestCase
     protected function getLocation($name)
     {
         $locations = [
-            'us' => [38.9072, -77.0369],
+            'us' => [37.0902, -95.7129],
             'us.alabama' => [32.3182, -86.9023],
             'us.alabama.attalla' => [34.0218, -86.0886],
             'us.alabama.auburn' => [32.6099, -85.4808],
@@ -219,6 +264,7 @@ class TestCase extends BaseTestCase
             'us.colorado' => [39.7640021, -105.1352965],
             'us.delaware' => [39.1582, -75.5244],
             'us.georgia' => [33.7490, -84.3880],
+            'us.florida' => [27.6648, -81.5158],
             'us.illinois' => [39.7817, -89.6501],
             'us.indiana' => [39.7684, -86.1581],
             'us.indiana.adams' => [40.7249, -84.8985],
@@ -314,9 +360,13 @@ class TestCase extends BaseTestCase
             'us.indiana.white' => [40.6766, -86.9824],
             'us.indiana.whitley' => [41.1136, -85.5200],
             'us.kentucky' => [37.8393, -84.2700],
+            'us.kentucky.boone_county' => [38.9941, -84.7316],
+            'us.kentucky.florence_city' => [38.9989, -84.6266],
+            'us.kentucky.georgetown_city' => [38.2098, -84.5588],
             'us.kentucky.jefferson_county' => [38.1938, -85.6435],
-            'us.florida' => [27.6648, -81.5158],
+            'us.kentucky.scott_county' => [38.3172, -84.5641],
             'us.massachusetts' => [42.4072, -71.3824],
+            'us.louisiana' => [30.9843, -91.9623],
             'us.maryland' => [38.9784, -76.4922],
             'us.maryland.allegany' => [39.6255, -78.6115],
             'us.maryland.annearundel' => [38.9530, -76.5488],
@@ -343,14 +393,19 @@ class TestCase extends BaseTestCase
             'us.maryland.wicomico' => [38.3942, -75.6674],
             'us.maryland.worcester' => [38.1584, -75.4345],
             'us.michigan' => [42.7325, -84.5555],
+            'us.mississippi' => [32.3547, -89.3985],
             'us.nevada' => [39.1641, -119.7661],
+            'us.new_jersey' => [40.2206, -74.7597],
+            'us.new_jersey.newark' => [40.7357, -74.1724],
             'us.new_mexico' => [34.5199, -105.8701],
             'us.new_york' => [40.7128, -74.0060],
             'us.new_york.yonkers' => [40.9312, -73.8987],
             'us.north_carolina' => [35.7596, -79.0193],
+            'us.oklahoma' => [35.4676, -97.5164],
             'us.tennessee' => [35.5175, -86.5804],
             'us.texas' => [31.9686, -99.9018],
             'us.virginia' => [37.5407, -77.4360],
+            'us.washingtondc' => [38.9072, -77.0369],
             'us.wisconsin' => [43.0849721, -89.4764603],
         ];
 
@@ -392,11 +447,16 @@ class TestCase extends BaseTestCase
         $app['config']->set('taxes.tables.us.illinois.illinois_income_tax_information', 'illinois_income_tax_information');
         $app['config']->set('taxes.tables.us.indiana.indiana_income_tax_information', 'indiana_income_tax_information');
         $app['config']->set('taxes.tables.us.kentucky.kentucky_income_tax_information', 'kentucky_income_tax_information');
+        $app['config']->set('taxes.tables.us.louisiana.louisiana_income_tax_information', 'louisiana_income_tax_information');
         $app['config']->set('taxes.tables.us.maryland.maryland_income_tax_information', 'maryland_income_tax_information');
         $app['config']->set('taxes.tables.us.massachusetts.massachusetts_income_tax_information', 'massachusetts_income_tax_information');
         $app['config']->set('taxes.tables.us.michigan.michigan_income_tax_information', 'michigan_income_tax_information');
+        $app['config']->set('taxes.tables.us.mississippi.mississippi_income_tax_information', 'mississippi_income_tax_information');
+        $app['config']->set('taxes.tables.us.new_jersey.new_jersey_income_tax_information', 'new_jersey_income_tax_information');
         $app['config']->set('taxes.tables.us.new_york.new_york_income_tax_information', 'new_york_income_tax_information');
+        $app['config']->set('taxes.tables.us.oklahoma.oklahoma_income_tax_information', 'oklahoma_income_tax_information');
         $app['config']->set('taxes.tables.us.virginia.virginia_income_tax_information', 'virginia_income_tax_information');
+        $app['config']->set('taxes.tables.us.washingtondc.washingtondc_income_tax_information', 'washingtondc_income_tax_information');
         $app['config']->set('taxes.tables.us.wisconsin.wisconsin_income_tax_information', 'wisconsin_income_tax_information');
     }
 

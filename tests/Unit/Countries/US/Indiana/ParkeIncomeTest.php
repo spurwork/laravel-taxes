@@ -28,6 +28,30 @@ class ParkeIncomeTest extends TestCase
             'dependent_exemptions' => 0,
             'exempt' => false,
             'additional_withholding' => 0,
+            'county_lived' => 61,
+            'county_worked' => 60,
+        ], $this->user);
+
+        $results = $this->taxes->calculate(function (Taxes $taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.indiana.parke'));
+            $taxes->setWorkLocation($this->getLocation('us.indiana.parke'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(300);
+            $taxes->setPayPeriods(52);
+        });
+
+        $this->assertThat(7.94, self::identicalTo($results->getTax(ParkeIncome::class)));
+    }
+
+    public function testParkeIncomeCountyWorked(): void
+    {
+        IndianaIncomeTaxInformation::createForUser([
+            'personal_exemptions' => 0,
+            'dependent_exemptions' => 0,
+            'exempt' => false,
+            'additional_withholding' => 0,
+            'county_lived' => 0,
+            'county_worked' => 61,
         ], $this->user);
 
         $results = $this->taxes->calculate(function (Taxes $taxes) {

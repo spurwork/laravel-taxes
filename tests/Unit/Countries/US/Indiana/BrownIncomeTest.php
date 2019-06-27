@@ -28,10 +28,34 @@ class BrownIncomeTest extends TestCase
             'dependent_exemptions' => 0,
             'exempt' => false,
             'additional_withholding' => 0,
+            'county_lived' => 7,
+            'county_worked' => 6,
         ], $this->user);
 
         $results = $this->taxes->calculate(function (Taxes $taxes) {
-            $taxes->setHomeLocation($this->getLocation('us.indiana.brown'));
+            $taxes->setHomeLocation($this->getLocation('us.indiana'));
+            $taxes->setWorkLocation($this->getLocation('us.indiana'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(300);
+            $taxes->setPayPeriods(52);
+        });
+
+        $this->assertThat(7.57, self::identicalTo($results->getTax(BrownIncome::class)));
+    }
+
+    public function testBrownIncomeCountyWorked(): void
+    {
+        IndianaIncomeTaxInformation::createForUser([
+            'personal_exemptions' => 0,
+            'dependent_exemptions' => 0,
+            'exempt' => false,
+            'additional_withholding' => 0,
+            'county_lived' => 0,
+            'county_worked' => 7,
+        ], $this->user);
+
+        $results = $this->taxes->calculate(function (Taxes $taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.indiana.adams'));
             $taxes->setWorkLocation($this->getLocation('us.indiana.brown'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(300);

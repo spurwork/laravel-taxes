@@ -158,6 +158,8 @@ class IndianaIncomeTest extends TestCase
             'dependent_exemptions' => $dependent_exemptions,
             'exempt' => $exempt,
             'additional_withholding' => $additional_withholding,
+            'county_lived' => 22,
+            'county_worked' => 33,
         ], $this->user);
 
         return $this->taxes->calculate(function (Taxes $taxes) use ($earnings) {

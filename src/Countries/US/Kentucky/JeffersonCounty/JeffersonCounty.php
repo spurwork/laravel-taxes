@@ -8,11 +8,6 @@ use Appleton\Taxes\Models\Countries\US\Kentucky\KentuckyIncomeTaxInformation;
 
 abstract class JeffersonCounty extends BaseLocalIncome
 {
-    const TYPE = 'local';
-    const PRIORITY = 9999;
-
-    public $tax_total = 0;
-
     protected $tax_information;
 
     public function __construct(KentuckyIncomeTaxInformation $tax_information, Payroll $payroll)

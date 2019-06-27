@@ -37,6 +37,30 @@ class TippecanoeIncomeTest extends TestCase
             'dependent_exemptions' => 2,
             'exempt' => false,
             'additional_withholding' => 0,
+            'county_lived' => 79,
+            'county_worked' => 78,
+        ], $this->user);
+
+        $results = $this->taxes->calculate(function (Taxes $taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.indiana.tippecanoe'));
+            $taxes->setWorkLocation($this->getLocation('us.indiana.tippecanoe'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(300);
+            $taxes->setPayPeriods(52);
+        });
+
+        $this->assertThat(2.45, self::identicalTo($results->getTax(TippecanoeIncome::class)));
+    }
+
+    public function testTippecanoeIncomeCountyWorked(): void
+    {
+        IndianaIncomeTaxInformation::createForUser([
+            'personal_exemptions' => 1,
+            'dependent_exemptions' => 2,
+            'exempt' => false,
+            'additional_withholding' => 0,
+            'county_lived' => 0,
+            'county_worked' => 79,
         ], $this->user);
 
         $results = $this->taxes->calculate(function (Taxes $taxes) {
