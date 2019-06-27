@@ -191,6 +191,7 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\Massachusetts\MassachusettsUnemployment\MassachusettsUnemployment::class,
         \Appleton\Taxes\Countries\US\Michigan\MichiganIncome\MichiganIncome::class,
         \Appleton\Taxes\Countries\US\Michigan\MichiganUnemployment\MichiganUnemployment::class,
+        \Appleton\Taxes\Countries\US\Nevada\NevadaUnemployment\NevadaUnemployment::class,
         \Appleton\Taxes\Countries\US\NewMexico\NewMexicoIncome\NewMexicoIncome::class,
         \Appleton\Taxes\Countries\US\NewMexico\NewMexicoUnemployment\NewMexicoUnemployment::class,
         \Appleton\Taxes\Countries\US\NewYork\NewYorkCity\NewYorkCity::class,

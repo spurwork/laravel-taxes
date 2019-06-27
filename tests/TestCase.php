@@ -343,6 +343,7 @@ class TestCase extends BaseTestCase
             'us.maryland.wicomico' => [38.3942, -75.6674],
             'us.maryland.worcester' => [38.1584, -75.4345],
             'us.michigan' => [42.7325, -84.5555],
+            'us.nevada' => [39.1641, -119.7661],
             'us.new_mexico' => [34.5199, -105.8701],
             'us.new_york' => [40.7128, -74.0060],
             'us.new_york.yonkers' => [40.9312, -73.8987],
