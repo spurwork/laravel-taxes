@@ -15,7 +15,7 @@ class MississippiIncomeTaxInformation extends BaseTaxInformationModel
         $tax_information->additional_withholding = 0;
         $tax_information->exempt = false;
         $tax_information->filing_status = MississippiIncome::FILING_SINGLE;
-        $tax_information->personal_exemptions = 0;
+        $tax_information->exemption_amount = 0;
 
         return $tax_information;
     }
@@ -23,5 +23,15 @@ class MississippiIncomeTaxInformation extends BaseTaxInformationModel
     public static function getTax()
     {
         return MississippiIncome::class;
+    }
+
+    public function getAdditionalWithholding(int $value): int
+    {
+        return $value * 100;
+    }
+
+    public function setAdditionalWithholding(int $value): void
+    {
+        $this->attributes['additional_withholding'] = round($value / 100);
     }
 }

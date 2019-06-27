@@ -17,7 +17,7 @@ class AddMississippiIncomeTaxInformationTable extends Migration
             $table->integer('additional_withholding')->default(0);
             $table->boolean('exempt')->default(false);
             $table->string('filing_status');
-            $table->integer('personal_exemptions')->default(0);
+            $table->integer('exemption_amount')->default(0);
         });
 
         $income_tax_id = DB::table('taxes')->insertGetId([
