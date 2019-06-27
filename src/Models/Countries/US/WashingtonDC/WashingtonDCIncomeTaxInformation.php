@@ -21,7 +21,6 @@ class WashingtonDCIncomeTaxInformation extends BaseTaxInformationModel
 
     public static function getTax()
     {
-        dump('in get tax dc');
         return WashingtonDCIncome::class;
     }
 }
