@@ -1,7 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Colorado\ColoradoIncome;
+namespace Appleton\Taxes\Countries\US\Colorado\ColoradoIncome\V20190101;
 
+use Appleton\Taxes\Countries\US\Colorado\ColoradoIncome\ColoradoIncome;
 use Appleton\Taxes\Models\Countries\US\Colorado\ColoradoIncomeTaxInformation;
 use Carbon\Carbon;
 
@@ -12,7 +13,7 @@ class ColoradoIncomeTest extends \TestCase
         parent::setUp();
 
         Carbon::setTestNow(
-            Carbon::parse('January 1, 2018 8am', 'America/Chicago')->setTimezone('UTC')
+            Carbon::parse('January 1, 2019 8am', 'America/Chicago')->setTimezone('UTC')
         );
     }
 
@@ -26,7 +27,7 @@ class ColoradoIncomeTest extends \TestCase
             $taxes->setPayPeriods(52);
         });
 
-        $this->assertSame(44.00, $results->getTax(ColoradoIncome::class));
+        $this->assertSame(43.00, $results->getTax(ColoradoIncome::class));
 
         ColoradoIncomeTaxInformation::forUser($this->user)->update(['filing_status' => ColoradoIncome::FILING_MARRIED]);
 
@@ -38,7 +39,7 @@ class ColoradoIncomeTest extends \TestCase
             $taxes->setPayPeriods(52);
         });
 
-        $this->assertSame(39.00, $results->getTax(ColoradoIncome::class));
+        $this->assertSame(36.00, $results->getTax(ColoradoIncome::class));
     }
 
     public function testIncomeExemptions()
@@ -53,6 +54,6 @@ class ColoradoIncomeTest extends \TestCase
             $taxes->setPayPeriods(52);
         });
 
-        $this->assertSame(41.00, $results->getTax(ColoradoIncome::class));
+        $this->assertSame(39.00, $results->getTax(ColoradoIncome::class));
     }
 }
