@@ -227,7 +227,7 @@ class TestCase extends BaseTestCase
     protected function getLocation($name)
     {
         $locations = [
-            'us' => [38.9072, -77.0369],
+            'us' => [37.0902, -95.7129],
             'us.alabama' => [32.3182, -86.9023],
             'us.alabama.attalla' => [34.0218, -86.0886],
             'us.alabama.auburn' => [32.6099, -85.4808],
