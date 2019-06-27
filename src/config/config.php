@@ -75,6 +75,10 @@ return [
                 'oklahoma_income_tax_information' => env('TAXES_OKLAHOMA_INCOME_TAX_INFORMATION', 'oklahoma_income_tax_information'),
             ],
 
+            'washingtondc' => [
+                'washingtondc_income_tax_information' => env('TAXES_WASHINGTONDC_INCOME_TAX_INFORMATION', 'washingtondc_income_tax_information'),
+            ],
+
             'wisconsin' => [
                 'wisconsin_income_tax_information' => env('TAXES_WISCONSIN_INCOME_TAX_INFORMATION', 'wisconsin_income_tax_information'),
             ],
@@ -130,6 +134,10 @@ return [
 
             'oklahoma' => [
                 'unemployment' => env('TAXES_OKLAHOMA_UNEMPLOYMENT_TAX_RATE', 0.015),
+            ],
+
+            'washingtondc' => [
+                'unemployment' => env('TAXES_WASHINGTONDC_UNEMPLOYMENT_TAX_RATE', 0.027),
             ],
 
             'wisconsin' => [

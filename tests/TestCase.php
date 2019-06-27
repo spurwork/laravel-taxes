@@ -15,6 +15,7 @@ use Appleton\Taxes\Countries\US\NewMexico\NewMexicoIncome\NewMexicoIncome;
 use Appleton\Taxes\Countries\US\NewYork\NewYorkIncome\NewYorkIncome;
 use Appleton\Taxes\Countries\US\NorthCarolina\NorthCarolinaIncome\NorthCarolinaIncome;
 use Appleton\Taxes\Countries\US\Oklahoma\OklahomaIncome\OklahomaIncome;
+use Appleton\Taxes\Countries\US\WashingtonDC\WashingtonDCIncome\WashingtonDCIncome;
 use Appleton\Taxes\Countries\US\Wisconsin\WisconsinIncome\WisconsinIncome;
 use Appleton\Taxes\Models\Countries\US\Alabama\AlabamaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Arizona\ArizonaIncomeTaxInformation;
@@ -35,6 +36,7 @@ use Appleton\Taxes\Models\Countries\US\NewYork\NewYorkIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\NorthCarolina\NorthCarolinaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Oklahoma\OklahomaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Virginia\VirginiaIncomeTaxInformation;
+use Appleton\Taxes\Models\Countries\US\WashingtonDC\WashingtonDCIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Wisconsin\WisconsinIncomeTaxInformation;
 use Appleton\Taxes\Providers\TaxesServiceProvider;
 use Carbon\Carbon;
@@ -209,6 +211,12 @@ class TestCase extends BaseTestCase
             'sixty_five_plus_or_blind_exemptions' => 0,
         ], $this->user);
 
+        WashingtonDCIncomeTaxInformation::createForUser([
+            'dependents' => 0,
+            'exempt' => false,
+            'filing_status' => WashingtonDCIncome::FILING_SINGLE,
+        ], $this->user);
+
         WisconsinIncomeTaxInformation::createForUser([
             'additional_withholding' => 0,
             'exemptions' => 0,
@@ -219,7 +227,7 @@ class TestCase extends BaseTestCase
     protected function getLocation($name)
     {
         $locations = [
-            'us' => [38.9072, -77.0369],
+            'us' => [37.0902, -95.7129],
             'us.alabama' => [32.3182, -86.9023],
             'us.alabama.attalla' => [34.0218, -86.0886],
             'us.alabama.auburn' => [32.6099, -85.4808],
@@ -396,6 +404,7 @@ class TestCase extends BaseTestCase
             'us.tennessee' => [35.5175, -86.5804],
             'us.texas' => [31.9686, -99.9018],
             'us.virginia' => [37.5407, -77.4360],
+            'us.washingtondc' => [38.9072, -77.0369],
             'us.wisconsin' => [43.0849721, -89.4764603],
         ];
 
@@ -446,6 +455,7 @@ class TestCase extends BaseTestCase
         $app['config']->set('taxes.tables.us.new_york.new_york_income_tax_information', 'new_york_income_tax_information');
         $app['config']->set('taxes.tables.us.oklahoma.oklahoma_income_tax_information', 'oklahoma_income_tax_information');
         $app['config']->set('taxes.tables.us.virginia.virginia_income_tax_information', 'virginia_income_tax_information');
+        $app['config']->set('taxes.tables.us.washingtondc.washingtondc_income_tax_information', 'washingtondc_income_tax_information');
         $app['config']->set('taxes.tables.us.wisconsin.wisconsin_income_tax_information', 'wisconsin_income_tax_information');
     }
 

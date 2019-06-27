@@ -16,8 +16,6 @@ abstract class OklahomaIncome extends BaseStateIncome
         self::FILING_MARRIED => 'FILING_MARRIED',
     ];
 
-    protected $tax_information;
-
     public function __construct(OklahomaIncomeTaxInformation $tax_information, Payroll $payroll)
     {
         parent::__construct($payroll);
