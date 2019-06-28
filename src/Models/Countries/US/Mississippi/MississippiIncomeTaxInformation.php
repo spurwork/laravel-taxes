@@ -15,7 +15,7 @@ class MississippiIncomeTaxInformation extends BaseTaxInformationModel
         $tax_information->additional_withholding = 0;
         $tax_information->exempt = false;
         $tax_information->filing_status = MississippiIncome::FILING_SINGLE;
-        $tax_information->exemption_amount = 0;
+        $tax_information->total_exemption_amount_dollars = 0;
 
         return $tax_information;
     }

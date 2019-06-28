@@ -27,7 +27,7 @@ class MississippiIncome extends BaseMississippiIncome
             return 0;
         }
 
-        $this->tax_total = $this->payroll->withholdTax($this->getTaxAmountFromTaxBrackets(($this->getAdjustedEarnings() * $this->payroll->pay_periods) - $this->tax_information->exemption_amount - $this->getTaxBrackets(), SELF::TAX_WITHHOLDING_BRACKET) / $this->payroll->pay_periods) + $this->getAdditionalWithholding();
+        $this->tax_total = $this->payroll->withholdTax($this->getTaxAmountFromTaxBrackets(($this->getAdjustedEarnings() * $this->payroll->pay_periods) - $this->tax_information->total_exemption_amount_dollars - $this->getTaxBrackets(), SELF::TAX_WITHHOLDING_BRACKET) / $this->payroll->pay_periods) + $this->getAdditionalWithholding();
 
         return (int)round(intval($this->tax_total * 100) / 100, 0);
     }

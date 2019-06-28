@@ -12,13 +12,13 @@ class MississippiIncomeTest extends TestCase
     /**
      * @dataProvider provideTestData
      */
-    public function testMississippiIncome($date, $filing_status, $exempt, $exemption_amount, $additional_withholding, $earnings, $result)
+    public function testMississippiIncome($date, $filing_status, $exempt, $total_exemption_amount_dollars, $additional_withholding, $earnings, $result)
     {
         MississippiIncomeTaxInformation::forUser($this->user)->update([
             'additional_withholding' => $additional_withholding,
             'exempt' => $exempt,
             'filing_status' => $filing_status,
-            'exemption_amount' => $exemption_amount,
+            'total_exemption_amount_dollars' => $total_exemption_amount_dollars,
         ]);
 
         Carbon::setTestNow(
@@ -41,7 +41,7 @@ class MississippiIncomeTest extends TestCase
         // date
         // filing status
         // exempt
-        // exemption_amount
+        // total_exemption_amount_dollars
         // additional_withholding
         // earnings
         // results
