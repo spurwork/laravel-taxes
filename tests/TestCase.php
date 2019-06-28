@@ -169,7 +169,7 @@ class TestCase extends BaseTestCase
         ], $this->user);
 
         MississippiIncomeTaxInformation::createForUser([
-            'personal_exemptions' => 0,
+            'total_exemption_amount_dollars' => 0,
             'additional_withholding' => 0,
             'filing_status' => MississippiIncome::FILING_SINGLE,
             'exempt' => false,

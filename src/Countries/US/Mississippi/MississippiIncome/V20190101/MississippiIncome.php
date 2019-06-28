@@ -11,7 +11,8 @@ class MississippiIncome extends BaseMississippiIncome
     const TAX_RATE = 0.05;
     const SINGLE_DEDUCTION = 2300;
     const HEAD_OF_HOUSEHOLD_DEDUCTION = 3400;
-    const MARRIED_DEDUCTION = 4600;
+    const MARRIED_DEDUCTION_ONE_SPOUSE_EMPLOYED = 4600;
+    const MARRIED_DEDUCTION_BOTH_SPOUSES_EMPLOYED = 4600;
 
     const TAX_WITHHOLDING_BRACKET = [
         [0, 0, 0],
@@ -26,24 +27,21 @@ class MississippiIncome extends BaseMississippiIncome
             return 0;
         }
 
-        $this->tax_total = $this->payroll->withholdTax($this->getTaxAmountFromTaxBrackets(($this->getAdjustedEarnings() * $this->payroll->pay_periods) - $this->tax_information->personal_exemptions - $this->getTaxBrackets(), SELF::TAX_WITHHOLDING_BRACKET) / $this->payroll->pay_periods) + $this->getAdditionalWithholding();
+        $this->tax_total = $this->payroll->withholdTax($this->getTaxAmountFromTaxBrackets(($this->getAdjustedEarnings() * $this->payroll->pay_periods) - $this->tax_information->total_exemption_amount_dollars - $this->getTaxBrackets(), SELF::TAX_WITHHOLDING_BRACKET) / $this->payroll->pay_periods) + $this->getAdditionalWithholding();
 
         return (int)round(intval($this->tax_total * 100) / 100, 0);
     }
 
     public function getTaxBrackets()
     {
-        if ($this->tax_information->filing_status === static::FILING_MARRIED) {
-            return self::MARRIED_DEDUCTION;
+        if ($this->tax_information->filing_status === static::FILING_MARRIED_ONE_SPOUSE_EMPLOYED) {
+            return self::MARRIED_DEDUCTION_ONE_SPOUSE_EMPLOYED;
+        } elseif ($this->tax_information->filing_status === static::FILING_MARRIED_BOTH_SPOUSES_EMPLOYED) {
+            return self::MARRIED_DEDUCTION_BOTH_SPOUSES_EMPLOYED;
         } elseif ($this->tax_information->filing_status === static::FILING_HEAD_OF_HOUSEHOLD) {
             return self::HEAD_OF_HOUSEHOLD_DEDUCTION;
         } else {
             return self::SINGLE_DEDUCTION;
         }
-    }
-
-    public function getAdditionalWithholding()
-    {
-        return $this->tax_information->additional_withholding;
     }
 }

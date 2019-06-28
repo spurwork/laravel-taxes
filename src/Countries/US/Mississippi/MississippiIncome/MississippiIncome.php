@@ -9,7 +9,8 @@ use Appleton\Taxes\Models\Countries\US\Mississippi\MississippiIncomeTaxInformati
 abstract class MississippiIncome extends BaseStateIncome
 {
     const FILING_SINGLE = 'S';
-    const FILING_MARRIED = 'M';
+    const FILING_MARRIED_ONE_SPOUSE_EMPLOYED = 'M';
+    const FILING_MARRIED_BOTH_SPOUSES_EMPLOYED = 'B';
     const FILING_HEAD_OF_HOUSEHOLD = 'H';
 
     protected $tax_information;
