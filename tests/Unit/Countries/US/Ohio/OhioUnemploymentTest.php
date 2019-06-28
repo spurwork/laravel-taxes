@@ -24,8 +24,8 @@ class OhioUnemploymentTest extends TestCase
             $taxes->setEarnings(200.0);
         });
 
-        // round(200.0 * .015, 2) = 3.0;
-        $this->assertThat(3, self::identicalTo($results->getTax(OhioUnemployment::class)));
+        // round(200.0 * .027, 2) = 5.4;
+        $this->assertThat(5.4, self::identicalTo($results->getTax(OhioUnemployment::class)));
     }
 
     public function testOhioUnemployment_notMetWageBase(): void
@@ -35,13 +35,13 @@ class OhioUnemploymentTest extends TestCase
             $taxes->setWorkLocation($this->getLocation('us.ohio'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(200.0);
-            $taxes->setYtdEarnings(17900);
+            $taxes->setYtdEarnings(9200);
         });
 
-        // 17900 + 200 = 18050
-        // 18100 wage base not met, all taxable
-        // round(200.0 * .015, 2) = 3;
-        $this->assertThat(3, self::identicalTo($results->getTax(OhioUnemployment::class)));
+        // 9200 + 200 = 9400
+        // 9500 wage base not met, all taxable
+        // round(200.0 * .027, 2) = 5.4;
+        $this->assertThat(5.4, self::identicalTo($results->getTax(OhioUnemployment::class)));
     }
 
     public function testOhioUnemployment_metAndExceedWageBase(): void
@@ -51,13 +51,13 @@ class OhioUnemploymentTest extends TestCase
             $taxes->setWorkLocation($this->getLocation('us.ohio'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(200.0);
-            $taxes->setYtdEarnings(18000);
+            $taxes->setYtdEarnings(9400);
         });
 
-        // 18000 + 200 = 18200
-        // 100 over 18100 wage base so only 200 taxable
-        // round(100.0 * .015, 2) = 1.5;
-        $this->assertThat(2, self::identicalTo($results->getTax(OhioUnemployment::class)));
+        // 9400 + 200 = 9600
+        // 100 over 9500 wage base so only 200 taxable
+        // round(100.0 * .027, 2) = 2.7;
+        $this->assertThat(2.7, self::identicalTo($results->getTax(OhioUnemployment::class)));
     }
 
     public function testOhioUnemployment_exceedWageBase(): void
@@ -67,10 +67,10 @@ class OhioUnemploymentTest extends TestCase
             $taxes->setWorkLocation($this->getLocation('us.ohio'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(200.0);
-            $taxes->setYtdEarnings(18200);
+            $taxes->setYtdEarnings(9500);
         });
 
-        // 18500 exceeds 18100 wage base, none taxable
-        $this->assertThat(0, self::identicalTo($results->getTax(OhioUnemployment::class)));
+        // 9700 exceeds 9500 wage base, none taxable
+        $this->assertThat(0.0, self::identicalTo($results->getTax(OhioUnemployment::class)));
     }
 }
