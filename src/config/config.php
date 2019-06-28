@@ -71,6 +71,10 @@ return [
                 'north_carolina_income_tax_information' => env('TAXES_NORTH_CAROLINA_INCOME_TAX_INFORMATION', 'north_carolina_income_tax_information'),
             ],
 
+            'ohio' => [
+                'ohio_income_tax_information' => env('TAXES_OHIO_INCOME_TAX_INFORMATION', 'ohio_income_tax_information'),
+            ],
+
             'oklahoma' => [
                 'oklahoma_income_tax_information' => env('TAXES_OKLAHOMA_INCOME_TAX_INFORMATION', 'oklahoma_income_tax_information'),
             ],
@@ -130,6 +134,10 @@ return [
 
             'north_carolina' => [
                 'unemployment' => env('TAXES_NORTH_CAROLINA_UNEMPLOYMENT_TAX_RATE', 0.01),
+            ],
+
+            'ohio' => [
+                'unemployment' => env('TAXES_OHIO_UNEMPLOYMENT_TAX_RATE', 0.027),
             ],
 
             'oklahoma' => [

@@ -217,6 +217,8 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\NewYork\Yonkers\Yonkers::class,
         \Appleton\Taxes\Countries\US\NorthCarolina\NorthCarolinaIncome\NorthCarolinaIncome::class,
         \Appleton\Taxes\Countries\US\NorthCarolina\NorthCarolinaUnemployment\NorthCarolinaUnemployment::class,
+        \Appleton\Taxes\Countries\US\Ohio\OhioIncome\OhioIncome::class,
+        \Appleton\Taxes\Countries\US\Ohio\OhioUnemployment\OhioUnemployment::class,
         \Appleton\Taxes\Countries\US\Oklahoma\OklahomaIncome\OklahomaIncome::class,
         \Appleton\Taxes\Countries\US\Oklahoma\OklahomaUnemployment\OklahomaUnemployment::class,
         \Appleton\Taxes\Countries\US\Virginia\VirginiaIncome\VirginiaIncome::class,

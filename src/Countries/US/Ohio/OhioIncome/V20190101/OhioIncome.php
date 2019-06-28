@@ -9,67 +9,18 @@ use Illuminate\Database\Eloquent\Collection;
 
 class OhioIncome extends BaseOhioIncome
 {
-    const SUPPLEMENTAL_TAX_RATE = 0.0535;
+    const TAX_RATE = 0.05;
 
-    const TAX_RATE = 0.0535;
-
-    const STANDARD_DEDUCTIONS = [
-        self::FILING_SINGLE => 10000,
-        self::FILING_HEAD_OF_HOUSEHOLD => 15000,
-        self::FILING_MARRIED => 10000,
-        self::FILING_SEPERATE => 10000,
+    const TAX_WITHHOLDING_BRACKET = [
+        [0, .005, 0],
+        [5000, .01, 25],
+        [10000, .02, 75],
+        [15000, .025, 175],
+        [20000, .03, 300],
+        [40000, .035, 900],
+        [80000, .04, 2300],
+        [100000, .05, 3100],
     ];
-
-    const DEPENDENT_EXEMPTION_BRACKETS = [
-        self::FILING_SINGLE => [
-            [0, 2500],
-            [20000, 2000],
-            [30000, 1500],
-            [40000, 1000],
-            [50000, 500],
-            [60000, 0],
-        ],
-        self::FILING_HEAD_OF_HOUSEHOLD => [
-            [0, 2500],
-            [30000, 2000],
-            [45000, 1500],
-            [60000, 1000],
-            [75000, 500],
-            [90000, 0],
-        ],
-        self::FILING_MARRIED => [
-            [0, 2500],
-            [40000, 2000],
-            [60000, 1500],
-            [80000, 1000],
-            [100000, 500],
-            [120000, 0],
-        ],
-        self::FILING_SEPERATE => [
-            [0, 2500],
-            [20000, 2000],
-            [30000, 1500],
-            [40000, 1000],
-            [50000, 500],
-            [60000, 0],
-        ],
-    ];
-
-    public function __construct(OhioIncomeTaxInformation $tax_information, Payroll $payroll)
-    {
-        parent::__construct($payroll);
-        $this->tax_information = $tax_information;
-    }
-
-    public function getAdjustedEarnings()
-    {
-        return $this->getGrossEarnings() - $this->getStandardDeduction() - $this->getDependentExemption();
-    }
-
-    public function getSupplementalIncomeTax()
-    {
-        return $this->payroll->getSupplementalEarnings() * self::SUPPLEMENTAL_TAX_RATE;
-    }
 
     public function getTaxBrackets()
     {
@@ -78,28 +29,17 @@ class OhioIncome extends BaseOhioIncome
 
     public function compute(Collection $tax_areas)
     {
-        $result = parent::compute($tax_areas);
-        return round($result, 0);
-    }
-
-    private function getStandardDeduction()
-    {
-        if (array_key_exists($this->tax_information->filing_status, static::STANDARD_DEDUCTIONS)) {
-            return static::STANDARD_DEDUCTIONS[$this->tax_information->filing_status];
+        if ($this->isUserClaimingExemption()) {
+            return 0;
         }
 
-        return 0;
+        $this->tax_total = $this->payroll->withholdTax($this->getTaxAmountFromTaxBrackets(($this->getAdjustedEarnings() * $this->payroll->pay_periods) - $this->getDependentAllowance(), SELF::TAX_WITHHOLDING_BRACKET) / $this->payroll->pay_periods);
+
+        return round(intval($this->tax_total * 100) / 100, 2);
     }
 
-    private function getDependentExemption()
+    public function getDependentAllowance()
     {
-        $gross_earnings = $this->getGrossEarnings();
-        $dependent_exemption = $this->getTaxBracket($gross_earnings, static::DEPENDENT_EXEMPTION_BRACKETS[$this->tax_information->filing_status]);
-        return $this->tax_information->dependents * $dependent_exemption[1];
-    }
-
-    private function getGrossEarnings()
-    {
-        return ($this->payroll->getEarnings() - $this->payroll->getSupplementalEarnings()) * $this->payroll->pay_periods;
+        return $this->tax_information->dependents * 650;
     }
 }

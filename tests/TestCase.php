@@ -34,6 +34,7 @@ use Appleton\Taxes\Models\Countries\US\NewJersey\NewJerseyIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\NewMexico\NewMexicoIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\NewYork\NewYorkIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\NorthCarolina\NorthCarolinaIncomeTaxInformation;
+use Appleton\Taxes\Models\Countries\US\Ohio\OhioIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Oklahoma\OklahomaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Virginia\VirginiaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\WashingtonDC\WashingtonDCIncomeTaxInformation;
@@ -197,6 +198,11 @@ class TestCase extends BaseTestCase
             'additional_withholding' => 0,
             'dependents' => 0,
             'filing_status' => NorthCarolinaIncome::FILING_SINGLE,
+        ], $this->user);
+
+        OhioIncomeTaxInformation::createForUser([
+            'dependents' => 0,
+            'exempt' => false,
         ], $this->user);
 
         OklahomaIncomeTaxInformation::createForUser([
@@ -400,6 +406,7 @@ class TestCase extends BaseTestCase
             'us.new_york' => [40.7128, -74.0060],
             'us.new_york.yonkers' => [40.9312, -73.8987],
             'us.north_carolina' => [35.7596, -79.0193],
+            'us.ohio' => [40.4173, -82.9071],
             'us.oklahoma' => [35.4676, -97.5164],
             'us.tennessee' => [35.5175, -86.5804],
             'us.texas' => [31.9686, -99.9018],
@@ -453,6 +460,7 @@ class TestCase extends BaseTestCase
         $app['config']->set('taxes.tables.us.mississippi.mississippi_income_tax_information', 'mississippi_income_tax_information');
         $app['config']->set('taxes.tables.us.new_jersey.new_jersey_income_tax_information', 'new_jersey_income_tax_information');
         $app['config']->set('taxes.tables.us.new_york.new_york_income_tax_information', 'new_york_income_tax_information');
+        $app['config']->set('taxes.tables.us.ohio.ohio_income_tax_information', 'ohio_income_tax_information');
         $app['config']->set('taxes.tables.us.oklahoma.oklahoma_income_tax_information', 'oklahoma_income_tax_information');
         $app['config']->set('taxes.tables.us.virginia.virginia_income_tax_information', 'virginia_income_tax_information');
         $app['config']->set('taxes.tables.us.washingtondc.washingtondc_income_tax_information', 'washingtondc_income_tax_information');

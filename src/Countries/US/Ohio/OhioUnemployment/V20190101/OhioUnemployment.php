@@ -7,15 +7,15 @@ use Appleton\Taxes\Countries\US\Ohio\OhioUnemployment\OhioUnemployment as BaseOh
 
 class OhioUnemployment extends BaseOhioUnemployment
 {
-    const FUTA_CREDIT = 0.054;
+    const FUTA_CREDIT = 0.06;
 
-    const NEW_EMPLOYER_RATE = 0.01;
+    const NEW_EMPLOYER_RATE = 0.027;
 
-    const WAGE_BASE = 24300;
+    const WAGE_BASE = 9500;
 
     public function __construct(Payroll $payroll)
     {
         parent::__construct($payroll);
-        $this->tax_rate = config('taxes.rates.us.north_carolina.unemployment', static::NEW_EMPLOYER_RATE);
+        $this->tax_rate = config('taxes.rates.us.ohio.unemployment', static::NEW_EMPLOYER_RATE);
     }
 }
