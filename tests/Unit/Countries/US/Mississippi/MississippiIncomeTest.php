@@ -12,13 +12,13 @@ class MississippiIncomeTest extends TestCase
     /**
      * @dataProvider provideTestData
      */
-    public function testMississippiIncome($date, $filing_status, $exempt, $personal_exemptions, $additional_withholding, $earnings, $result)
+    public function testMississippiIncome($date, $filing_status, $exempt, $total_exemption_amount_dollars, $additional_withholding, $earnings, $result)
     {
         MississippiIncomeTaxInformation::forUser($this->user)->update([
             'additional_withholding' => $additional_withholding,
             'exempt' => $exempt,
             'filing_status' => $filing_status,
-            'personal_exemptions' => $personal_exemptions,
+            'total_exemption_amount_dollars' => $total_exemption_amount_dollars,
         ]);
 
         Carbon::setTestNow(
@@ -41,7 +41,7 @@ class MississippiIncomeTest extends TestCase
         // date
         // filing status
         // exempt
-        // personal_exemptions
+        // total_exemption_amount_dollars
         // additional_withholding
         // earnings
         // results
@@ -85,7 +85,7 @@ class MississippiIncomeTest extends TestCase
             ],
             '4' => [
                 'January 1, 2019 8am',
-                MississippiIncome::FILING_MARRIED,
+                MississippiIncome::FILING_MARRIED_ONE_SPOUSE_EMPLOYED,
                 false,
                 50,
                 0,
@@ -94,7 +94,7 @@ class MississippiIncomeTest extends TestCase
             ],
             '5' => [
                 'January 1, 2019 8am',
-                MississippiIncome::FILING_MARRIED,
+                MississippiIncome::FILING_MARRIED_ONE_SPOUSE_EMPLOYED,
                 false,
                 4000,
                 0,
@@ -103,7 +103,7 @@ class MississippiIncomeTest extends TestCase
             ],
             '6' => [
                 'January 1, 2019 8am',
-                MississippiIncome::FILING_MARRIED,
+                MississippiIncome::FILING_MARRIED_ONE_SPOUSE_EMPLOYED,
                 false,
                 10000,
                 0,
@@ -139,7 +139,7 @@ class MississippiIncomeTest extends TestCase
             ],
             '10' => [
                 'January 1, 2019 8am',
-                MississippiIncome::FILING_MARRIED,
+                MississippiIncome::FILING_MARRIED_BOTH_SPOUSES_EMPLOYED,
                 false,
                 50,
                 0,
@@ -148,7 +148,7 @@ class MississippiIncomeTest extends TestCase
             ],
             '11' => [
                 'January 1, 2019 8am',
-                MississippiIncome::FILING_MARRIED,
+                MississippiIncome::FILING_MARRIED_BOTH_SPOUSES_EMPLOYED,
                 false,
                 4000,
                 0,
@@ -157,7 +157,7 @@ class MississippiIncomeTest extends TestCase
             ],
             '12' => [
                 'January 1, 2019 8am',
-                MississippiIncome::FILING_MARRIED,
+                MississippiIncome::FILING_MARRIED_BOTH_SPOUSES_EMPLOYED,
                 false,
                 10000,
                 0,
