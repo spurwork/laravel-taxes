@@ -24,7 +24,7 @@ class OhioIncome extends BaseOhioIncome
 
     public function getTaxBrackets()
     {
-        return [[0, self::TAX_RATE, 0]];
+        return self::TAX_WITHHOLDING_BRACKET;
     }
 
     public function compute(Collection $tax_areas)
@@ -33,7 +33,7 @@ class OhioIncome extends BaseOhioIncome
             return 0;
         }
 
-        $this->tax_total = $this->payroll->withholdTax($this->getTaxAmountFromTaxBrackets(($this->getAdjustedEarnings() * $this->payroll->pay_periods) - $this->getDependentAllowance(), SELF::TAX_WITHHOLDING_BRACKET) / $this->payroll->pay_periods) * 1.075;
+        $this->tax_total = $this->payroll->withholdTax($this->getTaxAmountFromTaxBrackets(($this->getAdjustedEarnings() * $this->payroll->pay_periods) - $this->getDependentAllowance(), $this->getTaxBrackets()) / $this->payroll->pay_periods) * 1.075;
 
         return round(intval($this->tax_total * 100) / 100, 2);
     }
