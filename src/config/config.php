@@ -35,6 +35,10 @@ return [
                 'alabama_income_tax_information' => env('TAXES_ALABAMA_INCOME_TAX_INFORMATION', 'alabama_income_tax_information'),
             ],
 
+            'california' => [
+                'california_income_tax_information' => env('TAXES_CALIFORNIA_INCOME_TAX_INFORMATION', 'california_income_tax_information'),
+            ],
+
             'colorado' => [
                 'colorado_income_tax_information' => env('TAXES_COLORADO_INCOME_TAX_INFORMATION', 'colorado_income_tax_information'),
             ],
@@ -98,6 +102,10 @@ return [
         'us' => [
             'alabama' => [
                 'unemployment' => env('TAXES_ALABAMA_UNEMPLOYMENT_TAX_RATE', 0.027),
+            ],
+
+            'california' => [
+                'unemployment' => env('TAXES_CALIFORNIA_UNEMPLOYMENT_TAX_RATE', 0.034),
             ],
 
             'colorado' => [

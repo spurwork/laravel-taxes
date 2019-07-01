@@ -52,6 +52,8 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\Alabama\TuskegeeOccupational\TuskegeeOccupational::class,
         \Appleton\Taxes\Countries\US\Arizona\ArizonaIncome\ArizonaIncome::class,
         \Appleton\Taxes\Countries\US\Arizona\ArizonaUnemployment\ArizonaUnemployment::class,
+        \Appleton\Taxes\Countries\US\California\CaliforniaIncome\CaliforniaIncome::class,
+        \Appleton\Taxes\Countries\US\California\CaliforniaUnemployment\CaliforniaUnemployment::class,
         \Appleton\Taxes\Countries\US\Colorado\ColoradoIncome\ColoradoIncome::class,
         \Appleton\Taxes\Countries\US\Colorado\ColoradoUnemployment\ColoradoUnemployment::class,
         \Appleton\Taxes\Countries\US\Georgia\GeorgiaIncome\GeorgiaIncome::class,
