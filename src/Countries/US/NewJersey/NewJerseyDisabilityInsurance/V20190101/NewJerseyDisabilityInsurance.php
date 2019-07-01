@@ -15,7 +15,7 @@ class NewJerseyDisabilityInsurance extends BaseNewJerseyDisabilityInsurance
         if (($this->payroll->earnings + $this->payroll->wtd_earnings) < self::WAGE_BASE) {
             return $this->payroll->wtd_earnings;
         } elseif (($this->payroll->earnings + $this->payroll->wtd_earnings) >= self::WAGE_BASE) {
-            $total = ($this->payroll->earnings + $this->payroll->wtd_earnings) - self::WAGE_BASE;
+            $total = self::WAGE_BASE - $this->payroll->earnings;
 
             return $total > 0 ? $total : 0;
         }

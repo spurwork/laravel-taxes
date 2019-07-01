@@ -52,7 +52,7 @@ class NewJerseyDisabilityInsuranceTest extends \TestCase
                 'January 1, 2019 8am',
                 930,
                 34000,
-                0.9, // check with Corey to see if he had a typo
+                0.68
             ],
         ];
     }
