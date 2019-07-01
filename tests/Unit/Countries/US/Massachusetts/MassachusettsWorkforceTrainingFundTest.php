@@ -57,7 +57,7 @@ class MassachusettsWorkforceTrainingFundTest extends \TestCase
             $taxes->setYtdEarnings(15000);
         });
 
-        $this->assertSame(0.0, $results->getTax(MassachusettsWorkforceTrainingFund::class));
+        $this->assertSame(null, $results->getTax(MassachusettsWorkforceTrainingFund::class));
 
         $results = $this->taxes->calculate(function ($taxes) {
             $taxes->setHomeLocation($this->getLocation('us.massachusetts'));
@@ -67,6 +67,6 @@ class MassachusettsWorkforceTrainingFundTest extends \TestCase
             $taxes->setYtdEarnings(15050);
         });
 
-        $this->assertSame(0.0, $results->getTax(MassachusettsWorkforceTrainingFund::class));
+        $this->assertSame(null, $results->getTax(MassachusettsWorkforceTrainingFund::class));
     }
 }
