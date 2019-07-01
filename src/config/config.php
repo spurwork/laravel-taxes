@@ -83,6 +83,10 @@ return [
                 'washingtondc_income_tax_information' => env('TAXES_WASHINGTONDC_INCOME_TAX_INFORMATION', 'washingtondc_income_tax_information'),
             ],
 
+            'west_virginia' => [
+                'west_virginia_income_tax_information' => env('TAXES_WEST_VIRGINIA_INCOME_TAX_INFORMATION', 'west_virginia_income_tax_information'),
+            ],
+
             'wisconsin' => [
                 'wisconsin_income_tax_information' => env('TAXES_WISCONSIN_INCOME_TAX_INFORMATION', 'wisconsin_income_tax_information'),
             ],
@@ -150,6 +154,10 @@ return [
 
             'washingtondc' => [
                 'unemployment' => env('TAXES_WASHINGTONDC_UNEMPLOYMENT_TAX_RATE', 0.027),
+            ],
+
+            'west_virginia' => [
+                'unemployment' => env('TAXES_WEST_VIRGINIA_UNEMPLOYMENT_TAX_RATE', 0.027),
             ],
 
             'wisconsin' => [

@@ -39,6 +39,7 @@ use Appleton\Taxes\Models\Countries\US\NorthCarolina\NorthCarolinaIncomeTaxInfor
 use Appleton\Taxes\Models\Countries\US\Oklahoma\OklahomaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Virginia\VirginiaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\WashingtonDC\WashingtonDCIncomeTaxInformation;
+use Appleton\Taxes\Models\Countries\US\WestVirginia\WestVirginiaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Wisconsin\WisconsinIncomeTaxInformation;
 use Appleton\Taxes\Providers\TaxesServiceProvider;
 use Carbon\Carbon;
@@ -225,6 +226,13 @@ class TestCase extends BaseTestCase
             'dependents' => 0,
             'exempt' => false,
             'filing_status' => WashingtonDCIncome::FILING_SINGLE,
+        ], $this->user);
+
+        WestVirginiaIncomeTaxInformation::createForUser([
+            'two_earner_percent' => false,
+            'allowances' => 0,
+            'additional_withholding' => 0,
+            'exempt' => false,
         ], $this->user);
 
         WisconsinIncomeTaxInformation::createForUser([
@@ -417,6 +425,7 @@ class TestCase extends BaseTestCase
             'us.texas' => [31.9686, -99.9018],
             'us.virginia' => [37.5407, -77.4360],
             'us.washingtondc' => [38.9072, -77.0369],
+            'us.west_virginia' => [38.3498, -81.6326],
             'us.wisconsin' => [43.0849721, -89.4764603],
         ];
 
