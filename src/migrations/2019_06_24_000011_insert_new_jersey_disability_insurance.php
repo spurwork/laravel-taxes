@@ -10,7 +10,7 @@ class InsertNewJerseyDisabilityInsurance extends Migration
     public function up()
     {
         $disability_tax_id = DB::table('taxes')->insertGetId([
-            'name' => 'New Jersey Disability Insurance Tax',
+            'name' => 'New Jersey Disability Insurance Tax Employer',
             'class' => NewJerseyDisabilityInsuranceEmployer::class,
         ]);
 
