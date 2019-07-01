@@ -9,7 +9,7 @@ class TaxResults
     public function __construct($results)
     {
         $this->results = collect($results)->reject(function ($result) {
-            return $result['amount'] === 0;
+            return $result['amount'] <= 0;
         });
     }
 
