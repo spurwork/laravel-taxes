@@ -48,7 +48,7 @@ class SocialSecurityTest extends \TestCase
             $taxes->setYtdEarnings(127200);
         });
 
-        $this->assertSame(0.0, $results->getTax(ParentSocialSecurity::class));
+        $this->assertSame(null, $results->getTax(ParentSocialSecurity::class));
 
         $results = $this->taxes->calculate(function ($taxes) {
             $taxes->setHomeLocation($this->getLocation('us'));
@@ -58,7 +58,7 @@ class SocialSecurityTest extends \TestCase
             $taxes->setYtdEarnings(127250);
         });
 
-        $this->assertSame(0.0, $results->getTax(ParentSocialSecurity::class));
+        $this->assertSame(null, $results->getTax(ParentSocialSecurity::class));
     }
 
     public function testCaseStudy1()

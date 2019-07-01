@@ -54,7 +54,7 @@ class MississippiIncomeTest extends TestCase
                 0,
                 0,
                 300,
-                0,
+                null,
             ],
             '1' => [
                 'January 1, 2019 8am',
@@ -108,7 +108,7 @@ class MississippiIncomeTest extends TestCase
                 10000,
                 0,
                 300,
-                0,
+                null,
             ],
             '7' => [
                 'January 1, 2019 8am',
@@ -135,7 +135,7 @@ class MississippiIncomeTest extends TestCase
                 10000,
                 0,
                 300,
-                0,
+                null,
             ],
             '10' => [
                 'January 1, 2019 8am',

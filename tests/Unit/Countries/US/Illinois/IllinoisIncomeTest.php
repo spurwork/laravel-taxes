@@ -85,7 +85,7 @@ class IllinoisIncomeTest extends TestCase
     public function testVirginiaIncome_exempt(): void
     {
         $results = $this->calculateTaxes(0, 0, 300.0, true);
-        $this->assertThat(0.0, self::identicalTo($results->getTax(IllinoisIncome::class)));
+        $this->assertThat(null, self::identicalTo($results->getTax(IllinoisIncome::class)));
     }
 
     /**

@@ -71,6 +71,6 @@ class OklahomaUnemploymentTest extends TestCase
         });
 
         // 18500 exceeds 18100 wage base, none taxable
-        $this->assertThat(0, self::identicalTo($results->getTax(OklahomaUnemployment::class)));
+        $this->assertThat(null, self::identicalTo($results->getTax(OklahomaUnemployment::class)));
     }
 }

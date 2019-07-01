@@ -71,7 +71,7 @@ class MassachusettsUnemploymentTest extends \TestCase
             $taxes->setYtdEarnings(15000);
         });
 
-        $this->assertSame(0.0, $results->getTax(MassachusettsUnemployment::class));
+        $this->assertSame(null, $results->getTax(MassachusettsUnemployment::class));
 
         $results = $this->taxes->calculate(function ($taxes) {
             $taxes->setHomeLocation($this->getLocation('us.massachusetts'));
@@ -81,6 +81,6 @@ class MassachusettsUnemploymentTest extends \TestCase
             $taxes->setYtdEarnings(15050);
         });
 
-        $this->assertSame(0.0, $results->getTax(MassachusettsUnemployment::class));
+        $this->assertSame(null, $results->getTax(MassachusettsUnemployment::class));
     }
 }

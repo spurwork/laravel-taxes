@@ -71,6 +71,6 @@ class MississippiUnemploymentTest extends TestCase
         });
 
         // 9100 exceeds 9000 wage base, none taxable
-        $this->assertThat(0, self::identicalTo($results->getTax(MississippiUnemployment::class)));
+        $this->assertThat(null, self::identicalTo($results->getTax(MississippiUnemployment::class)));
     }
 }

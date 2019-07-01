@@ -70,6 +70,6 @@ class LouisianaUnemploymentTest extends TestCase
         });
 
         // 7100 exceeds 7000 wage base, none taxable
-        $this->assertThat(0.0, self::identicalTo($results->getTax(LouisianaUnemployment::class)));
+        $this->assertThat(null, self::identicalTo($results->getTax(LouisianaUnemployment::class)));
     }
 }
