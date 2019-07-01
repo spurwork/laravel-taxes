@@ -405,6 +405,7 @@ class TestCase extends BaseTestCase
             'us.maryland.worcester' => [38.1584, -75.4345],
             'us.michigan' => [42.7325, -84.5555],
             'us.mississippi' => [32.3547, -89.3985],
+            'us.nevada' => [39.1641, -119.7661],
             'us.new_jersey' => [40.2206, -74.7597],
             'us.new_jersey.newark' => [40.7357, -74.1724],
             'us.new_mexico' => [34.5199, -105.8701],
