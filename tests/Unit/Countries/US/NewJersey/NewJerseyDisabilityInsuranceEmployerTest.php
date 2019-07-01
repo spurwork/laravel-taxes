@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Unit\Countries\US\NewJersey;
+namespace Appleton\Taxes\Unit\Countries\US\NewJersey\NewJerseyDisabilityInsuranceEmployer;
 
-use Appleton\Taxes\Countries\US\NewJersey\NewJerseyDisabilityInsurance\NewJerseyDisabilityInsurance;
+use Appleton\Taxes\Countries\US\NewJersey\NewJerseyDisabilityInsuranceEmployer\NewJerseyDisabilityInsuranceEmployer;
 use Carbon\Carbon;
 
 class NewJerseyDisabilityInsuranceEmployerTest extends \TestCase
@@ -21,7 +21,7 @@ class NewJerseyDisabilityInsuranceEmployerTest extends \TestCase
             $taxes->setPayPeriods(52);
         });
 
-        $this->assertSame(3.73, $results->getTax(NewJerseyDisabilityInsurance::class));
+        $this->assertSame(3.73, $results->getTax(NewJerseyDisabilityInsuranceEmployer::class));
     }
 
     public function testNewJerseyDisabilityInsuranceOverWageBase()
@@ -39,7 +39,7 @@ class NewJerseyDisabilityInsuranceEmployerTest extends \TestCase
             $taxes->setYtdEarnings(34401);
         });
 
-        $this->assertSame(0.0, $results->getTax(NewJerseyDisabilityInsurance::class));
+        $this->assertSame(0.0, $results->getTax(NewJerseyDisabilityInsuranceEmployer::class));
     }
 
     public function testNewJerseyDisabilityInsuranceJustUnderWageBase()
@@ -57,6 +57,6 @@ class NewJerseyDisabilityInsuranceEmployerTest extends \TestCase
             $taxes->setYtdEarnings(34399);
         });
 
-        $this->assertSame(0.01, $results->getTax(NewJerseyDisabilityInsurance::class));
+        $this->assertSame(0.01, $results->getTax(NewJerseyDisabilityInsuranceEmployer::class));
     }
 }

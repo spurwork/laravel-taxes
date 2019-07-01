@@ -1,9 +1,9 @@
 <?php
 
 
-namespace Appleton\Taxes\Countries\US\NewJersey\NewJerseyDisabilityInsurance\V20190101;
+namespace Appleton\Taxes\Countries\US\NewJersey\NewJerseyDisabilityInsuranceEmployer\V20190101;
 
-use Appleton\Taxes\Countries\US\NewJersey\NewJerseyDisabilityInsurance\NewJerseyDisabilityInsuranceEmployer
+use Appleton\Taxes\Countries\US\NewJersey\NewJerseyDisabilityInsuranceEmployer\NewJerseyDisabilityInsuranceEmployer
     as BaseNewJerseyDisabilityInsuranceEmployer;
 use Illuminate\Database\Eloquent\Collection;
 
