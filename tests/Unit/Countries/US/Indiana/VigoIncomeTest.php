@@ -28,6 +28,30 @@ class VigoIncomeTest extends TestCase
             'dependent_exemptions' => 0,
             'exempt' => false,
             'additional_withholding' => 0,
+            'county_lived' => 84,
+            'county_worked' => 83,
+        ], $this->user);
+
+        $results = $this->taxes->calculate(function (Taxes $taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.indiana.vigo'));
+            $taxes->setWorkLocation($this->getLocation('us.indiana.vigo'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(300);
+            $taxes->setPayPeriods(52);
+        });
+
+        $this->assertThat(6.00, self::identicalTo($results->getTax(VigoIncome::class)));
+    }
+
+    public function testVigoIncomeCountyWorked(): void
+    {
+        IndianaIncomeTaxInformation::createForUser([
+            'personal_exemptions' => 0,
+            'dependent_exemptions' => 0,
+            'exempt' => false,
+            'additional_withholding' => 0,
+            'county_lived' => 0,
+            'county_worked' => 84,
         ], $this->user);
 
         $results = $this->taxes->calculate(function (Taxes $taxes) {

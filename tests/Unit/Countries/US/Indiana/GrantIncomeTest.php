@@ -37,6 +37,30 @@ class GrantIncomeTest extends TestCase
             'dependent_exemptions' => 1,
             'exempt' => false,
             'additional_withholding' => 0,
+            'county_lived' => 27,
+            'county_worked' => 26,
+        ], $this->user);
+
+        $results = $this->taxes->calculate(function (Taxes $taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.indiana.grant'));
+            $taxes->setWorkLocation($this->getLocation('us.indiana.grant'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(300);
+            $taxes->setPayPeriods(52);
+        });
+
+        $this->assertThat(5.93, self::identicalTo($results->getTax(GrantIncome::class)));
+    }
+
+    public function testGrantIncomeCountyWorked(): void
+    {
+        IndianaIncomeTaxInformation::createForUser([
+            'personal_exemptions' => 2,
+            'dependent_exemptions' => 1,
+            'exempt' => false,
+            'additional_withholding' => 0,
+            'county_lived' => 0,
+            'county_worked' => 27,
         ], $this->user);
 
         $results = $this->taxes->calculate(function (Taxes $taxes) {

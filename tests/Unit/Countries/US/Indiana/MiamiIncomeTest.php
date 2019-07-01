@@ -37,6 +37,30 @@ class MiamiIncomeTest extends TestCase
             'dependent_exemptions' => 1,
             'exempt' => false,
             'additional_withholding' => 0,
+            'county_lived' => 52,
+            'county_worked' => 51,
+        ], $this->user);
+
+        $results = $this->taxes->calculate(function (Taxes $taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.indiana.miami'));
+            $taxes->setWorkLocation($this->getLocation('us.indiana.miami'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(300);
+            $taxes->setPayPeriods(52);
+        });
+
+        $this->assertThat(5.91, self::identicalTo($results->getTax(MiamiIncome::class)));
+    }
+
+    public function testMiamiIncomeCountyWorked(): void
+    {
+        IndianaIncomeTaxInformation::createForUser([
+            'personal_exemptions' => 2,
+            'dependent_exemptions' => 1,
+            'exempt' => false,
+            'additional_withholding' => 0,
+            'county_lived' => 0,
+            'county_worked' => 52,
         ], $this->user);
 
         $results = $this->taxes->calculate(function (Taxes $taxes) {

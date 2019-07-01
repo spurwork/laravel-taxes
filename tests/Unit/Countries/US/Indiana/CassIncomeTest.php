@@ -28,6 +28,30 @@ class CassIncomeTest extends TestCase
             'dependent_exemptions' => 0,
             'exempt' => false,
             'additional_withholding' => 0,
+            'county_lived' => 9,
+            'county_worked' => 8,
+        ], $this->user);
+
+        $results = $this->taxes->calculate(function (Taxes $taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.indiana.cass'));
+            $taxes->setWorkLocation($this->getLocation('us.indiana.cass'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(300);
+            $taxes->setPayPeriods(52);
+        });
+
+        $this->assertThat(7.79, self::identicalTo($results->getTax(CassIncome::class)));
+    }
+
+    public function testCassIncomeCountyWorked(): void
+    {
+        IndianaIncomeTaxInformation::createForUser([
+            'personal_exemptions' => 0,
+            'dependent_exemptions' => 0,
+            'exempt' => false,
+            'additional_withholding' => 0,
+            'county_lived' => 0,
+            'county_worked' => 9,
         ], $this->user);
 
         $results = $this->taxes->calculate(function (Taxes $taxes) {

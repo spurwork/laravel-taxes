@@ -28,6 +28,30 @@ class VermillionIncomeTest extends TestCase
             'dependent_exemptions' => 0,
             'exempt' => false,
             'additional_withholding' => 0,
+            'county_lived' => 83,
+            'county_worked' => 82,
+        ], $this->user);
+
+        $results = $this->taxes->calculate(function (Taxes $taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.indiana.vermillion'));
+            $taxes->setWorkLocation($this->getLocation('us.indiana.vermillion'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(300);
+            $taxes->setPayPeriods(52);
+        });
+
+        $this->assertThat(4.50, self::identicalTo($results->getTax(VermillionIncome::class)));
+    }
+
+    public function testVermillionIncomeCountyWorked(): void
+    {
+        IndianaIncomeTaxInformation::createForUser([
+            'personal_exemptions' => 0,
+            'dependent_exemptions' => 0,
+            'exempt' => false,
+            'additional_withholding' => 0,
+            'county_lived' => 0,
+            'county_worked' => 83,
         ], $this->user);
 
         $results = $this->taxes->calculate(function (Taxes $taxes) {

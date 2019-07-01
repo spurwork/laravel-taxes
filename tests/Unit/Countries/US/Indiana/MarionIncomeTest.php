@@ -37,6 +37,30 @@ class MarionIncomeTest extends TestCase
             'dependent_exemptions' => 0,
             'exempt' => false,
             'additional_withholding' => 0,
+            'county_lived' => 49,
+            'county_worked' => 48,
+        ], $this->user);
+
+        $results = $this->taxes->calculate(function (Taxes $taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.indiana.marion'));
+            $taxes->setWorkLocation($this->getLocation('us.indiana.marion'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(300);
+            $taxes->setPayPeriods(52);
+        });
+
+        $this->assertThat(5.67, self::identicalTo($results->getTax(MarionIncome::class)));
+    }
+
+    public function testMarionIncomeCountyWorked(): void
+    {
+        IndianaIncomeTaxInformation::createForUser([
+            'personal_exemptions' => 1,
+            'dependent_exemptions' => 0,
+            'exempt' => false,
+            'additional_withholding' => 0,
+            'county_lived' => 0,
+            'county_worked' => 49,
         ], $this->user);
 
         $results = $this->taxes->calculate(function (Taxes $taxes) {

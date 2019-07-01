@@ -22,12 +22,14 @@ class TaxInformationServiceProvider extends ServiceProvider
         \Appleton\Taxes\Models\Countries\US\Maryland\MarylandIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\Massachusetts\MassachusettsIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\Michigan\MichiganIncomeTaxInformation::class,
+        \Appleton\Taxes\Models\Countries\US\Mississippi\MississippiIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\NewJersey\NewJerseyIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\NewMexico\NewMexicoIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\NewYork\NewYorkIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\Oklahoma\OklahomaIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\NorthCarolina\NorthCarolinaIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\Virginia\VirginiaIncomeTaxInformation::class,
+        \Appleton\Taxes\Models\Countries\US\WashingtonDC\WashingtonDCIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\Wisconsin\WisconsinIncomeTaxInformation::class,
     ];
 

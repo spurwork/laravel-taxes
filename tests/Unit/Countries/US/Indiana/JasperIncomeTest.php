@@ -28,6 +28,30 @@ class JasperIncomeTest extends TestCase
             'dependent_exemptions' => 0,
             'exempt' => false,
             'additional_withholding' => 0,
+            'county_lived' => 37,
+            'county_worked' => 36,
+        ], $this->user);
+
+        $results = $this->taxes->calculate(function (Taxes $taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.indiana.jasper'));
+            $taxes->setWorkLocation($this->getLocation('us.indiana.jasper'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(300);
+            $taxes->setPayPeriods(52);
+        });
+
+        $this->assertThat(8.59, self::identicalTo($results->getTax(JasperIncome::class)));
+    }
+
+    public function testJasperIncomeCountyWorked(): void
+    {
+        IndianaIncomeTaxInformation::createForUser([
+            'personal_exemptions' => 0,
+            'dependent_exemptions' => 0,
+            'exempt' => false,
+            'additional_withholding' => 0,
+            'county_lived' => 0,
+            'county_worked' => 37,
         ], $this->user);
 
         $results = $this->taxes->calculate(function (Taxes $taxes) {

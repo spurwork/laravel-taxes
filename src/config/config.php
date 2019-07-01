@@ -55,6 +55,10 @@ return [
                 'michigan_income_tax_information' => env('TAXES_MICHIGAN_INCOME_TAX_INFORMATION', 'michigan_income_tax_information'),
             ],
 
+            'mississippi' => [
+                'mississippi_income_tax_information' => env('TAXES_MISSISSIPPI_INCOME_TAX_INFORMATION', 'mississippi_income_tax_information'),
+            ],
+
             'new_jersey' => [
                 'new_jersey_income_tax_information' => env('TAXES_NEW_JERSEY_INCOME_TAX_INFORMATION', 'new_jersey_income_tax_information'),
             ],
@@ -69,6 +73,10 @@ return [
 
             'oklahoma' => [
                 'oklahoma_income_tax_information' => env('TAXES_OKLAHOMA_INCOME_TAX_INFORMATION', 'oklahoma_income_tax_information'),
+            ],
+
+            'washingtondc' => [
+                'washingtondc_income_tax_information' => env('TAXES_WASHINGTONDC_INCOME_TAX_INFORMATION', 'washingtondc_income_tax_information'),
             ],
 
             'wisconsin' => [
@@ -108,6 +116,10 @@ return [
                 'unemployment' => env('TAXES_MARYLAND_UNEMPLOYMENT_TAX_RATE', 0.026),
             ],
 
+            'mississippi' => [
+                'unemployment' => env('TAXES_MISSISSIPPI_UNEMPLOYMENT_TAX_RATE', 0.012),
+            ],
+
             'new_jersey' => [
                 'unemployment' => env('TAXES_NEW_JERSEY_UNEMPLOYMENT_TAX_RATE', 0.028),
             ],
@@ -122,6 +134,10 @@ return [
 
             'oklahoma' => [
                 'unemployment' => env('TAXES_OKLAHOMA_UNEMPLOYMENT_TAX_RATE', 0.015),
+            ],
+
+            'washingtondc' => [
+                'unemployment' => env('TAXES_WASHINGTONDC_UNEMPLOYMENT_TAX_RATE', 0.027),
             ],
 
             'wisconsin' => [

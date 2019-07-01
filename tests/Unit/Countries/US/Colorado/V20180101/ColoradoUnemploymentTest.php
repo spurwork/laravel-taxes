@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Colorado\ColoradoUnemployment;
+namespace Appleton\Taxes\Countries\US\Colorado\ColoradoUnemployment\V20180101;
 
-use Appleton\Taxes\Countries\US\Colorado\ColoradoIncome;
+use Appleton\Taxes\Countries\US\Colorado\ColoradoUnemployment\ColoradoUnemployment;
 use Carbon\Carbon;
 
 class ColoradoUnemploymentTest extends \TestCase

@@ -28,6 +28,30 @@ class JenningsIncomeTest extends TestCase
             'dependent_exemptions' => 0,
             'exempt' => false,
             'additional_withholding' => 0,
+            'county_lived' => 40,
+            'county_worked' => 39,
+        ], $this->user);
+
+        $results = $this->taxes->calculate(function (Taxes $taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.indiana.jennings'));
+            $taxes->setWorkLocation($this->getLocation('us.indiana.jennings'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(300);
+            $taxes->setPayPeriods(52);
+        });
+
+        $this->assertThat(9.44, self::identicalTo($results->getTax(JenningsIncome::class)));
+    }
+
+    public function testJenningsIncomeWorked(): void
+    {
+        IndianaIncomeTaxInformation::createForUser([
+            'personal_exemptions' => 0,
+            'dependent_exemptions' => 0,
+            'exempt' => false,
+            'additional_withholding' => 0,
+            'county_lived' => 0,
+            'county_worked' => 40,
         ], $this->user);
 
         $results = $this->taxes->calculate(function (Taxes $taxes) {

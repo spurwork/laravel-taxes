@@ -28,6 +28,30 @@ class FayetteIncomeTest extends TestCase
             'dependent_exemptions' => 0,
             'exempt' => false,
             'additional_withholding' => 0,
+            'county_lived' => 21,
+            'county_worked' => 20,
+        ], $this->user);
+
+        $results = $this->taxes->calculate(function (Taxes $taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.indiana.fayette'));
+            $taxes->setWorkLocation($this->getLocation('us.indiana.fayette'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(300);
+            $taxes->setPayPeriods(52);
+        });
+
+        $this->assertThat(7.11, self::identicalTo($results->getTax(FayetteIncome::class)));
+    }
+
+    public function testFayetteIncomeCountyWorked(): void
+    {
+        IndianaIncomeTaxInformation::createForUser([
+            'personal_exemptions' => 0,
+            'dependent_exemptions' => 0,
+            'exempt' => false,
+            'additional_withholding' => 0,
+            'county_lived' => 0,
+            'county_worked' => 21,
         ], $this->user);
 
         $results = $this->taxes->calculate(function (Taxes $taxes) {
