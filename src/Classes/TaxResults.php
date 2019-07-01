@@ -4,9 +4,13 @@ namespace Appleton\Taxes\Classes;
 
 class TaxResults
 {
+    private $results;
+
     public function __construct($results)
     {
-        $this->results = collect($results);
+        $this->results = collect($results)->reject(function ($result) {
+            return $result['amount'] === 0;
+        });
     }
 
     private function transform($results, $field = 'amount')

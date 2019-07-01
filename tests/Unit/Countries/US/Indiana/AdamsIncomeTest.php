@@ -4,6 +4,7 @@ namespace Appleton\Taxes\Unit\Countries\US\Indiana;
 
 use Appleton\Taxes\Classes\Taxes;
 use Appleton\Taxes\Countries\US\Indiana\AdamsIncome\AdamsIncome;
+use Appleton\Taxes\Countries\US\Indiana\AllenIncome\AllenIncome;
 use Appleton\Taxes\Countries\US\Indiana\IndianaIncome\IndianaIncome;
 use Appleton\Taxes\Models\Countries\US\Indiana\IndianaIncomeTaxInformation;
 use Carbon\Carbon;
@@ -42,6 +43,7 @@ class AdamsIncomeTest extends TestCase
 
         $this->assertThat(9.69, self::identicalTo($results->getTax(IndianaIncome::class)));
         $this->assertThat(4.87, self::identicalTo($results->getTax(AdamsIncome::class)));
+        $this->assertThat(null, self::identicalTo($results->getTax(AllenIncome::class)));
     }
 
     public function testAdamsIncomeCountyWorked(): void
