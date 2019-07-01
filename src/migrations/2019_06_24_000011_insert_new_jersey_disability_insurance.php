@@ -1,6 +1,6 @@
 <?php
 
-use \Appleton\Taxes\Countries\US\NewJersey\NewJerseyDisabilityInsurance\NewJerseyDisabilityInsurance;
+use \Appleton\Taxes\Countries\US\NewJersey\NewJerseyDisabilityInsurance\NewJerseyDisabilityInsuranceEmployer;
 use Appleton\Taxes\Models\TaxArea;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
@@ -11,7 +11,7 @@ class InsertNewJerseyDisabilityInsurance extends Migration
     {
         $disability_tax_id = DB::table('taxes')->insertGetId([
             'name' => 'New Jersey Disability Insurance Tax',
-            'class' => NewJerseyDisabilityInsurance::class,
+            'class' => NewJerseyDisabilityInsuranceEmployer::class,
         ]);
 
         $new_jersey_id = DB::table('governmental_unit_areas')->where('name', 'New Jersey')
@@ -27,7 +27,7 @@ class InsertNewJerseyDisabilityInsurance extends Migration
     public function down()
     {
         $tax_id = DB::table('taxes')
-            ->where('class', NewJerseyDisabilityInsurance::class)
+            ->where('class', NewJerseyDisabilityInsuranceEmployer::class)
             ->first()
             ->id;
 
