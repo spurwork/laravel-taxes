@@ -70,7 +70,7 @@ class LouisianaIncomeTest extends TestCase
                 2,
                 3,
                 2300,
-                0.0,
+                null,
             ],
             '3' => [
                 'January 1, 2019 8am',

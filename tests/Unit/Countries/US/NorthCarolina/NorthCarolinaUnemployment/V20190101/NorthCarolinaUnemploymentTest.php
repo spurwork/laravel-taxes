@@ -73,7 +73,7 @@ class NorthCarolinaUnemploymentTest extends \TestCase
             $taxes->setYtdEarnings(24300);
         });
 
-        $this->assertSame(0.0, $results->getTax(ParentNorthCarolinaUnemployment::class));
+        $this->assertSame(null, $results->getTax(ParentNorthCarolinaUnemployment::class));
 
         $results = $this->taxes->calculate(function ($taxes) {
             $taxes->setHomeLocation($this->getLocation('us.north_carolina'));
@@ -83,7 +83,7 @@ class NorthCarolinaUnemploymentTest extends \TestCase
             $taxes->setYtdEarnings(24350);
         });
 
-        $this->assertSame(0.0, $results->getTax(ParentNorthCarolinaUnemployment::class));
+        $this->assertSame(null, $results->getTax(ParentNorthCarolinaUnemployment::class));
     }
 
     public function testCaseStudy1()

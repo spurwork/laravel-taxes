@@ -72,7 +72,7 @@ class ColoradoUnemploymentTest extends \TestCase
             $taxes->setYtdEarnings(12600);
         });
 
-        $this->assertSame(0.0, $results->getTax(ColoradoUnemployment::class));
+        $this->assertSame(null, $results->getTax(ColoradoUnemployment::class));
 
         $results = $this->taxes->calculate(function ($taxes) {
             $taxes->setHomeLocation($this->getLocation('us.colorado'));
@@ -82,6 +82,6 @@ class ColoradoUnemploymentTest extends \TestCase
             $taxes->setYtdEarnings(12650);
         });
 
-        $this->assertSame(0.0, $results->getTax(ColoradoUnemployment::class));
+        $this->assertSame(null, $results->getTax(ColoradoUnemployment::class));
     }
 }

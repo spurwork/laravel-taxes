@@ -71,6 +71,6 @@ class VirginiaUnemploymentTest extends TestCase
         });
 
         // 8100 exceeds 8000 wage base, none taxable
-        $this->assertThat(0.0, self::identicalTo($results->getTax(VirginiaUnemployment::class)));
+        $this->assertThat(null, self::identicalTo($results->getTax(VirginiaUnemployment::class)));
     }
 }

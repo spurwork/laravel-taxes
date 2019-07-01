@@ -71,6 +71,6 @@ class MichiganUnemploymentTest extends TestCase
         });
 
         // 9100 exceeds 9000 wage base, none taxable
-        $this->assertThat(0.0, self::identicalTo($results->getTax(MichiganUnemployment::class)));
+        $this->assertThat(null, self::identicalTo($results->getTax(MichiganUnemployment::class)));
     }
 }

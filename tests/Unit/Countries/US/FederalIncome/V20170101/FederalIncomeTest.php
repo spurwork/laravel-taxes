@@ -16,7 +16,7 @@ class FederalIncomeTest extends \TestCase
             $taxes->setEarnings(2300);
         });
 
-        $this->assertSame(0.0, $results->getTax(ParentFederalIncome::class));
+        $this->assertSame(null, $results->getTax(ParentFederalIncome::class));
 
         $results = $this->taxes->calculate(function ($taxes) {
             $taxes->setHomeLocation($this->getLocation('us'));
@@ -25,7 +25,7 @@ class FederalIncomeTest extends \TestCase
             $taxes->setEarnings(2300);
         });
 
-        $this->assertSame(0.0, $results->getTax(ParentFederalIncome::class));
+        $this->assertSame(null, $results->getTax(ParentFederalIncome::class));
     }
 
     public function testNoTaxesOwed()
@@ -37,7 +37,7 @@ class FederalIncomeTest extends \TestCase
             $taxes->setEarnings(2300);
         });
 
-        $this->assertSame(0.0, $results->getTax(ParentFederalIncome::class));
+        $this->assertSame(null, $results->getTax(ParentFederalIncome::class));
 
         FederalIncomeTaxInformation::forUser($this->user)->update(['filing_status' => ParentFederalIncome::FILING_MARRIED]);
 
@@ -48,7 +48,7 @@ class FederalIncomeTest extends \TestCase
             $taxes->setEarnings(8650);
         });
 
-        $this->assertSame(0.0, $results->getTax(ParentFederalIncome::class));
+        $this->assertSame(null, $results->getTax(ParentFederalIncome::class));
     }
 
     public function testTaxesOwed()
@@ -85,7 +85,7 @@ class FederalIncomeTest extends \TestCase
             $taxes->setEarnings(0);
         });
 
-        $this->assertSame(0.0, $results->getTax(ParentFederalIncome::class));
+        $this->assertSame(null, $results->getTax(ParentFederalIncome::class));
 
         $results = $this->taxes->calculate(function ($taxes) {
             $taxes->setHomeLocation($this->getLocation('us'));
@@ -241,7 +241,7 @@ class FederalIncomeTest extends \TestCase
             $taxes->setDate($this->date('2018-01-01'));
         });
 
-        $this->assertSame(0.0, $results->getTax(ParentFederalIncome::class));
+        $this->assertSame(null, $results->getTax(ParentFederalIncome::class));
     }
 
     public function testTaxesOwed2018C()
@@ -259,7 +259,7 @@ class FederalIncomeTest extends \TestCase
             $taxes->setDate($this->date('2018-01-01'));
         });
 
-        $this->assertSame(0.0, $results->getTax(ParentFederalIncome::class));
+        $this->assertSame(null, $results->getTax(ParentFederalIncome::class));
     }
 
     public function testTaxesOwed2018D()
@@ -294,7 +294,7 @@ class FederalIncomeTest extends \TestCase
             $taxes->setDate($this->date('2018-01-01'));
         });
 
-        $this->assertSame(0.0, $results->getTax(ParentFederalIncome::class));
+        $this->assertSame(null, $results->getTax(ParentFederalIncome::class));
     }
 
     public function testTaxesOwed2018H()
@@ -344,7 +344,7 @@ class FederalIncomeTest extends \TestCase
             $taxes->setPayPeriods(24);
         });
 
-        $this->assertSame(0.00, $results->getTax(ParentFederalIncome::class));
+        $this->assertSame(null, $results->getTax(ParentFederalIncome::class));
 
         FederalIncomeTaxInformation::forUser($this->user)->update([
             'exempt' => false

@@ -77,7 +77,7 @@ class JeffersonCountyTest extends \TestCase
                 $this->getLocation('us.kentucky.jefferson_county'),
                 300,
                 true,
-                0.0,
+                null,
             ],
             // Live in Kentucky work in Jefferson County - exempt
             '4' => [
@@ -86,7 +86,7 @@ class JeffersonCountyTest extends \TestCase
                 $this->getLocation('us.kentucky.jefferson_county'),
                 300,
                 true,
-                0.0,
+                null,
             ],
             // Live in Alabama work in Jefferson County Kentucky - exempt
             '5' => [
@@ -95,7 +95,7 @@ class JeffersonCountyTest extends \TestCase
                 $this->getLocation('us.kentucky.jefferson_county'),
                 300,
                 true,
-                0.0,
+                null,
             ],
             // live in Jefferson county work in Kentucky. Should be null
             '6' => [

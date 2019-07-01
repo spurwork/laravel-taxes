@@ -72,7 +72,7 @@ class NewMexicoUnemploymentTest extends \TestCase
             $taxes->setYtdEarnings(24800);
         });
 
-        $this->assertSame(0.0, $results->getTax(ParentNewMexicoUnemployment::class));
+        $this->assertSame(null, $results->getTax(ParentNewMexicoUnemployment::class));
 
         $results = $this->taxes->calculate(function ($taxes) {
             $taxes->setHomeLocation($this->getLocation('us.new_mexico'));
@@ -82,6 +82,6 @@ class NewMexicoUnemploymentTest extends \TestCase
             $taxes->setYtdEarnings(24850);
         });
 
-        $this->assertSame(0.0, $results->getTax(ParentNewMexicoUnemployment::class));
+        $this->assertSame(null, $results->getTax(ParentNewMexicoUnemployment::class));
     }
 }

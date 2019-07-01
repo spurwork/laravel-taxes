@@ -67,7 +67,7 @@ class NewJerseyIncomeTest extends TestCase
                 0,
                 300,
                 null,
-                0.0,
+                null,
             ],
             '2' => [
                 'January 1, 2019 8am',
@@ -169,7 +169,7 @@ class NewJerseyIncomeTest extends TestCase
                 0,
                 300,
                 'A',
-                0.0,
+                null,
             ],
             '13' => [
                 'January 1, 2019 8am',

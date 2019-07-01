@@ -73,7 +73,7 @@ class IllinoisUnemploymentTest extends TestCase
     public function testIllinoisUnemployment_exceedWageBase(): void
     {
         $results = $this->calculateTaxes(100.0, 13000.0);
-        $this->assertThat(0.0, self::identicalTo($results->getTax(IllinoisUnemployment::class)));
+        $this->assertThat(null, self::identicalTo($results->getTax(IllinoisUnemployment::class)));
     }
 
     private function calculateTaxes(float $earnings, float $ytd_earnings): TaxResults

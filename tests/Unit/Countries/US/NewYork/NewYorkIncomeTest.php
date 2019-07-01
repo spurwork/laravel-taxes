@@ -90,7 +90,7 @@ class NewYorkIncomeTest extends \TestCase
                 NewYorkIncome::FILING_MARRIED,
                 0,
                 145,
-                0.0,
+                null,
             ],
             '8' => [
                 'January 1, 2019 8am',
