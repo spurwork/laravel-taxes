@@ -5,9 +5,9 @@ namespace Appleton\Taxes\Unit\Countries\US\NewJersey;
 use Appleton\Taxes\Countries\US\NewJersey\NewJerseyDisabilityInsurance\NewJerseyDisabilityInsurance;
 use Carbon\Carbon;
 
-class NewJerseyDisabilityInsuranceTest extends \TestCase
+class NewJerseyDisabilityInsuranceEmployerTest extends \TestCase
 {
-    public function testNewJerseyDisabilityInsurance()
+    public function testNewJerseyDisabilityInsuranceEmployer()
     {
         Carbon::setTestNow(
             Carbon::parse('January 1, 2019 8am', 'America/Chicago')->setTimezone('UTC')
