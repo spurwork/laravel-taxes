@@ -34,7 +34,7 @@ class NewJerseyDisabilityInsuranceTest extends \TestCase
                 'January 1, 2019 8am',
                 0,
                 0,
-                0.0,
+                null,
             ],
             '1' => [
                 'January 1, 2019 8am',
