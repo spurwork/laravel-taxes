@@ -42,7 +42,7 @@ class NorthCarolinaIncomeTest extends \TestCase
             $taxes->setPayPeriods(260);
         });
 
-        $this->assertSame(0.0, $results->getTax(NorthCarolinaIncome::class));
+        $this->assertSame(null, $results->getTax(NorthCarolinaIncome::class));
 
         $results = $this->taxes->calculate(function ($taxes) {
             $taxes->setHomeLocation($this->getLocation('us.north_carolina'));
@@ -78,7 +78,7 @@ class NorthCarolinaIncomeTest extends \TestCase
             $taxes->setPayPeriods(260);
         });
 
-        $this->assertSame(0.00, $results->getTax(NorthCarolinaIncome::class));
+        $this->assertSame(null, $results->getTax(NorthCarolinaIncome::class));
     }
 
     public function testNorthCarolinaIncomeUseDefault()
@@ -93,7 +93,7 @@ class NorthCarolinaIncomeTest extends \TestCase
             $taxes->setPayPeriods(260);
         });
 
-        $this->assertSame(0.0, $results->getTax(NorthCarolinaIncome::class));
+        $this->assertSame(null, $results->getTax(NorthCarolinaIncome::class));
 
         $results = $this->taxes->calculate(function ($taxes) {
             $taxes->setHomeLocation($this->getLocation('us.north_carolina'));

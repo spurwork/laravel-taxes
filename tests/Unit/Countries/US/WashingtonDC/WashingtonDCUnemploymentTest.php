@@ -71,6 +71,6 @@ class WashingtonDCUnemploymentTest extends TestCase
         });
 
         // 9100 exceeds 9000 wage base, none taxable
-        $this->assertThat(0.0, self::identicalTo($results->getTax(WashingtonDCUnemployment::class)));
+        $this->assertThat(null, self::identicalTo($results->getTax(WashingtonDCUnemployment::class)));
     }
 }

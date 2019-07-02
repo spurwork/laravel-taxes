@@ -39,7 +39,7 @@ class NewJerseyDisabilityInsuranceEmployerTest extends \TestCase
             $taxes->setYtdEarnings(34401);
         });
 
-        $this->assertSame(0.0, $results->getTax(NewJerseyDisabilityInsuranceEmployer::class));
+        $this->assertSame(null, $results->getTax(NewJerseyDisabilityInsurance::class));
     }
 
     public function testNewJerseyDisabilityInsuranceJustUnderWageBase()
@@ -57,6 +57,6 @@ class NewJerseyDisabilityInsuranceEmployerTest extends \TestCase
             $taxes->setYtdEarnings(34399);
         });
 
-        $this->assertSame(0.01, $results->getTax(NewJerseyDisabilityInsuranceEmployer::class));
+        $this->assertSame(0.01, $results->getTax(NewJerseyDisabilityInsurance::class));
     }
 }

@@ -56,7 +56,7 @@ class KentuckyIncomeTest extends TestCase
             $taxes->setPayPeriods(self::PAY_PERIODS);
         });
 
-        $this->assertThat(0.0, self::identicalTo($results->getTax(KentuckyIncome::class)));
+        $this->assertThat(null, self::identicalTo($results->getTax(KentuckyIncome::class)));
     }
 
     public function testKentuckyIncome_meet_standard_deduction(): void
@@ -69,7 +69,7 @@ class KentuckyIncomeTest extends TestCase
             $taxes->setPayPeriods(self::PAY_PERIODS);
         });
 
-        $this->assertThat(0.0, self::identicalTo($results->getTax(KentuckyIncome::class)));
+        $this->assertThat(null, self::identicalTo($results->getTax(KentuckyIncome::class)));
     }
 
     public function testKentuckyIncome_exceed_standard_deduction(): void
@@ -99,7 +99,7 @@ class KentuckyIncomeTest extends TestCase
             $taxes->setPayPeriods(self::PAY_PERIODS);
         });
 
-        $this->assertThat(0.0, self::identicalTo($results->getTax(KentuckyIncome::class)));
+        $this->assertThat(null, self::identicalTo($results->getTax(KentuckyIncome::class)));
     }
 
     public function testKentuckyIncome_workOutOfState()

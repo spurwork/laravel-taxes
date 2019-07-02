@@ -59,7 +59,7 @@ class IndianaUnemploymentTest extends TestCase
     public function testIndianaUnemployment_exceedWageBase(): void
     {
         $results = $this->calculateTaxes(100.0, 96000.0);
-        $this->assertThat(0.0, self::identicalTo($results->getTax(IndianaUnemployment::class)));
+        $this->assertThat(null, self::identicalTo($results->getTax(IndianaUnemployment::class)));
     }
 
     private function calculateTaxes(float $earnings, float $ytd_earnings): TaxResults

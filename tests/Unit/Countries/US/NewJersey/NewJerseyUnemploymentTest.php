@@ -71,6 +71,6 @@ class NewJerseyUnemploymentTest extends TestCase
         });
 
         // 34500 exceeds 34400 wage base, none taxable
-        $this->assertThat(0.0, self::identicalTo($results->getTax(NewJerseyUnemployment::class)));
+        $this->assertThat(null, self::identicalTo($results->getTax(NewJerseyUnemployment::class)));
     }
 }

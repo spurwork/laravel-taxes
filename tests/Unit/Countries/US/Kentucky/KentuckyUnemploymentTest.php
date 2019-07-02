@@ -66,7 +66,7 @@ class KentuckyUnemploymentTest extends TestCase
             $taxes->setYtdEarnings(self::WAGE_BASE);
         });
 
-        $this->assertThat(self::ZERO, self::identicalTo($results->getTax(KentuckyUnemployment::class)));
+        $this->assertThat(null, self::identicalTo($results->getTax(KentuckyUnemployment::class)));
     }
 
     public function testKentuckyUnemployment_ytdExceedWageBase(): void
@@ -79,7 +79,7 @@ class KentuckyUnemploymentTest extends TestCase
             $taxes->setYtdEarnings(self::WAGE_BASE + 1);
         });
 
-        $this->assertThat(self::ZERO, self::identicalTo($results->getTax(KentuckyUnemployment::class)));
+        $this->assertThat(null, self::identicalTo($results->getTax(KentuckyUnemployment::class)));
     }
 
     public function testKentuckyUnemployment_workOutOfState()

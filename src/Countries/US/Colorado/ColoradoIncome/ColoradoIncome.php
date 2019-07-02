@@ -31,7 +31,17 @@ abstract class ColoradoIncome extends BaseStateIncome
 
     public function compute(Collection $tax_areas)
     {
-        return round(parent::compute($tax_areas));
+        if ($this->isUserClaimingExemption()) {
+            return 0.00;
+        }
+
+        $tax_amount = round($this->getTaxAmountFromTaxBrackets($this->getAdjustedEarnings(), $this->getTaxBrackets())
+            / $this->payroll->pay_periods);
+        $this->tax_total = $this->payroll->withholdTax($tax_amount) +
+            $this->payroll->withholdTax($this->getSupplementalIncomeTax()) +
+            $this->payroll->withholdTax($this->getAdditionalWithholding());
+
+        return round(((int)($this->tax_total * 100)) / 100, 2);
     }
 
     public function getAdjustedEarnings()

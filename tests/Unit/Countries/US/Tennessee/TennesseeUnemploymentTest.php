@@ -63,7 +63,7 @@ class TennesseeUnemploymentTest extends TestCase
             $taxes->setYtdEarnings(7000);
         });
 
-        $this->assertSame(0.00, $results->getTax(TennesseeUnemployment::class));
+        $this->assertSame(null, $results->getTax(TennesseeUnemployment::class));
     }
 
     public function testTennesseeUnemploymentWorkOutOfState()

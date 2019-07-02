@@ -301,7 +301,7 @@ class VirginiaIncomeTest extends TestCase
     public function testVirginiaIncome_testCase13(): void
     {
         $results = $this->calculateTaxes(2, 2, 300.0, true);
-        $this->assertThat(0.0, self::identicalTo($results->getTax(VirginiaIncome::class)));
+        $this->assertThat(null, self::identicalTo($results->getTax(VirginiaIncome::class)));
     }
 
     private function calculateTaxes(int $exemptions, int $other_exemptions,

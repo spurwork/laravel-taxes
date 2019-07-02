@@ -80,7 +80,7 @@ class GeorgiaIncomeTest extends \TestCase
                 'supplemental_earnings' => 0,
                 'pay_periods' => 260,
                 'use_default' => false,
-                'result' => 0.00,
+                'result' => null,
             ],
             [
                 'date' => 'January 1, 2018 8am',
@@ -119,7 +119,7 @@ class GeorgiaIncomeTest extends \TestCase
                 'supplemental_earnings' => 0,
                 'pay_periods' => 260,
                 'use_default' => false,
-                'result' => 0.00,
+                'result' => null,
             ],
             [
                 'date' => 'January 1, 2018 8am',
@@ -132,7 +132,7 @@ class GeorgiaIncomeTest extends \TestCase
                 'supplemental_earnings' => 0,
                 'pay_periods' => 260,
                 'use_default' => true,
-                'result' => 0.00,
+                'result' => null,
             ],
             [
                 'date' => 'January 1, 2018 8am',
@@ -158,7 +158,7 @@ class GeorgiaIncomeTest extends \TestCase
                 'supplemental_earnings' => 0,
                 'pay_periods' => 260,
                 'use_default' => false,
-                'result' => 0.00,
+                'result' => null,
             ],
             [
                 'date' => 'January 1, 2018 8am',
