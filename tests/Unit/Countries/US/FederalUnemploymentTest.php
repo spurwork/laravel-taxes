@@ -60,7 +60,7 @@ class FederalUnemploymentTest extends \TestCase
             $taxes->setYtdEarnings(7000);
         });
 
-        $this->assertSame(0.0, $results->getTax(FederalUnemployment::class));
+        $this->assertSame(null, $results->getTax(FederalUnemployment::class));
 
         $results = $this->taxes->calculate(function ($taxes) {
             $taxes->setHomeLocation($this->getLocation('us.alabama'));
@@ -70,7 +70,7 @@ class FederalUnemploymentTest extends \TestCase
             $taxes->setYtdEarnings(7050);
         });
 
-        $this->assertSame(0.0, $results->getTax(FederalUnemployment::class));
+        $this->assertSame(null, $results->getTax(FederalUnemployment::class));
     }
 
     public function testCaseStudy1()

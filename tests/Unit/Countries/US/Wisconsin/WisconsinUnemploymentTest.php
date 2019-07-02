@@ -72,7 +72,7 @@ class WisconsinUnemploymentTest extends \TestCase
             $taxes->setYtdEarnings(14000);
         });
 
-        $this->assertSame(0.0, $results->getTax(WisconsinUnemployment::class));
+        $this->assertSame(null, $results->getTax(WisconsinUnemployment::class));
 
         $results = $this->taxes->calculate(function ($taxes) {
             $taxes->setHomeLocation($this->getLocation('us.wisconsin'));
@@ -82,6 +82,6 @@ class WisconsinUnemploymentTest extends \TestCase
             $taxes->setYtdEarnings(14050);
         });
 
-        $this->assertSame(0.0, $results->getTax(WisconsinUnemployment::class));
+        $this->assertSame(null, $results->getTax(WisconsinUnemployment::class));
     }
 }

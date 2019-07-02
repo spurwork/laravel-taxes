@@ -72,7 +72,7 @@ class GeorgiaUnemploymentTest extends \TestCase
             $taxes->setYtdEarnings(9500);
         });
 
-        $this->assertSame(0.0, $results->getTax(GeorgiaUnemployment::class));
+        $this->assertSame(null, $results->getTax(GeorgiaUnemployment::class));
 
         $results = $this->taxes->calculate(function ($taxes) {
             $taxes->setHomeLocation($this->getLocation('us.georgia'));
@@ -82,7 +82,7 @@ class GeorgiaUnemploymentTest extends \TestCase
             $taxes->setYtdEarnings(9550);
         });
 
-        $this->assertSame(0.0, $results->getTax(GeorgiaUnemployment::class));
+        $this->assertSame(null, $results->getTax(GeorgiaUnemployment::class));
     }
 
     public function testCaseStudy1()

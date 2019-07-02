@@ -35,6 +35,10 @@ return [
                 'alabama_income_tax_information' => env('TAXES_ALABAMA_INCOME_TAX_INFORMATION', 'alabama_income_tax_information'),
             ],
 
+            'california' => [
+                'california_income_tax_information' => env('TAXES_CALIFORNIA_INCOME_TAX_INFORMATION', 'california_income_tax_information'),
+            ],
+
             'colorado' => [
                 'colorado_income_tax_information' => env('TAXES_COLORADO_INCOME_TAX_INFORMATION', 'colorado_income_tax_information'),
             ],
@@ -83,6 +87,10 @@ return [
                 'washingtondc_income_tax_information' => env('TAXES_WASHINGTONDC_INCOME_TAX_INFORMATION', 'washingtondc_income_tax_information'),
             ],
 
+            'west_virginia' => [
+                'west_virginia_income_tax_information' => env('TAXES_WEST_VIRGINIA_INCOME_TAX_INFORMATION', 'west_virginia_income_tax_information'),
+            ],
+
             'wisconsin' => [
                 'wisconsin_income_tax_information' => env('TAXES_WISCONSIN_INCOME_TAX_INFORMATION', 'wisconsin_income_tax_information'),
             ],
@@ -102,6 +110,10 @@ return [
         'us' => [
             'alabama' => [
                 'unemployment' => env('TAXES_ALABAMA_UNEMPLOYMENT_TAX_RATE', 0.027),
+            ],
+
+            'california' => [
+                'unemployment' => env('TAXES_CALIFORNIA_UNEMPLOYMENT_TAX_RATE', 0.034),
             ],
 
             'colorado' => [
@@ -132,6 +144,10 @@ return [
                 'unemployment' => env('TAXES_NEW_MEXICO_UNEMPLOYMENT_TAX_RATE', 0.01),
             ],
 
+            'nevada' => [
+                'unemployment' => env('TAXES_NEVADA_UNEMPLOYMENT_TAX_RATE', 0.03),
+            ],
+
             'north_carolina' => [
                 'unemployment' => env('TAXES_NORTH_CAROLINA_UNEMPLOYMENT_TAX_RATE', 0.01),
             ],
@@ -146,6 +162,10 @@ return [
 
             'washingtondc' => [
                 'unemployment' => env('TAXES_WASHINGTONDC_UNEMPLOYMENT_TAX_RATE', 0.027),
+            ],
+
+            'west_virginia' => [
+                'unemployment' => env('TAXES_WEST_VIRGINIA_UNEMPLOYMENT_TAX_RATE', 0.027),
             ],
 
             'wisconsin' => [

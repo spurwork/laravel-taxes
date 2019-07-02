@@ -46,7 +46,7 @@ class AlabamaIncomeTest extends \TestCase
             $taxes->setPayPeriods(260);
         });
 
-        $this->assertSame(0.0, $results->getTax(AlabamaIncome::class));
+        $this->assertSame(null, $results->getTax(AlabamaIncome::class));
 
         $results = $this->taxes->calculate(function ($taxes) {
             $taxes->setHomeLocation($this->getLocation('us.alabama'));
@@ -102,7 +102,7 @@ class AlabamaIncomeTest extends \TestCase
             $taxes->setPayPeriods(260);
         });
 
-        $this->assertSame(0.0, $results->getTax(AlabamaIncome::class));
+        $this->assertSame(null, $results->getTax(AlabamaIncome::class));
     }
 
     public function testAlabamaIncomeWithNoPersonalExemption()
@@ -163,7 +163,7 @@ class AlabamaIncomeTest extends \TestCase
             $taxes->setPayPeriods(260);
         });
 
-        $this->assertSame(0.00, $results->getTax(AlabamaIncome::class));
+        $this->assertSame(null, $results->getTax(AlabamaIncome::class));
 
         $alabama_income_tax_information->update([
             'exempt' => false,

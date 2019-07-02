@@ -71,7 +71,7 @@ class NewYorkUnemploymentTest extends \TestCase
             $taxes->setYtdEarnings(11400);
         });
 
-        $this->assertSame(0.0, $results->getTax(NewYorkUnemployment::class));
+        $this->assertSame(null, $results->getTax(NewYorkUnemployment::class));
 
         $results = $this->taxes->calculate(function ($taxes) {
             $taxes->setHomeLocation($this->getLocation('us.new_york'));
@@ -81,6 +81,6 @@ class NewYorkUnemploymentTest extends \TestCase
             $taxes->setYtdEarnings(11450);
         });
 
-        $this->assertSame(0.0, $results->getTax(NewYorkUnemployment::class));
+        $this->assertSame(null, $results->getTax(NewYorkUnemployment::class));
     }
 }

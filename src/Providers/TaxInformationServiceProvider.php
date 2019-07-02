@@ -13,6 +13,7 @@ class TaxInformationServiceProvider extends ServiceProvider
         \Appleton\Taxes\Models\Countries\US\FederalIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\Alabama\AlabamaIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\Arizona\ArizonaIncomeTaxInformation::class,
+        \Appleton\Taxes\Models\Countries\US\California\CaliforniaIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\Colorado\ColoradoIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\Georgia\GeorgiaIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\Illinois\IllinoisIncomeTaxInformation::class,
@@ -31,6 +32,7 @@ class TaxInformationServiceProvider extends ServiceProvider
         \Appleton\Taxes\Models\Countries\US\NorthCarolina\NorthCarolinaIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\Virginia\VirginiaIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\WashingtonDC\WashingtonDCIncomeTaxInformation::class,
+        \Appleton\Taxes\Models\Countries\US\WestVirginia\WestVirginiaIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\Wisconsin\WisconsinIncomeTaxInformation::class,
     ];
 

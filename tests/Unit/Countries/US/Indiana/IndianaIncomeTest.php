@@ -125,7 +125,7 @@ class IndianaIncomeTest extends TestCase
     public function testIndianaIncome_exempt(): void
     {
         $results = $this->calculateTaxes(300.0, 0, 0, true);
-        $this->assertThat(0.0, self::identicalTo($results->getTax(IndianaIncome::class)));
+        $this->assertThat(null, self::identicalTo($results->getTax(IndianaIncome::class)));
     }
 
     /**

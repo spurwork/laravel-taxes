@@ -51,7 +51,7 @@ class OklahomaIncomeTest extends TestCase
                 true,
                 0,
                 300,
-                0.0,
+                null,
             ],
             '1' => [
                 'January 1, 2019 8am',
@@ -75,7 +75,7 @@ class OklahomaIncomeTest extends TestCase
                 false,
                 9,
                 288.46,
-                0,
+                null,
             ],
             '4' => [
                 'January 1, 2019 8am',
@@ -83,7 +83,7 @@ class OklahomaIncomeTest extends TestCase
                 false,
                 0,
                 300,
-                0,
+                null,
             ],
             '5' => [
                 'January 1, 2019 8am',
@@ -99,7 +99,7 @@ class OklahomaIncomeTest extends TestCase
                 false,
                 9,
                 288.46,
-                0,
+                null,
             ],
         ];
     }

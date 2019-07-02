@@ -2,6 +2,7 @@
 
 use Appleton\Taxes\Classes\Taxes;
 use Appleton\Taxes\Countries\US\Alabama\AlabamaIncome\AlabamaIncome;
+use Appleton\Taxes\Countries\US\California\CaliforniaIncome\CaliforniaIncome;
 use Appleton\Taxes\Countries\US\Colorado\ColoradoIncome\ColoradoIncome;
 use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome;
 use Appleton\Taxes\Countries\US\Georgia\GeorgiaIncome\GeorgiaIncome;
@@ -19,6 +20,7 @@ use Appleton\Taxes\Countries\US\WashingtonDC\WashingtonDCIncome\WashingtonDCInco
 use Appleton\Taxes\Countries\US\Wisconsin\WisconsinIncome\WisconsinIncome;
 use Appleton\Taxes\Models\Countries\US\Alabama\AlabamaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Arizona\ArizonaIncomeTaxInformation;
+use Appleton\Taxes\Models\Countries\US\California\CaliforniaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Colorado\ColoradoIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\FederalIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Georgia\GeorgiaIncomeTaxInformation;
@@ -38,9 +40,11 @@ use Appleton\Taxes\Models\Countries\US\Ohio\OhioIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Oklahoma\OklahomaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Virginia\VirginiaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\WashingtonDC\WashingtonDCIncomeTaxInformation;
+use Appleton\Taxes\Models\Countries\US\WestVirginia\WestVirginiaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Wisconsin\WisconsinIncomeTaxInformation;
 use Appleton\Taxes\Providers\TaxesServiceProvider;
 use Carbon\Carbon;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Orchestra\Database\ConsoleServiceProvider;
@@ -103,6 +107,13 @@ class TestCase extends BaseTestCase
         ArizonaIncomeTaxInformation::createForUser([
             'additional_withholding' => 0,
             'percentage_withheld' => 0,
+        ], $this->user);
+
+        CaliforniaIncomeTaxInformation::createForUser([
+            'filing_status' => CaliforniaIncome::FILING_SINGLE,
+            'allowances' => 0,
+            'estimated_deductions' => 0,
+            'additional_withholding' => 0,
         ], $this->user);
 
         ColoradoIncomeTaxInformation::createForUser([
@@ -223,6 +234,13 @@ class TestCase extends BaseTestCase
             'filing_status' => WashingtonDCIncome::FILING_SINGLE,
         ], $this->user);
 
+        WestVirginiaIncomeTaxInformation::createForUser([
+            'two_earner_percent' => false,
+            'allowances' => 0,
+            'additional_withholding' => 0,
+            'exempt' => false,
+        ], $this->user);
+
         WisconsinIncomeTaxInformation::createForUser([
             'additional_withholding' => 0,
             'exemptions' => 0,
@@ -267,6 +285,7 @@ class TestCase extends BaseTestCase
             'us.alabama.tarrant' => [33.5868, -86.7718],
             'us.alabama.tuskegee' => [32.4302, -85.7077],
             'us.arizona' => [33.6050991, -112.4052392],
+            'us.california' => [38.5816, -121.4944],
             'us.colorado' => [39.7640021, -105.1352965],
             'us.delaware' => [39.1582, -75.5244],
             'us.georgia' => [33.7490, -84.3880],
@@ -400,6 +419,7 @@ class TestCase extends BaseTestCase
             'us.maryland.worcester' => [38.1584, -75.4345],
             'us.michigan' => [42.7325, -84.5555],
             'us.mississippi' => [32.3547, -89.3985],
+            'us.nevada' => [39.1641, -119.7661],
             'us.new_jersey' => [40.2206, -74.7597],
             'us.new_jersey.newark' => [40.7357, -74.1724],
             'us.new_mexico' => [34.5199, -105.8701],
@@ -412,6 +432,7 @@ class TestCase extends BaseTestCase
             'us.texas' => [31.9686, -99.9018],
             'us.virginia' => [37.5407, -77.4360],
             'us.washingtondc' => [38.9072, -77.0369],
+            'us.west_virginia' => [38.3498, -81.6326],
             'us.wisconsin' => [43.0849721, -89.4764603],
         ];
 
@@ -448,6 +469,7 @@ class TestCase extends BaseTestCase
         $app['config']->set('taxes.tables.us.federal_income_tax_information', 'federal_income_tax_information');
         $app['config']->set('taxes.tables.us.alabama.alabama_income_tax_information', 'alabama_income_tax_information');
         $app['config']->set('taxes.tables.us.arizona.arizona_income_tax_information', 'arizona_income_tax_information');
+        $app['config']->set('taxes.tables.us.california.california_income_tax_information', 'california_income_tax_information');
         $app['config']->set('taxes.tables.us.colorado.colorado_income_tax_information', 'colorado_income_tax_information');
         $app['config']->set('taxes.tables.us.georgia.georgia_income_tax_information', 'georgia_income_tax_information');
         $app['config']->set('taxes.tables.us.illinois.illinois_income_tax_information', 'illinois_income_tax_information');

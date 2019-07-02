@@ -51,7 +51,7 @@ class WashingtonDCIncomeTest extends TestCase
                 true,
                 0,
                 300,
-                0,
+                null,
             ],
             '1' => [
                 'January 1, 2019 8am',

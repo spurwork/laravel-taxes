@@ -43,7 +43,7 @@ class SocialSecurityTest extends \TestCase
             $taxes->setDate($this->date('2019-01-01'));
         });
 
-        $this->assertSame(0.0, $results->getTax(ParentSocialSecurity::class));
+        $this->assertSame(null, $results->getTax(ParentSocialSecurity::class));
     }
 
     public function testCaseStudy2019D()
@@ -57,6 +57,6 @@ class SocialSecurityTest extends \TestCase
             $taxes->setDate($this->date('2019-01-01'));
         });
 
-        $this->assertSame(0.0, $results->getTax(ParentSocialSecurity::class));
+        $this->assertSame(null, $results->getTax(ParentSocialSecurity::class));
     }
 }

@@ -84,7 +84,7 @@ class WisconsinIncomeTest extends \TestCase
             $taxes->setPayPeriods(52);
         });
 
-        $this->assertSame(0.00, $results->getTax(WisconsinIncome::class));
+        $this->assertSame(null, $results->getTax(WisconsinIncome::class));
 
         $wisconsin_income_tax_information->update([
             'exempt' => false

@@ -51,7 +51,7 @@ class MassachusettsIncomeTest extends \TestCase
                 0,
                 1,
                 125,
-                0.0,
+                null,
             ],
             '2' => [
                 'January 1, 2019 8am',
@@ -67,7 +67,7 @@ class MassachusettsIncomeTest extends \TestCase
                 0,
                 1,
                 125,
-                0.0,
+                null,
             ],
             '4' => [
                 'January 1, 2019 8am',

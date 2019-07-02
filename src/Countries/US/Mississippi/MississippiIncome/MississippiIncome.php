@@ -13,6 +13,13 @@ abstract class MississippiIncome extends BaseStateIncome
     const FILING_MARRIED_BOTH_SPOUSES_EMPLOYED = 'B';
     const FILING_HEAD_OF_HOUSEHOLD = 'H';
 
+    const FILING_STATUSES = [
+        self::FILING_SINGLE =>'S',
+        self::FILING_MARRIED_ONE_SPOUSE_EMPLOYED => 'M',
+        self::FILING_MARRIED_BOTH_SPOUSES_EMPLOYED => 'B',
+        self::FILING_HEAD_OF_HOUSEHOLD > 'H',
+    ];
+
     protected $tax_information;
 
     public function __construct(MississippiIncomeTaxInformation $tax_information, Payroll $payroll)

@@ -49,7 +49,7 @@ class ScottCountySchoolDistrictTest extends \TestCase
                 $this->getLocation('us.kentucky.scott_county'),
                 300,
                 false,
-                0.0,
+                null,
             ],
         ];
     }
