@@ -36,15 +36,15 @@ class WestVirginiaUnemploymentTest extends TestCase
 
         // already met 7000 wage base, none taxable
         $results = $this->calculateTaxes(100, 12000);
-        $this->assertSame(0.0, $results->getTax(WestVirginiaUnemployment::class));
+        $this->assertNull($results->getTax(WestVirginiaUnemployment::class));
 
         // already met 7000 wage base, none taxable
         $results = $this->calculateTaxes(100, 12001);
-        $this->assertSame(0.0, $results->getTax(WestVirginiaUnemployment::class));
+        $this->assertNull($results->getTax(WestVirginiaUnemployment::class));
 
         // already met 7000 wage base, none taxable
         $results = $this->calculateTaxes(100, 12100);
-        $this->assertSame(0.0, $results->getTax(WestVirginiaUnemployment::class));
+        $this->assertNull($results->getTax(WestVirginiaUnemployment::class));
     }
 
     public function testWestVirginiaUnemploymentWorkOutOfState(): void
