@@ -71,6 +71,6 @@ class OhioUnemploymentTest extends TestCase
         });
 
         // 9700 exceeds 9500 wage base, none taxable
-        $this->assertThat(0.0, self::identicalTo($results->getTax(OhioUnemployment::class)));
+        $this->assertThat(null, self::identicalTo($results->getTax(OhioUnemployment::class)));
     }
 }
