@@ -27,9 +27,8 @@ class CaliforniaIncomeTaxTest extends TestCase
     public function testCaliforniaIncomeTest1(): void
     {
         $results = $this->calculateTaxes(CaliforniaIncome::FILING_SINGLE, 0, 0, 280.25);
-        self::assertThat($results->getTax(CaliforniaIncome::class), self::identicalTo(0.0));
+        self::assertNull($results->getTax(CaliforniaIncome::class));
     }
-
 
     /**
      * Single, 1 allowances, 0 estimated deductions, 300 wages
@@ -74,7 +73,7 @@ class CaliforniaIncomeTaxTest extends TestCase
     public function testCaliforniaIncomeTest5(): void
     {
         $results = $this->calculateTaxes(CaliforniaIncome::FILING_MARRIED, 0, 0, 280.25);
-        self::assertThat($results->getTax(CaliforniaIncome::class), self::identicalTo(0.0));
+        self::assertNull($results->getTax(CaliforniaIncome::class));
     }
 
     /**
@@ -86,7 +85,7 @@ class CaliforniaIncomeTaxTest extends TestCase
     public function testCaliforniaIncomeTest6(): void
     {
         $results = $this->calculateTaxes(CaliforniaIncome::FILING_MARRIED, 2, 0, 560.50);
-        self::assertThat($results->getTax(CaliforniaIncome::class), self::identicalTo(0.0));
+        self::assertNull($results->getTax(CaliforniaIncome::class));
     }
 
     /**
@@ -133,7 +132,7 @@ class CaliforniaIncomeTaxTest extends TestCase
     public function testCaliforniaIncomeTest9(): void
     {
         $results = $this->calculateTaxes(CaliforniaIncome::FILING_HEAD_OF_HOUSEHOLD, 0, 0, 560.50);
-        self::assertThat($results->getTax(CaliforniaIncome::class), self::identicalTo(0.0));
+        self::assertNull($results->getTax(CaliforniaIncome::class));
     }
 
     /**

@@ -37,15 +37,15 @@ class CaliforniaUnemploymentTest extends TestCase
 
         // already met 7000 wage base, none taxable
         $results = $this->calculateTaxes(100, 7000);
-        $this->assertSame(0.0, $results->getTax(CaliforniaUnemployment::class));
+        $this->assertNull($results->getTax(CaliforniaUnemployment::class));
 
         // already met 7000 wage base, none taxable
         $results = $this->calculateTaxes(100, 7001);
-        $this->assertSame(0.0, $results->getTax(CaliforniaUnemployment::class));
+        $this->assertNull($results->getTax(CaliforniaUnemployment::class));
 
         // already met 7000 wage base, none taxable
         $results = $this->calculateTaxes(100, 7100);
-        $this->assertSame(0.0, $results->getTax(CaliforniaUnemployment::class));
+        $this->assertNull($results->getTax(CaliforniaUnemployment::class));
     }
 
     public function testtestCaliforniaUnemploymentWorkOutOfState(): void

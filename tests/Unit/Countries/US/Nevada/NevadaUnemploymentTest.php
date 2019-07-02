@@ -35,15 +35,15 @@ class NevadaUnemploymentTest extends TestCase
 
         // already met 31200 wage base, none taxable
         $results = $this->calculateTaxes(100, 31200);
-        $this->assertSame(0.0, $results->getTax(NevadaUnemployment::class));
+        $this->assertNull($results->getTax(NevadaUnemployment::class));
 
         // already met 31200 wage base, none taxable
         $results = $this->calculateTaxes(100, 31201);
-        $this->assertSame(0.0, $results->getTax(NevadaUnemployment::class));
+        $this->assertNull($results->getTax(NevadaUnemployment::class));
 
         // already met 31200 wage base, none taxable
         $results = $this->calculateTaxes(100, 31300);
-        $this->assertSame(0.0, $results->getTax(NevadaUnemployment::class));
+        $this->assertNull($results->getTax(NevadaUnemployment::class));
     }
 
     public function testWorkOutOfState(): void
