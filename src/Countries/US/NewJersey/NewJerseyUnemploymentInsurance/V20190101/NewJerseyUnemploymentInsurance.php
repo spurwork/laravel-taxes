@@ -1,16 +1,16 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\NewJersey\NewJerseyDisabilityInsurance\V20190101;
+namespace Appleton\Taxes\Countries\US\NewJersey\NewJerseyUnemploymentInsurance\V20190101;
 
-use Appleton\Taxes\Countries\US\NewJersey\NewJerseyDisabilityInsurance\NewJerseyDisabilityInsurance as BaseNewJerseyDisabilityInsurance;
+use Appleton\Taxes\Countries\US\NewJersey\NewJerseyUnemploymentInsurance\NewJerseyUnemploymentInsurance as BaseNewJerseyUnemploymentInsurance;
 use Appleton\Taxes\Traits\HasWageBase;
 use Illuminate\Database\Eloquent\Collection;
 
-class NewJerseyDisabilityInsurance extends BaseNewJerseyDisabilityInsurance
+class NewJerseyUnemploymentInsurance extends BaseNewJerseyUnemploymentInsurance
 {
     use HasWageBase;
 
-    const TAX_RATE = 0.0017;
+    const TAX_RATE = 0.00425;
     const WAGE_BASE = 34400;
 
     public function getBaseEarnings()

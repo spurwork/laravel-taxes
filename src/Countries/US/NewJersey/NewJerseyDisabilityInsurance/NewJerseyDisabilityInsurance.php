@@ -2,12 +2,10 @@
 
 namespace Appleton\Taxes\Countries\US\NewJersey\NewJerseyDisabilityInsurance;
 
-use Appleton\Taxes\Classes\BaseState;
-use Appleton\Taxes\Traits\HasWageBase;
+use Appleton\Taxes\Classes\BaseTax;
 
-abstract class NewJerseyDisabilityInsurance extends BaseState
+abstract class NewJerseyDisabilityInsurance extends BaseTax
 {
-    use HasWageBase;
-
-    const WITHHELD = false;
+    const TYPE = 'state';
+    const WITHHELD = true;
 }

@@ -1,16 +1,16 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\NewJersey\NewJerseyDisabilityInsurance;
+namespace Appleton\Taxes\Countries\US\NewJersey\NewJerseyUnemploymentInsurance;
 
-use Appleton\Taxes\Countries\US\NewJersey\NewJerseyDisabilityInsurance\NewJerseyDisabilityInsurance;
+use Appleton\Taxes\Countries\US\NewJersey\NewJerseyUnemploymentInsurance\NewJerseyUnemploymentInsurance;
 use Carbon\Carbon;
 
-class NewJerseyDisabilityInsuranceTest extends \TestCase
+class NewJerseyUnemploymentInsuranceTest extends \TestCase
 {
     /**
      * @dataProvider provideTestData
      */
-    public function testNewJerseyDisabilityInsurance($date, $wtd_earnings, $earnings, $result)
+    public function testNewJerseyUnemploymentInsurance($date, $wtd_earnings, $earnings, $result)
     {
         Carbon::setTestNow(
             Carbon::parse($date, 'America/Chicago')->setTimezone('UTC')
@@ -24,7 +24,7 @@ class NewJerseyDisabilityInsuranceTest extends \TestCase
             $taxes->setEarnings($earnings);
         });
 
-        $this->assertSame($result, $results->getTax(NewJerseyDisabilityInsurance::class));
+        $this->assertSame($result, $results->getTax(NewJerseyUnemploymentInsurance::class));
     }
 
     public function provideTestData()
@@ -40,19 +40,19 @@ class NewJerseyDisabilityInsuranceTest extends \TestCase
                 'January 1, 2019 8am',
                 400,
                 23345,
-                0.68,
+                1.7,
             ],
             '2' => [
                 'January 1, 2019 8am',
                 930,
                 500,
-                1.58,
+                3.95,
             ],
             '3' => [
                 'January 1, 2019 8am',
                 930,
                 34000,
-                0.68
+                1.70
             ],
         ];
     }
