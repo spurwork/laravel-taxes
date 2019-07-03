@@ -34,14 +34,14 @@ class MississippiUnemploymentTest extends TestCase
             $taxes->setHomeLocation($this->getLocation('us.mississippi'));
             $taxes->setWorkLocation($this->getLocation('us.mississippi'));
             $taxes->setUser($this->user);
-            $taxes->setEarnings(190.0);
-            $taxes->setYtdEarnings(1200);
+            $taxes->setEarnings(900.0);
+            $taxes->setYtdEarnings(13000);
         });
 
-        // 1200 + 190 = 1390
-        // 9000 wage base not met, all taxable
-        // round(190.0 * .012, 2) = 2.28;
-        $this->assertThat(2, self::identicalTo($results->getTax(MississippiUnemployment::class)));
+        // 13000 + 900 = 13900
+        // 14000 wage base not met, all taxable
+        // round(900.0 * .012, 2) = 10.8;
+        $this->assertThat(11, self::identicalTo($results->getTax(MississippiUnemployment::class)));
     }
 
     public function testMississippiUnemployment_metAndExceedWageBase(): void
@@ -51,11 +51,11 @@ class MississippiUnemploymentTest extends TestCase
             $taxes->setWorkLocation($this->getLocation('us.mississippi'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(210.0);
-            $taxes->setYtdEarnings(1200);
+            $taxes->setYtdEarnings(13800);
         });
 
-        // 1200 + 210 = 1410
-        // 10 over 1400 wage base so only 200 taxable
+        // 13800 + 210 = 14010
+        // 10 over 14000 wage base so only 200 taxable
         // round(200.0 * .012, 2) = 2.38;
         $this->assertThat(2, self::identicalTo($results->getTax(MississippiUnemployment::class)));
     }
@@ -67,10 +67,10 @@ class MississippiUnemploymentTest extends TestCase
             $taxes->setWorkLocation($this->getLocation('us.mississippi'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(200.0);
-            $taxes->setYtdEarnings(1410);
+            $taxes->setYtdEarnings(14100);
         });
 
-        // 9100 exceeds 9000 wage base, none taxable
+        // 14100 exceeds 14000 wage base, none taxable
         $this->assertThat(null, self::identicalTo($results->getTax(MississippiUnemployment::class)));
     }
 }

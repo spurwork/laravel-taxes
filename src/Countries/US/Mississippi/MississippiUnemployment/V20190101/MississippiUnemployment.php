@@ -8,7 +8,7 @@ class MississippiUnemployment extends BaseMississippiUnemployment
 {
     const FUTA_CREDIT = 0.06;
     const NEW_EMPLOYER_RATE = 0.012;
-    const WAGE_BASE = 1400;
+    const WAGE_BASE = 14000;
 
     public function __construct(Payroll $payroll)
     {
