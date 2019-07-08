@@ -35,7 +35,6 @@ class InsertNewJerseyAdditionalEmployeeDeductions extends Migration
 
         DB::table($this->tax_areas)->insert([[
             'tax_id' => $new_jersey_family_medical_leave_id,
-            'home_governmental_unit_area_id' => $new_jersey_gua_id,
             'work_governmental_unit_area_id' => $new_jersey_gua_id,
             'based' => TaxArea::BASED_ON_WORK_LOCATION,
         ]]);
@@ -52,7 +51,6 @@ class InsertNewJerseyAdditionalEmployeeDeductions extends Migration
 
         DB::table($this->tax_areas)->insert([[
             'tax_id' => $new_jersey_disability_id,
-            'home_governmental_unit_area_id' => $new_jersey_gua_id,
             'work_governmental_unit_area_id' => $new_jersey_gua_id,
             'based' => TaxArea::BASED_ON_WORK_LOCATION,
         ]]);
@@ -69,7 +67,6 @@ class InsertNewJerseyAdditionalEmployeeDeductions extends Migration
 
         DB::table($this->tax_areas)->insert([[
             'tax_id' => $new_jersey_unemployment_insurance_id,
-            'home_governmental_unit_area_id' => $new_jersey_gua_id,
             'work_governmental_unit_area_id' => $new_jersey_gua_id,
             'based' => TaxArea::BASED_ON_WORK_LOCATION,
         ]]);
