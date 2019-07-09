@@ -10,18 +10,18 @@ class NewJerseyFamilyMedicalLeaveTest extends \TestCase
     /**
      * @dataProvider provideTestData
      */
-    public function testNewJerseyFamilyMedicalLeave($date, $wtd_earnings, $earnings, $result)
+    public function testNewJerseyFamilyMedicalLeave($date, $earnings, $ytd_earnings, $result)
     {
         Carbon::setTestNow(
             Carbon::parse($date, 'America/Chicago')->setTimezone('UTC')
         );
 
-        $results = $this->taxes->calculate(function ($taxes) use ($wtd_earnings, $earnings) {
+        $results = $this->taxes->calculate(function ($taxes) use ($ytd_earnings, $earnings) {
             $taxes->setHomeLocation($this->getLocation('us.new_jersey'));
             $taxes->setWorkLocation($this->getLocation('us.new_jersey'));
             $taxes->setUser($this->user);
-            $taxes->setWtdEarnings($wtd_earnings);
             $taxes->setEarnings($earnings);
+            $taxes->setYtdEarnings($ytd_earnings);
         });
 
         $this->assertSame($result, $results->getTax(NewJerseyFamilyMedicalLeave::class));
