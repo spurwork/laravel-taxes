@@ -15,10 +15,10 @@ class NewJerseyUnemploymentInsurance extends BaseNewJerseyUnemploymentInsurance
 
     public function getBaseEarnings()
     {
-        if (($this->payroll->earnings + $this->payroll->wtd_earnings) < self::WAGE_BASE) {
-            return $this->payroll->wtd_earnings;
-        } elseif (($this->payroll->earnings + $this->payroll->wtd_earnings) >= self::WAGE_BASE) {
-            $total = self::WAGE_BASE - $this->payroll->earnings;
+        if (($this->payroll->earnings + $this->payroll->ytd_earnings + $this->payroll->wtd_earnings) < self::WAGE_BASE) {
+            return max(min(static::WAGE_BASE - $this->payroll->ytd_earnings, $this->payroll->getEarnings()), 0);
+        } elseif (($this->payroll->earnings + $this->payroll->ytd_earnings + $this->payroll->wtd_earnings) >= self::WAGE_BASE) {
+            $total = self::WAGE_BASE - $this->payroll->ytd_earnings;
 
             return $total > 0 ? $total : 0;
         }
