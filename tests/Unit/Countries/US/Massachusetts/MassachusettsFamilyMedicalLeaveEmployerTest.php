@@ -3,20 +3,14 @@
 namespace Appleton\Taxes\Countries\US\Massachusetts\MassachusettsFamilyMedicalLeaveEmployer;
 
 use Carbon\Carbon;
+use Exception;
 
 class MassachusettsFamilyMedicalLeaveEmployerTest extends \TestCase
 {
-    public function setUp()
-    {
-        parent::setUp();
-
-        Carbon::setTestNow(
-            Carbon::parse('January 1, 2019 8am', 'America/Chicago')->setTimezone('UTC')
-        );
-    }
-
     public function testMassachusettsFamilyMedicalLeaveEmployer()
     {
+        Carbon::setTestNow('2019-10-01');
+
         $results = $this->taxes->calculate(function ($taxes) {
             $taxes->setHomeLocation($this->getLocation('us.massachusetts'));
             $taxes->setWorkLocation($this->getLocation('us.massachusetts'));
@@ -24,6 +18,6 @@ class MassachusettsFamilyMedicalLeaveEmployerTest extends \TestCase
             $taxes->setEarnings(2300);
         });
 
-        $this->assertSame(7.18, $results->getTax(MassachusettsFamilyMedicalLeaveEmployer::class));
+        $this->assertSame(8.56, $results->getTax(MassachusettsFamilyMedicalLeaveEmployer::class));
     }
 }

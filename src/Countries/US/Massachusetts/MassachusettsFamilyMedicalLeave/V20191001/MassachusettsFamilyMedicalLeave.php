@@ -1,10 +1,10 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Massachusetts\MassachusettsFamilyMedicalLeave\V20190101;
+namespace Appleton\Taxes\Countries\US\Massachusetts\MassachusettsFamilyMedicalLeave\V20191001;
 
 use Appleton\Taxes\Countries\US\Massachusetts\MassachusettsFamilyMedicalLeave\MassachusettsFamilyMedicalLeave as BaseMassachusettsFamilyMedicalLeave;
 
 class MassachusettsFamilyMedicalLeave extends BaseMassachusettsFamilyMedicalLeave
 {
-    const TAX_RATE = 0.00318;
+    const TAX_RATE = 0.0037785;
 }
