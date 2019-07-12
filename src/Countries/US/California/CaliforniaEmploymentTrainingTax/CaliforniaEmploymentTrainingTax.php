@@ -2,10 +2,9 @@
 
 namespace Appleton\Taxes\Countries\US\California\CaliforniaEmploymentTrainingTax;
 
-use Appleton\Taxes\Classes\BaseTax;
+use Appleton\Taxes\Classes\BaseState;
 
-abstract class CaliforniaEmploymentTrainingTax extends BaseTax
+abstract class CaliforniaEmploymentTrainingTax extends BaseState
 {
-    const TYPE = 'state';
-    const WITHHELD = true;
+    const WITHHELD = false;
 }
