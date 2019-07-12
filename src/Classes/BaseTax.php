@@ -17,7 +17,7 @@ abstract class BaseTax
 
     public function compute(Collection $tax_areas)
     {
-        $this->tax_total = $this->payroll->withholdTax($this->payroll->getEarnings() * static::TAX_RATE);
+        $this->tax_total = $this->payroll->withholdTax($this->payroll->getEarningsWageBase() * static::TAX_RATE);
         return round($this->tax_total, 2);
     }
 
@@ -34,5 +34,18 @@ abstract class BaseTax
     public function getEarnings()
     {
         return method_exists($this, 'getBaseEarnings') ? $this->getBaseEarnings() : $this->payroll->getEarnings();
+    }
+
+    public function getBaseEarningsWageBase()
+    {
+        if (($this->payroll->earnings + $this->payroll->ytd_earnings + $this->payroll->wtd_earnings) < static::WAGE_BASE) {
+            return max(min(static::WAGE_BASE - $this->payroll->ytd_earnings, $this->payroll->getEarnings()), 0);
+        } elseif (($this->payroll->earnings + $this->payroll->ytd_earnings + $this->payroll->wtd_earnings) >= static::WAGE_BASE) {
+            $total = static::WAGE_BASE - $this->payroll->ytd_earnings;
+
+            return $total > 0 ? $total : 0;
+        }
+
+        return 0;
     }
 }
