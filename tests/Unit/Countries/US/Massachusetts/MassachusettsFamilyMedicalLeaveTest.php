@@ -11,15 +11,14 @@ class MassachusettsFamilyMedicalLeaveTest extends \TestCase
     {
         Carbon::setTestNow('2019-09-30');
 
-        $this->expectException(Exception::class);
-        $this->expectExceptionMessage('The implementation could not be found.');
-
-        $this->taxes->calculate(function ($taxes) {
+        $results = $this->taxes->calculate(function ($taxes) {
             $taxes->setHomeLocation($this->getLocation('us.massachusetts'));
             $taxes->setWorkLocation($this->getLocation('us.massachusetts'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(2300);
         });
+
+        $this->assertNull($results->getTax(MassachusettsFamilyMedicalLeave::class));
     }
 
     public function testMassachusettsFamilyMedicalLeave()
