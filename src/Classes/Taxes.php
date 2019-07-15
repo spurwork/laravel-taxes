@@ -75,6 +75,9 @@ class Taxes
 
     public function setYtdEarnings($ytd_earnings)
     {
+        if ($ytd_earnings instanceof Closure) {
+            $ytd_earnings = $ytd_earnings($this);
+        }
         $this->ytd_earnings = $ytd_earnings;
     }
 

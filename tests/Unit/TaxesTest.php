@@ -144,6 +144,26 @@ class TaxesTest extends \TestCase
         $this->assertSame(2.03, $results->getTax(AlabamaIncome::class));
         $this->assertSame(null, $results->getTax(AlabamaUnemployment::class));
         $this->assertSame(0.67, $results->getTax(BirminghamOccupational::class));
+
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.alabama.birmingham'));
+            $taxes->setWorkLocation($this->getLocation('us.alabama.birmingham'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(66.68);
+            $taxes->setSupplementalEarnings(6.68);
+            $taxes->setYtdEarnings(function ($taxes) {
+                return 500000;
+            });
+            $taxes->setPayPeriods(260);
+            $taxes->setDate(Carbon::now()->addMonth());
+        });
+
+        $this->assertSame(7.54, $results->getTax(FederalIncome::class));
+        $this->assertSame(1.57, $results->getTax(Medicare::class));
+        $this->assertSame(0.97, $results->getTax(MedicareEmployer::class));
+        $this->assertSame(2.03, $results->getTax(AlabamaIncome::class));
+        $this->assertSame(null, $results->getTax(AlabamaUnemployment::class));
+        $this->assertSame(0.67, $results->getTax(BirminghamOccupational::class));
     }
 
     public function testTaxesUnresolvableDate()
