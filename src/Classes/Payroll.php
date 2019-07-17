@@ -67,7 +67,7 @@ class Payroll
 
     public function getWtdEarnings($governmental_unit_area = null)
     {
-        if ($this->wtd_earnings instanceof Closure && !is_null($governmental_unit_area)) {
+        if (is_callable($this->wtd_earnings)) {
             return $this->wtd_earnings($governmental_unit_area);
         }
 
@@ -76,7 +76,7 @@ class Payroll
 
     public function getYtdEarnings($governmental_unit_area = null)
     {
-        if ($this->ytd_earnings instanceof Closure) {
+        if (is_callable($this->ytd_earnings)) {
             return $this->ytd_earnings($governmental_unit_area);
         }
 
