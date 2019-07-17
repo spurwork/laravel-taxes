@@ -64,4 +64,22 @@ class Payroll
     {
         return $this->supplemental_earnings - $this->exempted_supplemental_earnings;
     }
+
+    public function getWtdEarnings($governmental_unit_area = null)
+    {
+        if ($this->wtd_earnings instanceof Closure && !is_null($governmental_unit_area)) {
+            return $this->wtd_earnings($governmental_unit_area);
+        }
+
+        return $this->wtd_earnings;
+    }
+
+    public function getYtdEarnings($governmental_unit_area = null)
+    {
+        if ($this->ytd_earnings instanceof Closure && !is_null($governmental_unit_area)) {
+            return $this->ytd_earnings($governmental_unit_area);
+        }
+
+        return $this->ytd_earnings;
+    }
 }

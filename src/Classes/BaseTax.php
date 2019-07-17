@@ -36,12 +36,12 @@ abstract class BaseTax
         return method_exists($this, 'getBaseEarnings') ? $this->getBaseEarnings() : $this->payroll->getEarnings();
     }
 
-    public function getBaseEarningsWageBase()
+    public function getBaseEarningsWageBase($governmental_unit_area = null)
     {
-        if (($this->payroll->earnings + $this->payroll->ytd_earnings + $this->payroll->wtd_earnings) < static::WAGE_BASE) {
-            return max(min(static::WAGE_BASE - $this->payroll->ytd_earnings, $this->payroll->getEarnings()), 0);
-        } elseif (($this->payroll->earnings + $this->payroll->ytd_earnings + $this->payroll->wtd_earnings) >= static::WAGE_BASE) {
-            $total = static::WAGE_BASE - $this->payroll->ytd_earnings;
+        if (($this->payroll->earnings + $this->payroll->getYtdEarnings($governmental_unit_area) + $this->payroll->getWtdEarnings($governmental_unit_area)) < static::WAGE_BASE) {
+            return max(min(static::WAGE_BASE - $this->payroll->getYtdEarnings($governmental_unit_area), $this->payroll->getEarnings()), 0);
+        } elseif (($this->payroll->earnings + $this->payroll->getYtdEarnings($governmental_unit_area) + $this->payroll->getWtdEarnings($governmental_unit_area)) >= static::WAGE_BASE) {
+            $total = static::WAGE_BASE - $this->payroll->getYtdEarnings($governmental_unit_area);
 
             return $total > 0 ? $total : 0;
         }
