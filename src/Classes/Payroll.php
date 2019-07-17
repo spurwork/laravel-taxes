@@ -76,7 +76,7 @@ class Payroll
 
     public function getYtdEarnings($governmental_unit_area = null)
     {
-        if ($this->ytd_earnings instanceof Closure && !is_null($governmental_unit_area)) {
+        if ($this->ytd_earnings instanceof Closure) {
             return $this->ytd_earnings($governmental_unit_area);
         }
 
