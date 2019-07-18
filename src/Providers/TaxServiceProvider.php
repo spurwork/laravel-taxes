@@ -209,7 +209,7 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\Kentucky\CrestviewHillsCity\CrestviewHillsCity::class,
         \Appleton\Taxes\Countries\US\Kentucky\CrittendenCounty\CrittendenCounty::class,
         \Appleton\Taxes\Countries\US\Kentucky\CumberlandCounty\CumberlandCounty::class,
-        \Appleton\Taxes\Countries\US\Kentucky\CumberlandSchoolCity\CumberlandSchoolCity::class,
+        \Appleton\Taxes\Countries\US\Kentucky\CumberlandSchoolCounty\CumberlandSchoolCounty::class,
         \Appleton\Taxes\Countries\US\Kentucky\CynthianaCity\CynthianaCity::class,
         \Appleton\Taxes\Countries\US\Kentucky\DanvilleCity\DanvilleCity::class,
         \Appleton\Taxes\Countries\US\Kentucky\DaviessCounty\DaviessCounty::class,

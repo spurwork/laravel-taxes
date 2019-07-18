@@ -1,30 +1,30 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Kentucky\FlorenceCity;
+namespace Appleton\Taxes\Countries\US\Kentucky\HighlandHeightsCity;
 
-use Appleton\Taxes\Countries\US\Kentucky\FlorenceCity\FlorenceCity;
+use Appleton\Taxes\Countries\US\Kentucky\HighlandHeightsCity\HighlandHeightsCity;
 use Carbon\Carbon;
 
-class FlorenceCityTest extends \TestCase
+class HighlandHeightsCityTest extends \TestCase
 {
     /**
      * @dataProvider provideTestData
      */
-    public function testFlorenceCity($date, $earnings, $ytd_earnings, $result)
+    public function testHighlandHeightsCity($date, $earnings, $ytd_earnings, $result)
     {
         Carbon::setTestNow(
             Carbon::parse($date, 'America/Chicago')->setTimezone('UTC')
         );
 
         $results = $this->taxes->calculate(function ($taxes) use ($ytd_earnings, $earnings) {
-            $taxes->setHomeLocation($this->getLocation('us.kentucky.florence_city'));
-            $taxes->setWorkLocation($this->getLocation('us.kentucky.florence_city'));
+            $taxes->setHomeLocation($this->getLocation('us.kentucky.highland_heights_city'));
+            $taxes->setWorkLocation($this->getLocation('us.kentucky.highland_heights_city'));
             $taxes->setUser($this->user);
             $taxes->setEarnings($earnings);
             $taxes->setYtdEarnings($ytd_earnings);
         });
 
-        $this->assertSame($result, $results->getTax(FlorenceCity::class));
+        $this->assertSame($result, $results->getTax(HighlandHeightsCity::class));
     }
 
     public function provideTestData()
@@ -40,18 +40,18 @@ class FlorenceCityTest extends \TestCase
                 'January 1, 2019 8am',
                 300,
                 5000,
-                6.0,
+                3.0,
             ],
             '2' => [
                 'January 1, 2019 8am',
                 900,
-                132000,
-                18.0,
+                99100,
+                9.0,
             ],
             '3' => [
                 'January 1, 2019 8am',
                 771,
-                132900,
+                100000,
                 null,
             ],
         ];

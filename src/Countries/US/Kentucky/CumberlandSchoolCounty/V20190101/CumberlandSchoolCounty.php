@@ -1,16 +1,16 @@
 <?php
-namespace Appleton\Taxes\Countries\US\Kentucky\FortWrightCity\V20190101;
+namespace Appleton\Taxes\Countries\US\Kentucky\CumberlandSchoolCounty\V20190101;
 
-use Appleton\Taxes\Countries\US\Kentucky\FortWrightCity\FortWrightCity as BaseFortWrightCity;
+use Appleton\Taxes\Countries\US\Kentucky\CumberlandSchoolCounty\CumberlandSchoolCounty as BaseCumberlandSchoolCounty;
 use Appleton\Taxes\Traits\HasWageBase;
 use Illuminate\Database\Eloquent\Collection;
 
-class FortWrightCity extends BaseFortWrightCity
+class CumberlandSchoolCounty extends BaseCumberlandSchoolCounty
 {
     use HasWageBase;
 
-    public const TAX_RATE = 0.0115;
-    const WAGE_BASE = 132900;
+    public const TAX_RATE = 0.005;
+    const WAGE_BASE = 100000;
 
     public function compute(Collection $tax_areas)
     {
