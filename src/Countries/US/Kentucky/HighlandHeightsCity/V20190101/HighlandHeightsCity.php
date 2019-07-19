@@ -14,7 +14,11 @@ class HighlandHeightsCity extends BaseHighlandHeightsCity
 
     public function compute(Collection $tax_areas)
     {
-        $this->tax_total = $this->payroll->withholdTax($this->getBaseEarningsWageBase() * static::TAX_RATE);
-        return round($this->tax_total, 2);
+        return round($this->getAdjustedEarnings() * self::TAX_RATE, 2);
+    }
+
+    public function getAdjustedEarnings()
+    {
+        return min($this->payroll->getEarnings(), $this->getBaseEarnings());
     }
 }
