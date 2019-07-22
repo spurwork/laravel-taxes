@@ -12,7 +12,7 @@ class OhioSchoolDistrictTaxTest extends TestCase
     /**
      * @dataProvider provideTestData
      */
-    public function testOhioIncome($date, $exempt, $dependents, $school_district_id, $earnings, $result)
+    public function testOhioIncome($date, $exempt, $dependents, $school_district_id, $earnings, $ytd_earnings, $result)
     {
         OhioIncomeTaxInformation::forUser($this->user)->update([
             'dependents' => $dependents,
@@ -24,11 +24,12 @@ class OhioSchoolDistrictTaxTest extends TestCase
             Carbon::parse($date, 'America/Chicago')->setTimezone('UTC')
         );
 
-        $results = $this->taxes->calculate(function ($taxes) use ($earnings) {
+        $results = $this->taxes->calculate(function ($taxes) use ($earnings, $ytd_earnings) {
             $taxes->setHomeLocation($this->getLocation('us.ohio'));
             $taxes->setWorkLocation($this->getLocation('us.ohio'));
             $taxes->setUser($this->user);
             $taxes->setEarnings($earnings);
+            $taxes->setYtdEarnings($ytd_earnings);
             $taxes->setPayPeriods(52);
         });
 
@@ -42,6 +43,7 @@ class OhioSchoolDistrictTaxTest extends TestCase
         // dependents
         // school district id
         // earnings
+        // ytd earnings
         // results
         return [
             // No school district id
@@ -59,16 +61,29 @@ class OhioSchoolDistrictTaxTest extends TestCase
                 0,
                 3301,
                 50,
+                0,
                 0.75,
             ],
-            // '2' => [
-            //     'January 1, 2019 8am',
-            //     false,
-            //     0,
-            //     3301,
-            //     50,
-            //     0.75,
-            // ],
+            // wage base of 9500 should be null
+            '2' => [
+                'January 1, 2019 8am',
+                false,
+                0,
+                2305,
+                50,
+                9500,
+                null,
+            ],
+            // wage base not met
+            '3' => [
+                'January 1, 2019 8am',
+                false,
+                0,
+                2305,
+                50,
+                0,
+                0.75,
+            ],
             // '2' => [
             //     'January 1, 2019 8am',
             //     false,

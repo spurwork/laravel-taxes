@@ -214,7 +214,11 @@ class OhioSchoolDistrictTax extends BaseOhioSchoolDistrictTax
             return;
         }
 
-        return round($this->getAdjustedEarnings() * $this->tax_rate, 2);
+        if ($this->has_wage_base) {
+            return round($this->getAdjustedEarnings() * $this->tax_rate, 2);
+        }
+
+        return round($this->payroll->getEarnings() * $this->tax_rate, 2);
     }
 
     public function getAdjustedEarnings()
