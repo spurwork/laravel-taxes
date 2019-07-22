@@ -312,6 +312,7 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\Kentucky\NortonvilleCity\NortonvilleCity::class,
         \Appleton\Taxes\Countries\US\Kentucky\OakGroveCity\OakGroveCity::class,
         \Appleton\Taxes\Countries\US\Kentucky\OhioCounty\OhioCounty::class,
+        \Appleton\Taxes\Countries\US\Ohio\OhioSchoolDistrictTax\OhioSchoolDistrictTax::class,
         \Appleton\Taxes\Countries\US\Kentucky\OliveHillCity\OliveHillCity::class,
         \Appleton\Taxes\Countries\US\Kentucky\OwensboroCity\OwensboroCity::class,
         \Appleton\Taxes\Countries\US\Kentucky\OwentonCity\OwentonCity::class,
