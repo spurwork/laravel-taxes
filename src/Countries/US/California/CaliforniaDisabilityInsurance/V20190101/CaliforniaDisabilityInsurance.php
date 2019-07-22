@@ -17,9 +17,4 @@ class CaliforniaDisabilityInsurance extends BaseCaliforniaDisabilityInsurance
     {
         return round($this->payroll->withholdTax(min($this->payroll->getEarnings(), $this->getBaseEarnings($tax_areas->first()->workGovernmentalUnitArea)) * self::TAX_RATE), 2);
     }
-
-    public function getAdjustedEarnings()
-    {
-        return min($this->payroll->getEarnings(), $this->getBaseEarnings());
-    }
 }
