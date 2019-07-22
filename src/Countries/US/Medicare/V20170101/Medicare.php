@@ -30,7 +30,7 @@ class Medicare extends BaseMedicare
 
     public function getAdditionalTaxAmount()
     {
-        return max($this->payroll->getEarnings() - max(static::ADDITIONAL_TAX_AMOUNT[$this->tax_information->filing_status] - $this->payroll->ytd_earnings, 0), 0) * static::ADDITIONAL_TAX_RATE;
+        return max($this->payroll->getEarnings() - max(static::ADDITIONAL_TAX_AMOUNT[$this->tax_information->filing_status] - $this->payroll->getYtdEarnings(), 0), 0) * static::ADDITIONAL_TAX_RATE;
     }
 
     public function compute(Collection $tax_areas)
