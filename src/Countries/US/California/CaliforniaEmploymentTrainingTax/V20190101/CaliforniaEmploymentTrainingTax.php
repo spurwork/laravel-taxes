@@ -15,7 +15,7 @@ class CaliforniaEmploymentTrainingTax extends BaseCaliforniaEmploymentTrainingTa
 
     public function compute(Collection $tax_areas)
     {
-        return round($this->payroll->withholdTax($this->getAdjustedEarnings() * self::TAX_RATE), 2);
+        return round($this->payroll->withholdTax($this->payroll->withholdTax($this->getAdjustedEarnings() * self::TAX_RATE)), 2);
     }
 
     public function getAdjustedEarnings()

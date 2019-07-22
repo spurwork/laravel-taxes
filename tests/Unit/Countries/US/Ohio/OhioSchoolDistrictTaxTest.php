@@ -46,16 +46,7 @@ class OhioSchoolDistrictTaxTest extends TestCase
         // ytd earnings
         // results
         return [
-            // No school district id
-            // '0' => [
-            //     'January 1, 2019 8am',
-            //     false,
-            //     0,
-            //     null,
-            //     300,
-            //     null,
-            // ],
-            '1' => [
+            '0' => [
                 'January 1, 2019 8am',
                 false,
                 0,
@@ -65,7 +56,7 @@ class OhioSchoolDistrictTaxTest extends TestCase
                 0.75,
             ],
             // wage base of 9500 should be null
-            '2' => [
+            '1' => [
                 'January 1, 2019 8am',
                 false,
                 0,
@@ -75,7 +66,7 @@ class OhioSchoolDistrictTaxTest extends TestCase
                 null,
             ],
             // wage base not met
-            '3' => [
+            '2' => [
                 'January 1, 2019 8am',
                 false,
                 0,
@@ -84,38 +75,16 @@ class OhioSchoolDistrictTaxTest extends TestCase
                 0,
                 0.75,
             ],
-            // '2' => [
-            //     'January 1, 2019 8am',
-            //     false,
-            //     2,
-            // 	   null,
-            //     300,
-            //     3.32,
-            // ],
-            // '3' => [
-            //     'January 1, 2019 8am',
-            //     false,
-            //     5,
-            // 	   null,
-            //     2000,
-            //     64.86,
-            // ],
-            // '4' => [
-            //     'January 1, 2019 8am',
-            //     false,
-            //     0,
-            // 	   null,
-            //     500,
-            //     9.92,
-            // ],
-            // '5' => [
-            //     'January 1, 2019 8am',
-            //     false,
-            //     2,
-            // 	   null,
-            //     700,
-            //     15.56,
-            // ],
+            // no matching school district id
+            '3' => [
+                'January 1, 2019 8am',
+                false,
+                2,
+                null,
+                300,
+                0,
+                null,
+            ],
         ];
     }
 }

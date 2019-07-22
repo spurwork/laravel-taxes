@@ -215,15 +215,10 @@ class OhioSchoolDistrictTax extends BaseOhioSchoolDistrictTax
         }
 
         if ($this->has_wage_base) {
-            return round($this->getAdjustedEarnings() * $this->tax_rate, 2);
+            return round($this->payroll->withholdTax(min($this->payroll->getEarnings(), $this->getBaseEarnings($tax_areas->first()->workGovernmentalUnitArea)) * $this->tax_rate), 2);
         }
 
         return round($this->payroll->getEarnings() * $this->tax_rate, 2);
-    }
-
-    public function getAdjustedEarnings()
-    {
-        return min($this->payroll->getEarnings(), $this->getBaseEarnings());
     }
 
     private function checkSchoolDistrictId($id)
