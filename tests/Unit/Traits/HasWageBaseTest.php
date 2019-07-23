@@ -22,6 +22,10 @@ class HasWageBaseTest extends \TestCase
                     {
                         return $this->earnings;
                     }
+                    public function getYtdEarnings()
+                    {
+                        return $this->ytd_earnings;
+                    }
                 };
             }
         };

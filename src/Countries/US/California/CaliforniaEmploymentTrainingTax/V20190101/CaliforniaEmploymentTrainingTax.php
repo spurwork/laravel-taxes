@@ -15,7 +15,7 @@ class CaliforniaEmploymentTrainingTax extends BaseCaliforniaEmploymentTrainingTa
 
     public function compute(Collection $tax_areas)
     {
-        $this->tax_total = $this->payroll->withholdTax($this->getBaseEarningsWageBase() * static::TAX_RATE);
+        $this->tax_total = $this->payroll->withholdTax($this->getBaseEarningsWageBase($tax_areas->first()->workGovernmentalUnitArea) * static::TAX_RATE);
         return round($this->tax_total, 2);
     }
 }
