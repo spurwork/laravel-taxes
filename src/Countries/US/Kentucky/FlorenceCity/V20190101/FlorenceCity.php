@@ -13,17 +13,13 @@ class FlorenceCity extends BaseFlorenceCity
     const TAX_RATE = 0.02;
     const WAGE_BASE = 132900;
 
-    private $governmental_unit_area;
-
     public function compute(Collection $tax_areas)
     {
-        $this->governmental_unit_area = $tax_areas->first()->workGovernmentalUnitArea;
+        $this->tax_total = $this->payroll->withholdTax(min(
+            $this->payroll->getEarnings(),
+            $this->getBaseEarnings($tax_areas->first()->workGovernmentalUnitArea)
+        ) * static::TAX_RATE);
 
-        return parent::compute($tax_areas);
-    }
-
-    public function getEarnings()
-    {
-        return $this->getBaseEarnings($this->governmental_unit_area);
+        return round($this->tax_total, 2);
     }
 }
