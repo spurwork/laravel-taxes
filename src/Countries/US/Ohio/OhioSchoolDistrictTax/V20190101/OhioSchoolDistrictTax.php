@@ -15,6 +15,7 @@ class OhioSchoolDistrictTax extends BaseOhioSchoolDistrictTax
 
     const WAGE_BASE = 9500;
 
+    // id => [tax rate, wage base]
     const TRADITIONAL_TAX_BASE_SCHOOL_ID = [
         '3301' => [0.015, false],
         '7501' => [0.015, false],
