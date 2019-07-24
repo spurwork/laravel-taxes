@@ -32,14 +32,14 @@ class GreeneIncomeTest extends TestCase
      */
     public function testGreeneIncome(): void
     {
-        IndianaIncomeTaxInformation::createForUser([
+        IndianaIncomeTaxInformation::forUser($this->user)->update([
             'personal_exemptions' => 2,
             'dependent_exemptions' => 1,
             'exempt' => false,
             'additional_withholding' => 0,
             'county_lived' => 28,
             'county_worked' => 27,
-        ], $this->user);
+        ]);
 
         $results = $this->taxes->calculate(function (Taxes $taxes) {
             $taxes->setHomeLocation($this->getLocation('us.indiana.greene'));
@@ -54,14 +54,14 @@ class GreeneIncomeTest extends TestCase
 
     public function testGreeneIncomeCountyWorked(): void
     {
-        IndianaIncomeTaxInformation::createForUser([
+        IndianaIncomeTaxInformation::forUser($this->user)->update([
             'personal_exemptions' => 2,
             'dependent_exemptions' => 1,
             'exempt' => false,
             'additional_withholding' => 0,
             'county_lived' => 0,
             'county_worked' => 28,
-        ], $this->user);
+        ]);
 
         $results = $this->taxes->calculate(function (Taxes $taxes) {
             $taxes->setHomeLocation($this->getLocation('us.indiana.greene'));
