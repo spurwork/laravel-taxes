@@ -15,6 +15,7 @@ class NewJerseyFamilyMedicalLeave extends BaseNewJerseyFamilyMedicalLeave
 
     public function compute(Collection $tax_areas)
     {
-        return round($this->payroll->withholdTax(min($this->payroll->getEarnings(), $this->getBaseEarnings($tax_areas->first()->workGovernmentalUnitArea)) * self::TAX_RATE), 2);
+        $this->tax_total = $this->payroll->withholdTax($this->getBaseEarningsWageBase($tax_areas->first()->workGovernmentalUnitArea) * static::TAX_RATE);
+        return round($this->tax_total, 2);
     }
 }
