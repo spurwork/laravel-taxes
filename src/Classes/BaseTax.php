@@ -42,8 +42,10 @@ abstract class BaseTax
             return max(min(static::WAGE_BASE - $this->payroll->getYtdEarnings($governmental_unit_area), $this->payroll->getEarnings()), 0);
         } elseif (($this->payroll->earnings + $this->payroll->getYtdEarnings($governmental_unit_area) + $this->payroll->getWtdEarnings($governmental_unit_area)) >= static::WAGE_BASE) {
             $total = static::WAGE_BASE - $this->payroll->getYtdEarnings($governmental_unit_area);
+
             return $total > 0 ? $total : 0;
         }
+
         return 0;
     }
 }
