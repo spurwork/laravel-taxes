@@ -35,17 +35,4 @@ abstract class BaseTax
     {
         return method_exists($this, 'getBaseEarnings') ? $this->getBaseEarnings() : $this->payroll->getEarnings();
     }
-
-    public function getBaseEarningsWageBase()
-    {
-        if (($this->payroll->earnings + $this->payroll->ytd_earnings + $this->payroll->wtd_earnings) < static::WAGE_BASE) {
-            return max(min(static::WAGE_BASE - $this->payroll->ytd_earnings, $this->payroll->getEarnings()), 0);
-        } elseif (($this->payroll->earnings + $this->payroll->ytd_earnings + $this->payroll->wtd_earnings) >= static::WAGE_BASE) {
-            $total = static::WAGE_BASE - $this->payroll->ytd_earnings;
-
-            return $total > 0 ? $total : 0;
-        }
-
-        return 0;
-    }
 }

@@ -6,6 +6,7 @@ use Appleton\Taxes\Classes\Taxes;
 use Appleton\Taxes\Countries\US\Indiana\AdamsIncome\AdamsIncome;
 use Appleton\Taxes\Countries\US\Indiana\AllenIncome\AllenIncome;
 use Appleton\Taxes\Countries\US\Indiana\IndianaIncome\IndianaIncome;
+use Appleton\Taxes\Models\Countries\US\Illinois\IllinoisIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Indiana\IndianaIncomeTaxInformation;
 use Carbon\Carbon;
 use TestCase;
@@ -24,14 +25,14 @@ class AdamsIncomeTest extends TestCase
      */
     public function testAdamsIncomeCountyLived(): void
     {
-        IndianaIncomeTaxInformation::createForUser([
+        IndianaIncomeTaxInformation::forUser($this->user)->update([
             'personal_exemptions' => 0,
             'dependent_exemptions' => 0,
             'exempt' => false,
             'additional_withholding' => 0,
             'county_lived' => 1,
             'county_worked' => 3,
-        ], $this->user);
+        ]);
 
         $results = $this->taxes->calculate(function (Taxes $taxes) {
             $taxes->setHomeLocation($this->getLocation('us.indiana'));
@@ -48,14 +49,14 @@ class AdamsIncomeTest extends TestCase
 
     public function testAdamsIncomeCountyWorked(): void
     {
-        IndianaIncomeTaxInformation::createForUser([
+        IndianaIncomeTaxInformation::forUser($this->user)->update([
             'personal_exemptions' => 0,
             'dependent_exemptions' => 0,
             'exempt' => false,
             'additional_withholding' => 0,
             'county_lived' => 0,
             'county_worked' => 1,
-        ], $this->user);
+        ]);
 
         $results = $this->taxes->calculate(function (Taxes $taxes) {
             $taxes->setHomeLocation($this->getLocation('us.indiana'));

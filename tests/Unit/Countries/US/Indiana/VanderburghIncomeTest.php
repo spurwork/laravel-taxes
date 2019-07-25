@@ -33,14 +33,14 @@ class VanderburghIncomeTest extends TestCase
      */
     public function testVanderburghIncome(): void
     {
-        IndianaIncomeTaxInformation::createForUser([
+        IndianaIncomeTaxInformation::forUser($this->user)->update([
             'personal_exemptions' => 1,
             'dependent_exemptions' => 0,
             'exempt' => false,
             'additional_withholding' => 0,
             'county_lived' => 82,
             'county_worked' => 81,
-        ], $this->user);
+        ]);
 
         $results = $this->taxes->calculate(function (Taxes $taxes) {
             $taxes->setHomeLocation($this->getLocation('us.indiana.vanderburgh'));
@@ -55,14 +55,14 @@ class VanderburghIncomeTest extends TestCase
 
     public function testVanderburghIncomeCountyWorked(): void
     {
-        IndianaIncomeTaxInformation::createForUser([
+        IndianaIncomeTaxInformation::forUser($this->user)->update([
             'personal_exemptions' => 1,
             'dependent_exemptions' => 0,
             'exempt' => false,
             'additional_withholding' => 0,
             'county_lived' => 0,
             'county_worked' => 82,
-        ], $this->user);
+        ]);
 
         $results = $this->taxes->calculate(function (Taxes $taxes) {
             $taxes->setHomeLocation($this->getLocation('us.indiana.vanderburgh'));

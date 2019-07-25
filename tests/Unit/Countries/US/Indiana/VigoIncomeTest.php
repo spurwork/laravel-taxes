@@ -23,14 +23,14 @@ class VigoIncomeTest extends TestCase
      */
     public function testVigoIncome(): void
     {
-        IndianaIncomeTaxInformation::createForUser([
+        IndianaIncomeTaxInformation::forUser($this->user)->update([
             'personal_exemptions' => 0,
             'dependent_exemptions' => 0,
             'exempt' => false,
             'additional_withholding' => 0,
             'county_lived' => 84,
             'county_worked' => 83,
-        ], $this->user);
+        ]);
 
         $results = $this->taxes->calculate(function (Taxes $taxes) {
             $taxes->setHomeLocation($this->getLocation('us.indiana.vigo'));
@@ -45,14 +45,14 @@ class VigoIncomeTest extends TestCase
 
     public function testVigoIncomeCountyWorked(): void
     {
-        IndianaIncomeTaxInformation::createForUser([
+        IndianaIncomeTaxInformation::forUser($this->user)->update([
             'personal_exemptions' => 0,
             'dependent_exemptions' => 0,
             'exempt' => false,
             'additional_withholding' => 0,
             'county_lived' => 0,
             'county_worked' => 84,
-        ], $this->user);
+        ]);
 
         $results = $this->taxes->calculate(function (Taxes $taxes) {
             $taxes->setHomeLocation($this->getLocation('us.indiana.vigo'));
