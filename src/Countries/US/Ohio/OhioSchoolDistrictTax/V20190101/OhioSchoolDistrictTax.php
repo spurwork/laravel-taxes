@@ -212,7 +212,7 @@ class OhioSchoolDistrictTax extends BaseOhioSchoolDistrictTax
     public function compute(Collection $tax_areas)
     {
         if (!$this->checkSchoolDistrictId($this->tax_information->school_district_id) && is_null($this->tax_information->school_district_id)) {
-            return;
+            return 0.0;
         }
 
         if ($this->has_wage_base) {
