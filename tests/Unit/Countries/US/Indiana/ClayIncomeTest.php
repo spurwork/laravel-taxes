@@ -32,14 +32,14 @@ class ClayIncomeTest extends TestCase
      */
     public function testClayIncome(): void
     {
-        IndianaIncomeTaxInformation::createForUser([
+        IndianaIncomeTaxInformation::forUser($this->user)->update([
             'personal_exemptions' => 1,
             'dependent_exemptions' => 1,
             'exempt' => false,
             'additional_withholding' => 0,
             'county_lived' => 11,
             'county_worked' => 10,
-        ], $this->user);
+        ]);
 
         $results = $this->taxes->calculate(function (Taxes $taxes) {
             $taxes->setHomeLocation($this->getLocation('us.indiana.clark'));
@@ -54,14 +54,14 @@ class ClayIncomeTest extends TestCase
 
     public function testClayIncomeCountyWorked(): void
     {
-        IndianaIncomeTaxInformation::createForUser([
+        IndianaIncomeTaxInformation::forUser($this->user)->update([
             'personal_exemptions' => 1,
             'dependent_exemptions' => 1,
             'exempt' => false,
             'additional_withholding' => 0,
             'county_lived' => 0,
             'county_worked' => 11,
-        ], $this->user);
+        ]);
 
         $results = $this->taxes->calculate(function (Taxes $taxes) {
             $taxes->setHomeLocation($this->getLocation('us.indiana.clark'));

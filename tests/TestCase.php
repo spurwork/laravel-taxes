@@ -46,7 +46,7 @@ use Appleton\Taxes\Providers\TaxesServiceProvider;
 use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Orchestra\Database\ConsoleServiceProvider;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 
@@ -55,7 +55,7 @@ use Orchestra\Testbench\TestCase as BaseTestCase;
  */
 class TestCase extends BaseTestCase
 {
-    use DatabaseMigrations;
+    use DatabaseTransactions;
 
     protected $user_model;
     protected $user;
@@ -73,13 +73,6 @@ class TestCase extends BaseTestCase
         Carbon::setTestNow(
             Carbon::parse('January 1, 2017 8am', 'America/Chicago')->setTimezone('UTC')
         );
-
-        $this->loadLaravelMigrations(['--database' => 'testing']);
-
-        $this->loadMigrationsFrom([
-            '--database' => 'testing',
-            '--realpath' => realpath(__DIR__.'/../src/migrations'),
-        ]);
 
         $this->user_model = app(config('taxes.user'));
 
