@@ -218,7 +218,6 @@ class TestCase extends BaseTestCase
 
         PennsylvaniaIncomeTaxInformation::createForUser([
             'exempt' => false,
-            'filing_status' => PennsylvaniaIncome::FILING_SINGLE,
         ], $this->user);
 
         VirginiaIncomeTaxInformation::createForUser([
