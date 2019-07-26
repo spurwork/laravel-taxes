@@ -3,19 +3,14 @@
 namespace Appleton\Taxes\Countries\US\Ohio\OhioSchoolDistrictTax\V20190101;
 
 use Appleton\Taxes\Countries\US\Ohio\OhioSchoolDistrictTax\OhioSchoolDistrictTax as BaseOhioSchoolDistrictTax;
-use Appleton\Taxes\Traits\HasWageBase;
 use Illuminate\Database\Eloquent\Collection;
 
 class OhioSchoolDistrictTax extends BaseOhioSchoolDistrictTax
 {
-    use HasWageBase;
-
     protected $tax_rate;
-    protected $has_wage_base;
+    protected $has_traditional_wage_base;
 
-    const WAGE_BASE = 9500;
-
-    // id => [tax rate, wage base]
+    // id => [tax rate, traditional wage base]
     const TRADITIONAL_TAX_BASE_SCHOOL_ID = [
         '3301' => [0.015, false],
         '7501' => [0.015, false],
@@ -211,12 +206,16 @@ class OhioSchoolDistrictTax extends BaseOhioSchoolDistrictTax
 
     public function compute(Collection $tax_areas)
     {
+        if ($this->tax_information->exempt) {
+            return 0.0;
+        }
+
         if (!$this->checkSchoolDistrictId($this->tax_information->school_district_id) && is_null($this->tax_information->school_district_id)) {
             return 0.0;
         }
 
-        if ($this->has_wage_base) {
-            return round($this->payroll->withholdTax(min($this->payroll->getEarnings(), $this->getBaseEarnings($tax_areas->first()->workGovernmentalUnitArea)) * $this->tax_rate), 2);
+        if ($this->has_traditional_wage_base) {
+            return round((($this->getGrossEarnings() - $this->getDependentAllowance()) * $this->tax_rate) / $this->payroll->pay_periods, 2);
         }
 
         return round($this->payroll->getEarnings() * $this->tax_rate, 2);
@@ -227,10 +226,20 @@ class OhioSchoolDistrictTax extends BaseOhioSchoolDistrictTax
         if (array_key_exists($id, static::TRADITIONAL_TAX_BASE_SCHOOL_ID)) {
             $this->tax_rate = static::TRADITIONAL_TAX_BASE_SCHOOL_ID[$id][0];
             if (static::TRADITIONAL_TAX_BASE_SCHOOL_ID[$id][1]) {
-                $this->has_wage_base = true;
+                $this->has_traditional_wage_base = true;
             }
             return true;
         }
         return false;
+    }
+
+    public function getDependentAllowance()
+    {
+        return $this->tax_information->dependents * 650;
+    }
+
+    private function getGrossEarnings()
+    {
+        return ($this->payroll->getEarnings() - $this->payroll->getSupplementalEarnings()) * $this->payroll->pay_periods;
     }
 }

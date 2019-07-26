@@ -12,7 +12,7 @@ class OhioSchoolDistrictTaxTest extends TestCase
     /**
      * @dataProvider provideTestData
      */
-    public function testOhioIncome($date, $exempt, $dependents, $school_district_id, $earnings, $ytd_earnings, $result)
+    public function testOhioIncome($date, $exempt, $dependents, $school_district_id, $earnings, $result)
     {
         OhioIncomeTaxInformation::forUser($this->user)->update([
             'dependents' => $dependents,
@@ -24,12 +24,11 @@ class OhioSchoolDistrictTaxTest extends TestCase
             Carbon::parse($date, 'America/Chicago')->setTimezone('UTC')
         );
 
-        $results = $this->taxes->calculate(function ($taxes) use ($earnings, $ytd_earnings) {
+        $results = $this->taxes->calculate(function ($taxes) use ($earnings) {
             $taxes->setHomeLocation($this->getLocation('us.ohio'));
             $taxes->setWorkLocation($this->getLocation('us.ohio'));
             $taxes->setUser($this->user);
             $taxes->setEarnings($earnings);
-            $taxes->setYtdEarnings($ytd_earnings);
             $taxes->setPayPeriods(52);
         });
 
@@ -43,47 +42,49 @@ class OhioSchoolDistrictTaxTest extends TestCase
         // dependents
         // school district id
         // earnings
-        // ytd earnings
         // results
         return [
             '0' => [
                 'January 1, 2019 8am',
-                false,
+                true,
                 0,
-                3301,
+                '3301',
                 50,
-                0,
-                0.75,
+                null,
             ],
-            // wage base of 9500 should be null
             '1' => [
                 'January 1, 2019 8am',
                 false,
                 0,
-                2305,
-                50,
-                9500,
-                null,
+                '3301',
+                500,
+                7.5,
             ],
-            // wage base not met
+            // not traditional so dependents don't matter
             '2' => [
                 'January 1, 2019 8am',
                 false,
-                0,
-                2305,
-                50,
-                0,
-                0.75,
+                2,
+                '3301',
+                500,
+                7.5,
             ],
-            // no matching school district id
             '3' => [
                 'January 1, 2019 8am',
                 false,
-                2,
-                null,
-                300,
                 0,
-                null,
+                '0502',
+                500,
+                5.0,
+            ],
+            // traditional so dependents do matter
+            '4' => [
+                'January 1, 2019 8am',
+                false,
+                2,
+                '0502',
+                500,
+                4.75,
             ],
         ];
     }
