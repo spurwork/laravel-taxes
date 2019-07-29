@@ -1,30 +1,31 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Kentucky\FlorenceCity;
+namespace Appleton\Taxes\Unit\Countries\US\Kentucky;
 
-use Appleton\Taxes\Countries\US\Kentucky\FlorenceCity\FlorenceCity;
+use Appleton\Taxes\Countries\US\Kentucky\BurkesvilleCity\BurkesvilleCity;
 use Carbon\Carbon;
+use TestCase;
 
-class FlorenceCityTest extends \TestCase
+class BurkesvilleCityTest extends TestCase
 {
     /**
      * @dataProvider provideTestData
      */
-    public function testFlorenceCity($date, $earnings, $ytd_earnings, $result)
+    public function testBurkesvilleCity($date, $earnings, $ytd_earnings, $result)
     {
         Carbon::setTestNow(
             Carbon::parse($date, 'America/Chicago')->setTimezone('UTC')
         );
 
         $results = $this->taxes->calculate(function ($taxes) use ($ytd_earnings, $earnings) {
-            $taxes->setHomeLocation($this->getLocation('us.kentucky.florence_city'));
-            $taxes->setWorkLocation($this->getLocation('us.kentucky.florence_city'));
+            $taxes->setHomeLocation($this->getLocation('us.kentucky.burkesville_city'));
+            $taxes->setWorkLocation($this->getLocation('us.kentucky.burkesville_city'));
             $taxes->setUser($this->user);
             $taxes->setEarnings($earnings);
             $taxes->setYtdEarnings($ytd_earnings);
         });
 
-        $this->assertSame($result, $results->getTax(FlorenceCity::class));
+        $this->assertSame($result, $results->getTax(BurkesvilleCity::class));
     }
 
     public function provideTestData()
@@ -45,13 +46,13 @@ class FlorenceCityTest extends \TestCase
             '2' => [
                 'January 1, 2019 8am',
                 900,
-                132000,
+                36600,
                 18.0,
             ],
             '3' => [
                 'January 1, 2019 8am',
                 771,
-                132900,
+                37500,
                 null,
             ],
         ];

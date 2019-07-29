@@ -1,17 +1,16 @@
 <?php
+namespace Appleton\Taxes\Countries\US\Kentucky\HighlandHeightsCity\V20190101;
 
-namespace Appleton\Taxes\Countries\US\Kentucky\FlorenceCity\V20190101;
-
-use Appleton\Taxes\Countries\US\Kentucky\FlorenceCity\FlorenceCity as BaseFlorenceCity;
+use Appleton\Taxes\Countries\US\Kentucky\HighlandHeightsCity\HighlandHeightsCity as BaseHighlandHeightsCity;
 use Appleton\Taxes\Traits\HasWageBase;
 use Illuminate\Database\Eloquent\Collection;
 
-class FlorenceCity extends BaseFlorenceCity
+class HighlandHeightsCity extends BaseHighlandHeightsCity
 {
     use HasWageBase;
 
-    const TAX_RATE = 0.02;
-    const WAGE_BASE = 132900;
+    public const TAX_RATE = 0.01;
+    const WAGE_BASE = 100000;
 
     public function compute(Collection $tax_areas)
     {
