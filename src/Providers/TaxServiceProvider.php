@@ -1089,6 +1089,8 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\Ohio\OhioUnemployment\OhioUnemployment::class,
         \Appleton\Taxes\Countries\US\Oklahoma\OklahomaIncome\OklahomaIncome::class,
         \Appleton\Taxes\Countries\US\Oklahoma\OklahomaUnemployment\OklahomaUnemployment::class,
+        \Appleton\Taxes\Countries\US\Pennsylvania\PennsylvaniaIncome\PennsylvaniaIncome::class,
+        \Appleton\Taxes\Countries\US\Pennsylvania\PennsylvaniaUnemployment\PennsylvaniaUnemployment::class,
         \Appleton\Taxes\Countries\US\Virginia\VirginiaIncome\VirginiaIncome::class,
         \Appleton\Taxes\Countries\US\Virginia\VirginiaUnemployment\VirginiaUnemployment::class,
         \Appleton\Taxes\Countries\US\WashingtonDC\WashingtonDCIncome\WashingtonDCIncome::class,
