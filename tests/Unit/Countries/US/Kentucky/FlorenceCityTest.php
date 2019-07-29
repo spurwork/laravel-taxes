@@ -10,17 +10,18 @@ class FlorenceCityTest extends \TestCase
     /**
      * @dataProvider provideTestData
      */
-    public function testFlorenceCity($date, $home_location, $work_location, $earnings, $result)
+    public function testFlorenceCity($date, $home_location, $work_location, $earnings, $ytd_earnings, $result)
     {
         Carbon::setTestNow(
             Carbon::parse($date, 'America/Chicago')->setTimezone('UTC')
         );
 
-        $results = $this->taxes->calculate(function ($taxes) use ($home_location, $work_location, $earnings) {
+        $results = $this->taxes->calculate(function ($taxes) use ($home_location, $work_location, $earnings, $ytd_earnings) {
             $taxes->setHomeLocation($home_location);
             $taxes->setWorkLocation($work_location);
             $taxes->setUser($this->user);
             $taxes->setEarnings($earnings);
+            $taxes->setYtdEarnings($ytd_earnings);
             $taxes->setPayPeriods(52);
         });
 
@@ -35,7 +36,16 @@ class FlorenceCityTest extends \TestCase
                 $this->getLocation('us.kentucky.florence_city'),
                 $this->getLocation('us.kentucky.florence_city'),
                 300,
+                0,
                 6.0,
+            ],
+            '1' => [
+                'January 1, 2019 8am',
+                $this->getLocation('us.kentucky.florence_city'),
+                $this->getLocation('us.kentucky.florence_city'),
+                300,
+                132900,
+                null,
             ],
         ];
     }
