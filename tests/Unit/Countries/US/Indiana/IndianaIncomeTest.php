@@ -153,14 +153,14 @@ class IndianaIncomeTest extends TestCase
     private function calculateTaxes(int $earnings, int $personal_exemptions, int $dependent_exemptions,
                                     bool $exempt = false, int $additional_withholding = 0): TaxResults
     {
-        IndianaIncomeTaxInformation::createForUser([
+        IndianaIncomeTaxInformation::forUser($this->user)->update([
             'personal_exemptions' => $personal_exemptions,
             'dependent_exemptions' => $dependent_exemptions,
             'exempt' => $exempt,
             'additional_withholding' => $additional_withholding,
             'county_lived' => 22,
             'county_worked' => 33,
-        ], $this->user);
+        ]);
 
         return $this->taxes->calculate(function (Taxes $taxes) use ($earnings) {
             $taxes->setHomeLocation($this->getLocation('us.indiana'));
