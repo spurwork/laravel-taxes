@@ -2,15 +2,12 @@
 
 namespace Appleton\Taxes\Countries\US\Ohio\OhioSchoolDistrictTax;
 
-use Appleton\Taxes\Classes\BaseTax;
+use Appleton\Taxes\Classes\BaseOccupational;
 use Appleton\Taxes\Classes\Payroll;
 use Appleton\Taxes\Models\Countries\US\Ohio\OhioIncomeTaxInformation;
 
-abstract class OhioSchoolDistrictTax extends BaseTax
+abstract class OhioSchoolDistrictTax extends BaseOccupational
 {
-    const TYPE = 'state';
-    const WITHHELD = true;
-
     protected $tax_information;
     protected $payroll;
 
