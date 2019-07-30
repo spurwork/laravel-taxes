@@ -15,7 +15,6 @@ class NewJerseyUnemploymentInsurance extends BaseNewJerseyUnemploymentInsurance
 
     public function compute(Collection $tax_areas)
     {
-        $this->tax_total = $this->payroll->withholdTax($this->getBaseEarningsWageBase($tax_areas->first()->workGovernmentalUnitArea) * static::TAX_RATE);
-        return round($this->tax_total, 2);
+        return round($this->payroll->withholdTax(min($this->payroll->getEarnings(), $this->getBaseEarnings($tax_areas->first()->workGovernmentalUnitArea)) * self::TAX_RATE), 2);
     }
 }

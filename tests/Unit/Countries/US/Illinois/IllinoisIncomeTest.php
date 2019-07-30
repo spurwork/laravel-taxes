@@ -114,12 +114,12 @@ class IllinoisIncomeTest extends TestCase
                                     float $earnings, bool $exempt = false,
                                     int $additional_withholding = 0): TaxResults
     {
-        IllinoisIncomeTaxInformation::createForUser([
+        IllinoisIncomeTaxInformation::forUser($this->user)->update([
             'basic_allowances' => $basic_allowances,
             'additional_allowances' => $additional_allowances,
             'additional_withholding' => $additional_withholding,
             'exempt' => $exempt,
-        ], $this->user);
+        ]);
 
         return $this->taxes->calculate(function (Taxes $taxes) use ($earnings) {
             $taxes->setHomeLocation($this->getLocation('us.illinois'));

@@ -307,11 +307,11 @@ class VirginiaIncomeTest extends TestCase
     private function calculateTaxes(int $exemptions, int $other_exemptions,
                                     float $earnings, bool $exempt = false): TaxResults
     {
-        VirginiaIncomeTaxInformation::createForUser([
+        VirginiaIncomeTaxInformation::forUser($this->user)->update([
             'exemptions' => $exemptions,
             'sixty_five_plus_or_blind_exemptions' => $other_exemptions,
             'exempt' => $exempt,
-        ], $this->user);
+        ]);
 
         return $this->taxes->calculate(function (Taxes $taxes) use ($earnings) {
             $taxes->setHomeLocation($this->getLocation('us.virginia'));

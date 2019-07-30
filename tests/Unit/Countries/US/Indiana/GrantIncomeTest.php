@@ -32,14 +32,14 @@ class GrantIncomeTest extends TestCase
      */
     public function testGrantIncome(): void
     {
-        IndianaIncomeTaxInformation::createForUser([
+        IndianaIncomeTaxInformation::forUser($this->user)->update([
             'personal_exemptions' => 2,
             'dependent_exemptions' => 1,
             'exempt' => false,
             'additional_withholding' => 0,
             'county_lived' => 27,
             'county_worked' => 26,
-        ], $this->user);
+        ]);
 
         $results = $this->taxes->calculate(function (Taxes $taxes) {
             $taxes->setHomeLocation($this->getLocation('us.indiana.grant'));
@@ -54,14 +54,14 @@ class GrantIncomeTest extends TestCase
 
     public function testGrantIncomeCountyWorked(): void
     {
-        IndianaIncomeTaxInformation::createForUser([
+        IndianaIncomeTaxInformation::forUser($this->user)->update([
             'personal_exemptions' => 2,
             'dependent_exemptions' => 1,
             'exempt' => false,
             'additional_withholding' => 0,
             'county_lived' => 0,
             'county_worked' => 27,
-        ], $this->user);
+        ]);
 
         $results = $this->taxes->calculate(function (Taxes $taxes) {
             $taxes->setHomeLocation($this->getLocation('us.indiana.grant'));
