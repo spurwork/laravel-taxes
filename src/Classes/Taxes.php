@@ -16,6 +16,7 @@ class Taxes
     protected $supplemental_earnings = 0;
     protected $suta_location = null;
     protected $wtd_earnings = 0;
+    protected $mtd_earnings = 0;
     protected $ytd_earnings = 0;
 
     public function setDate($date)
@@ -73,6 +74,11 @@ class Taxes
         $this->wtd_earnings = $wtd_earnings;
     }
 
+    public function setMtdEarnings($mtd_earnings)
+    {
+        $this->mtd_earnings = $mtd_earnings;
+    }
+
     public function setYtdEarnings($ytd_earnings)
     {
         $this->ytd_earnings = $ytd_earnings;
@@ -118,6 +124,7 @@ class Taxes
             'supplemental_earnings' => $this->supplemental_earnings,
             'user' => $this->user,
             'wtd_earnings' => $this->wtd_earnings,
+            'mtd_earnings' => $this->mtd_earnings,
             'ytd_earnings' => $this->ytd_earnings,
         ]));
     }
