@@ -9,8 +9,8 @@ class SocialSecurityTest extends \TestCase
     public function testCaseStudy2018A()
     {
         $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us'));
-            $taxes->setWorkLocation($this->getLocation('us'));
+            $taxes->setHomeLocation($this->getLocation('us.alabama'));
+            $taxes->setWorkLocation($this->getLocation('us.alabama'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(640);
             $taxes->setDate($this->date('2018-01-01'));
@@ -22,8 +22,8 @@ class SocialSecurityTest extends \TestCase
     public function testCaseStudy2018B()
     {
         $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us'));
-            $taxes->setWorkLocation($this->getLocation('us'));
+            $taxes->setHomeLocation($this->getLocation('us.alabama'));
+            $taxes->setWorkLocation($this->getLocation('us.alabama'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(774.28);
             $taxes->setDate($this->date('2018-01-01'));
@@ -35,8 +35,8 @@ class SocialSecurityTest extends \TestCase
     public function testCaseStudy2018C()
     {
         $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us'));
-            $taxes->setWorkLocation($this->getLocation('us'));
+            $taxes->setHomeLocation($this->getLocation('us.alabama'));
+            $taxes->setWorkLocation($this->getLocation('us.alabama'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(640);
             $taxes->setYtdEarnings(128500);
@@ -49,8 +49,8 @@ class SocialSecurityTest extends \TestCase
     public function testCaseStudy2018D()
     {
         $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us'));
-            $taxes->setWorkLocation($this->getLocation('us'));
+            $taxes->setHomeLocation($this->getLocation('us.alabama'));
+            $taxes->setWorkLocation($this->getLocation('us.alabama'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(774.28);
             $taxes->setYtdEarnings(128500);

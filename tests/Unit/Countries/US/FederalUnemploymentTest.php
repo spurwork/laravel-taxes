@@ -9,8 +9,8 @@ class FederalUnemploymentTest extends \TestCase
     public function testFederalUnemployment()
     {
         $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us'));
-            $taxes->setWorkLocation($this->getLocation('us'));
+            $taxes->setHomeLocation([56.1304, -106.3468]); // canada lat long since we have no state without futa credit
+            $taxes->setWorkLocation($this->getLocation('us.alabama'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(2300);
         });
