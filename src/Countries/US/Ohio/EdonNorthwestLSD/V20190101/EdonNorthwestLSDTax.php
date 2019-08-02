@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\EdonNorthwestLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\EdonNorthwestLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\EdonNorthwestLSDTax\EdonNorthwestLSDTax as BaseEdonNorthwestLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\EdonNorthwestLSD\EdonNorthwestLSDTax as BaseEdonNorthwestLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class EdonNorthwestLSDTax extends BaseEdonNorthwestLSDTax

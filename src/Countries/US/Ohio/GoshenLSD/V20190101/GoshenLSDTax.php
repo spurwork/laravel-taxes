@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\GoshenLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\GoshenLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\GoshenLSDTax\GoshenLSDTax as BaseGoshenLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\GoshenLSD\GoshenLSDTax as BaseGoshenLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class GoshenLSDTax extends BaseGoshenLSDTax

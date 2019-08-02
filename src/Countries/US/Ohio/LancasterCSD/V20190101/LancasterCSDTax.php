@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\LancasterCSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\LancasterCSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\LancasterCSDTax\LancasterCSDTax as BaseLancasterCSDTax;
+use Appleton\Taxes\Countries\US\Ohio\LancasterCSD\LancasterCSDTax as BaseLancasterCSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class LancasterCSDTax extends BaseLancasterCSDTax

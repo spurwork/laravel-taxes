@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\CrestlineEVSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\CrestlineEVSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\CrestlineEVSDTax\CrestlineEVSDTax as BaseCrestlineEVSDTax;
+use Appleton\Taxes\Countries\US\Ohio\CrestlineEVSD\CrestlineEVSDTax as BaseCrestlineEVSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class CrestlineEVSDTax extends BaseCrestlineEVSDTax

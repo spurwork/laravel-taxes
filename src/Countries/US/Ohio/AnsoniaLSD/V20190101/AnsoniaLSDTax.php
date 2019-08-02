@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\AnsoniaLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\AnsoniaLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\AnsoniaLSDTax\AnsoniaLSDTax as BaseAnsoniaLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\AnsoniaLSD\AnsoniaLSDTax as BaseAnsoniaLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class AnsoniaLSDTax extends BaseAnsoniaLSDTax

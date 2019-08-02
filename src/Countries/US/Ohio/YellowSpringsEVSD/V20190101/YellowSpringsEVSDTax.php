@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\YellowSpringsEVSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\YellowSpringsEVSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\YellowSpringsEVSDTax\YellowSpringsEVSDTax as BaseYellowSpringsEVSDTax;
+use Appleton\Taxes\Countries\US\Ohio\YellowSpringsEVSD\YellowSpringsEVSDTax as BaseYellowSpringsEVSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class YellowSpringsEVSDTax extends BaseYellowSpringsEVSDTax

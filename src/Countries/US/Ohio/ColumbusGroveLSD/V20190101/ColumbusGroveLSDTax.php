@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\ColumbusGroveLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\ColumbusGroveLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\ColumbusGroveLSDTax\ColumbusGroveLSDTax as BaseColumbusGroveLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\ColumbusGroveLSD\ColumbusGroveLSDTax as BaseColumbusGroveLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class ColumbusGroveLSDTax extends BaseColumbusGroveLSDTax

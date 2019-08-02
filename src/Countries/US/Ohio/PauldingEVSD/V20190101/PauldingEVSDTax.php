@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\PauldingEVSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\PauldingEVSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\PauldingEVSDTax\PauldingEVSDTax as BasePauldingEVSDTax;
+use Appleton\Taxes\Countries\US\Ohio\PauldingEVSD\PauldingEVSDTax as BasePauldingEVSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class PauldingEVSDTax extends BasePauldingEVSDTax

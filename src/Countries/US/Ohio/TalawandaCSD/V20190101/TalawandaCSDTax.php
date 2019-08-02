@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\TalawandaCSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\TalawandaCSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\TalawandaCSDTax\TalawandaCSDTax as BaseTalawandaCSDTax;
+use Appleton\Taxes\Countries\US\Ohio\TalawandaCSD\TalawandaCSDTax as BaseTalawandaCSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class TalawandaCSDTax extends BaseTalawandaCSDTax

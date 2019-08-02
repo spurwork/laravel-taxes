@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\UpperSciotoValleyLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\UpperSciotoValleyLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\UpperSciotoValleyLSDTax\UpperSciotoValleyLSDTax as BaseUpperSciotoValleyLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\UpperSciotoValleyLSD\UpperSciotoValleyLSDTax as BaseUpperSciotoValleyLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class UpperSciotoValleyLSDTax extends BaseUpperSciotoValleyLSDTax

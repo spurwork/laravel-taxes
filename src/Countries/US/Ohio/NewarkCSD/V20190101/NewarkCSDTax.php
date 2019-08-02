@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\NewarkCSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\NewarkCSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\NewarkCSDTax\NewarkCSDTax as BaseNewarkCSDTax;
+use Appleton\Taxes\Countries\US\Ohio\NewarkCSD\NewarkCSDTax as BaseNewarkCSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class NewarkCSDTax extends BaseNewarkCSDTax

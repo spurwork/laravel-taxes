@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\NewMiamiLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\NewMiamiLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\NewMiamiLSDTax\NewMiamiLSDTax as BaseNewMiamiLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\NewMiamiLSD\NewMiamiLSDTax as BaseNewMiamiLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class NewMiamiLSDTax extends BaseNewMiamiLSDTax

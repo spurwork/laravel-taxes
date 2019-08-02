@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\WillardCSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\WillardCSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\WillardCSDTax\WillardCSDTax as BaseWillardCSDTax;
+use Appleton\Taxes\Countries\US\Ohio\WillardCSD\WillardCSDTax as BaseWillardCSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class WillardCSDTax extends BaseWillardCSDTax

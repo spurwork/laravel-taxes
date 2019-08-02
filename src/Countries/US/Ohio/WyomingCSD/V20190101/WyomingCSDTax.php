@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\WyomingCSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\WyomingCSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\WyomingCSDTax\WyomingCSDTax as BaseWyomingCSDTax;
+use Appleton\Taxes\Countries\US\Ohio\WyomingCSD\WyomingCSDTax as BaseWyomingCSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class WyomingCSDTax extends BaseWyomingCSDTax

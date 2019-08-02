@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\TriVillageLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\TriVillageLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\TriVillageLSDTax\TriVillageLSDTax as BaseTriVillageLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\TriVillageLSD\TriVillageLSDTax as BaseTriVillageLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class TriVillageLSDTax extends BaseTriVillageLSDTax

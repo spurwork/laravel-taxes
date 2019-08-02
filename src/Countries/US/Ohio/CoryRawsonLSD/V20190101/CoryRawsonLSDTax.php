@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\CoryRawsonLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\CoryRawsonLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\CoryRawsonLSDTax\CoryRawsonLSDTax as BaseCoryRawsonLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\CoryRawsonLSD\CoryRawsonLSDTax as BaseCoryRawsonLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class CoryRawsonLSDTax extends BaseCoryRawsonLSDTax

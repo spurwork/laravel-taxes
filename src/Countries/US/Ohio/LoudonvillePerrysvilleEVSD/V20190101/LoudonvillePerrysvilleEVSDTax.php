@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\LoudonvillePerrysvilleEVSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\LoudonvillePerrysvilleEVSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\LoudonvillePerrysvilleEVSDTax\LoudonvillePerrysvilleEVSDTax as BaseLoudonvillePerrysvilleEVSDTax;
+use Appleton\Taxes\Countries\US\Ohio\LoudonvillePerrysvilleEVSD\LoudonvillePerrysvilleEVSDTax as BaseLoudonvillePerrysvilleEVSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class LoudonvillePerrysvilleEVSDTax extends BaseLoudonvillePerrysvilleEVSDTax

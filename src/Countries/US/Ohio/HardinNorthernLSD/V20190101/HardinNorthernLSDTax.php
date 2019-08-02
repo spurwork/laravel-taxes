@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\HardinNorthernLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\HardinNorthernLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\HardinNorthernLSDTax\HardinNorthernLSDTax as BaseHardinNorthernLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\HardinNorthernLSD\HardinNorthernLSDTax as BaseHardinNorthernLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class HardinNorthernLSDTax extends BaseHardinNorthernLSDTax

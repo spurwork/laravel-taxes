@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\FairbanksLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\FairbanksLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\FairbanksLSDTax\FairbanksLSDTax as BaseFairbanksLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\FairbanksLSD\FairbanksLSDTax as BaseFairbanksLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class FairbanksLSDTax extends BaseFairbanksLSDTax

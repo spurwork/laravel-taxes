@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\CirclevilleCSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\CirclevilleCSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\CirclevilleCSDTax\CirclevilleCSDTax as BaseCirclevilleCSDTax;
+use Appleton\Taxes\Countries\US\Ohio\CirclevilleCSD\CirclevilleCSDTax as BaseCirclevilleCSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class CirclevilleCSDTax extends BaseCirclevilleCSDTax

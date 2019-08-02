@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\BowlingGreenCSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\BowlingGreenCSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\BowlingGreenCSDTax\BowlingGreenCSDTax as BaseBowlingGreenCSDTax;
+use Appleton\Taxes\Countries\US\Ohio\BowlingGreenCSD\BowlingGreenCSDTax as BaseBowlingGreenCSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class BowlingGreenCSDTax extends BaseBowlingGreenCSDTax

@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\EatonCSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\EatonCSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\EatonCSDTax\EatonCSDTax as BaseEatonCSDTax;
+use Appleton\Taxes\Countries\US\Ohio\EatonCSD\EatonCSDTax as BaseEatonCSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class EatonCSDTax extends BaseEatonCSDTax

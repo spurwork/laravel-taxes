@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\ClydeGreenSpringsEVSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\ClydeGreenSpringsEVSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\ClydeGreenSpringsEVSDTax\ClydeGreenSpringsEVSDTax as BaseClydeGreenSpringsEVSDTax;
+use Appleton\Taxes\Countries\US\Ohio\ClydeGreenSpringsEVSD\ClydeGreenSpringsEVSDTax as BaseClydeGreenSpringsEVSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class ClydeGreenSpringsEVSDTax extends BaseClydeGreenSpringsEVSDTax

@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\ArcanumButlerLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\ArcanumButlerLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\ArcanumButlerLSDTax\ArcanumButlerLSDTax as BaseArcanumButlerLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\ArcanumButlerLSD\ArcanumButlerLSDTax as BaseArcanumButlerLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class ArcanumButlerLSDTax extends BaseArcanumButlerLSDTax

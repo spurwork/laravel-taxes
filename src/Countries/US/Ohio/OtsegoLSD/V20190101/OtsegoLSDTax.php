@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\OtsegoLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\OtsegoLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\OtsegoLSDTax\OtsegoLSDTax as BaseOtsegoLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\OtsegoLSD\OtsegoLSDTax as BaseOtsegoLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class OtsegoLSDTax extends BaseOtsegoLSDTax

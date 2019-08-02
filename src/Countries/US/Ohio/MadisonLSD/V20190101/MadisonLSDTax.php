@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\MadisonLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\MadisonLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\MadisonLSDTax\MadisonLSDTax as BaseMadisonLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\MadisonLSD\MadisonLSDTax as BaseMadisonLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class MadisonLSDTax extends BaseMadisonLSDTax

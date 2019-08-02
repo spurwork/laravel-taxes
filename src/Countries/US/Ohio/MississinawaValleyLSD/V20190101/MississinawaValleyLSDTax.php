@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\MississinawaValleyLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\MississinawaValleyLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\MississinawaValleyLSDTax\MississinawaValleyLSDTax as BaseMississinawaValleyLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\MississinawaValleyLSD\MississinawaValleyLSDTax as BaseMississinawaValleyLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class MississinawaValleyLSDTax extends BaseMississinawaValleyLSDTax

@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\BellevueCSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\BellevueCSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\BellevueCSDTax\BellevueCSDTax as BaseBellevueCSDTax;
+use Appleton\Taxes\Countries\US\Ohio\BellevueCSD\BellevueCSDTax as BaseBellevueCSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class TwinValleyCommunityLSDTax extends BaseTwinValleyCommunityLSDTax

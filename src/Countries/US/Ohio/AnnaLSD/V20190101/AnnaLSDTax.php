@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\AnnaLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\AnnaLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\AnnaLSDTax\AnnaLSDTax as BaseAnnaLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\AnnaLSD\AnnaLSDTax as BaseAnnaLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class AnnaLSDTax extends BaseAnnaLVSDTax

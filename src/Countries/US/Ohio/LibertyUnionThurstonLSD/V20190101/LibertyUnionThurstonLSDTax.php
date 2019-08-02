@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\LibertyUnionThurstonLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\LibertyUnionThurstonLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\LibertyUnionThurstonLSDTax\LibertyUnionThurstonLSDTax as BaseLibertyUnionThurstonLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\LibertyUnionThurstonLSD\LibertyUnionThurstonLSDTax as BaseLibertyUnionThurstonLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class LibertyUnionThurstonLSDTax extends BaseLibertyUnionThurstonLSDTax

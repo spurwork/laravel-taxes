@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\StrykerLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\StrykerLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\StrykerLSDTax\StrykerLSDTax as BaseStrykerLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\StrykerLSD\StrykerLSDTax as BaseStrykerLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class StrykerLSDTax extends BaseStrykerLSDTax

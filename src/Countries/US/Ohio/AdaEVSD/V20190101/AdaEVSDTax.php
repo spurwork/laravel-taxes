@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\AdaEVSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\AdaEVSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\AdaEVSDTax\AdaEVSDTax as BaseAdaEVSDTax;
+use Appleton\Taxes\Countries\US\Ohio\AdaEVSD\AdaEVSDTax as BaseAdaEVSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class AdaEVSDTax extends BaseAdaEVSDTax

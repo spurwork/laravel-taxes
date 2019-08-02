@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\ArcadiaLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\ArcadiaLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\ArcadiaLSDTax\ArcadiaLSDTax as BaseArcadiaLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\ArcadiaLSD\ArcadiaLSDTax as BaseArcadiaLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class ArcadiaLSDTax extends BaseArcadiaLSDTax

@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\CloverleafLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\CloverleafLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\CloverleafLSDTax\CloverleafLSDTax as BaseCloverleafLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\CloverleafLSD\CloverleafLSDTax as BaseCloverleafLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class CloverleafLSDTax extends BaseCloverleafLSDTax

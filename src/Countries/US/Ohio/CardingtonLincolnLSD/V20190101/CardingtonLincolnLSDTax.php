@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\CardingtonLincolnLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\CardingtonLincolnLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\CardingtonLincolnLSDTax\CardingtonLincolnLSDTax as BaseCardingtonLincolnLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\CardingtonLincolnLSD\CardingtonLincolnLSDTax as BaseCardingtonLincolnLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class CardingtonLincolnLSDTax extends BaseCardingtonLincolnLSDTax

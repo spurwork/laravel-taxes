@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\PiquaCSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\PiquaCSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\PiquaCSDTax\PiquaCSDTax as BasePiquaCSDTax;
+use Appleton\Taxes\Countries\US\Ohio\PiquaCSD\PiquaCSDTax as BasePiquaCSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class PiquaCSDTax extends BasePiquaCSDTax

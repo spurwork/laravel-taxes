@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\NewLondonLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\NewLondonLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\NewLondonLSDTax\NewLondonLSDTax as BaseNewLondonLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\NewLondonLSD\NewLondonLSDTax as BaseNewLondonLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class NewLondonLSDTax extends BaseNewLondonLSDTax

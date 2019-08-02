@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\PrebleShawneeLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\PrebleShawneeLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\PrebleShawneeLSDTax\PrebleShawneeLSDTax as BasePrebleShawneeLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\PrebleShawneeLSD\PrebleShawneeLSDTax as BasePrebleShawneeLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class PrebleShawneeLSDTax extends BasePrebleShawneeLSDTax

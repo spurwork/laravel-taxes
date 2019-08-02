@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\MohawkLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\MohawkLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\MohawkLSDTax\MohawkLSDTax as BaseMohawkLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\MohawkLSD\MohawkLSDTax as BaseMohawkLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class MohawkLSDTax extends BaseMohawkLSDTax

@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\BUpperSanduskyEVSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\BUpperSanduskyEVSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\BUpperSanduskyEVSDTax\BUpperSanduskyEVSDTax as BaseBUpperSanduskyEVSDTax;
+use Appleton\Taxes\Countries\US\Ohio\BUpperSanduskyEVSD\BUpperSanduskyEVSDTax as BaseBUpperSanduskyEVSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class BUpperSanduskyEVSDTax extends BaseBUpperSanduskyEVSDTax

@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\BuckeyeCentralLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\BuckeyeCentralLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\BuckeyeCentralLSDTax\BuckeyeCentralLSDTax as BaseBuckeyeCentralLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\BuckeyeCentralLSD\BuckeyeCentralLSDTax as BaseBuckeyeCentralLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class BuckeyeCentralLSDTax extends BaseBuckeyeCentralLSDTax

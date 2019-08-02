@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\CentralLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\CentralLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\CentralLSDTax\CentralLSDTax as BaseCentralLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\CentralLSD\CentralLSDTax as BaseCentralLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class CentralLSDTax extends BaseCentralLSDTax

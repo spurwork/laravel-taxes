@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\SenecaEastLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\SenecaEastLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\SenecaEastLSDTax\SenecaEastLSDTax as BaseSenecaEastLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\SenecaEastLSD\SenecaEastLSDTax as BaseSenecaEastLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class SenecaEastLSDTax extends BaseSenecaEastLSDTax

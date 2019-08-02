@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\RossLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\RossLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\RossLSDTax\RossLSDTax as BaseRossLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\RossLSD\RossLSDTax as BaseRossLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class RossLSDTax extends BaseRossLSDTax

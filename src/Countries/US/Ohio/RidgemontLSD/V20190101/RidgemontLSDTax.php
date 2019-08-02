@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\RidgemontLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\RidgemontLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\RidgemontLSDTax\RidgemontLSDTax as BaseRidgemontLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\RidgemontLSD\RidgemontLSDTax as BaseRidgemontLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class RidgemontLSDTax extends BaseRidgemontLSDTax

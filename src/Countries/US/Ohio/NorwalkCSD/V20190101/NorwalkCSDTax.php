@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\NorwalkCSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\NorwalkCSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\NorwalkCSDTax\NorwalkCSDTax as BaseNorwalkCSDTax;
+use Appleton\Taxes\Countries\US\Ohio\NorwalkCSD\NorwalkCSDTax as BaseNorwalkCSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class NorwalkCSDTax extends BaseNorwalkCSDTax

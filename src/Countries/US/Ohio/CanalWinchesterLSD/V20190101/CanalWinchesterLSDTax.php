@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\CanalWinchesterLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\CanalWinchesterLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\CanalWinchesterLSDTax\CanalWinchesterLSDTax as BaseCanalWinchesterLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\CanalWinchesterLSD\CanalWinchesterLSDTax as BaseCanalWinchesterLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class CanalWinchesterLSDTax extends BaseCanalWinchesterLSDTax

@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\FairbornCSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\FairbornCSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\FairbornCSDTax\FairbornCSDTax as BaseFairbornCSDTax;
+use Appleton\Taxes\Countries\US\Ohio\FairbornCSD\FairbornCSDTax as BaseFairbornCSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class FairbornCSDTax extends BaseFairbornCSDTax

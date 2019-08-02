@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\UnitedLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\UnitedLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\UnitedLSDTax\UnitedLSDTax as BaseUnitedLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\UnitedLSD\UnitedLSDTax as BaseUnitedLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class UnitedLSDTax extends BaseUnitedLSDTax

@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\EvergreenLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\EvergreenLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\EvergreenLSDTax\EvergreenLSDTax as BaseEvergreenLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\EvergreenLSD\EvergreenLSDTax as BaseEvergreenLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class EvergreenLSDTax extends BaseEvergreenLSDTax

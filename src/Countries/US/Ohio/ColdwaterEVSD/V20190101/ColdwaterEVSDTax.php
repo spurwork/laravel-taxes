@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\ColdwaterEVSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\ColdwaterEVSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\ColdwaterEVSDTax\ColdwaterEVSDTax as BaseColdwaterEVSDTax;
+use Appleton\Taxes\Countries\US\Ohio\ColdwaterEVSD\ColdwaterEVSDTax as BaseColdwaterEVSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class ColdwaterEVSDTax extends BaseColdwaterEVSDTax

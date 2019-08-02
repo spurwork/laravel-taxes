@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\MontpelierEVSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\MontpelierEVSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\MontpelierEVSDTax\MontpelierEVSDTax as BaseMontpelierEVSDTax;
+use Appleton\Taxes\Countries\US\Ohio\MontpelierEVSD\MontpelierEVSDTax as BaseMontpelierEVSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class MontpelierEVSDTax extends BaseMontpelierEVSDTax

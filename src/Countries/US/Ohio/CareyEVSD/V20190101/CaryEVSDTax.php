@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\CareyEVSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\CareyEVSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\CareyEVSDTax\CareyEVSDTax as BaseCareyEVSDTax;
+use Appleton\Taxes\Countries\US\Ohio\CareyEVSD\CareyEVSDTax as BaseCareyEVSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class CareyEVSDTax extends BaseCareyEVSDTax

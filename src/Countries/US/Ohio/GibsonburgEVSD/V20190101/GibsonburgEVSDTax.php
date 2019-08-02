@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\GibsonburgEVSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\GibsonburgEVSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\GibsonburgEVSDTax\GibsonburgEVSDTax as BaseGibsonburgEVSDTax;
+use Appleton\Taxes\Countries\US\Ohio\GibsonburgEVSD\GibsonburgEVSDTax as BaseGibsonburgEVSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class GibsonburgEVSDTax extends BaseGibsonburgEVSDTax

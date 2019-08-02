@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\ElmwoodLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\ElmwoodLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\ElmwoodLSDTax\ElmwoodLSDTax as BaseElmwoodLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\ElmwoodLSD\ElmwoodLSDTax as BaseElmwoodLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class ElmwoodLSDTax extends BaseElmwoodLSDTax

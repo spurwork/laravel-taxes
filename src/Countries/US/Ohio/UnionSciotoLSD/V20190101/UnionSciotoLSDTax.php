@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\UnionSciotoLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\UnionSciotoLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\UnionSciotoLSDTax\UnionSciotoLSDTax as BaseUnionSciotoLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\UnionSciotoLSD\UnionSciotoLSDTax as BaseUnionSciotoLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class UnionSciotoLSDTax extends BaseUnionSciotoLSDTax

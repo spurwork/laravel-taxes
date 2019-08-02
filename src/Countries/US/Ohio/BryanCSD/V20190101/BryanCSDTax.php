@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\BryanCSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\BryanCSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\BryanCSDTax\BryanCSDTax as BaseBryanCSDTax;
+use Appleton\Taxes\Countries\US\Ohio\BryanCSD\BryanCSDTax as BaseBryanCSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class BryanCSDTax extends BaseBryanCSDTax

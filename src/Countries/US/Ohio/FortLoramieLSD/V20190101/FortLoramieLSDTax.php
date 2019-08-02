@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\FortLaramieLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\FortLaramieLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\FortLaramieLSDTax\FortLaramieLSDTax as BaseFortLaramieLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\FortLaramieLSD\FortLaramieLSDTax as BaseFortLaramieLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class FortLaramieLSDTax extends BaseFortLaramieLSDTax

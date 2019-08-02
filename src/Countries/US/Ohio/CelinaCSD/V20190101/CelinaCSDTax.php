@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\CelinaCSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\CelinaCSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\CelinaCSDTax\CelinaCSDTax as BaseCelinaCSDTax;
+use Appleton\Taxes\Countries\US\Ohio\CelinaCSD\CelinaCSDTax as BaseCelinaCSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class CelinaCSDTax extends BaseCelinaCSDTax

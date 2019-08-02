@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\PlymouthShilohLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\PlymouthShilohLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\PlymouthShilohLSDTax\PlymouthShilohLSDTax as BasePlymouthShilohLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\PlymouthShilohLSD\PlymouthShilohLSDTax as BasePlymouthShilohLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class PlymouthShilohLSDTax extends BasePlymouthShilohLSDTax

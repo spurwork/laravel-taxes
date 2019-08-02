@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\ContinentalLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\ContinentalLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\ContinentalLSDTax\ContinentalLSDTax as BaseContinentalLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\ContinentalLSD\ContinentalLSDTax as BaseContinentalLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class ContinentalLSDTax extends BaseContinentalLSDTax

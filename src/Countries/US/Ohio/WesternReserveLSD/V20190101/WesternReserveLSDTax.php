@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\WesternReserveLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\WesternReserveLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\WesternReserveLSDTax\WesternReserveLSDTax as BaseWesternReserveLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\WesternReserveLSD\WesternReserveLSDTax as BaseWesternReserveLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class WesternReserveLSDTax extends BaseWesternReserveLSDTax

@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\SpringfieldLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\SpringfieldLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\SpringfieldLSDTax\SpringfieldLSDTax as BaseSpringfieldLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\SpringfieldLSD\SpringfieldLSDTax as BaseSpringfieldLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class SpringfieldLSDTax extends BaseSpringfieldLSDTax

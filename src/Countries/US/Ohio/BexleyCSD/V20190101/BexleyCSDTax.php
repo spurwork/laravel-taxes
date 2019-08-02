@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\BexleyCSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\BexleyCSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\BexleyCSDTax\BexleyCSDTax as BaseBexleyCSDTax;
+use Appleton\Taxes\Countries\US\Ohio\BexleyCSD\BexleyCSDTax as BaseBexleyCSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class BexleyCSDTax extends BaseBexleyCSDTax

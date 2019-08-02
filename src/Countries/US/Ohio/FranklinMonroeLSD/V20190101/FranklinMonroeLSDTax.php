@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\FranklinMonroeLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\FranklinMonroeLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\FranklinMonroeLSDTax\FranklinMonroeLSDTax as FranklinMonroeLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\FranklinMonroeLSD\FranklinMonroeLSDTax as FranklinMonroeLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class FranklinMonroeLSDTax extends FranklinMonroeLSDTax

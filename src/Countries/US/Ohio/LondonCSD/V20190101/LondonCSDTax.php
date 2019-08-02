@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\LondonCSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\LondonCSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\LondonCSDTax\LondonCSDTax as BaseLondonCSDTax;
+use Appleton\Taxes\Countries\US\Ohio\LondonCSD\LondonCSDTax as BaseLondonCSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class LondonCSDTax extends BaseLondonCSDTax

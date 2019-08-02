@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\LickingValleyLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\LickingValleyLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\LickingValleyLSDTax\LickingValleyLSDTax as BaseLickingValleyLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\LickingValleyLSD\LickingValleyLSDTax as BaseLickingValleyLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class LickingValleyLSDTax extends BaseLickingValleyLSDTax

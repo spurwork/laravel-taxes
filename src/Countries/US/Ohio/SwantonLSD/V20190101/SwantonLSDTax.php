@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\SwantonLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\SwantonLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\SwantonLSDTax\SwantonLSDTax as BaseSwantonLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\SwantonLSD\SwantonLSDTax as BaseSwantonLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class SwantonLSDTax extends BaseSwantonLSDTax

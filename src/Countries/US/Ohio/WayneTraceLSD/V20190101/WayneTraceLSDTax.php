@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\WayneTraceLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\WayneTraceLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\WayneTraceLSDTax\WayneTraceLSDTax as BaseWayneTraceLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\WayneTraceLSD\WayneTraceLSDTax as BaseWayneTraceLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class WayneTraceLSDTax extends BaseWayneTraceLSDTax

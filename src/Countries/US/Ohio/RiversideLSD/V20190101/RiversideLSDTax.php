@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\RiversideLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\RiversideLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\RiversideLSDTax\RiversideLSDTax as BaseRiversideLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\RiversideLSD\RiversideLSDTax as BaseRiversideLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class RiversideLSDTax extends BaseRiversideLSDTax

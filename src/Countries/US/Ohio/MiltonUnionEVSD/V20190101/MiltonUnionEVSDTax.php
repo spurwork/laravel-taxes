@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\MiltonUnionEVSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\MiltonUnionEVSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\MiltonUnionEVSDTax\MiltonUnionEVSDTax as BaseMiltonUnionEVSDTax;
+use Appleton\Taxes\Countries\US\Ohio\MiltonUnionEVSD\MiltonUnionEVSDTax as BaseMiltonUnionEVSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class MiltonUnionEVSDTax extends BaseMiltonUnionEVSDTax

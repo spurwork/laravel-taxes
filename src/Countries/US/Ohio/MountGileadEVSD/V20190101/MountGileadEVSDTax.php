@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\MountGileadEVSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\MountGileadEVSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\MountGileadEVSDTax\MountGileadEVSDTax as BaseMountGileadEVSDTax;
+use Appleton\Taxes\Countries\US\Ohio\MountGileadEVSD\MountGileadEVSDTax as BaseMountGileadEVSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class MountGileadEVSDTax extends BaseMountGileadEVSDTax

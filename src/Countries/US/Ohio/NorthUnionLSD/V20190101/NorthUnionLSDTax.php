@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\NorthUnionLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\NorthUnionLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\NorthUnionLSDTax\NorthUnionLSDTax as BaseNorthUnionLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\NorthUnionLSD\NorthUnionLSDTax as BaseNorthUnionLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class NorthUnionLSDTax extends BaseNorthUnionLSDTax

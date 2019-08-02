@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\HighlandEVSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\HighlandEVSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\HighlandEVSDTax\HighlandEVSDTax as BaseHighlandEVSDTax;
+use Appleton\Taxes\Countries\US\Ohio\HighlandEVSD\HighlandEVSDTax as BaseHighlandEVSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class HighlandEVSDTax extends BaseHighlandEVSDTax

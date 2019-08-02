@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\ZaneTraceLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\ZaneTraceLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\ZaneTraceLSDTax\ZaneTraceLSDTax as BaseZaneTraceLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\ZaneTraceLSD\ZaneTraceLSDTax as BaseZaneTraceLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class ZaneTraceLSDTax extends BaseZaneTraceLSDTax

@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\JacksonCenterLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\JacksonCenterLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\JacksonCenterLSDTax\JacksonCenterLSDTax as BaseJacksonCenterLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\JacksonCenterLSD\JacksonCenterLSDTax as BaseJacksonCenterLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class JacksonCenterLSDTax extends BaseJacksonCenterLSDTax

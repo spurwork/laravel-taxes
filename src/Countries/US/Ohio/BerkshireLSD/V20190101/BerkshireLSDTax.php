@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\BerkshireLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\BerkshireLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\BerkshireLSDTax\BerkshireLSDTax as BaseBerkshireLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\BerkshireLSD\BerkshireLSDTax as BaseBerkshireLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class BerkshireLSDTax extends BaseBerkshireLSDTax

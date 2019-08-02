@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\WapakonetaCSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\WapakonetaCSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\WapakonetaCSDTax\WapakonetaCSDTax as BaseWapakonetaCSDTax;
+use Appleton\Taxes\Countries\US\Ohio\WapakonetaCSD\WapakonetaCSDTax as BaseWapakonetaCSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class WapakonetaCSDTax extends BaseWapakonetaCSDTax

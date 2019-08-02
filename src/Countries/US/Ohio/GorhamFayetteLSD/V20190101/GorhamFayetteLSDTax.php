@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\GorhamFayetteLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\GorhamFayetteLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\GorhamFayetteLSDTax\GorhamFayetteLSDTax as BaseGorhamFayetteLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\GorhamFayetteLSD\GorhamFayetteLSDTax as BaseGorhamFayetteLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class GorhamFayetteLSDTax extends BaseGorhamFayetteLSDTax

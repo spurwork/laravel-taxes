@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\SoutheasternLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\SoutheasternLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\SoutheasternLSDTax\SoutheasternLSDTax as BaseSoutheasternLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\SoutheasternLSD\SoutheasternLSDTax as BaseSoutheasternLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class SoutheasternLSDTax extends BaseSoutheasternLSDTax

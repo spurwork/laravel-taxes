@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\BlufftonEVSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\BlufftonEVSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\BlufftonEVSDTax\BlufftonEVSDTax as BaseBlufftonEVSDTax;
+use Appleton\Taxes\Countries\US\Ohio\BlufftonEVSD\BlufftonEVSDTax as BaseBlufftonEVSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class BlufftonEVSDTax extends BaseBlufftonEVSDTax

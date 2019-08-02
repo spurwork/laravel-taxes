@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\FairfieldUnionLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\FairfieldUnionLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\FairfieldUnionLSDTax\FairfieldUnionLSDTax as BaseFairfieldUnionLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\FairfieldUnionLSD\FairfieldUnionLSDTax as BaseFairfieldUnionLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class FairfieldUnionLSDTax extends BaseFairfieldUnionLSDTax

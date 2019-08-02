@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\NationalTrailLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\NationalTrailLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\NationalTrailLSDTax\NationalTrailLSDTax as BaseNationalTrailLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\NationalTrailLSD\NationalTrailLSDTax as BaseNationalTrailLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class NationalTrailLSDTax extends BaseNationalTrailLSDTax

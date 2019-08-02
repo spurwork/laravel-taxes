@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\TroyCSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\TroyCSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\TroyCSDTax\TroyCSDTax as BaseTroyCSDTax;
+use Appleton\Taxes\Countries\US\Ohio\TroyCSD\TroyCSDTax as BaseTroyCSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class TroyCSDTax extends BaseTroyCSDTax

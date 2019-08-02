@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\McCombLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\McCombLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\McCombLSDTax\McCombLSDTax as BaseMcCombLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\McCombLSD\McCombLSDTax as BaseMcCombLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class McCombLSDTax extends BaseMcCombLSDTax

@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\LoganElmLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\LoganElmLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\LoganElmLSDTax\LoganElmLSDTax as BaseLoganElmLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\LoganElmLSD\LoganElmLSDTax as BaseLoganElmLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class LoganElmLSDTax extends BaseLoganElmLSDTax

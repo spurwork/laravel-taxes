@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\NorwayneLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\NorwayneLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\NorwayneLSDTax\NorwayneLSDTax as BaseNorwayneLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\NorwayneLSD\NorwayneLSDTax as BaseNorwayneLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class NorwayneLSDTax extends BaseNorwayneLSDTax

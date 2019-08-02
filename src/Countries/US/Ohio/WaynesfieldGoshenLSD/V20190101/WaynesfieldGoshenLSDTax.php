@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\WaynesfieldGoshenLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\WaynesfieldGoshenLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\WaynesfieldGoshenLSDTax\WaynesfieldGoshenLSDTax as BaseWaynesfieldGoshenLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\WaynesfieldGoshenLSD\WaynesfieldGoshenLSDTax as BaseWaynesfieldGoshenLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class WaynesfieldGoshenLSDTax extends BaseWaynesfieldGoshenLSDTax

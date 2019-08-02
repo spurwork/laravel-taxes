@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\ClearForkValleyLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\ClearForkValleyLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\ClearForkValleyLSDTax\ClearForkValleyLSDTax as BaseClearForkValleyLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\ClearForkValleyLSD\ClearForkValleyLSDTax as BaseClearForkValleyLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class ClearForkValleyLSDTax extends BaseClearForkValleyLSDTax

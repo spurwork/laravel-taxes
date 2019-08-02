@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\FreemontCSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\FreemontCSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\FreemontCSDTax\FreemontCSDTax as BaseFreemontCSDTax;
+use Appleton\Taxes\Countries\US\Ohio\FreemontCSD\FreemontCSDTax as BaseFreemontCSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class FreemontCSDTax extends BaseFreemontCSDTax

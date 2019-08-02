@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\ValleyViewLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\ValleyViewLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\ValleyViewLSDTax\ValleyViewLSDTax as BaseValleyViewLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\ValleyViewLSD\ValleyViewLSDTax as BaseValleyViewLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class ValleyViewLSDTax extends BaseValleyViewLSDTax

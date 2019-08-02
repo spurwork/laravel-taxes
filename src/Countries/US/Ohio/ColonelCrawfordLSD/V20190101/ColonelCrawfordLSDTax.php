@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\ColonelCrawfordLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\ColonelCrawfordLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\ColonelCrawfordLSDTax\ColonelCrawfordLSDTax as BaseColonelCrawfordLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\ColonelCrawfordLSD\ColonelCrawfordLSDTax as BaseColonelCrawfordLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class ColonelCrawfordLSDTax extends BaseColonelCrawfordLSDTax

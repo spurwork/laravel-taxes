@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\LibertyCenterLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\LibertyCenterLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\LibertyCenterLSDTax\LibertyCenterLSDTax as BaseLibertyCenterLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\LibertyCenterLSD\LibertyCenterLSDTax as BaseLibertyCenterLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class LibertyCenterLSDTax extends BaseLibertyCenterLSDTax

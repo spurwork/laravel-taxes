@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\NorthwestLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\NorthwestLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\NorthwestLSDTax\NorthwestLSDTax as BaseNorthwestLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\NorthwestLSD\NorthwestLSDTax as BaseNorthwestLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class NorthwestLSDTax extends BaseNorthwestLSDTax

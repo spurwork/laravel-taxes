@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\TriwayLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\TriwayLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\TriwayLSDTax\TriwayLSDTax as BaseTriwayLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\TriwayLSD\TriwayLSDTax as BaseTriwayLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class TriwayLSDTax extends BaseTriwayLSDTax

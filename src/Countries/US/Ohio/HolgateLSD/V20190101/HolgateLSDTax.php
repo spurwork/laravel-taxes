@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\HolgateLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\HolgateLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\HolgateLSDTax\HolgateLSDTax as BaseHolgateLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\HolgateLSD\HolgateLSDTax as BaseHolgateLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class HolgateLSDTax extends BaseHolgateLSDTax

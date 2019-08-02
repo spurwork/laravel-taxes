@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\MillcreekWestUnityLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\MillcreekWestUnityLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\MillcreekWestUnityLSDTax\MillcreekWestUnityLSDTax as BaseMillcreekWestUnityLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\MillcreekWestUnityLSD\MillcreekWestUnityLSDTax as BaseMillcreekWestUnityLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class MillcreekWestUnityLSDTax extends BaseMillcreekWestUnityLSDTax

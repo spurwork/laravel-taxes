@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\JeffersonLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\JeffersonLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\JeffersonLSDTax\JeffersonLSDTax as BaseJeffersonLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\JeffersonLSD\JeffersonLSDTax as BaseJeffersonLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class JeffersonLSDTax extends BaseJeffersonLSDTax

@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\BethelLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\BethelLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\BethelLSDTax\BethelLSDTax as BaseBethelLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\BethelLSD\BethelLSDTax as BaseBethelLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class BethelLSDTax extends BaseBethelLSDTax

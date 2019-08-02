@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\WalnutTownshipLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\WalnutTownshipLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\WalnutTownshipLSDTax\WalnutTownshipLSDTax as BaseWalnutTownshipLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\WalnutTownshipLSD\WalnutTownshipLSDTax as BaseWalnutTownshipLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class WalnutTownshipLSDTax extends BaseWalnutTownshipLSDTax

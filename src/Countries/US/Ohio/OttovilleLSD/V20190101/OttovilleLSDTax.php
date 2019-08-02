@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\OttovilleLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\OttovilleLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\OttovilleLSDTax\OttovilleLSDTax as BaseOttovilleLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\OttovilleLSD\OttovilleLSDTax as BaseOttovilleLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class OttovilleLSDTax extends BaseOttovilleLSDTax

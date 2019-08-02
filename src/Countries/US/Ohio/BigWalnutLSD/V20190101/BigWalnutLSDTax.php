@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\BigWalnutLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\BigWalnutLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\BigWalnutLSDTax\BigWalnutLSDTax as BaseBigWalnutLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\BigWalnutLSD\BigWalnutLSDTax as BaseBigWalnutLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class BigWalnutLSDTax extends BaseBigWalnutLSDTax

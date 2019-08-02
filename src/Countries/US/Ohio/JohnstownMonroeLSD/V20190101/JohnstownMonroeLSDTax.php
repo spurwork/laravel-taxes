@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\JohnstownMonroeLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\JohnstownMonroeLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\JohnstownMonroeLSDTax\JohnstownMonroeLSDTax as BaseJohnstownMonroeLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\JohnstownMonroeLSD\JohnstownMonroeLSDTax as BaseJohnstownMonroeLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class JohnstownMonroeLSDTax extends BaseJohnstownMonroeLSDTax

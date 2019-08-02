@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\CenterburgLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\CenterburgLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\CenterburgLSDTax\CenterburgLSDTax as BaseCenterburgLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\CenterburgLSD\CenterburgLSDTax as BaseCenterburgLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class CenterburgLSDTax extends BaseCenterburgLSDTax

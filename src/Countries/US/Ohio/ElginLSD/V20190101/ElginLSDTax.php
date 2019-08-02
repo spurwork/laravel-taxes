@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\ElginLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\ElginLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\ElginLSDTax\ElginLSDTax as BaseElginLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\ElginLSD\ElginLSDTax as BaseElginLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class ElginLSDTax extends BaseElginLSDTax

@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\PandoraGilboaLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\PandoraGilboaLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\PandoraGilboaLSDTax\PandoraGilboaLSDTax as BasePandoraGilboaLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\PandoraGilboaLSD\PandoraGilboaLSDTax as BasePandoraGilboaLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class PandoraGilboaLSDTax extends BasePandoraGilboaLSDTax

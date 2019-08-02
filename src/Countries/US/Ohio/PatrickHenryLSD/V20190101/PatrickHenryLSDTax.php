@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\PatrickHenryLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\PatrickHenryLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\PatrickHenryLSDTax\PatrickHenryLSDTax as BasePatrickHenryLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\PatrickHenryLSD\PatrickHenryLSDTax as BasePatrickHenryLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class PatrickHenryLSDTax extends BasePatrickHenryLSDTax

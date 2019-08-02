@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\GreenfieldEVSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\GreenfieldEVSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\GreenfieldEVSDTax\GreenfieldEVSDTax as BaseGreenfieldEVSDTax;
+use Appleton\Taxes\Countries\US\Ohio\GreenfieldEVSD\GreenfieldEVSDTax as BaseGreenfieldEVSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class GreenfieldEVSDTax extends BaseGreenfieldEVSDTax

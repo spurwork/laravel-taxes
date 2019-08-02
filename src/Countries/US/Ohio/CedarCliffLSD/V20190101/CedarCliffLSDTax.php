@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\CedarCliffLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\CedarCliffLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\CedarCliffLSDTax\CedarCliffLSDTax as BaseCedarCliffLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\CedarCliffLSD\CedarCliffLSDTax as BaseCedarCliffLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class CedarCliffLSDTax extends BaseCedarCliffLSDTax

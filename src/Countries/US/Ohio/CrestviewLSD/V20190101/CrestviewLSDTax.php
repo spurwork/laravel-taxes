@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\CrestviewLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\CrestviewLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\CrestviewLSDTax\CrestviewLSDTax as BaseCrestviewLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\CrestviewLSD\CrestviewLSDTax as BaseCrestviewLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class CrestviewLSDTax extends BaseCrestviewLSDTax

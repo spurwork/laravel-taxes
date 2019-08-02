@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\HopewellLoudonLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\HopewellLoudonLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\HopewellLoudonLSDTax\HopewellLoudonLSDTax as BaseHopewellLoudonLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\HopewellLoudonLSD\HopewellLoudonLSDTax as BaseHopewellLoudonLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class HopewellLoudonLSDTax extends BaseHopewellLoudonLSDTax

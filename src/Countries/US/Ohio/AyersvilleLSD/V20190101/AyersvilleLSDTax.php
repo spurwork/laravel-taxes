@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\AyersvilleLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\AyersvilleLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\AyersvilleLSDTax\AyersvilleLSDTax as BaseAyersvilleLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\AyersvilleLSD\AyersvilleLSDTax as BaseAyersvilleLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class AyersvilleLSDTax extends BaseAyersvilleLSDTax

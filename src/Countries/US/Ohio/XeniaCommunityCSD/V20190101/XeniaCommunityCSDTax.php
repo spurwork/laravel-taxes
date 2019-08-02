@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\XeniaCommunityCSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\XeniaCommunityCSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\XeniaCommunityCSDTax\XeniaCommunityCSDTax as BaseXeniaCommunityCSDTax;
+use Appleton\Taxes\Countries\US\Ohio\XeniaCommunityCSD\XeniaCommunityCSDTax as BaseXeniaCommunityCSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class XeniaCommunityCSDTax extends BaseXeniaCommunityCSDTax

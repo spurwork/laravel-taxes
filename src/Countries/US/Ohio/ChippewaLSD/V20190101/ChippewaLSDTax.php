@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\ChippewaLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\ChippewaLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\ChippewaLSDTax\ChippewaLSDTax as BaseChippewaLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\ChippewaLSD\ChippewaLSDTax as BaseChippewaLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class ChippewaLSDTax extends BaseChippewaLSDTax

@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\SebringLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\SebringLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\SebringLSDTax\SebringLSDTax as BaseSebringLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\SebringLSD\SebringLSDTax as BaseSebringLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class SebringLSDTax extends BaseSebringLSDTax

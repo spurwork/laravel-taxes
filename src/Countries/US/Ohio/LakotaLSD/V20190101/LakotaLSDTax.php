@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\LakotaLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\LakotaLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\LakotaLSDTax\LakotaLSDTax as BaseLakotaLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\LakotaLSD\LakotaLSDTax as BaseLakotaLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class LakotaLSDTax extends BaseLakotaLSDTax

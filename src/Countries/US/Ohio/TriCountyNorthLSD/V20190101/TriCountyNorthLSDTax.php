@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\TriCountyNorthLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\TriCountyNorthLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\TriCountyNorthLSDTax\TriCountyNorthLSDTax as BaseTriCountyNorthLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\TriCountyNorthLSD\TriCountyNorthLSDTax as BaseTriCountyNorthLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class TriCountyNorthLSDTax extends BaseTriCountyNorthLSDTax

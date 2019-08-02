@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\HillsboroCSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\HillsboroCSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\HillsboroCSDTax\HillsboroCSDTax as BaseHillsboroCSDTax;
+use Appleton\Taxes\Countries\US\Ohio\HillsboroCSD\HillsboroCSDTax as BaseHillsboroCSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class HillsboroCSDTax extends BaseHillsboroCSDTax

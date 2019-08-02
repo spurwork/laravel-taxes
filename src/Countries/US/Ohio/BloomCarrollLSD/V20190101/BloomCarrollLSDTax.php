@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\BloomCarrollLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\BloomCarrollLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\BloomCarrollLSDTax\BloomCarrollLSDTax as BaseBloomCarrollLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\BloomCarrollLSD\BloomCarrollLSDTax as BaseBloomCarrollLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class BloomCarrollLSDTax extends BaseBloomCarrollLSDTax

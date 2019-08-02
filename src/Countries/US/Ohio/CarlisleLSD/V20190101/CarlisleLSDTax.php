@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\CarlisleLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\CarlisleLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\CarlisleLSDTax\CarlisleLSDTax as BaseCarlisleLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\CarlisleLSD\CarlisleLSDTax as BaseCarlisleLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class CarlisleLSDTax extends BaseCarlisleLSDTax

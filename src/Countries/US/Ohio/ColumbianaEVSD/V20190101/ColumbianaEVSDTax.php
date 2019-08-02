@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\ColumbianaEVSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\ColumbianaEVSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\ColumbianaEVSDTax\ColumbianaEVSDTax as BaseColumbianaEVSDTax;
+use Appleton\Taxes\Countries\US\Ohio\ColumbianaEVSD\ColumbianaEVSDTax as BaseColumbianaEVSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class ColumbianaEVSDTax extends BaseColumbianaEVSDTax

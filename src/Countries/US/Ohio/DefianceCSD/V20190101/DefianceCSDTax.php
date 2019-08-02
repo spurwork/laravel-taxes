@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\DefianceCSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\DefianceCSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\DefianceCSDTax\DefianceCSDTax as BaseDefianceCSDTax;
+use Appleton\Taxes\Countries\US\Ohio\DefianceCSD\DefianceCSDTax as BaseDefianceCSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class DefianceCSDTax extends BaseDefianceCSDTax

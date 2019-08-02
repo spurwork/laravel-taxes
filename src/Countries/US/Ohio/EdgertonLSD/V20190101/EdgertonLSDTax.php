@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\EdgertonLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\EdgertonLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\EdgertonLSDTax\EdgertonLSDTax as BaseEdgertonLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\EdgertonLSD\EdgertonLSDTax as BaseEdgertonLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class EdgertonLSDTax extends BaseEdgertonLSDTax

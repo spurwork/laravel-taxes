@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\OttawaGlandorfLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\OttawaGlandorfLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\OttawaGlandorfLSDTax\OttawaGlandorfLSDTax as BaseOttawaGlandorfLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\OttawaGlandorfLSD\OttawaGlandorfLSDTax as BaseOttawaGlandorfLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class OttawaGlandorfLSDTax extends BaseOttawaGlandorfLSDTax

@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\JonathanAlderLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\JonathanAlderLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\JonathanAlderLSDTax\JonathanAlderLSDTax as BaseJonathanAlderLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\JonathanAlderLSD\JonathanAlderLSDTax as BaseJonathanAlderLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class JonathanAlderLSDTax extends BaseJonathanAlderLSDTax

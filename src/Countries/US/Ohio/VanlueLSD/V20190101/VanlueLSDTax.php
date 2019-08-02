@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\VanlueLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\VanlueLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\VanlueLSDTax\VanlueLSDTax as BaseVanlueLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\VanlueLSD\VanlueLSDTax as BaseVanlueLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class VanlueLSDTax extends BaseVanlueLSDTax

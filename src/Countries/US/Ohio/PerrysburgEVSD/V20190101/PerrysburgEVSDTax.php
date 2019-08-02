@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\PerrysburgEVSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\PerrysburgEVSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\PerrysburgEVSDTax\PerrysburgEVSDTax as BasePerrysburgEVSDTax;
+use Appleton\Taxes\Countries\US\Ohio\PerrysburgEVSD\PerrysburgEVSDTax as BasePerrysburgEVSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class PerrysburgEVSDTax extends BasePerrysburgEVSDTax

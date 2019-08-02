@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\JenningsLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\JenningsLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\JenningsLSDTax\JenningsLSDTax as BaseJenningsLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\JenningsLSD\JenningsLSDTax as BaseJenningsLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class JenningsLSDTax extends BaseJenningsLSDTax

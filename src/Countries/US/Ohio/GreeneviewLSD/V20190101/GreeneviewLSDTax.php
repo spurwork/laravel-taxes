@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\GreenviewLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\GreenviewLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\GreenviewLSDTax\GreenviewLSDTax as BaseGreenviewLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\GreenviewLSD\GreenviewLSDTax as BaseGreenviewLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class GreenviewLSDTax extends BaseGreenviewLSDTax

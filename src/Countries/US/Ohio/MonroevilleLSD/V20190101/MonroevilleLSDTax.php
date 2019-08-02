@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\MonroevilleLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\MonroevilleLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\MonroevilleLSDTax\MonroevilleLSDTax as BaseMonroevilleLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\MonroevilleLSD\MonroevilleLSDTax as BaseMonroevilleLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class MonroevilleLSDTax extends BaseMonroevilleLSDTax

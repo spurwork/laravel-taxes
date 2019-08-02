@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\HicksvilleEVSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\HicksvilleEVSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\HicksvilleEVSDTax\HicksvilleEVSDTax as BaseHicksvilleEVSDTax;
+use Appleton\Taxes\Countries\US\Ohio\HicksvilleEVSD\HicksvilleEVSDTax as BaseHicksvilleEVSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class HicksvilleEVSDTax extends BaseHicksvilleEVSDTax

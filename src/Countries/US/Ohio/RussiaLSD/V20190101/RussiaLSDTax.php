@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\RussiaLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\RussiaLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\RussiaLSDTax\RussiaLSDTax as BaseRussiaLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\RussiaLSD\RussiaLSDTax as BaseRussiaLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class RussiaLSDTax extends BaseRussiaLSDTax

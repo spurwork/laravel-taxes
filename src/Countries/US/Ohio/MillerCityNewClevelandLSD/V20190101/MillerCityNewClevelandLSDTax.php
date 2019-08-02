@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\MillerCityNewClevelandLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\MillerCityNewClevelandLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\MillerCityNewClevelandLSDTax\MillerCityNewClevelandLSDTax as BaseMillerCityNewClevelandLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\MillerCityNewClevelandLSD\MillerCityNewClevelandLSDTax as BaseMillerCityNewClevelandLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class MillerCityNewClevelandLSDTax extends BaseMillerCityNewClevelandLSDTax

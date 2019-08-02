@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\ParkwayLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\ParkwayLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\ParkwayLSDTax\ParkwayLSDTax as BaseParkwayLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\ParkwayLSD\ParkwayLSDTax as BaseParkwayLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class ParkwayLSDTax extends BaseParkwayLSDTax

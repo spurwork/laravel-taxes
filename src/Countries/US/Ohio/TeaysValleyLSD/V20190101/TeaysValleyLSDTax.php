@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\TeaysValleyLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\TeaysValleyLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\TeaysValleyLSDTax\TeaysValleyLSDTax as BaseTeaysValleyLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\TeaysValleyLSD\TeaysValleyLSDTax as BaseTeaysValleyLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class TeaysValleyLSDTax extends BaseTeaysValleyLSDTax

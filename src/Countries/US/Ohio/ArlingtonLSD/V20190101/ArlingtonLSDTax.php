@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\ArlingtonLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\ArlingtonLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\ArlingtonLSDTax\ArlingtonLSDTax as BaseArlingtonLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\ArlingtonLSD\ArlingtonLSDTax as BaseArlingtonLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class ArlingtonLSDTax extends BaseArlingtonLSDTax

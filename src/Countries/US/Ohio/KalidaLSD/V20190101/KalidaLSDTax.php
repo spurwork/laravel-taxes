@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\KalidaLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\KalidaLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\KalidaLSDTax\KalidaLSDTax as BaseKalidaLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\KalidaLSD\KalidaLSDTax as BaseKalidaLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class KalidaLSDTax extends BaseKalidaLSDTax

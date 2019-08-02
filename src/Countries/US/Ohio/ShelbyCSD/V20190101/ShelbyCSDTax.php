@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\ShelbyCSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\ShelbyCSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\ShelbyCSDTax\ShelbyCSDTax as BaseShelbyCSDTax;
+use Appleton\Taxes\Countries\US\Ohio\ShelbyCSD\ShelbyCSDTax as BaseShelbyCSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class ShelbyCSDTax extends BaseShelbyCSDTax

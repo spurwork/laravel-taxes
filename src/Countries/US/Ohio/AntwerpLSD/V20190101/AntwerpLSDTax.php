@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\AntwerpLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\AntwerpLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\AntwerpLSDTax\AntwerpLSDTax as BaseAntwerpLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\AntwerpLSD\AntwerpLSDTax as BaseAntwerpLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class AntwerpLSDTax extends BaseAntwerpLSDTax

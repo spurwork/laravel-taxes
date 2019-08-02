@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\VanWertCSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\VanWertCSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\VanWertCSDTax\VanWertCSDTax as BaseVanWertCSDTax;
+use Appleton\Taxes\Countries\US\Ohio\VanWertCSD\VanWertCSDTax as BaseVanWertCSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class VanWertCSDTax extends BaseVanWertCSDTax

@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\DanvilleLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\DanvilleLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\DanvilleLSDTax\DanvilleLSDTax as BaseDanvilleLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\DanvilleLSD\DanvilleLSDTax as BaseDanvilleLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class DanvilleLSDTax extends BaseDanvilleLSDTax

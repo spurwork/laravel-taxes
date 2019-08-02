@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\KentonCSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\KentonCSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\KentonCSDTax\KentonCSDTax as BaseKentonCSDTax;
+use Appleton\Taxes\Countries\US\Ohio\KentonCSD\KentonCSDTax as BaseKentonCSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class KentonCSDTax extends BaseKentonCSDTax

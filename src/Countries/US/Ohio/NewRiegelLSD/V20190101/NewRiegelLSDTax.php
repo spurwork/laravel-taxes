@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\NewRiegelLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\NewRiegelLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\NewRiegelLSDTax\NewRiegelLSDTax as BaseNewRiegelLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\NewRiegelLSD\NewRiegelLSDTax as BaseNewRiegelLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class NewRiegelLSDTax extends BaseNewRiegelLSDTax

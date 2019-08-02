@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\TriadLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\TriadLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\TriadLSDTax\TriadLSDTax as BaseTriadLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\TriadLSD\TriadLSDTax as BaseTriadLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class TriadLSDTax extends BaseTriadLSDTax

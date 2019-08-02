@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\MechanicsburgEVSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\MechanicsburgEVSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\MechanicsburgEVSDTax\MechanicsburgEVSDTax as BaseMechanicsburgEVSDTax;
+use Appleton\Taxes\Countries\US\Ohio\MechanicsburgEVSD\MechanicsburgEVSDTax as BaseMechanicsburgEVSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class MechanicsburgEVSDTax extends BaseMechanicsburgEVSDTax

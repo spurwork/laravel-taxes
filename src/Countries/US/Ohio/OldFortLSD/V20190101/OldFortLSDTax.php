@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\OldFortLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\OldFortLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\OldFortLSDTax\OldFortLSDTax as BaseOldFortLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\OldFortLSD\OldFortLSDTax as BaseOldFortLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class OldFortLSDTax extends BaseOldFortLSDTax

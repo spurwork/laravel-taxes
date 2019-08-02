@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\BotkinsLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\BotkinsLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\BotkinsLSDTax\BotkinsLSDTax as BaseBotkinsLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\BotkinsLSD\BotkinsLSDTax as BaseBotkinsLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class BotkinsLSDTax extends BaseBotkinsLSDTax

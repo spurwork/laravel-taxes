@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\PettisvilleLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\PettisvilleLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\PettisvilleLSDTax\PettisvilleLSDTax as BasePettisvilleLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\PettisvilleLSD\PettisvilleLSDTax as BasePettisvilleLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class PettisvilleLSDTax extends BasePettisvilleLSDTax

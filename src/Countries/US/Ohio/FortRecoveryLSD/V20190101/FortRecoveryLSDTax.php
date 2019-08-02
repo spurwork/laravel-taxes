@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\FortRecoveryLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\FortRecoveryLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\FortRecoveryLSDTax\FortRecoveryLSDTax as BaseFortRecoveryLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\FortRecoveryLSD\FortRecoveryLSDTax as BaseFortRecoveryLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class FortRecoveryLSDTax extends BaseFortRecoveryLSDTax

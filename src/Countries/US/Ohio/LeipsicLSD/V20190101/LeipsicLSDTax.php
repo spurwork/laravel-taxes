@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\LeipsicLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\LeipsicLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\LeipsicLSDTax\LeipsicLSDTax as BaseLeipsicLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\LeipsicLSD\LeipsicLSDTax as BaseLeipsicLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class LeipsicLSDTax extends BaseLeipsicLSDTax

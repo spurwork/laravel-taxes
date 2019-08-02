@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\NewtonLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\NewtonLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\NewtonLSDTax\NewtonLSDTax as BaseNewtonLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\NewtonLSD\NewtonLSDTax as BaseNewtonLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class NewtonLSDTax extends BaseNewtonLSDTax

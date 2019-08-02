@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\NewKnoxvilleLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\NewKnoxvilleLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\NewKnoxvilleLSDTax\NewKnoxvilleLSDTax as BaseNewKnoxvilleLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\NewKnoxvilleLSD\NewKnoxvilleLSDTax as BaseNewKnoxvilleLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class NewKnoxvilleLSDTax extends BaseNewKnoxvilleLSDTax

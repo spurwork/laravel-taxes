@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\ReynoldsburgCSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\ReynoldsburgCSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\ReynoldsburgCSDTax\ReynoldsburgCSDTax as BaseReynoldsburgCSDTax;
+use Appleton\Taxes\Countries\US\Ohio\ReynoldsburgCSD\ReynoldsburgCSDTax as BaseReynoldsburgCSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class ReynoldsburgCSDTax extends BaseReynoldsburgCSDTax

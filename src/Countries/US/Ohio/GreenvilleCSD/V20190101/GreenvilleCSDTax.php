@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\GreenvilleCSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\GreenvilleCSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\GreenvilleCSDTax\GreenvilleCSDTax as BaseGreenvilleCSDTax;
+use Appleton\Taxes\Countries\US\Ohio\GreenvilleCSD\GreenvilleCSDTax as BaseGreenvilleCSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class GreenvilleCSDTax extends BaseGreenvilleCSDTax

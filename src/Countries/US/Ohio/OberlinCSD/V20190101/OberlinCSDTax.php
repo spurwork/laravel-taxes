@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\OberlinCSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\OberlinCSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\OberlinCSDTax\OberlinCSDTax as BaseOberlinCSDTax;
+use Appleton\Taxes\Countries\US\Ohio\OberlinCSD\OberlinCSDTax as BaseOberlinCSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class OberlinCSDTax extends BaseOberlinCSDTax

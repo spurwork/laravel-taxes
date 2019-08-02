@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\PickeringtonLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\PickeringtonLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\PickeringtonLSDTax\PickeringtonLSDTax as BasePickeringtonLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\PickeringtonLSD\PickeringtonLSDTax as BasePickeringtonLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class PickeringtonLSDTax extends BasePickeringtonLSDTax

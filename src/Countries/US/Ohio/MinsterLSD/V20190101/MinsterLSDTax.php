@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\MinsterLSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\MinsterLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\MinsterLSDTax\MinsterLSDTax as BaseMinsterLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\MinsterLSD\MinsterLSDTax as BaseMinsterLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class MinsterLSDTax extends BaseMinsterLSDTax

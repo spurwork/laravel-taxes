@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\VersaillesEVSDTax\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\VersaillesEVSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\VersaillesEVSDTax\VersaillesEVSDTax as BaseVersaillesEVSDTax;
+use Appleton\Taxes\Countries\US\Ohio\VersaillesEVSD\VersaillesEVSDTax as BaseVersaillesEVSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
 class VersaillesEVSDTax extends BaseVersaillesEVSDTax
