@@ -11,7 +11,7 @@ class HuntingtonCityServiceFee extends BaseHuntingtonCityServiceFee
 {
     public function compute(Collection $tax_areas)
     {
-        if (0 !== $this->payroll->getWtdEarnings()) {
+        if (0 !== $this->payroll->getWtdEarnings($tax_areas->first()->workGovernmentalUnitArea)) {
             return 0.00;
         }
         return 5.00;
