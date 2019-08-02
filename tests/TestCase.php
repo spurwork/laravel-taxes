@@ -1306,6 +1306,11 @@ class TestCase extends BaseTestCase
             'us.virginia' => [37.5407, -77.4360],
             'us.washingtondc' => [38.9072, -77.0369],
             'us.west_virginia' => [38.3498, -81.6326],
+            'us.west_virginia.charleston' => [38.3498, -81.6326],
+            'us.west_virginia.fairmont' => [39.4851, -80.1426],
+            'us.west_virginia.huntington' => [38.4192, -82.4452],
+            'us.west_virginia.morgantown' => [39.6295, -79.9559],
+            'us.west_virginia.parkersburg' => [39.2667, -81.5615],
             'us.wisconsin' => [43.0849721, -89.4764603],
         ];
 
