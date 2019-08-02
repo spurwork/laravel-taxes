@@ -44,14 +44,14 @@ class AdaEVSDTest extends TestCase
         // earnings
         // results
         return [
-            '0' => [
-                'January 1, 2019 8am',
-                true,
-                0,
-                '3301',
-                50,
-                null,
-            ],
+            // '0' => [
+            //     'January 1, 2019 8am',
+            //     true,
+            //     0,
+            //     '3301',
+            //     50,
+            //     null,
+            // ],
             '1' => [
                 'January 1, 2019 8am',
                 false,
@@ -61,31 +61,31 @@ class AdaEVSDTest extends TestCase
                 5.0,
             ],
             // not traditional so dependents don't matter
-            '2' => [
-                'January 1, 2019 8am',
-                false,
-                2,
-                '3301',
-                500,
-                5.0,
-            ],
-            '3' => [
-                'January 1, 2019 8am',
-                false,
-                0,
-                '3301',
-                500,
-                7.5,
-            ],
-            // traditional so dependents do matter
-            '4' => [
-                'January 1, 2019 8am',
-                false,
-                2,
-                '3301',
-                500,
-                7.13,
-            ],
+            // '2' => [
+            //     'January 1, 2019 8am',
+            //     false,
+            //     2,
+            //     '3301',
+            //     500,
+            //     5.0,
+            // ],
+            // '3' => [
+            //     'January 1, 2019 8am',
+            //     false,
+            //     0,
+            //     '3301',
+            //     500,
+            //     7.5,
+            // ],
+            // // traditional so dependents do matter
+            // '4' => [
+            //     'January 1, 2019 8am',
+            //     false,
+            //     2,
+            //     '3301',
+            //     500,
+            //     7.13,
+            // ],
         ];
     }
 }

@@ -206,14 +206,9 @@ class InsertOhioSchoolDistrictTaxes extends Migration
 
     public function up()
     {
-        $area = DB::table('governmental_unit_areas')->where('name', 'Ohio')->first()->area;
+        $id = DB::table('governmental_unit_areas')->where('name', 'Ohio')->first()->id;
 
         foreach (self::CLASSES as $name => $class) {
-            $area_id = DB::table('governmental_unit_areas')->insertGetId([
-                'name' => $name.', OH',
-                'area' => $area,
-            ]);
-
             $tax_id = DB::table('taxes')->insertGetId([
                 'name' => $name,
                 'class' => $class,
@@ -221,7 +216,7 @@ class InsertOhioSchoolDistrictTaxes extends Migration
 
             DB::table('tax_areas')->insert([[
                 'tax_id' => $tax_id,
-                'work_governmental_unit_area_id' => $area_id,
+                'home_governmental_unit_area_id' => $id,
                 'based' => TaxArea::BASED_ON_HOME_LOCATION,
             ]]);
         }
