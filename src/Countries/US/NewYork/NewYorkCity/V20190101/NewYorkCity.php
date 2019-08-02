@@ -42,9 +42,14 @@ class NewYorkCity extends BaseNewYorkCity
         return static::BRACKETS;
     }
 
+    public function getAdditionalWithholding()
+    {
+        return max(min($this->payroll->getNetEarnings(), $this->tax_information->nyc_additional_withholding), 0);
+    }
+
     private function getExemptionAllowance()
     {
-        return $this->tax_information->exemptions * static::EXEMPTION_ALLOWANCE_AMOUNT;
+        return $this->tax_information->nyc_allowances * static::EXEMPTION_ALLOWANCE_AMOUNT;
     }
 
     public function getDeductionAllowance()

@@ -12,8 +12,12 @@ class NewYorkIncomeTaxInformation extends BaseTaxInformationModel
     public static function getDefault()
     {
         $tax_information = new self();
-        $tax_information->additional_withholding = 0;
-        $tax_information->exemptions = 0;
+        $tax_information->ny_additional_withholding = 0;
+        $tax_information->nyc_additional_withholding = 0;
+        $tax_information->yonkers_additional_withholding = 0;
+        $tax_information->ny_allowances = 0;
+        $tax_information->nyc_allowances = 0;
+        $tax_information->yonkers_allowances = 0;
         $tax_information->filing_status = NewYorkIncome::FILING_SINGLE;
         $tax_information->exempt = false;
         return $tax_information;
