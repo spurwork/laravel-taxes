@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\GreenvilleCSDTax;
+namespace Appleton\Taxes\Countries\US\Ohio\GreenvilleCSD;
 
 use Appleton\Taxes\Classes\BaseOccupational;
 use Appleton\Taxes\Classes\Payroll;

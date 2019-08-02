@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\UpperSanduskyEVSDTax;
+namespace Appleton\Taxes\Countries\US\Ohio\UpperSanduskyEVSD;
 
 use Appleton\Taxes\Classes\BaseOccupational;
 use Appleton\Taxes\Classes\Payroll;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\WesternReserveLSDTax;
+namespace Appleton\Taxes\Countries\US\Ohio\WesternReserveLSD;
 
 use Appleton\Taxes\Classes\BaseOccupational;
 use Appleton\Taxes\Classes\Payroll;

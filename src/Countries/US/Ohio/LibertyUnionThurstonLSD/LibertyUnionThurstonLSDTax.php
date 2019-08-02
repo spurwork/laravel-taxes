@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\LibertyUnionThurstonLSDTax;
+namespace Appleton\Taxes\Countries\US\Ohio\LibertyUnionThurstonLSD;
 
 use Appleton\Taxes\Classes\BaseOccupational;
 use Appleton\Taxes\Classes\Payroll;

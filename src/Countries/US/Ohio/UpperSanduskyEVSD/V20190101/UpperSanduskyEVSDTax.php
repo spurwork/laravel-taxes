@@ -1,11 +1,11 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\BUpperSanduskyEVSD\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\UpperSanduskyEVSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\BUpperSanduskyEVSD\BUpperSanduskyEVSDTax as BaseBUpperSanduskyEVSDTax;
+use Appleton\Taxes\Countries\US\Ohio\UpperSanduskyEVSD\UpperSanduskyEVSDTax as BaseUpperSanduskyEVSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
-class BUpperSanduskyEVSDTax extends BaseBUpperSanduskyEVSDTax
+class UpperSanduskyEVSDTax extends BaseUpperSanduskyEVSDTax
 {
     public const TAX_RATE = 0.0125;
     const ID = '8803';

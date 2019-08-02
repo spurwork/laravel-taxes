@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\XeniaCommunityCSDTax;
+namespace Appleton\Taxes\Countries\US\Ohio\XeniaCommunityCSD;
 
 use Appleton\Taxes\Classes\BaseOccupational;
 use Appleton\Taxes\Classes\Payroll;

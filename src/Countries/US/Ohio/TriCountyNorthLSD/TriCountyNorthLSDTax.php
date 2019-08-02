@@ -1,12 +1,12 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\BuckeyeCentralLSDTax;
+namespace Appleton\Taxes\Countries\US\Ohio\TriCountyNorthLSD;
 
 use Appleton\Taxes\Classes\BaseOccupational;
 use Appleton\Taxes\Classes\Payroll;
 use Appleton\Taxes\Models\Countries\US\Ohio\OhioIncomeTaxInformation;
 
-abstract class TriadCountyNorthLSDTax extends BaseOccupational
+abstract class TriCountyNorthLSDTax extends BaseOccupational
 {
     protected $tax_information;
     protected $payroll;

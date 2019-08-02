@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\MechanicsburgEVSDTax;
+namespace Appleton\Taxes\Countries\US\Ohio\MechanicsburgEVSD;
 
 use Appleton\Taxes\Classes\BaseOccupational;
 use Appleton\Taxes\Classes\Payroll;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\WellingtonEVSDTax;
+namespace Appleton\Taxes\Countries\US\Ohio\WellingtonEVSD;
 
 use Appleton\Taxes\Classes\BaseOccupational;
 use Appleton\Taxes\Classes\Payroll;

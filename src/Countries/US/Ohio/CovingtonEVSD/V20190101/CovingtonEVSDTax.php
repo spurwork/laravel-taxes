@@ -1,11 +1,11 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\ConvingtonEVSD\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\CovingtonEVSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\ConvingtonEVSD\ConvingtonEVSDTax as BaseConvingtonEVSDTax;
+use Appleton\Taxes\Countries\US\Ohio\CovingtonEVSD\CovingtonEVSDTax as BaseCovingtonEVSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
-class ConvingtonEVSDTax extends BaseConvingtonEVSDTax
+class CovingtonEVSDTax extends BaseCovingtonEVSDTax
 {
     public const TAX_RATE = 0.02;
     const ID = '5503';

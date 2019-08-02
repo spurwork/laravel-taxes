@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\HopewellLoudonLSDTax;
+namespace Appleton\Taxes\Countries\US\Ohio\HopewellLoudonLSD;
 
 use Appleton\Taxes\Classes\BaseOccupational;
 use Appleton\Taxes\Classes\Payroll;

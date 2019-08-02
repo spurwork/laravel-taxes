@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\ColumbianaEVSDTax;
+namespace Appleton\Taxes\Countries\US\Ohio\ColumbianaEVSD;
 
 use Appleton\Taxes\Classes\BaseOccupational;
 use Appleton\Taxes\Classes\Payroll;

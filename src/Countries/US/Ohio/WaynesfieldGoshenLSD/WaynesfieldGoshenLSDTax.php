@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\WaynesfieldGoshenLSDTax;
+namespace Appleton\Taxes\Countries\US\Ohio\WaynesfieldGoshenLSD;
 
 use Appleton\Taxes\Classes\BaseOccupational;
 use Appleton\Taxes\Classes\Payroll;

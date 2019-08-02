@@ -1,12 +1,12 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\CoryLawsonLSDTax;
+namespace Appleton\Taxes\Countries\US\Ohio\CoryRawsonLSD;
 
 use Appleton\Taxes\Classes\BaseOccupational;
 use Appleton\Taxes\Classes\Payroll;
 use Appleton\Taxes\Models\Countries\US\Ohio\OhioIncomeTaxInformation;
 
-abstract class CoryLawsonLSDTax extends BaseOccupational
+abstract class CoryRawsonLSDTax extends BaseOccupational
 {
     protected $tax_information;
     protected $payroll;

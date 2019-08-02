@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\EdonNorthwestLSDTax;
+namespace Appleton\Taxes\Countries\US\Ohio\EdonNorthwestLSD;
 
 use Appleton\Taxes\Classes\BaseOccupational;
 use Appleton\Taxes\Classes\Payroll;

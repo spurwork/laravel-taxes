@@ -1,11 +1,11 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\FreemontCSD\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\FremontCSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\FreemontCSD\FreemontCSDTax as BaseFreemontCSDTax;
+use Appleton\Taxes\Countries\US\Ohio\FremontCSD\FremontCSDTax as BaseFremontCSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
-class FreemontCSDTax extends BaseFreemontCSDTax
+class FremontCSDTax extends BaseFremontCSDTax
 {
     public const TAX_RATE = 0.0125;
     const ID = '7202';

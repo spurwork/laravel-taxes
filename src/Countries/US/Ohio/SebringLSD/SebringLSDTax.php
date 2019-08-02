@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\SebringLSDTax;
+namespace Appleton\Taxes\Countries\US\Ohio\SebringLSD;
 
 use Appleton\Taxes\Classes\BaseOccupational;
 use Appleton\Taxes\Classes\Payroll;
@@ -8,7 +8,7 @@ use Appleton\Taxes\Models\Countries\US\Ohio\OhioIncomeTaxInformation;
 
 abstract class SebringLSDTax extends BaseOccupational
 {
-	protected $tax_information;
+    protected $tax_information;
     protected $payroll;
 
     public function __construct(OhioIncomeTaxInformation $tax_information, Payroll $payroll)

@@ -2,10 +2,10 @@
 
 namespace Appleton\Taxes\Countries\US\Ohio\FranklinMonroeLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\FranklinMonroeLSD\FranklinMonroeLSDTax as FranklinMonroeLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\FranklinMonroeLSD\FranklinMonroeLSDTax as BaseFranklinMonroeLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
-class FranklinMonroeLSDTax extends FranklinMonroeLSDTax
+class FranklinMonroeLSDTax extends BaseFranklinMonroeLSDTax
 {
     public const TAX_RATE = 0.0075;
     const ID = '1903';

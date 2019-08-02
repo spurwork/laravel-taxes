@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\PlymouthShilohLSDTax;
+namespace Appleton\Taxes\Countries\US\Ohio\PlymouthShilohLSD;
 
 use Appleton\Taxes\Classes\BaseOccupational;
 use Appleton\Taxes\Classes\Payroll;

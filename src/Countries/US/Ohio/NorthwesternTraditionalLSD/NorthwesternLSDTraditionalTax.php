@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\NorthwesternLSDTraditionalTax;
+namespace Appleton\Taxes\Countries\US\Ohio\NorthwesternLSDTraditional;
 
 use Appleton\Taxes\Classes\BaseOccupational;
 use Appleton\Taxes\Classes\Payroll;

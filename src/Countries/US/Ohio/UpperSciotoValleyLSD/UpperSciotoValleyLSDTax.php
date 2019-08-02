@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\UpperSciotoValleyLSDTax;
+namespace Appleton\Taxes\Countries\US\Ohio\UpperSciotoValleyLSD;
 
 use Appleton\Taxes\Classes\BaseOccupational;
 use Appleton\Taxes\Classes\Payroll;

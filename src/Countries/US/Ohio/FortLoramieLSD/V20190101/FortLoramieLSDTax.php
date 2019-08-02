@@ -1,11 +1,11 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\FortLaramieLSD\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\FortLoramieLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\FortLaramieLSD\FortLaramieLSDTax as BaseFortLaramieLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\FortLoramieLSD\FortLoramieLSDTax as BaseFortLoramieLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
-class FortLaramieLSDTax extends BaseFortLaramieLSDTax
+class FortLoramieLSDTax extends BaseFortLoramieLSDTax
 {
     public const TAX_RATE = 0.015;
     const ID = '7504';

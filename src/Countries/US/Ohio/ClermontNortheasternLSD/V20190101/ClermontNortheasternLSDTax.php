@@ -1,11 +1,11 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\ClermontNorteasternLSD\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\ClermontNortheasternLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\ClermontNorteasternLSD\ClermontNorteasternLSDTax as BaseClermontNorteasternLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\ClermontNortheasternLSD\ClermontNortheasternLSDTax as BaseClermontNortheasternLSDTax;
 use Illuminate\Database\Eloquent\Collection;
 
-class ClermontNorteasternLSDTax extends BaseClermontNorteasternLSDTax
+class ClermontNortheasternLSDTax extends BaseClermontNortheasternLSDTax
 {
     public const TAX_RATE = 0.01;
     const ID = '1303';

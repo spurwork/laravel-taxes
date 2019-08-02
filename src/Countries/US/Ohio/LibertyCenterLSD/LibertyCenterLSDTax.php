@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\LibertyCenterLSDTax;
+namespace Appleton\Taxes\Countries\US\Ohio\LibertyCenterLSD;
 
 use Appleton\Taxes\Classes\BaseOccupational;
 use Appleton\Taxes\Classes\Payroll;

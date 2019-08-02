@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\TeaysValleyLSDTax;
+namespace Appleton\Taxes\Countries\US\Ohio\TeaysValleyLSD;
 
 use Appleton\Taxes\Classes\BaseOccupational;
 use Appleton\Taxes\Classes\Payroll;

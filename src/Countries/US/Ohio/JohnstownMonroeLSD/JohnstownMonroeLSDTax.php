@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\JohnstownMonroeLSDTax;
+namespace Appleton\Taxes\Countries\US\Ohio\JohnstownMonroeLSD;
 
 use Appleton\Taxes\Classes\BaseOccupational;
 use Appleton\Taxes\Classes\Payroll;

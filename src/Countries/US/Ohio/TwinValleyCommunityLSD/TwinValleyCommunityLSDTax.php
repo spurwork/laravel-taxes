@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\TwinValleyCommunityLSDTax;
+namespace Appleton\Taxes\Countries\US\Ohio\TwinValleyCommunityLSD;
 
 use Appleton\Taxes\Classes\BaseOccupational;
 use Appleton\Taxes\Classes\Payroll;
