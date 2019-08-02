@@ -17,7 +17,6 @@ class NewYorkIncomeTaxInformation extends BaseTaxInformationModel
         $tax_information->yonkers_additional_withholding = 0;
         $tax_information->ny_allowances = 0;
         $tax_information->nyc_allowances = 0;
-        $tax_information->yonkers_allowances = 0;
         $tax_information->filing_status = NewYorkIncome::FILING_SINGLE;
         $tax_information->exempt = false;
         return $tax_information;
