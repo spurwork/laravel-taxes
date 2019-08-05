@@ -10,7 +10,8 @@ class NewYorkIncomeTest extends \TestCase
     /**
      * @dataProvider provideTestData
      */
-    public function testNewYorkIncome($date, $filing_status, $exemptions, $earnings, $result)
+    public function testNewYorkIncome($date, $filing_status, $allowances,
+                                      $additional_withholding, $earnings, $result)
     {
         Carbon::setTestNow(
             Carbon::parse($date, 'America/Chicago')->setTimezone('UTC')
@@ -18,8 +19,12 @@ class NewYorkIncomeTest extends \TestCase
 
         NewYorkIncomeTaxInformation::forUser($this->user)
             ->update([
-                'exemptions' => $exemptions,
+                'ny_allowances' => $allowances,
+                'nyc_allowances' => 10, // should not be used
                 'filing_status' => $filing_status,
+                'ny_additional_withholding' => $additional_withholding,
+                'nyc_additional_withholding' => 10, // should not be used
+                'yonkers_additional_withholding' => 10, // should not be used
             ]);
 
         $results = $this->taxes->calculate(function ($taxes) use ($earnings) {
@@ -40,12 +45,14 @@ class NewYorkIncomeTest extends \TestCase
                 'January 1, 2019 8am',
                 NewYorkIncome::FILING_SINGLE,
                 0,
+                0,
                 145,
                 0.1,
             ],
             '1' => [
                 'January 1, 2019 8am',
                 NewYorkIncome::FILING_SINGLE,
+                0,
                 0,
                 300,
                 6.3,
@@ -54,6 +61,7 @@ class NewYorkIncomeTest extends \TestCase
                 'January 1, 2019 8am',
                 NewYorkIncome::FILING_SINGLE,
                 2,
+                0,
                 500,
                 14.6,
             ],
@@ -61,6 +69,7 @@ class NewYorkIncomeTest extends \TestCase
                 'January 1, 2019 8am',
                 NewYorkIncome::FILING_SINGLE,
                 3,
+                0,
                 700,
                 25.53,
             ],
@@ -68,6 +77,7 @@ class NewYorkIncomeTest extends \TestCase
                 'January 1, 2019 8am',
                 NewYorkIncome::FILING_SINGLE,
                 3,
+                0,
                 900,
                 37.95,
             ],
@@ -75,6 +85,7 @@ class NewYorkIncomeTest extends \TestCase
                 'January 1, 2019 8am',
                 NewYorkIncome::FILING_SINGLE,
                 2,
+                0,
                 1300,
                 63.98,
             ],
@@ -82,12 +93,14 @@ class NewYorkIncomeTest extends \TestCase
                 'January 1, 2019 8am',
                 NewYorkIncome::FILING_SINGLE,
                 11,
+                0,
                 1000,
                 34.6,
             ],
             '7' => [
                 'January 1, 2019 8am',
                 NewYorkIncome::FILING_MARRIED,
+                0,
                 0,
                 145,
                 null,
@@ -96,6 +109,7 @@ class NewYorkIncomeTest extends \TestCase
                 'January 1, 2019 8am',
                 NewYorkIncome::FILING_MARRIED,
                 0,
+                0,
                 300,
                 5.88,
             ],
@@ -103,6 +117,7 @@ class NewYorkIncomeTest extends \TestCase
                 'January 1, 2019 8am',
                 NewYorkIncome::FILING_MARRIED,
                 2,
+                0,
                 500,
                 13.97,
             ],
@@ -110,6 +125,7 @@ class NewYorkIncomeTest extends \TestCase
                 'January 1, 2019 8am',
                 NewYorkIncome::FILING_MARRIED,
                 3,
+                0,
                 700,
                 24.87,
             ],
@@ -117,6 +133,7 @@ class NewYorkIncomeTest extends \TestCase
                 'January 1, 2019 8am',
                 NewYorkIncome::FILING_MARRIED,
                 3,
+                0,
                 900,
                 37.29,
             ],
@@ -124,6 +141,7 @@ class NewYorkIncomeTest extends \TestCase
                 'January 1, 2019 8am',
                 NewYorkIncome::FILING_MARRIED,
                 2,
+                0,
                 2000,
                 107.51,
             ],
@@ -131,8 +149,17 @@ class NewYorkIncomeTest extends \TestCase
                 'January 1, 2019 8am',
                 NewYorkIncome::FILING_MARRIED,
                 11,
+                0,
                 1000,
                 33.95,
+            ],
+            '14' => [
+                'January 1, 2019 8am',
+                NewYorkIncome::FILING_MARRIED,
+                11,
+                10,
+                1000,
+                43.95,
             ],
         ];
     }
