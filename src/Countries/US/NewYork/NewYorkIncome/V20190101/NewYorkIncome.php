@@ -70,9 +70,14 @@ class NewYorkIncome extends BaseNewYorkIncome
         }
     }
 
+    public function getAdditionalWithholding()
+    {
+        return max(min($this->payroll->getNetEarnings(), $this->tax_information->ny_additional_withholding), 0);
+    }
+
     private function getExemptionAllowance()
     {
-        return $this->tax_information->exemptions * self::EXEMPTION_ALLOWANCE_AMOUNT;
+        return $this->tax_information->ny_allowances * self::EXEMPTION_ALLOWANCE_AMOUNT;
     }
 
     public function getDeductionAllowance()
