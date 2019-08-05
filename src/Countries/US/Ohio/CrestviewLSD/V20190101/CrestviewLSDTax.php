@@ -13,7 +13,7 @@ class CrestviewLSDTax extends BaseCrestviewLSDTax
 
     public function compute(Collection $tax_areas)
     {
-        if ($this->tax_information->exempt || $this->tax_information->school_district_id !== self::ID1 || $this->tax_information->school_district_id !== self::ID2) {
+        if ($this->tax_information->exempt || $this->tax_information->school_district_id !== self::ID1 && $this->tax_information->school_district_id !== self::ID2) {
             return 0.0;
         }
 

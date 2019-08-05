@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Collection;
 class ZaneTraceLSDTax extends BaseZaneTraceLSDTax
 {
     public const TAX_RATE = 0.0075;
-    const ID = '7101';
+    const ID = '7107';
 
     public function compute(Collection $tax_areas)
     {
@@ -16,6 +16,6 @@ class ZaneTraceLSDTax extends BaseZaneTraceLSDTax
             return 0.0;
         }
 
-        return round($this->payroll->getEarnings() * $this->tax_rate, 2);
+        return round($this->payroll->getEarnings() * self::TAX_RATE, 2);
     }
 }

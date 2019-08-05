@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Collection;
 class SpencervilleLSDTax extends BaseSpencervilleLSDTax
 {
     public const TAX_RATE = 0.01;
-    const ID = '0201';
+    const ID = '0209';
 
     public function compute(Collection $tax_areas)
     {

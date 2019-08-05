@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Collection;
 class NorthwestLSDTax extends BaseNorthwestLSDTax
 {
     public const TAX_RATE = 0.01;
-    const ID = '1203';
+    const ID = '7612';
 
     public function compute(Collection $tax_areas)
     {
@@ -16,6 +16,6 @@ class NorthwestLSDTax extends BaseNorthwestLSDTax
             return 0.0;
         }
 
-        return round($this->payroll->getEarnings() * $this->tax_rate, 2);
+        return round($this->payroll->getEarnings() * self::TAX_RATE, 2);
     }
 }

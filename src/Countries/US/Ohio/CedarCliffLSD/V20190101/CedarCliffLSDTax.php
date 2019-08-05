@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Collection;
 class CedarCliffLSDTax extends BaseCedarCliffLSDTax
 {
     public const TAX_RATE = 0.0125;
-    const ID = '2901';
+    const ID = '2902';
 
     public function compute(Collection $tax_areas)
     {

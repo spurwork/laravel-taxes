@@ -1,18 +1,18 @@
 <?php
 
-namespace Appleton\Taxes\Unit\Countries\US\Ohio\OhioSchoolDistrictTax;
+namespace Appleton\Taxes\Unit\Countries\US\Ohio\BuckeyeValleyLSD;
 
-use Appleton\Taxes\Countries\US\Ohio\OhioSchoolDistrictTax\OhioSchoolDistrictTax;
+use Appleton\Taxes\Countries\US\Ohio\BuckeyeValleyLSD\BuckeyeValleyLSDTax;
 use Appleton\Taxes\Models\Countries\US\Ohio\OhioIncomeTaxInformation;
 use Carbon\Carbon;
 use TestCase;
 
-class OhioSchoolDistrictTaxTest extends TestCase
+class BuckeyeValleyLSDTest extends TestCase
 {
     /**
      * @dataProvider provideTestData
      */
-    public function testOhioIncome($date, $exempt, $dependents, $school_district_id, $earnings, $result)
+    public function testBuckeyeValleyLSD($date, $exempt, $dependents, $school_district_id, $earnings, $result)
     {
         OhioIncomeTaxInformation::forUser($this->user)->update([
             'dependents' => $dependents,
@@ -32,7 +32,7 @@ class OhioSchoolDistrictTaxTest extends TestCase
             $taxes->setPayPeriods(52);
         });
 
-        $this->assertSame($result, $results->getTax(OhioSchoolDistrictTax::class));
+        $this->assertSame($result, $results->getTax(BuckeyeValleyLSDTax::class));
     }
 
     public function provideTestData()
@@ -44,47 +44,41 @@ class OhioSchoolDistrictTaxTest extends TestCase
         // earnings
         // results
         return [
+            // exempt
             '0' => [
                 'January 1, 2019 8am',
                 true,
                 0,
-                '0502',
+                '2102',
                 50,
                 null,
             ],
+            // no depedents, traditional
             '1' => [
                 'January 1, 2019 8am',
                 false,
                 0,
-                '0502',
+                '2102',
                 500,
                 5.0,
             ],
-            // not traditional so dependents don't matter
+            // 2 depedents, traditional
             '2' => [
                 'January 1, 2019 8am',
                 false,
                 2,
-                '0502',
+                '2102',
                 500,
-                5.0,
+                4.75,
             ],
+            // not this district id, should be null
             '3' => [
                 'January 1, 2019 8am',
                 false,
-                0,
-                '3301',
-                500,
-                7.5,
-            ],
-            // traditional so dependents do matter
-            '4' => [
-                'January 1, 2019 8am',
-                false,
                 2,
-                '3301',
+                '2222',
                 500,
-                7.13,
+                null,
             ],
         ];
     }

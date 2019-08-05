@@ -44,48 +44,42 @@ class AdaEVSDTest extends TestCase
         // earnings
         // results
         return [
-            // '0' => [
-            //     'January 1, 2019 8am',
-            //     true,
-            //     0,
-            //     '3301',
-            //     50,
-            //     null,
-            // ],
+            // exempt
+            '0' => [
+                'January 1, 2019 8am',
+                true,
+                0,
+                '3301',
+                50,
+                null,
+            ],
+            // no depedents, traditional
             '1' => [
                 'January 1, 2019 8am',
                 false,
                 0,
                 '3301',
                 500,
-                5.0,
+                7.5,
             ],
-            // not traditional so dependents don't matter
-            // '2' => [
-            //     'January 1, 2019 8am',
-            //     false,
-            //     2,
-            //     '3301',
-            //     500,
-            //     5.0,
-            // ],
-            // '3' => [
-            //     'January 1, 2019 8am',
-            //     false,
-            //     0,
-            //     '3301',
-            //     500,
-            //     7.5,
-            // ],
-            // // traditional so dependents do matter
-            // '4' => [
-            //     'January 1, 2019 8am',
-            //     false,
-            //     2,
-            //     '3301',
-            //     500,
-            //     7.13,
-            // ],
+            // 2 depedents, traditional
+            '2' => [
+                'January 1, 2019 8am',
+                false,
+                2,
+                '3301',
+                500,
+                7.13,
+            ],
+            // not this district id, should be null
+            '3' => [
+                'January 1, 2019 8am',
+                false,
+                2,
+                '2222',
+                500,
+                null,
+            ],
         ];
     }
 }

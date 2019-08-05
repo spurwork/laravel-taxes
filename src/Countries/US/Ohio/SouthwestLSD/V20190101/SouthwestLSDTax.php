@@ -16,6 +16,6 @@ class SouthwestLSDTax extends BaseSouthwestLSDTax
             return 0.0;
         }
 
-        return round($this->payroll->getEarnings() * $this->tax_rate, 2);
+        return round($this->payroll->getEarnings() * self::TAX_RATE, 2);
     }
 }

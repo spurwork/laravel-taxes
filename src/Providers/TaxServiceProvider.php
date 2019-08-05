@@ -995,7 +995,7 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\Ohio\NorthStar\NorthStar::class,
         \Appleton\Taxes\Countries\US\Ohio\NorthUnionLSD\NorthUnionLSDTax::class,
         \Appleton\Taxes\Countries\US\Ohio\NorthwesternLSD\NorthwesternLSDTax::class,
-        \Appleton\Taxes\Countries\US\Ohio\NorthwesternLSD\NorthwesternLSDTax::class,
+        \Appleton\Taxes\Countries\US\Ohio\NorthwesternLSDTraditional\NorthwesternLSDTraditionalTax::class,
         \Appleton\Taxes\Countries\US\Ohio\NorthwestLSD\NorthwestLSDTax::class,
         \Appleton\Taxes\Countries\US\Ohio\Northwood\Northwood::class,
         \Appleton\Taxes\Countries\US\Ohio\NorthwoodLSD\NorthwoodLSDTax::class,

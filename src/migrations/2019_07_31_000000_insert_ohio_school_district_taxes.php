@@ -136,7 +136,7 @@ class InsertOhioSchoolDistrictTaxes extends Migration
         'Northmor LSD' => Appleton\Taxes\Countries\US\Ohio\NorthmorLSD\NorthmorLSDTax::class,
         'Northwest LSD' => Appleton\Taxes\Countries\US\Ohio\NorthwestLSD\NorthwestLSDTax::class,
         'Northwestern LSD' => Appleton\Taxes\Countries\US\Ohio\NorthwesternLSD\NorthwesternLSDTax::class,
-        'Northwestern LSD' => Appleton\Taxes\Countries\US\Ohio\NorthwesternLSD\NorthwesternLSDTax::class,
+        'Northwestern LSD Traditional' => Appleton\Taxes\Countries\US\Ohio\NorthwesternLSDTraditional\NorthwesternLSDTraditionalTax::class,
         'Northwood LSD' => Appleton\Taxes\Countries\US\Ohio\NorthwoodLSD\NorthwoodLSDTax::class,
         'Norwalk CSD' => Appleton\Taxes\Countries\US\Ohio\NorwalkCSD\NorwalkCSDTax::class,
         'Norwayne LSD' => Appleton\Taxes\Countries\US\Ohio\NorwayneLSD\NorwayneLSDTax::class,

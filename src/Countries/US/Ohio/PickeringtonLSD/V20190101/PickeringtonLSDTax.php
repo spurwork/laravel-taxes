@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Collection;
 class PickeringtonLSDTax extends BasePickeringtonLSDTax
 {
     public const TAX_RATE = 0.01;
-    const ID = '2301';
+    const ID = '2307';
 
     public function compute(Collection $tax_areas)
     {

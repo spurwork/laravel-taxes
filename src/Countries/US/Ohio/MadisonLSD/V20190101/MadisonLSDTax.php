@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 class MadisonLSDTax extends BaseMadisonLSDTax
 {
-    public const TAX_RATE = 0.05;
+    public const TAX_RATE = 0.005;
     const ID = '0905';
 
     public function compute(Collection $tax_areas)
