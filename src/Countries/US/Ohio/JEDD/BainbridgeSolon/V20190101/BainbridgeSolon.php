@@ -6,5 +6,5 @@ use Appleton\Taxes\Countries\US\Ohio\JEDD\BainbridgeSolon\BainbridgeSolon as Bas
 
 class BainbridgeSolon extends BaseBainbridgeSolon
 {
-    public const TAX_RATE = 0.018;
+    public const TAX_RATE = 0.02;
 }
