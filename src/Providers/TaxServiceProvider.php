@@ -153,6 +153,8 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\Indiana\WellsIncome\WellsIncome::class,
         \Appleton\Taxes\Countries\US\Indiana\WhiteIncome\WhiteIncome::class,
         \Appleton\Taxes\Countries\US\Indiana\WhitleyIncome\WhitleyIncome::class,
+        \Appleton\Taxes\Countries\US\Kansas\KansasIncome\KansasIncome::class,
+        \Appleton\Taxes\Countries\US\Kansas\KansasUnemployment\KansasUnemployment::class,
         \Appleton\Taxes\Countries\US\Kentucky\AdairvilleCity\AdairvilleCity::class,
         \Appleton\Taxes\Countries\US\Kentucky\AlexandriaCity\AlexandriaCity::class,
         \Appleton\Taxes\Countries\US\Kentucky\AllenCounty\AllenCounty::class,
