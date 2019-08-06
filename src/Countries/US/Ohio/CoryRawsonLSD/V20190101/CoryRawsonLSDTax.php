@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Collection;
 class CoryRawsonLSDTax extends BaseCoryRawsonLSDTax
 {
     public const TAX_RATE = 0.0175;
-    const ID = '3202';
+    const ID = '3203';
 
     public function compute(Collection $tax_areas)
     {
