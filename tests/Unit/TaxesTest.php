@@ -381,4 +381,25 @@ class TaxesTest extends \TestCase
         $this->assertSame(null, $results->getTax(ParentGeorgiaIncome::class));
         $this->assertSame(2.13, $results->getTax(AlabamaIncome::class));
     }
+
+    public function testAdditionalTaxes()
+    {
+        Carbon::setTestNow(
+            Carbon::parse('January 1, 2018 8am', 'America/Chicago')->setTimezone('UTC')
+        );
+
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.georgia'));
+            $taxes->setWorkLocation($this->getLocation('us.georgia'));
+            $taxes->setUser($this->user);
+            $taxes->setReciprocalAgreement(true);
+            $taxes->setEarnings(66.68);
+            $taxes->setSupplementalEarnings(0);
+            $taxes->setPayPeriods(260);
+            $taxes->setDate(Carbon::now()->addMonth());
+            $taxes->setAdditionalTaxes([AlabamaIncome::class]);
+        });
+
+        $this->assertSame(2.13, $results->getTax(AlabamaIncome::class));
+    }
 }
