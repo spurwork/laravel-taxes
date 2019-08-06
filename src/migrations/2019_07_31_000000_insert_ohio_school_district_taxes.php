@@ -210,7 +210,7 @@ class InsertOhioSchoolDistrictTaxes extends Migration
 
         foreach (self::CLASSES as $name => $class) {
             $tax_id = DB::table('taxes')->insertGetId([
-                'name' => $name,
+                'name' => $name.' Tax',
                 'class' => $class,
             ]);
 
