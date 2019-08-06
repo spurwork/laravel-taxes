@@ -105,7 +105,7 @@ class FloridaUnemploymentTest extends \TestCase
 
         $results = $this->taxes->calculate(function ($taxes) {
             $taxes->setHomeLocation($this->getLocation('us.florida'));
-            $taxes->setWorkLocation($this->getLocation('us'));
+            $taxes->setWorkLocation($this->getLocation('us.tennessee'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(66.68);
         });

@@ -12,8 +12,8 @@ class FederalIncomeTest extends \TestCase
         FederalIncomeTaxInformation::forUser($this->user)->update(['exemptions' => 1]);
 
         $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us'));
-            $taxes->setWorkLocation($this->getLocation('us'));
+            $taxes->setHomeLocation($this->getLocation('us.alabama'));
+            $taxes->setWorkLocation($this->getLocation('us.alabama'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(258.69);
             $taxes->setPayPeriods(52);
@@ -31,8 +31,8 @@ class FederalIncomeTest extends \TestCase
         ]);
 
         $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us'));
-            $taxes->setWorkLocation($this->getLocation('us'));
+            $taxes->setHomeLocation($this->getLocation('us.alabama'));
+            $taxes->setWorkLocation($this->getLocation('us.alabama'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(475.25);
             $taxes->setPayPeriods(52);
@@ -49,8 +49,8 @@ class FederalIncomeTest extends \TestCase
         ]);
 
         $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us'));
-            $taxes->setWorkLocation($this->getLocation('us'));
+            $taxes->setHomeLocation($this->getLocation('us.alabama'));
+            $taxes->setWorkLocation($this->getLocation('us.alabama'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(112.33);
             $taxes->setPayPeriods(52);
@@ -65,8 +65,8 @@ class FederalIncomeTest extends \TestCase
         FederalIncomeTaxInformation::forUser($this->user)->update(['filing_status' => ParentFederalIncome::FILING_SEPERATE]);
 
         $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us'));
-            $taxes->setWorkLocation($this->getLocation('us'));
+            $taxes->setHomeLocation($this->getLocation('us.alabama'));
+            $taxes->setWorkLocation($this->getLocation('us.alabama'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(865.14);
             $taxes->setPayPeriods(52);
@@ -84,8 +84,8 @@ class FederalIncomeTest extends \TestCase
         ]);
 
         $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us'));
-            $taxes->setWorkLocation($this->getLocation('us'));
+            $taxes->setHomeLocation($this->getLocation('us.alabama'));
+            $taxes->setWorkLocation($this->getLocation('us.alabama'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(367.57);
             $taxes->setPayPeriods(52);
@@ -102,8 +102,8 @@ class FederalIncomeTest extends \TestCase
         ]);
 
         $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us'));
-            $taxes->setWorkLocation($this->getLocation('us'));
+            $taxes->setHomeLocation($this->getLocation('us.alabama'));
+            $taxes->setWorkLocation($this->getLocation('us.alabama'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(800);
             $taxes->setPayPeriods(52);
@@ -117,8 +117,8 @@ class FederalIncomeTest extends \TestCase
         FederalIncomeTaxInformation::forUser($this->user)->delete();
 
         $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us'));
-            $taxes->setWorkLocation($this->getLocation('us'));
+            $taxes->setHomeLocation($this->getLocation('us.alabama'));
+            $taxes->setWorkLocation($this->getLocation('us.alabama'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(800);
             $taxes->setPayPeriods(52);

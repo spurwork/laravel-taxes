@@ -7,8 +7,8 @@ class MedicareTest extends \TestCase
     public function testMedicare()
     {
         $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us'));
-            $taxes->setWorkLocation($this->getLocation('us'));
+            $taxes->setHomeLocation($this->getLocation('us.alabama'));
+            $taxes->setWorkLocation($this->getLocation('us.alabama'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(2300);
         });
@@ -19,8 +19,8 @@ class MedicareTest extends \TestCase
     public function testMedicareWithAdditionalTax()
     {
         $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us'));
-            $taxes->setWorkLocation($this->getLocation('us'));
+            $taxes->setHomeLocation($this->getLocation('us.alabama'));
+            $taxes->setWorkLocation($this->getLocation('us.alabama'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(100);
             $taxes->setYtdEarnings(0);
@@ -29,8 +29,8 @@ class MedicareTest extends \TestCase
         $this->assertSame(1.45, $results->getTax(Medicare::class));
 
         $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us'));
-            $taxes->setWorkLocation($this->getLocation('us'));
+            $taxes->setHomeLocation($this->getLocation('us.alabama'));
+            $taxes->setWorkLocation($this->getLocation('us.alabama'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(100);
             $taxes->setYtdEarnings(199950);
@@ -39,8 +39,8 @@ class MedicareTest extends \TestCase
         $this->assertSame(1.90, $results->getTax(Medicare::class));
 
         $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us'));
-            $taxes->setWorkLocation($this->getLocation('us'));
+            $taxes->setHomeLocation($this->getLocation('us.alabama'));
+            $taxes->setWorkLocation($this->getLocation('us.alabama'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(100);
             $taxes->setYtdEarnings(200000);
@@ -49,8 +49,8 @@ class MedicareTest extends \TestCase
         $this->assertSame(2.35, $results->getTax(Medicare::class));
 
         $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us'));
-            $taxes->setWorkLocation($this->getLocation('us'));
+            $taxes->setHomeLocation($this->getLocation('us.alabama'));
+            $taxes->setWorkLocation($this->getLocation('us.alabama'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(100);
             $taxes->setYtdEarnings(200050);
@@ -62,8 +62,8 @@ class MedicareTest extends \TestCase
     public function testMedicareEmployer()
     {
         $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us'));
-            $taxes->setWorkLocation($this->getLocation('us'));
+            $taxes->setHomeLocation($this->getLocation('us.alabama'));
+            $taxes->setWorkLocation($this->getLocation('us.alabama'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(2300);
             $taxes->setYtdEarnings(200000);
@@ -75,8 +75,8 @@ class MedicareTest extends \TestCase
     public function testCaseStudy1()
     {
         $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us'));
-            $taxes->setWorkLocation($this->getLocation('us'));
+            $taxes->setHomeLocation($this->getLocation('us.alabama'));
+            $taxes->setWorkLocation($this->getLocation('us.alabama'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(66.68);
         });
@@ -89,8 +89,8 @@ class MedicareTest extends \TestCase
     public function testCaseStudyA()
     {
         $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us'));
-            $taxes->setWorkLocation($this->getLocation('us'));
+            $taxes->setHomeLocation($this->getLocation('us.alabama'));
+            $taxes->setWorkLocation($this->getLocation('us.alabama'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(271.67);
             $taxes->setYtdEarnings(24897.33);
@@ -104,8 +104,8 @@ class MedicareTest extends \TestCase
     public function testCaseStudyB()
     {
         $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us'));
-            $taxes->setWorkLocation($this->getLocation('us'));
+            $taxes->setHomeLocation($this->getLocation('us.alabama'));
+            $taxes->setWorkLocation($this->getLocation('us.alabama'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(765.12);
             $taxes->setYtdEarnings(200100);

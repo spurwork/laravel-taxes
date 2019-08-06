@@ -6,18 +6,6 @@ use Carbon\Carbon;
 
 class FederalUnemploymentTest extends \TestCase
 {
-    public function testFederalUnemployment()
-    {
-        $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us'));
-            $taxes->setWorkLocation($this->getLocation('us'));
-            $taxes->setUser($this->user);
-            $taxes->setEarnings(2300);
-        });
-
-        $this->assertSame(138.0, $results->getTax(FederalUnemployment::class));
-    }
-
     public function testFederalUnemploymentWithStateCredit()
     {
         $results = $this->taxes->calculate(function ($taxes) {

@@ -9,8 +9,8 @@ class SocialSecurityTest extends \TestCase
     public function testSocialSecurity()
     {
         $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us'));
-            $taxes->setWorkLocation($this->getLocation('us'));
+            $taxes->setHomeLocation($this->getLocation('us.alabama'));
+            $taxes->setWorkLocation($this->getLocation('us.alabama'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(2300);
         });
@@ -21,8 +21,8 @@ class SocialSecurityTest extends \TestCase
     public function testSocialSecurityMetWageBase()
     {
         $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us'));
-            $taxes->setWorkLocation($this->getLocation('us'));
+            $taxes->setHomeLocation($this->getLocation('us.alabama'));
+            $taxes->setWorkLocation($this->getLocation('us.alabama'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(100);
             $taxes->setYtdEarnings(127100);
@@ -31,8 +31,8 @@ class SocialSecurityTest extends \TestCase
         $this->assertSame(6.20, $results->getTax(ParentSocialSecurity::class));
 
         $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us'));
-            $taxes->setWorkLocation($this->getLocation('us'));
+            $taxes->setHomeLocation($this->getLocation('us.alabama'));
+            $taxes->setWorkLocation($this->getLocation('us.alabama'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(100);
             $taxes->setYtdEarnings(127150);
@@ -41,8 +41,8 @@ class SocialSecurityTest extends \TestCase
         $this->assertSame(3.10, $results->getTax(ParentSocialSecurity::class));
 
         $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us'));
-            $taxes->setWorkLocation($this->getLocation('us'));
+            $taxes->setHomeLocation($this->getLocation('us.alabama'));
+            $taxes->setWorkLocation($this->getLocation('us.alabama'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(100);
             $taxes->setYtdEarnings(127200);
@@ -51,8 +51,8 @@ class SocialSecurityTest extends \TestCase
         $this->assertSame(null, $results->getTax(ParentSocialSecurity::class));
 
         $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us'));
-            $taxes->setWorkLocation($this->getLocation('us'));
+            $taxes->setHomeLocation($this->getLocation('us.alabama'));
+            $taxes->setWorkLocation($this->getLocation('us.alabama'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(100);
             $taxes->setYtdEarnings(127250);
@@ -64,8 +64,8 @@ class SocialSecurityTest extends \TestCase
     public function testCaseStudy1()
     {
         $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us'));
-            $taxes->setWorkLocation($this->getLocation('us'));
+            $taxes->setHomeLocation($this->getLocation('us.alabama'));
+            $taxes->setWorkLocation($this->getLocation('us.alabama'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(66.68);
         });
