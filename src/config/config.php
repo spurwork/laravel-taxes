@@ -47,6 +47,10 @@ return [
                 'georgia_income_tax_information' => env('TAXES_GEORGIA_INCOME_TAX_INFORMATION', 'georgia_income_tax_information'),
             ],
 
+            'kansas' => [
+                'kansas_income_tax_information' => env('TAXES_KANSAS_INCOME_TAX_INFORMATION', 'kansas_income_tax_information'),
+            ],
+
             'louisiana' => [
                 'louisiana_income_tax_information' => env('TAXES_LOUISIANA_INCOME_TAX_INFORMATION', 'louisiana_income_tax_information'),
             ],
@@ -126,6 +130,10 @@ return [
 
             'georgia' => [
                 'unemployment' => env('TAXES_GEORGIA_UNEMPLOYMENT_TAX_RATE', 0.027),
+            ],
+
+            'kansas' => [
+                'unemployment' => env('TAXES_KANSAS_UNEMPLOYMENT_TAX_RATE', 0.027),
             ],
 
             'louisiana' => [

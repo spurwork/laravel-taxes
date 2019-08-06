@@ -93,7 +93,7 @@ class AlabamaUnemploymentTest extends \TestCase
     {
         $results = $this->taxes->calculate(function ($taxes) {
             $taxes->setHomeLocation($this->getLocation('us.alabama'));
-            $taxes->setWorkLocation($this->getLocation('us'));
+            $taxes->setWorkLocation($this->getLocation('us.tennessee'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(2300);
         });

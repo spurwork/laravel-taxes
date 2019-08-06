@@ -26,6 +26,7 @@ use Appleton\Taxes\Models\Countries\US\FederalIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Georgia\GeorgiaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Illinois\IllinoisIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Indiana\IndianaIncomeTaxInformation;
+use Appleton\Taxes\Models\Countries\US\Kansas\KansasIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Kentucky\KentuckyIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Louisiana\LouisianaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Maryland\MarylandIncomeTaxInformation;
@@ -138,6 +139,8 @@ class TestCase extends BaseTestCase
             'county_lived' => 11,
             'county_worked' => 11,
         ], $this->user);
+
+        KansasIncomeTaxInformation::createForUser([], $this->user);
 
         KentuckyIncomeTaxInformation::createForUser([
             'additional_withholding' => 0,
@@ -382,6 +385,7 @@ class TestCase extends BaseTestCase
             'us.indiana.wells' => [40.7778, -85.1894],
             'us.indiana.white' => [40.6766, -86.9824],
             'us.indiana.whitley' => [41.1136, -85.5200],
+            'us.kansas' => [39.0119, -98.4842],
             'us.kentucky' => [37.8393, -84.2700],
             'us.kentucky.adairville_city' => [36.6675425, -86.8519417],
             'us.kentucky.alexandria_city' => [38.9595, -84.3880],

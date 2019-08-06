@@ -8,6 +8,7 @@ use Closure;
 
 class Taxes
 {
+    protected $additional_taxes = [];
     protected $date = null;
     protected $exemptions = [];
     protected $pay_periods = 1;
@@ -17,6 +18,11 @@ class Taxes
     protected $suta_location = null;
     protected $wtd_earnings = 0;
     protected $ytd_earnings = 0;
+
+    public function setAdditionalTaxes($additional_taxes)
+    {
+        $this->additional_taxes = $additional_taxes;
+    }
 
     public function setDate($date)
     {
@@ -167,6 +173,12 @@ class Taxes
         }
 
         $this->overrideLocations();
+
+        foreach ($this->additional_taxes as $additional_tax) {
+            $tax = Tax::where('class', $additional_tax)->first();
+            if (is_null($tax)) continue;
+            $this->taxes->push($tax);
+        }
     }
 
     private function overrideLocations()
