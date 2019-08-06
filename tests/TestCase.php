@@ -193,8 +193,8 @@ class TestCase extends BaseTestCase
         ], $this->user);
 
         NewYorkIncomeTaxInformation::createForUser([
-            'additional_withholding' => 0,
-            'exemptions' => 0,
+            'ny_additional_withholding' => 0,
+            'ny_allowances' => 0,
             'filing_status' => NewYorkIncome::FILING_SINGLE,
         ], $this->user);
 

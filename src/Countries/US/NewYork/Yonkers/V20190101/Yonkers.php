@@ -4,7 +4,9 @@ namespace Appleton\Taxes\Countries\US\NewYork\Yonkers\V20190101;
 
 use Appleton\Taxes\Classes\Payroll;
 use Appleton\Taxes\Countries\US\NewYork\NewYorkIncome\NewYorkIncome;
+use Appleton\Taxes\Countries\US\NewYork\NewYorkIncome\V20190101\NewYorkIncome as NewYorkIncome2019;
 use Appleton\Taxes\Countries\US\NewYork\Yonkers\Yonkers as BaseYonkers;
+use Appleton\Taxes\Models\Countries\US\NewYork\NewYorkIncomeTaxInformation;
 use Illuminate\Database\Eloquent\Collection;
 
 class Yonkers extends BaseYonkers
@@ -21,26 +23,27 @@ class Yonkers extends BaseYonkers
         [30000, 10000, 0],
     ];
 
-    public function __construct(Payroll $payroll, NewYorkIncome $new_york_income)
+    public function __construct(NewYorkIncomeTaxInformation $tax_information,
+                                Payroll $payroll, NewYorkIncome $new_york_income)
     {
-        $this->payroll = $payroll;
+        parent::__construct($tax_information, $payroll);
         $this->new_york_income = $new_york_income;
     }
 
-    public function getAdjustedEarnings()
+    public function getNonResidentAdjustedEarnings()
     {
         $adjusted_earnings = $this->payroll->getEarnings() * $this->payroll->pay_periods;
 
         if ($adjusted_earnings <= static::NONRESIDENT_MINIMUM_ANNUALIZED_WAGES) {
             $adjusted_earnings = 0;
         } else {
-            $adjusted_earnings -= $this->getExclusionAmount($adjusted_earnings, static::NONRESIDENT_ANNUALIZED_EXCLUSIONS);
+            $adjusted_earnings -= $this->getNonResidentExclusionAmount($adjusted_earnings, static::NONRESIDENT_ANNUALIZED_EXCLUSIONS);
         }
 
         return $adjusted_earnings / $this->payroll->pay_periods;
     }
 
-    public function getExclusionAmount($amount, $table)
+    public function getNonResidentExclusionAmount($amount, $table)
     {
         $bracket = end($table);
         foreach ($table as $row) {
@@ -63,11 +66,26 @@ class Yonkers extends BaseYonkers
         });
 
         if ($resident) {
-            $this->tax_total = $this->new_york_income->getAmount() * static::TAX_RATE;
+            $ny_tax_information = $this->tax_information->replicate();
+            $ny_tax_information->ny_additional_withholding = 0;
+
+            // todo: need a better way to instantiate this, TaxServiceProvider doesn't support parameters
+            $ny_income = new NewYorkIncome2019($ny_tax_information, $this->payroll);
+            $tax_amount = ($ny_income->compute($tax_areas) * static::TAX_RATE);
+
+            $this->tax_total = $this->payroll->withholdTax($tax_amount) +
+                $this->payroll->withholdTax($this->getAdditionalWithholding());
+
         } else {
-            $this->tax_total = $this->getAdjustedEarnings() * static::NONRESIDENT_TAX_RATE;
+            $tax_amount = $this->getNonResidentAdjustedEarnings() * static::NONRESIDENT_TAX_RATE;
+            $this->tax_total = $this->payroll->withholdTax($tax_amount);
         }
 
         return round($this->tax_total, 2);
+    }
+
+    public function getAdditionalWithholding()
+    {
+        return max(min($this->payroll->getNetEarnings(), $this->tax_information->yonkers_additional_withholding), 0);
     }
 }
