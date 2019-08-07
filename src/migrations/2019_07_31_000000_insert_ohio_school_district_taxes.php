@@ -217,7 +217,8 @@ class InsertOhioSchoolDistrictTaxes extends Migration
             DB::table('tax_areas')->insert([[
                 'tax_id' => $tax_id,
                 'home_governmental_unit_area_id' => $id,
-                'based' => TaxArea::BASED_ON_HOME_LOCATION,
+                'work_governmental_unit_area_id' => $id,
+                'based' => TaxArea::BASED_ON_BOTH_LOCATIONS,
             ]]);
         }
     }
