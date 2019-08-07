@@ -11,6 +11,7 @@ class Payroll
     public $supplemental_earnings;
     public $user;
     public $wtd_earnings;
+    public $mtd_earnings;
     public $ytd_earnings;
 
     protected $amount_withheld;
@@ -24,6 +25,7 @@ class Payroll
         $this->supplemental_earnings = $parameters['supplemental_earnings'] ?? 0;
         $this->user = $parameters['user'];
         $this->wtd_earnings = $parameters['wtd_earnings'] ?? 0;
+        $this->mtd_earnings = $parameters['mtd_earnings'] ?? 0;
         $this->ytd_earnings = $parameters['ytd_earnings'] ?? 0;
 
         $this->amount_withheld = 0;
@@ -72,6 +74,15 @@ class Payroll
         }
 
         return $this->wtd_earnings;
+    }
+
+    public function getMtdEarnings($governmental_unit_area = null, bool $include_current = false)
+    {
+        if (is_callable($this->mtd_earnings)) {
+            return ($this->mtd_earnings)($governmental_unit_area, $include_current);
+        }
+
+        return $this->mtd_earnings;
     }
 
     public function getYtdEarnings($governmental_unit_area = null)
