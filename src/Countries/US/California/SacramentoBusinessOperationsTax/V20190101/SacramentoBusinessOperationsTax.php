@@ -1,12 +1,12 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\California\SacrementoBusinessOperationsTax\V20190101;
+namespace Appleton\Taxes\Countries\US\California\SacramentoBusinessOperationsTax\V20190101;
 
-use Appleton\Taxes\Countries\US\California\SacrementoBusinessOperationsTax\SacrementoBusinessOperationsTax as BaseSacrementoBusinessOperationsTax;
+use Appleton\Taxes\Countries\US\California\SacramentoBusinessOperationsTax\SacramentoBusinessOperationsTax as BaseSacramentoBusinessOperationsTax;
 use Appleton\Taxes\Traits\HasWageBase;
 use Illuminate\Database\Eloquent\Collection;
 
-class SacrementoBusinessOperationsTax extends BaseSacrementoBusinessOperationsTax
+class SacramentoBusinessOperationsTax extends BaseSacramentoBusinessOperationsTax
 {
     // use HasWageBase;
 
