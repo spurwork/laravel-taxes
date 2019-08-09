@@ -90,6 +90,11 @@ class Taxes
         $this->ytd_earnings = $ytd_earnings;
     }
 
+    public function setYtdLiabilities($ytd_liabilities)
+    {
+        $this->ytd_liabilities = $ytd_liabilities;
+    }
+
     public function calculate(Closure $closure)
     {
         $closure($this);
@@ -132,6 +137,7 @@ class Taxes
             'wtd_earnings' => $this->wtd_earnings,
             'mtd_earnings' => $this->mtd_earnings,
             'ytd_earnings' => $this->ytd_earnings,
+            'ytd_liabilities' => $this->ytd_liabilities,
         ]));
     }
 
@@ -183,7 +189,9 @@ class Taxes
 
         foreach ($this->additional_taxes as $additional_tax) {
             $tax = Tax::where('class', $additional_tax)->first();
-            if (is_null($tax)) continue;
+            if (is_null($tax)) {
+                continue;
+            }
             $this->taxes->push($tax);
         }
     }

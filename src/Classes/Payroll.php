@@ -13,6 +13,7 @@ class Payroll
     public $wtd_earnings;
     public $mtd_earnings;
     public $ytd_earnings;
+    public $ytd_liabilities;
 
     protected $amount_withheld;
 
@@ -27,6 +28,7 @@ class Payroll
         $this->wtd_earnings = $parameters['wtd_earnings'] ?? 0;
         $this->mtd_earnings = $parameters['mtd_earnings'] ?? 0;
         $this->ytd_earnings = $parameters['ytd_earnings'] ?? 0;
+        $this->ytd_liabilities = $parameters['ytd_liabilities'] ?? 0;
 
         $this->amount_withheld = 0;
     }
@@ -92,5 +94,14 @@ class Payroll
         }
 
         return $this->ytd_earnings;
+    }
+
+    public function getYtdLiabilities($governmental_unit_area = null)
+    {
+        if (is_callable($this->ytd_liabilities)) {
+            return ($this->ytd_liabilities)($governmental_unit_area);
+        }
+
+        return $this->ytd_liabilities;
     }
 }
