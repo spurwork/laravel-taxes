@@ -19,6 +19,7 @@ class Taxes
     protected $wtd_earnings = 0;
     protected $mtd_earnings = 0;
     protected $ytd_earnings = 0;
+    protected $ytd_liabilities = 0;
 
     public function setAdditionalTaxes($additional_taxes)
     {
