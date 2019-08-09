@@ -287,7 +287,7 @@ class TestCase extends BaseTestCase
             'us.arizona' => [33.6050991, -112.4052392],
             'us.california' => [36.7783, -119.4179],
             'us.california.sanfrancisco' => [37.7749, -122.4194],
-            'us.california.sacremento' => [38.5816, -121.4944],
+            'us.california.sacramento' => [38.5816, -121.4944],
             'us.colorado' => [39.7640021, -105.1352965],
             'us.delaware' => [39.1582, -75.5244],
             'us.georgia' => [33.7490, -84.3880],
