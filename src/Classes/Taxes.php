@@ -10,6 +10,7 @@ class Taxes
 {
     protected $additional_taxes = [];
     protected $date = null;
+    protected $days_worked = 0;
     protected $exemptions = [];
     protected $pay_periods = 1;
     protected $reciprocal_agreement = false;
@@ -28,6 +29,11 @@ class Taxes
     public function setDate($date)
     {
         $this->date = $date;
+    }
+
+    public function setDaysWorked($days_worked)
+    {
+        $this->days_worked = $days_worked;
     }
 
     public function setEarnings($earnings)
@@ -124,6 +130,7 @@ class Taxes
     {
         app()->instance(Payroll::class, new Payroll([
             'date' => $this->getDate(),
+            'days_worked' => $this->days_worked,
             'earnings' => $this->earnings,
             'exemptions' => $this->exemptions,
             'pay_periods' => $this->pay_periods,

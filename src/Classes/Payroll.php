@@ -5,6 +5,7 @@ namespace Appleton\Taxes\Classes;
 class Payroll
 {
     public $date;
+    public $days_worked;
     public $earnings;
     public $exemptions;
     public $pay_periods;
@@ -19,6 +20,7 @@ class Payroll
     public function __construct($parameters)
     {
         $this->date = $parameters['date'];
+        $this->days_worked = $parameters['days_worked'] ?? false;
         $this->earnings = $parameters['earnings'] ?? 0;
         $this->exemptions = collect($parameters['exemptions'] ?? []);
         $this->pay_periods = $parameters['pay_periods'] ?? 52;
@@ -65,6 +67,15 @@ class Payroll
     public function getSupplementalEarnings()
     {
         return $this->supplemental_earnings - $this->exempted_supplemental_earnings;
+    }
+
+    public function getDaysWorked($governmental_unit_area = null)
+    {
+        if (is_callable($this->days_worked)) {
+            return ($this->days_worked)($governmental_unit_area);
+        }
+
+        return $this->days_worked;
     }
 
     public function getWtdEarnings($governmental_unit_area = null)
