@@ -16,7 +16,7 @@ class CarrollCountyTest extends TestCase
             $taxes->setHomeLocation($this->getLocation('us.kentucky.carroll_county'));
             $taxes->setWorkLocation($this->getLocation('us.kentucky.carroll_county'));
             $taxes->setUser($this->user);
-            $taxes->setEarnings(300);
+            $taxes->setEarnings(5300);
             $taxes->setPayPeriods(52);
         });
 
