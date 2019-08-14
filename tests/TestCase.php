@@ -432,7 +432,7 @@ class TestCase extends BaseTestCase
             'us.kentucky.clinton_county' => [36.7263899, -85.1479364],
             'us.kentucky.cold_spring_city' => [39.0217, -84.4399],
             'us.kentucky.coal_run_village_city' => [37.5131553, -82.5584861],
-            'us.kentucky.corbin_city' => [36.9487, -84.0969],
+            'us.kentucky.corbin_city' => [36.910052, -84.070530],
             'us.kentucky.covington_city' => [39.0837, -84.5086],
             'us.kentucky.crescent_springs_city' => [39.0514492, -84.5816106],
             'us.kentucky.crestview_hills_city' => [39.0273, -84.5849],
