@@ -17,7 +17,7 @@ abstract class MississippiIncome extends BaseStateIncome
         self::FILING_SINGLE =>'S',
         self::FILING_MARRIED_ONE_SPOUSE_EMPLOYED => 'M',
         self::FILING_MARRIED_BOTH_SPOUSES_EMPLOYED => 'B',
-        self::FILING_HEAD_OF_HOUSEHOLD > 'H',
+        self::FILING_HEAD_OF_HOUSEHOLD => 'H',
     ];
 
     protected $tax_information;

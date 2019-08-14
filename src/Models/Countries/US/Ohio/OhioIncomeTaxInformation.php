@@ -14,6 +14,7 @@ class OhioIncomeTaxInformation extends BaseTaxInformationModel
         $tax_information = new self();
         $tax_information->dependents = 0;
         $tax_information->exempt = false;
+        $tax_information->school_district_id = 0;
         return $tax_information;
     }
 

@@ -210,6 +210,7 @@ class TestCase extends BaseTestCase
         OhioIncomeTaxInformation::createForUser([
             'dependents' => 0,
             'exempt' => false,
+            'school_district_id' => 0,
         ], $this->user);
 
         OklahomaIncomeTaxInformation::createForUser([
