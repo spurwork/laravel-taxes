@@ -2,50 +2,18 @@
 
 namespace Appleton\Taxes\Unit\Countries\US\Ohio;
 
-use Appleton\Taxes\Classes\TaxResults;
-use Appleton\Taxes\Countries\US\Ohio\Cincinnati\Cincinnati;
-use Appleton\Taxes\Countries\US\Ohio\Cleveland\Cleveland;
 use Appleton\Taxes\Countries\US\Ohio\Columbus\Columbus;
 use Carbon\Carbon;
 use TestCase;
 
 class ColumbusTest extends TestCase
 {
-    public function testColumbus_no_birth_date()
+    /** @dataProvider dataProvider */
+    public function testColumbus(?Carbon $birth_date, ?float $amount): void
     {
         Carbon::setTestNow(Carbon::parse('2019-02-01'));
 
-        $results = $this->calculateTaxes(null);
-        $this->assertSame(7.50, $results->getTax(Columbus::class));
-    }
-
-    public function testColumbus_over_18()
-    {
-        Carbon::setTestNow(Carbon::parse('2019-02-01'));
-
-        $results = $this->calculateTaxes(Carbon::now()->subYears(19));
-        $this->assertSame(7.50, $results->getTax(Columbus::class));
-    }
-
-    public function testColumbus_18()
-    {
-        Carbon::setTestNow(Carbon::parse('2019-02-01'));
-
-        $results = $this->calculateTaxes(Carbon::now()->subYears(18));
-        $this->assertSame(7.50, $results->getTax(Columbus::class));
-    }
-
-    public function testColumbus_under_18()
-    {
-        Carbon::setTestNow(Carbon::parse('2019-02-01'));
-
-        $results = $this->calculateTaxes(Carbon::now()->subYears(17));
-        $this->assertNull($results->getTax(Columbus::class));
-    }
-
-    private function calculateTaxes(?Carbon $birth_date): TaxResults
-    {
-        return $this->taxes->calculate(function ($taxes) use ($birth_date) {
+        $results = $this->taxes->calculate(function ($taxes) use ($birth_date) {
             $taxes->setHomeLocation($this->getLocation('us.ohio.columbus'));
             $taxes->setWorkLocation($this->getLocation('us.ohio.columbus'));
             $taxes->setUser($this->user);
@@ -53,5 +21,31 @@ class ColumbusTest extends TestCase
             $taxes->setPayPeriods(52);
             $taxes->setBirthDate($birth_date);
         });
+
+        $this->assertSame($amount, $results->getTax(Columbus::class));
+    }
+
+    public function dataProvider(): array
+    {
+        Carbon::setTestNow(Carbon::parse('2019-02-01'));
+
+        return [
+            'no birth date' => [
+                null,
+                7.50
+            ],
+            'over 18' => [
+                Carbon::now()->subYears(19),
+                7.50
+            ],
+            'exactly 18' => [
+                Carbon::now()->subYears(18),
+                7.50
+            ],
+            'under 18' => [
+                Carbon::now()->subYears(17),
+                null
+            ],
+        ];
     }
 }
