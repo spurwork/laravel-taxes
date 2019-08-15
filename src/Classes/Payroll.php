@@ -20,7 +20,7 @@ class Payroll
     public function __construct($parameters)
     {
         $this->date = $parameters['date'];
-        $this->birth_date = $parameters['birth_date'];
+        $this->birth_date = $parameters['birth_date'] ?? null;
         $this->earnings = $parameters['earnings'] ?? 0;
         $this->exemptions = collect($parameters['exemptions'] ?? []);
         $this->pay_periods = $parameters['pay_periods'] ?? 52;
