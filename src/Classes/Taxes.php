@@ -10,6 +10,7 @@ class Taxes
 {
     protected $additional_taxes = [];
     protected $date = null;
+    protected $birth_date = null;
     protected $exemptions = [];
     protected $pay_periods = 1;
     protected $reciprocal_agreement = false;
@@ -28,6 +29,11 @@ class Taxes
     public function setDate($date)
     {
         $this->date = $date;
+    }
+
+    public function setBirthDate($birth_date)
+    {
+        $this->birth_date = $birth_date;
     }
 
     public function setEarnings($earnings)
@@ -124,6 +130,7 @@ class Taxes
     {
         app()->instance(Payroll::class, new Payroll([
             'date' => $this->getDate(),
+            'birth_date' => $this->birth_date,
             'earnings' => $this->earnings,
             'exemptions' => $this->exemptions,
             'pay_periods' => $this->pay_periods,
