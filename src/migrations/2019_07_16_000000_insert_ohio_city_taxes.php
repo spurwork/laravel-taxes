@@ -658,7 +658,6 @@ class InsertOhioCityTaxes extends Migration
     public function up()
     {
         foreach (parse_ini_file(self::STATE_FILE) as $name => $geo) {
-
             $area_id = DB::table('governmental_unit_areas')->insertGetId([
                 'name' => $name.', OH',
                 'area' => $geo
