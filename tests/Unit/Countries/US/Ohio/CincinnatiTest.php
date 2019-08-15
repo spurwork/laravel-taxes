@@ -9,6 +9,14 @@ use TestCase;
 
 class CincinnatiTest extends TestCase
 {
+    public function testCincinnati_no_birth_date()
+    {
+        Carbon::setTestNow(Carbon::parse('2019-02-01'));
+
+        $results = $this->calculateTaxes(null);
+        $this->assertSame(6.30, $results->getTax(Cincinnati::class));
+    }
+
     public function testCincinnati_over_18()
     {
         Carbon::setTestNow(Carbon::parse('2019-02-01'));
@@ -33,7 +41,7 @@ class CincinnatiTest extends TestCase
         $this->assertNull($results->getTax(Cincinnati::class));
     }
 
-    private function calculateTaxes(Carbon $birth_date): TaxResults
+    private function calculateTaxes(?Carbon $birth_date): TaxResults
     {
         return $this->taxes->calculate(function ($taxes) use ($birth_date) {
             $taxes->setHomeLocation($this->getLocation('us.ohio.cincinnati'));

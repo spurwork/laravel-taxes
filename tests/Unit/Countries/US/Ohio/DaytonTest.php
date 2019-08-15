@@ -3,13 +3,20 @@
 namespace Appleton\Taxes\Unit\Countries\US\Ohio;
 
 use Appleton\Taxes\Classes\TaxResults;
-use Appleton\Taxes\Countries\US\Ohio\Cleveland\Cleveland;
 use Appleton\Taxes\Countries\US\Ohio\Dayton\Dayton;
 use Carbon\Carbon;
 use TestCase;
 
 class DaytonTest extends TestCase
 {
+    public function testDayton_no_birth_date()
+    {
+        Carbon::setTestNow(Carbon::parse('2019-02-01'));
+
+        $results = $this->calculateTaxes(null);
+        $this->assertSame(7.50, $results->getTax(Dayton::class));
+    }
+
     public function testDayton_over_18()
     {
         Carbon::setTestNow(Carbon::parse('2019-02-01'));
@@ -34,7 +41,7 @@ class DaytonTest extends TestCase
         $this->assertNull($results->getTax(Dayton::class));
     }
 
-    private function calculateTaxes(Carbon $birth_date): TaxResults
+    private function calculateTaxes(?Carbon $birth_date): TaxResults
     {
         return $this->taxes->calculate(function ($taxes) use ($birth_date) {
             $taxes->setHomeLocation($this->getLocation('us.ohio.dayton'));
