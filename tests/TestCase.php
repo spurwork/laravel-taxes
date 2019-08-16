@@ -40,6 +40,7 @@ use Appleton\Taxes\Models\Countries\US\NorthCarolina\NorthCarolinaIncomeTaxInfor
 use Appleton\Taxes\Models\Countries\US\Ohio\OhioIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Oklahoma\OklahomaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Pennsylvania\PennsylvaniaIncomeTaxInformation;
+use Appleton\Taxes\Models\Countries\US\SouthCarolina\SouthCarolinaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Virginia\VirginiaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\WashingtonDC\WashingtonDCIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\WestVirginia\WestVirginiaIncomeTaxInformation;
@@ -220,6 +221,11 @@ class TestCase extends BaseTestCase
         ], $this->user);
 
         PennsylvaniaIncomeTaxInformation::createForUser([
+            'exempt' => false,
+        ], $this->user);
+
+        SouthCarolinaIncomeTaxInformation::createForUser([
+            'exemptions' => 0,
             'exempt' => false,
         ], $this->user);
 
@@ -1306,6 +1312,7 @@ class TestCase extends BaseTestCase
             'us.ohio.zanesville' => [39.9403453, -82.0131924],
             'us.oklahoma' => [35.4676, -97.5164],
             'us.pennsylvania' => [41.2033, -77.1945],
+            'us.south_carolina' => [33.8361, -81.1637],
             'us.tennessee' => [35.5175, -86.5804],
             'us.texas' => [31.9686, -99.9018],
             'us.virginia' => [37.5407, -77.4360],
