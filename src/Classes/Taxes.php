@@ -180,7 +180,10 @@ class Taxes
             ->with(['taxAreas' => function ($query) {
                 $query->atPoint($this->home_location, $this->work_location);
             }])
-            ->get();
+            ->get()
+            ->filter(static function (Tax $tax) {
+                return $tax->class::SCOPE === 'worker';
+            });
 
         if (!$this->hasStateIncomeTax()) {
             $this->getStateIncomeTax();
