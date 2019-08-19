@@ -19,16 +19,64 @@ class ConnecticutIncome extends BaseConnecticutIncome
     FILING_SINGLE
     */
 
-    public function __construct(ConnecticutIncomeTaxInformation $tax_information, Payroll $payroll)
+    public function compute(Collection $tax_areas)
     {
-        parent::__construct($payroll);
-        $this->tax_information = $tax_information;
+        if ($this->isUserClaimingExemption()) {
+            return 0;
+        }
+
+        if ($this->getPersonalExemption() === 0) {
+            return $this->getPersonalExemption() - $this->tax_information->reduced_withholding + $this->tax_information->additional_withholding;
+        }
+
+        $annual_gross_tax_amount = $this->getTaxBracket($gross_earnings, self::ANNUAL_GROSS_TAX_AMOUNT);
+
+        $phased_out_amount = $this->getTaxBracket($gross_earnings, self::PHASED_OUT);
+
+        $additional_recapture_amount = $this->getTaxBracket($gross_earnings, self::ADDITONAL_RECAPTURE);
+
+        $amount_of_tax_to_withhold = $annual_gross_tax_amount + $phased_out_amount + $additional_recapture_amount;
+
+        $annual_tax_credit = $amount_of_tax_to_withhold * $this->getTaxBracket($gross_earnings, self::ANNUAL_GROSS_MULTIPLICATION_PERCENTAGE);
+
+        $total = $amount_of_tax_to_withhold - $annual_tax_credit;
+
+        $total = $total / $this->payroll->pay_periods;
+
+        $total -= $this->tax_information->reduced_withholding;
+        $total += $this->tax_information->additional_withholding;
+
+        $this->tax_total = $this->payroll->withholdTax($total);
     }
 
-    public function getTaxBrackets()
+    public function getPersonalExemption()
     {
+        $gross_earnings = $this->getGrossAnnualWages();
+
+        $standard_deduction = self::PERSONAL_EXEMPTION[$this->tax_information->filing_status];
+        $deduction = $standard_deduction['amount'];
+
+        if ($gross_earnings > $standard_deduction['base']) {
+            $deduction -= $standard_deduction['modifier']['amount'] * ceil(($gross_earnings - $standard_deduction['base']) / $standard_deduction['modifier']['per']);
+        }
+
+        $deduction = $deduction < $standard_deduction['floor'] ? $standard_deduction['floor'] : $deduction;
+
+        $gross_earnings = $gross_earnings - $deduction;
+
+        return $gross_earnings < 0 ? $gross_earnings : 0;
     }
 
+    public function getGrossAnnualWages()
+    {
+        return $this->getAdjustedEarnings() * $this->payroll->pay_periods;
+    }
+
+    public function getTaxBrackets(): array
+    {
+        dump('ho');
+        return self::ANNUAL_GROSS_TAX_AMOUNT;
+    }
     // public function getPersonalExemption()
     // {
     //     $gross_earnings = $this->getGrossEarnings();
