@@ -129,11 +129,11 @@ return [
             ],
 
             'colorado' => [
-                'unemployment' => env('TAXES_COLORADO_UNEMPLOYMENT_TAX_RATE', 0.034),
+                'unemployment' => env('TAXES_COLORADO_UNEMPLOYMENT_TAX_RATE', 0.017),
             ],
 
             'connecticut' => [
-                'unemployment' => env('TAXES_CONNECTICUT_UNEMPLOYMENT_TAX_RATE', 0.017),
+                'unemployment' => env('TAXES_CONNECTICUT_UNEMPLOYMENT_TAX_RATE', 0.034),
             ],
 
             'georgia' => [
