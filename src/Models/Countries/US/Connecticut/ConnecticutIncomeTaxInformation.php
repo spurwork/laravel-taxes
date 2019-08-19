@@ -13,8 +13,11 @@ class ConnecticutIncomeTaxInformation extends BaseTaxInformationModel
     {
         $tax_information = new self();
         $tax_information->dependents = 0;
+        $tax_information->additional_withholding = 0;
+        $tax_information->reduced_withholding = 0;
         $tax_information->exempt = false;
-        $tax_information->school_district_id = 0;
+        $tax_information->filing_status = 'S';
+
         return $tax_information;
     }
 

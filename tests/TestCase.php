@@ -4,6 +4,7 @@ use Appleton\Taxes\Classes\Taxes;
 use Appleton\Taxes\Countries\US\Alabama\AlabamaIncome\AlabamaIncome;
 use Appleton\Taxes\Countries\US\California\CaliforniaIncome\CaliforniaIncome;
 use Appleton\Taxes\Countries\US\Colorado\ColoradoIncome\ColoradoIncome;
+use Appleton\Taxes\Countries\US\Connecticut\ConnecticutIncome\ConnecticutIncome;
 use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome;
 use Appleton\Taxes\Countries\US\Georgia\GeorgiaIncome\GeorgiaIncome;
 use Appleton\Taxes\Countries\US\Louisiana\LouisianaIncome\LouisianaIncome;
@@ -22,6 +23,7 @@ use Appleton\Taxes\Models\Countries\US\Alabama\AlabamaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Arizona\ArizonaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\California\CaliforniaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Colorado\ColoradoIncomeTaxInformation;
+use Appleton\Taxes\Models\Countries\US\Connecticut\ConnecticutIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\FederalIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Georgia\GeorgiaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Illinois\IllinoisIncomeTaxInformation;
@@ -114,6 +116,14 @@ class TestCase extends BaseTestCase
             'additional_withholding' => 0,
             'exemptions' => 0,
             'filing_status' => ColoradoIncome::FILING_SINGLE,
+        ], $this->user);
+
+        ConnecticutIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'reduced_withholding' => 0,
+            'dependents' => 0,
+            'exempt' => false,
+            'filing_status' => ConnecticutIncome::FILING_SINGLE,
         ], $this->user);
 
         GeorgiaIncomeTaxInformation::createForUser([
@@ -288,6 +298,7 @@ class TestCase extends BaseTestCase
             'us.arizona' => [33.6050991, -112.4052392],
             'us.california' => [38.5816, -121.4944],
             'us.colorado' => [39.7640021, -105.1352965],
+            'us.connecticut' => [41.6032, -73.0877],
             'us.delaware' => [39.1582, -75.5244],
             'us.georgia' => [33.7490, -84.3880],
             'us.florida' => [27.6648, -81.5158],

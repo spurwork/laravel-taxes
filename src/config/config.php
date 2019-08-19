@@ -43,6 +43,10 @@ return [
                 'colorado_income_tax_information' => env('TAXES_COLORADO_INCOME_TAX_INFORMATION', 'colorado_income_tax_information'),
             ],
 
+            'connecticut' => [
+                'connecticut_income_tax_information' => env('TAXES_CONNECTICUT_INCOME_TAX_INFORMATION', 'connecticut_income_tax_information'),
+            ],
+
             'georgia' => [
                 'georgia_income_tax_information' => env('TAXES_GEORGIA_INCOME_TAX_INFORMATION', 'georgia_income_tax_information'),
             ],
@@ -125,7 +129,11 @@ return [
             ],
 
             'colorado' => [
-                'unemployment' => env('TAXES_COLORADO_UNEMPLOYMENT_TAX_RATE', 0.017),
+                'unemployment' => env('TAXES_COLORADO_UNEMPLOYMENT_TAX_RATE', 0.034),
+            ],
+
+            'connecticut' => [
+                'unemployment' => env('TAXES_CONNECTICUT_UNEMPLOYMENT_TAX_RATE', 0.017),
             ],
 
             'georgia' => [

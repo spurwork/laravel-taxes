@@ -28,7 +28,7 @@ class ConnecticutUnemploymentTest extends TestCase
         $this->assertThat(6.8, self::identicalTo($results->getTax(ConnecticutUnemployment::class)));
     }
 
-    public function testConnecticutUnemployment_notMetWageBase(): void
+    public function testConnecticutUnemploymentNotMetWageBase(): void
     {
         $results = $this->taxes->calculate(function (Taxes $taxes) {
             $taxes->setHomeLocation($this->getLocation('us.connecticut'));
@@ -44,7 +44,7 @@ class ConnecticutUnemploymentTest extends TestCase
         $this->assertThat(6.8, self::identicalTo($results->getTax(ConnecticutUnemployment::class)));
     }
 
-    public function testConnecticutUnemployment_metAndExceedWageBase(): void
+    public function testConnecticutUnemploymentMetAndExceedWageBase(): void
     {
         $results = $this->taxes->calculate(function (Taxes $taxes) {
             $taxes->setHomeLocation($this->getLocation('us.connecticut'));
@@ -54,13 +54,13 @@ class ConnecticutUnemploymentTest extends TestCase
             $taxes->setYtdEarnings(14900);
         });
 
-        // 14900 + 200 = 9600
+        // 14900 + 200 = 15100
         // 100 over 15000 wage base so only 100 taxable
         // round(100.0 * .034, 2) = 3.4;
         $this->assertThat(3.4, self::identicalTo($results->getTax(ConnecticutUnemployment::class)));
     }
 
-    public function testConnecticutUnemployment_exceedWageBase(): void
+    public function testConnecticutUnemploymentExceedWageBase(): void
     {
         $results = $this->taxes->calculate(function (Taxes $taxes) {
             $taxes->setHomeLocation($this->getLocation('us.connecticut'));
