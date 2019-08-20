@@ -9,44 +9,35 @@ use Illuminate\Database\Eloquent\Collection;
 
 class ConnecticutIncome extends BaseConnecticutIncome
 {
-    /*
-    FILING_MARRIED_FILING_SEPARATELY
-    FILING_MARRIED_FILING_JOINTLY_COMBINED_INCOME_LESS_THAN_OR_EQUAL_TO
-    FILING_HEAD_OF_HOUSEHOLD
-    FILING_MARRIED
-    FILING_MARRIED_FILING_JOINTLY_ONE_SPOUSE_WORKING
-    FILING_MARRIED_JOINTLY_COMBINED_INCOME_GREATER_THAN
-    FILING_SINGLE
-    */
-
     public function compute(Collection $tax_areas)
     {
         if ($this->isUserClaimingExemption()) {
             return 0;
         }
 
-        if ($this->getPersonalExemption() === 0) {
-            return $this->getPersonalExemption() - $this->tax_information->reduced_withholding + $this->tax_information->additional_withholding;
+        $employee_taxable_income = $this->getPersonalExemption();
+
+        if ($employee_taxable_income === 0) {
+            return $employee_taxable_income - $this->tax_information->reduced_withholding + $this->tax_information->additional_withholding;
         }
 
-        $annual_gross_tax_amount = $this->getTaxBracket($gross_earnings, self::ANNUAL_GROSS_TAX_AMOUNT);
+        $annual_gross_tax_amount = $this->getTaxAmountFromTaxBrackets($employee_taxable_income, self::ANNUAL_GROSS_TAX_AMOUNT[$this->tax_information->filing_status]);
+        $phased_out_amount = $this->getBracketAmount($this->getGrossAnnualWages(), self::PHASED_OUT[$this->tax_information->filing_status]);
 
-        $phased_out_amount = $this->getTaxBracket($gross_earnings, self::PHASED_OUT);
+        $annual_gross_tax_amount += $phased_out_amount;
 
-        $additional_recapture_amount = $this->getTaxBracket($gross_earnings, self::ADDITONAL_RECAPTURE);
+        $additional_recapture_amount = $this->getBracketAmount($this->getGrossAnnualWages(), self::ADDITIONAL_RECAPTURE[$this->tax_information->filing_status]);
+        $annual_gross_tax_amount += $additional_recapture_amount;
 
-        $amount_of_tax_to_withhold = $annual_gross_tax_amount + $phased_out_amount + $additional_recapture_amount;
+        $tax_credit_percentage = $this->getBracketAmount($this->getGrossAnnualWages(), self::ANNUAL_GROSS_MULTIPLICATION_PERCENTAGE[$this->tax_information->filing_status]);
+        $annual_tax_credit = $annual_gross_tax_amount * $tax_credit_percentage;
 
-        $annual_tax_credit = $amount_of_tax_to_withhold * $this->getTaxBracket($gross_earnings, self::ANNUAL_GROSS_MULTIPLICATION_PERCENTAGE);
+        $annual_gross_tax_amount -= $annual_tax_credit;
+        $annual_gross_tax_amount /= $this->payroll->pay_periods;
+        $annual_gross_tax_amount -= $this->tax_information->reduced_withholding;
+        $annual_gross_tax_amount += $this->tax_information->additional_withholding;
 
-        $total = $amount_of_tax_to_withhold - $annual_tax_credit;
-
-        $total = $total / $this->payroll->pay_periods;
-
-        $total -= $this->tax_information->reduced_withholding;
-        $total += $this->tax_information->additional_withholding;
-
-        $this->tax_total = $this->payroll->withholdTax($total);
+        return round($this->payroll->withholdTax($annual_gross_tax_amount), 2);
     }
 
     public function getPersonalExemption()
@@ -56,15 +47,14 @@ class ConnecticutIncome extends BaseConnecticutIncome
         $standard_deduction = self::PERSONAL_EXEMPTION[$this->tax_information->filing_status];
         $deduction = $standard_deduction['amount'];
 
-        if ($gross_earnings > $standard_deduction['base']) {
+        if ($gross_earnings > $standard_deduction['base'] && $this->tax_information->filing_status !== 'D') {
             $deduction -= $standard_deduction['modifier']['amount'] * ceil(($gross_earnings - $standard_deduction['base']) / $standard_deduction['modifier']['per']);
         }
 
         $deduction = $deduction < $standard_deduction['floor'] ? $standard_deduction['floor'] : $deduction;
-
         $gross_earnings = $gross_earnings - $deduction;
 
-        return $gross_earnings < 0 ? $gross_earnings : 0;
+        return $gross_earnings > 0 ? $gross_earnings : 0;
     }
 
     public function getGrossAnnualWages()
@@ -74,19 +64,13 @@ class ConnecticutIncome extends BaseConnecticutIncome
 
     public function getTaxBrackets(): array
     {
-        dump('ho');
-        return self::ANNUAL_GROSS_TAX_AMOUNT;
+        return self::ANNUAL_GROSS_TAX_AMOUNT[$this->tax_information->filing_status];
     }
-    // public function getPersonalExemption()
-    // {
-    //     $gross_earnings = $this->getGrossEarnings();
-    //     $personal_exemption = static::PERSONAL_EXEMPTION[$this->tax_information->filing_status];
-    //     $deduction = $personal_exemption['amount'];
 
-    //     if ($gross_earnings > $personal_exemption['base']) {
-    //         $deduction -= $personal_exemption['modifier']['amount'] * ceil(($gross_earnings - $personal_exemption['base']) / $personal_exemption['modifier']['per']);
-    //     }
+    public function getBracketAmount($wages, $table)
+    {
+        $bracket = $this->getTaxBracket($wages, $table);
 
-    //     return $deduction < $personal_exemption['floor'] ? $personal_exemption['floor'] : $deduction;
-    // }
+        return $bracket[1];
+    }
 }

@@ -15,7 +15,6 @@ class AddConnecticutIncomeTaxInformationTable extends Migration
             $table->increments('id');
             $table->integer('additional_withholding')->default(0);
             $table->integer('reduced_withholding')->default(0);
-            $table->integer('dependents')->default(0);
             $table->string('filing_status')->nullable();
             $table->boolean('exempt')->default(false);
         });

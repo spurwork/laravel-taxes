@@ -121,7 +121,6 @@ class TestCase extends BaseTestCase
         ConnecticutIncomeTaxInformation::createForUser([
             'additional_withholding' => 0,
             'reduced_withholding' => 0,
-            'dependents' => 0,
             'exempt' => false,
             'filing_status' => ConnecticutIncome::FILING_SINGLE,
         ], $this->user);
