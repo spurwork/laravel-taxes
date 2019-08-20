@@ -18,4 +18,6 @@ abstract class BasePayrollLiability
     }
 
     abstract public function compute(Collection $tax_areas): float;
+
+    abstract public function getWages(Collection $tax_areas): float;
 }

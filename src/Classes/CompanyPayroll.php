@@ -25,8 +25,12 @@ class CompanyPayroll
         return $this->date;
     }
 
-    public function getWages(): int
+    public function getWages(TaxArea $tax_area = null): int
     {
+        if (is_callable($this->wages)) {
+            return ($this->wages)($tax_area);
+        }
+
         return $this->wages;
     }
 

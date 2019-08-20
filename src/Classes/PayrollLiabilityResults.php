@@ -15,12 +15,12 @@ class PayrollLiabilityResults
         });
     }
 
-    public function getLiability(string $tax)
+    public function getLiability(string $tax): ?float
     {
         $liabilities = $this->results->filter(static function (PayrollLiability $liability) use ($tax) {
             return $liability->getTaxClass() === $tax;
         });
-        return $this->transform($liabilities)->first();
+        return $this->transformAmount($liabilities)->first();
     }
 
     public function getStateLiabilities(): Collection
@@ -28,13 +28,22 @@ class PayrollLiabilityResults
         $liabilities = $this->results->filter(static function (PayrollLiability $liability) {
             return $liability->getTaxClass()::TYPE === 'state';
         });
-        return $this->transform($liabilities);
+        return $this->transformAmount($liabilities);
     }
 
-    private function transform(Collection $results)
+    public function getWages(string $tax): ?int
     {
-        return $results->map(static function (PayrollLiability $result) {
-            return $result->getAmount();
+        return $this->results->filter(static function ($result, $tax_name) use ($tax) {
+            return $tax_name === $tax;
+        })->map(static function (PayrollLiability $liability) {
+            return $liability->getWages();
+        })->first();
+    }
+
+    private function transformAmount(Collection $results)
+    {
+        return $results->map(static function (PayrollLiability $liability) {
+            return $liability->getAmount();
         });
     }
 }

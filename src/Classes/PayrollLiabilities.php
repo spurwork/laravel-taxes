@@ -78,7 +78,7 @@ class PayrollLiabilities
                 $tax_implementation = app($tax->class);
                 $amount = $tax_implementation->compute($tax->taxAreas);
 
-                $liability = new PayrollLiability($tax->class, $amount, $tax_implementation->getWages());
+                $liability = new PayrollLiability($tax->class, $amount, $tax_implementation->getWages($tax->taxAreas));
                 $results->put($tax->class, $liability);
                 app()->instance($tax->class, $tax_implementation);
             });
@@ -88,11 +88,7 @@ class PayrollLiabilities
 
     private function getTaxes(): Collection
     {
-        return Tax::atPoint($this->work_location, $this->work_location)
-            ->with(['taxAreas' => function ($query) {
-                $query->atPoint($this->work_location, $this->work_location);
-            }])
-            ->get()
+        return Tax::get()
             ->filter(static function (Tax $tax) {
                 return $tax->class::SCOPE === 'payroll';
             });

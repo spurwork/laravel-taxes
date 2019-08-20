@@ -10,8 +10,10 @@ use TestCase;
 class SanFranciscoPayrollEmployerTest extends TestCase
 {
     /** @dataProvider dataProvider */
-    public function testSanFranciscoPayrollEmployer(int $wages, int $ytd_wages,
-                                                    ?float $result): void
+    public function testSanFranciscoPayrollEmployer(int $wages,
+                                                    int $ytd_wages,
+                                                    ?float $expected_amount,
+                                                    ?int $expected_wages): void
     {
         Carbon::setTestNow(Carbon::parse('2019-01-01'));
 
@@ -23,7 +25,8 @@ class SanFranciscoPayrollEmployerTest extends TestCase
             $payroll_liabilities->setYtdLiabilities(0);
         });
 
-        self::assertThat($results->getLiability(SanFranciscoPayrollEmployer::class), self::identicalTo($result));
+        self::assertThat($results->getLiability(SanFranciscoPayrollEmployer::class), self::identicalTo($expected_amount));
+        self::assertThat($results->getWages(SanFranciscoPayrollEmployer::class), self::identicalTo($expected_wages));
     }
 
     /**
@@ -38,14 +41,13 @@ class SanFranciscoPayrollEmployerTest extends TestCase
     public function dataProvider(): array
     {
         return [
-            'with ytd wages under start' => [100, 2999899, null],
-            'with ytd wages equal start' => [100, 2999900, null],
-            'with ytd wages over start' => [100, 2999999, 0.3762],
-            'wages under start' => [2999900, 0, null],
-            'wages equal start' => [3000000, 0, null],
-            'wages over start' => [3000100, 0, 0.38],
-            'combined wages' => [2000000, 2000000, 3800.0],
+            'with ytd wages under start' => [100, 2999899, null, null],
+            'with ytd wages equal start' => [100, 2999900, null, null],
+            'with ytd wages over start' => [100, 2999999, 0.3762, 100],
+            'wages under start' => [2999900, 0, null, null, 2999900],
+            'wages equal start' => [3000000, 0, null, null, 3000000],
+            'wages over start' => [3000100, 0, 0.38, 3000100],
+            'combined wages' => [2000000, 2000000, 3800.0, 2000000],
         ];
     }
-
 }
