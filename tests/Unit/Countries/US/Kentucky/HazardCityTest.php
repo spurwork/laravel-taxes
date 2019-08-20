@@ -20,6 +20,17 @@ class HazardCityTest extends TestCase
             $taxes->setPayPeriods(52);
         });
 
-        $this->assertSame(3.00, $results->getTax(HazardCity::class));
+        $this->assertSame(3.75, $results->getTax(HazardCity::class));
+
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.kentucky.hazard_city'));
+            $taxes->setWorkLocation($this->getLocation('us.kentucky.hazard_city'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(300);
+            $taxes->setYtdEarnings(60000);
+            $taxes->setPayPeriods(52);
+        });
+
+        $this->assertSame(15.0, $results->getTax(HazardCity::class));
     }
 }

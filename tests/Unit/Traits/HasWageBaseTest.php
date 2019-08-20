@@ -4,15 +4,11 @@ namespace Appleton\Taxes\Traits;
 
 class HasWageBaseTest extends \TestCase
 {
-    /**
-     * @dataProvider provideTestData
-     */
-    public function testHasWageBase($earnings, $ytd_earnings, $result)
+    public function testHasWageBase()
     {
         $mock = new class {
             use HasWageBase;
 
-            const WAGE_START = 50;
             const WAGE_BASE = 100;
 
             public $payroll;
@@ -20,8 +16,8 @@ class HasWageBaseTest extends \TestCase
             public function __construct()
             {
                 $this->payroll = new class {
-                    public $earnings = 0;
-                    public $ytd_earnings = 0;
+                    public $earnings = 1;
+                    public $ytd_earnings = 95;
                     public function getEarnings()
                     {
                         return $this->earnings;
@@ -34,35 +30,6 @@ class HasWageBaseTest extends \TestCase
             }
         };
 
-        $mock->payroll->earnings = $earnings;
-        $mock->payroll->ytd_earnings = $ytd_earnings;
-
-        $this->assertSame($result, $mock->getBaseEarnings());
-    }
-
-    public function provideTestData()
-    {
-        return [
-            '0' => [
-                1,
-                0,
-                0,
-            ],
-            '1' => [
-                1,
-                50,
-                1,
-            ],
-            '2' => [
-                1,
-                99,
-                1,
-            ],
-            '3' => [
-                1,
-                100,
-                0,
-            ],
-        ];
+        $this->assertSame(1, $mock->getBaseEarnings());
     }
 }

@@ -16,10 +16,32 @@ class CarrollCountyTest extends TestCase
             $taxes->setHomeLocation($this->getLocation('us.kentucky.carroll_county'));
             $taxes->setWorkLocation($this->getLocation('us.kentucky.carroll_county'));
             $taxes->setUser($this->user);
-            $taxes->setEarnings(5300);
+            $taxes->setEarnings(300);
+            $taxes->setPayPeriods(52);
+        });
+
+        $this->assertNull($results->getTax(CarrollCounty::class));
+
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.kentucky.carroll_county'));
+            $taxes->setWorkLocation($this->getLocation('us.kentucky.carroll_county'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(300);
+            $taxes->setYtdEarnings(5000);
             $taxes->setPayPeriods(52);
         });
 
         $this->assertSame(3.00, $results->getTax(CarrollCounty::class));
+
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.kentucky.carroll_county'));
+            $taxes->setWorkLocation($this->getLocation('us.kentucky.carroll_county'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(300);
+            $taxes->setYtdEarnings(50000);
+            $taxes->setPayPeriods(52);
+        });
+
+        $this->assertNull($results->getTax(CarrollCounty::class));
     }
 }
