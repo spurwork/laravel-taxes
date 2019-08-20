@@ -9,6 +9,7 @@ use Closure;
 class Taxes
 {
     protected $additional_taxes = [];
+    protected $birth_date = null;
     protected $date = null;
     protected $days_worked = 0;
     protected $exemptions = [];
@@ -24,6 +25,11 @@ class Taxes
     public function setAdditionalTaxes($additional_taxes)
     {
         $this->additional_taxes = $additional_taxes;
+    }
+
+    public function setBirthDate($birth_date)
+    {
+        $this->birth_date = $birth_date;
     }
 
     public function setDate($date)
@@ -129,6 +135,7 @@ class Taxes
     private function bindPayrollData()
     {
         app()->instance(Payroll::class, new Payroll([
+            'birth_date' => $this->birth_date,
             'date' => $this->getDate(),
             'days_worked' => $this->days_worked,
             'earnings' => $this->earnings,

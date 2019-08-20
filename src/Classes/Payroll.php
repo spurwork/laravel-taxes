@@ -4,6 +4,7 @@ namespace Appleton\Taxes\Classes;
 
 class Payroll
 {
+    public $birth_date;
     public $date;
     public $days_worked;
     public $earnings;
@@ -19,6 +20,7 @@ class Payroll
 
     public function __construct($parameters)
     {
+        $this->birth_date = $parameters['birth_date'] ?? null;
         $this->date = $parameters['date'];
         $this->days_worked = $parameters['days_worked'] ?? false;
         $this->earnings = $parameters['earnings'] ?? 0;
