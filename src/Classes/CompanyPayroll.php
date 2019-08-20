@@ -12,7 +12,7 @@ class CompanyPayroll
     private $ytd_wages;
     private $ytd_liabilities;
 
-    public function __construct(Carbon $date, int $gross_wages, $ytd_wages, $ytd_liabilities)
+    public function __construct(Carbon $date, $gross_wages, $ytd_wages, $ytd_liabilities)
     {
         $this->date = $date;
         $this->wages = $gross_wages;

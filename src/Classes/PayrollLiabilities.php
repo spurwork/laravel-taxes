@@ -25,7 +25,7 @@ class PayrollLiabilities
         $this->work_location = $location;
     }
 
-    public function setWages(int $wages): void
+    public function setWages($wages): void
     {
         $this->wages = $wages;
     }
