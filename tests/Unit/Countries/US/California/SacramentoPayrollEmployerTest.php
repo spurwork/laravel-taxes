@@ -44,19 +44,19 @@ class SacramentoPayrollEmployerTest extends TestCase
     public function dataProvider(): array
     {
         return [
-            'no ytd wages' => [1000, 0, 0, 30.0, 1000],
+            'no ytd wages' => [1000, 0, 0, 30, 1000],
             'with ytd wages under start' => [100, 999899, 0, null, null],
             'with ytd wages equal start' => [100, 999900, 0, null, null],
-            'with ytd wages over start' => [100, 1000000, 0, .0004, 100],
+            'with ytd wages over start' => [100, 1000000, 0, 1, 100],
             'wages under start' => [999800, 100, 0, null, null],
             'wages equal start' => [999900, 100, 0, null, null],
-            'wages over start' => [1000000, 100, 0, 0.0004, 1000000],
-            'with ytd liabilities under max' => [100, 1000000, 499800, .0004, 100],
-            'with ytd liabilities equal max' => [100, 1000000, 499900, .0004, 100],
+            'wages over start' => [1000000, 100, 0, 1, 1000000],
+            'with ytd liabilities under max' => [100, 1000000, 499800, 1, 100],
+            'with ytd liabilities equal max' => [100, 1000000, 499900, 1, 100],
             'with ytd liabilities over max' => [100, 1000000, 500000, null, null],
-            'liabilities under max' => [124999999900, 1000000, 0, 499999.9996, 124999999900],
-            'liabilities equal max' => [125000000000, 1000000, 0, 500000.0, 125000000000],
-            'liabilities over max' => [125000000100, 1000000, 0, 500000.0, 125000000100],
+            'liabilities under max' => [124999699999, 1000000, 0, 499999, 124999699999],
+            'liabilities equal max' => [125000000000, 1000000, 0, 500000, 125000000000],
+            'liabilities over max' => [125000000100, 1000000, 0, 500000, 125000000100],
         ];
     }
 }

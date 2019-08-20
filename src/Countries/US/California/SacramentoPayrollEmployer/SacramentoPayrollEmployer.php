@@ -16,7 +16,7 @@ abstract class SacramentoPayrollEmployer extends BasePayrollState
 
     abstract public function getTaxAmount(): float;
 
-    public function compute(Collection $tax_areas): float
+    public function compute(Collection $tax_areas): int
     {
         $ytd_wages = $this->company_payroll->getYtdWages($tax_areas->first());
         if ($ytd_wages === 0) {
@@ -39,10 +39,10 @@ abstract class SacramentoPayrollEmployer extends BasePayrollState
 
         $liability = $applicable_wages * $this->getTaxAmount();
 
-        return round(min($liability, $this->getMaxLiability() - $ytd_liabilities), 4);
+        return ceil(min($liability, $this->getMaxLiability() - $ytd_liabilities));
     }
 
-    public function getWages(Collection $tax_areas): float
+    public function getWages(Collection $tax_areas): int
     {
         return $this->company_payroll->getWages($tax_areas->first());
     }

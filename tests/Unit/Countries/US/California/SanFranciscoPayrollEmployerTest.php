@@ -43,11 +43,11 @@ class SanFranciscoPayrollEmployerTest extends TestCase
         return [
             'with ytd wages under start' => [100, 2999899, null, null],
             'with ytd wages equal start' => [100, 2999900, null, null],
-            'with ytd wages over start' => [100, 2999999, 0.3762, 100],
+            'with ytd wages over start' => [100, 2999999, 1, 100],
             'wages under start' => [2999900, 0, null, null, 2999900],
             'wages equal start' => [3000000, 0, null, null, 3000000],
-            'wages over start' => [3000100, 0, 0.38, 3000100],
-            'combined wages' => [2000000, 2000000, 3800.0, 2000000],
+            'wages over start' => [3000100, 0, 1, 3000100],
+            'combined wages' => [2000000, 2000000, 3800, 2000000],
         ];
     }
 }

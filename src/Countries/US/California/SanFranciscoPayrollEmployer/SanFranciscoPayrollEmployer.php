@@ -11,7 +11,7 @@ abstract class SanFranciscoPayrollEmployer extends BasePayrollState
 
     abstract public function getTaxAmount(): float;
 
-    public function compute(Collection $tax_areas): float
+    public function compute(Collection $tax_areas): int
     {
         $ytd_wages = $this->company_payroll->getYtdWages($tax_areas->first());
         $wages = $this->company_payroll->getWages($tax_areas->first());
@@ -24,10 +24,10 @@ abstract class SanFranciscoPayrollEmployer extends BasePayrollState
             ? $wages
             : $ytd_wages + $wages - $this->getStartAmount();
 
-        return round($applicable_wages * $this->getTaxAmount(), 4);
+        return ceil($applicable_wages * $this->getTaxAmount());
     }
 
-    public function getWages(Collection $tax_areas): float
+    public function getWages(Collection $tax_areas): int
     {
         return $this->company_payroll->getWages($tax_areas->first());
     }
