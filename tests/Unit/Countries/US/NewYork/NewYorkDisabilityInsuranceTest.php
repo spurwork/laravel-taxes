@@ -15,7 +15,6 @@ class NewYorkDisabilityInsuranceTest extends \TestCase
             Carbon::parse($date, 'America/Chicago')->setTimezone('UTC')
         );
 
-        dump($earnings);
         $results = $this->taxes->calculate(function ($taxes) use ($wtd_earnings, $earnings) {
             $taxes->setHomeLocation($this->getLocation('us.new_york'));
             $taxes->setWorkLocation($this->getLocation('us.new_york'));

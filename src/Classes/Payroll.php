@@ -72,7 +72,6 @@ class Payroll
     public function getWtdEarnings($governmental_unit_area = null)
     {
         if (is_callable($this->wtd_earnings)) {
-            dump('asdfasdf');
             return ($this->wtd_earnings)($governmental_unit_area);
         }
 
