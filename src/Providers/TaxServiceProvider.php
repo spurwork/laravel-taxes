@@ -63,8 +63,6 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\Colorado\GreenwoodVillageOccupationalPrivilegeEmployer\GreenwoodVillageOccupationalPrivilegeEmployer::class,
         \Appleton\Taxes\Countries\US\Colorado\SheridanOccupationalPrivilege\SheridanOccupationalPrivilege::class,
         \Appleton\Taxes\Countries\US\Colorado\SheridanOccupationalPrivilegeEmployer\SheridanOccupationalPrivilegeEmployer::class,
-        \Appleton\Taxes\Countries\US\Connecticut\ConnecticutIncome\ConnecticutIncome::class,
-        \Appleton\Taxes\Countries\US\Connecticut\ConnecticutUnemployment\ConnecticutUnemployment::class,
 		\Appleton\Taxes\Countries\US\FederalIncome\FederalIncome::class,
         \Appleton\Taxes\Countries\US\FederalUnemployment\FederalUnemployment::class,
         \Appleton\Taxes\Countries\US\Florida\FloridaUnemployment\FloridaUnemployment::class,
