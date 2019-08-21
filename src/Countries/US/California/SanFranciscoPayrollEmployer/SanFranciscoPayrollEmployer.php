@@ -13,8 +13,8 @@ abstract class SanFranciscoPayrollEmployer extends BasePayrollState
 
     public function compute(Collection $tax_areas): int
     {
-        $ytd_wages = $this->company_payroll->getYtdWages($tax_areas->first());
-        $wages = $this->company_payroll->getWages($tax_areas->first());
+        $ytd_wages = $this->company_payroll->getYtdWages($tax_areas->first()->workGovernmentalUnitArea);
+        $wages = $this->company_payroll->getWages($tax_areas->first()->workGovernmentalUnitArea);
 
         if ($ytd_wages + $wages < $this->getStartAmount()) {
             return 0.0;
@@ -29,6 +29,6 @@ abstract class SanFranciscoPayrollEmployer extends BasePayrollState
 
     public function getWages(Collection $tax_areas): int
     {
-        return $this->company_payroll->getWages($tax_areas->first());
+        return $this->company_payroll->getWages($tax_areas->first()->workGovernmentalUnitArea);
     }
 }

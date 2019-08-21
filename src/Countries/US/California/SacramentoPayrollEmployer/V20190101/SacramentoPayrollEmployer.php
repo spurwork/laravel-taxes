@@ -9,7 +9,7 @@ class SacramentoPayrollEmployer extends BaseSacramentoPayrollEmployer
     private const INITIAL_TAX = 30.0000;
     private const START_AMOUNT = 1000000;
     private const MAX_LIABILITY = 500000;
-    private const TAX_AMOUNT = .000004;
+    private const TAX_AMOUNT = .0004;
 
     public function getInitialTax(): float
     {

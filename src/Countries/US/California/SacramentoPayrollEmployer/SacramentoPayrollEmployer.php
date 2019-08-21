@@ -18,17 +18,17 @@ abstract class SacramentoPayrollEmployer extends BasePayrollState
 
     public function compute(Collection $tax_areas): int
     {
-        $ytd_wages = $this->company_payroll->getYtdWages($tax_areas->first());
-        if ($ytd_wages === 0) {
-            return $this->getInitialTax();
-        }
-
         $ytd_liabilities = $this->company_payroll->getYtdLiabilities(BaseSacramentoPayrollEmployer::class);
         if ($ytd_liabilities > $this->getMaxLiability()) {
             return 0.0;
         }
 
-        $wages = $this->company_payroll->getWages($tax_areas->first());
+        $wages = $this->company_payroll->getWages($tax_areas->first()->workGovernmentalUnitArea);
+        $ytd_wages = $this->company_payroll->getYtdWages($tax_areas->first()->workGovernmentalUnitArea);
+        if ($ytd_wages === 0 && $ytd_wages + $wages < $this->getStartAmount()) {
+            return $this->getInitialTax();
+        }
+
         if ($ytd_wages + $wages < $this->getStartAmount()) {
             return 0.0;
         }
@@ -39,11 +39,15 @@ abstract class SacramentoPayrollEmployer extends BasePayrollState
 
         $liability = $applicable_wages * $this->getTaxAmount();
 
+        if($ytd_wages === 0) {
+            $liability += $this->getInitialTax();
+        }
+
         return ceil(min($liability, $this->getMaxLiability() - $ytd_liabilities));
     }
 
     public function getWages(Collection $tax_areas): int
     {
-        return $this->company_payroll->getWages($tax_areas->first());
+        return $this->company_payroll->getWages($tax_areas->first()->workGovernmentalUnitArea);
     }
 }

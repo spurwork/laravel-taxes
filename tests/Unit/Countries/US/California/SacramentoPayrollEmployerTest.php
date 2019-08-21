@@ -54,9 +54,9 @@ class SacramentoPayrollEmployerTest extends TestCase
             'with ytd liabilities under max' => [100, 1000000, 499800, 1, 100],
             'with ytd liabilities equal max' => [100, 1000000, 499900, 1, 100],
             'with ytd liabilities over max' => [100, 1000000, 500000, null, null],
-            'liabilities under max' => [124999699999, 1000000, 0, 499999, 124999699999],
-            'liabilities equal max' => [125000000000, 1000000, 0, 500000, 125000000000],
-            'liabilities over max' => [125000000100, 1000000, 0, 500000, 125000000100],
+            'liabilities under max' => [1249996999, 1000000, 0, 499999, 1249996999],
+            'liabilities equal max' => [1250000000, 1000000, 0, 500000, 1250000000],
+            'liabilities over max' => [1250000100, 1000000, 0, 500000, 1250000100],
         ];
     }
 }

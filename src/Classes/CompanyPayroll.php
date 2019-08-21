@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Classes;
 
-use Appleton\Taxes\Models\TaxArea;
+use Appleton\Taxes\Models\GovernmentalUnitArea;
 use Carbon\Carbon;
 
 class CompanyPayroll
@@ -25,7 +25,7 @@ class CompanyPayroll
         return $this->date;
     }
 
-    public function getWages(TaxArea $tax_area = null): int
+    public function getWages(GovernmentalUnitArea $tax_area = null): int
     {
         if (is_callable($this->wages)) {
             return ($this->wages)($tax_area);
@@ -34,7 +34,7 @@ class CompanyPayroll
         return $this->wages;
     }
 
-    public function getYtdWages(TaxArea $tax_area = null): int
+    public function getYtdWages(GovernmentalUnitArea $tax_area = null): int
     {
         if (is_callable($this->ytd_wages)) {
             return ($this->ytd_wages)($tax_area);
