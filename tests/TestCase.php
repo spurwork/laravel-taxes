@@ -28,6 +28,7 @@ use Appleton\Taxes\Models\Countries\US\FederalIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Georgia\GeorgiaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Illinois\IllinoisIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Indiana\IndianaIncomeTaxInformation;
+use Appleton\Taxes\Models\Countries\US\Iowa\IowaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Kansas\KansasIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Kentucky\KentuckyIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Louisiana\LouisianaIncomeTaxInformation;
