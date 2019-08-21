@@ -33,6 +33,7 @@ class TaxInformationServiceProvider extends ServiceProvider
         \Appleton\Taxes\Models\Countries\US\Oklahoma\OklahomaIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\NorthCarolina\NorthCarolinaIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\Pennsylvania\PennsylvaniaIncomeTaxInformation::class,
+        \Appleton\Taxes\Models\Countries\US\SouthCarolina\SouthCarolinaIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\Virginia\VirginiaIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\WashingtonDC\WashingtonDCIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\WestVirginia\WestVirginiaIncomeTaxInformation::class,

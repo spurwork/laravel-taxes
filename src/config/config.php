@@ -95,6 +95,10 @@ return [
                 'pennsylvania_income_tax_information' => env('TAXES_PENNSYLVANIA_INCOME_TAX_INFORMATION', 'pennsylvania_income_tax_information'),
             ],
 
+            'south_carolina' => [
+                'south_carolina_income_tax_information' => env('TAXES_SOUTH_CAROLINA_INCOME_TAX_INFORMATION', 'south_carolina_income_tax_information'),
+            ],
+
             'washingtondc' => [
                 'washingtondc_income_tax_information' => env('TAXES_WASHINGTONDC_INCOME_TAX_INFORMATION', 'washingtondc_income_tax_information'),
             ],
@@ -182,6 +186,10 @@ return [
 
             'pennsylvania' => [
                 'unemployment' => env('TAXES_PENNSYLVANIA_UNEMPLOYMENT_TAX_RATE', 0.03689),
+            ],
+
+            'south_carolina' => [
+                'unemployment' => env('TAXES_SOUTH_CAROLINA_UNEMPLOYMENT_TAX_RATE', 0.0087),
             ],
 
             'washingtondc' => [
