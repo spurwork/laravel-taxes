@@ -43,7 +43,9 @@ class NewYorkFamilyMedicalLeaveTest extends \TestCase
             ],
             '2' => [
                 'January 1, 2019 8am',
-                0,
+                (function () {
+                    return 0;
+                }),
                 1400,
                 2.08,
             ],
