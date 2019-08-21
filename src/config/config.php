@@ -196,6 +196,10 @@ return [
                 'unemployment' => env('TAXES_SOUTH_CAROLINA_UNEMPLOYMENT_TAX_RATE', 0.0087),
             ],
 
+            'south_dakota' => [
+                'unemployment' => env('TAXES_SOUTH_DAKOTA_UNEMPLOYMENT_TAX_RATE', 0.012),
+            ],
+
             'washingtondc' => [
                 'unemployment' => env('TAXES_WASHINGTONDC_UNEMPLOYMENT_TAX_RATE', 0.027),
             ],

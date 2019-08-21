@@ -1324,6 +1324,7 @@ class TestCase extends BaseTestCase
             'us.oklahoma' => [35.4676, -97.5164],
             'us.pennsylvania' => [41.2033, -77.1945],
             'us.south_carolina' => [33.8361, -81.1637],
+            'us.south_dakota' => [43.9695, -99.9018],
             'us.tennessee' => [35.5175, -86.5804],
             'us.texas' => [31.9686, -99.9018],
             'us.virginia' => [37.5407, -77.4360],
