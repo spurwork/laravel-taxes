@@ -128,6 +128,10 @@ return [
                 'unemployment' => env('TAXES_ALABAMA_UNEMPLOYMENT_TAX_RATE', 0.027),
             ],
 
+            'alaska' => [
+                'unemployment' => env('TAXES_ALASKA_UNEMPLOYMENT_TAX_RATE', 0.0132),
+            ],
+
             'california' => [
                 'unemployment' => env('TAXES_CALIFORNIA_UNEMPLOYMENT_TAX_RATE', 0.034),
             ],
