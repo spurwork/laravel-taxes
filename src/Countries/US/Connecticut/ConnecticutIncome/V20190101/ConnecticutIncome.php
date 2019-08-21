@@ -11,7 +11,7 @@ class ConnecticutIncome extends BaseConnecticutIncome
 {
     public function compute(Collection $tax_areas)
     {
-        if ($this->isUserClaimingExemption()) {
+        if ($this->isUserClaimingExemption() || $this->tax_information->filing_status === 'E') {
             return 0;
         }
 
@@ -29,10 +29,12 @@ class ConnecticutIncome extends BaseConnecticutIncome
         $additional_recapture_amount = $this->getBracketAmount($this->getGrossAnnualWages(), self::ADDITIONAL_RECAPTURE[$this->tax_information->filing_status]);
         $annual_gross_tax_amount += $additional_recapture_amount;
 
-        $tax_credit_percentage = $this->getBracketAmount($this->getGrossAnnualWages(), self::ANNUAL_GROSS_MULTIPLICATION_PERCENTAGE[$this->tax_information->filing_status]);
-        $annual_tax_credit = $annual_gross_tax_amount * $tax_credit_percentage;
+        if ($this->tax_information->filing_status !== 'D') {
+            $tax_credit_percentage = $this->getBracketAmount($this->getGrossAnnualWages(), self::ANNUAL_GROSS_MULTIPLICATION_PERCENTAGE[$this->tax_information->filing_status]);
+            $annual_tax_credit = $annual_gross_tax_amount * $tax_credit_percentage;
+            $annual_gross_tax_amount -= $annual_tax_credit;
+        }
 
-        $annual_gross_tax_amount -= $annual_tax_credit;
         $annual_gross_tax_amount /= $this->payroll->pay_periods;
         $annual_gross_tax_amount -= $this->tax_information->reduced_withholding;
         $annual_gross_tax_amount += $this->tax_information->additional_withholding;
@@ -44,15 +46,17 @@ class ConnecticutIncome extends BaseConnecticutIncome
     {
         $gross_earnings = $this->getGrossAnnualWages();
 
-        $standard_deduction = self::PERSONAL_EXEMPTION[$this->tax_information->filing_status];
-        $deduction = $standard_deduction['amount'];
+        if ($this->tax_information->filing_status !== 'D') {
+            $standard_deduction = self::PERSONAL_EXEMPTION[$this->tax_information->filing_status];
+            $deduction = $standard_deduction['amount'];
 
-        if ($gross_earnings > $standard_deduction['base'] && $this->tax_information->filing_status !== 'D') {
-            $deduction -= $standard_deduction['modifier']['amount'] * ceil(($gross_earnings - $standard_deduction['base']) / $standard_deduction['modifier']['per']);
+            if ($gross_earnings > $standard_deduction['base']) {
+                $deduction -= $standard_deduction['modifier']['amount'] * ceil(($gross_earnings - $standard_deduction['base']) / $standard_deduction['modifier']['per']);
+            }
+
+            $deduction = $deduction < $standard_deduction['floor'] ? $standard_deduction['floor'] : $deduction;
+            $gross_earnings = $gross_earnings - $deduction;
         }
-
-        $deduction = $deduction < $standard_deduction['floor'] ? $standard_deduction['floor'] : $deduction;
-        $gross_earnings = $gross_earnings - $deduction;
 
         return $gross_earnings > 0 ? $gross_earnings : 0;
     }

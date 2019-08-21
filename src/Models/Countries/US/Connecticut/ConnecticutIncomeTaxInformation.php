@@ -15,7 +15,7 @@ class ConnecticutIncomeTaxInformation extends BaseTaxInformationModel
         $tax_information->additional_withholding = 0;
         $tax_information->reduced_withholding = 0;
         $tax_information->exempt = false;
-        $tax_information->filing_status = 'S';
+        $tax_information->filing_status = 'A';
 
         return $tax_information;
     }

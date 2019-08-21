@@ -8,26 +8,15 @@ use Appleton\Taxes\Models\Countries\US\Connecticut\ConnecticutIncomeTaxInformati
 
 abstract class ConnecticutIncome extends BaseStateIncome
 {
-    public const FILING_MARRIED_FILING_SEPARATELY = 'A';
-    public const FILING_MARRIED_FILING_JOINTLY_COMBINED_INCOME_LESS_THAN_OR_EQUAL_TO = 'A';
-    public const FILING_HEAD_OF_HOUSEHOLD = 'B';
-    public const FILING_MARRIED = 'C';
-    public const FILING_MARRIED_FILING_JOINTLY_ONE_SPOUSE_WORKING = 'C';
-    public const FILING_MARRIED_JOINTLY_COMBINED_INCOME_GREATER_THAN = 'D';
-    public const FILING_SINGLE = 'F';
-
-    public const FILING_STATUSES = [
-        self::FILING_MARRIED_FILING_SEPARATELY => 'FILING_MARRIED_FILING_SEPARATELY',
-        self::FILING_MARRIED_FILING_JOINTLY_COMBINED_INCOME_LESS_THAN_OR_EQUAL_TO => 'FILING_MARRIED_FILING_JOINTLY_COMBINED_INCOME_LESS_THAN_OR_EQUAL_TO',
-        self::FILING_HEAD_OF_HOUSEHOLD => 'FILING_HEAD_OF_HOUSEHOLD',
-        self::FILING_MARRIED => 'FILING_MARRIED',
-        self::FILING_MARRIED_FILING_JOINTLY_ONE_SPOUSE_WORKING => 'FILING_MARRIED_FILING_JOINTLY_ONE_SPOUSE_WORKING',
-        self::FILING_MARRIED_JOINTLY_COMBINED_INCOME_GREATER_THAN => 'FILING_MARRIED_JOINTLY_COMBINED_INCOME_GREATER_THAN',
-        self::FILING_SINGLE => 'FILING_SINGLE',
-    ];
+    public const WITHHOLDING_CODE_A = 'A';
+    public const WITHHOLDING_CODE_B = 'B';
+    public const WITHHOLDING_CODE_C = 'C';
+    public const WITHHOLDING_CODE_D = 'D';
+    public const WITHHOLDING_CODE_E = 'E';
+    public const WITHHOLDING_CODE_F = 'F';
 
     const PERSONAL_EXEMPTION = [
-        self::FILING_MARRIED_FILING_SEPARATELY => [
+        self::WITHHOLDING_CODE_A => [
             'base' => 24000,
             'amount' => 12000,
             'floor' => 0,
@@ -36,16 +25,7 @@ abstract class ConnecticutIncome extends BaseStateIncome
                 'per' => 1000,
             ],
         ],
-        self::FILING_MARRIED_FILING_JOINTLY_COMBINED_INCOME_LESS_THAN_OR_EQUAL_TO => [
-            'base' => 24000,
-            'amount' => 12000,
-            'floor' => 0,
-            'modifier' => [
-                'amount' => 1000,
-                'per' => 1000,
-            ],
-        ],
-        self::FILING_HEAD_OF_HOUSEHOLD => [
+        self::WITHHOLDING_CODE_B => [
             'base' => 38000,
             'amount' => 19000,
             'floor' => 0,
@@ -54,7 +34,7 @@ abstract class ConnecticutIncome extends BaseStateIncome
                 'per' => 1000,
             ]
         ],
-        self::FILING_MARRIED => [
+        self::WITHHOLDING_CODE_C => [
             'base' => 48000,
             'amount' => 24000,
             'floor' => 0,
@@ -63,16 +43,7 @@ abstract class ConnecticutIncome extends BaseStateIncome
                 'per' => 1000,
             ]
         ],
-        self::FILING_MARRIED_FILING_JOINTLY_ONE_SPOUSE_WORKING => [
-            'base' => 48000,
-            'amount' => 24000,
-            'floor' => 0,
-            'modifier' => [
-                'amount' => 1000,
-                'per' => 1000,
-            ]
-        ],
-        self::FILING_SINGLE => [
+        self::WITHHOLDING_CODE_F => [
             'base' => 30000,
             'amount' => 15000,
             'floor' => 0,
@@ -81,19 +52,10 @@ abstract class ConnecticutIncome extends BaseStateIncome
                 'per' => 1000,
             ]
         ],
-        self::FILING_MARRIED_JOINTLY_COMBINED_INCOME_GREATER_THAN => [
-            'base' => 0,
-            'amount' => 0,
-            'floor' => 0,
-            'modifier' => [
-                'amount' => 0,
-                'per' => 0,
-            ]
-        ],
     ];
 
     const ANNUAL_GROSS_TAX_AMOUNT = [
-        self::FILING_MARRIED_FILING_SEPARATELY => [
+        self::WITHHOLDING_CODE_A => [
             [0, 0.03, 0],
             [10000, 0.05, 300],
             [50000, 0.055, 2300],
@@ -102,16 +64,7 @@ abstract class ConnecticutIncome extends BaseStateIncome
             [250000, 0.069, 14300],
             [500000, 0.0699, 31550],
         ],
-        self::FILING_MARRIED_FILING_JOINTLY_COMBINED_INCOME_LESS_THAN_OR_EQUAL_TO => [
-            [0, 0.03, 0],
-            [10000, 0.05, 300],
-            [50000, 0.055, 2300],
-            [100000, 0.06, 5050],
-            [200000, 0.065, 11050],
-            [250000, 0.069, 14300],
-            [500000, 0.0699, 31550],
-        ],
-        self::FILING_HEAD_OF_HOUSEHOLD => [
+        self::WITHHOLDING_CODE_B => [
             [0, 0.03, 0],
             [16000, 0.05, 480],
             [80000, 0.055, 3680],
@@ -120,7 +73,7 @@ abstract class ConnecticutIncome extends BaseStateIncome
             [400000, 0.069, 22880],
             [800000, 0.0699, 50480],
         ],
-        self::FILING_MARRIED => [
+        self::WITHHOLDING_CODE_C => [
             [0, 0.03, 0],
             [20000, 0.05, 600],
             [100000, 0.055, 4600],
@@ -129,16 +82,7 @@ abstract class ConnecticutIncome extends BaseStateIncome
             [500000, 0.069, 28600],
             [1000000, 0.0699, 63100],
         ],
-        self::FILING_MARRIED_FILING_JOINTLY_ONE_SPOUSE_WORKING => [
-            [0, 0.03, 0],
-            [20000, 0.05, 600],
-            [100000, 0.055, 4600],
-            [200000, 0.06, 10100],
-            [400000, 0.065, 22100],
-            [500000, 0.069, 28600],
-            [1000000, 0.0699, 63100],
-        ],
-        self::FILING_SINGLE => [
+        self::WITHHOLDING_CODE_D => [
             [0, 0.03, 0],
             [10000, 0.05, 300],
             [50000, 0.055, 2300],
@@ -147,7 +91,7 @@ abstract class ConnecticutIncome extends BaseStateIncome
             [250000, 0.069, 14300],
             [500000, 0.0699, 31550],
         ],
-        self::FILING_MARRIED_JOINTLY_COMBINED_INCOME_GREATER_THAN => [
+        self::WITHHOLDING_CODE_F => [
             [0, 0.03, 0],
             [10000, 0.05, 300],
             [50000, 0.055, 2300],
@@ -159,7 +103,7 @@ abstract class ConnecticutIncome extends BaseStateIncome
     ];
 
     const PHASED_OUT = [
-        self::FILING_MARRIED_FILING_SEPARATELY => [
+        self::WITHHOLDING_CODE_A => [
             [0, 0],
             [50250, 20],
             [52750, 40],
@@ -172,20 +116,7 @@ abstract class ConnecticutIncome extends BaseStateIncome
             [70250, 180],
             [72750, 200],
         ],
-        self::FILING_MARRIED_FILING_JOINTLY_COMBINED_INCOME_LESS_THAN_OR_EQUAL_TO => [
-            [0, 0],
-            [50250, 20],
-            [52750, 40],
-            [55250, 60],
-            [57750, 80],
-            [60250, 100],
-            [62750, 120],
-            [65250, 140],
-            [67750, 160],
-            [70250, 180],
-            [72750, 200],
-        ],
-        self::FILING_HEAD_OF_HOUSEHOLD => [
+        self::WITHHOLDING_CODE_B => [
             [0, 0],
             [78500, 32],
             [82500, 64],
@@ -198,7 +129,7 @@ abstract class ConnecticutIncome extends BaseStateIncome
             [110500, 288],
             [114500, 320],
         ],
-        self::FILING_MARRIED => [
+        self::WITHHOLDING_CODE_C => [
             [0, 0],
             [100500, 40],
             [105500, 80],
@@ -211,33 +142,7 @@ abstract class ConnecticutIncome extends BaseStateIncome
             [140500, 360],
             [145500, 400],
         ],
-        self::FILING_MARRIED_FILING_JOINTLY_ONE_SPOUSE_WORKING => [
-            [0, 0],
-            [100500, 40],
-            [105500, 80],
-            [110500, 120],
-            [115500, 160],
-            [120500, 200],
-            [125500, 240],
-            [130500, 280],
-            [135500, 320],
-            [140500, 360],
-            [145500, 400],
-        ],
-        self::FILING_SINGLE => [
-            [0, 0],
-            [56500, 20],
-            [61500, 40],
-            [66500, 60],
-            [71500, 80],
-            [76500, 100],
-            [81500, 120],
-            [86500, 140],
-            [91500, 160],
-            [96500, 180],
-            [101500, 200],
-        ],
-        self::FILING_MARRIED_JOINTLY_COMBINED_INCOME_GREATER_THAN => [
+        self::WITHHOLDING_CODE_D => [
             [0, 0],
             [50250, 20],
             [52750, 40],
@@ -250,10 +155,23 @@ abstract class ConnecticutIncome extends BaseStateIncome
             [70250, 180],
             [72750, 200],
         ],
+        self::WITHHOLDING_CODE_F => [
+            [0, 0],
+            [56500, 20],
+            [61500, 40],
+            [66500, 60],
+            [71500, 80],
+            [76500, 100],
+            [81500, 120],
+            [86500, 140],
+            [91500, 160],
+            [96500, 180],
+            [101500, 200],
+        ],
     ];
 
     const ADDITIONAL_RECAPTURE = [
-        self::FILING_MARRIED_FILING_SEPARATELY => [
+        self::WITHHOLDING_CODE_A => [
             [0, 0],
             [200000, 90],
             [205000, 180],
@@ -295,49 +213,7 @@ abstract class ConnecticutIncome extends BaseStateIncome
             [535000, 3100],
             [540000, 3150],
         ],
-        self::FILING_MARRIED_FILING_JOINTLY_COMBINED_INCOME_LESS_THAN_OR_EQUAL_TO => [
-            [0, 0],
-            [200000, 90],
-            [205000, 180],
-            [210000, 270],
-            [215000, 360],
-            [220000, 450],
-            [225000, 540],
-            [230000, 630],
-            [235000, 720],
-            [240000, 810],
-            [245000, 900],
-            [250000, 990],
-            [255000, 1080],
-            [260000, 1170],
-            [265000, 1260],
-            [270000, 1350],
-            [275000, 1440],
-            [280000, 1530],
-            [285000, 1620],
-            [290000, 1710],
-            [295000, 1800],
-            [300000, 1890],
-            [305000, 1980],
-            [310000, 2070],
-            [315000, 2160],
-            [320000, 2250],
-            [325000, 2340],
-            [330000, 2430],
-            [335000, 2520],
-            [340000, 2610],
-            [345000, 2700],
-            [500000, 2750],
-            [505000, 2800],
-            [510000, 2850],
-            [515000, 2900],
-            [520000, 2950],
-            [525000, 3000],
-            [530000, 3050],
-            [535000, 3100],
-            [540000, 3150],
-        ],
-        self::FILING_HEAD_OF_HOUSEHOLD => [
+        self::WITHHOLDING_CODE_B => [
             [0, 0],
             [320000, 140],
             [328000, 280],
@@ -379,7 +255,7 @@ abstract class ConnecticutIncome extends BaseStateIncome
             [856000, 4840],
             [864000, 4920],
         ],
-        self::FILING_MARRIED => [
+        self::WITHHOLDING_CODE_C => [
             [0, 0],
             [400000, 180],
             [410000, 360],
@@ -421,49 +297,7 @@ abstract class ConnecticutIncome extends BaseStateIncome
             [1070000, 6200],
             [1080000, 6300],
         ],
-        self::FILING_MARRIED_FILING_JOINTLY_ONE_SPOUSE_WORKING => [
-            [0, 0],
-            [400000, 180],
-            [410000, 360],
-            [420000, 540],
-            [430000, 720],
-            [440000, 900],
-            [450000, 1080],
-            [460000, 1260],
-            [470000, 1440],
-            [480000, 1620],
-            [490000, 1800],
-            [500000, 1980],
-            [510000, 2160],
-            [520000, 2340],
-            [530000, 2520],
-            [540000, 2700],
-            [550000, 2880],
-            [560000, 3060],
-            [570000, 3240],
-            [580000, 3420],
-            [590000, 3600],
-            [600000, 3780],
-            [610000, 3960],
-            [620000, 4140],
-            [630000, 4320],
-            [640000, 4500],
-            [650000, 4680],
-            [660000, 4860],
-            [670000, 5040],
-            [680000, 5220],
-            [690000, 5400],
-            [1000000, 5500],
-            [1010000, 5600],
-            [1020000, 5700],
-            [1030000, 5800],
-            [1040000, 5900],
-            [1050000, 6000],
-            [1060000, 6100],
-            [1070000, 6200],
-            [1080000, 6300],
-        ],
-        self::FILING_SINGLE => [
+        self::WITHHOLDING_CODE_D => [
             [0, 0],
             [200000, 90],
             [205000, 180],
@@ -505,7 +339,7 @@ abstract class ConnecticutIncome extends BaseStateIncome
             [535000, 3100],
             [540000, 3150],
         ],
-        self::FILING_MARRIED_JOINTLY_COMBINED_INCOME_GREATER_THAN => [
+        self::WITHHOLDING_CODE_F => [
             [0, 0],
             [200000, 90],
             [205000, 180],
@@ -550,7 +384,7 @@ abstract class ConnecticutIncome extends BaseStateIncome
     ];
 
     const ANNUAL_GROSS_MULTIPLICATION_PERCENTAGE = [
-        self::FILING_MARRIED_FILING_SEPARATELY => [
+        self::WITHHOLDING_CODE_A => [
             [12000, .75],
             [15000, .70],
             [15500, .65],
@@ -580,37 +414,7 @@ abstract class ConnecticutIncome extends BaseStateIncome
             [52000, .01],
             [52500, .00],
         ],
-        self::FILING_MARRIED_FILING_JOINTLY_COMBINED_INCOME_LESS_THAN_OR_EQUAL_TO => [
-            [12000, .75],
-            [15000, .70],
-            [15500, .65],
-            [16000, .60],
-            [16500, .55],
-            [17000, .50],
-            [17500, .45],
-            [18000, .40],
-            [18500, .35],
-            [20000, .30],
-            [20500, .25],
-            [21000, .20],
-            [21500, .15],
-            [25000, .14],
-            [25500, .13],
-            [26000, .12],
-            [26500, .11],
-            [27000, .10],
-            [48000, .09],
-            [48500, .08],
-            [49000, .07],
-            [49500, .06],
-            [50000, .05],
-            [50500, .04],
-            [51000, .03],
-            [51500, .02],
-            [52000, .01],
-            [52500, .00],
-        ],
-        self::FILING_HEAD_OF_HOUSEHOLD => [
+        self::WITHHOLDING_CODE_B => [
             [19000, .75],
             [24000, .70],
             [24500, .65],
@@ -640,7 +444,7 @@ abstract class ConnecticutIncome extends BaseStateIncome
             [78000, .01],
             [78500, .00],
         ],
-        self::FILING_MARRIED => [
+        self::WITHHOLDING_CODE_C => [
             [24000, .75],
             [30000, .70],
             [30500, .65],
@@ -670,37 +474,7 @@ abstract class ConnecticutIncome extends BaseStateIncome
             [100000, .01],
             [100500, .00],
         ],
-        self::FILING_MARRIED_FILING_JOINTLY_ONE_SPOUSE_WORKING => [
-            [24000, .75],
-            [30000, .70],
-            [30500, .65],
-            [31000, .60],
-            [31500, .55],
-            [32000, .50],
-            [32500, .45],
-            [33000, .40],
-            [33500, .35],
-            [40000, .30],
-            [40500, .25],
-            [41000, .20],
-            [41500, .15],
-            [50000, .14],
-            [50500, .13],
-            [51000, .12],
-            [51500, .11],
-            [52000, .10],
-            [96000, .09],
-            [96500, .08],
-            [97000, .07],
-            [97500, .06],
-            [98000, .05],
-            [98500, .04],
-            [99000, .03],
-            [99500, .02],
-            [100000, .01],
-            [100500, .00],
-        ],
-        self::FILING_SINGLE => [
+        self::WITHHOLDING_CODE_F => [
             [15000, .75],
             [18800, .70],
             [19300, .65],
@@ -729,9 +503,6 @@ abstract class ConnecticutIncome extends BaseStateIncome
             [63500, .02],
             [64000, .01],
             [64500, .00],
-        ],
-        self::FILING_MARRIED_JOINTLY_COMBINED_INCOME_GREATER_THAN => [
-            [0, 0],
         ],
     ];
 

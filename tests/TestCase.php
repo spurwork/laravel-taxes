@@ -122,7 +122,7 @@ class TestCase extends BaseTestCase
             'additional_withholding' => 0,
             'reduced_withholding' => 0,
             'exempt' => false,
-            'filing_status' => ConnecticutIncome::FILING_SINGLE,
+            'filing_status' => ConnecticutIncome::WITHHOLDING_CODE_A,
         ], $this->user);
 
         GeorgiaIncomeTaxInformation::createForUser([
