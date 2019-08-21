@@ -1,5 +1,6 @@
 <?php
- use Appleton\Taxes\Countries\US\Oklahoma\OklahomaIncome\OklahomaIncome;
+
+use Appleton\Taxes\Countries\US\Oklahoma\OklahomaIncome\OklahomaIncome;
 use Appleton\Taxes\Countries\US\Oklahoma\OklahomaUnemployment\OklahomaUnemployment;
 use Appleton\Taxes\Models\TaxArea;
 use Illuminate\Database\Migrations\Migration;

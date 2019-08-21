@@ -77,6 +77,7 @@ class AlabamaIncome extends BaseAlabamaIncome
 
     public function __construct(AlabamaIncomeTaxInformation $tax_information, FederalIncome $federal_income, Payroll $payroll)
     {
+        dump($federal_income);
         parent::__construct($tax_information, $payroll);
         $this->federal_income_tax = $federal_income->getAmount();
         $this->tax_information = $tax_information;

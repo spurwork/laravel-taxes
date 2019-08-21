@@ -141,6 +141,11 @@ class TestCase extends BaseTestCase
             'exempt' => false,
         ], $this->user);
 
+        IowaIncomeTaxInformation::createForUser([
+            'allowances' => 0,
+            'exempt' => false,
+        ], $this->user);
+
         IndianaIncomeTaxInformation::createForUser([
             'personal_exemptions' => 0,
             'dependent_exemptions' => 0,
@@ -402,6 +407,7 @@ class TestCase extends BaseTestCase
             'us.indiana.wells' => [40.7778, -85.1894],
             'us.indiana.white' => [40.6766, -86.9824],
             'us.indiana.whitley' => [41.1136, -85.5200],
+            'us.iowa' => [41.8780, -93.0977],
             'us.kansas' => [39.0119, -98.4842],
             'us.kentucky' => [37.8393, -84.2700],
             'us.kentucky.adairville_city' => [36.6675425, -86.8519417],
