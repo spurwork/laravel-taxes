@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Collection;
 
 class IowaIncome extends BaseIowaIncome
 {
-    const TAX_RATE = 0.0495;
     const DEDUCTION_AMOUNT = 40;
     const ZERO_OR_ONE = 1690;
     const TWO_OR_MORE = 4160;

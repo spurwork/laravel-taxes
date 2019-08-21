@@ -43,20 +43,20 @@ class IowaIncomeTest extends TestCase
         // results
         return [
             // exempt, should be null
-            // '0' => [
-            //     'January 1, 2019 8am',
-            //     true,
-            //     0,
-            //     300,
-            //     null,
-            // ],
-            // '1' => [
-            //     'January 1, 2019 8am',
-            //     false,
-            //     0,
-            //     300,
-            //     7.47,
-            // ],
+            '0' => [
+                'January 1, 2019 8am',
+                true,
+                0,
+                300,
+                null,
+            ],
+            '1' => [
+                'January 1, 2019 8am',
+                false,
+                0,
+                300,
+                7.47,
+            ],
             '2' => [
                 'January 1, 2019 8am',
                 false,
