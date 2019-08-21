@@ -2,10 +2,10 @@
 
 namespace Appleton\Taxes\Countries\US\California\SanFranciscoPayrollEmployer;
 
-use Appleton\Taxes\Classes\BasePayrollState;
+use Appleton\Taxes\Classes\BasePayrollLiabilityLocal;
 use Illuminate\Support\Collection;
 
-abstract class SanFranciscoPayrollEmployer extends BasePayrollState
+abstract class SanFranciscoPayrollEmployer extends BasePayrollLiabilityLocal
 {
     abstract public function getStartAmount(): int;
 

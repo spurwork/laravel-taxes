@@ -2,11 +2,11 @@
 
 namespace Appleton\Taxes\Countries\US\California\SacramentoPayrollEmployer;
 
-use Appleton\Taxes\Classes\BasePayrollState;
+use Appleton\Taxes\Classes\BasePayrollLiabilityLocal;
 use Appleton\Taxes\Countries\US\California\SacramentoPayrollEmployer\SacramentoPayrollEmployer as BaseSacramentoPayrollEmployer;
 use Illuminate\Support\Collection;
 
-abstract class SacramentoPayrollEmployer extends BasePayrollState
+abstract class SacramentoPayrollEmployer extends BasePayrollLiabilityLocal
 {
     abstract public function getInitialTax(): float;
 
