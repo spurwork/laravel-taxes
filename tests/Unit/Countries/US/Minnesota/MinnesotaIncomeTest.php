@@ -87,10 +87,10 @@ class MinnesotaIncomeTest extends TestCase
             '5' => [
                 'January 1, 2019 8am',
                 false,
-                1,
+                0,
                 MinnesotaIncome::FILING_MARRIED,
                 2000,
-                110.29,
+                116.06,
             ],
         ];
     }
