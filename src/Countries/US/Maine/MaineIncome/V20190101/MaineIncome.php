@@ -72,9 +72,9 @@ class MaineIncome extends BaseMaineIncome
 
         if ($this->tax_information->filing_status === 'M' && $this->gross_wages <= 162950) {
             return 21550;
-        } elseif ($this->tax_information->filing_status === 'M' && $this->gross_wages > 162950 && $this->gross_wages <= 312950) {
+        } elseif ($this->tax_information->filing_status === 'M' && $this->gross_wages > 312950) {
             return 0;
-        } else {
+        } elseif ($this->tax_information->filing_status === 'M' && $this->gross_wages > 162950 && $this->gross_wages <= 312950) {
             return round(21550 * (312950 - $this->gross_wages) / 150000, 4);
         }
     }

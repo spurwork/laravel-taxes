@@ -109,6 +109,22 @@ class MaineIncomeTest extends TestCase
                 2000,
                 88,
             ],
+            '8' => [
+                'January 1, 2019 8am',
+                false,
+                MaineIncome::FILING_SINGLE,
+                2,
+                800,
+                27,
+            ],
+            '9' => [
+                'January 1, 2019 8am',
+                false,
+                MaineIncome::FILING_MARRIED,
+                2,
+                4500,
+                279,
+            ],
         ];
     }
 }
