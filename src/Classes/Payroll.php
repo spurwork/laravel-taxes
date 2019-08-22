@@ -71,10 +71,10 @@ class Payroll
         return $this->supplemental_earnings - $this->exempted_supplemental_earnings;
     }
 
-    public function getDaysWorked($governmental_unit_area = null)
+    public function getDaysWorked($tax_class, $governmental_unit_area = null)
     {
         if (is_callable($this->days_worked)) {
-            return ($this->days_worked)($governmental_unit_area);
+            return ($this->days_worked)($tax_class,$governmental_unit_area);
         }
 
         return $this->days_worked;
