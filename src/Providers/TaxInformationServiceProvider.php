@@ -22,6 +22,7 @@ class TaxInformationServiceProvider extends ServiceProvider
         \Appleton\Taxes\Models\Countries\US\Kansas\KansasIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\Kentucky\KentuckyIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\Louisiana\LouisianaIncomeTaxInformation::class,
+        \Appleton\Taxes\Models\Countries\US\Maine\MaineIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\Maryland\MarylandIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\Massachusetts\MassachusettsIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\Michigan\MichiganIncomeTaxInformation::class,

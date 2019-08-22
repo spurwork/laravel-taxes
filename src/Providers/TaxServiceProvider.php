@@ -413,6 +413,8 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\Kentucky\WurtlandCity\WurtlandCity::class,
         \Appleton\Taxes\Countries\US\Louisiana\LouisianaIncome\LouisianaIncome::class,
         \Appleton\Taxes\Countries\US\Louisiana\LouisianaUnemployment\LouisianaUnemployment::class,
+        \Appleton\Taxes\Countries\US\Maine\MaineIncome\MaineIncome::class,
+        \Appleton\Taxes\Countries\US\Maine\MaineUnemployment\MaineUnemployment::class,
         \Appleton\Taxes\Countries\US\Maryland\Allegany\Allegany::class,
         \Appleton\Taxes\Countries\US\Maryland\AnneArundel\AnneArundel::class,
         \Appleton\Taxes\Countries\US\Maryland\Baltimore\Baltimore::class,

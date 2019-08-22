@@ -8,6 +8,7 @@ use Appleton\Taxes\Countries\US\Connecticut\ConnecticutIncome\ConnecticutIncome;
 use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome;
 use Appleton\Taxes\Countries\US\Georgia\GeorgiaIncome\GeorgiaIncome;
 use Appleton\Taxes\Countries\US\Louisiana\LouisianaIncome\LouisianaIncome;
+use Appleton\Taxes\Countries\US\Maine\MaineIncome\MaineIncome;
 use Appleton\Taxes\Countries\US\Maryland\MarylandIncome\MarylandIncome;
 use Appleton\Taxes\Countries\US\Massachusetts\MassachusettsIncome\MassachusettsIncome;
 use Appleton\Taxes\Countries\US\Michigan\MichiganIncome\MichiganIncome;
@@ -31,6 +32,7 @@ use Appleton\Taxes\Models\Countries\US\Indiana\IndianaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Kansas\KansasIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Kentucky\KentuckyIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Louisiana\LouisianaIncomeTaxInformation;
+use Appleton\Taxes\Models\Countries\US\Maine\MaineIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Maryland\MarylandIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Massachusetts\MassachusettsIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Michigan\MichiganIncomeTaxInformation;
@@ -162,6 +164,12 @@ class TestCase extends BaseTestCase
             'dependents' => 0,
             'exemptions' => 0,
             'filing_status' => LouisianaIncome::FILING_SINGLE,
+        ], $this->user);
+
+        MaineIncomeTaxInformation::createForUser([
+            'allowances' => 0,
+            'filing_status' => MaineIncome::FILING_SINGLE,
+            'exempt' => false,
         ], $this->user);
 
         MarylandIncomeTaxInformation::createForUser([
@@ -640,8 +648,8 @@ class TestCase extends BaseTestCase
             'us.kentucky.wolfe_county' => [37.7550869, -83.4643551],
             'us.kentucky.woodford_county' => [38.0721662, -84.7315563],
             'us.kentucky.wurtland_city' => [38.5503577, -82.7779437],
-            'us.massachusetts' => [42.4072, -71.3824],
             'us.louisiana' => [30.9843, -91.9623],
+            'us.maine' => [45.2538, -69.4455],
             'us.maryland' => [38.9784, -76.4922],
             'us.maryland.allegany' => [39.6255, -78.6115],
             'us.maryland.annearundel' => [38.9530, -76.5488],
@@ -667,6 +675,7 @@ class TestCase extends BaseTestCase
             'us.maryland.washington' => [39.6418, -77.7200],
             'us.maryland.wicomico' => [38.3942, -75.6674],
             'us.maryland.worcester' => [38.1584, -75.4345],
+            'us.massachusetts' => [42.4072, -71.3824],
             'us.michigan' => [42.7325, -84.5555],
             'us.mississippi' => [32.3547, -89.3985],
             'us.nevada' => [39.1641, -119.7661],

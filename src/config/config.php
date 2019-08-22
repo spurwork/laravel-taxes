@@ -59,6 +59,10 @@ return [
                 'louisiana_income_tax_information' => env('TAXES_LOUISIANA_INCOME_TAX_INFORMATION', 'louisiana_income_tax_information'),
             ],
 
+            'maine' => [
+                'maine_income_tax_information' => env('TAXES_MAINE_INCOME_TAX_INFORMATION', 'maine_income_tax_information'),
+            ],
+
             'maryland' => [
                 'maryland_income_tax_information' => env('TAXES_MARYLAND_INCOME_TAX_INFORMATION', 'maryland_income_tax_information'),
             ],
@@ -154,6 +158,10 @@ return [
 
             'louisiana' => [
                 'unemployment' => env('TAXES_LOUISIANA_UNEMPLOYMENT_TAX_RATE', 0.03),
+            ],
+
+            'maine' => [
+                'unemployment' => env('TAXES_MAINE_UNEMPLOYMENT_TAX_RATE', 0.0189),
             ],
 
             'maryland' => [
