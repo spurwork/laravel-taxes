@@ -51,6 +51,10 @@ return [
                 'georgia_income_tax_information' => env('TAXES_GEORGIA_INCOME_TAX_INFORMATION', 'georgia_income_tax_information'),
             ],
 
+            'idaho' => [
+                'idaho_income_tax_information' => env('TAXES_IDAHO_INCOME_TAX_INFORMATION', 'idaho_income_tax_information'),
+            ],
+
             'kansas' => [
                 'kansas_income_tax_information' => env('TAXES_KANSAS_INCOME_TAX_INFORMATION', 'kansas_income_tax_information'),
             ],
@@ -146,6 +150,10 @@ return [
 
             'georgia' => [
                 'unemployment' => env('TAXES_GEORGIA_UNEMPLOYMENT_TAX_RATE', 0.027),
+            ],
+
+            'idaho' => [
+                'unemployment' => env('TAXES_IDAHO_UNEMPLOYMENT_TAX_RATE', 0.01),
             ],
 
             'kansas' => [
