@@ -9,12 +9,10 @@ abstract class MinnesotaIncome extends BaseStateIncome
 {
     const FILING_SINGLE = 'S';
     const FILING_MARRIED = 'M';
-    const FILING_MARRIED_BUT_WITHHOLD_AT_HIGHER_SINGLE_RATE = 'R';
 
     const FILING_STATUSES = [
         self::FILING_SINGLE => 'FILING_SINGLE',
         self::FILING_MARRIED => 'FILING_MARRIED',
-        self::FILING_MARRIED => 'FILING_MARRIED_BUT_WITHHOLD_AT_HIGHER_SINGLE_RATE',
     ];
 
     public function __construct(MinnesotaIncomeTaxInformation $tax_information, Payroll $payroll)
