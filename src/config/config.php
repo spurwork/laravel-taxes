@@ -67,6 +67,10 @@ return [
                 'michigan_income_tax_information' => env('TAXES_MICHIGAN_INCOME_TAX_INFORMATION', 'michigan_income_tax_information'),
             ],
 
+            'minnesota' => [
+                'minnesota_income_tax_information' => env('TAXES_MINNESOTA_INCOME_TAX_INFORMATION', 'minnesota_income_tax_information'),
+            ],
+
             'mississippi' => [
                 'mississippi_income_tax_information' => env('TAXES_MISSISSIPPI_INCOME_TAX_INFORMATION', 'mississippi_income_tax_information'),
             ],
@@ -158,6 +162,10 @@ return [
 
             'maryland' => [
                 'unemployment' => env('TAXES_MARYLAND_UNEMPLOYMENT_TAX_RATE', 0.026),
+            ],
+
+            'minnesota' => [
+                'unemployment' => env('TAXES_MINNESOTA_UNEMPLOYMENT_TAX_RATE', 0.01),
             ],
 
             'mississippi' => [
