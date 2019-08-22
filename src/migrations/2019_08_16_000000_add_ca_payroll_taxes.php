@@ -23,7 +23,7 @@ class AddCaPayrollTaxes extends Migration
     {
         foreach (self::CITIES as $name => $data) {
             $tax_id = DB::table('taxes')->insertGetId([
-                'name' => $name.' Payroll Tax',
+                'name' => $name.' California Payroll Tax',
                 'class' => $data['class'],
             ]);
 

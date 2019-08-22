@@ -8,7 +8,7 @@ use Illuminate\Support\Collection;
 
 abstract class SacramentoPayrollEmployer extends BasePayrollLiabilityLocal
 {
-    abstract public function getInitialTax(): float;
+    abstract public function getInitialTax(): int;
 
     abstract public function getMaxLiability(): int;
 
@@ -20,17 +20,21 @@ abstract class SacramentoPayrollEmployer extends BasePayrollLiabilityLocal
     {
         $ytd_liabilities = $this->company_payroll->getYtdLiabilities(BaseSacramentoPayrollEmployer::class);
         if ($ytd_liabilities > $this->getMaxLiability()) {
-            return 0.0;
+            return 0;
         }
 
         $wages = $this->company_payroll->getWages($tax_areas->first()->workGovernmentalUnitArea);
-        $ytd_wages = $this->company_payroll->getYtdWages($tax_areas->first()->workGovernmentalUnitArea);
-        if ($ytd_wages === 0 && $ytd_wages + $wages < $this->getStartAmount()) {
-            return $this->getInitialTax();
+        if($wages === 0) {
+            return 0;
         }
 
+        $ytd_wages = $this->company_payroll->getYtdWages($tax_areas->first()->workGovernmentalUnitArea);
         if ($ytd_wages + $wages < $this->getStartAmount()) {
-            return 0.0;
+            if($ytd_wages === 0) {
+                return $this->getInitialTax();
+            }
+
+            return 0;
         }
 
         $applicable_wages = $ytd_wages > $this->getStartAmount()

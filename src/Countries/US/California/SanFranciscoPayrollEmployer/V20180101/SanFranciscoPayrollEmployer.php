@@ -1,21 +1,24 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\California\SanFranciscoPayrollEmployer\V20190101;
+namespace Appleton\Taxes\Countries\US\California\SanFranciscoPayrollEmployer\V20180101;
 
 use Appleton\Taxes\Countries\US\California\SanFranciscoPayrollEmployer\SanFranciscoPayrollEmployer as BaseSanFranciscoPayrollEmployer;
+use Illuminate\Support\Collection;
 
 class SanFranciscoPayrollEmployer extends BaseSanFranciscoPayrollEmployer
 {
-    private const START_AMOUNT = 3000000;
-    private const TAX_AMOUNT = 0.0038;
+    public function compute(Collection $tax_areas): int
+    {
+        return 0;
+    }
 
     public function getStartAmount(): int
     {
-        return self::START_AMOUNT;
+        return 0;
     }
 
     public function getTaxAmount(): float
     {
-        return self::TAX_AMOUNT;
+        return 0.0;
     }
 }

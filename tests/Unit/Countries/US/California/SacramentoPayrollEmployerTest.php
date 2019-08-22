@@ -44,7 +44,8 @@ class SacramentoPayrollEmployerTest extends TestCase
     public function dataProvider(): array
     {
         return [
-            'no ytd wages' => [1000, 0, 0, 30, 1000],
+            'no ytd wages' => [1000, 0, 0, 3000, 1000],
+            'no wages' => [0, 0, 0, null, null],
             'with ytd wages under start' => [100, 999899, 0, null, null],
             'with ytd wages equal start' => [100, 999900, 0, null, null],
             'with ytd wages over start' => [100, 1000000, 0, 1, 100],

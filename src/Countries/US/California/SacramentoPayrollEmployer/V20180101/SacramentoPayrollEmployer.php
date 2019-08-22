@@ -1,33 +1,34 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\California\SacramentoPayrollEmployer\V20190101;
+namespace Appleton\Taxes\Countries\US\California\SacramentoPayrollEmployer\V20180101;
 
 use Appleton\Taxes\Countries\US\California\SacramentoPayrollEmployer\SacramentoPayrollEmployer as BaseSacramentoPayrollEmployer;
+use Illuminate\Support\Collection;
 
 class SacramentoPayrollEmployer extends BaseSacramentoPayrollEmployer
 {
-    private const INITIAL_TAX = 3000;
-    private const START_AMOUNT = 1000000;
-    private const MAX_LIABILITY = 500000;
-    private const TAX_AMOUNT = 0.0004;
+    public function compute(Collection $tax_areas): int
+    {
+        return 0;
+    }
 
     public function getInitialTax(): int
     {
-        return self::INITIAL_TAX;
+        return 0;
     }
 
     public function getMaxLiability(): int
     {
-        return self::MAX_LIABILITY;
+        return 0;
     }
 
     public function getStartAmount(): int
     {
-        return self::START_AMOUNT;
+        return 0;
     }
 
     public function getTaxAmount(): float
     {
-        return self::TAX_AMOUNT;
+        return 0;
     }
 }
