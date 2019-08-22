@@ -193,7 +193,9 @@ class Taxes
 
         foreach ($this->additional_taxes as $additional_tax) {
             $tax = Tax::where('class', $additional_tax)->first();
-            if (is_null($tax)) continue;
+            if (is_null($tax)) {
+                continue;
+            }
             $this->taxes->push($tax);
         }
     }

@@ -43,6 +43,10 @@ return [
                 'colorado_income_tax_information' => env('TAXES_COLORADO_INCOME_TAX_INFORMATION', 'colorado_income_tax_information'),
             ],
 
+            'connecticut' => [
+                'connecticut_income_tax_information' => env('TAXES_CONNECTICUT_INCOME_TAX_INFORMATION', 'connecticut_income_tax_information'),
+            ],
+
             'georgia' => [
                 'georgia_income_tax_information' => env('TAXES_GEORGIA_INCOME_TAX_INFORMATION', 'georgia_income_tax_information'),
             ],
@@ -91,6 +95,10 @@ return [
                 'pennsylvania_income_tax_information' => env('TAXES_PENNSYLVANIA_INCOME_TAX_INFORMATION', 'pennsylvania_income_tax_information'),
             ],
 
+            'south_carolina' => [
+                'south_carolina_income_tax_information' => env('TAXES_SOUTH_CAROLINA_INCOME_TAX_INFORMATION', 'south_carolina_income_tax_information'),
+            ],
+
             'washingtondc' => [
                 'washingtondc_income_tax_information' => env('TAXES_WASHINGTONDC_INCOME_TAX_INFORMATION', 'washingtondc_income_tax_information'),
             ],
@@ -120,12 +128,20 @@ return [
                 'unemployment' => env('TAXES_ALABAMA_UNEMPLOYMENT_TAX_RATE', 0.027),
             ],
 
+            'alaska' => [
+                'unemployment' => env('TAXES_ALASKA_UNEMPLOYMENT_TAX_RATE', 0.0132),
+            ],
+
             'california' => [
                 'unemployment' => env('TAXES_CALIFORNIA_UNEMPLOYMENT_TAX_RATE', 0.034),
             ],
 
             'colorado' => [
                 'unemployment' => env('TAXES_COLORADO_UNEMPLOYMENT_TAX_RATE', 0.017),
+            ],
+
+            'connecticut' => [
+                'unemployment' => env('TAXES_CONNECTICUT_UNEMPLOYMENT_TAX_RATE', 0.034),
             ],
 
             'georgia' => [
@@ -174,6 +190,14 @@ return [
 
             'pennsylvania' => [
                 'unemployment' => env('TAXES_PENNSYLVANIA_UNEMPLOYMENT_TAX_RATE', 0.03689),
+            ],
+
+            'south_carolina' => [
+                'unemployment' => env('TAXES_SOUTH_CAROLINA_UNEMPLOYMENT_TAX_RATE', 0.0087),
+            ],
+
+            'south_dakota' => [
+                'unemployment' => env('TAXES_SOUTH_DAKOTA_UNEMPLOYMENT_TAX_RATE', 0.012),
             ],
 
             'washingtondc' => [
