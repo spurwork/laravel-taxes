@@ -12,6 +12,7 @@ use Appleton\Taxes\Countries\US\Maryland\MarylandIncome\MarylandIncome;
 use Appleton\Taxes\Countries\US\Massachusetts\MassachusettsIncome\MassachusettsIncome;
 use Appleton\Taxes\Countries\US\Michigan\MichiganIncome\MichiganIncome;
 use Appleton\Taxes\Countries\US\Mississippi\MississippiIncome\MississippiIncome;
+use Appleton\Taxes\Countries\US\Nebraska\NebraskaIncome\NebraskaIncome;
 use Appleton\Taxes\Countries\US\NewJersey\NewJerseyIncome\NewJerseyIncome;
 use Appleton\Taxes\Countries\US\NewMexico\NewMexicoIncome\NewMexicoIncome;
 use Appleton\Taxes\Countries\US\NewYork\NewYorkIncome\NewYorkIncome;
@@ -35,6 +36,7 @@ use Appleton\Taxes\Models\Countries\US\Maryland\MarylandIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Massachusetts\MassachusettsIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Michigan\MichiganIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Mississippi\MississippiIncomeTaxInformation;
+use Appleton\Taxes\Models\Countries\US\Nebraska\NebraskaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\NewJersey\NewJerseyIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\NewMexico\NewMexicoIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\NewYork\NewYorkIncomeTaxInformation;
@@ -203,6 +205,12 @@ class TestCase extends BaseTestCase
             'additional_withholding' => 0,
             'exemptions' => 0,
             'filing_status' => NewMexicoIncome::FILING_SINGLE,
+        ], $this->user);
+
+        NebraskaIncomeTaxInformation::createForUser([
+            'allowances' => 0,
+            'exempt' => false,
+            'filing_status' => NebraskaIncome::FILING_SINGLE,
         ], $this->user);
 
         NewYorkIncomeTaxInformation::createForUser([
@@ -669,6 +677,7 @@ class TestCase extends BaseTestCase
             'us.maryland.worcester' => [38.1584, -75.4345],
             'us.michigan' => [42.7325, -84.5555],
             'us.mississippi' => [32.3547, -89.3985],
+            'us.nebraska' => [41.4925, -99.9018],
             'us.nevada' => [39.1641, -119.7661],
             'us.new_jersey' => [40.2206, -74.7597],
             'us.new_jersey.newark' => [40.7357, -74.1724],

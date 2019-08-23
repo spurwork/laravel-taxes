@@ -1,0 +1,62 @@
+<?php
+namespace Appleton\Taxes\Countries\US\Nebraska\NebraskaIncome\V20190101;
+
+use Appleton\Taxes\Classes\Payroll;
+use Appleton\Taxes\Countries\US\Nebraska\NebraskaIncome\NebraskaIncome as BaseNebraskaIncome;
+use Appleton\Taxes\Models\Countries\US\Nebraska\NebraskaIncomeTaxInformation;
+use Illuminate\Database\Eloquent\Collection;
+
+class NebraskaIncome extends BaseNebraskaIncome
+{
+    const EXEMPTION_ALLOWANCE = 1960;
+
+    const SINGLE_TAX_WITHHOLDING_BRACKET = [
+        [0, .0, 0],
+        [2975, .0226, 0],
+        [5480, .0322, 56.61],
+        [17790, .0491, 452.99],
+        [25780, .062, 845.3],
+        [32730, .0659, 1276.2],
+        [61470, .0695, 3170.17],
+    ];
+
+    const MARRIED_TAX_WITHHOLDING_BRACKET = [
+        [0, .0, 0],
+        [7100, .0226, 0],
+        [10610, .0322, 79.33],
+        [26420, .0491, 588.41],
+        [41100, .062, 1309.2],
+        [50990, .0659, 1922.38],
+        [67620, .0695, 3018.3],
+    ];
+
+    public function getTaxBrackets()
+    {
+        if ($this->tax_information->filing_status === 'S' || $this->tax_information->filing_status === 'H') {
+            return self::SINGLE_TAX_WITHHOLDING_BRACKET;
+        }
+
+        return self::MARRIED_TAX_WITHHOLDING_BRACKET;
+    }
+
+    public function compute(Collection $tax_areas)
+    {
+        if ($this->isUserClaimingExemption()) {
+            return 0;
+        }
+
+        $this->tax_total = $this->payroll->withholdTax($this->getTaxAmountFromTaxBrackets($this->getGrossWages() - $this->getExemptionAllowances(), $this->getTaxBrackets()) / $this->payroll->pay_periods);
+
+        return round($this->tax_total, 2);
+    }
+
+    public function getGrossWages()
+    {
+        return $this->getAdjustedEarnings() * $this->payroll->pay_periods;
+    }
+
+    public function getExemptionAllowances()
+    {
+        return $this->tax_information->allowances * self::EXEMPTION_ALLOWANCE;
+    }
+}
