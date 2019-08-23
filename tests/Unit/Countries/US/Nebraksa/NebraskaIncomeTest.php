@@ -117,6 +117,38 @@ class NebraskaIncomeTest extends TestCase
                 3000,
                 168.31,
             ],
+            '9' => [
+                'January 1, 2019 8am',
+                false,
+                NebraskaIncome::FILING_HEAD_OF_HOUSEHOLD,
+                0,
+                300,
+                7.36,
+            ],
+            '10' => [
+                'January 1, 2019 8am',
+                false,
+                NebraskaIncome::FILING_HEAD_OF_HOUSEHOLD,
+                1,
+                700,
+                26.71,
+            ],
+            '11' => [
+                'January 1, 2019 8am',
+                false,
+                NebraskaIncome::FILING_HEAD_OF_HOUSEHOLD,
+                2,
+                1500,
+                77.82,
+            ],
+            '12' => [
+                'January 1, 2019 8am',
+                false,
+                NebraskaIncome::FILING_HEAD_OF_HOUSEHOLD,
+                3,
+                3000,
+                179.45,
+            ],
         ];
     }
 }
