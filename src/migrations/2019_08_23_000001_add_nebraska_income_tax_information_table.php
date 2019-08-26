@@ -15,6 +15,7 @@ class AddNebraskaIncomeTaxInformationTable extends Migration
             $table->increments('id');
             $table->integer('allowances')->default(0);
             $table->string('filing_status')->nullable();
+            $table->boolean('lower_withholding_than_lb223')->default(false);
             $table->boolean('exempt')->default(false);
         });
 

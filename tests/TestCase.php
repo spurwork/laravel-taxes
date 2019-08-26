@@ -194,6 +194,13 @@ class TestCase extends BaseTestCase
             'exempt' => false,
         ], $this->user);
 
+        NebraskaIncomeTaxInformation::createForUser([
+            'allowances' => 0,
+            'exempt' => false,
+            'lower_withholding_than_lb223' => false,
+            'filing_status' => NebraskaIncome::FILING_SINGLE,
+        ], $this->user);
+
         NewJerseyIncomeTaxInformation::createForUser([
             'additional_withholding' => 0,
             'exemptions' => 0,
@@ -205,12 +212,6 @@ class TestCase extends BaseTestCase
             'additional_withholding' => 0,
             'exemptions' => 0,
             'filing_status' => NewMexicoIncome::FILING_SINGLE,
-        ], $this->user);
-
-        NebraskaIncomeTaxInformation::createForUser([
-            'allowances' => 0,
-            'exempt' => false,
-            'filing_status' => NebraskaIncome::FILING_SINGLE,
         ], $this->user);
 
         NewYorkIncomeTaxInformation::createForUser([

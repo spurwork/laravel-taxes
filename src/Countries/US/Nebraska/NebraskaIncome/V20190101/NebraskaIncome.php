@@ -45,8 +45,20 @@ class NebraskaIncome extends BaseNebraskaIncome
             return 0;
         }
 
-        $this->tax_total = $this->payroll->withholdTax($this->getTaxAmountFromTaxBrackets($this->getGrossWages() - $this->getExemptionAllowances(), $this->getTaxBrackets()) / $this->payroll->pay_periods);
+        $this->tax_total = ($this->getTaxAmountFromTaxBrackets($this->getGrossWages() - $this->getExemptionAllowances(), $this->getTaxBrackets()) / $this->payroll->pay_periods);
 
+        if ($this->tax_information->lower_withholding_than_lb223 || ($this->tax_information->filing_status === 'S' && $this->tax_information->allowances > 1) || $this->tax_information->filing_status === 'M' && $this->tax_information->allowances > 2) {
+            $exemptions = 0;
+            if ($this->tax_information->filing_status === 'S' || $this->tax_information->filing_status === 'H') {
+                $exemption = self::EXEMPTION_ALLOWANCE;
+            } else {
+                $exemption = self::EXEMPTION_ALLOWANCE * 2;
+            }
+
+            $this->tax_total = max($this->tax_total, (($this->getTaxAmountFromTaxBrackets($this->getGrossWages() - $exemptions, $this->getTaxBrackets()) / $this->payroll->pay_periods) * .5));
+        }
+
+        $this->payroll->withholdTax($this->tax_total);
         return round($this->tax_total, 2);
     }
 

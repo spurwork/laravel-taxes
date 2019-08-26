@@ -12,12 +12,13 @@ class NebraskaIncomeTest extends TestCase
     /**
      * @dataProvider provideTestData
      */
-    public function testNebraskaIncome($date, $exempt, $filing_status, $allowances, $earnings, $result)
+    public function testNebraskaIncome($date, $exempt, $lower_withholding_than_lb223, $filing_status, $allowances, $earnings, $result)
     {
         NebraskaIncomeTaxInformation::forUser($this->user)->update([
             'allowances' => $allowances,
             'exempt' => $exempt,
             'filing_status' => $filing_status,
+            'lower_withholding_than_lb223' => $lower_withholding_than_lb223,
         ]);
 
         Carbon::setTestNow(
@@ -48,6 +49,7 @@ class NebraskaIncomeTest extends TestCase
             '0' => [
                 'January 1, 2019 8am',
                 true,
+                false,
                 NebraskaIncome::FILING_SINGLE,
                 0,
                 300,
@@ -55,6 +57,7 @@ class NebraskaIncomeTest extends TestCase
             ],
             '1' => [
                 'January 1, 2019 8am',
+                false,
                 false,
                 NebraskaIncome::FILING_SINGLE,
                 0,
@@ -64,6 +67,7 @@ class NebraskaIncomeTest extends TestCase
             '2' => [
                 'January 1, 2019 8am',
                 false,
+                false,
                 NebraskaIncome::FILING_SINGLE,
                 1,
                 700,
@@ -71,6 +75,7 @@ class NebraskaIncomeTest extends TestCase
             ],
             '3' => [
                 'January 1, 2019 8am',
+                false,
                 false,
                 NebraskaIncome::FILING_SINGLE,
                 2,
@@ -80,6 +85,7 @@ class NebraskaIncomeTest extends TestCase
             '4' => [
                 'January 1, 2019 8am',
                 false,
+                false,
                 NebraskaIncome::FILING_SINGLE,
                 3,
                 3000,
@@ -87,6 +93,7 @@ class NebraskaIncomeTest extends TestCase
             ],
             '5' => [
                 'January 1, 2019 8am',
+                false,
                 false,
                 NebraskaIncome::FILING_MARRIED,
                 2,
@@ -96,6 +103,7 @@ class NebraskaIncomeTest extends TestCase
             '6' => [
                 'January 1, 2019 8am',
                 false,
+                false,
                 NebraskaIncome::FILING_MARRIED,
                 2,
                 700,
@@ -103,6 +111,7 @@ class NebraskaIncomeTest extends TestCase
             ],
             '7' => [
                 'January 1, 2019 8am',
+                false,
                 false,
                 NebraskaIncome::FILING_MARRIED,
                 11,
@@ -112,6 +121,7 @@ class NebraskaIncomeTest extends TestCase
             '8' => [
                 'January 1, 2019 8am',
                 false,
+                false,
                 NebraskaIncome::FILING_MARRIED,
                 3,
                 3000,
@@ -119,6 +129,7 @@ class NebraskaIncomeTest extends TestCase
             ],
             '9' => [
                 'January 1, 2019 8am',
+                false,
                 false,
                 NebraskaIncome::FILING_HEAD_OF_HOUSEHOLD,
                 0,
@@ -128,6 +139,7 @@ class NebraskaIncomeTest extends TestCase
             '10' => [
                 'January 1, 2019 8am',
                 false,
+                false,
                 NebraskaIncome::FILING_HEAD_OF_HOUSEHOLD,
                 1,
                 700,
@@ -135,6 +147,7 @@ class NebraskaIncomeTest extends TestCase
             ],
             '11' => [
                 'January 1, 2019 8am',
+                false,
                 false,
                 NebraskaIncome::FILING_HEAD_OF_HOUSEHOLD,
                 2,
@@ -144,6 +157,115 @@ class NebraskaIncomeTest extends TestCase
             '12' => [
                 'January 1, 2019 8am',
                 false,
+                false,
+                NebraskaIncome::FILING_HEAD_OF_HOUSEHOLD,
+                3,
+                3000,
+                179.45,
+            ],
+            '13' => [
+                'January 1, 2019 8am',
+                false,
+                true,
+                NebraskaIncome::FILING_SINGLE,
+                0,
+                300,
+                7.36,
+            ],
+            '14' => [
+                'January 1, 2019 8am',
+                false,
+                true,
+                NebraskaIncome::FILING_SINGLE,
+                1,
+                700,
+                26.71,
+            ],
+            '15' => [
+                'January 1, 2019 8am',
+                false,
+                true,
+                NebraskaIncome::FILING_SINGLE,
+                2,
+                1500,
+                77.82,
+            ],
+            '16' => [
+                'January 1, 2019 8am',
+                false,
+                true,
+                NebraskaIncome::FILING_SINGLE,
+                3,
+                3000,
+                179.45,
+            ],
+            '17' => [
+                'January 1, 2019 8am',
+                false,
+                true,
+                NebraskaIncome::FILING_MARRIED,
+                2,
+                300,
+                2.31,
+            ],
+            '18' => [
+                'January 1, 2019 8am',
+                false,
+                true,
+                NebraskaIncome::FILING_MARRIED,
+                2,
+                700,
+                17.04,
+            ],
+            '19' => [
+                'January 1, 2019 8am',
+                false,
+                true,
+                NebraskaIncome::FILING_MARRIED,
+                11,
+                1500,
+                43.88,
+            ],
+            '20' => [
+                'January 1, 2019 8am',
+                false,
+                true,
+                NebraskaIncome::FILING_MARRIED,
+                3,
+                3000,
+                168.31,
+            ],
+            '21' => [
+                'January 1, 2019 8am',
+                false,
+                true,
+                NebraskaIncome::FILING_HEAD_OF_HOUSEHOLD,
+                0,
+                300,
+                7.36,
+            ],
+            '22' => [
+                'January 1, 2019 8am',
+                false,
+                true,
+                NebraskaIncome::FILING_HEAD_OF_HOUSEHOLD,
+                1,
+                700,
+                26.71,
+            ],
+            '23' => [
+                'January 1, 2019 8am',
+                false,
+                true,
+                NebraskaIncome::FILING_HEAD_OF_HOUSEHOLD,
+                2,
+                1500,
+                77.82,
+            ],
+            '24' => [
+                'January 1, 2019 8am',
+                false,
+                true,
                 NebraskaIncome::FILING_HEAD_OF_HOUSEHOLD,
                 3,
                 3000,
