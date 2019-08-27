@@ -448,6 +448,8 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\Medicare\MedicareEmployer::class,
         \Appleton\Taxes\Countries\US\Michigan\MichiganIncome\MichiganIncome::class,
         \Appleton\Taxes\Countries\US\Michigan\MichiganUnemployment\MichiganUnemployment::class,
+        \Appleton\Taxes\Countries\US\Minnesota\MinnesotaIncome\MinnesotaIncome::class,
+        \Appleton\Taxes\Countries\US\Minnesota\MinnesotaUnemployment\MinnesotaUnemployment::class,
         \Appleton\Taxes\Countries\US\Mississippi\MississippiIncome\MississippiIncome::class,
         \Appleton\Taxes\Countries\US\Mississippi\MississippiUnemployment\MississippiUnemployment::class,
         \Appleton\Taxes\Countries\US\Nevada\NevadaUnemployment\NevadaUnemployment::class,
