@@ -79,6 +79,10 @@ return [
                 'mississippi_income_tax_information' => env('TAXES_MISSISSIPPI_INCOME_TAX_INFORMATION', 'mississippi_income_tax_information'),
             ],
 
+            'montana' => [
+                'montana_income_tax_information' => env('TAXES_MONTANA_INCOME_TAX_INFORMATION', 'montana_income_tax_information'),
+            ],
+
             'new_jersey' => [
                 'new_jersey_income_tax_information' => env('TAXES_NEW_JERSEY_INCOME_TAX_INFORMATION', 'new_jersey_income_tax_information'),
             ],
@@ -178,6 +182,10 @@ return [
 
             'mississippi' => [
                 'unemployment' => env('TAXES_MISSISSIPPI_UNEMPLOYMENT_TAX_RATE', 0.012),
+            ],
+
+            'montana' => [
+                'unemployment' => env('TAXES_MONTANA_UNEMPLOYMENT_TAX_RATE', 0.0258),
             ],
 
             'new_jersey' => [

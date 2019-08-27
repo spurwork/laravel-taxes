@@ -454,6 +454,8 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\Minnesota\MinnesotaUnemployment\MinnesotaUnemployment::class,
         \Appleton\Taxes\Countries\US\Mississippi\MississippiIncome\MississippiIncome::class,
         \Appleton\Taxes\Countries\US\Mississippi\MississippiUnemployment\MississippiUnemployment::class,
+        \Appleton\Taxes\Countries\US\Montana\MontanaIncome\MontanaIncome::class,
+        \Appleton\Taxes\Countries\US\Montana\MontanaUnemployment\MontanaUnemployment::class,
         \Appleton\Taxes\Countries\US\Nevada\NevadaUnemployment\NevadaUnemployment::class,
         \Appleton\Taxes\Countries\US\NewJersey\NewarkPayroll\NewarkPayroll::class,
         \Appleton\Taxes\Countries\US\NewJersey\NewarkPayroll\NewarkPayroll::class,
