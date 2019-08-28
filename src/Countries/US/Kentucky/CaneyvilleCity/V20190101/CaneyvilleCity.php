@@ -9,7 +9,13 @@ class CaneyvilleCity extends BaseCaneyvilleCity
 {
     public function compute(Collection $tax_areas)
     {
-        $tax_amount = ($this->payroll->getDaysWorked(get_parent_class($this), $tax_areas->first()->workGovernmentalUnitArea) > 3) ? 4 : 2;
+        $days_worked = $this->payroll->getDaysWorked(get_parent_class($this), $tax_areas->first()->workGovernmentalUnitArea);
+
+        if (!$days_worked) {
+            return 0.00;
+        }
+
+        $tax_amount = ($days_worked > 3) ? 4 : 2;
 
         return round($this->payroll->withholdTax($tax_amount), 2);
     }

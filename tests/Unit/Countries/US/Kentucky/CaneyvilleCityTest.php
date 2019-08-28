@@ -18,6 +18,17 @@ class CaneyvilleCityTest extends TestCase
             $taxes->setUser($this->user);
             $taxes->setEarnings(300);
             $taxes->setPayPeriods(52);
+            $taxes->setDaysWorked(0);
+        });
+
+        $this->assertNull($results->getTax(CaneyvilleCity::class));
+
+        $results = $this->taxes->calculate(function ($taxes) {
+            $taxes->setHomeLocation($this->getLocation('us.kentucky.caneyville_city'));
+            $taxes->setWorkLocation($this->getLocation('us.kentucky.caneyville_city'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings(300);
+            $taxes->setPayPeriods(52);
             $taxes->setDaysWorked(3);
         });
 
