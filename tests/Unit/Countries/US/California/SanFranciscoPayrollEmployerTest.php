@@ -34,20 +34,21 @@ class SanFranciscoPayrollEmployerTest extends TestCase
      * @type array {
      * @type int $wages
      * @type int $ytd_wages
-     * @type ?float $result
+     * @type ?float $expected_amount
+     * @type ?int $expected_wages
      *     }
      * }
      */
     public function dataProvider(): array
     {
         return [
-            'with ytd wages under start' => [100, 2999899, null, null],
-            'with ytd wages equal start' => [100, 2999900, null, null],
-            'with ytd wages over start' => [100, 2999999, 1, 100],
-            'wages under start' => [2999900, 0, null, null, 2999900],
-            'wages equal start' => [3000000, 0, null, null, 3000000],
-            'wages over start' => [3000100, 0, 1, 3000100],
-            'combined wages' => [2000000, 2000000, 3800, 2000000],
+            'with ytd wages under start' => [100, 29999899, null, null],
+            'with ytd wages equal start' => [100, 29999900, null, null],
+            'with ytd wages over start' => [100, 29999999, 1, 100],
+            'wages under start' => [29999000, 0, null, null, 29999000],
+            'wages equal start' => [30000000, 0, null, null, 30000000],
+            'wages over start' => [30000100, 0, 1, 30000100],
+            'combined wages' => [20000000, 20000000, 38000, 20000000],
         ];
     }
 }

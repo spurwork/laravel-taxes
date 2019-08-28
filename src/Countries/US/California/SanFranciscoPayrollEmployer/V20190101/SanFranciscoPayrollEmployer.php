@@ -6,7 +6,7 @@ use Appleton\Taxes\Countries\US\California\SanFranciscoPayrollEmployer\SanFranci
 
 class SanFranciscoPayrollEmployer extends BaseSanFranciscoPayrollEmployer
 {
-    private const START_AMOUNT = 3000000;
+    private const START_AMOUNT = 30000000;
     private const TAX_AMOUNT = 0.0038;
 
     public function getStartAmount(): int
