@@ -1,11 +1,11 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\California\SacramentoPayrollEmployer\V20180101;
+namespace Appleton\Taxes\Countries\US\California\SacramentoBusinessOperationsEmployer\V20180101;
 
-use Appleton\Taxes\Countries\US\California\SacramentoPayrollEmployer\SacramentoPayrollEmployer as BaseSacramentoPayrollEmployer;
+use Appleton\Taxes\Countries\US\California\SacramentoBusinessOperationsEmployer\SacramentoBusinessOperationsEmployer as BaseSacramentoBusinessOperationsEmployer;
 use Illuminate\Support\Collection;
 
-class SacramentoPayrollEmployer extends BaseSacramentoPayrollEmployer
+class SacramentoBusinessOperationsEmployer extends BaseSacramentoBusinessOperationsEmployer
 {
     public function compute(Collection $tax_areas): int
     {

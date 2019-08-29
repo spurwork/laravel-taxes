@@ -1,12 +1,12 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\California\SacramentoPayrollEmployer;
+namespace Appleton\Taxes\Countries\US\California\SacramentoBusinessOperationsEmployer;
 
 use Appleton\Taxes\Classes\BasePayrollLiabilityLocal;
-use Appleton\Taxes\Countries\US\California\SacramentoPayrollEmployer\SacramentoPayrollEmployer as BaseSacramentoPayrollEmployer;
+use Appleton\Taxes\Countries\US\California\SacramentoBusinessOperationsEmployer\SacramentoBusinessOperationsEmployer as BaseSacramentoPayrollEmployer;
 use Illuminate\Support\Collection;
 
-abstract class SacramentoPayrollEmployer extends BasePayrollLiabilityLocal
+abstract class SacramentoBusinessOperationsEmployer extends BasePayrollLiabilityLocal
 {
     abstract public function getInitialTax(): int;
 

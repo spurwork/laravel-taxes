@@ -3,11 +3,11 @@
 namespace Appleton\Taxes\Unit\Countries\US\California;
 
 use Appleton\Taxes\Classes\PayrollLiabilities;
-use Appleton\Taxes\Countries\US\California\SacramentoPayrollEmployer\SacramentoPayrollEmployer;
+use Appleton\Taxes\Countries\US\California\SacramentoBusinessOperationsEmployer\SacramentoBusinessOperationsEmployer;
 use Carbon\Carbon;
 use TestCase;
 
-class SacramentoPayrollEmployerTest extends TestCase
+class SacramentoBusinessOperationsEmployerTest extends TestCase
 {
     /** @dataProvider dataProvider */
     public function testSacramentoPayrollEmployer(int $wages,
@@ -26,8 +26,8 @@ class SacramentoPayrollEmployerTest extends TestCase
             $payroll_liabilities->setYtdLiabilities($ytd_liabilities);
         });
 
-        self::assertThat($results->getLiability(SacramentoPayrollEmployer::class), self::identicalTo($expected_amount));
-        self::assertThat($results->getWages(SacramentoPayrollEmployer::class), self::identicalTo($expected_wages));
+        self::assertThat($results->getLiability(SacramentoBusinessOperationsEmployer::class), self::identicalTo($expected_amount));
+        self::assertThat($results->getWages(SacramentoBusinessOperationsEmployer::class), self::identicalTo($expected_wages));
     }
 
     /**

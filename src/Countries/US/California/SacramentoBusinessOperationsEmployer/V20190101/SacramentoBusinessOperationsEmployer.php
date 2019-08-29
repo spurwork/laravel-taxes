@@ -1,10 +1,10 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\California\SacramentoPayrollEmployer\V20190101;
+namespace Appleton\Taxes\Countries\US\California\SacramentoBusinessOperationsEmployer\V20190101;
 
-use Appleton\Taxes\Countries\US\California\SacramentoPayrollEmployer\SacramentoPayrollEmployer as BaseSacramentoPayrollEmployer;
+use Appleton\Taxes\Countries\US\California\SacramentoBusinessOperationsEmployer\SacramentoBusinessOperationsEmployer as BaseSacramentoBusinessOperationsEmployer;
 
-class SacramentoPayrollEmployer extends BaseSacramentoPayrollEmployer
+class SacramentoBusinessOperationsEmployer extends BaseSacramentoBusinessOperationsEmployer
 {
     private const INITIAL_TAX = 3000;
     private const START_AMOUNT = 1000000;
