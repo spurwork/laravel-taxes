@@ -488,6 +488,8 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\NewYork\Yonkers\Yonkers::class,
         \Appleton\Taxes\Countries\US\NorthCarolina\NorthCarolinaIncome\NorthCarolinaIncome::class,
         \Appleton\Taxes\Countries\US\NorthCarolina\NorthCarolinaUnemployment\NorthCarolinaUnemployment::class,
+        \Appleton\Taxes\Countries\US\NorthDakota\NorthDakotaIncome\NorthDakotaIncome::class,
+        \Appleton\Taxes\Countries\US\NorthDakota\NorthDakotaUnemployment\NorthDakotaUnemployment::class,
         \Appleton\Taxes\Countries\US\Ohio\Aberdeen\Aberdeen::class,
         \Appleton\Taxes\Countries\US\Ohio\Ada\Ada::class,
         \Appleton\Taxes\Countries\US\Ohio\AdaEVSD\AdaEVSDTax::class,
