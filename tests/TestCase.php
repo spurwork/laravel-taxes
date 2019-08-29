@@ -8,6 +8,7 @@ use Appleton\Taxes\Countries\US\Colorado\ColoradoIncome\ColoradoIncome;
 use Appleton\Taxes\Countries\US\Connecticut\ConnecticutIncome\ConnecticutIncome;
 use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome;
 use Appleton\Taxes\Countries\US\Georgia\GeorgiaIncome\GeorgiaIncome;
+use Appleton\Taxes\Countries\US\Idaho\IdahoIncome\IdahoIncome;
 use Appleton\Taxes\Countries\US\Louisiana\LouisianaIncome\LouisianaIncome;
 use Appleton\Taxes\Countries\US\Maine\MaineIncome\MaineIncome;
 use Appleton\Taxes\Countries\US\Maryland\MarylandIncome\MarylandIncome;
@@ -30,6 +31,7 @@ use Appleton\Taxes\Models\Countries\US\Colorado\ColoradoIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Connecticut\ConnecticutIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\FederalIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Georgia\GeorgiaIncomeTaxInformation;
+use Appleton\Taxes\Models\Countries\US\Idaho\IdahoIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Illinois\IllinoisIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Indiana\IndianaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Iowa\IowaIncomeTaxInformation;
@@ -143,6 +145,13 @@ class TestCase extends BaseTestCase
             'dependents' => 0,
             'personal_allowances' => 0,
             'filing_status' => GeorgiaIncome::FILING_SINGLE,
+        ], $this->user);
+
+        IdahoIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'exemptions' => 0,
+            'filing_status' => IdahoIncome::FILING_SINGLE,
+            'exempt' => false,
         ], $this->user);
 
         IllinoisIncomeTaxInformation::createForUser([
@@ -343,6 +352,7 @@ class TestCase extends BaseTestCase
             'us.delaware' => [39.1582, -75.5244],
             'us.georgia' => [33.7490, -84.3880],
             'us.florida' => [27.6648, -81.5158],
+            'us.idaho' => [44.0682, -114.7420],
             'us.illinois' => [39.7817, -89.6501],
             'us.indiana' => [39.7684, -86.1581],
             'us.indiana.adams' => [40.7249, -84.8985],

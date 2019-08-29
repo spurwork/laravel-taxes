@@ -78,6 +78,8 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\Florida\FloridaUnemployment\FloridaUnemployment::class,
         \Appleton\Taxes\Countries\US\Georgia\GeorgiaIncome\GeorgiaIncome::class,
         \Appleton\Taxes\Countries\US\Georgia\GeorgiaUnemployment\GeorgiaUnemployment::class,
+        \Appleton\Taxes\Countries\US\Idaho\IdahoIncome\IdahoIncome::class,
+        \Appleton\Taxes\Countries\US\Idaho\IdahoUnemployment\IdahoUnemployment::class,
         \Appleton\Taxes\Countries\US\Illinois\IllinoisIncome\IllinoisIncome::class,
         \Appleton\Taxes\Countries\US\Illinois\IllinoisUnemployment\IllinoisUnemployment::class,
         \Appleton\Taxes\Countries\US\Indiana\AdamsIncome\AdamsIncome::class,
