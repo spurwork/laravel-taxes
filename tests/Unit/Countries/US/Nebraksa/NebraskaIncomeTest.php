@@ -206,7 +206,7 @@ class NebraskaIncomeTest extends TestCase
                 NebraskaIncome::FILING_MARRIED,
                 2,
                 300,
-                2.31,
+                2.19,
             ],
             '18' => [
                 'January 1, 2019 8am',
