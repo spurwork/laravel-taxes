@@ -51,6 +51,10 @@ return [
                 'georgia_income_tax_information' => env('TAXES_GEORGIA_INCOME_TAX_INFORMATION', 'georgia_income_tax_information'),
             ],
 
+            'iowa' => [
+                'iowa_income_tax_information' => env('TAXES_IOWA_INCOME_TAX_INFORMATION', 'iowa_income_tax_information'),
+            ],
+
             'kansas' => [
                 'kansas_income_tax_information' => env('TAXES_KANSAS_INCOME_TAX_INFORMATION', 'kansas_income_tax_information'),
             ],
@@ -67,8 +71,16 @@ return [
                 'michigan_income_tax_information' => env('TAXES_MICHIGAN_INCOME_TAX_INFORMATION', 'michigan_income_tax_information'),
             ],
 
+            'minnesota' => [
+                'minnesota_income_tax_information' => env('TAXES_MINNESOTA_INCOME_TAX_INFORMATION', 'minnesota_income_tax_information'),
+            ],
+
             'mississippi' => [
                 'mississippi_income_tax_information' => env('TAXES_MISSISSIPPI_INCOME_TAX_INFORMATION', 'mississippi_income_tax_information'),
+            ],
+
+            'montana' => [
+                'montana_income_tax_information' => env('TAXES_MONTANA_INCOME_TAX_INFORMATION', 'montana_income_tax_information'),
             ],
 
             'new_jersey' => [
@@ -148,6 +160,10 @@ return [
                 'unemployment' => env('TAXES_GEORGIA_UNEMPLOYMENT_TAX_RATE', 0.027),
             ],
 
+            'iowa' => [
+                'unemployment' => env('TAXES_IOWA_UNEMPLOYMENT_TAX_RATE', 0.01),
+            ],
+
             'kansas' => [
                 'unemployment' => env('TAXES_KANSAS_UNEMPLOYMENT_TAX_RATE', 0.027),
             ],
@@ -160,8 +176,16 @@ return [
                 'unemployment' => env('TAXES_MARYLAND_UNEMPLOYMENT_TAX_RATE', 0.026),
             ],
 
+            'minnesota' => [
+                'unemployment' => env('TAXES_MINNESOTA_UNEMPLOYMENT_TAX_RATE', 0.01),
+            ],
+
             'mississippi' => [
                 'unemployment' => env('TAXES_MISSISSIPPI_UNEMPLOYMENT_TAX_RATE', 0.012),
+            ],
+
+            'montana' => [
+                'unemployment' => env('TAXES_MONTANA_UNEMPLOYMENT_TAX_RATE', 0.0258),
             ],
 
             'new_jersey' => [

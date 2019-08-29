@@ -12,7 +12,9 @@ use Appleton\Taxes\Countries\US\Louisiana\LouisianaIncome\LouisianaIncome;
 use Appleton\Taxes\Countries\US\Maryland\MarylandIncome\MarylandIncome;
 use Appleton\Taxes\Countries\US\Massachusetts\MassachusettsIncome\MassachusettsIncome;
 use Appleton\Taxes\Countries\US\Michigan\MichiganIncome\MichiganIncome;
+use Appleton\Taxes\Countries\US\Minnesota\MinnesotaIncome\MinnesotaIncome;
 use Appleton\Taxes\Countries\US\Mississippi\MississippiIncome\MississippiIncome;
+use Appleton\Taxes\Countries\US\Montana\MontanaIncome\MontanaIncome;
 use Appleton\Taxes\Countries\US\NewJersey\NewJerseyIncome\NewJerseyIncome;
 use Appleton\Taxes\Countries\US\NewMexico\NewMexicoIncome\NewMexicoIncome;
 use Appleton\Taxes\Countries\US\NewYork\NewYorkIncome\NewYorkIncome;
@@ -29,13 +31,16 @@ use Appleton\Taxes\Models\Countries\US\FederalIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Georgia\GeorgiaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Illinois\IllinoisIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Indiana\IndianaIncomeTaxInformation;
+use Appleton\Taxes\Models\Countries\US\Iowa\IowaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Kansas\KansasIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Kentucky\KentuckyIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Louisiana\LouisianaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Maryland\MarylandIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Massachusetts\MassachusettsIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Michigan\MichiganIncomeTaxInformation;
+use Appleton\Taxes\Models\Countries\US\Minnesota\MinnesotaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Mississippi\MississippiIncomeTaxInformation;
+use Appleton\Taxes\Models\Countries\US\Montana\MontanaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\NewJersey\NewJerseyIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\NewMexico\NewMexicoIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\NewYork\NewYorkIncomeTaxInformation;
@@ -145,6 +150,11 @@ class TestCase extends BaseTestCase
             'exempt' => false,
         ], $this->user);
 
+        IowaIncomeTaxInformation::createForUser([
+            'allowances' => 0,
+            'exempt' => false,
+        ], $this->user);
+
         IndianaIncomeTaxInformation::createForUser([
             'personal_exemptions' => 0,
             'dependent_exemptions' => 0,
@@ -189,10 +199,21 @@ class TestCase extends BaseTestCase
             'exempt' => false,
         ], $this->user);
 
+        MinnesotaIncomeTaxInformation::createForUser([
+            'allowances' => 0,
+            'filing_status' => MinnesotaIncome::FILING_SINGLE,
+            'exempt' => false,
+        ], $this->user);
+
         MississippiIncomeTaxInformation::createForUser([
             'total_exemption_amount_dollars' => 0,
             'additional_withholding' => 0,
             'filing_status' => MississippiIncome::FILING_SINGLE,
+            'exempt' => false,
+        ], $this->user);
+
+        MontanaIncomeTaxInformation::createForUser([
+            'allowances' => 0,
             'exempt' => false,
         ], $this->user);
 
@@ -408,6 +429,7 @@ class TestCase extends BaseTestCase
             'us.indiana.wells' => [40.7778, -85.1894],
             'us.indiana.white' => [40.6766, -86.9824],
             'us.indiana.whitley' => [41.1136, -85.5200],
+            'us.iowa' => [41.8780, -93.0977],
             'us.kansas' => [39.0119, -98.4842],
             'us.kentucky' => [37.8393, -84.2700],
             'us.kentucky.adairville_city' => [36.6675425, -86.8519417],
@@ -674,7 +696,9 @@ class TestCase extends BaseTestCase
             'us.maryland.wicomico' => [38.3942, -75.6674],
             'us.maryland.worcester' => [38.1584, -75.4345],
             'us.michigan' => [42.7325, -84.5555],
+            'us.minnesota' => [46.7296, -94.6859],
             'us.mississippi' => [32.3547, -89.3985],
+            'us.montana' => [46.8797, -110.3626],
             'us.nevada' => [39.1641, -119.7661],
             'us.new_jersey' => [40.2206, -74.7597],
             'us.new_jersey.newark' => [40.7357, -74.1724],

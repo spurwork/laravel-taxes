@@ -15,6 +15,15 @@ abstract class ConnecticutIncome extends BaseStateIncome
     public const WITHHOLDING_CODE_E = 'E';
     public const WITHHOLDING_CODE_F = 'F';
 
+    const FILING_STATUSES = [
+        self::WITHHOLDING_CODE_A => 'A',
+        self::WITHHOLDING_CODE_B => 'B',
+        self::WITHHOLDING_CODE_C => 'C',
+        self::WITHHOLDING_CODE_D => 'D',
+        self::WITHHOLDING_CODE_E => 'E',
+        self::WITHHOLDING_CODE_F => 'F',
+    ];
+
     const PERSONAL_EXEMPTION = [
         self::WITHHOLDING_CODE_A => [
             'base' => 24000,
