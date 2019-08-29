@@ -1,5 +1,6 @@
 <?php
 
+use Appleton\Taxes\Classes\PayrollLiabilities;
 use Appleton\Taxes\Classes\Taxes;
 use Appleton\Taxes\Countries\US\Alabama\AlabamaIncome\AlabamaIncome;
 use Appleton\Taxes\Countries\US\California\CaliforniaIncome\CaliforniaIncome;
@@ -9,10 +10,13 @@ use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome;
 use Appleton\Taxes\Countries\US\Georgia\GeorgiaIncome\GeorgiaIncome;
 use Appleton\Taxes\Countries\US\Idaho\IdahoIncome\IdahoIncome;
 use Appleton\Taxes\Countries\US\Louisiana\LouisianaIncome\LouisianaIncome;
+use Appleton\Taxes\Countries\US\Maine\MaineIncome\MaineIncome;
 use Appleton\Taxes\Countries\US\Maryland\MarylandIncome\MarylandIncome;
 use Appleton\Taxes\Countries\US\Massachusetts\MassachusettsIncome\MassachusettsIncome;
 use Appleton\Taxes\Countries\US\Michigan\MichiganIncome\MichiganIncome;
+use Appleton\Taxes\Countries\US\Minnesota\MinnesotaIncome\MinnesotaIncome;
 use Appleton\Taxes\Countries\US\Mississippi\MississippiIncome\MississippiIncome;
+use Appleton\Taxes\Countries\US\Montana\MontanaIncome\MontanaIncome;
 use Appleton\Taxes\Countries\US\NewJersey\NewJerseyIncome\NewJerseyIncome;
 use Appleton\Taxes\Countries\US\NewMexico\NewMexicoIncome\NewMexicoIncome;
 use Appleton\Taxes\Countries\US\NewYork\NewYorkIncome\NewYorkIncome;
@@ -30,13 +34,17 @@ use Appleton\Taxes\Models\Countries\US\Georgia\GeorgiaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Idaho\IdahoIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Illinois\IllinoisIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Indiana\IndianaIncomeTaxInformation;
+use Appleton\Taxes\Models\Countries\US\Iowa\IowaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Kansas\KansasIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Kentucky\KentuckyIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Louisiana\LouisianaIncomeTaxInformation;
+use Appleton\Taxes\Models\Countries\US\Maine\MaineIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Maryland\MarylandIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Massachusetts\MassachusettsIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Michigan\MichiganIncomeTaxInformation;
+use Appleton\Taxes\Models\Countries\US\Minnesota\MinnesotaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Mississippi\MississippiIncomeTaxInformation;
+use Appleton\Taxes\Models\Countries\US\Montana\MontanaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\NewJersey\NewJerseyIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\NewMexico\NewMexicoIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\NewYork\NewYorkIncomeTaxInformation;
@@ -58,6 +66,7 @@ use Orchestra\Testbench\TestCase as BaseTestCase;
 
 /**
  * @property Taxes $taxes
+ * @property PayrollLiabilities $payroll_liabilities
  */
 class TestCase extends BaseTestCase
 {
@@ -66,6 +75,7 @@ class TestCase extends BaseTestCase
     protected $user_model;
     protected $user;
     protected $taxes;
+    protected $payroll_liabilities;
 
     public function date($date)
     {
@@ -89,6 +99,7 @@ class TestCase extends BaseTestCase
         ]);
 
         $this->taxes = $this->app->make(Taxes::class);
+        $this->payroll_liabilities = $this->app->make(PayrollLiabilities::class);
 
         FederalIncomeTaxInformation::createForUser([
             'additional_withholding' => 0,
@@ -150,6 +161,11 @@ class TestCase extends BaseTestCase
             'exempt' => false,
         ], $this->user);
 
+        IowaIncomeTaxInformation::createForUser([
+            'allowances' => 0,
+            'exempt' => false,
+        ], $this->user);
+
         IndianaIncomeTaxInformation::createForUser([
             'personal_exemptions' => 0,
             'dependent_exemptions' => 0,
@@ -173,6 +189,12 @@ class TestCase extends BaseTestCase
             'filing_status' => LouisianaIncome::FILING_SINGLE,
         ], $this->user);
 
+        MaineIncomeTaxInformation::createForUser([
+            'allowances' => 0,
+            'filing_status' => MaineIncome::FILING_SINGLE,
+            'exempt' => false,
+        ], $this->user);
+
         MarylandIncomeTaxInformation::createForUser([
             'additional_withholding' => 0,
             'dependents' => 0,
@@ -194,10 +216,21 @@ class TestCase extends BaseTestCase
             'exempt' => false,
         ], $this->user);
 
+        MinnesotaIncomeTaxInformation::createForUser([
+            'allowances' => 0,
+            'filing_status' => MinnesotaIncome::FILING_SINGLE,
+            'exempt' => false,
+        ], $this->user);
+
         MississippiIncomeTaxInformation::createForUser([
             'total_exemption_amount_dollars' => 0,
             'additional_withholding' => 0,
             'filing_status' => MississippiIncome::FILING_SINGLE,
+            'exempt' => false,
+        ], $this->user);
+
+        MontanaIncomeTaxInformation::createForUser([
+            'allowances' => 0,
             'exempt' => false,
         ], $this->user);
 
@@ -312,6 +345,8 @@ class TestCase extends BaseTestCase
             'us.alaska' => [64.2008, -149.4937],
             'us.arizona' => [33.6050991, -112.4052392],
             'us.california' => [38.5816, -121.4944],
+            'us.california.sacramento' => [38.5816, -121.4944],
+            'us.california.san_francisco' => [37.7749, -122.4194],
             'us.colorado' => [39.7640021, -105.1352965],
             'us.connecticut' => [41.6032, -73.0877],
             'us.delaware' => [39.1582, -75.5244],
@@ -412,6 +447,7 @@ class TestCase extends BaseTestCase
             'us.indiana.wells' => [40.7778, -85.1894],
             'us.indiana.white' => [40.6766, -86.9824],
             'us.indiana.whitley' => [41.1136, -85.5200],
+            'us.iowa' => [41.8780, -93.0977],
             'us.kansas' => [39.0119, -98.4842],
             'us.kentucky' => [37.8393, -84.2700],
             'us.kentucky.adairville_city' => [36.6675425, -86.8519417],
@@ -650,8 +686,8 @@ class TestCase extends BaseTestCase
             'us.kentucky.wolfe_county' => [37.7550869, -83.4643551],
             'us.kentucky.woodford_county' => [38.0721662, -84.7315563],
             'us.kentucky.wurtland_city' => [38.5503577, -82.7779437],
-            'us.massachusetts' => [42.4072, -71.3824],
             'us.louisiana' => [30.9843, -91.9623],
+            'us.maine' => [45.2538, -69.4455],
             'us.maryland' => [38.9784, -76.4922],
             'us.maryland.allegany' => [39.6255, -78.6115],
             'us.maryland.annearundel' => [38.9530, -76.5488],
@@ -677,8 +713,11 @@ class TestCase extends BaseTestCase
             'us.maryland.washington' => [39.6418, -77.7200],
             'us.maryland.wicomico' => [38.3942, -75.6674],
             'us.maryland.worcester' => [38.1584, -75.4345],
+            'us.massachusetts' => [42.4072, -71.3824],
             'us.michigan' => [42.7325, -84.5555],
+            'us.minnesota' => [46.7296, -94.6859],
             'us.mississippi' => [32.3547, -89.3985],
+            'us.montana' => [46.8797, -110.3626],
             'us.nevada' => [39.1641, -119.7661],
             'us.new_jersey' => [40.2206, -74.7597],
             'us.new_jersey.newark' => [40.7357, -74.1724],

@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Collection;
 
 abstract class BaseTax
 {
-    const PRIORITY = 9999;
+    public const SCOPE = 'worker';
+    public const PRIORITY = 9999;
 
     public $tax_total = 0;
 
