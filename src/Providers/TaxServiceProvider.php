@@ -2,8 +2,13 @@
 
 namespace Appleton\Taxes\Providers;
 
+use Appleton\Taxes\Classes\BasePayrollLiability;
+use Appleton\Taxes\Classes\BaseTax;
 use Appleton\Taxes\Classes\Payroll;
+use Appleton\Taxes\Classes\CompanyPayroll;
 use Carbon\Carbon;
+use http\Exception\UnexpectedValueException;
+use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 
 class TaxServiceProvider extends ServiceProvider
@@ -51,6 +56,8 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\California\CaliforniaEmploymentTrainingTax\CaliforniaEmploymentTrainingTax::class,
         \Appleton\Taxes\Countries\US\California\CaliforniaIncome\CaliforniaIncome::class,
         \Appleton\Taxes\Countries\US\California\CaliforniaUnemployment\CaliforniaUnemployment::class,
+        \Appleton\Taxes\Countries\US\California\SacramentoBusinessOperationsEmployer\SacramentoBusinessOperationsEmployer::class,
+        \Appleton\Taxes\Countries\US\California\SanFranciscoPayrollExpenseEmployer\SanFranciscoPayrollExpenseEmployer::class,
         \Appleton\Taxes\Countries\US\Colorado\ColoradoIncome\ColoradoIncome::class,
         \Appleton\Taxes\Countries\US\Colorado\ColoradoUnemployment\ColoradoUnemployment::class,
         \Appleton\Taxes\Countries\US\Colorado\AuroraOccupationalPrivilege\AuroraOccupationalPrivilege::class,
@@ -66,6 +73,7 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\Connecticut\ConnecticutIncome\ConnecticutIncome::class,
         \Appleton\Taxes\Countries\US\Connecticut\ConnecticutUnemployment\ConnecticutUnemployment::class,
 		\Appleton\Taxes\Countries\US\FederalIncome\FederalIncome::class,
+        \Appleton\Taxes\Countries\US\FederalIncome\FederalIncome::class,
         \Appleton\Taxes\Countries\US\FederalUnemployment\FederalUnemployment::class,
         \Appleton\Taxes\Countries\US\Florida\FloridaUnemployment\FloridaUnemployment::class,
         \Appleton\Taxes\Countries\US\Georgia\GeorgiaIncome\GeorgiaIncome::class,
@@ -1414,9 +1422,19 @@ class TaxServiceProvider extends ServiceProvider
         );
 
         foreach ($this->interfaces as $interface) {
-            $this->app->bind($interface, function ($app) use ($interface) {
-                $payroll = $app->make(Payroll::class);
-                $implementation = $this->resolveImplementation($interface, $payroll->date);
+            $this->app->bind($interface, function (Application $app) use ($interface) {
+                switch ($interface::SCOPE) {
+                    case BaseTax::SCOPE:
+                        $payroll = $app->make(Payroll::class);
+                        $implementation = $this->resolveImplementation($interface, $payroll->date);
+                        break;
+                    case BasePayrollLiability::SCOPE:
+                        $payroll = $app->make(CompanyPayroll::class);
+                        $implementation = $this->resolveImplementation($interface, $payroll->getDate());
+                        break;
+                    default:
+                        throw new UnexpectedValueException('Do not know how to register '.$interface);
+                }
 
                 return $app->make($implementation);
             });

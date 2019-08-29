@@ -1,5 +1,6 @@
 <?php
 
+use Appleton\Taxes\Classes\PayrollLiabilities;
 use Appleton\Taxes\Classes\Taxes;
 use Appleton\Taxes\Countries\US\Alabama\AlabamaIncome\AlabamaIncome;
 use Appleton\Taxes\Countries\US\California\CaliforniaIncome\CaliforniaIncome;
@@ -61,6 +62,7 @@ use Orchestra\Testbench\TestCase as BaseTestCase;
 
 /**
  * @property Taxes $taxes
+ * @property PayrollLiabilities $payroll_liabilities
  */
 class TestCase extends BaseTestCase
 {
@@ -69,6 +71,7 @@ class TestCase extends BaseTestCase
     protected $user_model;
     protected $user;
     protected $taxes;
+    protected $payroll_liabilities;
 
     public function date($date)
     {
@@ -92,6 +95,7 @@ class TestCase extends BaseTestCase
         ]);
 
         $this->taxes = $this->app->make(Taxes::class);
+        $this->payroll_liabilities = $this->app->make(PayrollLiabilities::class);
 
         FederalIncomeTaxInformation::createForUser([
             'additional_withholding' => 0,
@@ -324,6 +328,8 @@ class TestCase extends BaseTestCase
             'us.alaska' => [64.2008, -149.4937],
             'us.arizona' => [33.6050991, -112.4052392],
             'us.california' => [38.5816, -121.4944],
+            'us.california.sacramento' => [38.5816, -121.4944],
+            'us.california.san_francisco' => [37.7749, -122.4194],
             'us.colorado' => [39.7640021, -105.1352965],
             'us.connecticut' => [41.6032, -73.0877],
             'us.delaware' => [39.1582, -75.5244],
