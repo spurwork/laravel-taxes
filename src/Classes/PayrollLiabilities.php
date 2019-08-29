@@ -11,6 +11,7 @@ class PayrollLiabilities
 {
     private $date;
     private $wages;
+    private $qtd_wages;
     private $ytd_wages;
     private $ytd_liabilities;
     private $work_location;
@@ -28,6 +29,11 @@ class PayrollLiabilities
     public function setWages($wages): void
     {
         $this->wages = $wages;
+    }
+
+    public function setQtdWages($qtd_earnings): void
+    {
+        $this->qtd_wages = $qtd_earnings;
     }
 
     public function setYtdWages($ytd_earnings): void
@@ -56,7 +62,9 @@ class PayrollLiabilities
         $this->bindInterfaces($taxes);
         $this->bindPayrollData();
 
-        $local_results = $this->computeLocal($taxes);
+        $local_results = collect([])
+            ->merge($this->compute($taxes, 'state'))
+            ->merge($this->compute($taxes, 'local'));
 
         $this->unbindPayrollData();
         $this->unbindTaxes($taxes);
@@ -64,11 +72,11 @@ class PayrollLiabilities
         return new PayrollLiabilityResults($local_results);
     }
 
-    private function computeLocal(Collection $taxes): Collection
+    private function compute(Collection $taxes, string $type): Collection
     {
         $results = collect([]);
-        $taxes->filter(static function ($tax) {
-            return $tax->class::TYPE === 'local';
+        $taxes->filter(static function ($tax) use ($type) {
+            return $tax->class::TYPE === $type;
         })
             ->sortBy('class')
             ->sortBy(static function ($tax) {
@@ -97,7 +105,7 @@ class PayrollLiabilities
     private function bindPayrollData(): void
     {
         app()->instance(CompanyPayroll::class, new CompanyPayroll($this->getDate(),
-            $this->wages, $this->ytd_wages, $this->ytd_liabilities));
+            $this->wages, $this->qtd_wages, $this->ytd_wages, $this->ytd_liabilities));
     }
 
     private function bindInterfaces(Collection $taxes): void
