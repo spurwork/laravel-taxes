@@ -123,6 +123,10 @@ return [
                 'washingtondc_income_tax_information' => env('TAXES_WASHINGTONDC_INCOME_TAX_INFORMATION', 'washingtondc_income_tax_information'),
             ],
 
+            'utah' => [
+                'utah_income_tax_information' => env('TAXES_UTAH_INCOME_TAX_INFORMATION', 'utah_income_tax_information'),
+            ],
+
             'west_virginia' => [
                 'west_virginia_income_tax_information' => env('TAXES_WEST_VIRGINIA_INCOME_TAX_INFORMATION', 'west_virginia_income_tax_information'),
             ],
@@ -238,6 +242,10 @@ return [
 
             'south_dakota' => [
                 'unemployment' => env('TAXES_SOUTH_DAKOTA_UNEMPLOYMENT_TAX_RATE', 0.012),
+            ],
+
+            'utah' => [
+                'unemployment' => env('TAXES_UTAH_UNEMPLOYMENT_TAX_RATE', 0.03),
             ],
 
             'washingtondc' => [
