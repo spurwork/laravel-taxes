@@ -103,6 +103,10 @@ return [
                 'north_carolina_income_tax_information' => env('TAXES_NORTH_CAROLINA_INCOME_TAX_INFORMATION', 'north_carolina_income_tax_information'),
             ],
 
+            'north_dakota' => [
+                'north_dakota_income_tax_information' => env('TAXES_NORTH_DAKOTA_INCOME_TAX_INFORMATION', 'north_dakota_income_tax_information'),
+            ],
+
             'ohio' => [
                 'ohio_income_tax_information' => env('TAXES_OHIO_INCOME_TAX_INFORMATION', 'ohio_income_tax_information'),
             ],
@@ -218,6 +222,10 @@ return [
 
             'north_carolina' => [
                 'unemployment' => env('TAXES_NORTH_CAROLINA_UNEMPLOYMENT_TAX_RATE', 0.01),
+            ],
+
+            'north_dakota' => [
+                'unemployment' => env('TAXES_NORTH_DAKOTA_UNEMPLOYMENT_TAX_RATE', 0.0121),
             ],
 
             'ohio' => [
