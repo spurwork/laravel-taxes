@@ -91,6 +91,10 @@ return [
                 'pennsylvania_income_tax_information' => env('TAXES_PENNSYLVANIA_INCOME_TAX_INFORMATION', 'pennsylvania_income_tax_information'),
             ],
 
+            'vermont' => [
+                'vermont_income_tax_information' => env('TAXES_VERMONT_INCOME_TAX_INFORMATION', 'vermont_income_tax_information'),
+            ],
+
             'washingtondc' => [
                 'washingtondc_income_tax_information' => env('TAXES_WASHINGTONDC_INCOME_TAX_INFORMATION', 'washingtondc_income_tax_information'),
             ],
@@ -178,6 +182,10 @@ return [
 
             'washingtondc' => [
                 'unemployment' => env('TAXES_WASHINGTONDC_UNEMPLOYMENT_TAX_RATE', 0.027),
+            ],
+
+            'vermont' => [
+                'unemployment' => env('TAXES_VERMONT_UNEMPLOYMENT_TAX_RATE', 0.01),
             ],
 
             'west_virginia' => [

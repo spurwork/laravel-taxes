@@ -1362,6 +1362,8 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\SocialSecurity\SocialSecurityEmployer::class,
         \Appleton\Taxes\Countries\US\Tennessee\TennesseeUnemployment\TennesseeUnemployment::class,
         \Appleton\Taxes\Countries\US\Texas\TexasUnemployment\TexasUnemployment::class,
+        \Appleton\Taxes\Countries\US\Vermont\VermontIncome\VermontIncome::class,
+        \Appleton\Taxes\Countries\US\Vermont\VermontUnemployment\VermontUnemployment::class,
         \Appleton\Taxes\Countries\US\Virginia\VirginiaIncome\VirginiaIncome::class,
         \Appleton\Taxes\Countries\US\Virginia\VirginiaUnemployment\VirginiaUnemployment::class,
         \Appleton\Taxes\Countries\US\WashingtonDC\WashingtonDCIncome\WashingtonDCIncome::class,
