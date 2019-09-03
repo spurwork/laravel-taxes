@@ -2,8 +2,13 @@
 
 namespace Appleton\Taxes\Providers;
 
+use Appleton\Taxes\Classes\BasePayrollLiability;
+use Appleton\Taxes\Classes\BaseTax;
 use Appleton\Taxes\Classes\Payroll;
+use Appleton\Taxes\Classes\CompanyPayroll;
 use Carbon\Carbon;
+use http\Exception\UnexpectedValueException;
+use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 
 class TaxServiceProvider extends ServiceProvider
@@ -44,12 +49,15 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\Alabama\SulligentOccupational\SulligentOccupational::class,
         \Appleton\Taxes\Countries\US\Alabama\TarrantOccupational\TarrantOccupational::class,
         \Appleton\Taxes\Countries\US\Alabama\TuskegeeOccupational\TuskegeeOccupational::class,
+        \Appleton\Taxes\Countries\US\Alaska\AlaskaUnemployment\AlaskaUnemployment::class,
         \Appleton\Taxes\Countries\US\Arizona\ArizonaIncome\ArizonaIncome::class,
         \Appleton\Taxes\Countries\US\Arizona\ArizonaUnemployment\ArizonaUnemployment::class,
         \Appleton\Taxes\Countries\US\California\CaliforniaDisabilityInsurance\CaliforniaDisabilityInsurance::class,
         \Appleton\Taxes\Countries\US\California\CaliforniaEmploymentTrainingTax\CaliforniaEmploymentTrainingTax::class,
         \Appleton\Taxes\Countries\US\California\CaliforniaIncome\CaliforniaIncome::class,
         \Appleton\Taxes\Countries\US\California\CaliforniaUnemployment\CaliforniaUnemployment::class,
+        \Appleton\Taxes\Countries\US\California\SacramentoBusinessOperationsEmployer\SacramentoBusinessOperationsEmployer::class,
+        \Appleton\Taxes\Countries\US\California\SanFranciscoPayrollExpenseEmployer\SanFranciscoPayrollExpenseEmployer::class,
         \Appleton\Taxes\Countries\US\Colorado\ColoradoIncome\ColoradoIncome::class,
         \Appleton\Taxes\Countries\US\Colorado\ColoradoUnemployment\ColoradoUnemployment::class,
         \Appleton\Taxes\Countries\US\Colorado\AuroraOccupationalPrivilege\AuroraOccupationalPrivilege::class,
@@ -62,11 +70,16 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\Colorado\GreenwoodVillageOccupationalPrivilegeEmployer\GreenwoodVillageOccupationalPrivilegeEmployer::class,
         \Appleton\Taxes\Countries\US\Colorado\SheridanOccupationalPrivilege\SheridanOccupationalPrivilege::class,
         \Appleton\Taxes\Countries\US\Colorado\SheridanOccupationalPrivilegeEmployer\SheridanOccupationalPrivilegeEmployer::class,
+        \Appleton\Taxes\Countries\US\Connecticut\ConnecticutIncome\ConnecticutIncome::class,
+        \Appleton\Taxes\Countries\US\Connecticut\ConnecticutUnemployment\ConnecticutUnemployment::class,
 		\Appleton\Taxes\Countries\US\FederalIncome\FederalIncome::class,
+        \Appleton\Taxes\Countries\US\FederalIncome\FederalIncome::class,
         \Appleton\Taxes\Countries\US\FederalUnemployment\FederalUnemployment::class,
         \Appleton\Taxes\Countries\US\Florida\FloridaUnemployment\FloridaUnemployment::class,
         \Appleton\Taxes\Countries\US\Georgia\GeorgiaIncome\GeorgiaIncome::class,
         \Appleton\Taxes\Countries\US\Georgia\GeorgiaUnemployment\GeorgiaUnemployment::class,
+        \Appleton\Taxes\Countries\US\Idaho\IdahoIncome\IdahoIncome::class,
+        \Appleton\Taxes\Countries\US\Idaho\IdahoUnemployment\IdahoUnemployment::class,
         \Appleton\Taxes\Countries\US\Illinois\IllinoisIncome\IllinoisIncome::class,
         \Appleton\Taxes\Countries\US\Illinois\IllinoisUnemployment\IllinoisUnemployment::class,
         \Appleton\Taxes\Countries\US\Indiana\AdamsIncome\AdamsIncome::class,
@@ -163,6 +176,8 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\Indiana\WellsIncome\WellsIncome::class,
         \Appleton\Taxes\Countries\US\Indiana\WhiteIncome\WhiteIncome::class,
         \Appleton\Taxes\Countries\US\Indiana\WhitleyIncome\WhitleyIncome::class,
+        \Appleton\Taxes\Countries\US\Iowa\IowaIncome\IowaIncome::class,
+        \Appleton\Taxes\Countries\US\Iowa\IowaUnemployment\IowaUnemployment::class,
         \Appleton\Taxes\Countries\US\Kansas\KansasIncome\KansasIncome::class,
         \Appleton\Taxes\Countries\US\Kansas\KansasUnemployment\KansasUnemployment::class,
         \Appleton\Taxes\Countries\US\Kentucky\AdairvilleCity\AdairvilleCity::class,
@@ -410,6 +425,8 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\Kentucky\WurtlandCity\WurtlandCity::class,
         \Appleton\Taxes\Countries\US\Louisiana\LouisianaIncome\LouisianaIncome::class,
         \Appleton\Taxes\Countries\US\Louisiana\LouisianaUnemployment\LouisianaUnemployment::class,
+        \Appleton\Taxes\Countries\US\Maine\MaineIncome\MaineIncome::class,
+        \Appleton\Taxes\Countries\US\Maine\MaineUnemployment\MaineUnemployment::class,
         \Appleton\Taxes\Countries\US\Maryland\Allegany\Allegany::class,
         \Appleton\Taxes\Countries\US\Maryland\AnneArundel\AnneArundel::class,
         \Appleton\Taxes\Countries\US\Maryland\Baltimore\Baltimore::class,
@@ -445,8 +462,12 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\Medicare\MedicareEmployer::class,
         \Appleton\Taxes\Countries\US\Michigan\MichiganIncome\MichiganIncome::class,
         \Appleton\Taxes\Countries\US\Michigan\MichiganUnemployment\MichiganUnemployment::class,
+        \Appleton\Taxes\Countries\US\Minnesota\MinnesotaIncome\MinnesotaIncome::class,
+        \Appleton\Taxes\Countries\US\Minnesota\MinnesotaUnemployment\MinnesotaUnemployment::class,
         \Appleton\Taxes\Countries\US\Mississippi\MississippiIncome\MississippiIncome::class,
         \Appleton\Taxes\Countries\US\Mississippi\MississippiUnemployment\MississippiUnemployment::class,
+        \Appleton\Taxes\Countries\US\Montana\MontanaIncome\MontanaIncome::class,
+        \Appleton\Taxes\Countries\US\Montana\MontanaUnemployment\MontanaUnemployment::class,
         \Appleton\Taxes\Countries\US\Nevada\NevadaUnemployment\NevadaUnemployment::class,
         \Appleton\Taxes\Countries\US\NewJersey\NewarkPayroll\NewarkPayroll::class,
         \Appleton\Taxes\Countries\US\NewJersey\NewarkPayroll\NewarkPayroll::class,
@@ -1360,6 +1381,9 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\Pennsylvania\PennsylvaniaUnemployment\PennsylvaniaUnemployment::class,
         \Appleton\Taxes\Countries\US\SocialSecurity\SocialSecurity::class,
         \Appleton\Taxes\Countries\US\SocialSecurity\SocialSecurityEmployer::class,
+        \Appleton\Taxes\Countries\US\SouthCarolina\SouthCarolinaIncome\SouthCarolinaIncome::class,
+        \Appleton\Taxes\Countries\US\SouthCarolina\SouthCarolinaUnemployment\SouthCarolinaUnemployment::class,
+        \Appleton\Taxes\Countries\US\SouthDakota\SouthDakotaUnemployment\SouthDakotaUnemployment::class,
         \Appleton\Taxes\Countries\US\Tennessee\TennesseeUnemployment\TennesseeUnemployment::class,
         \Appleton\Taxes\Countries\US\Texas\TexasUnemployment\TexasUnemployment::class,
         \Appleton\Taxes\Countries\US\Vermont\VermontIncome\VermontIncome::class,
@@ -1404,9 +1428,19 @@ class TaxServiceProvider extends ServiceProvider
         );
 
         foreach ($this->interfaces as $interface) {
-            $this->app->bind($interface, function ($app) use ($interface) {
-                $payroll = $app->make(Payroll::class);
-                $implementation = $this->resolveImplementation($interface, $payroll->date);
+            $this->app->bind($interface, function (Application $app) use ($interface) {
+                switch ($interface::SCOPE) {
+                    case BaseTax::SCOPE:
+                        $payroll = $app->make(Payroll::class);
+                        $implementation = $this->resolveImplementation($interface, $payroll->date);
+                        break;
+                    case BasePayrollLiability::SCOPE:
+                        $payroll = $app->make(CompanyPayroll::class);
+                        $implementation = $this->resolveImplementation($interface, $payroll->getDate());
+                        break;
+                    default:
+                        throw new UnexpectedValueException('Do not know how to register '.$interface);
+                }
 
                 return $app->make($implementation);
             });
