@@ -468,6 +468,8 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\Mississippi\MississippiUnemployment\MississippiUnemployment::class,
         \Appleton\Taxes\Countries\US\Montana\MontanaIncome\MontanaIncome::class,
         \Appleton\Taxes\Countries\US\Montana\MontanaUnemployment\MontanaUnemployment::class,
+        \Appleton\Taxes\Countries\US\Nebraska\NebraskaIncome\NebraskaIncome::class,
+        \Appleton\Taxes\Countries\US\Nebraska\NebraskaUnemployment\NebraskaUnemployment::class,
         \Appleton\Taxes\Countries\US\Nevada\NevadaUnemployment\NevadaUnemployment::class,
         \Appleton\Taxes\Countries\US\NewJersey\NewarkPayroll\NewarkPayroll::class,
         \Appleton\Taxes\Countries\US\NewJersey\NewarkPayroll\NewarkPayroll::class,

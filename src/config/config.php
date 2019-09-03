@@ -91,6 +91,10 @@ return [
                 'montana_income_tax_information' => env('TAXES_MONTANA_INCOME_TAX_INFORMATION', 'montana_income_tax_information'),
             ],
 
+            'nebraska' => [
+                'nebraska_income_tax_information' => env('TAXES_NEBRASKA_INCOME_TAX_INFORMATION', 'nebraska_income_tax_information'),
+            ],
+
             'new_jersey' => [
                 'new_jersey_income_tax_information' => env('TAXES_NEW_JERSEY_INCOME_TAX_INFORMATION', 'new_jersey_income_tax_information'),
             ],
@@ -210,6 +214,10 @@ return [
 
             'montana' => [
                 'unemployment' => env('TAXES_MONTANA_UNEMPLOYMENT_TAX_RATE', 0.0258),
+            ],
+
+            'nebraska' => [
+                'unemployment' => env('TAXES_NEBRASKA_UNEMPLOYMENT_TAX_RATE', 0.0125),
             ],
 
             'new_jersey' => [
