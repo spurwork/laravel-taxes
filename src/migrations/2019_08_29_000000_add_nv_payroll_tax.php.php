@@ -14,7 +14,7 @@ class AddNvPayrollTax extends Migration
             'class' => NevadaGrossPayrollEmployer::class,
         ]);
 
-        $nv_id = DB::table('governmental_unit_areas')->where('name', 'Maine')->first()->id;
+        $nv_id = DB::table('governmental_unit_areas')->where('name', 'Nevada')->first()->id;
         DB::table('tax_areas')->insert([[
             'tax_id' => $tax_id,
             'work_governmental_unit_area_id' => $nv_id,
