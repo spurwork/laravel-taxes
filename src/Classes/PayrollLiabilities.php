@@ -62,22 +62,19 @@ class PayrollLiabilities
         $this->bindInterfaces($taxes);
         $this->bindPayrollData();
 
-        $local_results = collect([])
-            ->merge($this->compute($taxes, 'state'))
-            ->merge($this->compute($taxes, 'local'));
+        $results = $this->compute($taxes);
 
         $this->unbindPayrollData();
         $this->unbindTaxes($taxes);
 
-        return new PayrollLiabilityResults($local_results);
+        return new PayrollLiabilityResults($results);
     }
 
-    private function compute(Collection $taxes, string $type): Collection
+    private function compute(Collection $taxes): Collection
     {
         $results = collect([]);
-        $taxes->filter(static function ($tax) use ($type) {
-            return $tax->class::TYPE === $type;
-        })
+
+        $taxes
             ->sortBy('class')
             ->sortBy(static function ($tax) {
                 return $tax->class::PRIORITY;
