@@ -10,7 +10,7 @@ class InsertPennsylvaniaEmployeeSuta extends Migration
     public function up()
     {
         $disability_tax_id = DB::table('taxes')->insertGetId([
-            'name' => 'Pennsylvania Employee Suta',
+            'name' => 'PA Employee SUI',
             'class' => PennsylvaniaEmployeeSuta::class,
         ]);
 
