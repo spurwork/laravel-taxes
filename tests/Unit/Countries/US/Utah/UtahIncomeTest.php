@@ -12,9 +12,10 @@ class UtahIncomeTest extends TestCase
     /**
     * @dataProvider provideTestData
     */
-    public function testUtahIncome($date, $filing_status, $earnings, $result)
+    public function testUtahIncome($date, $filing_status, $additional_withholding, $earnings, $result)
     {
         UtahIncomeTaxInformation::forUser($this->user)->update([
+            'additional_withholding' => $additional_withholding,
             'filing_status' => $filing_status,
         ]);
 
@@ -37,26 +38,37 @@ class UtahIncomeTest extends TestCase
     {
         // date
         // filing status
+        // additional withholding
         // earnings
         // results
         return [
             '0' => [
                 'January 1, 2019 8am',
                 UtahIncome::FILING_SINGLE,
+                0,
                 400,
                 16.29,
             ],
             '1' => [
                 'January 1, 2019 8am',
                 UtahIncome::FILING_SINGLE,
+                0,
                 300,
                 10.04,
             ],
             '2' => [
                 'January 1, 2019 8am',
                 UtahIncome::FILING_MARRIED,
+                0,
                 300,
                 1.34,
+            ],
+            '3' => [
+                'January 1, 2019 8am',
+                UtahIncome::FILING_MARRIED,
+                20,
+                300,
+                21.34,
             ],
         ];
     }

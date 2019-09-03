@@ -18,7 +18,7 @@ class UtahIncome extends BaseUtahIncome
 
     public function compute(Collection $tax_areas)
     {
-        $this->tax_total = $this->payroll->withholdTax(($this->getGrossAnnualTaxAmount() - $this->getAnnualWithholdingAllowance()) / $this->payroll->pay_periods);
+        $this->tax_total = $this->payroll->withholdTax((($this->getGrossAnnualTaxAmount() - $this->getAnnualWithholdingAllowance()) / $this->payroll->pay_periods) + $this->tax_information->additional_withholding);
 
         return round($this->tax_total, 2);
     }

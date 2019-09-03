@@ -289,6 +289,7 @@ class TestCase extends BaseTestCase
         ], $this->user);
 
         UtahIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
             'filing_status' => UtahIncome::FILING_SINGLE,
         ], $this->user);
 

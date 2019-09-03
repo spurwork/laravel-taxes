@@ -13,7 +13,7 @@ class AddUtahIncomeTaxInformationTable extends Migration
     {
         Schema::create('utah_income_tax_information', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('allowances')->default(0);
+            $table->integer('additional_withholding')->default(0);
             $table->string('filing_status')->nullable();
             $table->boolean('exempt')->default(false);
         });
