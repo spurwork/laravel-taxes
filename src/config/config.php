@@ -51,12 +51,24 @@ return [
                 'georgia_income_tax_information' => env('TAXES_GEORGIA_INCOME_TAX_INFORMATION', 'georgia_income_tax_information'),
             ],
 
+            'idaho' => [
+                'idaho_income_tax_information' => env('TAXES_IDAHO_INCOME_TAX_INFORMATION', 'idaho_income_tax_information'),
+            ],
+
+            'iowa' => [
+                'iowa_income_tax_information' => env('TAXES_IOWA_INCOME_TAX_INFORMATION', 'iowa_income_tax_information'),
+            ],
+
             'kansas' => [
                 'kansas_income_tax_information' => env('TAXES_KANSAS_INCOME_TAX_INFORMATION', 'kansas_income_tax_information'),
             ],
 
             'louisiana' => [
                 'louisiana_income_tax_information' => env('TAXES_LOUISIANA_INCOME_TAX_INFORMATION', 'louisiana_income_tax_information'),
+            ],
+
+            'maine' => [
+                'maine_income_tax_information' => env('TAXES_MAINE_INCOME_TAX_INFORMATION', 'maine_income_tax_information'),
             ],
 
             'maryland' => [
@@ -67,8 +79,16 @@ return [
                 'michigan_income_tax_information' => env('TAXES_MICHIGAN_INCOME_TAX_INFORMATION', 'michigan_income_tax_information'),
             ],
 
+            'minnesota' => [
+                'minnesota_income_tax_information' => env('TAXES_MINNESOTA_INCOME_TAX_INFORMATION', 'minnesota_income_tax_information'),
+            ],
+
             'mississippi' => [
                 'mississippi_income_tax_information' => env('TAXES_MISSISSIPPI_INCOME_TAX_INFORMATION', 'mississippi_income_tax_information'),
+            ],
+
+            'montana' => [
+                'montana_income_tax_information' => env('TAXES_MONTANA_INCOME_TAX_INFORMATION', 'montana_income_tax_information'),
             ],
 
             'nebraska' => [
@@ -85,6 +105,10 @@ return [
 
             'north_carolina' => [
                 'north_carolina_income_tax_information' => env('TAXES_NORTH_CAROLINA_INCOME_TAX_INFORMATION', 'north_carolina_income_tax_information'),
+            ],
+
+            'north_dakota' => [
+                'north_dakota_income_tax_information' => env('TAXES_NORTH_DAKOTA_INCOME_TAX_INFORMATION', 'north_dakota_income_tax_information'),
             ],
 
             'ohio' => [
@@ -105,6 +129,10 @@ return [
 
             'washingtondc' => [
                 'washingtondc_income_tax_information' => env('TAXES_WASHINGTONDC_INCOME_TAX_INFORMATION', 'washingtondc_income_tax_information'),
+            ],
+
+            'utah' => [
+                'utah_income_tax_information' => env('TAXES_UTAH_INCOME_TAX_INFORMATION', 'utah_income_tax_information'),
             ],
 
             'west_virginia' => [
@@ -152,6 +180,14 @@ return [
                 'unemployment' => env('TAXES_GEORGIA_UNEMPLOYMENT_TAX_RATE', 0.027),
             ],
 
+            'idaho' => [
+                'unemployment' => env('TAXES_IDAHO_UNEMPLOYMENT_TAX_RATE', 0.01),
+            ],
+
+            'iowa' => [
+                'unemployment' => env('TAXES_IOWA_UNEMPLOYMENT_TAX_RATE', 0.01),
+            ],
+
             'kansas' => [
                 'unemployment' => env('TAXES_KANSAS_UNEMPLOYMENT_TAX_RATE', 0.027),
             ],
@@ -160,12 +196,24 @@ return [
                 'unemployment' => env('TAXES_LOUISIANA_UNEMPLOYMENT_TAX_RATE', 0.03),
             ],
 
+            'maine' => [
+                'unemployment' => env('TAXES_MAINE_UNEMPLOYMENT_TAX_RATE', 0.0189),
+            ],
+
             'maryland' => [
                 'unemployment' => env('TAXES_MARYLAND_UNEMPLOYMENT_TAX_RATE', 0.026),
             ],
 
+            'minnesota' => [
+                'unemployment' => env('TAXES_MINNESOTA_UNEMPLOYMENT_TAX_RATE', 0.01),
+            ],
+
             'mississippi' => [
                 'unemployment' => env('TAXES_MISSISSIPPI_UNEMPLOYMENT_TAX_RATE', 0.012),
+            ],
+
+            'montana' => [
+                'unemployment' => env('TAXES_MONTANA_UNEMPLOYMENT_TAX_RATE', 0.0258),
             ],
 
             'nebraska' => [
@@ -188,6 +236,10 @@ return [
                 'unemployment' => env('TAXES_NORTH_CAROLINA_UNEMPLOYMENT_TAX_RATE', 0.01),
             ],
 
+            'north_dakota' => [
+                'unemployment' => env('TAXES_NORTH_DAKOTA_UNEMPLOYMENT_TAX_RATE', 0.0121),
+            ],
+
             'ohio' => [
                 'unemployment' => env('TAXES_OHIO_UNEMPLOYMENT_TAX_RATE', 0.027),
             ],
@@ -206,6 +258,10 @@ return [
 
             'south_dakota' => [
                 'unemployment' => env('TAXES_SOUTH_DAKOTA_UNEMPLOYMENT_TAX_RATE', 0.012),
+            ],
+
+            'utah' => [
+                'unemployment' => env('TAXES_UTAH_UNEMPLOYMENT_TAX_RATE', 0.03),
             ],
 
             'washingtondc' => [
