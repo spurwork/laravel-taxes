@@ -6,7 +6,7 @@ use Carbon\Carbon;
 
 class MassachusettsWorkforceTrainingFundTest extends \TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 

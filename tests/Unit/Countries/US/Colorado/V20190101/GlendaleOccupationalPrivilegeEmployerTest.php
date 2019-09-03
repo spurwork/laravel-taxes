@@ -9,7 +9,7 @@ use TestCase;
 
 class GlendaleOccupationalPrivilegeEmployerTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 

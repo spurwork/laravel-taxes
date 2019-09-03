@@ -7,7 +7,7 @@ use Carbon\Carbon;
 
 class WisconsinIncomeTest extends \TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
