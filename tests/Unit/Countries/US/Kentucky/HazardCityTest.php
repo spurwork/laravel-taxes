@@ -31,6 +31,6 @@ class HazardCityTest extends TestCase
             $taxes->setPayPeriods(52);
         });
 
-        $this->assertSame(15.0, $results->getTax(HazardCity::class));
+        $this->assertSame(1.50, $results->getTax(HazardCity::class));
     }
 }

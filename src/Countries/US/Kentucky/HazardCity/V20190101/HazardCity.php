@@ -12,7 +12,7 @@ class HazardCity extends BaseHazardCity
 
     private const BRACKETS = [
         [1, 60000, 0.0125],
-        [60001, null, 0.05],
+        [60001, null, 0.005],
     ];
 
     public function compute(Collection $tax_areas)
