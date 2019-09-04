@@ -187,7 +187,10 @@ class Taxes
             ->with(['taxAreas' => function ($query) {
                 $query->atPoint($this->home_location, $this->work_location);
             }])
-            ->get();
+            ->get()
+            ->filter(static function (Tax $tax) {
+                return $tax->class::SCOPE === 'worker';
+            });
 
         if (!$this->hasStateIncomeTax()) {
             $this->getStateIncomeTax();
@@ -197,7 +200,9 @@ class Taxes
 
         foreach ($this->additional_taxes as $additional_tax) {
             $tax = Tax::where('class', $additional_tax)->first();
-            if (is_null($tax)) continue;
+            if (is_null($tax)) {
+                continue;
+            }
             $this->taxes->push($tax);
         }
     }

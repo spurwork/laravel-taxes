@@ -34,16 +34,16 @@ class DaytonTest extends TestCase
                 null,
                 7.50
             ],
-            'over 18' => [
-                Carbon::now()->subYears(19),
-                7.50
-            ],
-            'exactly 18' => [
-                Carbon::now()->subYears(18),
-                7.50
-            ],
-            'under 18' => [
+            'over 16' => [
                 Carbon::now()->subYears(17),
+                7.50
+            ],
+            'exactly 16' => [
+                Carbon::now()->subYears(16),
+                7.50
+            ],
+            'under 16' => [
+                Carbon::now()->subYears(15),
                 null
             ],
         ];
