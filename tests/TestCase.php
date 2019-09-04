@@ -3,6 +3,7 @@
 use Appleton\Taxes\Classes\PayrollLiabilities;
 use Appleton\Taxes\Classes\Taxes;
 use Appleton\Taxes\Countries\US\Alabama\AlabamaIncome\AlabamaIncome;
+use Appleton\Taxes\Countries\US\Arkansas\ArkansasIncome\ArkansasIncome;
 use Appleton\Taxes\Countries\US\California\CaliforniaIncome\CaliforniaIncome;
 use Appleton\Taxes\Countries\US\Colorado\ColoradoIncome\ColoradoIncome;
 use Appleton\Taxes\Countries\US\Connecticut\ConnecticutIncome\ConnecticutIncome;
@@ -16,7 +17,6 @@ use Appleton\Taxes\Countries\US\Massachusetts\MassachusettsIncome\MassachusettsI
 use Appleton\Taxes\Countries\US\Michigan\MichiganIncome\MichiganIncome;
 use Appleton\Taxes\Countries\US\Minnesota\MinnesotaIncome\MinnesotaIncome;
 use Appleton\Taxes\Countries\US\Mississippi\MississippiIncome\MississippiIncome;
-use Appleton\Taxes\Countries\US\Montana\MontanaIncome\MontanaIncome;
 use Appleton\Taxes\Countries\US\NewJersey\NewJerseyIncome\NewJerseyIncome;
 use Appleton\Taxes\Countries\US\NewMexico\NewMexicoIncome\NewMexicoIncome;
 use Appleton\Taxes\Countries\US\NewYork\NewYorkIncome\NewYorkIncome;
@@ -26,6 +26,7 @@ use Appleton\Taxes\Countries\US\WashingtonDC\WashingtonDCIncome\WashingtonDCInco
 use Appleton\Taxes\Countries\US\Wisconsin\WisconsinIncome\WisconsinIncome;
 use Appleton\Taxes\Models\Countries\US\Alabama\AlabamaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Arizona\ArizonaIncomeTaxInformation;
+use Appleton\Taxes\Models\Countries\US\Arkansas\ArkansasIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\California\CaliforniaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Colorado\ColoradoIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Connecticut\ConnecticutIncomeTaxInformation;
@@ -117,6 +118,12 @@ class TestCase extends BaseTestCase
         ArizonaIncomeTaxInformation::createForUser([
             'additional_withholding' => 0,
             'percentage_withheld' => 0,
+        ], $this->user);
+
+        ArkansasIncomeTaxInformation::createForUser([
+            'exemptions' => 0,
+            'additional_withholding' => 0,
+            'exempt' => false,
         ], $this->user);
 
         CaliforniaIncomeTaxInformation::createForUser([
@@ -344,6 +351,7 @@ class TestCase extends BaseTestCase
             'us.alabama.tuskegee' => [32.4302, -85.7077],
             'us.alaska' => [64.2008, -149.4937],
             'us.arizona' => [33.6050991, -112.4052392],
+            'us.arkansas' => [35.2010, -91.8318],
             'us.california' => [38.5816, -121.4944],
             'us.california.sacramento' => [38.5816, -121.4944],
             'us.california.san_francisco' => [37.7749, -122.4194],

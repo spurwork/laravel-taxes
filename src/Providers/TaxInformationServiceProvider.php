@@ -13,6 +13,7 @@ class TaxInformationServiceProvider extends ServiceProvider
         \Appleton\Taxes\Models\Countries\US\FederalIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\Alabama\AlabamaIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\Arizona\ArizonaIncomeTaxInformation::class,
+        \Appleton\Taxes\Models\Countries\US\Arkansas\ArkansasIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\California\CaliforniaIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\Colorado\ColoradoIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\Connecticut\ConnecticutIncomeTaxInformation::class,

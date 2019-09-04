@@ -35,6 +35,10 @@ return [
                 'alabama_income_tax_information' => env('TAXES_ALABAMA_INCOME_TAX_INFORMATION', 'alabama_income_tax_information'),
             ],
 
+            'arkansas' => [
+                'arkansas_income_tax_information' => env('TAXES_ARKANSAS_INCOME_TAX_INFORMATION', 'arkansas_income_tax_information'),
+            ],
+
             'california' => [
                 'california_income_tax_information' => env('TAXES_CALIFORNIA_INCOME_TAX_INFORMATION', 'california_income_tax_information'),
             ],
@@ -150,6 +154,10 @@ return [
 
             'alaska' => [
                 'unemployment' => env('TAXES_ALASKA_UNEMPLOYMENT_TAX_RATE', 0.0132),
+            ],
+
+            'arkansas' => [
+                'unemployment' => env('TAXES_ARKANSAS_UNEMPLOYMENT_TAX_RATE', 0.032),
             ],
 
             'california' => [
