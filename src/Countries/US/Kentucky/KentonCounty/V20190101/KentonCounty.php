@@ -11,8 +11,8 @@ class KentonCounty extends BaseKentonCounty
     use HasBrackets;
 
     private const BRACKETS = [
-        [1, 25000, 0.007097],
-        [25001, 132900, 0.001097],
+        [0, 25000, 0.007097],
+        [25000, 132900, 0.001097],
     ];
 
     public function compute(Collection $tax_areas)

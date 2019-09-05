@@ -13,9 +13,9 @@ class HasBracketsTest extends \TestCase
             use HasBrackets;
 
             private const BRACKETS = [
-                [1, 10000, 0.03],
-                [10001, 20000, 0.02],
-                [20001, null, 0.01],
+                [0, 10000, 0.03],
+                [10000, 20000, 0.02],
+                [20000, null, 0.01],
             ];
 
             public $payroll;
@@ -61,7 +61,7 @@ class HasBracketsTest extends \TestCase
                 20000,
                 1.0,
             ],
-            '4' => [
+            '3' => [
                 100,
                 9950,
                 2.5,

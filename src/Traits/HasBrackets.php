@@ -8,7 +8,7 @@ trait HasBrackets
     {
         $start = max($start, $ytd_earnings);
 
-        $stop = min($stop ?? $start + $earnings + 1, $earnings + $ytd_earnings + 1);
+        $stop = min($stop ?? $start + $earnings, $earnings + $ytd_earnings);
 
         $earnings = min($earnings, max($stop - $start, 0));
 

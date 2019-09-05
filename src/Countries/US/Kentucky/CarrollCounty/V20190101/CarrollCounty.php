@@ -11,9 +11,9 @@ class CarrollCounty extends BaseCarrollCounty
     use HasBrackets;
 
     private const BRACKETS = [
-        [1, 5000, 0.0],
-        [5001, 50000, 0.01],
-        [50001, null, 0.0],
+        [0, 5000, 0.0],
+        [5000, 50000, 0.01],
+        [50000, null, 0.0],
     ];
 
     public function compute(Collection $tax_areas)
