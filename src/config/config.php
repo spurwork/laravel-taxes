@@ -91,6 +91,10 @@ return [
                 'montana_income_tax_information' => env('TAXES_MONTANA_INCOME_TAX_INFORMATION', 'montana_income_tax_information'),
             ],
 
+            'nebraska' => [
+                'nebraska_income_tax_information' => env('TAXES_NEBRASKA_INCOME_TAX_INFORMATION', 'nebraska_income_tax_information'),
+            ],
+
             'new_jersey' => [
                 'new_jersey_income_tax_information' => env('TAXES_NEW_JERSEY_INCOME_TAX_INFORMATION', 'new_jersey_income_tax_information'),
             ],
@@ -101,6 +105,10 @@ return [
 
             'north_carolina' => [
                 'north_carolina_income_tax_information' => env('TAXES_NORTH_CAROLINA_INCOME_TAX_INFORMATION', 'north_carolina_income_tax_information'),
+            ],
+
+            'north_dakota' => [
+                'north_dakota_income_tax_information' => env('TAXES_NORTH_DAKOTA_INCOME_TAX_INFORMATION', 'north_dakota_income_tax_information'),
             ],
 
             'ohio' => [
@@ -121,6 +129,10 @@ return [
 
             'washingtondc' => [
                 'washingtondc_income_tax_information' => env('TAXES_WASHINGTONDC_INCOME_TAX_INFORMATION', 'washingtondc_income_tax_information'),
+            ],
+
+            'utah' => [
+                'utah_income_tax_information' => env('TAXES_UTAH_INCOME_TAX_INFORMATION', 'utah_income_tax_information'),
             ],
 
             'west_virginia' => [
@@ -204,6 +216,10 @@ return [
                 'unemployment' => env('TAXES_MONTANA_UNEMPLOYMENT_TAX_RATE', 0.0258),
             ],
 
+            'nebraska' => [
+                'unemployment' => env('TAXES_NEBRASKA_UNEMPLOYMENT_TAX_RATE', 0.0125),
+            ],
+
             'new_jersey' => [
                 'unemployment' => env('TAXES_NEW_JERSEY_UNEMPLOYMENT_TAX_RATE', 0.028),
             ],
@@ -218,6 +234,10 @@ return [
 
             'north_carolina' => [
                 'unemployment' => env('TAXES_NORTH_CAROLINA_UNEMPLOYMENT_TAX_RATE', 0.01),
+            ],
+
+            'north_dakota' => [
+                'unemployment' => env('TAXES_NORTH_DAKOTA_UNEMPLOYMENT_TAX_RATE', 0.0121),
             ],
 
             'ohio' => [
@@ -238,6 +258,10 @@ return [
 
             'south_dakota' => [
                 'unemployment' => env('TAXES_SOUTH_DAKOTA_UNEMPLOYMENT_TAX_RATE', 0.012),
+            ],
+
+            'utah' => [
+                'unemployment' => env('TAXES_UTAH_UNEMPLOYMENT_TAX_RATE', 0.03),
             ],
 
             'washingtondc' => [
