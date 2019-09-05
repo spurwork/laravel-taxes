@@ -12,7 +12,7 @@ class NewYorkFamilyMedicalLeave extends BaseNewYorkFamilyMedicalLeave
 
     public function getBaseEarnings()
     {
-        return max(min(static::WAGE_BASE - $this->payroll->wtd_earnings, $this->payroll->getEarnings()), 0);
+        return max(min(static::WAGE_BASE - $this->payroll->getWtdEarnings(), $this->payroll->getEarnings()), 0);
     }
 
     public function compute(Collection $tax_areas)
