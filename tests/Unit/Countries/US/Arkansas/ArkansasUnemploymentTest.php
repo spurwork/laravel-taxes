@@ -12,7 +12,7 @@ class ArkansasUnemploymentTest extends TestCase
     /**
      * @dataProvider provideTestData
      */
-    public function testNorthDakotaUnemployment(int $earnings, int $ytd_earnings, ?float $expected_amount): void
+    public function testArkansasUnemployment(int $earnings, int $ytd_earnings, ?float $expected_amount): void
     {
         Carbon::setTestNow(Carbon::parse('2019-01-01'));
 

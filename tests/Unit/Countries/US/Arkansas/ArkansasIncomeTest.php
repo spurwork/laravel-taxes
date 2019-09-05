@@ -12,8 +12,8 @@ class ArkansasIncomeTest extends TestCase
     /**
      * @dataProvider provideTestData
      */
-    public function testVermontIncome(int $exemptions, int $additional_withholding,
-                                      bool $exempt, float $earnings, ?float $result): void
+    public function testArkansasIncome(int $exemptions, int $additional_withholding,
+                                       bool $exempt, float $earnings, ?float $result): void
     {
         Carbon::setTestNow('2019-01-01');
 
