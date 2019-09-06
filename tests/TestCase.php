@@ -3,6 +3,7 @@
 use Appleton\Taxes\Classes\PayrollLiabilities;
 use Appleton\Taxes\Classes\Taxes;
 use Appleton\Taxes\Countries\US\Alabama\AlabamaIncome\AlabamaIncome;
+use Appleton\Taxes\Countries\US\Arkansas\ArkansasIncome\ArkansasIncome;
 use Appleton\Taxes\Countries\US\California\CaliforniaIncome\CaliforniaIncome;
 use Appleton\Taxes\Countries\US\Colorado\ColoradoIncome\ColoradoIncome;
 use Appleton\Taxes\Countries\US\Connecticut\ConnecticutIncome\ConnecticutIncome;
@@ -17,16 +18,20 @@ use Appleton\Taxes\Countries\US\Michigan\MichiganIncome\MichiganIncome;
 use Appleton\Taxes\Countries\US\Minnesota\MinnesotaIncome\MinnesotaIncome;
 use Appleton\Taxes\Countries\US\Mississippi\MississippiIncome\MississippiIncome;
 use Appleton\Taxes\Countries\US\Montana\MontanaIncome\MontanaIncome;
+use Appleton\Taxes\Countries\US\Nebraska\NebraskaIncome\NebraskaIncome;
 use Appleton\Taxes\Countries\US\NewJersey\NewJerseyIncome\NewJerseyIncome;
 use Appleton\Taxes\Countries\US\NewMexico\NewMexicoIncome\NewMexicoIncome;
 use Appleton\Taxes\Countries\US\NewYork\NewYorkIncome\NewYorkIncome;
 use Appleton\Taxes\Countries\US\NorthCarolina\NorthCarolinaIncome\NorthCarolinaIncome;
+use Appleton\Taxes\Countries\US\NorthDakota\NorthDakotaIncome\NorthDakotaIncome;
 use Appleton\Taxes\Countries\US\Oklahoma\OklahomaIncome\OklahomaIncome;
+use Appleton\Taxes\Countries\US\Utah\UtahIncome\UtahIncome;
 use Appleton\Taxes\Countries\US\Vermont\VermontIncome\VermontIncome;
 use Appleton\Taxes\Countries\US\WashingtonDC\WashingtonDCIncome\WashingtonDCIncome;
 use Appleton\Taxes\Countries\US\Wisconsin\WisconsinIncome\WisconsinIncome;
 use Appleton\Taxes\Models\Countries\US\Alabama\AlabamaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Arizona\ArizonaIncomeTaxInformation;
+use Appleton\Taxes\Models\Countries\US\Arkansas\ArkansasIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\California\CaliforniaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Colorado\ColoradoIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Connecticut\ConnecticutIncomeTaxInformation;
@@ -46,14 +51,17 @@ use Appleton\Taxes\Models\Countries\US\Michigan\MichiganIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Minnesota\MinnesotaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Mississippi\MississippiIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Montana\MontanaIncomeTaxInformation;
+use Appleton\Taxes\Models\Countries\US\Nebraska\NebraskaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\NewJersey\NewJerseyIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\NewMexico\NewMexicoIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\NewYork\NewYorkIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\NorthCarolina\NorthCarolinaIncomeTaxInformation;
+use Appleton\Taxes\Models\Countries\US\NorthDakota\NorthDakotaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Ohio\OhioIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Oklahoma\OklahomaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Pennsylvania\PennsylvaniaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\SouthCarolina\SouthCarolinaIncomeTaxInformation;
+use Appleton\Taxes\Models\Countries\US\Utah\UtahIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Vermont\VermontIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Virginia\VirginiaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\WashingtonDC\WashingtonDCIncomeTaxInformation;
@@ -119,6 +127,12 @@ class TestCase extends BaseTestCase
         ArizonaIncomeTaxInformation::createForUser([
             'additional_withholding' => 0,
             'percentage_withheld' => 0,
+        ], $this->user);
+
+        ArkansasIncomeTaxInformation::createForUser([
+            'exemptions' => 0,
+            'additional_withholding' => 0,
+            'exempt' => false,
         ], $this->user);
 
         CaliforniaIncomeTaxInformation::createForUser([
@@ -236,6 +250,13 @@ class TestCase extends BaseTestCase
             'exempt' => false,
         ], $this->user);
 
+        NebraskaIncomeTaxInformation::createForUser([
+            'allowances' => 0,
+            'exempt' => false,
+            'lower_withholding_than_lb223' => false,
+            'filing_status' => NebraskaIncome::FILING_SINGLE,
+        ], $this->user);
+
         NewJerseyIncomeTaxInformation::createForUser([
             'additional_withholding' => 0,
             'exemptions' => 0,
@@ -259,6 +280,12 @@ class TestCase extends BaseTestCase
             'additional_withholding' => 0,
             'dependents' => 0,
             'filing_status' => NorthCarolinaIncome::FILING_SINGLE,
+        ], $this->user);
+
+        NorthDakotaIncomeTaxInformation::createForUser([
+            'exemptions' => 0,
+            'exempt' => false,
+            'filing_status' => NorthDakotaIncome::FILING_SINGLE,
         ], $this->user);
 
         OhioIncomeTaxInformation::createForUser([
@@ -293,6 +320,11 @@ class TestCase extends BaseTestCase
             'additional_withholding' => 0,
             'exemptions' => 0,
             'sixty_five_plus_or_blind_exemptions' => 0,
+        ], $this->user);
+
+        UtahIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'filing_status' => UtahIncome::FILING_SINGLE,
         ], $this->user);
 
         WashingtonDCIncomeTaxInformation::createForUser([
@@ -353,6 +385,7 @@ class TestCase extends BaseTestCase
             'us.alabama.tuskegee' => [32.4302, -85.7077],
             'us.alaska' => [64.2008, -149.4937],
             'us.arizona' => [33.6050991, -112.4052392],
+            'us.arkansas' => [35.2010, -91.8318],
             'us.california' => [38.5816, -121.4944],
             'us.california.sacramento' => [38.5816, -121.4944],
             'us.california.san_francisco' => [37.7749, -122.4194],
@@ -727,6 +760,7 @@ class TestCase extends BaseTestCase
             'us.minnesota' => [46.7296, -94.6859],
             'us.mississippi' => [32.3547, -89.3985],
             'us.montana' => [46.8797, -110.3626],
+            'us.nebraska' => [41.4925, -99.9018],
             'us.nevada' => [39.1641, -119.7661],
             'us.new_jersey' => [40.2206, -74.7597],
             'us.new_jersey.newark' => [40.7357, -74.1724],
@@ -734,6 +768,7 @@ class TestCase extends BaseTestCase
             'us.new_york' => [40.7128, -74.0060],
             'us.new_york.yonkers' => [40.9312, -73.8987],
             'us.north_carolina' => [35.7596, -79.0193],
+            'us.north_dakota' => [47.5515, -101.0020],
             'us.ohio' => [40.4173, -82.9071],
             'us.ohio.aberdeen' => [38.6556296, -83.7610323],
             'us.ohio.ada' => [40.7694969, -83.8227148],
@@ -1385,6 +1420,7 @@ class TestCase extends BaseTestCase
             'us.south_dakota' => [43.9695, -99.9018],
             'us.tennessee' => [35.5175, -86.5804],
             'us.texas' => [31.9686, -99.9018],
+            'us.utah' => [39.3210, -111.0937],
             'us.vermont' => [44.5588, -72.5778],
             'us.virginia' => [37.5407, -77.4360],
             'us.washingtondc' => [38.9072, -77.0369],
