@@ -131,6 +131,10 @@ return [
                 'south_carolina_income_tax_information' => env('TAXES_SOUTH_CAROLINA_INCOME_TAX_INFORMATION', 'south_carolina_income_tax_information'),
             ],
 
+            'vermont' => [
+                'vermont_income_tax_information' => env('TAXES_VERMONT_INCOME_TAX_INFORMATION', 'vermont_income_tax_information'),
+            ],
+
             'washingtondc' => [
                 'washingtondc_income_tax_information' => env('TAXES_WASHINGTONDC_INCOME_TAX_INFORMATION', 'washingtondc_income_tax_information'),
             ],
@@ -274,6 +278,10 @@ return [
 
             'washingtondc' => [
                 'unemployment' => env('TAXES_WASHINGTONDC_UNEMPLOYMENT_TAX_RATE', 0.027),
+            ],
+
+            'vermont' => [
+                'unemployment' => env('TAXES_VERMONT_UNEMPLOYMENT_TAX_RATE', 0.01),
             ],
 
             'west_virginia' => [
