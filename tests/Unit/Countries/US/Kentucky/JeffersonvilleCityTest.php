@@ -8,18 +8,30 @@ use TestCase;
 
 class JeffersonvilleCityTest extends TestCase
 {
-    public function testJeffersonvilleCity()
+    /**
+     * @dataProvider provideTestData
+     */
+    public function testJeffersonvilleCity(string $date, int $earnings, float $result)
     {
-        Carbon::setTestNow(Carbon::parse('2019-02-01'));
+        Carbon::setTestNow(Carbon::parse($date));
 
-        $results = $this->taxes->calculate(function ($taxes) {
+        $results = $this->taxes->calculate(function ($taxes) use ($earnings) {
             $taxes->setHomeLocation($this->getLocation('us.kentucky.jeffersonville_city'));
             $taxes->setWorkLocation($this->getLocation('us.kentucky.jeffersonville_city'));
             $taxes->setUser($this->user);
-            $taxes->setEarnings(300);
+            $taxes->setEarnings($earnings);
             $taxes->setPayPeriods(52);
         });
 
-        $this->assertSame(3.00, $results->getTax(JeffersonvilleCity::class));
+        $this->assertSame($result, $results->getTax(JeffersonvilleCity::class));
+    }
+
+    public function provideTestData(): array
+    {
+        // [$date, $earnings, $result]
+        return [
+            '2019-01-01' => ['2019-01-01', 300, 3.0],
+            '2019-07-01' => ['2019-07-01', 300, 6.0],
+        ];
     }
 }
