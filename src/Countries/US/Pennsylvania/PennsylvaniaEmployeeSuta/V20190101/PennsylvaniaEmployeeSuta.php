@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 class PennsylvaniaEmployeeSuta extends BasePennsylvaniaEmployeeSuta
 {
-    const TAX_RATE = 0.06;
+    const TAX_RATE = 0.0006;
 
     public function compute(Collection $tax_areas)
     {

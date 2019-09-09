@@ -37,17 +37,17 @@ class PennsylvaniaEmployeeSutaTest extends TestCase
             '0' => [
                 'January 1, 2019 8am',
                 300,
-                18.0,
+                0.18,
             ],
             '1' => [
                 'January 1, 2019 8am',
                 100,
-                6.0,
+                0.06,
             ],
             '2' => [
                 'January 1, 2019 8am',
                 2000,
-                120.0,
+                1.2,
             ],
         ];
     }
