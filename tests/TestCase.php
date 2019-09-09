@@ -3,6 +3,7 @@
 use Appleton\Taxes\Classes\PayrollLiabilities;
 use Appleton\Taxes\Classes\Taxes;
 use Appleton\Taxes\Countries\US\Alabama\AlabamaIncome\AlabamaIncome;
+use Appleton\Taxes\Countries\US\Arkansas\ArkansasIncome\ArkansasIncome;
 use Appleton\Taxes\Countries\US\California\CaliforniaIncome\CaliforniaIncome;
 use Appleton\Taxes\Countries\US\Colorado\ColoradoIncome\ColoradoIncome;
 use Appleton\Taxes\Countries\US\Connecticut\ConnecticutIncome\ConnecticutIncome;
@@ -17,15 +18,20 @@ use Appleton\Taxes\Countries\US\Michigan\MichiganIncome\MichiganIncome;
 use Appleton\Taxes\Countries\US\Minnesota\MinnesotaIncome\MinnesotaIncome;
 use Appleton\Taxes\Countries\US\Mississippi\MississippiIncome\MississippiIncome;
 use Appleton\Taxes\Countries\US\Montana\MontanaIncome\MontanaIncome;
+use Appleton\Taxes\Countries\US\Nebraska\NebraskaIncome\NebraskaIncome;
 use Appleton\Taxes\Countries\US\NewJersey\NewJerseyIncome\NewJerseyIncome;
 use Appleton\Taxes\Countries\US\NewMexico\NewMexicoIncome\NewMexicoIncome;
 use Appleton\Taxes\Countries\US\NewYork\NewYorkIncome\NewYorkIncome;
 use Appleton\Taxes\Countries\US\NorthCarolina\NorthCarolinaIncome\NorthCarolinaIncome;
+use Appleton\Taxes\Countries\US\NorthDakota\NorthDakotaIncome\NorthDakotaIncome;
 use Appleton\Taxes\Countries\US\Oklahoma\OklahomaIncome\OklahomaIncome;
+use Appleton\Taxes\Countries\US\Utah\UtahIncome\UtahIncome;
+use Appleton\Taxes\Countries\US\Vermont\VermontIncome\VermontIncome;
 use Appleton\Taxes\Countries\US\WashingtonDC\WashingtonDCIncome\WashingtonDCIncome;
 use Appleton\Taxes\Countries\US\Wisconsin\WisconsinIncome\WisconsinIncome;
 use Appleton\Taxes\Models\Countries\US\Alabama\AlabamaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Arizona\ArizonaIncomeTaxInformation;
+use Appleton\Taxes\Models\Countries\US\Arkansas\ArkansasIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\California\CaliforniaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Colorado\ColoradoIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Connecticut\ConnecticutIncomeTaxInformation;
@@ -45,14 +51,18 @@ use Appleton\Taxes\Models\Countries\US\Michigan\MichiganIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Minnesota\MinnesotaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Mississippi\MississippiIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Montana\MontanaIncomeTaxInformation;
+use Appleton\Taxes\Models\Countries\US\Nebraska\NebraskaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\NewJersey\NewJerseyIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\NewMexico\NewMexicoIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\NewYork\NewYorkIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\NorthCarolina\NorthCarolinaIncomeTaxInformation;
+use Appleton\Taxes\Models\Countries\US\NorthDakota\NorthDakotaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Ohio\OhioIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Oklahoma\OklahomaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Pennsylvania\PennsylvaniaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\SouthCarolina\SouthCarolinaIncomeTaxInformation;
+use Appleton\Taxes\Models\Countries\US\Utah\UtahIncomeTaxInformation;
+use Appleton\Taxes\Models\Countries\US\Vermont\VermontIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Virginia\VirginiaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\WashingtonDC\WashingtonDCIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\WestVirginia\WestVirginiaIncomeTaxInformation;
@@ -117,6 +127,12 @@ class TestCase extends BaseTestCase
         ArizonaIncomeTaxInformation::createForUser([
             'additional_withholding' => 0,
             'percentage_withheld' => 0,
+        ], $this->user);
+
+        ArkansasIncomeTaxInformation::createForUser([
+            'exemptions' => 0,
+            'additional_withholding' => 0,
+            'exempt' => false,
         ], $this->user);
 
         CaliforniaIncomeTaxInformation::createForUser([
@@ -234,6 +250,13 @@ class TestCase extends BaseTestCase
             'exempt' => false,
         ], $this->user);
 
+        NebraskaIncomeTaxInformation::createForUser([
+            'allowances' => 0,
+            'exempt' => false,
+            'lower_withholding_than_lb223' => false,
+            'filing_status' => NebraskaIncome::FILING_SINGLE,
+        ], $this->user);
+
         NewJerseyIncomeTaxInformation::createForUser([
             'additional_withholding' => 0,
             'exemptions' => 0,
@@ -259,6 +282,12 @@ class TestCase extends BaseTestCase
             'filing_status' => NorthCarolinaIncome::FILING_SINGLE,
         ], $this->user);
 
+        NorthDakotaIncomeTaxInformation::createForUser([
+            'exemptions' => 0,
+            'exempt' => false,
+            'filing_status' => NorthDakotaIncome::FILING_SINGLE,
+        ], $this->user);
+
         OhioIncomeTaxInformation::createForUser([
             'dependents' => 0,
             'exempt' => false,
@@ -280,10 +309,22 @@ class TestCase extends BaseTestCase
             'exempt' => false,
         ], $this->user);
 
+        VermontIncomeTaxInformation::createForUser([
+            'filing_status' => VermontIncome::FILING_SINGLE,
+            'allowances' => 0,
+            'additional_withholding' => 0,
+            'exempt' => false,
+        ], $this->user);
+
         VirginiaIncomeTaxInformation::createForUser([
             'additional_withholding' => 0,
             'exemptions' => 0,
             'sixty_five_plus_or_blind_exemptions' => 0,
+        ], $this->user);
+
+        UtahIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'filing_status' => UtahIncome::FILING_SINGLE,
         ], $this->user);
 
         WashingtonDCIncomeTaxInformation::createForUser([
@@ -344,6 +385,7 @@ class TestCase extends BaseTestCase
             'us.alabama.tuskegee' => [32.4302, -85.7077],
             'us.alaska' => [64.2008, -149.4937],
             'us.arizona' => [33.6050991, -112.4052392],
+            'us.arkansas' => [35.2010, -91.8318],
             'us.california' => [38.5816, -121.4944],
             'us.california.sacramento' => [38.5816, -121.4944],
             'us.california.san_francisco' => [37.7749, -122.4194],
@@ -482,7 +524,9 @@ class TestCase extends BaseTestCase
             'us.kentucky.camargo_city' => [37.9942469, -83.8876978],
             'us.kentucky.campbell_county' => [38.8952, -84.3963],
             'us.kentucky.campbellsville_city' => [37.3433974, -85.3419069],
+            'us.kentucky.caneyville_city' => [37.4242, -86.4883],
             'us.kentucky.carlisle_city' => [38.3120197, -84.027427],
+            'us.kentucky.carroll_county' => [38.6748, -85.0649],
             'us.kentucky.catlettsburg_city' => [38.4048042, -82.6004369],
             'us.kentucky.cave_city' => [37.1367171, -85.9569195],
             'us.kentucky.clark_county' => [37.959945, -84.1435136],
@@ -493,6 +537,7 @@ class TestCase extends BaseTestCase
             'us.kentucky.clinton_county' => [36.7263899, -85.1479364],
             'us.kentucky.cold_spring_city' => [39.0217, -84.4399],
             'us.kentucky.coal_run_village_city' => [37.5131553, -82.5584861],
+            'us.kentucky.corbin_city' => [36.910052, -84.070530],
             'us.kentucky.covington_city' => [39.0837, -84.5086],
             'us.kentucky.crescent_springs_city' => [39.0514492, -84.5816106],
             'us.kentucky.crestview_hills_city' => [39.0273, -84.5849],
@@ -527,6 +572,7 @@ class TestCase extends BaseTestCase
             'us.kentucky.franklin_county' => [38.2481018, -84.8984775],
             'us.kentucky.fulton_city' => [36.5042277, -88.8742259],
             'us.kentucky.gallatin_county' => [38.7295069, -84.8776392],
+            'us.kentucky.gamaliel_city' => [36.6398, -85.7966],
             'us.kentucky.garrard_county' => [37.6413234, -84.564147],
             'us.kentucky.georgetown_city' => [38.2098, -84.5588],
             'us.kentucky.glasgow_city' => [36.9958839, -85.9119215],
@@ -542,6 +588,7 @@ class TestCase extends BaseTestCase
             'us.kentucky.harrodsburg_city' => [37.762298, -84.8432852],
             'us.kentucky.hart_county' => [37.3101304, -85.8486236],
             'us.kentucky.hartford_city' => [37.4511591, -86.9091596],
+            'us.kentucky.hazard_city' => [37.2495, -83.1932],
             'us.kentucky.henderson_city' => [37.8361538, -87.5900134],
             'us.kentucky.henderson_county' => [37.7415161, -87.5791287],
             'us.kentucky.hickman_city' => [36.5711721, -89.1861791],
@@ -562,6 +609,7 @@ class TestCase extends BaseTestCase
             'us.kentucky.jessamine_county' => [37.895573, -84.564147],
             'us.kentucky.johnson_county' => [37.8048335, -82.8640623],
             'us.kentucky.junction_city' => [37.5867433, -84.7938377],
+            'us.kentucky.kenton_county' => [38.9864, -84.5641],
             'us.kentucky.knox_county' => [36.9260578, -83.8897057],
             'us.kentucky.la_grange_city' => [38.4075666, -85.3788468],
             'us.kentucky.lakeside_park_city' => [39.0356162, -84.5691102],
@@ -718,6 +766,7 @@ class TestCase extends BaseTestCase
             'us.minnesota' => [46.7296, -94.6859],
             'us.mississippi' => [32.3547, -89.3985],
             'us.montana' => [46.8797, -110.3626],
+            'us.nebraska' => [41.4925, -99.9018],
             'us.nevada' => [39.1641, -119.7661],
             'us.new_jersey' => [40.2206, -74.7597],
             'us.new_jersey.newark' => [40.7357, -74.1724],
@@ -725,6 +774,7 @@ class TestCase extends BaseTestCase
             'us.new_york' => [40.7128, -74.0060],
             'us.new_york.yonkers' => [40.9312, -73.8987],
             'us.north_carolina' => [35.7596, -79.0193],
+            'us.north_dakota' => [47.5515, -101.0020],
             'us.ohio' => [40.4173, -82.9071],
             'us.ohio.aberdeen' => [38.6556296, -83.7610323],
             'us.ohio.ada' => [40.7694969, -83.8227148],
@@ -1376,6 +1426,8 @@ class TestCase extends BaseTestCase
             'us.south_dakota' => [43.9695, -99.9018],
             'us.tennessee' => [35.5175, -86.5804],
             'us.texas' => [31.9686, -99.9018],
+            'us.utah' => [39.3210, -111.0937],
+            'us.vermont' => [44.5588, -72.5778],
             'us.virginia' => [37.5407, -77.4360],
             'us.washingtondc' => [38.9072, -77.0369],
             'us.west_virginia' => [38.3498, -81.6326],
@@ -1436,6 +1488,7 @@ class TestCase extends BaseTestCase
         $app['config']->set('taxes.tables.us.ohio.ohio_income_tax_information', 'ohio_income_tax_information');
         $app['config']->set('taxes.tables.us.oklahoma.oklahoma_income_tax_information', 'oklahoma_income_tax_information');
         $app['config']->set('taxes.tables.us.pennsylvania.pennsylvania_income_tax_information', 'pennsylvania_income_tax_information');
+        $app['config']->set('taxes.tables.us.vermont.vermont_income_tax_information', 'vermont_income_tax_information');
         $app['config']->set('taxes.tables.us.virginia.virginia_income_tax_information', 'virginia_income_tax_information');
         $app['config']->set('taxes.tables.us.washingtondc.washingtondc_income_tax_information', 'washingtondc_income_tax_information');
         $app['config']->set('taxes.tables.us.wisconsin.wisconsin_income_tax_information', 'wisconsin_income_tax_information');
