@@ -284,6 +284,10 @@ return [
                 'unemployment' => env('TAXES_VERMONT_UNEMPLOYMENT_TAX_RATE', 0.01),
             ],
 
+            'washington' => [
+                'unemployment' => env('TAXES_WASHINGTON_UNEMPLOYMENT_TAX_RATE', 0.012),
+            ],
+
             'west_virginia' => [
                 'unemployment' => env('TAXES_WEST_VIRGINIA_UNEMPLOYMENT_TAX_RATE', 0.027),
             ],

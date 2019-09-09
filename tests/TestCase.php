@@ -1429,6 +1429,7 @@ class TestCase extends BaseTestCase
             'us.utah' => [39.3210, -111.0937],
             'us.vermont' => [44.5588, -72.5778],
             'us.virginia' => [37.5407, -77.4360],
+            'us.washington' => [47.7511, -120.7401],
             'us.washingtondc' => [38.9072, -77.0369],
             'us.west_virginia' => [38.3498, -81.6326],
             'us.west_virginia.charleston' => [38.3498, -81.6326],
