@@ -285,7 +285,7 @@ return [
             ],
 
             'washington' => [
-                'unemployment' => env('TAXES_WASHINGTON_UNEMPLOYMENT_TAX_RATE', 0.012),
+                'unemployment' => env('TAXES_WASHINGTON_UNEMPLOYMENT_TAX_RATE', 0.015),
             ],
 
             'west_virginia' => [

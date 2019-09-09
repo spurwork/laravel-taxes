@@ -24,8 +24,8 @@ class WashingtonUnemploymentTest extends TestCase
             $taxes->setEarnings(200.0);
         });
 
-        // round(200.0 * .012, 2) = 2.4;
-        $this->assertThat(2.4, self::identicalTo($results->getTax(WashingtonUnemployment::class)));
+        // round(200.0 * .015, 2) = 3.0;
+        $this->assertThat(3.0, self::identicalTo($results->getTax(WashingtonUnemployment::class)));
     }
 
     public function testWashingtonUnemploymentNotMetWageBase(): void
@@ -40,8 +40,8 @@ class WashingtonUnemploymentTest extends TestCase
 
         // 49500 + 200 = 49700
         // 49800 wage base not met, all taxable
-        // round(200.0 * .012, 2) = 2.4;
-        $this->assertThat(2.4, self::identicalTo($results->getTax(WashingtonUnemployment::class)));
+        // round(200.0 * .015, 2) = 3.0;
+        $this->assertThat(3.0, self::identicalTo($results->getTax(WashingtonUnemployment::class)));
     }
 
     public function testWashingtonUnemploymentMetAndExceedWageBase(): void
@@ -56,8 +56,8 @@ class WashingtonUnemploymentTest extends TestCase
 
         // 49700 + 200 = 49900
         // 100 over 49800 wage base so only 100 taxable
-        // round(100.0 * .012, 2) = 1.2;
-        $this->assertThat(1.2, self::identicalTo($results->getTax(WashingtonUnemployment::class)));
+        // round(100.0 * .015, 2) = 1.5;
+        $this->assertThat(1.5, self::identicalTo($results->getTax(WashingtonUnemployment::class)));
     }
 
     public function testWashingtonUnemploymentExceedWageBase(): void
