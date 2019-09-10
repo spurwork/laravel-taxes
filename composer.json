@@ -17,13 +17,13 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "php": "~7.1",
+        "php": "~7.2",
         "illuminate/database": "^5.5",
-        "nesbot/carbon": "^1.21"
+        "nesbot/carbon": "^2.24.0"
     },
     "require-dev": {
         "doctrine/dbal": "^2.9",
-        "mockery/mockery": "^0.9.9",
+        "mockery/mockery": "^1.0",
         "orchestra/database": "^3.6",
         "orchestra/testbench": "~3.6",
         "phpunit/phpunit": "~7.0",

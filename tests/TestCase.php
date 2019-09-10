@@ -92,7 +92,7 @@ class TestCase extends BaseTestCase
         return Carbon::parse($date);
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 

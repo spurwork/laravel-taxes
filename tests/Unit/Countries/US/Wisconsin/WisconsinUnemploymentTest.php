@@ -7,7 +7,7 @@ use Carbon\Carbon;
 
 class WisconsinUnemploymentTest extends \TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
