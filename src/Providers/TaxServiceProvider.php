@@ -480,6 +480,7 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\Nebraska\NebraskaUnemployment\NebraskaUnemployment::class,
         \Appleton\Taxes\Countries\US\NewHampshire\NewHampshireUnemployment\NewHampshireUnemployment::class,
         \Appleton\Taxes\Countries\US\Nevada\NevadaUnemployment\NevadaUnemployment::class,
+        \Appleton\Taxes\Countries\US\Nevada\NevadaGrossPayrollEmployer\NevadaGrossPayrollEmployer::class,
         \Appleton\Taxes\Countries\US\NewJersey\NewarkPayroll\NewarkPayroll::class,
         \Appleton\Taxes\Countries\US\NewJersey\NewarkPayroll\NewarkPayroll::class,
         \Appleton\Taxes\Countries\US\NewJersey\NewJerseyDisabilityInsurance\NewJerseyDisabilityInsurance::class,
