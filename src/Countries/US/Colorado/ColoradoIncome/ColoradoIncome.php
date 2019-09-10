@@ -6,6 +6,7 @@ use Appleton\Taxes\Classes\BaseStateIncome;
 use Appleton\Taxes\Classes\Payroll;
 use Appleton\Taxes\Models\Countries\US\Colorado\ColoradoIncomeTaxInformation;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Arr;
 
 abstract class ColoradoIncome extends BaseStateIncome
 {
@@ -63,7 +64,7 @@ abstract class ColoradoIncome extends BaseStateIncome
 
     private function getExemptionAllowance()
     {
-        return array_get($this->getExemptionAmounts(), min($this->tax_information->exemptions, 10));
+        return Arr::get($this->getExemptionAmounts(), min($this->tax_information->exemptions, 10));
     }
 
     private function getGrossEarnings()

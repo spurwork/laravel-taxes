@@ -7,7 +7,7 @@ use Appleton\Taxes\Countries\US\NorthCarolina\NorthCarolinaUnemployment\NorthCar
 
 class NorthCarolinaUnemploymentTest extends \TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 

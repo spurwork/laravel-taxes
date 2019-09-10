@@ -9,7 +9,7 @@ use TestCase;
 
 class KansasUnemploymentTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         Carbon::setTestNow('2019-01-01');

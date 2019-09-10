@@ -8,7 +8,7 @@ use Carbon\Carbon;
 
 class NorthCarolinaIncomeTest extends \TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 

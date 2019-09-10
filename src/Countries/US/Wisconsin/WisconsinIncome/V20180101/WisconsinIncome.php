@@ -5,6 +5,7 @@ namespace Appleton\Taxes\Countries\US\Wisconsin\WisconsinIncome\V20180101;
 use Appleton\Taxes\Classes\Payroll;
 use Appleton\Taxes\Countries\US\Wisconsin\WisconsinIncome\WisconsinIncome as BaseWisconsinIncome;
 use Appleton\Taxes\Models\Countries\US\Wisconsin\WisconsinIncomeTaxInformation;
+use Illuminate\Support\Arr;
 
 class WisconsinIncome extends BaseWisconsinIncome
 {
@@ -52,7 +53,7 @@ class WisconsinIncome extends BaseWisconsinIncome
     public function getTaxBrackets()
     {
         if (array_key_exists($this->tax_information->filing_status, static::BRACKETS)) {
-            return array_get(static::BRACKETS, $this->tax_information->filing_status);
+            return Arr::get(static::BRACKETS, $this->tax_information->filing_status);
         }
 
         return static::BRACKETS[static::FILING_SINGLE];
