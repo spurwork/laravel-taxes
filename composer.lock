@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "335cee7741fe171f3761e9a65e9f3030",
+    "content-hash": "03c3aa6887e799b1848cdcb16e58a31b",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -601,16 +601,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "2.24.0",
+            "version": "2.25.0-beta.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "934459c5ac0658bc765ad1e53512c7c77adcac29"
+                "reference": "a333fc82bf1ebfc0f90e359fec7d2d4eac7f4a18"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/934459c5ac0658bc765ad1e53512c7c77adcac29",
-                "reference": "934459c5ac0658bc765ad1e53512c7c77adcac29",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/a333fc82bf1ebfc0f90e359fec7d2d4eac7f4a18",
+                "reference": "a333fc82bf1ebfc0f90e359fec7d2d4eac7f4a18",
                 "shasum": ""
             },
             "require": {
@@ -657,14 +657,14 @@
                     "homepage": "http://github.com/kylekatarnls"
                 }
             ],
-            "description": "A API extension for DateTime that supports 281 different languages.",
+            "description": "An API extension for DateTime that supports 281 different languages.",
             "homepage": "http://carbon.nesbot.com",
             "keywords": [
                 "date",
                 "datetime",
                 "time"
             ],
-            "time": "2019-08-31T16:37:55+00:00"
+            "time": "2019-09-09T15:56:37+00:00"
         },
         {
             "name": "opis/closure",
@@ -1246,12 +1246,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug.git",
-                "reference": "ae236cea0b5e95263d2998e141e6e578433a0b4c"
+                "reference": "8b0e9b48810ef6a0d17f023c7ecdd12d398cf9a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/debug/zipball/ae236cea0b5e95263d2998e141e6e578433a0b4c",
-                "reference": "ae236cea0b5e95263d2998e141e6e578433a0b4c",
+                "url": "https://api.github.com/repos/symfony/debug/zipball/8b0e9b48810ef6a0d17f023c7ecdd12d398cf9a8",
+                "reference": "8b0e9b48810ef6a0d17f023c7ecdd12d398cf9a8",
                 "shasum": ""
             },
             "require": {
@@ -1294,7 +1294,7 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2019-09-06T14:02:48+00:00"
+            "time": "2019-09-10T11:27:29+00:00"
         },
         {
             "name": "symfony/error-handler",
@@ -1655,12 +1655,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-kernel.git",
-                "reference": "b2307d66b481977569ed47dfe5c8a7100781f4eb"
+                "reference": "827eb66b5fd150f73245deb790c61d932ed4f7a1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/b2307d66b481977569ed47dfe5c8a7100781f4eb",
-                "reference": "b2307d66b481977569ed47dfe5c8a7100781f4eb",
+                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/827eb66b5fd150f73245deb790c61d932ed4f7a1",
+                "reference": "827eb66b5fd150f73245deb790c61d932ed4f7a1",
                 "shasum": ""
             },
             "require": {
@@ -1741,7 +1741,7 @@
             ],
             "description": "Symfony HttpKernel Component",
             "homepage": "https://symfony.com",
-            "time": "2019-09-08T20:40:04+00:00"
+            "time": "2019-09-10T11:27:29+00:00"
         },
         {
             "name": "symfony/mime",
@@ -2478,12 +2478,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "feec20ee2b7b27c60296f2d760332bdeeea433a1"
+                "reference": "5a40a86069ddb9126c6cb53c0abd8619f0cca649"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/feec20ee2b7b27c60296f2d760332bdeeea433a1",
-                "reference": "feec20ee2b7b27c60296f2d760332bdeeea433a1",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/5a40a86069ddb9126c6cb53c0abd8619f0cca649",
+                "reference": "5a40a86069ddb9126c6cb53c0abd8619f0cca649",
                 "shasum": ""
             },
             "require": {
@@ -2546,7 +2546,7 @@
                 "debug",
                 "dump"
             ],
-            "time": "2019-09-07T11:31:53+00:00"
+            "time": "2019-09-10T11:27:29+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
@@ -2587,8 +2587,8 @@
             "authors": [
                 {
                     "name": "Tijs Verkoyen",
-                    "email": "css_to_inline_styles@verkoyen.eu",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "email": "css_to_inline_styles@verkoyen.eu"
                 }
             ],
             "description": "CssToInlineStyles is a class that enables you to convert HTML-pages/files into HTML-pages/files with inline styles. This is very useful when you're sending emails.",
@@ -3283,12 +3283,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/orchestral/testbench-core.git",
-                "reference": "2d24a28c51dcc6a363f26d6d6fe6c83c7eba42e0"
+                "reference": "a010400f1519a3240a99368554c6a077af67cb2f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/orchestral/testbench-core/zipball/2d24a28c51dcc6a363f26d6d6fe6c83c7eba42e0",
-                "reference": "2d24a28c51dcc6a363f26d6d6fe6c83c7eba42e0",
+                "url": "https://api.github.com/repos/orchestral/testbench-core/zipball/a010400f1519a3240a99368554c6a077af67cb2f",
+                "reference": "a010400f1519a3240a99368554c6a077af67cb2f",
                 "shasum": ""
             },
             "require": {
@@ -3340,7 +3340,7 @@
                 "orchestral",
                 "testing"
             ],
-            "time": "2019-09-03T21:23:30+00:00"
+            "time": "2019-09-10T07:33:18+00:00"
         },
         {
             "name": "phar-io/manifest",
@@ -3384,18 +3384,18 @@
             "authors": [
                 {
                     "name": "Arne Blankerts",
-                    "email": "arne@blankerts.de",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "email": "arne@blankerts.de"
                 },
                 {
                     "name": "Sebastian Heuer",
-                    "email": "sebastian@phpeople.de",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "email": "sebastian@phpeople.de"
                 },
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "sebastian@phpunit.de",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "email": "sebastian@phpunit.de"
                 }
             ],
             "description": "Component for reading phar.io manifest information from a PHP Archive (PHAR)",
@@ -3921,12 +3921,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "cfe3a028e410b0db78d4eafa23d463105a2628df"
+                "reference": "d5a2676db2a707362ae15f7fba5018f76091c61b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/cfe3a028e410b0db78d4eafa23d463105a2628df",
-                "reference": "cfe3a028e410b0db78d4eafa23d463105a2628df",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/d5a2676db2a707362ae15f7fba5018f76091c61b",
+                "reference": "d5a2676db2a707362ae15f7fba5018f76091c61b",
                 "shasum": ""
             },
             "require": {
@@ -3996,7 +3996,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2019-09-09T12:09:12+00:00"
+            "time": "2019-09-10T02:56:06+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
@@ -4757,12 +4757,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "doctrine/dbal": 20,
-        "mockery/mockery": 20,
-        "phpunit/phpunit": 20,
-        "squizlabs/php_codesniffer": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
