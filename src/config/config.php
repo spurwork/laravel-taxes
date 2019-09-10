@@ -232,6 +232,10 @@ return [
                 'unemployment' => env('TAXES_NEBRASKA_UNEMPLOYMENT_TAX_RATE', 0.0125),
             ],
 
+            'new_hampshire' => [
+                'unemployment' => env('TAXES_NEW_HAMPSHIRE_UNEMPLOYMENT_TAX_RATE', 0.012),
+            ],
+
             'new_jersey' => [
                 'unemployment' => env('TAXES_NEW_JERSEY_UNEMPLOYMENT_TAX_RATE', 0.028),
             ],
