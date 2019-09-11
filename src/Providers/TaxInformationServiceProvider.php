@@ -39,6 +39,7 @@ class TaxInformationServiceProvider extends ServiceProvider
         \Appleton\Taxes\Models\Countries\US\NorthDakota\NorthDakotaIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\Ohio\OhioIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\Oklahoma\OklahomaIncomeTaxInformation::class,
+        \Appleton\Taxes\Models\Countries\US\Oregon\OregonIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\NorthCarolina\NorthCarolinaIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\Pennsylvania\PennsylvaniaIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\SouthCarolina\SouthCarolinaIncomeTaxInformation::class,

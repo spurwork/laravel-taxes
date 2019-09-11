@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Collection;
 
 class OregonUnemployment extends BaseStateUnemployment
 {
-	const TYPE = 'state';
-	const WITHHELD = false;
+    const TYPE = 'state';
+    const WITHHELD = false;
 }

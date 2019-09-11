@@ -34,68 +34,95 @@ class OregonIncome extends BaseOregonIncome
     ];
 
     const TAX_WITHHOLDING_TABLE_SINGLE_LESS_THEN_3_EXEMPTIONS_LESS_THAN_50000 = [
-        [0, 206, 0.05],
-        [3550, 383.5, 0.07],
-        [8900, 758, 0.09],
+        [0, 0.05, 206],
+        [3550, 0.07, 383.5],
+        [8900, 0.09, 758],
     ];
 
     const TAX_WITHHOLDING_TABLE_SINGLE_MORE_THAN_OR_3_EXEMPTIONS_LESS_THAN_50000 = [
-        [0, 206, 0.05],
-        [7100, 561, 0.07],
-        [17800, 1310, 0.09],
+        [0, 0.05, 206],
+        [7100, 0.07, 561],
+        [17800, 0.09, 1310],
     ];
 
     const TAX_WITHHOLDING_TABLE_MARRIED_LESS_THAN_50000 = [
-        [0, 206, 0.05],
-        [7100, 561, 0.07],
-        [17800, 1310, 0.09],
+        [0, 0.05, 206],
+        [7100, 0.07, 561],
+        [17800, 0.09, 1310],
     ];
 
     const TAX_WITHHOLDING_TABLE_SINGLE_LESS_THEN_3_EXEMPTIONS_MORE_THAN_50000 = [
         [0, 0, 0],
-        [8900, 552, 0.0],
-        [125000, 11001, 0.099],
+        [8900, 0.0, 552],
+        [125000, 0.099, 11001],
     ];
 
     const TAX_WITHHOLDING_TABLE_SINGLE_MORE_THAN_OR_3_EXEMPTIONS_MORE_THAN_50000 = [
         [0, 0, 0],
-        [17800, 1104, 0.09],
-        [250000, 22002, 0.099],
+        [17800, 0.09, 1104],
+        [250000, 0.099, 22002],
     ];
 
     const TAX_WITHHOLDING_TABLE_MARRIED_MORE_THAN_50000 = [
         [0, 0, 0],
-        [17800, 1104, 0.09],
-        [250000, 22002, 0.099],
+        [17800, 0.09, 1104],
+        [250000, 0.099, 22002],
     ];
 
     public function compute(Collection $tax_areas)
     {
         if ($this->isUserClaimingExemption() || $this->tax_information->filing_status === 'E') {
-            return 0;
+            return 0.0;
         }
 
-        $gross_annual_wages = $this->getAdjustedEarnings();
+        $gross_annual_wages = $this->getGrossAnnualWages();
 
         $annualized_taxable_wages = $this->getBracketAmount($gross_annual_wages, $this->getTaxBrackets());
 
         $gross_annual_wages -= $annualized_taxable_wages;
 
         if ($this->tax_information->filing_status === 'M') {
-            $gross_annual_wages -= self::MARRIED_MAXIMUM_FEDERAL_DEDUCTION;
+            $gross_annual_wages -= self::MARRIED_DEDUCTION;
         } elseif ($this->tax_information->filing_status === 'S' && $this->tax_information->exemptions >= 3) {
             $gross_annual_wages -= self::SINGLE_THREE_OR_MORE_EXEMPTIONS_DEDUCTION;
         } else {
             $gross_annual_wages -= self::SINGLE_LESS_THAN_THREE_EXEMPTIONS_DEDUCTION;
         }
 
-        // step 7 of the nfc usda page
-        if ($this->getAdjustedEarnings() < 50000) {
+        if ($this->getGrossAnnualWages() < 50000) {
+            if ($this->tax_information->filing_status === 'M') {
+                $gross_annual_wages = $this->getTaxAmountFromTaxBrackets($gross_annual_wages, self::TAX_WITHHOLDING_TABLE_MARRIED_LESS_THAN_50000);
+            } elseif ($this->tax_information->filing_status === 'S' && $this->tax_information->exemptions >= 3) {
+                $gross_annual_wages = $this->getTaxAmountFromTaxBrackets($gross_annual_wages, self::TAX_WITHHOLDING_TABLE_SINGLE_MORE_THAN_OR_3_EXEMPTIONS_LESS_THAN_50000);
+            } else {
+                $gross_annual_wages = $this->getTaxAmountFromTaxBrackets($gross_annual_wages, self::TAX_WITHHOLDING_TABLE_SINGLE_LESS_THEN_3_EXEMPTIONS_LESS_THAN_50000);
+            }
         } else {
+            if ($this->tax_information->filing_status === 'M') {
+                $gross_annual_wages = $this->getTaxAmountFromTaxBrackets($gross_annual_wages, self::TAX_WITHHOLDING_TABLE_MARRIED_MORE_THAN_50000);
+            } elseif ($this->tax_information->filing_status === 'S' && $this->tax_information->exemptions >= 3) {
+                $gross_annual_wages = $this->getTaxAmountFromTaxBrackets($gross_annual_wages, self::TAX_WITHHOLDING_TABLE_SINGLE_MORE_THAN_OR_3_EXEMPTIONS_MORE_THAN_50000);
+            } else {
+                $gross_annual_wages = $this->getTaxAmountFromTaxBrackets($gross_annual_wages, self::TAX_WITHHOLDING_TABLE_SINGLE_LESS_THEN_3_EXEMPTIONS_MORE_THAN_50000);
+            }
         }
-    }
 
-    // need method to reduse exemptions
+        if ($this->tax_information->filing_status === 'S' && $gross_annual_wages > 100000 && $this->tax_information->exemptions > 1) {
+            $gross_annual_wages -= ($this->tax_information->exemptions - 1) * self::ANNUAL_TAX_CREDIT;
+        } elseif ($this->tax_information->filing_status === 'M' && $gross_annual_wages > 200000 && $this->tax_information->exemptions === 1) {
+            $gross_annual_wages -= ($this->tax_information->exemptions - 1) * self::ANNUAL_TAX_CREDIT;
+        } elseif ($this->tax_information->filing_status === 'M' && $gross_annual_wages > 200000 && $this->tax_information->exemptions >= 2) {
+            $gross_annual_wages -= ($this->tax_information->exemptions - 2) * self::ANNUAL_TAX_CREDIT;
+        } else {
+            $gross_annual_wages -= $this->tax_information->exemptions * self::ANNUAL_TAX_CREDIT;
+        }
+
+        $gross_annual_wages > 0 ? $gross_annual_wages /= $this->payroll->pay_periods : 0;
+        $gross_annual_wages += $this->tax_information->additional_withholding;
+
+        $this->tax_total = $gross_annual_wages;
+        return round($this->payroll->withholdTax($this->tax_total), 2);
+    }
 
     public function getGrossAnnualWages()
     {

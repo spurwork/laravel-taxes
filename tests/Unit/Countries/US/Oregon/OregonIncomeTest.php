@@ -9,10 +9,107 @@ use TestCase;
 
 class OregonIncomeTest extends TestCase
 {
-	/**
-	* @dataProvider provideTestData
-	*/
-	public function provideTestData()
-	{
-	}
+    /**
+     * @dataProvider provideTestData
+     */
+    public function testOregonIncome($date, $exempt, $filing_status, $exemptions, $earnings, $additional_withholding, $result)
+    {
+        OregonIncomeTaxInformation::forUser($this->user)->update([
+            'exemptions' => $exemptions,
+            'exempt' => $exempt,
+            'filing_status' => $filing_status,
+            'additional_withholding' => $additional_withholding,
+        ]);
+
+        Carbon::setTestNow(
+            Carbon::parse($date, 'America/Chicago')->setTimezone('UTC')
+        );
+
+        $results = $this->taxes->calculate(function ($taxes) use ($earnings) {
+            $taxes->setHomeLocation($this->getLocation('us.oregon'));
+            $taxes->setWorkLocation($this->getLocation('us.oregon'));
+            $taxes->setUser($this->user);
+            $taxes->setEarnings($earnings);
+            $taxes->setPayPeriods(52);
+        });
+
+        $this->assertSame($result, $results->getTax(OregonIncome::class));
+    }
+
+    public function provideTestData()
+    {
+        // date
+        // exempt
+        // filing status
+        // exemptions
+        // earnings
+        // additional withholding
+        // results
+        return [
+            // exempt, should be null
+            '0' => [
+                'January 1, 2019 8am',
+                true,
+                OregonIncome::FILING_SINGLE,
+                0,
+                300,
+                0,
+                null,
+            ],
+            '1' => [
+                'January 1, 2019 8am',
+                false,
+                OregonIncome::FILING_SINGLE,
+                0,
+                300,
+                0,
+                20.12,
+            ],
+            '2' => [
+                'January 1, 2019 8am',
+                false,
+                OregonIncome::FILING_SINGLE,
+                2,
+                600,
+                0,
+                39.93,
+            ],
+            '3' => [
+                'January 1, 2019 8am',
+                false,
+                OregonIncome::FILING_SINGLE,
+                3,
+                1200,
+                0,
+                67.49,
+            ],
+            '4' => [
+                'January 1, 2019 8am',
+                false,
+                OregonIncome::FILING_MARRIED,
+                0,
+                1000,
+                0,
+                61.37,
+            ],
+            '5' => [
+                'January 1, 2019 8am',
+                false,
+                OregonIncome::FILING_MARRIED,
+                4,
+                2000,
+                0,
+                135.64,
+            ],
+            '6' => [
+                'January 1, 2019 8am',
+                false,
+                OregonIncome::FILING_MARRIED,
+                4,
+                2000,
+                20,
+                155.64,
+            ],
+        ];
+    }
 }

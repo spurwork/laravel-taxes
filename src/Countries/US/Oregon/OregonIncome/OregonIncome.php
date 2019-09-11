@@ -8,9 +8,17 @@ use Appleton\Taxes\Models\Countries\US\Oregon\OregonIncomeTaxInformation;
 
 abstract class OregonIncome extends BaseStateIncome
 {
-	public function __construct(OregonIncomeTaxInformation $tax_information, Payroll $payroll)
-	{
-		parent::__construct($payroll);
-		$this->tax_information = $tax_information;
-	}
+    const FILING_SINGLE = 'S';
+    const FILING_MARRIED = 'M';
+
+    const FILING_STATUSES = [
+        self::FILING_SINGLE => 'Filing Single',
+        self::FILING_MARRIED => 'Filing Married',
+    ];
+
+    public function __construct(OregonIncomeTaxInformation $tax_information, Payroll $payroll)
+    {
+        parent::__construct($payroll);
+        $this->tax_information = $tax_information;
+    }
 }
