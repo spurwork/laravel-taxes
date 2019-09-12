@@ -35,6 +35,10 @@ return [
                 'alabama_income_tax_information' => env('TAXES_ALABAMA_INCOME_TAX_INFORMATION', 'alabama_income_tax_information'),
             ],
 
+            'arkansas' => [
+                'arkansas_income_tax_information' => env('TAXES_ARKANSAS_INCOME_TAX_INFORMATION', 'arkansas_income_tax_information'),
+            ],
+
             'california' => [
                 'california_income_tax_information' => env('TAXES_CALIFORNIA_INCOME_TAX_INFORMATION', 'california_income_tax_information'),
             ],
@@ -127,6 +131,10 @@ return [
                 'south_carolina_income_tax_information' => env('TAXES_SOUTH_CAROLINA_INCOME_TAX_INFORMATION', 'south_carolina_income_tax_information'),
             ],
 
+            'vermont' => [
+                'vermont_income_tax_information' => env('TAXES_VERMONT_INCOME_TAX_INFORMATION', 'vermont_income_tax_information'),
+            ],
+
             'washingtondc' => [
                 'washingtondc_income_tax_information' => env('TAXES_WASHINGTONDC_INCOME_TAX_INFORMATION', 'washingtondc_income_tax_information'),
             ],
@@ -162,6 +170,10 @@ return [
 
             'alaska' => [
                 'unemployment' => env('TAXES_ALASKA_UNEMPLOYMENT_TAX_RATE', 0.0132),
+            ],
+
+            'arkansas' => [
+                'unemployment' => env('TAXES_ARKANSAS_UNEMPLOYMENT_TAX_RATE', 0.032),
             ],
 
             'california' => [
@@ -220,6 +232,10 @@ return [
                 'unemployment' => env('TAXES_NEBRASKA_UNEMPLOYMENT_TAX_RATE', 0.0125),
             ],
 
+            'new_hampshire' => [
+                'unemployment' => env('TAXES_NEW_HAMPSHIRE_UNEMPLOYMENT_TAX_RATE', 0.012),
+            ],
+
             'new_jersey' => [
                 'unemployment' => env('TAXES_NEW_JERSEY_UNEMPLOYMENT_TAX_RATE', 0.028),
             ],
@@ -266,6 +282,14 @@ return [
 
             'washingtondc' => [
                 'unemployment' => env('TAXES_WASHINGTONDC_UNEMPLOYMENT_TAX_RATE', 0.027),
+            ],
+
+            'vermont' => [
+                'unemployment' => env('TAXES_VERMONT_UNEMPLOYMENT_TAX_RATE', 0.01),
+            ],
+
+            'washington' => [
+                'unemployment' => env('TAXES_WASHINGTON_UNEMPLOYMENT_TAX_RATE', 0.015),
             ],
 
             'west_virginia' => [

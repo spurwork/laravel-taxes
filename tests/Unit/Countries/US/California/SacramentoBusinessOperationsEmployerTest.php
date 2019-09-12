@@ -22,6 +22,7 @@ class SacramentoBusinessOperationsEmployerTest extends TestCase
         use ($wages, $ytd_wages, $ytd_liabilities) {
             $payroll_liabilities->setWorkLocation($this->getLocation('us.california.sacramento'));
             $payroll_liabilities->setWages($wages);
+            $payroll_liabilities->setQtdWages(0);
             $payroll_liabilities->setYtdWages($ytd_wages);
             $payroll_liabilities->setYtdLiabilities($ytd_liabilities);
         });

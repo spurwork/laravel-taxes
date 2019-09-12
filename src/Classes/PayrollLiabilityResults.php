@@ -23,12 +23,9 @@ class PayrollLiabilityResults
         return $this->transformAmount($liabilities)->first();
     }
 
-    public function getLocalLiabilities(): Collection
+    public function getLiabilities(): Collection
     {
-        $liabilities = $this->results->filter(static function (PayrollLiability $liability) {
-            return $liability->getTaxClass()::TYPE === 'local';
-        });
-        return $this->transformAmount($liabilities);
+        return $this->transformAmount($this->results);
     }
 
     public function getWages(string $tax): ?int

@@ -9,8 +9,9 @@ use Closure;
 class Taxes
 {
     protected $additional_taxes = [];
-    protected $date = null;
     protected $birth_date = null;
+    protected $date = null;
+    protected $days_worked = 0;
     protected $exemptions = [];
     protected $pay_periods = 1;
     protected $reciprocal_agreement = false;
@@ -26,14 +27,19 @@ class Taxes
         $this->additional_taxes = $additional_taxes;
     }
 
+    public function setBirthDate($birth_date)
+    {
+        $this->birth_date = $birth_date;
+    }
+
     public function setDate($date)
     {
         $this->date = $date;
     }
 
-    public function setBirthDate($birth_date)
+    public function setDaysWorked($days_worked)
     {
-        $this->birth_date = $birth_date;
+        $this->days_worked = $days_worked;
     }
 
     public function setEarnings($earnings)
@@ -129,8 +135,9 @@ class Taxes
     private function bindPayrollData()
     {
         app()->instance(Payroll::class, new Payroll([
-            'date' => $this->getDate(),
             'birth_date' => $this->birth_date,
+            'date' => $this->getDate(),
+            'days_worked' => $this->days_worked,
             'earnings' => $this->earnings,
             'exemptions' => $this->exemptions,
             'pay_periods' => $this->pay_periods,
