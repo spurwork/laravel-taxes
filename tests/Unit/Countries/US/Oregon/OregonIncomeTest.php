@@ -63,7 +63,7 @@ class OregonIncomeTest extends TestCase
                 0,
                 300,
                 0,
-                20.12,
+                20.13,
             ],
             '2' => [
                 'January 1, 2019 8am',
@@ -72,7 +72,7 @@ class OregonIncomeTest extends TestCase
                 2,
                 600,
                 0,
-                39.93,
+                35.97,
             ],
             '3' => [
                 'January 1, 2019 8am',
@@ -81,7 +81,7 @@ class OregonIncomeTest extends TestCase
                 3,
                 1200,
                 0,
-                67.49,
+                66.9,
             ],
             '4' => [
                 'January 1, 2019 8am',
@@ -99,7 +99,7 @@ class OregonIncomeTest extends TestCase
                 4,
                 2000,
                 0,
-                135.64,
+                134.94,
             ],
             '6' => [
                 'January 1, 2019 8am',
@@ -108,7 +108,16 @@ class OregonIncomeTest extends TestCase
                 4,
                 2000,
                 20,
-                155.64,
+                154.94,
+            ],
+            '7' => [
+                'January 1, 2019 8am',
+                false,
+                OregonIncome::FILING_MARRIED,
+                4,
+                5000,
+                0,
+                417.77,
             ],
         ];
     }
