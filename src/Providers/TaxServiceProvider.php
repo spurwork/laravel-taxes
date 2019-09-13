@@ -1418,6 +1418,7 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\WestVirginia\WestVirginiaUnemployment\WestVirginiaUnemployment::class,
         \Appleton\Taxes\Countries\US\Wisconsin\WisconsinIncome\WisconsinIncome::class,
         \Appleton\Taxes\Countries\US\Wisconsin\WisconsinUnemployment\WisconsinUnemployment::class,
+        \Appleton\Taxes\Countries\US\Wyoming\WyomingUnemployment\WyomingUnemployment::class,
     ];
 
     private function getImplementations($interface)

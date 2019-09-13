@@ -1439,6 +1439,7 @@ class TestCase extends BaseTestCase
             'us.west_virginia.morgantown' => [39.6295, -79.9559],
             'us.west_virginia.parkersburg' => [39.2667, -81.5615],
             'us.wisconsin' => [43.0849721, -89.4764603],
+            'us.wyoming' => [43.0760, -107.2903],
         ];
 
         return $locations[$name];
