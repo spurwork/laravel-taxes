@@ -127,6 +127,10 @@ return [
                 'pennsylvania_income_tax_information' => env('TAXES_PENNSYLVANIA_INCOME_TAX_INFORMATION', 'pennsylvania_income_tax_information'),
             ],
 
+            'rhode_island' => [
+                'rhode_island_income_tax_information' => env('TAXES_RHODE_ISLAND_INCOME_TAX_INFORMATION', 'rhode_island_income_tax_information'),
+            ],
+
             'south_carolina' => [
                 'south_carolina_income_tax_information' => env('TAXES_SOUTH_CAROLINA_INCOME_TAX_INFORMATION', 'south_carolina_income_tax_information'),
             ],
@@ -266,6 +270,10 @@ return [
 
             'pennsylvania' => [
                 'unemployment' => env('TAXES_PENNSYLVANIA_UNEMPLOYMENT_TAX_RATE', 0.03689),
+            ],
+
+            'rhode_island' => [
+                'unemployment' => env('TAXES_RHODE_ISLAND_UNEMPLOYMENT_TAX_RATE', 0.0117),
             ],
 
             'south_carolina' => [
