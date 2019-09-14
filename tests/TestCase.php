@@ -17,6 +17,7 @@ use Appleton\Taxes\Countries\US\Massachusetts\MassachusettsIncome\MassachusettsI
 use Appleton\Taxes\Countries\US\Michigan\MichiganIncome\MichiganIncome;
 use Appleton\Taxes\Countries\US\Minnesota\MinnesotaIncome\MinnesotaIncome;
 use Appleton\Taxes\Countries\US\Mississippi\MississippiIncome\MississippiIncome;
+use Appleton\Taxes\Countries\US\Missouri\MissouriIncome\MissouriIncome;
 use Appleton\Taxes\Countries\US\Montana\MontanaIncome\MontanaIncome;
 use Appleton\Taxes\Countries\US\Nebraska\NebraskaIncome\NebraskaIncome;
 use Appleton\Taxes\Countries\US\NewJersey\NewJerseyIncome\NewJerseyIncome;
@@ -50,6 +51,7 @@ use Appleton\Taxes\Models\Countries\US\Massachusetts\MassachusettsIncomeTaxInfor
 use Appleton\Taxes\Models\Countries\US\Michigan\MichiganIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Minnesota\MinnesotaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Mississippi\MississippiIncomeTaxInformation;
+use Appleton\Taxes\Models\Countries\US\Missouri\MissouriIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Montana\MontanaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Nebraska\NebraskaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\NewJersey\NewJerseyIncomeTaxInformation;
@@ -242,6 +244,13 @@ class TestCase extends BaseTestCase
             'total_exemption_amount_dollars' => 0,
             'additional_withholding' => 0,
             'filing_status' => MississippiIncome::FILING_SINGLE,
+            'exempt' => false,
+        ], $this->user);
+
+        MissouriIncomeTaxInformation::createForUser([
+            'exemptions' => 0,
+            'additional_withholding' => 0,
+            'filing_status' => MissouriIncome::FILING_SINGLE,
             'exempt' => false,
         ], $this->user);
 
@@ -765,6 +774,7 @@ class TestCase extends BaseTestCase
             'us.michigan' => [42.7325, -84.5555],
             'us.minnesota' => [46.7296, -94.6859],
             'us.mississippi' => [32.3547, -89.3985],
+            'us.missouri' => [37.9643, -91.8318],
             'us.montana' => [46.8797, -110.3626],
             'us.nebraska' => [41.4925, -99.9018],
             'us.nevada' => [39.1641, -119.7661],

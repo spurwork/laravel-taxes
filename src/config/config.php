@@ -91,6 +91,10 @@ return [
                 'mississippi_income_tax_information' => env('TAXES_MISSISSIPPI_INCOME_TAX_INFORMATION', 'mississippi_income_tax_information'),
             ],
 
+            'missouri' => [
+                'missouri_income_tax_information' => env('TAXES_MISSOURI_INCOME_TAX_INFORMATION', 'missouri_income_tax_information'),
+            ],
+
             'montana' => [
                 'montana_income_tax_information' => env('TAXES_MONTANA_INCOME_TAX_INFORMATION', 'montana_income_tax_information'),
             ],
@@ -222,6 +226,10 @@ return [
 
             'mississippi' => [
                 'unemployment' => env('TAXES_MISSISSIPPI_UNEMPLOYMENT_TAX_RATE', 0.012),
+            ],
+
+            'missouri' => [
+                'unemployment' => env('TAXES_MISSOURI_UNEMPLOYMENT_TAX_RATE', 0.027),
             ],
 
             'montana' => [
