@@ -232,6 +232,10 @@ return [
                 'unemployment' => env('TAXES_NEBRASKA_UNEMPLOYMENT_TAX_RATE', 0.0125),
             ],
 
+            'new_hampshire' => [
+                'unemployment' => env('TAXES_NEW_HAMPSHIRE_UNEMPLOYMENT_TAX_RATE', 0.012),
+            ],
+
             'new_jersey' => [
                 'unemployment' => env('TAXES_NEW_JERSEY_UNEMPLOYMENT_TAX_RATE', 0.028),
             ],
@@ -282,6 +286,10 @@ return [
 
             'vermont' => [
                 'unemployment' => env('TAXES_VERMONT_UNEMPLOYMENT_TAX_RATE', 0.01),
+            ],
+
+            'washington' => [
+                'unemployment' => env('TAXES_WASHINGTON_UNEMPLOYMENT_TAX_RATE', 0.015),
             ],
 
             'west_virginia' => [
