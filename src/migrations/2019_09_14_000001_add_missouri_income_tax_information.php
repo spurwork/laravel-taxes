@@ -14,7 +14,7 @@ class AddMissouriIncomeTaxInformation extends Migration
     {
         Schema::create('missouri_income_tax_information', static function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('exemptions')->default(0);
+            $table->integer('allowances')->default(0);
             $table->integer('additional_withholding')->default(0);
             $table->string('filing_status');
             $table->boolean('exempt')->default(false);

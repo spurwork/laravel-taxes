@@ -15,9 +15,9 @@ class MissouriIncome extends BaseMissouriIncome
             return 0;
         }
 
-        $this->tax_total = $this->payroll->withholdTax($this->getTaxAmountFromTaxBrackets($this->getAnnualTaxAmount(), $this->getTaxBrackets()) / $this->payroll->pay_periods + $this->tax_information->additional_withholding);
+        $this->tax_total = $this->payroll->withholdTax($this->getTaxAmountFromTaxBrackets($this->getStandardDeduction(), $this->getTaxBrackets()) / $this->payroll->pay_periods + $this->tax_information->additional_withholding);
 
-        return round($this->tax_total, 2);
+        return (int)round(intval($this->tax_total * 100) / 100, 0);
     }
 
     public function getGrossWages()
@@ -25,21 +25,23 @@ class MissouriIncome extends BaseMissouriIncome
         return $this->getAdjustedEarnings() * $this->payroll->pay_periods;
     }
 
-    public function getAnnualTaxAmount()
+    public function getStandardDeduction()
     {
-        $gross_wages = $this->getGrossWages();
-        return $gross_wages < self::EXEMPTION_GROSS_WAGES ? $gross_wages - ($this->tax_information->exemptions * self::EXEMPTION_AMOUNT) : $gross_wages;
+        if ($this->tax_information->filing_status === 'M') {
+            return $this->getGrossWages() - self::MARRIED_ONE_SPOUSE_WORKING_STANDARD_DEDUCTION;
+        } elseif ($this->tax_information->filing_status === 'H') {
+            return $this->getGrossWages() - self::HEAD_OF_HOUSEHOLD_STANDARD_DEDUCTION;
+        } elseif ($this->tax_information->filing_status === 'N') {
+            return $this->getGrossWages() - self::MARRIED_BOTH_SPOUSE_WORKING_STANDARD_DEDUCTION;
+        } elseif ($this->tax_information->filing_status === 'N') {
+            return $this->getGrossWages() - self::MARRIED_FILING_SEPARATELY_STANDARD_DEDUCTION;
+        } else {
+            return $this->getGrossWages() - self::SINGLE_STANDARD_DEDUCTION;
+        }
     }
 
     public function getTaxBrackets()
     {
-        return self::TAX_WITHHOLDING_AMOUNT;
-    }
-
-    public function getStandardDeduction()
-    {
-        if ($this->tax_information->filing_status === 'S') {
-			return self::
-        }
+        return self::TAX_WITHHOLDING_TABLE;
     }
 }

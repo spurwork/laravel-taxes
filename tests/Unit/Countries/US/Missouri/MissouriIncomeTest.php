@@ -12,13 +12,13 @@ class MissouriIncomeTest extends TestCase
     /**
     * @dataProvider provideTestData
     */
-    public function testMissouriIncome($date, $filing_status, $exempt, $exemptions, $additional_withholding, $earnings, $result)
+    public function testMissouriIncome($date, $filing_status, $exempt, $allowances, $additional_withholding, $earnings, $result)
     {
         MissouriIncomeTaxInformation::forUser($this->user)->update([
             'additional_withholding' => $additional_withholding,
             'exempt' => $exempt,
             'filing_status' => $filing_status,
-            'exemptions' => $exemptions,
+            'allowances' => $allowances,
         ]);
 
         Carbon::setTestNow(
@@ -41,7 +41,7 @@ class MissouriIncomeTest extends TestCase
         // date
         // filing status
         // exempt
-        // exemptions
+        // allowances
         // additional_withholding
         // earnings
         // results
@@ -58,111 +58,66 @@ class MissouriIncomeTest extends TestCase
             ],
             '1' => [
                 'January 1, 2019 8am',
-                MissouriIncome::FILING_SINGLE,
+                MissouriIncome::FILING_MARRIED_FILING_SEPARATE,
                 false,
-                50,
                 0,
-                300,
-                9,
+                0,
+                600,
+                16,
             ],
             '2' => [
                 'January 1, 2019 8am',
-                MissouriIncome::FILING_SINGLE,
+                MissouriIncome::FILING_MARRIED_BOTH_SPOUSES_EMPLOYED,
                 false,
-                4000,
                 0,
-                300,
-                5,
+                0,
+                100,
+                null,
             ],
             '3' => [
                 'January 1, 2019 8am',
-                MissouriIncome::FILING_SINGLE,
+                MissouriIncome::FILING_MARRIED_BOTH_SPOUSES_EMPLOYED,
                 false,
-                10000,
                 0,
-                300,
-                1,
+                0,
+                700,
+                22,
             ],
             '4' => [
                 'January 1, 2019 8am',
                 MissouriIncome::FILING_MARRIED_ONE_SPOUSE_EMPLOYED,
                 false,
-                50,
                 0,
-                300,
-                6,
+                0,
+                900,
+                20,
             ],
             '5' => [
                 'January 1, 2019 8am',
                 MissouriIncome::FILING_MARRIED_ONE_SPOUSE_EMPLOYED,
                 false,
-                4000,
+                0,
                 0,
                 1000,
-                38,
+                25,
             ],
             '6' => [
                 'January 1, 2019 8am',
-                MissouriIncome::FILING_MARRIED_ONE_SPOUSE_EMPLOYED,
+                MissouriIncome::FILING_HEAD_OF_HOUSEHOLD,
                 false,
-                10000,
                 0,
-                300,
+                0,
+                250,
                 null,
             ],
             '7' => [
                 'January 1, 2019 8am',
-                MissouriIncome::FILING_HEAD_OF_HOUSEHOLD,
+                MissouriIncome::FILING_MARRIED_ONE_SPOUSE_EMPLOYED,
                 false,
-                50,
                 0,
-                300,
-                8,
-            ],
-            '8' => [
-                'January 1, 2019 8am',
-                MissouriIncome::FILING_HEAD_OF_HOUSEHOLD,
-                false,
-                4000,
                 0,
-                1000,
-                39,
-            ],
-            '9' => [
-                'January 1, 2019 8am',
-                MissouriIncome::FILING_HEAD_OF_HOUSEHOLD,
-                false,
-                10000,
-                0,
-                300,
-                null,
-            ],
-            '10' => [
-                'January 1, 2019 8am',
-                MissouriIncome::FILING_MARRIED_BOTH_SPOUSES_EMPLOYED,
-                false,
-                50,
-                0,
-                600,
-                21,
-            ],
-            '11' => [
-                'January 1, 2019 8am',
-                MissouriIncome::FILING_MARRIED_BOTH_SPOUSES_EMPLOYED,
-                false,
-                4000,
-                0,
-                2000,
-                88,
-            ],
-            '12' => [
-                'January 1, 2019 8am',
-                MissouriIncome::FILING_MARRIED_BOTH_SPOUSES_EMPLOYED,
-                false,
-                10000,
-                0,
-                1200,
-                42,
+                961.54,
+                23,
             ],
         ];
     }

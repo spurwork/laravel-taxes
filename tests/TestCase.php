@@ -248,7 +248,7 @@ class TestCase extends BaseTestCase
         ], $this->user);
 
         MissouriIncomeTaxInformation::createForUser([
-            'exemptions' => 0,
+            'allowances' => 0,
             'additional_withholding' => 0,
             'filing_status' => MissouriIncome::FILING_SINGLE,
             'exempt' => false,

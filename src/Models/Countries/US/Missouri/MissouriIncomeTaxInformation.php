@@ -11,7 +11,7 @@ class MissouriIncomeTaxInformation extends BaseTaxInformationModel
     public static function getDefault()
     {
         $tax_information = new self();
-        $tax_information->exemptions = 0;
+        $tax_information->allowances = 0;
         $tax_information->additional_withholding = 0;
         $tax_information->exempt = false;
         $tax_information->filing_status = MissouriIncome::FILING_SINGLE;
