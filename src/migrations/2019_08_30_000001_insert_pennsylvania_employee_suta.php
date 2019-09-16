@@ -19,8 +19,8 @@ class InsertPennsylvaniaEmployeeSuta extends Migration
 
         DB::table('tax_areas')->insert([
             'tax_id' => $disability_tax_id,
-            'work_governmental_unit_area_id' => $pennsylvania_id,
-            'based' => TaxArea::BASED_ON_WORK_LOCATION,
+            'home_governmental_unit_area_id' => $pennsylvania_id,
+            'based' => TaxArea::BASED_ON_HOME_LOCATION,
         ]);
     }
 
