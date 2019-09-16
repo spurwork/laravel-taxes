@@ -7,6 +7,7 @@ use Appleton\Taxes\Countries\US\Arkansas\ArkansasIncome\ArkansasIncome;
 use Appleton\Taxes\Countries\US\California\CaliforniaIncome\CaliforniaIncome;
 use Appleton\Taxes\Countries\US\Colorado\ColoradoIncome\ColoradoIncome;
 use Appleton\Taxes\Countries\US\Connecticut\ConnecticutIncome\ConnecticutIncome;
+use Appleton\Taxes\Countries\US\Delaware\DelawareIncome\DelawareIncome;
 use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome;
 use Appleton\Taxes\Countries\US\Georgia\GeorgiaIncome\GeorgiaIncome;
 use Appleton\Taxes\Countries\US\Idaho\IdahoIncome\IdahoIncome;
@@ -35,6 +36,7 @@ use Appleton\Taxes\Models\Countries\US\Arkansas\ArkansasIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\California\CaliforniaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Colorado\ColoradoIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Connecticut\ConnecticutIncomeTaxInformation;
+use Appleton\Taxes\Models\Countries\US\Delaware\DelawareIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\FederalIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Georgia\GeorgiaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Idaho\IdahoIncomeTaxInformation;
@@ -153,6 +155,13 @@ class TestCase extends BaseTestCase
             'reduced_withholding' => 0,
             'exempt' => false,
             'filing_status' => ConnecticutIncome::WITHHOLDING_CODE_A,
+        ], $this->user);
+
+        DelawareIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'exemptions' => 0,
+            'exempt' => false,
+            'filing_status' => DelawareIncome::FILING_SINGLE,
         ], $this->user);
 
         GeorgiaIncomeTaxInformation::createForUser([

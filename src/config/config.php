@@ -51,6 +51,10 @@ return [
                 'connecticut_income_tax_information' => env('TAXES_CONNECTICUT_INCOME_TAX_INFORMATION', 'connecticut_income_tax_information'),
             ],
 
+            'delaware' => [
+                'delaware_income_tax_information' => env('TAXES_DELAWARE_INCOME_TAX_INFORMATION', 'delaware_income_tax_information'),
+            ],
+
             'georgia' => [
                 'georgia_income_tax_information' => env('TAXES_GEORGIA_INCOME_TAX_INFORMATION', 'georgia_income_tax_information'),
             ],
@@ -186,6 +190,10 @@ return [
 
             'connecticut' => [
                 'unemployment' => env('TAXES_CONNECTICUT_UNEMPLOYMENT_TAX_RATE', 0.034),
+            ],
+
+            'delaware' => [
+                'unemployment' => env('TAXES_DELAWARE_UNEMPLOYMENT_TAX_RATE', 0.015),
             ],
 
             'georgia' => [
