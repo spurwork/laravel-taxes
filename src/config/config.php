@@ -307,6 +307,10 @@ return [
             'wisconsin' => [
                 'unemployment' => env('TAXES_WISCONSIN_UNEMPLOYMENT_TAX_RATE', 0.0305),
             ],
+
+            'wyoming' => [
+                'unemployment' => env('TAXES_WYOMING_UNEMPLOYMENT_TAX_RATE', 0.0122),
+            ],
         ],
     ],
 ];
