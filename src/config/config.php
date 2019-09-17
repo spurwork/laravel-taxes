@@ -123,8 +123,16 @@ return [
                 'oklahoma_income_tax_information' => env('TAXES_OKLAHOMA_INCOME_TAX_INFORMATION', 'oklahoma_income_tax_information'),
             ],
 
+            'oregon' => [
+                'oregon_income_tax_information' => env('TAXES_OREGON_INCOME_TAX_INFORMATION', 'oregon_income_tax_information'),
+            ],
+
             'pennsylvania' => [
                 'pennsylvania_income_tax_information' => env('TAXES_PENNSYLVANIA_INCOME_TAX_INFORMATION', 'pennsylvania_income_tax_information'),
+            ],
+
+            'rhode_island' => [
+                'rhode_island_income_tax_information' => env('TAXES_RHODE_ISLAND_INCOME_TAX_INFORMATION', 'rhode_island_income_tax_information'),
             ],
 
             'south_carolina' => [
@@ -264,8 +272,16 @@ return [
                 'unemployment' => env('TAXES_OKLAHOMA_UNEMPLOYMENT_TAX_RATE', 0.015),
             ],
 
+            'oregon' => [
+                'unemployment' => env('TAXES_OREGON_UNEMPLOYMENT_TAX_RATE', 0.024),
+            ],
+
             'pennsylvania' => [
                 'unemployment' => env('TAXES_PENNSYLVANIA_UNEMPLOYMENT_TAX_RATE', 0.03689),
+            ],
+
+            'rhode_island' => [
+                'unemployment' => env('TAXES_RHODE_ISLAND_UNEMPLOYMENT_TAX_RATE', 0.0117),
             ],
 
             'south_carolina' => [
@@ -298,6 +314,10 @@ return [
 
             'wisconsin' => [
                 'unemployment' => env('TAXES_WISCONSIN_UNEMPLOYMENT_TAX_RATE', 0.0305),
+            ],
+
+            'wyoming' => [
+                'unemployment' => env('TAXES_WYOMING_UNEMPLOYMENT_TAX_RATE', 0.0122),
             ],
         ],
     ],

@@ -1391,9 +1391,13 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\Ohio\ZaneTraceLSD\ZaneTraceLSDTax::class,
         \Appleton\Taxes\Countries\US\Oklahoma\OklahomaIncome\OklahomaIncome::class,
         \Appleton\Taxes\Countries\US\Oklahoma\OklahomaUnemployment\OklahomaUnemployment::class,
+        \Appleton\Taxes\Countries\US\Oregon\OregonIncome\OregonIncome::class,
+        \Appleton\Taxes\Countries\US\Oregon\OregonUnemployment\OregonUnemployment::class,
         \Appleton\Taxes\Countries\US\Pennsylvania\PennsylvaniaEmployeeSuta\PennsylvaniaEmployeeSuta::class,
         \Appleton\Taxes\Countries\US\Pennsylvania\PennsylvaniaIncome\PennsylvaniaIncome::class,
         \Appleton\Taxes\Countries\US\Pennsylvania\PennsylvaniaUnemployment\PennsylvaniaUnemployment::class,
+        \Appleton\Taxes\Countries\US\RhodeIsland\RhodeIslandIncome\RhodeIslandIncome::class,
+        \Appleton\Taxes\Countries\US\RhodeIsland\RhodeIslandUnemployment\RhodeIslandUnemployment::class,
         \Appleton\Taxes\Countries\US\SocialSecurity\SocialSecurity::class,
         \Appleton\Taxes\Countries\US\SocialSecurity\SocialSecurityEmployer::class,
         \Appleton\Taxes\Countries\US\SouthCarolina\SouthCarolinaIncome\SouthCarolinaIncome::class,
@@ -1419,6 +1423,7 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\WestVirginia\WestVirginiaUnemployment\WestVirginiaUnemployment::class,
         \Appleton\Taxes\Countries\US\Wisconsin\WisconsinIncome\WisconsinIncome::class,
         \Appleton\Taxes\Countries\US\Wisconsin\WisconsinUnemployment\WisconsinUnemployment::class,
+        \Appleton\Taxes\Countries\US\Wyoming\WyomingUnemployment\WyomingUnemployment::class,
     ];
 
     private function getImplementations($interface)

@@ -25,6 +25,7 @@ use Appleton\Taxes\Countries\US\NewYork\NewYorkIncome\NewYorkIncome;
 use Appleton\Taxes\Countries\US\NorthCarolina\NorthCarolinaIncome\NorthCarolinaIncome;
 use Appleton\Taxes\Countries\US\NorthDakota\NorthDakotaIncome\NorthDakotaIncome;
 use Appleton\Taxes\Countries\US\Oklahoma\OklahomaIncome\OklahomaIncome;
+use Appleton\Taxes\Countries\US\Oregon\OregonIncome\OregonIncome;
 use Appleton\Taxes\Countries\US\Utah\UtahIncome\UtahIncome;
 use Appleton\Taxes\Countries\US\Vermont\VermontIncome\VermontIncome;
 use Appleton\Taxes\Countries\US\WashingtonDC\WashingtonDCIncome\WashingtonDCIncome;
@@ -59,7 +60,9 @@ use Appleton\Taxes\Models\Countries\US\NorthCarolina\NorthCarolinaIncomeTaxInfor
 use Appleton\Taxes\Models\Countries\US\NorthDakota\NorthDakotaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Ohio\OhioIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Oklahoma\OklahomaIncomeTaxInformation;
+use Appleton\Taxes\Models\Countries\US\Oregon\OregonIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Pennsylvania\PennsylvaniaIncomeTaxInformation;
+use Appleton\Taxes\Models\Countries\US\RhodeIsland\RhodeIslandIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\SouthCarolina\SouthCarolinaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Utah\UtahIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Vermont\VermontIncomeTaxInformation;
@@ -300,7 +303,20 @@ class TestCase extends BaseTestCase
             'filing_status' => OklahomaIncome::FILING_SINGLE,
         ], $this->user);
 
+        OregonIncomeTaxInformation::createForUser([
+            'exemptions' => 0,
+            'exempt' => false,
+            'additional_withholding' => 0,
+            'filing_status' => OregonIncome::FILING_SINGLE,
+        ], $this->user);
+
         PennsylvaniaIncomeTaxInformation::createForUser([
+            'exempt' => false,
+        ], $this->user);
+
+        RhodeIslandIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
+            'exemptions' => 0,
             'exempt' => false,
         ], $this->user);
 
@@ -1422,7 +1438,9 @@ class TestCase extends BaseTestCase
             'us.ohio.youngstown' => [41.0997803, -80.6495194],
             'us.ohio.zanesville' => [39.9403453, -82.0131924],
             'us.oklahoma' => [35.4676, -97.5164],
+            'us.oregon' => [43.8041, -120.5542],
             'us.pennsylvania' => [41.2033, -77.1945],
+            'us.rhode_island' => [41.5801, -71.4774],
             'us.south_carolina' => [33.8361, -81.1637],
             'us.south_dakota' => [43.9695, -99.9018],
             'us.tennessee' => [35.5175, -86.5804],
@@ -1439,6 +1457,7 @@ class TestCase extends BaseTestCase
             'us.west_virginia.morgantown' => [39.6295, -79.9559],
             'us.west_virginia.parkersburg' => [39.2667, -81.5615],
             'us.wisconsin' => [43.0849721, -89.4764603],
+            'us.wyoming' => [43.0760, -107.2903],
         ];
 
         return $locations[$name];
