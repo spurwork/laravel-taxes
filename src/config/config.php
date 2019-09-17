@@ -123,6 +123,10 @@ return [
                 'oklahoma_income_tax_information' => env('TAXES_OKLAHOMA_INCOME_TAX_INFORMATION', 'oklahoma_income_tax_information'),
             ],
 
+            'oregon' => [
+                'oregon_income_tax_information' => env('TAXES_OREGON_INCOME_TAX_INFORMATION', 'oregon_income_tax_information'),
+            ],
+
             'pennsylvania' => [
                 'pennsylvania_income_tax_information' => env('TAXES_PENNSYLVANIA_INCOME_TAX_INFORMATION', 'pennsylvania_income_tax_information'),
             ],
@@ -262,6 +266,10 @@ return [
 
             'oklahoma' => [
                 'unemployment' => env('TAXES_OKLAHOMA_UNEMPLOYMENT_TAX_RATE', 0.015),
+            ],
+
+            'oregon' => [
+                'unemployment' => env('TAXES_OREGON_UNEMPLOYMENT_TAX_RATE', 0.024),
             ],
 
             'pennsylvania' => [
