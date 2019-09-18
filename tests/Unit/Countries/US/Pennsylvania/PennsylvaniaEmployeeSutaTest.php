@@ -18,8 +18,9 @@ class PennsylvaniaEmployeeSutaTest extends TestCase
         );
 
         $results = $this->taxes->calculate(function ($taxes) use ($earnings) {
-            $taxes->setHomeLocation($this->getLocation('us.pennsylvania'));
-            $taxes->setWorkLocation($this->getLocation('us.pennsylvania'));
+            $taxes->setHomeLocation($this->getLocation('us.alabama'));
+            $taxes->setWorkLocation($this->getLocation('us.alabama'));
+            $taxes->setSutaLocation($this->getLocation('us.pennsylvania'));
             $taxes->setUser($this->user);
             $taxes->setEarnings($earnings);
             $taxes->setPayPeriods(52);
