@@ -59,6 +59,10 @@ return [
                 'georgia_income_tax_information' => env('TAXES_GEORGIA_INCOME_TAX_INFORMATION', 'georgia_income_tax_information'),
             ],
 
+            'hawaii' => [
+                'hawaii_income_tax_information' => env('TAXES_HAWAII_INCOME_TAX_INFORMATION', 'hawaii_income_tax_information'),
+            ],
+
             'idaho' => [
                 'idaho_income_tax_information' => env('TAXES_IDAHO_INCOME_TAX_INFORMATION', 'idaho_income_tax_information'),
             ],
@@ -210,6 +214,10 @@ return [
 
             'georgia' => [
                 'unemployment' => env('TAXES_GEORGIA_UNEMPLOYMENT_TAX_RATE', 0.027),
+            ],
+
+            'hawaii' => [
+                'unemployment' => env('TAXES_HAWAII_UNEMPLOYMENT_TAX_RATE', 0.024),
             ],
 
             'idaho' => [

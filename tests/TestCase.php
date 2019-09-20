@@ -10,6 +10,7 @@ use Appleton\Taxes\Countries\US\Connecticut\ConnecticutIncome\ConnecticutIncome;
 use Appleton\Taxes\Countries\US\Delaware\DelawareIncome\DelawareIncome;
 use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome;
 use Appleton\Taxes\Countries\US\Georgia\GeorgiaIncome\GeorgiaIncome;
+use Appleton\Taxes\Countries\US\Hawaii\HawaiiIncome\HawaiiIncome;
 use Appleton\Taxes\Countries\US\Idaho\IdahoIncome\IdahoIncome;
 use Appleton\Taxes\Countries\US\Louisiana\LouisianaIncome\LouisianaIncome;
 use Appleton\Taxes\Countries\US\Maine\MaineIncome\MaineIncome;
@@ -41,6 +42,7 @@ use Appleton\Taxes\Models\Countries\US\Connecticut\ConnecticutIncomeTaxInformati
 use Appleton\Taxes\Models\Countries\US\Delaware\DelawareIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\FederalIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Georgia\GeorgiaIncomeTaxInformation;
+use Appleton\Taxes\Models\Countries\US\Hawaii\HawaiiIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Idaho\IdahoIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Illinois\IllinoisIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Indiana\IndianaIncomeTaxInformation;
@@ -175,6 +177,13 @@ class TestCase extends BaseTestCase
             'dependents' => 0,
             'personal_allowances' => 0,
             'filing_status' => GeorgiaIncome::FILING_SINGLE,
+        ], $this->user);
+
+        HawaiiIncomeTaxInformation::createForUser([
+            'exemptions' => 0,
+            'additional_withholding' => 0,
+            'filing_status' => HawaiiIncome::FILING_SINGLE,
+            'exempt' => false,
         ], $this->user);
 
         IdahoIncomeTaxInformation::createForUser([
@@ -427,6 +436,7 @@ class TestCase extends BaseTestCase
             'us.connecticut' => [41.6032, -73.0877],
             'us.delaware' => [39.1582, -75.5244],
             'us.georgia' => [33.7490, -84.3880],
+            'us.hawaii' => [19.8968, -155.5828],
             'us.florida' => [27.6648, -81.5158],
             'us.idaho' => [44.0682, -114.7420],
             'us.illinois' => [39.7817, -89.6501],
