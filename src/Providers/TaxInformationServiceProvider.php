@@ -31,6 +31,7 @@ class TaxInformationServiceProvider extends ServiceProvider
         \Appleton\Taxes\Models\Countries\US\Minnesota\MinnesotaIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\Michigan\MichiganIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\Mississippi\MississippiIncomeTaxInformation::class,
+        \Appleton\Taxes\Models\Countries\US\Missouri\MissouriIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\Montana\MontanaIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\Nebraska\NebraskaIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\NewJersey\NewJerseyIncomeTaxInformation::class,
