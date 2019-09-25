@@ -8,7 +8,7 @@ class VirginiaIncome extends BaseVirginiaIncome
 {
     public const SUPPLEMENTAL_TAX_RATE = 0.0575;
 
-    private const STANDARD_DEDUCTION_AMOUNT = 3000;
+    private const STANDARD_DEDUCTION_AMOUNT = 4500;
     private const EXEMPTION_ALLOWANCE_AMOUNT = 930;
     private const OVER_65_OR_BLIND_EXEMPTION_ALLOWANCE_AMOUNT = 800;
 
