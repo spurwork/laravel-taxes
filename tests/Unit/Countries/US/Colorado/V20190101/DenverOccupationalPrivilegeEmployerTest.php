@@ -42,13 +42,13 @@ class DenverOccupationalPrivilegeEmployerTest extends TestCase
 
     public function testDenverOccupationalPrivilege_other_wages_at_limit(): void
     {
-        $results = $this->calculateTaxes(0, 10000, 40000, 10000);
+        $results = $this->calculateTaxes(0, 100, 40000, 100);
         $this->assertSame(4.0, $results->getTax(DenverOccupationalPrivilegeEmployer::class));
     }
 
     public function testDenverOccupationalPrivilege_other_wages_cross_limit(): void
     {
-        $results = $this->calculateTaxes(0, 10000, 45000, 10000);
+        $results = $this->calculateTaxes(0, 100, 45000, 100);
         $this->assertSame(4.0, $results->getTax(DenverOccupationalPrivilegeEmployer::class));
     }
 

@@ -42,13 +42,13 @@ class GlendaleOccupationalPrivilegeTest extends TestCase
 
     public function testGlendaleOccupationalPrivilege_other_wages_at_limit(): void
     {
-        $results = $this->calculateTaxes(0, 10000, 65000, 10000);
+        $results = $this->calculateTaxes(0, 100, 65000, 100);
         $this->assertSame(5.0, $results->getTax(GlendaleOccupationalPrivilege::class));
     }
 
     public function testGlendaleOccupationalPrivilege_other_wages_cross_limit(): void
     {
-        $results = $this->calculateTaxes(0, 10000, 70000, 10000);
+        $results = $this->calculateTaxes(0, 100, 70000, 100);
         $this->assertSame(5.0, $results->getTax(GlendaleOccupationalPrivilege::class));
     }
 
