@@ -8,12 +8,12 @@ use stdClass;
 
 class GreenwoodVillageOccupationalPrivilegeEmployer extends BaseGreenwoodVillageOccupationalPrivilegeEmployer
 {
-    protected function getMonthlyWageAmount(): int
+    protected function getMonthlyWageAmountInDollars(): int
     {
         return 0;
     }
 
-    protected function getMonthlyTaxAmount(): int
+    protected function getMonthlyTaxAmountInCents(): int
     {
         return 0;
     }

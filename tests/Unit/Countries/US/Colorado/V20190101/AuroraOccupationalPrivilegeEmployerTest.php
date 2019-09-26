@@ -42,13 +42,13 @@ class AuroraOccupationalPrivilegeEmployerTest extends TestCase
 
     public function testAuroraOccupationalPrivilege_other_wages_at_limit(): void
     {
-        $results = $this->calculateTaxes(0, 10000, 15000, 10000);
+        $results = $this->calculateTaxes(0, 100, 15000, 100);
         $this->assertSame(2.0, $results->getTax(AuroraOccupationalPrivilegeEmployer::class));
     }
 
     public function testAuroraOccupationalPrivilege_other_wages_cross_limit(): void
     {
-        $results = $this->calculateTaxes(0, 10000, 20000, 10000);
+        $results = $this->calculateTaxes(0, 100, 20000, 100);
         $this->assertSame(2.0, $results->getTax(AuroraOccupationalPrivilegeEmployer::class));
     }
 
