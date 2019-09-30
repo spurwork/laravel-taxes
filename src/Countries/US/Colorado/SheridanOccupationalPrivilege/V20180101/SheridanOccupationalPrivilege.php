@@ -8,12 +8,12 @@ use stdClass;
 
 class SheridanOccupationalPrivilege extends BaseDenverOccupationalPrivilege
 {
-    protected function getMonthlyWageAmountInDollars(): int
+    protected function getMonthlyWageAmount(): int
     {
         return 0;
     }
 
-    protected function getMonthlyTaxAmountInCents(): int
+    protected function getMonthlyTaxAmount(): int
     {
         return 0;
     }
