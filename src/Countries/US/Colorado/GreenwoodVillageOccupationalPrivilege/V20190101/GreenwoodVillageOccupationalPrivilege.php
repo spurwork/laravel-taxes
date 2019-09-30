@@ -8,7 +8,7 @@ use stdClass;
 
 class GreenwoodVillageOccupationalPrivilege extends BaseGreenwoodVillageOccupationalPrivilege
 {
-    private const MONTHLY_WAGE_AMOUNT = 250;
+    private const MONTHLY_WAGE_AMOUNT = 25000;
     private const MONTHLY_TAX_AMOUNT = 200;
 
     protected function getMonthlyWageAmount(): int

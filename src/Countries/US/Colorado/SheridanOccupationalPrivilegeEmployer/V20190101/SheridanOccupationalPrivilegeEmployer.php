@@ -8,7 +8,7 @@ use stdClass;
 
 class SheridanOccupationalPrivilegeEmployer extends BaseDenverOccupationalPrivilegeEmployer
 {
-    private const MONTHLY_WAGE_AMOUNT = 500;
+    private const MONTHLY_WAGE_AMOUNT = 50000;
     private const MONTHLY_TAX_AMOUNT = 300;
 
     protected function getMonthlyWageAmount(): int
