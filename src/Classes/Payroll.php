@@ -15,6 +15,7 @@ class Payroll
     public $wtd_earnings;
     public $mtd_earnings;
     public $ytd_earnings;
+    public $min_wage;
 
     protected $amount_withheld;
 
@@ -31,6 +32,7 @@ class Payroll
         $this->wtd_earnings = $parameters['wtd_earnings'] ?? 0;
         $this->mtd_earnings = $parameters['mtd_earnings'] ?? 0;
         $this->ytd_earnings = $parameters['ytd_earnings'] ?? 0;
+        $this->min_wage = $parameters['min_wage'] ?? 0;
 
         $this->amount_withheld = 0;
     }
@@ -74,7 +76,7 @@ class Payroll
     public function getDaysWorked($tax_class, $governmental_unit_area = null)
     {
         if (is_callable($this->days_worked)) {
-            return ($this->days_worked)($tax_class,$governmental_unit_area);
+            return ($this->days_worked)($tax_class, $governmental_unit_area);
         }
 
         return $this->days_worked;
@@ -105,5 +107,14 @@ class Payroll
         }
 
         return $this->ytd_earnings;
+    }
+
+    public function getMinWage()
+    {
+        if (is_callable($this->min_wage)) {
+            return $this->min_wage;
+        }
+
+        return $this->min_wage;
     }
 }
