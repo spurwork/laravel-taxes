@@ -8,9 +8,9 @@ use stdClass;
 
 abstract class ColoradoLocalIncome extends BaseLocal
 {
-    abstract protected function getMonthlyWageAmount(): int;
+    abstract protected function getMonthlyWageAmountInDollars(): int;
 
-    abstract protected function getMonthlyTaxAmount(): int;
+    abstract protected function getMonthlyTaxAmountInCents(): int;
 
     abstract protected function getLocalGovernmentalUnitArea(): stdClass;
 
@@ -28,19 +28,19 @@ abstract class ColoradoLocalIncome extends BaseLocal
         $colorado_mtd = $this->payroll->getMtdEarnings($colorado, true);
 
         $first_local_wages_with_colorado_wages_over_amount = $local_mtd_previous === 0
-            && $colorado_mtd >= $this->getMonthlyWageAmount();
+            && $colorado_mtd >= $this->getMonthlyWageAmountInDollars();
         if ($first_local_wages_with_colorado_wages_over_amount) {
-            $this->payroll->withholdTax($this->getMonthlyTaxAmount() / 100);
-            return round($this->getMonthlyTaxAmount() / 100, 2);
+            $this->payroll->withholdTax($this->getMonthlyTaxAmountInCents() / 100);
+            return round($this->getMonthlyTaxAmountInCents() / 100, 2);
         }
 
         $colorado_mtd_previous = $this->payroll->getMtdEarnings($colorado);
 
-        $colorado_wages_cross_amount = $colorado_mtd_previous < $this->getMonthlyWageAmount()
-            && $colorado_mtd >= $this->getMonthlyWageAmount();
+        $colorado_wages_cross_amount = $colorado_mtd_previous < $this->getMonthlyWageAmountInDollars()
+            && $colorado_mtd >= $this->getMonthlyWageAmountInDollars();
         if ($colorado_wages_cross_amount) {
-            $this->payroll->withholdTax($this->getMonthlyTaxAmount() / 100);
-            return round($this->getMonthlyTaxAmount() / 100, 2);
+            $this->payroll->withholdTax($this->getMonthlyTaxAmountInCents() / 100);
+            return round($this->getMonthlyTaxAmountInCents() / 100, 2);
         }
 
         return 0;

@@ -8,15 +8,15 @@ use stdClass;
 
 class SheridanOccupationalPrivilege extends BaseDenverOccupationalPrivilege
 {
-    private const MONTHLY_WAGE_AMOUNT = 50000;
+    private const MONTHLY_WAGE_AMOUNT = 500;
     private const MONTHLY_TAX_AMOUNT = 300;
 
-    protected function getMonthlyWageAmount(): int
+    protected function getMonthlyWageAmountInDollars(): int
     {
         return self::MONTHLY_WAGE_AMOUNT;
     }
 
-    protected function getMonthlyTaxAmount(): int
+    protected function getMonthlyTaxAmountInCents(): int
     {
         return self::MONTHLY_TAX_AMOUNT;
     }

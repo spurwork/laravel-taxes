@@ -51,8 +51,16 @@ return [
                 'connecticut_income_tax_information' => env('TAXES_CONNECTICUT_INCOME_TAX_INFORMATION', 'connecticut_income_tax_information'),
             ],
 
+            'delaware' => [
+                'delaware_income_tax_information' => env('TAXES_DELAWARE_INCOME_TAX_INFORMATION', 'delaware_income_tax_information'),
+            ],
+
             'georgia' => [
                 'georgia_income_tax_information' => env('TAXES_GEORGIA_INCOME_TAX_INFORMATION', 'georgia_income_tax_information'),
+            ],
+
+            'hawaii' => [
+                'hawaii_income_tax_information' => env('TAXES_HAWAII_INCOME_TAX_INFORMATION', 'hawaii_income_tax_information'),
             ],
 
             'idaho' => [
@@ -91,6 +99,10 @@ return [
                 'mississippi_income_tax_information' => env('TAXES_MISSISSIPPI_INCOME_TAX_INFORMATION', 'mississippi_income_tax_information'),
             ],
 
+            'missouri' => [
+                'missouri_income_tax_information' => env('TAXES_MISSOURI_INCOME_TAX_INFORMATION', 'missouri_income_tax_information'),
+            ],
+
             'montana' => [
                 'montana_income_tax_information' => env('TAXES_MONTANA_INCOME_TAX_INFORMATION', 'montana_income_tax_information'),
             ],
@@ -123,8 +135,16 @@ return [
                 'oklahoma_income_tax_information' => env('TAXES_OKLAHOMA_INCOME_TAX_INFORMATION', 'oklahoma_income_tax_information'),
             ],
 
+            'oregon' => [
+                'oregon_income_tax_information' => env('TAXES_OREGON_INCOME_TAX_INFORMATION', 'oregon_income_tax_information'),
+            ],
+
             'pennsylvania' => [
                 'pennsylvania_income_tax_information' => env('TAXES_PENNSYLVANIA_INCOME_TAX_INFORMATION', 'pennsylvania_income_tax_information'),
+            ],
+
+            'rhode_island' => [
+                'rhode_island_income_tax_information' => env('TAXES_RHODE_ISLAND_INCOME_TAX_INFORMATION', 'rhode_island_income_tax_information'),
             ],
 
             'south_carolina' => [
@@ -188,8 +208,16 @@ return [
                 'unemployment' => env('TAXES_CONNECTICUT_UNEMPLOYMENT_TAX_RATE', 0.034),
             ],
 
+            'delaware' => [
+                'unemployment' => env('TAXES_DELAWARE_UNEMPLOYMENT_TAX_RATE', 0.015),
+            ],
+
             'georgia' => [
                 'unemployment' => env('TAXES_GEORGIA_UNEMPLOYMENT_TAX_RATE', 0.027),
+            ],
+
+            'hawaii' => [
+                'unemployment' => env('TAXES_HAWAII_UNEMPLOYMENT_TAX_RATE', 0.024),
             ],
 
             'idaho' => [
@@ -222,6 +250,10 @@ return [
 
             'mississippi' => [
                 'unemployment' => env('TAXES_MISSISSIPPI_UNEMPLOYMENT_TAX_RATE', 0.012),
+            ],
+
+            'missouri' => [
+                'unemployment' => env('TAXES_MISSOURI_UNEMPLOYMENT_TAX_RATE', 0.027),
             ],
 
             'montana' => [
@@ -264,8 +296,16 @@ return [
                 'unemployment' => env('TAXES_OKLAHOMA_UNEMPLOYMENT_TAX_RATE', 0.015),
             ],
 
+            'oregon' => [
+                'unemployment' => env('TAXES_OREGON_UNEMPLOYMENT_TAX_RATE', 0.024),
+            ],
+
             'pennsylvania' => [
                 'unemployment' => env('TAXES_PENNSYLVANIA_UNEMPLOYMENT_TAX_RATE', 0.03689),
+            ],
+
+            'rhode_island' => [
+                'unemployment' => env('TAXES_RHODE_ISLAND_UNEMPLOYMENT_TAX_RATE', 0.0117),
             ],
 
             'south_carolina' => [
@@ -298,6 +338,10 @@ return [
 
             'wisconsin' => [
                 'unemployment' => env('TAXES_WISCONSIN_UNEMPLOYMENT_TAX_RATE', 0.0305),
+            ],
+
+            'wyoming' => [
+                'unemployment' => env('TAXES_WYOMING_UNEMPLOYMENT_TAX_RATE', 0.0122),
             ],
         ],
     ],

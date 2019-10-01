@@ -8,15 +8,15 @@ use stdClass;
 
 class AuroraOccupationalPrivilegeEmployer extends BaseAuroraOccupationalPrivilegeEmployer
 {
-    private const MONTHLY_WAGE_AMOUNT = 25000;
+    private const MONTHLY_WAGE_AMOUNT = 250;
     private const MONTHLY_TAX_AMOUNT = 200;
 
-    protected function getMonthlyWageAmount(): int
+    protected function getMonthlyWageAmountInDollars(): int
     {
         return self::MONTHLY_WAGE_AMOUNT;
     }
 
-    protected function getMonthlyTaxAmount(): int
+    protected function getMonthlyTaxAmountInCents(): int
     {
         return self::MONTHLY_TAX_AMOUNT;
     }
