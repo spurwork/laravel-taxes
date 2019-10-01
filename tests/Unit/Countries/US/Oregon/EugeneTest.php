@@ -10,17 +10,17 @@ class EugeneTest extends TestCase
     /**
      * @dataProvider provideTestData
      */
-    public function testEugene($date, $min_wage, $earnings, $home_location, $work_location, $result)
+    public function testEugene($date, $pay_rate, $earnings, $home_location, $work_location, $result)
     {
         Carbon::setTestNow(
             Carbon::parse($date, 'America/Chicago')->setTimezone('UTC')
         );
 
-        $results = $this->taxes->calculate(function ($taxes) use ($earnings, $min_wage, $home_location, $work_location) {
+        $results = $this->taxes->calculate(function ($taxes) use ($earnings, $pay_rate, $home_location, $work_location) {
             $taxes->setHomeLocation($this->getLocation($home_location));
             $taxes->setWorkLocation($this->getLocation($work_location));
             $taxes->setUser($this->user);
-            $taxes->setMinWage($min_wage);
+            $taxes->setPayRate($pay_rate);
             $taxes->setEarnings($earnings);
         });
 
@@ -30,7 +30,7 @@ class EugeneTest extends TestCase
     public function provideTestData()
     {
         // date
-        // minimum wage
+        // pay rate
         // earnings
         // home location
         // work location

@@ -21,7 +21,7 @@ class Taxes
     protected $wtd_earnings = 0;
     protected $mtd_earnings = 0;
     protected $ytd_earnings = 0;
-    protected $min_wage = 0;
+    protected $pay_rate = 0;
 
     public function setAdditionalTaxes($additional_taxes)
     {
@@ -103,9 +103,9 @@ class Taxes
         $this->ytd_earnings = $ytd_earnings;
     }
 
-    public function setMinWage($min_wage)
+    public function setPayRate($pay_rate)
     {
-        $this->min_wage = $min_wage;
+        $this->pay_rate = $pay_rate;
     }
 
     public function calculate(Closure $closure)
@@ -152,7 +152,7 @@ class Taxes
             'wtd_earnings' => $this->wtd_earnings,
             'mtd_earnings' => $this->mtd_earnings,
             'ytd_earnings' => $this->ytd_earnings,
-            'min_wage' => $this->min_wage,
+            'pay_rate' => $this->pay_rate,
         ]));
     }
 

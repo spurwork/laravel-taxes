@@ -15,7 +15,7 @@ class Payroll
     public $wtd_earnings;
     public $mtd_earnings;
     public $ytd_earnings;
-    public $min_wage;
+    public $pay_rate;
 
     protected $amount_withheld;
 
@@ -32,7 +32,7 @@ class Payroll
         $this->wtd_earnings = $parameters['wtd_earnings'] ?? 0;
         $this->mtd_earnings = $parameters['mtd_earnings'] ?? 0;
         $this->ytd_earnings = $parameters['ytd_earnings'] ?? 0;
-        $this->min_wage = $parameters['min_wage'] ?? 0;
+        $this->pay_rate = $parameters['pay_rate'] ?? 0;
 
         $this->amount_withheld = 0;
     }
@@ -109,12 +109,12 @@ class Payroll
         return $this->ytd_earnings;
     }
 
-    public function getMinWage()
+    public function getPayRate()
     {
-        if (is_callable($this->min_wage)) {
-            return $this->min_wage;
+        if (is_callable($this->pay_rate)) {
+            return $this->pay_rate;
         }
 
-        return $this->min_wage;
+        return $this->pay_rate;
     }
 }
