@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Unit\Countries\US\Oregon\EugeneEmployer;
+namespace Appleton\Taxes\Unit\Countries\US\Oregon;
 
 use Appleton\Taxes\Countries\US\Oregon\EugeneEmployer\EugeneEmployer;
 use Carbon\Carbon;

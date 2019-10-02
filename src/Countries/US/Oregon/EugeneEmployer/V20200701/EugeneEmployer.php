@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Oregon\EugeneEmployer\V20190101;
+namespace Appleton\Taxes\Countries\US\Oregon\EugeneEmployer\V20200701;
 
 use Appleton\Taxes\Countries\US\Oregon\EugeneEmployer\EugeneEmployer as BaseEugeneEmployer;
 use Illuminate\Database\Eloquent\Collection;
