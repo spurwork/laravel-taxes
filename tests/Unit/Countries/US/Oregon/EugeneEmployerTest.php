@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Unit\Countries\US\Oregon;
+namespace Appleton\Taxes\Countries\US\Oregon\EugeneEmployer;
 
 use Appleton\Taxes\Countries\US\Oregon\EugeneEmployer\EugeneEmployer;
 use Carbon\Carbon;
@@ -42,7 +42,7 @@ class EugeneEmployerTest extends TestCase
                 'us.oregon.eugene',
                 'us.oregon.eugene',
                 300,
-                0.63,
+                null,
             ],
             '1' => [
                 'July 10, 2020 8am',
@@ -51,41 +51,27 @@ class EugeneEmployerTest extends TestCase
                 300,
                 0.63,
             ],
-            // '2' => [
-            //     'July 10, 2020 8am',
-            //     'us.oregon.eugene',
-            //     'us.oregon.eugene',
-            //     300,
-            //     8.17,
-            // ],
-            // '3' => [
-            //     'July 10, 2020 8am',
-            //     'us.oregon.eugene',
-            //     'us.oregon.eugene',
-            //     550,
-            //     17.02,
-            // ],
-            // '4' => [
-            //     'July 10, 2020 8am',
-            //     'us.oregon.eugene',
-            //     'us.oregon.eugene',
-            //     153.84,
-            //     4.44,
-            // ],
-            // '5' => [
-            //     'July 10, 2020 8am',
-            //     'us.oregon.eugene',
-            //     'us.oregon.eugene',
-            //     673.07,
-            //     28.19,
-            // ],
-            // '6' => [
-            //     'July 10, 2020 8am',
-            //     'us.oregon.eugene',
-            //     'us.oregon.eugene',
-            //     1000,
-            //     44.32,
-            // ],
+            '2' => [
+                'July 10, 2020 8am',
+                'us.oregon.eugene',
+                'us.oregon',
+                300,
+                null,
+            ],
+            '3' => [
+                'July 10, 2020 8am',
+                'us.oregon',
+                'us.oregon',
+                550,
+                null,
+            ],
+            '4' => [
+                'July 10, 2020 8am',
+                'us.oregon.eugene',
+                'us.oregon.eugene',
+                1000,
+                2.1,
+            ],
         ];
     }
 }

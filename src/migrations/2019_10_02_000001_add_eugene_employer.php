@@ -30,9 +30,8 @@ class AddEugeneEmployer extends Migration
 
         DB::table($this->tax_areas)->insert([[
             'tax_id' => $eugene_tax_id,
-            'home_governmental_unit_area_id' => $eugene_gua_id,
             'work_governmental_unit_area_id' => $eugene_gua_id,
-            'based' => TaxArea::BASED_ON_WORK_AND_NOT_HOME_LOCATION,
+            'based' => TaxArea::BASED_ON_WORK_LOCATION,
         ]]);
     }
 
@@ -45,5 +44,6 @@ class AddEugeneEmployer extends Migration
 
         DB::table('tax_areas')->where('tax_id', $tax_id)->delete();
         DB::table('taxes')->where('id', $tax_id)->delete();
+        DB::table($this->governmental_unit_areas)->where('name', 'Eugene, OR')->delete();
     }
 }
