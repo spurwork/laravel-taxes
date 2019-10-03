@@ -58,17 +58,19 @@ class GreenwoodVillageOccupationalPrivilegeEmployerTest extends TestCase
         $this->assertNull($results->getTax(GreenwoodVillageOccupationalPrivilegeEmployer::class));
     }
 
-    private function calculateTaxes(int $local_earnings, int $previous_local_earnings,
-                                    int $colorado_earnings, int $previous_colorado_earnings): TaxResults
-    {
+    private function calculateTaxes(
+        int $local_earnings,
+        int $previous_local_earnings,
+        int $colorado_earnings,
+        int $previous_colorado_earnings
+    ): TaxResults {
         return $this->taxes->calculate(function ($taxes) use ($local_earnings, $previous_local_earnings, $colorado_earnings, $previous_colorado_earnings) {
             $taxes->setHomeLocation($this->getLocation('us.colorado'));
             $taxes->setWorkLocation($this->getLocation('us.colorado'));
             $taxes->setUser($this->user);
             $taxes->setEarnings(10000);
             $taxes->setPayPeriods(52);
-            $taxes->setMtdEarnings(static function ($governmental_unit_area, $include_current)
-            use ($local_earnings, $previous_local_earnings, $colorado_earnings, $previous_colorado_earnings) {
+            $taxes->setMtdEarnings(static function ($governmental_unit_area, $include_current) use ($local_earnings, $previous_local_earnings, $colorado_earnings, $previous_colorado_earnings) {
                 if ($governmental_unit_area->name === 'Greenwood Village, CO') {
                     return $include_current ? $local_earnings + $previous_local_earnings : $previous_local_earnings;
                 }

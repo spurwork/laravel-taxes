@@ -11,12 +11,12 @@ class GreenwoodVillageOccupationalPrivilegeEmployer extends BaseGreenwoodVillage
     private const MONTHLY_WAGE_AMOUNT = 250;
     private const MONTHLY_TAX_AMOUNT = 200;
 
-    protected function getMonthlyWageAmountInDollars(): int
+    protected function getMonthlyWageAmount(): int
     {
         return self::MONTHLY_WAGE_AMOUNT;
     }
 
-    protected function getMonthlyTaxAmountInCents(): int
+    protected function getMonthlyTaxAmount(): int
     {
         return self::MONTHLY_TAX_AMOUNT;
     }
