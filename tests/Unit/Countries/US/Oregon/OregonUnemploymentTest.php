@@ -12,7 +12,7 @@ class OregonUnemploymentTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        Carbon::setTestNow(Carbon::parse('2019-01-01'));
+        Carbon::setTestNow(Carbon::parse('2019-07-10'));
     }
 
     public function testOregonUnemployment(): void
