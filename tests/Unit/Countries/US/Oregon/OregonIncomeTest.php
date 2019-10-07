@@ -48,7 +48,7 @@ class OregonIncomeTest extends TestCase
         return [
             // exempt, should be null
             '0' => [
-                'January 1, 2019 8am',
+                'July 10, 2019 8am',
                 true,
                 OregonIncome::FILING_SINGLE,
                 0,
@@ -57,7 +57,7 @@ class OregonIncomeTest extends TestCase
                 null,
             ],
             '1' => [
-                'January 1, 2019 8am',
+                'July 10, 2019 8am',
                 false,
                 OregonIncome::FILING_SINGLE,
                 0,
@@ -66,7 +66,7 @@ class OregonIncomeTest extends TestCase
                 20.13,
             ],
             '2' => [
-                'January 1, 2019 8am',
+                'July 10, 2019 8am',
                 false,
                 OregonIncome::FILING_SINGLE,
                 2,
@@ -75,7 +75,7 @@ class OregonIncomeTest extends TestCase
                 35.97,
             ],
             '3' => [
-                'January 1, 2019 8am',
+                'July 10, 2019 8am',
                 false,
                 OregonIncome::FILING_SINGLE,
                 3,
@@ -84,7 +84,7 @@ class OregonIncomeTest extends TestCase
                 66.9,
             ],
             '4' => [
-                'January 1, 2019 8am',
+                'July 10, 2019 8am',
                 false,
                 OregonIncome::FILING_MARRIED,
                 0,
@@ -93,7 +93,7 @@ class OregonIncomeTest extends TestCase
                 61.37,
             ],
             '5' => [
-                'January 1, 2019 8am',
+                'July 10, 2019 8am',
                 false,
                 OregonIncome::FILING_MARRIED,
                 4,
@@ -102,7 +102,7 @@ class OregonIncomeTest extends TestCase
                 134.94,
             ],
             '6' => [
-                'January 1, 2019 8am',
+                'July 10, 2019 8am',
                 false,
                 OregonIncome::FILING_MARRIED,
                 4,
@@ -111,7 +111,7 @@ class OregonIncomeTest extends TestCase
                 154.94,
             ],
             '7' => [
-                'January 1, 2019 8am',
+                'July 10, 2019 8am',
                 false,
                 OregonIncome::FILING_MARRIED,
                 4,
