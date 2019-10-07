@@ -38,7 +38,7 @@ class EugeneEmployerTest extends TestCase
         return [
             // before the start, should be null
             '0' => [
-                'January 2, 2019 8am',
+                'July 1, 2019 8am',
                 'us.oregon.eugene',
                 'us.oregon.eugene',
                 300,
