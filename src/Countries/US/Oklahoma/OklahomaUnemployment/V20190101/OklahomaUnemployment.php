@@ -7,7 +7,7 @@ use Appleton\Taxes\Countries\US\Oklahoma\OklahomaUnemployment\OklahomaUnemployme
 
 class OklahomaUnemployment extends BaseOklahomaUnemployment
 {
-    const FUTA_CREDIT = 0.06;
+    const FUTA_CREDIT = 0.054;
 
     const NEW_EMPLOYER_RATE = 0.015;
 
