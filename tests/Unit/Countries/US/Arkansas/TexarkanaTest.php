@@ -59,12 +59,19 @@ class TexarkanaTest extends TestCase
             ],
             '3' => [
                 'July 10, 2020 8am',
+                'us.arkansas.texarkana',
+                'us.arkansas',
+                300,
+                null,
+            ],
+            '4' => [
+                'July 10, 2020 8am',
                 'us.texas',
                 'us.arkansas.texarkana',
                 550,
                 null,
             ],
-            '4' => [
+            '5' => [
                 'July 10, 2020 8am',
                 'us.arkansas.texarkana',
                 'us.texas',
