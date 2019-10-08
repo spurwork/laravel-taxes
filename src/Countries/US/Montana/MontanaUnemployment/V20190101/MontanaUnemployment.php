@@ -7,7 +7,7 @@ use Appleton\Taxes\Countries\US\Montana\MontanaUnemployment\MontanaUnemployment 
 
 class MontanaUnemployment extends BaseMontanaUnemployment
 {
-    const FUTA_CREDIT = 0.06;
+    const FUTA_CREDIT = 0.054;
     const NEW_EMPLOYER_RATE = 0.0258;
     const WAGE_BASE = 33000;
 

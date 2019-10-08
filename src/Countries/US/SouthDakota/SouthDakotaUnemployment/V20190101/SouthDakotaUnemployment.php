@@ -7,7 +7,7 @@ use Appleton\Taxes\Countries\US\SouthDakota\SouthDakotaUnemployment\SouthDakotaU
 
 class SouthDakotaUnemployment extends BaseSouthDakotaUnemployment
 {
-    public const FUTA_CREDIT = 0.06;
+    public const FUTA_CREDIT = 0.054;
     public const TAX_RATE = 0.012;
     public const WAGE_BASE = 15000;
 

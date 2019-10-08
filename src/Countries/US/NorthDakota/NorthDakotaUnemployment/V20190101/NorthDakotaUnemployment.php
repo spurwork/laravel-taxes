@@ -7,7 +7,7 @@ use Appleton\Taxes\Countries\US\NorthDakota\NorthDakotaUnemployment\NorthDakotaU
 
 class NorthDakotaUnemployment extends BaseNorthDakotaUnemployment
 {
-    const FUTA_CREDIT = 0.06;
+    const FUTA_CREDIT = 0.054;
     const NEW_EMPLOYER_RATE = 0.0121;
     const WAGE_BASE = 36400;
 
