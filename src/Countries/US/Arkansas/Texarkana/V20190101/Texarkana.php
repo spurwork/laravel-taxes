@@ -14,7 +14,6 @@ class Texarkana extends BaseTexarkana
 
     public function compute(Collection $tax_areas)
     {
-        dump('herer');
         return 0.0;
     }
 }
