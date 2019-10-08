@@ -53,7 +53,7 @@ class TexarkanaTest extends TestCase
             '2' => [
                 'July 10, 2020 8am',
                 'us.arkansas',
-                'us.arkansas',
+                'us.arkansas.texarkana',
                 300,
                 null,
             ],
