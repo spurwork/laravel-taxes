@@ -54,6 +54,7 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\Arizona\ArizonaUnemployment\ArizonaUnemployment::class,
         \Appleton\Taxes\Countries\US\Arkansas\ArkansasIncome\ArkansasIncome::class,
         \Appleton\Taxes\Countries\US\Arkansas\ArkansasUnemployment\ArkansasUnemployment::class,
+        \Appleton\Taxes\Countries\US\Arkansas\Texarkana\Texarkana::class,
         \Appleton\Taxes\Countries\US\California\CaliforniaDisabilityInsurance\CaliforniaDisabilityInsurance::class,
         \Appleton\Taxes\Countries\US\California\CaliforniaEmploymentTrainingTax\CaliforniaEmploymentTrainingTax::class,
         \Appleton\Taxes\Countries\US\California\CaliforniaIncome\CaliforniaIncome::class,

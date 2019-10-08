@@ -429,6 +429,7 @@ class TestCase extends BaseTestCase
             'us.alaska' => [64.2008, -149.4937],
             'us.arizona' => [33.6050991, -112.4052392],
             'us.arkansas' => [35.2010, -91.8318],
+            'us.arkansas.texarkana' => [33.4418, -94.0377],
             'us.california' => [38.5816, -121.4944],
             'us.california.sacramento' => [38.5816, -121.4944],
             'us.california.san_francisco' => [37.7749, -122.4194],
