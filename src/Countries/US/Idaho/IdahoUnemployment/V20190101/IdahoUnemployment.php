@@ -7,7 +7,7 @@ use Appleton\Taxes\Countries\US\Idaho\IdahoUnemployment\IdahoUnemployment as Bas
 
 class IdahoUnemployment extends BaseIdahoUnemployment
 {
-    const FUTA_CREDIT = 0.06;
+    const FUTA_CREDIT = 0.054;
     const NEW_EMPLOYER_RATE = 0.01;
     const WAGE_BASE = 40000;
 

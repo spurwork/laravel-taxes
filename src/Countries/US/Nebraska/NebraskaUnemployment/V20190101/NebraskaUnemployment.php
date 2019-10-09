@@ -7,7 +7,7 @@ use Appleton\Taxes\Countries\US\Nebraska\NebraskaUnemployment\NebraskaUnemployme
 
 class NebraskaUnemployment extends BaseNebraskaUnemployment
 {
-    const FUTA_CREDIT = 0.06;
+    const FUTA_CREDIT = 0.054;
     const NEW_EMPLOYER_RATE = 0.0125;
     const WAGE_BASE = 9000;
 

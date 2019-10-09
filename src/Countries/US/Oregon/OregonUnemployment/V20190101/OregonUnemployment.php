@@ -7,7 +7,7 @@ use Appleton\Taxes\Countries\US\Oregon\OregonUnemployment\OregonUnemployment as 
 
 class OregonUnemployment extends BaseOregonUnemployment
 {
-    const FUTA_CREDIT = 0.06;
+    const FUTA_CREDIT = 0.054;
     const NEW_EMPLOYER_RATE = 0.024;
     const WAGE_BASE = 40600;
 

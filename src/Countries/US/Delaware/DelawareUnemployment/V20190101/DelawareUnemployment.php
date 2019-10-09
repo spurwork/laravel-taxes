@@ -7,7 +7,7 @@ use Appleton\Taxes\Countries\US\Delaware\DelawareUnemployment\DelawareUnemployme
 
 class DelawareUnemployment extends BaseDelawareUnemployment
 {
-    const FUTA_CREDIT = 0.06;
+    const FUTA_CREDIT = 0.054;
     const NEW_EMPLOYER_RATE = 0.015;
     const WAGE_BASE = 16500;
 
