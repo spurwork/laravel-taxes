@@ -1468,6 +1468,7 @@ class TestCase extends BaseTestCase
             'us.ohio.zanesville' => [39.9403453, -82.0131924],
             'us.oklahoma' => [35.4676, -97.5164],
             'us.oregon' => [43.8041, -120.5542],
+            'us.oregon.eugene' => [44.0521, -123.0868],
             'us.pennsylvania' => [41.2033, -77.1945],
             'us.rhode_island' => [41.5801, -71.4774],
             'us.south_carolina' => [33.8361, -81.1637],
