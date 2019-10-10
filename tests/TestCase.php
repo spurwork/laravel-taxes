@@ -1475,7 +1475,7 @@ class TestCase extends BaseTestCase
             'us.south_dakota' => [43.9695, -99.9018],
             'us.tennessee' => [35.5175, -86.5804],
             'us.texas' => [31.9686, -99.9018],
-            // 'us.texas.texarkana' => [33.4251, -94.0477],
+            'us.texas.texarkana' => [33.4251, -94.0477],
             'us.utah' => [39.3210, -111.0937],
             'us.vermont' => [44.5588, -72.5778],
             'us.virginia' => [37.5407, -77.4360],

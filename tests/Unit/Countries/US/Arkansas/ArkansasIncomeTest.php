@@ -30,7 +30,6 @@ class ArkansasIncomeTest extends TestCase
         ]);
 
         $results = $this->taxes->calculate(function ($taxes) use ($earnings, $home_location, $work_location) {
-            dump($work_location);
             $taxes->setHomeLocation($this->getLocation($home_location));
             $taxes->setWorkLocation($this->getLocation($work_location));
             $taxes->setUser($this->user);
@@ -58,14 +57,16 @@ class ArkansasIncomeTest extends TestCase
 
 
 
-            // 'texarkana1' => [0, 0, false, 75.0, 0.3, 'us.arkansas.texarkana', 'us.arkansas.texarkana'],
-            // 'texarkana2' => [0, 0, false, 75.0, 0.3, 'us.arkansas.texarkana', 'us.arkansas'],
-            // 'texarkana3' => [0, 0, false, 75.0, 0.3, 'us.arkansas', 'us.arkansas.texarkana'],
-            'texarkana4' => [0, 0, false, 75.0, null, 'us.texas', 'us.arkansas.texarkana'],
+            'texarkana1' => [0, 0, false, 75.0, 0.3, 'us.arkansas.texarkana', 'us.arkansas.texarkana'],
+            'texarkana2' => [0, 0, false, 75.0, 0.3, 'us.arkansas.texarkana', 'us.arkansas'],
+            'texarkana3' => [0, 0, false, 75.0, 0.3, 'us.arkansas', 'us.arkansas.texarkana'],
+            'texarkana4' => [0, 0, false, 75.0, null, 'us.texas.texarkana', 'us.arkansas.texarkana'],
             'texarkana5' => [0, 0, false, 75.0, null, 'us.texas', 'us.arkansas.texarkana'],
 
             'texarkana6' => [0, 0, false, 75.0, null, 'us.arkansas.texarkana', 'us.texas'],
-            'texarkana7' => [0, 0, false, 75.0, null, 'us.arkansas', 'us.texas'],
+            'texarkana7' => [0, 0, false, 75.0, null, 'us.arkansas.texarkana', 'us.texas.texarkana'],
+            'texarkana8' => [0, 0, false, 75.0, null, 'us.arkansas', 'us.texas'],
+            'texarkana9' => [0, 0, false, 75.0, null, 'us.arkansas', 'us.texas.texarkana'],
         ];
     }
 }
