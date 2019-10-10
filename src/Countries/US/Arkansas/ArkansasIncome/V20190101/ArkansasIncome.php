@@ -26,7 +26,7 @@ class ArkansasIncome extends BaseArkansasIncome
         if ($this->isUserClaimingExemption()) {
             return 0.00;
         }
-
+        dump('herer');
         $annual_gross = $this->payroll->getEarnings() * $this->payroll->pay_periods;
         $net_taxable_income = $this->get50MidRange($annual_gross - self::STANDARD_DEDUCTION);
 

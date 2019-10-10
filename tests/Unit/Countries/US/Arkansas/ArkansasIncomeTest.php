@@ -30,6 +30,7 @@ class ArkansasIncomeTest extends TestCase
         ]);
 
         $results = $this->taxes->calculate(function ($taxes) use ($earnings, $home_location, $work_location) {
+            dump($work_location);
             $taxes->setHomeLocation($this->getLocation($home_location));
             $taxes->setWorkLocation($this->getLocation($work_location));
             $taxes->setUser($this->user);
@@ -44,21 +45,27 @@ class ArkansasIncomeTest extends TestCase
     {
         // [$allowances, $additional_withholding, $exempt, $earnings, $result, $home_location, $work_location]
         return [
-            'test case 1' => [0, 0, false, 961.54, 45.40, 'us.arkansas', 'us.arkansas'],
-            'test case 2' => [3, 0, false, 961.54, 43.90, 'us.arkansas', 'us.arkansas'],
-            'bracket 1' => [0, 0, false, 75.0, 0.3, 'us.arkansas', 'us.arkansas'],
-            'bracket 2' => [0, 0, false, 175.0, 1.96, 'us.arkansas', 'us.arkansas'],
-            'bracket 3' => [0, 0, false, 275.0, 5.08, 'us.arkansas', 'us.arkansas'],
-            'bracket 4' => [0, 0, false, 400.0, 10.50, 'us.arkansas', 'us.arkansas'],
-            'bracket 5' => [0, 0, false, 700.0, 27.52, 'us.arkansas', 'us.arkansas'],
-            'bracket 6' => [0, 0, false, 1000.0, 48.06, 'us.arkansas', 'us.arkansas'],
-            'additional withholding' => [0, 10, false, 961.54, 55.40, 'us.arkansas', 'us.arkansas'],
-            'exempt' => [0, 0, true, 961.54, null, 'us.arkansas', 'us.arkansas'],
-            'texarkana' => [0, 0, false, 75.0, 0.3, 'us.arkansas.texarkana', 'us.arkansas.texarkana'],
-            'texarkana' => [0, 0, false, 75.0, 0.3, 'us.arkansas', 'us.arkansas.texarkana'],
-            'texarkana' => [0, 0, false, 75.0, 0.3, 'us.arkansas.texarkana', 'us.arkansas'],
-            'texarkana' => [0, 0, false, 75.0, 0.3, 'us.texas', 'us.arkansas.texarkana'],
-            'texarkana' => [0, 0, false, 75.0, 0.3, 'us.arkansas.texarkana', 'us.texas'],
+            // 'test case 1' => [0, 0, false, 961.54, 45.40, 'us.arkansas', 'us.arkansas'],
+            // 'test case 2' => [3, 0, false, 961.54, 43.90, 'us.arkansas', 'us.arkansas'],
+            // 'bracket 1' => [0, 0, false, 75.0, 0.3, 'us.arkansas', 'us.arkansas'],
+            // 'bracket 2' => [0, 0, false, 175.0, 1.96, 'us.arkansas', 'us.arkansas'],
+            // 'bracket 3' => [0, 0, false, 275.0, 5.08, 'us.arkansas', 'us.arkansas'],
+            // 'bracket 4' => [0, 0, false, 400.0, 10.50, 'us.arkansas', 'us.arkansas'],
+            // 'bracket 5' => [0, 0, false, 700.0, 27.52, 'us.arkansas', 'us.arkansas'],
+            // 'bracket 6' => [0, 0, false, 1000.0, 48.06, 'us.arkansas', 'us.arkansas'],
+            // 'additional withholding' => [0, 10, false, 961.54, 55.40, 'us.arkansas', 'us.arkansas'],
+            // 'exempt' => [0, 0, true, 961.54, null, 'us.arkansas', 'us.arkansas'],
+
+
+
+            // 'texarkana1' => [0, 0, false, 75.0, 0.3, 'us.arkansas.texarkana', 'us.arkansas.texarkana'],
+            // 'texarkana2' => [0, 0, false, 75.0, 0.3, 'us.arkansas.texarkana', 'us.arkansas'],
+            // 'texarkana3' => [0, 0, false, 75.0, 0.3, 'us.arkansas', 'us.arkansas.texarkana'],
+            'texarkana4' => [0, 0, false, 75.0, null, 'us.texas', 'us.arkansas.texarkana'],
+            'texarkana5' => [0, 0, false, 75.0, null, 'us.texas', 'us.arkansas.texarkana'],
+
+            'texarkana6' => [0, 0, false, 75.0, null, 'us.arkansas.texarkana', 'us.texas'],
+            'texarkana7' => [0, 0, false, 75.0, null, 'us.arkansas', 'us.texas'],
         ];
     }
 }
