@@ -11,8 +11,8 @@ class Eugene extends BaseEugene
 {
     const TAX_RATE_BETWEEN = 0.003;
     const TAX_RATE_OVER = 0.0044;
-    const MIN_WAGE = 11.25;
-    const HOURLY_WAGE_CAP = 15.0;
+    const MIN_WAGE = 1125;
+    const HOURLY_WAGE_CAP = 1500;
 
     public function compute(Collection $tax_areas)
     {

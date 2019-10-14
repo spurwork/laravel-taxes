@@ -30,16 +30,10 @@ class AddEugeneLocalTax extends Migration
             'class' => Eugene::class,
         ]);
 
-        $oregon_gua_id = DB::table($this->governmental_unit_areas)
-            ->where('name', 'Oregon')
-            ->first()
-            ->id;
-
         DB::table($this->tax_areas)->insert([[
             'tax_id' => $eugene_tax_id,
-            'home_governmental_unit_area_id' => $eugene_gua_id,
             'work_governmental_unit_area_id' => $eugene_gua_id,
-            'based' => TaxArea::BASED_ON_WORK_AND_NOT_HOME_LOCATION,
+            'based' => TaxArea::BASED_ON_WORK_LOCATION,
         ]]);
     }
 
@@ -56,7 +50,7 @@ class AddEugeneLocalTax extends Migration
             ->id;
 
         DB::table($this->tax_areas)->where('tax_id', $eugene_tax_id)->delete();
-        DB::table($this->taxes)->where('name', 'Eugene Tax')->delete();
+        DB::table($this->taxes)->where('name', 'Eugene Oregon Tax')->delete();
         DB::table($this->governmental_unit_areas)->where('name', 'Eugene, OR')->delete();
     }
 }

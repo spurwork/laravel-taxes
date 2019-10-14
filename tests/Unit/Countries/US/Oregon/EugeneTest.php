@@ -30,7 +30,7 @@ class EugeneTest extends TestCase
     public function provideTestData()
     {
         // date
-        // pay rate
+        // pay rate, in cents, since that's how it's passed
         // earnings
         // home location
         // work location
@@ -38,7 +38,7 @@ class EugeneTest extends TestCase
         return [
             '0' => [
                 'July 1, 2019 8am',
-                11.25,
+                1125,
                 350,
                 'us.oregon',
                 'us.oregon.eugene',
@@ -46,7 +46,7 @@ class EugeneTest extends TestCase
             ],
             '1' => [
                 'July 1, 2020 8am',
-                11.25,
+                1125,
                 350,
                 'us.oregon',
                 'us.oregon.eugene',
@@ -54,7 +54,7 @@ class EugeneTest extends TestCase
             ],
             '2' => [
                 'July 1, 2020 8am',
-                11.25,
+                1125,
                 350,
                 'us.oregon.eugene',
                 'us.oregon',
@@ -62,7 +62,7 @@ class EugeneTest extends TestCase
             ],
             '3' => [
                 'July 1, 2020 8am',
-                12,
+                1200,
                 350,
                 'us.oregon',
                 'us.oregon.eugene',
@@ -70,23 +70,23 @@ class EugeneTest extends TestCase
             ],
             '4' => [
                 'July 1, 2020 8am',
-                12,
+                1200,
                 350,
                 'us.oregon.eugene',
                 'us.oregon',
                 null,
             ],
-            '4' => [
+            '5' => [
                 'July 1, 2020 8am',
-                16,
+                1600,
                 350,
                 'us.oregon',
                 'us.oregon.eugene',
                 1.54,
             ],
-            '5' => [
+            '6' => [
                 'July 1, 2020 8am',
-                16,
+                1600,
                 350,
                 'us.oregon.eugene',
                 'us.oregon',
