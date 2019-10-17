@@ -18,11 +18,12 @@ class PutnamIncomeTest extends TestCase
     }
 
     /**
-     * from Indiana tax calculation: 300 taxable wages
-     * round(300 * .02) = 6.00 tax
-     */
-    public function testPutnamIncome(): void
+    * @dataProvider provideTestData
+    */
+    public function testPutnamIncome($date, $result): void
     {
+        Carbon::setTestNow(Carbon::parse($date));
+
         IndianaIncomeTaxInformation::forUser($this->user)->update([
             'personal_exemptions' => 0,
             'dependent_exemptions' => 0,
@@ -40,7 +41,7 @@ class PutnamIncomeTest extends TestCase
             $taxes->setPayPeriods(52);
         });
 
-        $this->assertThat(6.00, self::identicalTo($results->getTax(PutnamIncome::class)));
+        $this->assertThat($result, self::identicalTo($results->getTax(PutnamIncome::class)));
     }
 
     public function testPutnamIncomeCountyWorked(): void
@@ -63,5 +64,13 @@ class PutnamIncomeTest extends TestCase
         });
 
         $this->assertThat(6.00, self::identicalTo($results->getTax(PutnamIncome::class)));
+    }
+
+    public function provideTestData(): array
+    {
+        return [
+            '2019-01-01' => ['2019-01-01', 6.00],
+            '2019-10-01' => ['2019-10-01', 6.3],
+        ];
     }
 }

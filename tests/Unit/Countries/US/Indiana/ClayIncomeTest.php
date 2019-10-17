@@ -18,20 +18,12 @@ class ClayIncomeTest extends TestCase
     }
 
     /**
-     * Weekly Pay               $300.00
-     * Personal Exemptions      1
-     * Dependent Exemptions     1
-     * Tax Due                  $5.67
-     *
-     * Math:
-     * 1 personal exemptions * 1000 = 1000
-     * 1 dependent exemptions * 1500 = 1500
-     * 2500 total allowances / 52 weeks = 48.0769
-     * 300 - 48.0769 = 251.9231 taxable wages
-     * round(251.9231 * .0225) = 5.67 tax
-     */
-    public function testClayIncome(): void
+    * @dataProvider provideTestData
+    */
+    public function testClayIncome($date, $result): void
     {
+        Carbon::setTestNow(Carbon::parse($date));
+
         IndianaIncomeTaxInformation::forUser($this->user)->update([
             'personal_exemptions' => 1,
             'dependent_exemptions' => 1,
@@ -49,7 +41,7 @@ class ClayIncomeTest extends TestCase
             $taxes->setPayPeriods(52);
         });
 
-        $this->assertThat(5.66, self::identicalTo($results->getTax(ClayIncome::class)));
+        $this->assertThat($result, self::identicalTo($results->getTax(ClayIncome::class)));
     }
 
     public function testClayIncomeCountyWorked(): void
@@ -72,5 +64,13 @@ class ClayIncomeTest extends TestCase
         });
 
         $this->assertThat(5.66, self::identicalTo($results->getTax(ClayIncome::class)));
+    }
+
+    public function provideTestData(): array
+    {
+        return [
+            '2019-01-01' => ['2019-01-01', 5.66],
+            '2019-10-01' => ['2019-10-01', 5.92],
+        ];
     }
 }

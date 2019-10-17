@@ -18,11 +18,12 @@ class OwenIncomeTest extends TestCase
     }
 
     /**
-     * from Indiana tax calculation: 300 taxable wages
-     * round(300 * .013) = 3.90 tax
-     */
-    public function testOwenIncome(): void
+    * @dataProvider provideTestData
+    */
+    public function testOwenIncome($date, $result): void
     {
+        Carbon::setTestNow(Carbon::parse($date));
+
         IndianaIncomeTaxInformation::forUser($this->user)->update([
             'personal_exemptions' => 0,
             'dependent_exemptions' => 0,
@@ -40,7 +41,7 @@ class OwenIncomeTest extends TestCase
             $taxes->setPayPeriods(52);
         });
 
-        $this->assertThat(3.89, self::identicalTo($results->getTax(OwenIncome::class)));
+        $this->assertThat($result, self::identicalTo($results->getTax(OwenIncome::class)));
     }
 
     public function testOwenIncomeCountyWorked(): void
@@ -63,5 +64,13 @@ class OwenIncomeTest extends TestCase
         });
 
         $this->assertThat(3.89, self::identicalTo($results->getTax(OwenIncome::class)));
+    }
+
+    public function provideTestData(): array
+    {
+        return [
+            '2019-01-01' => ['2019-01-01', 3.89],
+            '2019-10-01' => ['2019-10-01', 4.2],
+        ];
     }
 }

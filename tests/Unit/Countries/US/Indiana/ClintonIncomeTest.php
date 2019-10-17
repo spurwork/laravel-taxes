@@ -17,11 +17,12 @@ class ClintonIncomeTest extends TestCase
     }
 
     /**
-     * from Indiana tax calculation: 300 taxable wages
-     * round(300 * .0225) = 6.75 tax
-     */
-    public function testClintonIncome(): void
+    * @dataProvider provideTestData
+    */
+    public function testClintonIncome($date, $result): void
     {
+        Carbon::setTestNow(Carbon::parse($date));
+
         IndianaIncomeTaxInformation::forUser($this->user)->update([
             'personal_exemptions' => 0,
             'dependent_exemptions' => 0,
@@ -39,7 +40,7 @@ class ClintonIncomeTest extends TestCase
             $taxes->setPayPeriods(52);
         });
 
-        $this->assertThat(6.75, self::identicalTo($results->getTax(ClintonIncome::class)));
+        $this->assertThat($result, self::identicalTo($results->getTax(ClintonIncome::class)));
     }
 
     public function testClintonIncomeCountyWorked(): void
@@ -62,5 +63,13 @@ class ClintonIncomeTest extends TestCase
         });
 
         $this->assertThat(6.75, self::identicalTo($results->getTax(ClintonIncome::class)));
+    }
+
+    public function provideTestData(): array
+    {
+        return [
+            '2019-01-01' => ['2019-01-01', 6.75],
+            '2019-10-01' => ['2019-10-01', 7.35],
+        ];
     }
 }

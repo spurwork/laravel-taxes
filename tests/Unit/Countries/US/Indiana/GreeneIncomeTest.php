@@ -18,20 +18,12 @@ class GreeneIncomeTest extends TestCase
     }
 
     /**
-     * Weekly Pay               $300.00
-     * Personal Exemptions      1
-     * Dependent Exemptions     2
-     * Tax Due                  $3.90
-     *
-     * Math:
-     * 1 personal exemptions * 1000 = 1000
-     * 2 dependent exemptions * 1500 = 3000
-     * 4000 total allowances / 52 weeks = 76.923077
-     * 300 - 76.923077 = 223.07692 taxable wages
-     * round(223.07692 * .0175) = 3.90 tax
-     */
-    public function testGreeneIncome(): void
+    * @dataProvider provideTestData
+    */
+    public function testGreeneIncome($date, $result): void
     {
+        Carbon::setTestNow(Carbon::parse($date));
+
         IndianaIncomeTaxInformation::forUser($this->user)->update([
             'personal_exemptions' => 2,
             'dependent_exemptions' => 1,
@@ -49,7 +41,7 @@ class GreeneIncomeTest extends TestCase
             $taxes->setPayPeriods(52);
         });
 
-        $this->assertThat(4.07, self::identicalTo($results->getTax(GreeneIncome::class)));
+        $this->assertThat($result, self::identicalTo($results->getTax(GreeneIncome::class)));
     }
 
     public function testGreeneIncomeCountyWorked(): void
@@ -72,5 +64,13 @@ class GreeneIncomeTest extends TestCase
         });
 
         $this->assertThat(4.07, self::identicalTo($results->getTax(GreeneIncome::class)));
+    }
+
+    public function provideTestData(): array
+    {
+        return [
+            '2019-01-01' => ['2019-01-01', 4.07],
+            '2019-10-01' => ['2019-10-01', 4.53],
+        ];
     }
 }

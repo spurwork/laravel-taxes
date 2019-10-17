@@ -18,11 +18,12 @@ class DuboisIncomeTest extends TestCase
     }
 
     /**
-     * from Indiana tax calculation: 300 taxable wages
-     * round(300 * .01) = 3.00 tax
-     */
-    public function testDuboisIncome(): void
+    * @dataProvider provideTestData
+    */
+    public function testDuboisIncome($date, $result): void
     {
+        Carbon::setTestNow(Carbon::parse($date));
+
         IndianaIncomeTaxInformation::forUser($this->user)->update([
             'personal_exemptions' => 0,
             'dependent_exemptions' => 0,
@@ -40,7 +41,7 @@ class DuboisIncomeTest extends TestCase
             $taxes->setPayPeriods(52);
         });
 
-        $this->assertThat(3.00, self::identicalTo($results->getTax(DuboisIncome::class)));
+        $this->assertThat($result, self::identicalTo($results->getTax(DuboisIncome::class)));
     }
 
     public function testDuboisIncomeCountyWorked(): void
@@ -63,5 +64,13 @@ class DuboisIncomeTest extends TestCase
         });
 
         $this->assertThat(3.00, self::identicalTo($results->getTax(DuboisIncome::class)));
+    }
+
+    public function provideTestData(): array
+    {
+        return [
+            '2019-01-01' => ['2019-01-01', 3.00],
+            '2019-10-01' => ['2019-10-01', 3.6],
+        ];
     }
 }
