@@ -18,11 +18,12 @@ class HancockIncomeTest extends TestCase
     }
 
     /**
-     * from Indiana tax calculation: 300 taxable wages
-     * round(300 * .0175) = 5.22 tax
-     */
-    public function testHancockIncome(): void
+    * @dataProvider provideTestData
+    */
+    public function testHancockIncome($date, $result): void
     {
+        Carbon::setTestNow(Carbon::parse($date));
+
         IndianaIncomeTaxInformation::forUser($this->user)->update([
             'personal_exemptions' => 0,
             'dependent_exemptions' => 0,
@@ -40,7 +41,7 @@ class HancockIncomeTest extends TestCase
             $taxes->setPayPeriods(52);
         });
 
-        $this->assertThat(5.22, self::identicalTo($results->getTax(HancockIncome::class)));
+        $this->assertThat($result, self::identicalTo($results->getTax(HancockIncome::class)));
     }
 
     public function testHancockIncomeCountyWorked(): void
@@ -63,5 +64,13 @@ class HancockIncomeTest extends TestCase
         });
 
         $this->assertThat(5.22, self::identicalTo($results->getTax(HancockIncome::class)));
+    }
+
+    public function provideTestData(): array
+    {
+        return [
+            '2019-01-01' => ['2019-01-01', 5.22],
+            '2019-10-01' => ['2019-10-01', 5.81],
+        ];
     }
 }

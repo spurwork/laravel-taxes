@@ -18,11 +18,12 @@ class SullivanIncomeTest extends TestCase
     }
 
     /**
-     * from Indiana tax calculation: 300 taxable wages
-     * round(300 * .006) = 1.80 tax
-     */
-    public function testSullivanIncome(): void
+    * @dataProvider provideTestData
+    */
+    public function testSullivanIncome($date, $result): void
     {
+        Carbon::setTestNow(Carbon::parse($date));
+
         IndianaIncomeTaxInformation::forUser($this->user)->update([
             'personal_exemptions' => 0,
             'dependent_exemptions' => 0,
@@ -40,7 +41,7 @@ class SullivanIncomeTest extends TestCase
             $taxes->setPayPeriods(52);
         });
 
-        $this->assertThat(1.80, self::identicalTo($results->getTax(SullivanIncome::class)));
+        $this->assertThat($result, self::identicalTo($results->getTax(SullivanIncome::class)));
     }
 
     public function testSullivanIncomeCountyWorked(): void
@@ -63,5 +64,13 @@ class SullivanIncomeTest extends TestCase
         });
 
         $this->assertThat(1.80, self::identicalTo($results->getTax(SullivanIncome::class)));
+    }
+
+    public function provideTestData(): array
+    {
+        return [
+            '2019-01-01' => ['2019-01-01', 1.80],
+            '2019-10-01' => ['2019-10-01', 5.1],
+        ];
     }
 }

@@ -18,11 +18,12 @@ class JohnsonIncomeTest extends TestCase
     }
 
     /**
-     * from Indiana tax calculation: 300 taxable wages
-     * round(300 * .01) = 3.00 tax
-     */
-    public function testJohnsonIncome(): void
+    * @dataProvider provideTestData
+    */
+    public function testJohnsonIncome($date, $result): void
     {
+        Carbon::setTestNow(Carbon::parse($date));
+
         IndianaIncomeTaxInformation::forUser($this->user)->update([
             'personal_exemptions' => 0,
             'dependent_exemptions' => 0,
@@ -40,7 +41,7 @@ class JohnsonIncomeTest extends TestCase
             $taxes->setPayPeriods(52);
         });
 
-        $this->assertThat(3.00, self::identicalTo($results->getTax(JohnsonIncome::class)));
+        $this->assertThat($result, self::identicalTo($results->getTax(JohnsonIncome::class)));
     }
 
     public function testJohnsonIncomeCountyWorked(): void
@@ -63,5 +64,13 @@ class JohnsonIncomeTest extends TestCase
         });
 
         $this->assertThat(3.00, self::identicalTo($results->getTax(JohnsonIncome::class)));
+    }
+
+    public function provideTestData(): array
+    {
+        return [
+            '2019-01-01' => ['2019-01-01', 3.00],
+            '2019-10-01' => ['2019-10-01', 3.6],
+        ];
     }
 }

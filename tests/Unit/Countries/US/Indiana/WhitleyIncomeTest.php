@@ -18,11 +18,12 @@ class WhitleyIncomeTest extends TestCase
     }
 
     /**
-     * from Indiana tax calculation: 300 taxable wages
-     * round(300 * .014829) = 4.45 tax
-     */
-    public function testWhitleyIncome(): void
+    * @dataProvider provideTestData
+    */
+    public function testWhitleyIncome($date, $result): void
     {
+        Carbon::setTestNow(Carbon::parse($date));
+
         IndianaIncomeTaxInformation::forUser($this->user)->update([
             'personal_exemptions' => 0,
             'dependent_exemptions' => 0,
@@ -40,7 +41,7 @@ class WhitleyIncomeTest extends TestCase
             $taxes->setPayPeriods(52);
         });
 
-        $this->assertThat(4.44, self::identicalTo($results->getTax(WhitleyIncome::class)));
+        $this->assertThat($result, self::identicalTo($results->getTax(WhitleyIncome::class)));
     }
 
     public function testWhitleyIncomeCountyWorked(): void
@@ -63,5 +64,13 @@ class WhitleyIncomeTest extends TestCase
         });
 
         $this->assertThat(4.44, self::identicalTo($results->getTax(WhitleyIncome::class)));
+    }
+
+    public function provideTestData(): array
+    {
+        return [
+            '2019-01-01' => ['2019-01-01', 4.44],
+            '2019-10-01' => ['2019-10-01', 5.04],
+        ];
     }
 }
