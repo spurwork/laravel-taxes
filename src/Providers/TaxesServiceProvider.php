@@ -28,7 +28,7 @@ class TaxesServiceProvider extends ServiceProvider
         $this->app->register(TaxInformationServiceProvider::class);
 
         $this->app->singleton('taxes', function ($app) {
-            return $app(Taxes::class);
+            return $this->app->make(Taxes::class);
         });
     }
 }
