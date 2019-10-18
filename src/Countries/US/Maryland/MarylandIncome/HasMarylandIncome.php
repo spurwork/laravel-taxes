@@ -42,10 +42,7 @@ trait HasMarylandIncome
             return 0.00;
         }
 
-        $this->worked_in_delaware = $tax_areas->contains(function ($tax_area) {
-            return ($tax_area->homeGovernmentalUnitArea && $tax_area->workGovernmentalUnitArea)
-                && $tax_area->homeGovernmentalUnitArea->id !== $tax_area->workGovernmentalUnitArea->id;
-        });
+        $this->worked_in_delaware = $this->payroll->hasWorkInArea('Delaware');
 
         $this->tax_total = $this->payroll->withholdTax($this->getTaxAmountFromTaxBrackets($this->getAdjustedEarnings(), $this->getTaxBrackets()) / $this->payroll->pay_periods) +
             $this->payroll->withholdTax($this->getSupplementalIncomeTax()) +

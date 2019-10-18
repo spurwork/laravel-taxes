@@ -3,8 +3,8 @@
 namespace Appleton\Taxes\Countries\US\Maryland\MarylandIncome;
 
 
-use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseStateIncome;
 use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseStateIncome;
 use Appleton\Taxes\Models\Countries\US\Maryland\MarylandIncomeTaxInformation;
 
 abstract class MarylandIncome extends BaseStateIncome

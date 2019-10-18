@@ -1,59 +1,77 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Colorado\ColoradoIncome\V20190101;
+namespace Appleton\Taxes\Tests\Unit\Countries\US\Colorado\V20190101;
 
 use Appleton\Taxes\Countries\US\Colorado\ColoradoIncome\ColoradoIncome;
 use Appleton\Taxes\Models\Countries\US\Colorado\ColoradoIncomeTaxInformation;
-use Carbon\Carbon;
+use Appleton\Taxes\Tests\Unit\Countries\IncomeParameters;
+use Appleton\Taxes\Tests\Unit\Countries\IncomeParametersBuilder;
+use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
 
-class ColoradoIncomeTest extends \TestCase
+class ColoradoIncomeTest extends TaxTestCase
 {
+    private const DATE = '2019-01-01';
+    private const LOCATION = 'us.georgia';
+    private const TAX_CLASS = ColoradoIncome::class;
+    private const TAX_INFO_CLASS = ColoradoIncomeTaxInformation::class;
+
     public function setUp(): void
     {
         parent::setUp();
+        $this->query_runner->addTax(ColoradoIncome::class);
 
-        Carbon::setTestNow(
-            Carbon::parse('January 1, 2019 8am', 'America/Chicago')->setTimezone('UTC')
-        );
+        ColoradoIncomeTaxInformation::createForUser([
+            'filing_status' => ColoradoIncome::FILING_SINGLE,
+            'exemptions' => 0,
+            'additional_withholding' => 0,
+            'exempt' => false,
+        ], $this->user);
     }
 
-    public function testColoradoIncome()
+    /**
+     * @dataProvider provideTestData
+     */
+    public function testTax(IncomeParameters $parameters): void
     {
-        $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us.colorado'));
-            $taxes->setWorkLocation($this->getLocation('us.colorado'));
-            $taxes->setUser($this->user);
-            $taxes->setEarnings(1000);
-            $taxes->setPayPeriods(52);
-        });
-
-        $this->assertSame(43.00, $results->getTax(ColoradoIncome::class));
-
-        ColoradoIncomeTaxInformation::forUser($this->user)->update(['filing_status' => ColoradoIncome::FILING_MARRIED]);
-
-        $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us.colorado'));
-            $taxes->setWorkLocation($this->getLocation('us.colorado'));
-            $taxes->setUser($this->user);
-            $taxes->setEarnings(1000);
-            $taxes->setPayPeriods(52);
-        });
-
-        $this->assertSame(36.00, $results->getTax(ColoradoIncome::class));
+        $this->validate($parameters);
     }
 
-    public function testIncomeExemptions()
+    public function provideTestData(): array
     {
-        ColoradoIncomeTaxInformation::forUser($this->user)->update(['exemptions' => 1]);
+        $builder = new IncomeParametersBuilder();
+        $builder
+            ->setDate(self::DATE)
+            ->setHomeLocation(self::LOCATION)
+            ->setTaxClass(self::TAX_CLASS)
+            ->setTaxInfoClass(self::TAX_INFO_CLASS)
+            ->setPayPeriods(52);
 
-        $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us.colorado'));
-            $taxes->setWorkLocation($this->getLocation('us.colorado'));
-            $taxes->setUser($this->user);
-            $taxes->setEarnings(1000);
-            $taxes->setPayPeriods(52);
-        });
-
-        $this->assertSame(39.00, $results->getTax(ColoradoIncome::class));
+        return [
+            '01' => [
+                $builder
+                    ->setTaxInfoOptions(null)
+                    ->setWagesInCents(100000)
+                    ->setExpectedAmountInCents(4300)
+                    ->build()
+            ],
+            '02' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'filing_status' => ColoradoIncome::FILING_MARRIED
+                    ])
+                    ->setWagesInCents(100000)
+                    ->setExpectedAmountInCents(3600)
+                    ->build()
+            ],
+            'exemptions' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'exemptions' => 1
+                    ])
+                    ->setWagesInCents(100000)
+                    ->setExpectedAmountInCents(3900)
+                    ->build()
+            ],
+        ];
     }
 }

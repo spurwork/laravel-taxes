@@ -2,9 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\Delaware\DelawareIncome\V20190101;
 
-use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
 use Appleton\Taxes\Countries\US\Delaware\DelawareIncome\DelawareIncome as BaseDelawareIncome;
-use Appleton\Taxes\Models\Countries\US\Delaware\DelawareIncomeTaxInformation;
 use Illuminate\Database\Eloquent\Collection;
 
 class DelawareIncome extends BaseDelawareIncome

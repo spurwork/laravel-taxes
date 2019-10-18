@@ -2,8 +2,8 @@
 
 namespace Appleton\Taxes\Models\Countries\US\NewMexico;
 
-use Appleton\Taxes\Countries\US\NewMexico\NewMexicoIncome\NewMexicoIncome;
 use Appleton\Taxes\Classes\WorkerTaxes\BaseTaxInformationModel;
+use Appleton\Taxes\Countries\US\NewMexico\NewMexicoIncome\NewMexicoIncome;
 
 class NewMexicoIncomeTaxInformation extends BaseTaxInformationModel
 {

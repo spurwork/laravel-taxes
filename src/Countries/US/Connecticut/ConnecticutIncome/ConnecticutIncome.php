@@ -2,8 +2,8 @@
 
 namespace Appleton\Taxes\Countries\US\Connecticut\ConnecticutIncome;
 
-use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseStateIncome;
 use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseStateIncome;
 use Appleton\Taxes\Models\Countries\US\Connecticut\ConnecticutIncomeTaxInformation;
 
 abstract class ConnecticutIncome extends BaseStateIncome

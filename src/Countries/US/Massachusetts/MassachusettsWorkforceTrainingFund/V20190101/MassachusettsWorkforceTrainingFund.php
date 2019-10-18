@@ -2,7 +2,6 @@
 
 namespace Appleton\Taxes\Countries\US\Massachusetts\MassachusettsWorkforceTrainingFund\V20190101;
 
-use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
 use Appleton\Taxes\Countries\US\Massachusetts\MassachusettsWorkforceTrainingFund\MassachusettsWorkforceTrainingFund as BaseMassachusettsWorkforceTrainingFund;
 use Appleton\Taxes\Traits\HasWageBase;
 use Illuminate\Database\Eloquent\Collection;

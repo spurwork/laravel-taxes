@@ -1,87 +1,60 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Colorado\ColoradoUnemployment\V20190101;
+namespace Appleton\Taxes\Tests\Unit\Countries\US\Colorado\V20190101;
 
 use Appleton\Taxes\Countries\US\Colorado\ColoradoUnemployment\ColoradoUnemployment;
-use Carbon\Carbon;
+use Appleton\Taxes\Tests\Unit\Countries\UnemploymentTaxTestCase;
+use Appleton\Taxes\Tests\Unit\Countries\WageBaseParameters;
 
-class ColoradoUnemploymentTest extends \TestCase
+class ColoradoUnemploymentTest extends UnemploymentTaxTestCase
 {
+    private const DATE = '2019-01-01';
+    private const LOCATION = 'us.colorado';
+    private const TAX_CLASS = ColoradoUnemployment::class;
+    private const TAX_RATE = 0.017;
+    private const WAGE_BASE = 1310000;
+
     public function setUp(): void
     {
         parent::setUp();
+        $this->query_runner->addTax(self::TAX_CLASS);
+    }
 
-        Carbon::setTestNow(
-            Carbon::parse('January 1, 2019 8am', 'America/Chicago')->setTimezone('UTC')
+    /**
+     * @dataProvider provideData
+     */
+    public function testWageBase(WageBaseParameters $parameters): void
+    {
+        $this->validateWageBase($parameters);
+    }
+
+    public function testWorkDifferentState(): void
+    {
+        $this->validateWorkDifferentState(
+            self::DATE,
+            self::LOCATION,
+            self::TAX_CLASS,
+            self::TAX_RATE
         );
     }
 
-    public function testColoradoUnemployment()
+    public function testTaxRate(): void
     {
-        $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us.colorado'));
-            $taxes->setWorkLocation($this->getLocation('us.colorado'));
-            $taxes->setUser($this->user);
-            $taxes->setEarnings(2300);
-        });
-
-        $this->assertSame(39.10, $results->getTax(ColoradoUnemployment::class));
+        $this->validateTaxRate(
+            self::DATE,
+            self::LOCATION,
+            self::TAX_CLASS,
+            0.0321
+        );
     }
 
-    public function testColoradoUnemploymentWithTaxRate()
+    public function provideData(): array
     {
-        config(['taxes.rates.us.colorado.unemployment' => 0.024]);
-
-        $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us.colorado'));
-            $taxes->setWorkLocation($this->getLocation('us.colorado'));
-            $taxes->setUser($this->user);
-            $taxes->setEarnings(2300);
-        });
-
-        $this->assertSame(55.20, $results->getTax(ColoradoUnemployment::class));
-    }
-
-    public function testColoradoUnemploymentMetWageBase()
-    {
-        $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us.colorado'));
-            $taxes->setWorkLocation($this->getLocation('us.colorado'));
-            $taxes->setUser($this->user);
-            $taxes->setEarnings(100);
-            $taxes->setYtdEarnings(13000);
-        });
-
-        $this->assertSame(1.70, $results->getTax(ColoradoUnemployment::class));
-
-        $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us.colorado'));
-            $taxes->setWorkLocation($this->getLocation('us.colorado'));
-            $taxes->setUser($this->user);
-            $taxes->setEarnings(100);
-            $taxes->setYtdEarnings(13099);
-        });
-
-        $this->assertSame(.02, $results->getTax(ColoradoUnemployment::class));
-
-        $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us.colorado'));
-            $taxes->setWorkLocation($this->getLocation('us.colorado'));
-            $taxes->setUser($this->user);
-            $taxes->setEarnings(100);
-            $taxes->setYtdEarnings(13100);
-        });
-
-        $this->assertSame(null, $results->getTax(ColoradoUnemployment::class));
-
-        $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us.colorado'));
-            $taxes->setWorkLocation($this->getLocation('us.colorado'));
-            $taxes->setUser($this->user);
-            $taxes->setEarnings(100);
-            $taxes->setYtdEarnings(13101);
-        });
-
-        $this->assertSame(null, $results->getTax(ColoradoUnemployment::class));
+        return $this->wageBaseBoundariesTestCases(
+            self::DATE,
+            self::LOCATION,
+            self::TAX_CLASS,
+            self::WAGE_BASE,
+            self::TAX_RATE);
     }
 }

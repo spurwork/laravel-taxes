@@ -13,9 +13,9 @@ class IdahoIncomeTaxInformation extends BaseTaxInformationModel
     {
         $tax_information = new self();
         $tax_information->exemptions = 0;
-        $tax_information->filing_status = 0;
+        $tax_information->filing_status = IdahoIncome::FILING_SINGLE;
         $tax_information->additional_withholding = 0;
-        $tax_information->exempt = IdahoIncome::FILING_SINGLE;
+        $tax_information->exempt = false;
         return $tax_information;
     }
 

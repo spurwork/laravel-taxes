@@ -17,9 +17,14 @@ class GovernmentalUnitArea extends Model
         $this->table = config('taxes.tables.governmental_unit_areas');
     }
 
-    public function taxAreas()
+    public function homeTaxAreas()
     {
-        return $this->hasMany(TaxArea::class);
+        return $this->hasMany(TaxArea::class, 'home_governmental_unit_area_id');
+    }
+
+    public function workTaxAreas()
+    {
+        return $this->hasMany(TaxArea::class, 'work_governmental_unit_area_id');
     }
 
     public function scopeAtPoint($query, $latitude, $longitude)

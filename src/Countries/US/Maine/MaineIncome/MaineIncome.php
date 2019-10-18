@@ -1,8 +1,8 @@
 <?php
 namespace Appleton\Taxes\Countries\US\Maine\MaineIncome;
 
-use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseStateIncome;
 use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseStateIncome;
 use Appleton\Taxes\Models\Countries\US\Maine\MaineIncomeTaxInformation;
 
 abstract class MaineIncome extends BaseStateIncome

@@ -9,8 +9,7 @@ class KansasUnemployment extends BaseKansasUnemployment
 {
     public const FUTA_CREDIT = 0.054;
     public const WAGE_BASE = 14000;
-
-    private const NEW_EMPLOYER_RATE = 0.027;
+    public const NEW_EMPLOYER_RATE = 0.027;
 
     public function __construct(Payroll $payroll)
     {

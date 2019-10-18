@@ -2,8 +2,8 @@
 
 namespace Appleton\Taxes\Models\Countries\US\Ohio;
 
-use Appleton\Taxes\Countries\US\Ohio\OhioIncome\OhioIncome;
 use Appleton\Taxes\Classes\WorkerTaxes\BaseTaxInformationModel;
+use Appleton\Taxes\Countries\US\Ohio\OhioIncome\OhioIncome;
 
 class OhioIncomeTaxInformation extends BaseTaxInformationModel
 {

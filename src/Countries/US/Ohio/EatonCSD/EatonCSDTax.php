@@ -2,8 +2,8 @@
 
 namespace Appleton\Taxes\Countries\US\Ohio\EatonCSD;
 
-use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseOccupational;
 use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseOccupational;
 use Appleton\Taxes\Models\Countries\US\Ohio\OhioIncomeTaxInformation;
 
 abstract class EatonCSDTax extends BaseOccupational

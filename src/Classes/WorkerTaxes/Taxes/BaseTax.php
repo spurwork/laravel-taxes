@@ -14,7 +14,7 @@ abstract class BaseTax
 
     public function __construct(Payroll $payroll)
     {
-        $this->payroll = $payroll->exemptEarnings(get_parent_class($this));
+        $this->payroll = $payroll;
     }
 
     public function compute(Collection $tax_areas)

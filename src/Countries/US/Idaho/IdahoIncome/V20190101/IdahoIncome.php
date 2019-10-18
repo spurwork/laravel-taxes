@@ -1,9 +1,7 @@
 <?php
 namespace Appleton\Taxes\Countries\US\Idaho\IdahoIncome\V20190101;
 
-use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
 use Appleton\Taxes\Countries\US\Idaho\IdahoIncome\IdahoIncome as BaseIdahoIncome;
-use Appleton\Taxes\Models\Countries\US\Idaho\IdahoIncomeTaxInformation;
 use Illuminate\Database\Eloquent\Collection;
 
 class IdahoIncome extends BaseIdahoIncome

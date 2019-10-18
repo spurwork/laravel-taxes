@@ -2,8 +2,8 @@
 
 namespace Appleton\Taxes\Countries\US\Oklahoma\OklahomaIncome;
 
-use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseStateIncome;
 use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseStateIncome;
 use Appleton\Taxes\Models\Countries\US\Oklahoma\OklahomaIncomeTaxInformation;
 
 abstract class OklahomaIncome extends BaseStateIncome

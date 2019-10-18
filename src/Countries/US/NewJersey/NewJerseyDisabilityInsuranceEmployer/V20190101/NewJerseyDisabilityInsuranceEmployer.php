@@ -3,8 +3,7 @@
 
 namespace Appleton\Taxes\Countries\US\NewJersey\NewJerseyDisabilityInsuranceEmployer\V20190101;
 
-use Appleton\Taxes\Countries\US\NewJersey\NewJerseyDisabilityInsuranceEmployer\NewJerseyDisabilityInsuranceEmployer
-    as BaseNewJerseyDisabilityInsuranceEmployer;
+use Appleton\Taxes\Countries\US\NewJersey\NewJerseyDisabilityInsuranceEmployer\NewJerseyDisabilityInsuranceEmployer as BaseNewJerseyDisabilityInsuranceEmployer;
 use Illuminate\Database\Eloquent\Collection;
 
 class NewJerseyDisabilityInsuranceEmployer extends BaseNewJerseyDisabilityInsuranceEmployer

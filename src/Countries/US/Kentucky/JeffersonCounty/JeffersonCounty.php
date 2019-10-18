@@ -2,8 +2,8 @@
 
 namespace Appleton\Taxes\Countries\US\Kentucky\JeffersonCounty;
 
-use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseLocalIncome;
 use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseLocalIncome;
 use Appleton\Taxes\Models\Countries\US\Kentucky\KentuckyIncomeTaxInformation;
 
 abstract class JeffersonCounty extends BaseLocalIncome

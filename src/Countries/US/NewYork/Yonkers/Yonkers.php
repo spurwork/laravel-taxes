@@ -2,8 +2,8 @@
 
 namespace Appleton\Taxes\Countries\US\NewYork\Yonkers;
 
-use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseLocalIncome;
 use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseLocalIncome;
 use Appleton\Taxes\Models\Countries\US\NewYork\NewYorkIncomeTaxInformation;
 
 abstract class Yonkers extends BaseLocalIncome

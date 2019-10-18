@@ -2,8 +2,8 @@
 
 namespace Appleton\Taxes\Countries\US\Utah\UtahIncome;
 
-use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseStateIncome;
 use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseStateIncome;
 use Appleton\Taxes\Models\Countries\US\Utah\UtahIncomeTaxInformation;
 
 abstract class UtahIncome extends BaseStateIncome

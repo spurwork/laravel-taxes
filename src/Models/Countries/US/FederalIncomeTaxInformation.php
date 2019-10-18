@@ -2,9 +2,8 @@
 
 namespace Appleton\Taxes\Models\Countries\US;
 
-use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome;
 use Appleton\Taxes\Classes\WorkerTaxes\BaseTaxInformationModel;
-use Appleton\Taxes\Classes\WorkerTaxes\Taxes;
+use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome;
 
 class FederalIncomeTaxInformation extends BaseTaxInformationModel
 {

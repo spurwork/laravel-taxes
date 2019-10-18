@@ -2,8 +2,8 @@
 
 namespace Appleton\Taxes\Countries\US\WestVirginia\WestVirginiaIncome;
 
-use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseStateIncome;
 use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseStateIncome;
 use Appleton\Taxes\Models\Countries\US\WestVirginia\WestVirginiaIncomeTaxInformation;
 use Illuminate\Database\Eloquent\Collection;
 

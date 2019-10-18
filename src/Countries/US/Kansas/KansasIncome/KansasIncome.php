@@ -2,8 +2,8 @@
 
 namespace Appleton\Taxes\Countries\US\Kansas\KansasIncome;
 
-use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseStateIncome;
 use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseStateIncome;
 use Appleton\Taxes\Models\Countries\US\Kansas\KansasIncomeTaxInformation;
 
 abstract class KansasIncome extends BaseStateIncome

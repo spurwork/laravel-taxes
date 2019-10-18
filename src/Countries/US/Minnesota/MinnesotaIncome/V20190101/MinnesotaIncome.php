@@ -1,9 +1,7 @@
 <?php
 namespace Appleton\Taxes\Countries\US\Minnesota\MinnesotaIncome\V20190101;
 
-use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
 use Appleton\Taxes\Countries\US\Minnesota\MinnesotaIncome\MinnesotaIncome as BaseMinnesotaIncome;
-use Appleton\Taxes\Models\Countries\US\Minnesota\MinnesotaIncomeTaxInformation;
 use Illuminate\Database\Eloquent\Collection;
 
 class MinnesotaIncome extends BaseMinnesotaIncome

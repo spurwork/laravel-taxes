@@ -2,6 +2,8 @@
 
 namespace Appleton\Taxes\Classes\WorkerTaxes;
 
+use Appleton\Taxes\Models\GovernmentalUnitArea;
+
 class Payroll
 {
     public $birth_date;
@@ -15,13 +17,19 @@ class Payroll
     public $wtd_earnings;
     public $mtd_earnings;
     public $ytd_earnings;
+    public $exempted_earnings;
+    public $exempted_supplemental_earnings;
 
-    protected $amount_withheld;
+    private $amount_withheld;
+    private $start_date;
+    private $end_date;
+    private $area_incomes;
+    private $total_earnings;
+    private $wage_manager;
 
-    public function __construct($parameters)
+    public function __construct(array $parameters, WageManager $wage_manager)
     {
         $this->birth_date = $parameters['birth_date'] ?? null;
-        $this->date = $parameters['date'];
         $this->days_worked = $parameters['days_worked'] ?? false;
         $this->earnings = $parameters['earnings'] ?? 0;
         $this->exemptions = collect($parameters['exemptions'] ?? []);
@@ -31,79 +39,135 @@ class Payroll
         $this->wtd_earnings = $parameters['wtd_earnings'] ?? 0;
         $this->mtd_earnings = $parameters['mtd_earnings'] ?? 0;
         $this->ytd_earnings = $parameters['ytd_earnings'] ?? 0;
+        $this->exempted_earnings = $parameters['exempted_earnings'] ?? 0;
+        $this->exempted_supplemental_earnings = $parameters['exempted_supplemental_earnings'] ?? 0;
+
+        $this->start_date = $parameters['start_date'];
+        $this->end_date = $parameters['end_date'] ?? $parameters['start_date'];
+        $this->area_incomes = $parameters['area_incomes'] ?? collect([]);
+        $this->total_earnings = $parameters['total_earnings'] ?? 0;
 
         $this->amount_withheld = 0;
+        $this->wage_manager = $wage_manager;
     }
 
-    public function exemptEarnings($class_name)
+    public function getStartDate()
     {
-        if ($this->exemptions->has($class_name)) {
-            $max_amount_exempt = $this->exemptions->get($class_name, 0);
-        } else {
-            $max_amount_exempt = $this->exemptions->first(function ($value, $key) use ($class_name) {
-                return is_subclass_of($class_name, $key);
-            }, 0);
-        }
-        $this->exempted_earnings = min($max_amount_exempt, $this->earnings);
-        $this->exempted_supplemental_earnings = min($max_amount_exempt - $this->exempted_earnings, $this->supplemental_earnings);
-        return $this;
+        return $this->start_date;
     }
 
-    public function withholdTax($amount)
+    public function withholdTax(?float $amount): ?float
     {
         $amount = min($this->getNetEarnings(), $amount);
         $this->amount_withheld += $amount;
         return $amount;
     }
 
-    public function getNetEarnings()
+    public function getNetEarnings(): float
     {
-        return max($this->getEarnings() - $this->amount_withheld, 0);
+        return max($this->total_earnings - $this->exempted_earnings - $this->amount_withheld, 0);
     }
 
-    public function getEarnings()
+    public function getEarnings(GovernmentalUnitArea $governmental_unit_area = null): float
     {
-        return $this->earnings - $this->exempted_earnings;
+        if ($governmental_unit_area === null) {
+            return $this->earnings - $this->exempted_earnings;
+        }
+
+        /** @var AreaIncome $area_wages */
+        $area_wages = $this->area_incomes->get($governmental_unit_area->name);
+        if ($area_wages === null) {
+            return 0;
+        }
+
+        $earnings_in_cents = $area_wages->getWages()->sum(static function (Wage $gross_wage) {
+            return $gross_wage->getAmountInCents();
+        });
+
+        return ($earnings_in_cents / 100) - $this->exempted_earnings;
     }
 
-    public function getSupplementalEarnings()
+    public function getSupplementalEarnings(): float
     {
         return $this->supplemental_earnings - $this->exempted_supplemental_earnings;
     }
 
-    public function getDaysWorked($tax_class, $governmental_unit_area = null)
+    public function getDaysWorked(string $tax_class, GovernmentalUnitArea $governmental_unit_area = null)
     {
-        if (is_callable($this->days_worked)) {
-            return ($this->days_worked)($tax_class,$governmental_unit_area);
+        if ($governmental_unit_area === null) {
+            return $this->days_worked;
         }
 
-        return $this->days_worked;
+        /** @var AreaIncome $area_income */
+        $area_income = $this->area_incomes->get($governmental_unit_area->name);
+        if ($area_income === null) {
+            return 0;
+        }
+
+        return $this->wage_manager->calculateDaysWorked(
+            $area_income->getWages(),
+            $this->start_date,
+            $this->end_date
+        );
     }
 
-    public function getWtdEarnings($governmental_unit_area = null)
+    public function getMtdEarnings(GovernmentalUnitArea $governmental_unit_area = null): float
     {
-        if (is_callable($this->wtd_earnings)) {
-            return ($this->wtd_earnings)($governmental_unit_area);
+        if ($governmental_unit_area === null) {
+            return $this->mtd_earnings;
         }
 
-        return $this->wtd_earnings;
+        /** @var AreaIncome $area_income */
+        $area_income = $this->area_incomes->get($governmental_unit_area->name);
+        if ($area_income === null) {
+            return 0;
+        }
+
+        $start_of_month = $this->start_date->copy()->startOfMonth();
+        $start_of_year = $this->start_date->copy()->startOfYear();
+
+        return $this->wage_manager->calculateEarnings($area_income->getHistoricalWages(),
+            $start_of_month < $start_of_year ? $start_of_year : $start_of_month);
     }
 
-    public function getMtdEarnings($governmental_unit_area = null, bool $include_current = false)
+    public function getYtdEarnings(GovernmentalUnitArea $governmental_unit_area = null): float
     {
-        if (is_callable($this->mtd_earnings)) {
-            return ($this->mtd_earnings)($governmental_unit_area, $include_current);
+        if ($governmental_unit_area === null) {
+            return $this->ytd_earnings;
         }
 
-        return $this->mtd_earnings;
+        /** @var AreaIncome $area_income */
+        $area_income = $this->area_incomes->get($governmental_unit_area->name);
+        if ($area_income === null) {
+            return 0;
+        }
+
+        return $this->wage_manager->calculateEarnings($area_income->getHistoricalWages(),
+            $this->start_date->copy()->startOfYear());
     }
 
-    public function getYtdEarnings($governmental_unit_area = null)
+    public function determineEarnings(TaxableIncome $taxable_income): void
     {
-        if (is_callable($this->ytd_earnings)) {
-            return ($this->ytd_earnings)($governmental_unit_area);
-        }
+        $this->earnings = $this->wage_manager->calculateEarnings($taxable_income->getWages());
 
-        return $this->ytd_earnings;
+        $this->exempted_earnings = min($taxable_income->getExemptionAmountInCents() / 100, $this->earnings);
+        $this->exempted_supplemental_earnings = min(($taxable_income->getExemptionAmountInCents() / 100) - $this->exempted_earnings,
+            $this->supplemental_earnings);
+
+        $start_of_year = $this->start_date->copy()->startOfYear();
+        $this->ytd_earnings = $this->wage_manager->calculateEarnings($taxable_income->getHistoricalWages(),
+            $start_of_year);
+
+        $start_of_month = $this->start_date->copy()->startOfMonth();
+        $this->mtd_earnings = $this->wage_manager->calculateEarnings($taxable_income->getHistoricalWages(),
+            $start_of_month < $start_of_year ? $start_of_year : $start_of_month);
+
+        $this->supplemental_earnings = $this->wage_manager->calculateEarnings($taxable_income->getWages(),
+            null, true);
+    }
+
+    public function hasWorkInArea(string $area_name): bool
+    {
+        return $this->area_incomes->has($area_name);
     }
 }

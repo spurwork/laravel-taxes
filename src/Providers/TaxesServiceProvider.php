@@ -2,8 +2,8 @@
 
 namespace Appleton\Taxes\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use Appleton\Taxes\Classes\WorkerTaxes\Taxes;
+use Illuminate\Support\ServiceProvider;
 
 class TaxesServiceProvider extends ServiceProvider
 {
@@ -28,8 +28,7 @@ class TaxesServiceProvider extends ServiceProvider
         $this->app->register(TaxInformationServiceProvider::class);
 
         $this->app->singleton('taxes', function ($app) {
-            $taxes = new Taxes($app);
-            return $taxes;
+            return $app(Taxes::class);
         });
     }
 }

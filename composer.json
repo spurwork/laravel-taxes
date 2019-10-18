@@ -36,10 +36,10 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Appleton\\Taxes\\": "tests"
+            "Appleton\\Taxes\\Tests\\Unit\\": "tests/Unit"
         },
         "classmap": [
-            "tests/TestCase.php"
+            "tests/TestCaseOld.php"
         ]
     },
     "scripts": {

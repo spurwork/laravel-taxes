@@ -3,7 +3,6 @@
 namespace Appleton\Taxes\Countries\US\SocialSecurity\V20170101;
 
 use Appleton\Taxes\Countries\US\SocialSecurity\SocialSecurity as BaseSocialSecurity;
-use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
 use Appleton\Taxes\Traits\HasWageBase;
 use Illuminate\Database\Eloquent\Collection;
 

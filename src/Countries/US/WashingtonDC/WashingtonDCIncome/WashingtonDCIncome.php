@@ -1,8 +1,8 @@
 <?php
 namespace Appleton\Taxes\Countries\US\WashingtonDC\WashingtonDCIncome;
 
-use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseStateIncome;
 use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseStateIncome;
 use Appleton\Taxes\Models\Countries\US\WashingtonDC\WashingtonDCIncomeTaxInformation;
 
 abstract class WashingtonDCIncome extends BaseStateIncome
