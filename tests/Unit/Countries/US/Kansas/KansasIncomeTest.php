@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Unit\Countries\US\Kansas;
 
-use Appleton\Taxes\Classes\TaxResults;
+use Appleton\Taxes\Classes\WorkerTaxes\TaxResults;
 use Appleton\Taxes\Countries\US\Kansas\KansasIncome\KansasIncome;
 use Appleton\Taxes\Models\Countries\US\Kansas\KansasIncomeTaxInformation;
 use Carbon\Carbon;

@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\Tennessee\TennesseeUnemployment;
 
-use Appleton\Taxes\Classes\BaseStateUnemployment;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseStateUnemployment;
 
 abstract class TennesseeUnemployment extends BaseStateUnemployment
 {

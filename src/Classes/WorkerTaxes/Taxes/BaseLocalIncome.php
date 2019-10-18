@@ -1,10 +1,10 @@
 <?php
 
-namespace Appleton\Taxes\Classes;
+namespace Appleton\Taxes\Classes\WorkerTaxes\Taxes;
 
 use Appleton\Taxes\Traits\HasIncome;
 
-abstract class BaseStateIncome extends BaseState
+abstract class BaseLocalIncome extends BaseLocal
 {
     use HasIncome;
 

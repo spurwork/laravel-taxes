@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\Nevada\NevadaUnemployment;
 
-use Appleton\Taxes\Classes\TaxResults;
+use Appleton\Taxes\Classes\WorkerTaxes\TaxResults;
 use Carbon\Carbon;
 use TestCase;
 

@@ -1,7 +1,7 @@
 <?php
 namespace Appleton\Taxes\Countries\US\Mississippi\MississippiUnemployment\V20190101;
 
-use Appleton\Taxes\Classes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
 use Appleton\Taxes\Countries\US\Mississippi\MississippiUnemployment\MississippiUnemployment as BaseMississippiUnemployment;
 
 class MississippiUnemployment extends BaseMississippiUnemployment

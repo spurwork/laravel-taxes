@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Unit\Countries\US\Nevada;
 
-use Appleton\Taxes\Classes\PayrollLiabilities;
+use Appleton\Taxes\Classes\PayrollLiabilities\PayrollLiabilities;
 use Appleton\Taxes\Countries\US\Nevada\NevadaGrossPayrollEmployer\NevadaGrossPayrollEmployer;
 use Carbon\Carbon;
 use TestCase;

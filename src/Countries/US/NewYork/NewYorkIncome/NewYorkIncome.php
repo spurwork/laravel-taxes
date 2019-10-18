@@ -2,8 +2,8 @@
 
 namespace Appleton\Taxes\Countries\US\NewYork\NewYorkIncome;
 
-use Appleton\Taxes\Classes\BaseStateIncome;
-use Appleton\Taxes\Classes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseStateIncome;
+use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
 use Appleton\Taxes\Models\Countries\US\NewYork\NewYorkIncomeTaxInformation;
 
 abstract class NewYorkIncome extends BaseStateIncome

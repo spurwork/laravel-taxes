@@ -1,8 +1,8 @@
 <?php
  namespace Appleton\Taxes\Countries\US\Louisiana\LouisianaIncome;
 
-use Appleton\Taxes\Classes\BaseStateIncome;
-use Appleton\Taxes\Classes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseStateIncome;
+use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
 use Appleton\Taxes\Models\Countries\US\Louisiana\LouisianaIncomeTaxInformation;
 
 abstract class LouisianaIncome extends BaseStateIncome

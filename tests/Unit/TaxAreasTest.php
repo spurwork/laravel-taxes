@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Models;
 
-use Appleton\Taxes\Classes\BaseTax;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseTax;
 
 class TaxAreasTest extends \TestCase
 {

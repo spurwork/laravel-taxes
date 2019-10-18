@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\California\SanFranciscoPayrollExpenseEmployer;
 
-use Appleton\Taxes\Classes\BasePayrollLiabilityLocal;
+use Appleton\Taxes\Classes\PayrollLiabilities\Liabilities\BasePayrollLiabilityLocal;
 use Illuminate\Support\Collection;
 
 abstract class SanFranciscoPayrollExpenseEmployer extends BasePayrollLiabilityLocal

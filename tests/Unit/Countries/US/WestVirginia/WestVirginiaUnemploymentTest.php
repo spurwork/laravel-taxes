@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Unit\Countries\US\WestVirginia;
 
-use Appleton\Taxes\Classes\TaxResults;
+use Appleton\Taxes\Classes\WorkerTaxes\TaxResults;
 use Appleton\Taxes\Countries\US\WestVirginia\WestVirginiaIncome\WestVirginiaIncome;
 use Appleton\Taxes\Countries\US\WestVirginia\WestVirginiaUnemployment\WestVirginiaUnemployment;
 use Carbon\Carbon;

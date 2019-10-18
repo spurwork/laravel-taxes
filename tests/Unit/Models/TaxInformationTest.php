@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Models;
 
-use Appleton\Taxes\Classes\Taxes;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes;
 use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome;
 use Appleton\Taxes\Models\Countries\US\FederalIncomeTaxInformation;
 

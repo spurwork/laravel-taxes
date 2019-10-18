@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\Nevada\NevadaGrossPayrollEmployer;
 
-use Appleton\Taxes\Classes\BasePayrollLiabilityState;
+use Appleton\Taxes\Classes\PayrollLiabilities\Liabilities\BasePayrollLiabilityState;
 use Illuminate\Support\Collection;
 
 abstract class NevadaGrossPayrollEmployer extends BasePayrollLiabilityState

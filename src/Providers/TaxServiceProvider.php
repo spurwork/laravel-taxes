@@ -2,10 +2,10 @@
 
 namespace Appleton\Taxes\Providers;
 
-use Appleton\Taxes\Classes\BasePayrollLiability;
-use Appleton\Taxes\Classes\BaseTax;
-use Appleton\Taxes\Classes\Payroll;
-use Appleton\Taxes\Classes\CompanyPayroll;
+use Appleton\Taxes\Classes\PayrollLiabilities\Liabilities\BasePayrollLiability;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseTax;
+use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
+use Appleton\Taxes\Classes\PayrollLiabilities\CompanyPayroll;
 use Carbon\Carbon;
 use http\Exception\UnexpectedValueException;
 use Illuminate\Foundation\Application;
@@ -1453,8 +1453,8 @@ class TaxServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(
-            \Appleton\Taxes\Classes\StateUnemployment::class,
-            \Appleton\Taxes\Classes\BaseStateUnemployment::class
+            \Appleton\Taxes\Classes\WorkerTaxes\Taxes\StateUnemployment::class,
+            \Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseStateUnemployment::class
         );
 
         foreach ($this->interfaces as $interface) {

@@ -2,8 +2,8 @@
 
 namespace Appleton\Taxes\Unit\Countries\US\Indiana;
 
-use Appleton\Taxes\Classes\Taxes;
-use Appleton\Taxes\Classes\TaxResults;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes;
+use Appleton\Taxes\Classes\WorkerTaxes\TaxResults;
 use Appleton\Taxes\Countries\US\Indiana\IndianaIncome\IndianaIncome;
 use Appleton\Taxes\Models\Countries\US\Indiana\IndianaIncomeTaxInformation;
 use Carbon\Carbon;

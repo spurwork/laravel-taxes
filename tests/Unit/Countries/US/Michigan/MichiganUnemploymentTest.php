@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Unit\Countries\US\Michigan;
 
-use Appleton\Taxes\Classes\Taxes;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes;
 use Appleton\Taxes\Countries\US\Michigan\MichiganUnemployment\MichiganUnemployment;
 use Carbon\Carbon;
 use TestCase;

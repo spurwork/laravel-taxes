@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Unit\Countries\US\California;
 
-use Appleton\Taxes\Classes\PayrollLiabilities;
+use Appleton\Taxes\Classes\PayrollLiabilities\PayrollLiabilities;
 use Appleton\Taxes\Countries\US\California\SacramentoBusinessOperationsEmployer\SacramentoBusinessOperationsEmployer;
 use Carbon\Carbon;
 use TestCase;

@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\Wyoming\WyomingUnemployment\V20190101;
 
-use Appleton\Taxes\Classes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
 use Appleton\Taxes\Countries\US\Wyoming\WyomingUnemployment\WyomingUnemployment as BaseWyomingUnemployment;
 
 class WyomingUnemployment extends BaseWyomingUnemployment

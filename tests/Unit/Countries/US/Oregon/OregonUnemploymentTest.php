@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Unit\Countries\US\Oregon;
 
-use Appleton\Taxes\Classes\Taxes;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes;
 use Appleton\Taxes\Countries\US\Oregon\OregonUnemployment\OregonUnemployment;
 use Carbon\Carbon;
 use TestCase;

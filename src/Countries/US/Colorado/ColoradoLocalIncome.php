@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\Colorado;
 
-use Appleton\Taxes\Classes\BaseLocal;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseLocal;
 use Illuminate\Database\Eloquent\Collection;
 use stdClass;
 

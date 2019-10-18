@@ -1,7 +1,7 @@
 <?php
  namespace Appleton\Taxes\Countries\US\Louisiana\LouisianaUnemployment;
 
-use Appleton\Taxes\Classes\BaseStateUnemployment;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseStateUnemployment;
 
 class LouisianaUnemployment extends BaseStateUnemployment
 {

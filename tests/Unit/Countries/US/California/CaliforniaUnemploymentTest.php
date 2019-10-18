@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Unit\Countries\US\California;
 
-use Appleton\Taxes\Classes\TaxResults;
+use Appleton\Taxes\Classes\WorkerTaxes\TaxResults;
 use Appleton\Taxes\Countries\US\California\CaliforniaIncome\CaliforniaIncome;
 use Appleton\Taxes\Countries\US\California\CaliforniaUnemployment\CaliforniaUnemployment;
 use Carbon\Carbon;

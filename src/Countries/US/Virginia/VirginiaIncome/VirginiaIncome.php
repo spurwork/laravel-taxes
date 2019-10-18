@@ -2,8 +2,8 @@
 
 namespace Appleton\Taxes\Countries\US\Virginia\VirginiaIncome;
 
-use Appleton\Taxes\Classes\BaseStateIncome;
-use Appleton\Taxes\Classes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseStateIncome;
+use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
 use Appleton\Taxes\Models\Countries\US\Virginia\VirginiaIncomeTaxInformation;
 
 abstract class VirginiaIncome extends BaseStateIncome

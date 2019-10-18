@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\Illinois\IllinoisUnemployment;
 
-use Appleton\Taxes\Classes\BaseStateUnemployment;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseStateUnemployment;
 
 class IllinoisUnemployment extends BaseStateUnemployment
 {

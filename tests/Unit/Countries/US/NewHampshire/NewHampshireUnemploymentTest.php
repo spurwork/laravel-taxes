@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Unit\Countries\US\NewHampshire;
 
-use Appleton\Taxes\Classes\Taxes;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes;
 use Appleton\Taxes\Countries\US\NewHampshire\NewHampshireUnemployment\NewHampshireUnemployment;
 use Carbon\Carbon;
 use TestCase;

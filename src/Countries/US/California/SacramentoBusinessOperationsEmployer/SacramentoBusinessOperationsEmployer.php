@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\California\SacramentoBusinessOperationsEmployer;
 
-use Appleton\Taxes\Classes\BasePayrollLiabilityLocal;
+use Appleton\Taxes\Classes\PayrollLiabilities\Liabilities\BasePayrollLiabilityLocal;
 use Appleton\Taxes\Countries\US\California\SacramentoBusinessOperationsEmployer\SacramentoBusinessOperationsEmployer as BaseSacramentoPayrollEmployer;
 use Illuminate\Support\Collection;
 

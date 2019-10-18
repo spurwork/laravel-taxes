@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\Michigan\MichiganUnemployment\V20190101;
 
-use Appleton\Taxes\Classes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
 use Appleton\Taxes\Countries\US\Michigan\MichiganUnemployment\MichiganUnemployment as BaseMichiganUnemployment;
 
 class MichiganUnemployment extends BaseMichiganUnemployment

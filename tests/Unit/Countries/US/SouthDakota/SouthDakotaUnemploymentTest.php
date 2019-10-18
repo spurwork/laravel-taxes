@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Unit\Countries\US\SouthDakota;
 
-use Appleton\Taxes\Classes\Taxes;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes;
 use Appleton\Taxes\Countries\US\SouthDakota\SouthDakotaUnemployment\SouthDakotaUnemployment;
 use Carbon\Carbon;
 use TestCase;

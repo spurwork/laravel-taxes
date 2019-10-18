@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\Indiana\IndianaUnemployment;
 
-use Appleton\Taxes\Classes\BaseStateUnemployment;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseStateUnemployment;
 
 abstract class IndianaUnemployment extends BaseStateUnemployment
 {

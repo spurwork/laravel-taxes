@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Unit\Countries\US\Virginia;
 
-use Appleton\Taxes\Classes\Taxes;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes;
 use Appleton\Taxes\Countries\US\Virginia\VirginiaUnemployment\VirginiaUnemployment;
 use Carbon\Carbon;
 use TestCase;

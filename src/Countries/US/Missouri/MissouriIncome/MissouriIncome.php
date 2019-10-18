@@ -2,8 +2,8 @@
 
 namespace Appleton\Taxes\Countries\US\Missouri\MissouriIncome;
 
-use Appleton\Taxes\Classes\BaseStateIncome;
-use Appleton\Taxes\Classes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseStateIncome;
+use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
 use Appleton\Taxes\Models\Countries\US\Missouri\MissouriIncomeTaxInformation;
 
 abstract class MissouriIncome extends BaseStateIncome

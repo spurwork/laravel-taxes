@@ -1,8 +1,8 @@
 <?php
 namespace Appleton\Taxes\Countries\US\Idaho\IdahoIncome;
 
-use Appleton\Taxes\Classes\BaseStateIncome;
-use Appleton\Taxes\Classes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseStateIncome;
+use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
 use Appleton\Taxes\Models\Countries\US\Idaho\IdahoIncomeTaxInformation;
 
 abstract class IdahoIncome extends BaseStateIncome

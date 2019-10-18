@@ -1,7 +1,7 @@
 <?php
 namespace Appleton\Taxes\Countries\US\Iowa\IowaIncome\V20190101;
 
-use Appleton\Taxes\Classes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
 use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome;
 use Appleton\Taxes\Countries\US\Iowa\IowaIncome\IowaIncome as BaseIowaIncome;
 use Appleton\Taxes\Models\Countries\US\Iowa\IowaIncomeTaxInformation;

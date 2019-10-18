@@ -1,7 +1,7 @@
 <?php
 
-use Appleton\Taxes\Classes\PayrollLiabilities;
-use Appleton\Taxes\Classes\Taxes;
+use Appleton\Taxes\Classes\PayrollLiabilities\PayrollLiabilities;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes;
 use Appleton\Taxes\Countries\US\Alabama\AlabamaIncome\AlabamaIncome;
 use Appleton\Taxes\Countries\US\Arkansas\ArkansasIncome\ArkansasIncome;
 use Appleton\Taxes\Countries\US\California\CaliforniaIncome\CaliforniaIncome;

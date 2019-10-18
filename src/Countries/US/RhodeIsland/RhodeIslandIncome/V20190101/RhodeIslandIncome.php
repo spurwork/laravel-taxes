@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\RhodeIsland\RhodeIslandIncome\V20190101;
 
-use Appleton\Taxes\Classes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
 use Appleton\Taxes\Countries\US\RhodeIsland\RhodeIslandIncome\RhodeIslandIncome as BaseRhodeIslandIncome;
 use Appleton\Taxes\Models\Countries\US\RhodeIsland\RhodeIslandIncomeTaxInformation;
 use Illuminate\Database\Eloquent\Collection;

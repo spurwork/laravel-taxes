@@ -1,8 +1,7 @@
 <?php
 
-namespace Appleton\Taxes\Classes;
+namespace Appleton\Taxes\Classes\WorkerTaxes\Taxes;
 
-use Appleton\Taxes\Models\TaxInformation;
 use Appleton\Taxes\Traits\HasIncome;
 
 abstract class BaseIncome extends BaseTax

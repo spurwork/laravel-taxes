@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Unit\Countries\US\Kansas;
 
-use Appleton\Taxes\Classes\TaxResults;
+use Appleton\Taxes\Classes\WorkerTaxes\TaxResults;
 use Appleton\Taxes\Countries\US\Kansas\KansasUnemployment\KansasUnemployment;
 use Carbon\Carbon;
 use TestCase;

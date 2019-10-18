@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Unit\Countries\US\Colorado\V20190101;
 
-use Appleton\Taxes\Classes\TaxResults;
+use Appleton\Taxes\Classes\WorkerTaxes\TaxResults;
 use Appleton\Taxes\Countries\US\Colorado\SheridanOccupationalPrivilegeEmployer\SheridanOccupationalPrivilegeEmployer;
 use Carbon\Carbon;
 use TestCase;

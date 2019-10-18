@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\WestVirginia\CharlestonCityServiceFee;
 
-use Appleton\Taxes\Classes\BaseLocal;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseLocal;
 
 abstract class CharlestonCityServiceFee extends BaseLocal
 {

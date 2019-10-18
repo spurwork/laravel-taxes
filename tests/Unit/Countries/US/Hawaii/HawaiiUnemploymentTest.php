@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Unit\Countries\US\Hawaii;
 
-use Appleton\Taxes\Classes\Taxes;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes;
 use Appleton\Taxes\Countries\US\Hawaii\HawaiiUnemployment\HawaiiUnemployment;
 use Carbon\Carbon;
 use TestCase;

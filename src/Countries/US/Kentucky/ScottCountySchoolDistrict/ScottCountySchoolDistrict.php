@@ -2,8 +2,8 @@
 
 namespace Appleton\Taxes\Countries\US\Kentucky\ScottCountySchoolDistrict;
 
-use Appleton\Taxes\Classes\BaseOccupational;
-use Appleton\Taxes\Classes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseOccupational;
+use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
 use Appleton\Taxes\Models\Countries\US\Kentucky\KentuckyIncomeTaxInformation;
 
 abstract class ScottCountySchoolDistrict extends BaseOccupational

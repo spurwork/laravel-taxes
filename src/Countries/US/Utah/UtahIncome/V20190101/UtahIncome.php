@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\Utah\UtahIncome\V20190101;
 
-use Appleton\Taxes\Classes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
 use Appleton\Taxes\Countries\US\Utah\UtahIncome\UtahIncome as BaseUtahIncome;
 use Appleton\Taxes\Models\Countries\US\Utah\UtahIncomeTaxInformation;
 use Illuminate\Database\Eloquent\Collection;

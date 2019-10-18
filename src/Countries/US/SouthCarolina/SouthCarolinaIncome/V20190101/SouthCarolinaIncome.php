@@ -1,7 +1,7 @@
 <?php
 namespace Appleton\Taxes\Countries\US\SouthCarolina\SouthCarolinaIncome\V20190101;
 
-use Appleton\Taxes\Classes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
 use Appleton\Taxes\Countries\US\SouthCarolina\SouthCarolinaIncome\SouthCarolinaIncome as BaseSouthCarolinaIncome;
 use Appleton\Taxes\Models\Countries\US\SouthCarolina\SouthCarolinaIncomeTaxInformation;
 use Illuminate\Database\Eloquent\Collection;

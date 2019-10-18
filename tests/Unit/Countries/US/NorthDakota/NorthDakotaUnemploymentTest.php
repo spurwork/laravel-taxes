@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Unit\Countries\US\NorthDakota;
 
-use Appleton\Taxes\Classes\Taxes;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes;
 use Appleton\Taxes\Countries\US\NorthDakota\NorthDakotaUnemployment\NorthDakotaUnemployment;
 use Carbon\Carbon;
 use TestCase;

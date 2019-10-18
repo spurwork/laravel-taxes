@@ -1,8 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Classes;
-
-use Illuminate\Database\Eloquent\Collection;
+namespace Appleton\Taxes\Classes\WorkerTaxes\Taxes;
 
 abstract class BaseOccupational extends BaseLocal
 {

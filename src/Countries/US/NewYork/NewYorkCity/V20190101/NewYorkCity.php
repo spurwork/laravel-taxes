@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\NewYork\NewYorkCity\V20190101;
 
-use Appleton\Taxes\Classes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
 use Appleton\Taxes\Countries\US\NewYork\NewYorkCity\NewYorkCity as BaseNewYorkCity;
 use Appleton\Taxes\Countries\US\NewYork\NewYorkIncome\NewYorkIncome;
 use Appleton\Taxes\Models\Countries\US\NewYork\NewYorkIncomeTaxInformation;

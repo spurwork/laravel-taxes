@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\Montana\MontanaUnemployment;
 
-use Appleton\Taxes\Classes\BaseStateUnemployment;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseStateUnemployment;
 use Illuminate\Database\Eloquent\Collection;
 
 class MontanaUnemployment extends BaseStateUnemployment

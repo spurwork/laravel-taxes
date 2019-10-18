@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Unit\Countries\US\NewJersey;
 
-use Appleton\Taxes\Classes\Taxes;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes;
 use Appleton\Taxes\Countries\US\NewJersey\NewJerseyUnemployment\NewJerseyUnemployment;
 use Carbon\Carbon;
 use TestCase;

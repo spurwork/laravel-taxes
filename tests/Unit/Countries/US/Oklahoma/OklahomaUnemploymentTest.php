@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Unit\Countries\US\Oklahoma;
 
-use Appleton\Taxes\Classes\Taxes;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes;
 use Appleton\Taxes\Countries\US\Oklahoma\OklahomaUnemployment\OklahomaUnemployment;
 use Carbon\Carbon;
 use TestCase;

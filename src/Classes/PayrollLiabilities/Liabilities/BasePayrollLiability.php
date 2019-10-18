@@ -1,7 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Classes;
+namespace Appleton\Taxes\Classes\PayrollLiabilities\Liabilities;
 
+use Appleton\Taxes\Classes\PayrollLiabilities\CompanyPayroll;
 use Illuminate\Support\Collection;
 
 abstract class BasePayrollLiability

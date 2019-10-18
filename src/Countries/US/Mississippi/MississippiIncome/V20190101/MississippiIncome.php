@@ -1,7 +1,7 @@
 <?php
 namespace Appleton\Taxes\Countries\US\Mississippi\MississippiIncome\V20190101;
 
-use Appleton\Taxes\Classes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
 use Appleton\Taxes\Countries\US\Mississippi\MississippiIncome\MississippiIncome as BaseMississippiIncome;
 use Appleton\Taxes\Models\Countries\US\Mississippi\MississippiIncomeTaxInformation;
 use Illuminate\Database\Eloquent\Collection;

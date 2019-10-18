@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Unit\Countries\US\Vermont;
 
-use Appleton\Taxes\Classes\Taxes;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes;
 use Appleton\Taxes\Countries\US\Vermont\VermontUnemployment\VermontUnemployment;
 use Carbon\Carbon;
 use TestCase;

@@ -2,8 +2,8 @@
 
 namespace Appleton\Taxes\Countries\US\NewYork\NewYorkCity;
 
-use Appleton\Taxes\Classes\BaseLocalIncome;
-use Appleton\Taxes\Classes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseLocalIncome;
+use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
 use Appleton\Taxes\Models\Countries\US\NewYork\NewYorkIncomeTaxInformation;
 
 abstract class NewYorkCity extends BaseLocalIncome

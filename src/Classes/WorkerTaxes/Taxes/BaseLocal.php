@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Classes;
+namespace Appleton\Taxes\Classes\WorkerTaxes\Taxes;
 
 abstract class BaseLocal extends BaseTax
 {

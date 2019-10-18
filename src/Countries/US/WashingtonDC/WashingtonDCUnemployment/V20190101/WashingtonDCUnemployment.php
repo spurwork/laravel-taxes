@@ -1,7 +1,7 @@
 <?php
 namespace Appleton\Taxes\Countries\US\WashingtonDC\WashingtonDCUnemployment\V20190101;
 
-use Appleton\Taxes\Classes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
 use Appleton\Taxes\Countries\US\WashingtonDC\WashingtonDCUnemployment\WashingtonDCUnemployment as BaseWashingtonDCUnemployment;
 
 class WashingtonDCUnemployment extends BaseWashingtonDCUnemployment

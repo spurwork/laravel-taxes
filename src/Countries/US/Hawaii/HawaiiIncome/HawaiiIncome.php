@@ -2,8 +2,8 @@
 
 namespace Appleton\Taxes\Countries\US\Hawaii\HawaiiIncome;
 
-use Appleton\Taxes\Classes\BaseStateIncome;
-use Appleton\Taxes\Classes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseStateIncome;
+use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
 use Appleton\Taxes\Models\Countries\US\Hawaii\HawaiiIncomeTaxInformation;
 
 abstract class HawaiiIncome extends BaseStateIncome

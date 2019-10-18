@@ -1,7 +1,10 @@
 <?php
 
-namespace Appleton\Taxes\Classes;
+namespace Appleton\Taxes\Classes\WorkerTaxes;
 
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseLocal;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseStateIncome;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseStateUnemployment;
 use Appleton\Taxes\Models\Tax;
 use Carbon\Carbon;
 use Closure;
@@ -113,8 +116,8 @@ class Taxes
 
         $results = new TaxResults(
             $this->compute('federal')
-                + $this->compute('state')
-                + $this->compute('local')
+            + $this->compute('state')
+            + $this->compute('local')
         );
 
         $this->unbindTaxes();

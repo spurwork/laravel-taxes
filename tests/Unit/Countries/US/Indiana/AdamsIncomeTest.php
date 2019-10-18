@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Unit\Countries\US\Indiana;
 
-use Appleton\Taxes\Classes\Taxes;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes;
 use Appleton\Taxes\Countries\US\Indiana\AdamsIncome\AdamsIncome;
 use Appleton\Taxes\Countries\US\Indiana\AllenIncome\AllenIncome;
 use Appleton\Taxes\Countries\US\Indiana\IndianaIncome\IndianaIncome;
