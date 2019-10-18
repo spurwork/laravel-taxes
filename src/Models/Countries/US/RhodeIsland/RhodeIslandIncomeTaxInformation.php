@@ -3,7 +3,7 @@
 namespace Appleton\Taxes\Models\Countries\US\RhodeIsland;
 
 use Appleton\Taxes\Countries\US\RhodeIsland\RhodeIslandIncome\RhodeIslandIncome;
-use Appleton\Taxes\Classes\BaseTaxInformationModel;
+use Appleton\Taxes\Classes\WorkerTaxes\BaseTaxInformationModel;
 
 class RhodeIslandIncomeTaxInformation extends BaseTaxInformationModel
 {

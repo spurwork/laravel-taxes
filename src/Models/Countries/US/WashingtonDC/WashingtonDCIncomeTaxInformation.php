@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Models\Countries\US\WashingtonDC;
 
-use Appleton\Taxes\Classes\BaseTaxInformationModel;
+use Appleton\Taxes\Classes\WorkerTaxes\BaseTaxInformationModel;
 use Appleton\Taxes\Countries\US\WashingtonDC\WashingtonDCIncome\WashingtonDCIncome;
 
 class WashingtonDCIncomeTaxInformation extends BaseTaxInformationModel

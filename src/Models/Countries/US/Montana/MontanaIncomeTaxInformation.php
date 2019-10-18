@@ -3,7 +3,7 @@
 namespace Appleton\Taxes\Models\Countries\US\Montana;
 
 use Appleton\Taxes\Countries\US\Montana\MontanaIncome\MontanaIncome;
-use Appleton\Taxes\Classes\BaseTaxInformationModel;
+use Appleton\Taxes\Classes\WorkerTaxes\BaseTaxInformationModel;
 
 class MontanaIncomeTaxInformation extends BaseTaxInformationModel
 {

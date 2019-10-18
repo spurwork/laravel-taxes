@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Models\Countries\US\Vermont;
 
-use Appleton\Taxes\Classes\BaseTaxInformationModel;
+use Appleton\Taxes\Classes\WorkerTaxes\BaseTaxInformationModel;
 use Appleton\Taxes\Countries\US\Vermont\VermontIncome\VermontIncome;
 
 class VermontIncomeTaxInformation extends BaseTaxInformationModel

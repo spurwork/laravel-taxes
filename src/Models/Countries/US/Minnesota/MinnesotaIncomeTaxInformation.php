@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Models\Countries\US\Minnesota;
 
-use Appleton\Taxes\Classes\BaseTaxInformationModel;
+use Appleton\Taxes\Classes\WorkerTaxes\BaseTaxInformationModel;
 use Appleton\Taxes\Countries\US\Minnesota\MinnesotaIncome\MinnesotaIncome;
 
 class MinnesotaIncomeTaxInformation extends BaseTaxInformationModel

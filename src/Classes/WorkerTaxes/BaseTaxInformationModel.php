@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Classes;
+namespace Appleton\Taxes\Classes\WorkerTaxes;
 
 use Appleton\Taxes\Models\TaxInformation;
 use Illuminate\Database\Eloquent\Model;

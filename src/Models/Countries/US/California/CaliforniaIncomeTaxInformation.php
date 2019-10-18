@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Models\Countries\US\California;
 
-use Appleton\Taxes\Classes\BaseTaxInformationModel;
+use Appleton\Taxes\Classes\WorkerTaxes\BaseTaxInformationModel;
 use Appleton\Taxes\Countries\US\California\CaliforniaIncome\CaliforniaIncome;
 
 class CaliforniaIncomeTaxInformation extends BaseTaxInformationModel

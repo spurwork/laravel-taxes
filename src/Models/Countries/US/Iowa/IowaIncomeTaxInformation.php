@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Models\Countries\US\Iowa;
 
-use Appleton\Taxes\Classes\BaseTaxInformationModel;
+use Appleton\Taxes\Classes\WorkerTaxes\BaseTaxInformationModel;
 
 class IowaIncomeTaxInformation extends BaseTaxInformationModel
 {

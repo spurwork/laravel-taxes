@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Models\Countries\US\Oregon;
 
-use Appleton\Taxes\Classes\BaseTaxInformationModel;
+use Appleton\Taxes\Classes\WorkerTaxes\BaseTaxInformationModel;
 use Appleton\Taxes\Countries\US\Oregon\OregonIncome\OregonIncome;
 
 class OregonIncomeTaxInformation extends BaseTaxInformationModel

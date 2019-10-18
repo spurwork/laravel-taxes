@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Models\Countries\US\Virginia;
 
-use Appleton\Taxes\Classes\BaseTaxInformationModel;
+use Appleton\Taxes\Classes\WorkerTaxes\BaseTaxInformationModel;
 use Appleton\Taxes\Countries\US\Virginia\VirginiaIncome\VirginiaIncome;
 
 class VirginiaIncomeTaxInformation extends BaseTaxInformationModel

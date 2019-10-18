@@ -3,7 +3,7 @@
 namespace Appleton\Taxes\Models\Countries\US\Connecticut;
 
 use Appleton\Taxes\Countries\US\Connecticut\ConnecticutIncome\ConnecticutIncome;
-use Appleton\Taxes\Classes\BaseTaxInformationModel;
+use Appleton\Taxes\Classes\WorkerTaxes\BaseTaxInformationModel;
 
 class ConnecticutIncomeTaxInformation extends BaseTaxInformationModel
 {

@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Models\Countries\US\Maine;
 
-use Appleton\Taxes\Classes\BaseTaxInformationModel;
+use Appleton\Taxes\Classes\WorkerTaxes\BaseTaxInformationModel;
 use Appleton\Taxes\Countries\US\Maine\MaineIncome\MaineIncome;
 
 class MaineIncomeTaxInformation extends BaseTaxInformationModel

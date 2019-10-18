@@ -3,7 +3,7 @@
 namespace Appleton\Taxes\Models\Countries\US\Alabama;
 
 use Appleton\Taxes\Countries\US\Alabama\AlabamaIncome\AlabamaIncome;
-use Appleton\Taxes\Classes\BaseTaxInformationModel;
+use Appleton\Taxes\Classes\WorkerTaxes\BaseTaxInformationModel;
 
 class AlabamaIncomeTaxInformation extends BaseTaxInformationModel
 {

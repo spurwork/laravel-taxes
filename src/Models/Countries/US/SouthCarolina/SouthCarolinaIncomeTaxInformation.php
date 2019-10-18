@@ -3,7 +3,7 @@
 namespace Appleton\Taxes\Models\Countries\US\SouthCarolina;
 
 use Appleton\Taxes\Countries\US\SouthCarolina\SouthCarolinaIncome\SouthCarolinaIncome;
-use Appleton\Taxes\Classes\BaseTaxInformationModel;
+use Appleton\Taxes\Classes\WorkerTaxes\BaseTaxInformationModel;
 
 class SouthCarolinaIncomeTaxInformation extends BaseTaxInformationModel
 {

@@ -3,7 +3,7 @@
 namespace Appleton\Taxes\Models\Countries\US\Georgia;
 
 use Appleton\Taxes\Countries\US\Georgia\GeorgiaIncome\GeorgiaIncome;
-use Appleton\Taxes\Classes\BaseTaxInformationModel;
+use Appleton\Taxes\Classes\WorkerTaxes\BaseTaxInformationModel;
 
 class GeorgiaIncomeTaxInformation extends BaseTaxInformationModel
 {

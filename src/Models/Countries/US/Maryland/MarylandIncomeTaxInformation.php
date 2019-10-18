@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Models\Countries\US\Maryland;
 
-use Appleton\Taxes\Classes\BaseTaxInformationModel;
+use Appleton\Taxes\Classes\WorkerTaxes\BaseTaxInformationModel;
 use Appleton\Taxes\Countries\US\Maryland\MarylandIncome\MarylandIncome;
 
 class MarylandIncomeTaxInformation extends BaseTaxInformationModel
