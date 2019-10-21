@@ -6,24 +6,6 @@ use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Collection;
 
-/**
- * TODO:
- * unit tests
- * move files to WorkerTaxes
- * move tests to Unit
- * reciprocal agreements for local
- * rework tests to not change taxes during replaceSutaUnemploymentTaxes and addStateIncomeTax (check PennsylvaniaEmployeeSuta)
- *
- * Taxes changed:
- *  CO local taxes (OP taxes) changed, retest
- *  Maryland state income tax
- *  NewYorkDisabilityInsurance
- *  NewYorkFamilyMedicalLeave
- *  West Virginia city service fees
- *  Kentucky = Caneyville City - reworked how days worked is calculated, only gets days in the work week
- *      not sure how we want to account for shifts getting closed in a prior week
- *
- */
 class Taxes
 {
     private $tax_manager;
