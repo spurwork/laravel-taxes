@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Tests\Unit\Countries\US\Indiana\V20190101;
+namespace Appleton\Taxes\Tests\Unit\Countries\US\Indiana\V20191001;
 
 use Appleton\Taxes\Countries\US\Indiana\ClayIncome\ClayIncome;
 use Appleton\Taxes\Models\Countries\US\Indiana\IndianaIncomeTaxInformation;
@@ -10,7 +10,7 @@ use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
 
 class ClayIncomeTest extends TaxTestCase
 {
-    private const DATE = '2019-01-01';
+    private const DATE = '2019-10-01';
     private const LOCATION = 'us.indiana';
     private const TAX_CLASS = ClayIncome::class;
     private const TAX_INFO_CLASS = IndianaIncomeTaxInformation::class;
@@ -57,7 +57,7 @@ class ClayIncomeTest extends TaxTestCase
                         'county_worked' => 2,
                     ])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(675)
+                    ->setExpectedAmountInCents(705)
                     ->build()
             ],
             'county worked but taxes taken from home county' => [
@@ -77,7 +77,7 @@ class ClayIncomeTest extends TaxTestCase
                         'county_worked' => 11,
                     ])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(675)
+                    ->setExpectedAmountInCents(705)
                     ->build()
             ],
         ];

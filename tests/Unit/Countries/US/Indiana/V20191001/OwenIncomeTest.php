@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Tests\Unit\Countries\US\Indiana\V20190101;
+namespace Appleton\Taxes\Tests\Unit\Countries\US\Indiana\V20191001;
 
 use Appleton\Taxes\Countries\US\Indiana\OwenIncome\OwenIncome;
 use Appleton\Taxes\Models\Countries\US\Indiana\IndianaIncomeTaxInformation;
@@ -10,7 +10,7 @@ use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
 
 class OwenIncomeTest extends TaxTestCase
 {
-    private const DATE = '2019-01-01';
+    private const DATE = '2019-10-01';
     private const LOCATION = 'us.indiana';
     private const TAX_CLASS = OwenIncome::class;
     private const TAX_INFO_CLASS = IndianaIncomeTaxInformation::class;
@@ -57,7 +57,7 @@ class OwenIncomeTest extends TaxTestCase
                         'county_worked' => 2,
                     ])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(389)
+                    ->setExpectedAmountInCents(420)
                     ->build()
             ],
             'county worked but taxes taken from home county' => [
@@ -77,7 +77,7 @@ class OwenIncomeTest extends TaxTestCase
                         'county_worked' => 60,
                     ])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(389)
+                    ->setExpectedAmountInCents(420)
                     ->build()
             ],
         ];
