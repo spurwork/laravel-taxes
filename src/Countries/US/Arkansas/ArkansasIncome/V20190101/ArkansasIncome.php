@@ -4,6 +4,7 @@ namespace Appleton\Taxes\Countries\US\Arkansas\ArkansasIncome\V20190101;
 
 use Appleton\Taxes\Countries\US\Arkansas\ArkansasIncome\ArkansasIncome as BaseArkansasIncome;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\DB;
 
 class ArkansasIncome extends BaseArkansasIncome
 {
@@ -21,8 +22,23 @@ class ArkansasIncome extends BaseArkansasIncome
         [35100, 0.069, 940.44],
     ];
 
+    private const TEXARKANA_AR = 'Texarkana, AR';
+    private const TEXARKANA_TX = 'Texarkana, TX';
+
     public function compute(Collection $tax_areas)
     {
+        if ($this->tax_information->ar_tx_exempt && $tax_areas->contains(function ($tax_area) {
+            return $tax_area->home_governmental_unit_area_id === DB::table('governmental_unit_areas')->where('name', self::TEXARKANA_AR)->first()->id;
+        })) {
+            return 0.00;
+        }
+
+        if ($tax_areas->contains(function ($tax_area) {
+            return $tax_area->home_governmental_unit_area_id == DB::table('governmental_unit_areas')->where('name', self::TEXARKANA_TX)->first()->id;
+        })) {
+            return 0.00;
+        }
+
         if ($this->isUserClaimingExemption()) {
             return 0.00;
         }
