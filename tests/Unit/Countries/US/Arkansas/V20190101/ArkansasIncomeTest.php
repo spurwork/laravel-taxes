@@ -2,16 +2,23 @@
 
 namespace Appleton\Taxes\Tests\Unit\Countries\US\Arkansas\V20190101;
 
+use Appleton\Taxes\Classes\WorkerTaxes\GeoPoint;
+use Appleton\Taxes\Classes\WorkerTaxes\TaxResult;
 use Appleton\Taxes\Countries\US\Arkansas\ArkansasIncome\ArkansasIncome;
 use Appleton\Taxes\Models\Countries\US\Arkansas\ArkansasIncomeTaxInformation;
 use Appleton\Taxes\Tests\Unit\Countries\IncomeParameters;
 use Appleton\Taxes\Tests\Unit\Countries\IncomeParametersBuilder;
 use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
+use Carbon\Carbon;
+use ReflectionClass;
 
 class ArkansasIncomeTest extends TaxTestCase
 {
     private const DATE = '2019-01-01';
-    private const LOCATION = 'us.arkansas';
+    private const LOCATION_ARKANSAS = 'us.arkansas';
+    private const LOCATION_ARKANSAS_TEXARKANA = 'us.arkansas.texarkana';
+    private const LOCATION_TEXAS = 'us.texas';
+    private const LOCATION_TEXAS_TEXARKANA = 'us.texas.texarkana';
     private const TAX_CLASS = ArkansasIncome::class;
     private const TAX_INFO_CLASS = ArkansasIncomeTaxInformation::class;
 
@@ -35,12 +42,68 @@ class ArkansasIncomeTest extends TaxTestCase
         $this->validate($parameters);
     }
 
+    /**
+     * @dataProvider provideTexarkanaTestData
+     */
+    public function testTax_texarkana(IncomeParameters $parameters): void
+    {
+        $this->disableTestQueryRunner();
+        $this->validate($parameters);
+    }
+
+    public function testTax_texarkana_wages_removed(): void
+    {
+        $this->disableTestQueryRunner();
+
+        Carbon::setTestNow(self::DATE);
+
+        $home_location_array = $this->getLocation(self::LOCATION_TEXAS_TEXARKANA);
+        $home_location = new GeoPoint($home_location_array[0], $home_location_array[1]);
+
+        $texarkana_arkansas_location_array = $this->getLocation(self::LOCATION_ARKANSAS_TEXARKANA);
+        $texarkana_arkansas_location = new GeoPoint($texarkana_arkansas_location_array[0], $texarkana_arkansas_location_array[1]);
+
+        $arkansas_location_array = $this->getLocation(self::LOCATION_ARKANSAS);
+        $arkansas_location = new GeoPoint($arkansas_location_array[0], $arkansas_location_array[1]);
+
+        $wages = collect([
+            $this->makeWage($arkansas_location, 10000),
+            $this->makeWage($texarkana_arkansas_location, 10000),
+        ]);
+
+        $historical_wages = collect([]);
+
+        $results = $this->taxes->calculate(
+            Carbon::now(),
+            Carbon::now()->addWeek(),
+            $home_location,
+            $home_location,
+            $wages,
+            $historical_wages,
+            $this->user,
+            null,
+            52,
+            collect([]),
+            collect([]),
+            collect([])
+        );
+
+        $short_name = (new ReflectionClass(ArkansasIncome::class))->getShortName();
+
+        /** @var TaxResult $result */
+        $result = $results->get(ArkansasIncome::class);
+
+        self::assertNotNull($result, 'no tax results for '.$short_name.' found');
+        self::assertThat($result->getAmountInCents(), self::identicalTo(52),
+            $short_name.' expected 52 tax amount but got '.$result->getAmountInCents());
+    }
+
     public function provideTestData(): array
     {
         $builder = new IncomeParametersBuilder();
         $builder
             ->setDate(self::DATE)
-            ->setHomeLocation(self::LOCATION)
+            ->setHomeLocation(self::LOCATION_ARKANSAS)
             ->setTaxClass(self::TAX_CLASS)
             ->setTaxInfoClass(self::TAX_INFO_CLASS)
             ->setPayPeriods(52);
@@ -119,6 +182,109 @@ class ArkansasIncomeTest extends TaxTestCase
                         'exempt' => true,
                     ])
                     ->setWagesInCents(96154)
+                    ->setExpectedAmountInCents(null)
+                    ->build()
+            ],
+        ];
+    }
+
+    public function provideTexarkanaTestData(): array
+    {
+        $builder = new IncomeParametersBuilder();
+        $builder
+            ->setDate(self::DATE)
+            ->setTaxClass(self::TAX_CLASS)
+            ->setTaxInfoClass(self::TAX_INFO_CLASS)
+            ->setPayPeriods(52);
+
+        return [
+            '01' => [
+                $builder
+                    ->setHomeLocation(self::LOCATION_ARKANSAS_TEXARKANA)
+                    ->setWorkLocation(self::LOCATION_ARKANSAS_TEXARKANA)
+                    ->setTaxInfoOptions(['ar_tx_exempt' => false])
+                    ->setWagesInCents(7500)
+                    ->setExpectedAmountInCents(30)
+                    ->build()
+            ],
+            '02' => [
+                $builder
+                    ->setHomeLocation(self::LOCATION_ARKANSAS_TEXARKANA)
+                    ->setWorkLocation(self::LOCATION_ARKANSAS)
+                    ->setTaxInfoOptions(['ar_tx_exempt' => false])
+                    ->setWagesInCents(7500)
+                    ->setExpectedAmountInCents(30)
+                    ->build()
+            ],
+            '03' => [
+                $builder
+                    ->setHomeLocation(self::LOCATION_ARKANSAS)
+                    ->setWorkLocation(self::LOCATION_ARKANSAS_TEXARKANA)
+                    ->setTaxInfoOptions(['ar_tx_exempt' => false])
+                    ->setWagesInCents(7500)
+                    ->setExpectedAmountInCents(30)
+                    ->build()
+            ],
+            '04' => [
+                $builder
+                    ->setHomeLocation(self::LOCATION_TEXAS_TEXARKANA)
+                    ->setWorkLocation(self::LOCATION_ARKANSAS_TEXARKANA)
+                    ->setTaxInfoOptions(['ar_tx_exempt' => false])
+                    ->setWagesInCents(7500)
+                    ->setExpectedAmountInCents(null)
+                    ->build()
+            ],
+            '05' => [
+                $builder
+                    ->setHomeLocation(self::LOCATION_TEXAS)
+                    ->setWorkLocation(self::LOCATION_ARKANSAS_TEXARKANA)
+                    ->setTaxInfoOptions(['ar_tx_exempt' => false])
+                    ->setWagesInCents(7500)
+                    ->setExpectedAmountInCents(30)
+                    ->build()
+            ],
+            '06' => [
+                $builder
+                    ->setHomeLocation(self::LOCATION_ARKANSAS_TEXARKANA)
+                    ->setWorkLocation(self::LOCATION_TEXAS)
+                    ->setTaxInfoOptions(['ar_tx_exempt' => false])
+                    ->setWagesInCents(7500)
+                    ->setExpectedAmountInCents(30)
+                    ->build()
+            ],
+            '07' => [
+                $builder
+                    ->setHomeLocation(self::LOCATION_ARKANSAS_TEXARKANA)
+                    ->setWorkLocation(self::LOCATION_TEXAS_TEXARKANA)
+                    ->setTaxInfoOptions(['ar_tx_exempt' => false])
+                    ->setWagesInCents(7500)
+                    ->setExpectedAmountInCents(30)
+                    ->build()
+            ],
+            '08' => [
+                $builder
+                    ->setHomeLocation(self::LOCATION_ARKANSAS_TEXARKANA)
+                    ->setWorkLocation(self::LOCATION_TEXAS_TEXARKANA)
+                    ->setTaxInfoOptions(['ar_tx_exempt' => true])
+                    ->setWagesInCents(7500)
+                    ->setExpectedAmountInCents(null)
+                    ->build()
+            ],
+            '09' => [
+                $builder
+                    ->setHomeLocation(self::LOCATION_ARKANSAS)
+                    ->setWorkLocation(self::LOCATION_TEXAS)
+                    ->setTaxInfoOptions(['ar_tx_exempt' => false])
+                    ->setWagesInCents(7500)
+                    ->setExpectedAmountInCents(null)
+                    ->build()
+            ],
+            '10' => [
+                $builder
+                    ->setHomeLocation(self::LOCATION_ARKANSAS)
+                    ->setWorkLocation(self::LOCATION_TEXAS_TEXARKANA)
+                    ->setTaxInfoOptions(['ar_tx_exempt' => false])
+                    ->setWagesInCents(7500)
                     ->setExpectedAmountInCents(null)
                     ->build()
             ],
