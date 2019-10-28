@@ -24,6 +24,7 @@ class Payroll
     private $start_date;
     private $end_date;
     private $area_incomes;
+    private $home_areas;
     private $total_earnings;
     private $wage_manager;
 
@@ -45,6 +46,7 @@ class Payroll
         $this->start_date = $parameters['start_date'];
         $this->end_date = $parameters['end_date'] ?? $parameters['start_date'];
         $this->area_incomes = $parameters['area_incomes'] ?? collect([]);
+        $this->home_areas = $parameters['home_areas'] ?? collect([]);
         $this->total_earnings = $parameters['total_earnings'] ?? 0;
 
         $this->amount_withheld = 0;
@@ -169,5 +171,29 @@ class Payroll
     public function hasWorkInArea(string $area_name): bool
     {
         return $this->area_incomes->has($area_name);
+    }
+
+    public function livesInArea(string $area_name): bool
+    {
+        return $this->home_areas->has($area_name);
+    }
+
+    public function removeWages(string $area_name): void
+    {
+        /** @var AreaIncome $area_income */
+        $area_income = $this->area_incomes->get($area_name);
+        if ($area_income === null) {
+            return;
+        }
+
+        $this->earnings -= $this->wage_manager->calculateEarnings($area_income->getWages());
+
+        $start_of_year = $this->start_date->copy()->startOfYear();
+        $this->ytd_earnings -= $this->wage_manager->calculateEarnings($area_income->getHistoricalWages(),
+            $start_of_year);
+
+        $start_of_month = $this->start_date->copy()->startOfMonth();
+        $this->mtd_earnings -= $this->wage_manager->calculateEarnings($area_income->getHistoricalWages(),
+            $start_of_month < $start_of_year ? $start_of_year : $start_of_month);
     }
 }

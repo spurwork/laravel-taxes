@@ -54,6 +54,8 @@ class Taxes
             $historical_wages_by_lat_long
         );
 
+        $home_areas = $this->area_income_manager->getHomeAreas($home_location);
+
         $this->tax_override_manager->replaceSutaUnemploymentTaxes($suta_location, $taxable_incomes,
             $wages, $historical_wages);
         $this->tax_override_manager->addStateIncomeTax($home_location, $taxable_incomes,
@@ -72,6 +74,7 @@ class Taxes
             'birth_date' => $birth_date,
             'pay_periods' => $pay_periods,
             'area_incomes' => $area_incomes,
+            'home_areas' => $home_areas,
             'start_date' => $start_date,
             'end_date' => $end_date,
             'total_earnings' => $this->wage_manager->calculateEarnings($wages)

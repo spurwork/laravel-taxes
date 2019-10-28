@@ -68,4 +68,12 @@ class AreaIncomeManager
 
         $area_incomes->put($governmental_unit_area->name, $new_area_income);
     }
+
+    public function getHomeAreas(GeoPoint $home_location): Collection
+    {
+        return $this->query_runner->lookupGovernmentalAreas($home_location)
+            ->mapWithKeys(static function (GovernmentalUnitArea $area) {
+                return [$area->name => $area];
+            });
+    }
 }

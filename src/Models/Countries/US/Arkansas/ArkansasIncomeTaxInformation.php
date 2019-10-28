@@ -15,6 +15,7 @@ class ArkansasIncomeTaxInformation extends BaseTaxInformationModel
         $tax_information->exemptions = null;
         $tax_information->additional_withholding = 0;
         $tax_information->exempt = false;
+        $tax_information->ar_tx_exempt = false;
         return $tax_information;
     }
 
