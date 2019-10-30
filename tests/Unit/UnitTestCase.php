@@ -50,6 +50,7 @@ class UnitTestCase extends BaseTestCase
         ]);
 
         $app['config']->set('taxes.user', \Illuminate\Foundation\Auth\User::class);
+        $app['config']->set('taxes.user_id', 'employee_id');
 
         $app['config']->set('taxes.tables.governmental_unit_areas', 'governmental_unit_areas');
         $app['config']->set('taxes.tables.tax_areas', 'tax_areas');
