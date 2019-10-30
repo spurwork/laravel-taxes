@@ -4,8 +4,8 @@ namespace Appleton\Taxes\Tests\Unit\Countries\US\Georgia\V20180101;
 
 use Appleton\Taxes\Countries\US\Georgia\GeorgiaIncome\GeorgiaIncome;
 use Appleton\Taxes\Models\Countries\US\Georgia\GeorgiaIncomeTaxInformation;
-use Appleton\Taxes\Tests\Unit\Countries\IncomeParameters;
-use Appleton\Taxes\Tests\Unit\Countries\IncomeParametersBuilder;
+use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
+use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
 use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
 
 class GeorgiaIncomeTest extends TaxTestCase
@@ -32,14 +32,14 @@ class GeorgiaIncomeTest extends TaxTestCase
     /**
      * @dataProvider provideTestData
      */
-    public function testTax(IncomeParameters $parameters): void
+    public function testTax(TestParameters $parameters): void
     {
         $this->validate($parameters);
     }
 
     public function provideTestData(): array
     {
-        $builder = new IncomeParametersBuilder();
+        $builder = new TestParametersBuilder();
         $builder
             ->setDate(self::DATE)
             ->setHomeLocation(self::LOCATION)
@@ -84,7 +84,7 @@ class GeorgiaIncomeTest extends TaxTestCase
                     ->build()
             ],
             'supplemental' => [
-                (new IncomeParametersBuilder())
+                (new TestParametersBuilder())
                     ->setDate(self::DATE)
                     ->setHomeLocation(self::LOCATION)
                     ->setTaxClass(self::TAX_CLASS)

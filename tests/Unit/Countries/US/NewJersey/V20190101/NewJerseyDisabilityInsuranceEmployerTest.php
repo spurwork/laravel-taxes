@@ -3,7 +3,7 @@
 namespace Appleton\Taxes\Tests\Unit\Countries\US\NewJersey\V20190101;
 
 use Appleton\Taxes\Countries\US\NewJersey\NewJerseyDisabilityInsuranceEmployer\NewJerseyDisabilityInsuranceEmployer;
-use Appleton\Taxes\Tests\Unit\Countries\WageBaseParameters;
+use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
 use Appleton\Taxes\Tests\Unit\Countries\WageBaseTaxTestCase;
 
 class NewJerseyDisabilityInsuranceEmployerTest extends WageBaseTaxTestCase
@@ -23,7 +23,7 @@ class NewJerseyDisabilityInsuranceEmployerTest extends WageBaseTaxTestCase
     /**
      * @dataProvider provideData
      */
-    public function testWageBase(WageBaseParameters $parameters): void
+    public function testWageBase(TestParameters $parameters): void
     {
         $this->validateWageBase($parameters);
     }

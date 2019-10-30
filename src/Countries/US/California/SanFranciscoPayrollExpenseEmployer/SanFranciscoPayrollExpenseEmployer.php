@@ -29,6 +29,8 @@ abstract class SanFranciscoPayrollExpenseEmployer extends BasePayrollLiabilityLo
 
     public function getWages(Collection $tax_areas): int
     {
-        return $this->company_payroll->getWages($tax_areas->first()->workGovernmentalUnitArea);
+        $governmental_unit_area = $tax_areas->first()->governmental_unit_area;
+        $wages = $this->company_payroll->getYtdWages($governmental_unit_area) + $this->company_payroll->getWages($governmental_unit_area);
+        return max($wages - $this->getStartAmount(), 0);
     }
 }

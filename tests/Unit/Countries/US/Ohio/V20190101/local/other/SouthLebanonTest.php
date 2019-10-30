@@ -3,7 +3,7 @@
 namespace Appleton\Taxes\Tests\Unit\Countries\US\Ohio\V20190101;
 
 use Appleton\Taxes\Countries\US\Ohio\SouthLebanon\SouthLebanon;
-use Appleton\Taxes\Tests\Unit\Countries\IncomeParametersBuilder;
+use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
 use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
 
 class SouthLebanonTest extends TaxTestCase
@@ -21,7 +21,7 @@ class SouthLebanonTest extends TaxTestCase
     public function testTax(): void
     {
         $this->validate(
-            (new IncomeParametersBuilder())
+            (new TestParametersBuilder())
                 ->setDate(self::DATE)
                 ->setHomeLocation(self::LOCATION)
                 ->setTaxClass(self::TAX_CLASS)

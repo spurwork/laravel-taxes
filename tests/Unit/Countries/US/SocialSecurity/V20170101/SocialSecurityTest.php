@@ -3,7 +3,7 @@
 namespace Appleton\Taxes\Tests\Unit\Countries\US\SocialSecurity\V20170101;
 
 use Appleton\Taxes\Countries\US\SocialSecurity\SocialSecurity;
-use Appleton\Taxes\Tests\Unit\Countries\WageBaseParameters;
+use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
 use Appleton\Taxes\Tests\Unit\Countries\WageBaseTaxTestCase;
 
 class SocialSecurityTest extends WageBaseTaxTestCase
@@ -23,7 +23,7 @@ class SocialSecurityTest extends WageBaseTaxTestCase
     /**
      * @dataProvider provideTestData
      */
-    public function testTax(WageBaseParameters $parameters): void
+    public function testTax(TestParameters $parameters): void
     {
         $this->validateWageBase($parameters);
     }

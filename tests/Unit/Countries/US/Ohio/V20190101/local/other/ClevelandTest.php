@@ -3,7 +3,7 @@
 namespace Appleton\Taxes\Tests\Unit\Countries\US\Ohio\V20190101;
 
 use Appleton\Taxes\Countries\US\Ohio\Cleveland\Cleveland;
-use Appleton\Taxes\Tests\Unit\Countries\IncomeParametersBuilder;
+use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
 use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
 use Carbon\Carbon;
 
@@ -23,7 +23,7 @@ class ClevelandTest extends TaxTestCase
     public function testTax(?Carbon $birth_date, ?int $amount): void
     {
         $this->validate(
-            (new IncomeParametersBuilder())
+            (new TestParametersBuilder())
                 ->setDate(self::DATE)
                 ->setBirthDate($birth_date)
                 ->setHomeLocation(self::LOCATION)

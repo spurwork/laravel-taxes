@@ -4,8 +4,10 @@ namespace Appleton\Taxes\Tests\Unit\Countries\US\Alabama\V20170101;
 
 use Appleton\Taxes\Countries\US\Alabama\AlabamaUnemployment\AlabamaUnemployment;
 use Appleton\Taxes\Tests\Unit\Countries\UnemploymentTaxTestCase;
-use Appleton\Taxes\Tests\Unit\Countries\WageBaseParameters;
-use Appleton\Taxes\Tests\Unit\Countries\WageBaseParametersBuilder;
+use Appleton\Taxes\Tests\Unit\Countries\MinTestParameters;
+use Appleton\Taxes\Tests\Unit\Countries\MinTestParametersBuilder;
+use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
+use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
 
 class AlabamaUnemploymentTest extends UnemploymentTaxTestCase
 {
@@ -24,7 +26,7 @@ class AlabamaUnemploymentTest extends UnemploymentTaxTestCase
     /**
      * @dataProvider provideData
      */
-    public function testWageBase(WageBaseParameters $parameters): void
+    public function testWageBase(TestParameters $parameters): void
     {
         $this->validateWageBase($parameters);
     }
@@ -32,7 +34,7 @@ class AlabamaUnemploymentTest extends UnemploymentTaxTestCase
     public function testWorkDifferentState(): void
     {
         $this->validateWageBase(
-            (new WageBaseParametersBuilder())
+            (new TestParametersBuilder())
                 ->setDate(self::DATE)
                 ->setHomeLocation(self::LOCATION)
                 ->setWorkLocation('us.georgia')
@@ -40,6 +42,7 @@ class AlabamaUnemploymentTest extends UnemploymentTaxTestCase
                 ->setWagesInCents(1000)
                 ->setYtdWagesInCents(null)
                 ->setExpectedAmountInCents(round(1000 * self::TAX_RATE))
+                ->setExpectedEarningsInCents(round(1000))
                 ->build()
         );
     }

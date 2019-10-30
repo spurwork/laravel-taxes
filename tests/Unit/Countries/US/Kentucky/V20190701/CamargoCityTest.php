@@ -3,7 +3,7 @@
 namespace Appleton\Taxes\Tests\Unit\Countries\US\Kentucky\V20190701;
 
 use Appleton\Taxes\Countries\US\Kentucky\CamargoCity\CamargoCity;
-use Appleton\Taxes\Tests\Unit\Countries\IncomeParametersBuilder;
+use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
 use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
 
 class CamargoCityTest extends TaxTestCase
@@ -21,7 +21,7 @@ class CamargoCityTest extends TaxTestCase
     public function testTax(): void
     {
         $this->validate(
-            (new IncomeParametersBuilder())->setDate(self::DATE)
+            (new TestParametersBuilder())->setDate(self::DATE)
                 ->setHomeLocation(self::LOCATION)
                 ->setTaxClass(self::TAX_CLASS)
                 ->setPayPeriods(52)

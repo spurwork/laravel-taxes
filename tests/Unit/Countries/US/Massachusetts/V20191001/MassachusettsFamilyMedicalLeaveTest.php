@@ -3,7 +3,7 @@
 namespace Appleton\Taxes\Tests\Unit\Countries\US\Massachusetts\V20191001;
 
 use Appleton\Taxes\Countries\US\Massachusetts\MassachusettsFamilyMedicalLeave\MassachusettsFamilyMedicalLeave;
-use Appleton\Taxes\Tests\Unit\Countries\IncomeParametersBuilder;
+use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
 use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
 
 class MassachusettsFamilyMedicalLeaveTest extends TaxTestCase
@@ -21,7 +21,7 @@ class MassachusettsFamilyMedicalLeaveTest extends TaxTestCase
     public function testTax(): void
     {
         $this->validate(
-            (new IncomeParametersBuilder())
+            (new TestParametersBuilder())
                 ->setDate(self::DATE)
                 ->setHomeLocation(self::LOCATION)
                 ->setTaxClass(self::TAX_CLASS)

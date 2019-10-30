@@ -8,8 +8,8 @@ use Appleton\Taxes\Countries\US\Medicare\Medicare;
 use Appleton\Taxes\Countries\US\SocialSecurity\SocialSecurity;
 use Appleton\Taxes\Models\Countries\US\Alabama\AlabamaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\FederalIncomeTaxInformation;
-use Appleton\Taxes\Tests\Unit\Countries\IncomeParameters;
-use Appleton\Taxes\Tests\Unit\Countries\IncomeParametersBuilder;
+use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
+use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
 use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
 
 class AlabamaIncomeTest extends TaxTestCase
@@ -42,7 +42,7 @@ class AlabamaIncomeTest extends TaxTestCase
     /**
      * @dataProvider provideTestData
      */
-    public function testTax(IncomeParameters $parameters): void
+    public function testTax(TestParameters $parameters): void
     {
         $this->validate($parameters);
     }
@@ -50,7 +50,7 @@ class AlabamaIncomeTest extends TaxTestCase
     /**
      * @dataProvider provideAdditionalWithholdingTestData
      */
-    public function testTax_additional_withholding(IncomeParameters $parameters): void
+    public function testTax_additional_withholding(TestParameters $parameters): void
     {
         // these tests rely on SocialSecurity and Medicare being withheld from the payroll
         $this->query_runner->addTax(SocialSecurity::class);
@@ -62,7 +62,7 @@ class AlabamaIncomeTest extends TaxTestCase
     /**
      * @dataProvider provideUseDefaultTestData
      */
-    public function testTax_use_default(IncomeParameters $parameters): void
+    public function testTax_use_default(TestParameters $parameters): void
     {
         AlabamaIncomeTaxInformation::forUser($this->user)->delete();
 
@@ -71,7 +71,7 @@ class AlabamaIncomeTest extends TaxTestCase
 
     public function provideTestData(): array
     {
-        $builder = new IncomeParametersBuilder();
+        $builder = new TestParametersBuilder();
         $builder
             ->setDate(self::DATE)
             ->setHomeLocation(self::LOCATION)
@@ -87,7 +87,7 @@ class AlabamaIncomeTest extends TaxTestCase
                     ->build()
             ],
             'supplemental' => [
-                (new IncomeParametersBuilder())
+                (new TestParametersBuilder())
                     ->setDate(self::DATE)
                     ->setHomeLocation(self::LOCATION)
                     ->setTaxClass(self::TAX_CLASS)
@@ -135,7 +135,7 @@ class AlabamaIncomeTest extends TaxTestCase
 
     public function provideAdditionalWithholdingTestData(): array
     {
-        $builder = new IncomeParametersBuilder();
+        $builder = new TestParametersBuilder();
         $builder
             ->setDate(self::DATE)
             ->setHomeLocation(self::LOCATION)
@@ -181,7 +181,7 @@ class AlabamaIncomeTest extends TaxTestCase
     {
         return [
             'default tax information' => [
-                (new IncomeParametersBuilder())
+                (new TestParametersBuilder())
                     ->setDate(self::DATE)
                     ->setHomeLocation(self::LOCATION)
                     ->setTaxClass(self::TAX_CLASS)

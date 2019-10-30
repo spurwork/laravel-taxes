@@ -6,8 +6,8 @@ use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome;
 use Appleton\Taxes\Countries\US\Medicare\Medicare;
 use Appleton\Taxes\Countries\US\SocialSecurity\SocialSecurity;
 use Appleton\Taxes\Models\Countries\US\FederalIncomeTaxInformation;
-use Appleton\Taxes\Tests\Unit\Countries\IncomeParameters;
-use Appleton\Taxes\Tests\Unit\Countries\IncomeParametersBuilder;
+use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
+use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
 use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
 
 class FederalIncomeTest extends TaxTestCase
@@ -34,7 +34,7 @@ class FederalIncomeTest extends TaxTestCase
     /**
      * @dataProvider provideTestData
      */
-    public function testTax(IncomeParameters $parameters): void
+    public function testTax(TestParameters $parameters): void
     {
         $this->validate($parameters);
     }
@@ -42,7 +42,7 @@ class FederalIncomeTest extends TaxTestCase
     /**
      * @dataProvider provideAdditionalWithholdingTestData
      */
-    public function testTax_additional_withholding(IncomeParameters $parameters): void
+    public function testTax_additional_withholding(TestParameters $parameters): void
     {
         // these tests rely on SocialSecurity and Medicare being withheld from the payroll
         $this->query_runner->addTax(Medicare::class);
@@ -53,7 +53,7 @@ class FederalIncomeTest extends TaxTestCase
 
     public function provideTestData(): array
     {
-        $builder = new IncomeParametersBuilder();
+        $builder = new TestParametersBuilder();
         $builder
             ->setDate(self::DATE)
             ->setHomeLocation(self::LOCATION)
@@ -98,7 +98,7 @@ class FederalIncomeTest extends TaxTestCase
                     ->build()
             ],
             'supplemental' => [
-                (new IncomeParametersBuilder())
+                (new TestParametersBuilder())
                     ->setDate(self::DATE)
                     ->setHomeLocation(self::LOCATION)
                     ->setTaxClass(self::TAX_CLASS)
@@ -174,7 +174,7 @@ class FederalIncomeTest extends TaxTestCase
 
     public function provideAdditionalWithholdingTestData(): array
     {
-        $builder = new IncomeParametersBuilder();
+        $builder = new TestParametersBuilder();
         $builder
             ->setDate(self::DATE)
             ->setHomeLocation(self::LOCATION)

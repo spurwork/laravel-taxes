@@ -4,14 +4,14 @@ namespace Appleton\Taxes\Tests\Unit\Countries\US\Ohio;
 
 use Appleton\Taxes\Classes\WorkerTaxes\GeoPoint;
 use Appleton\Taxes\Classes\WorkerTaxes\TaxResult;
-use Appleton\Taxes\Tests\Unit\Countries\IncomeParameters;
+use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
 use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
 use Carbon\Carbon;
 use ReflectionClass;
 
 class JeddTaxTestCase extends TaxTestCase
 {
-    protected function validate(IncomeParameters $parameters): void
+    protected function validate(TestParameters $parameters): void
     {
         Carbon::setTestNow($parameters->getDate());
 

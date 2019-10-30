@@ -6,8 +6,8 @@ use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome;
 use Appleton\Taxes\Countries\US\Vermont\VermontIncome\VermontIncome;
 use Appleton\Taxes\Models\Countries\US\FederalIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Vermont\VermontIncomeTaxInformation;
-use Appleton\Taxes\Tests\Unit\Countries\IncomeParameters;
-use Appleton\Taxes\Tests\Unit\Countries\IncomeParametersBuilder;
+use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
+use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
 use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
 
 class VermontIncomeTest extends TaxTestCase
@@ -42,7 +42,7 @@ class VermontIncomeTest extends TaxTestCase
     /**
      * @dataProvider provideTestData
      */
-    public function testTax(IncomeParameters $parameters): void
+    public function testTax(TestParameters $parameters): void
     {
         $this->validate($parameters);
     }
@@ -54,7 +54,7 @@ class VermontIncomeTest extends TaxTestCase
         ]);
 
         $this->validate(
-            (new IncomeParametersBuilder())
+            (new TestParametersBuilder())
                 ->setDate(self::DATE)
                 ->setHomeLocation(self::LOCATION)
                 ->setTaxClass(self::TAX_CLASS)
@@ -69,7 +69,7 @@ class VermontIncomeTest extends TaxTestCase
 
     public function provideTestData(): array
     {
-        $builder = new IncomeParametersBuilder();
+        $builder = new TestParametersBuilder();
         $builder
             ->setDate(self::DATE)
             ->setHomeLocation(self::LOCATION)

@@ -3,7 +3,7 @@
 namespace Appleton\Taxes\Tests\Unit\Countries\US\California\V20190101;
 
 use Appleton\Taxes\Countries\US\California\CaliforniaEmploymentTrainingTax\CaliforniaEmploymentTrainingTax;
-use Appleton\Taxes\Tests\Unit\Countries\WageBaseParameters;
+use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
 use Appleton\Taxes\Tests\Unit\Countries\WageBaseTaxTestCase;
 
 class CaliforniaEmploymentTrainingTaxTest extends WageBaseTaxTestCase
@@ -23,7 +23,7 @@ class CaliforniaEmploymentTrainingTaxTest extends WageBaseTaxTestCase
     /**
      * @dataProvider provideData
      */
-    public function testTax(WageBaseParameters $parameters): void
+    public function testTax(TestParameters $parameters): void
     {
         $this->validateWageBase($parameters);
     }

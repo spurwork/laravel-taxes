@@ -5,8 +5,8 @@ namespace Appleton\Taxes\Tests\Unit\Countries\US\NewYork\V20190101;
 use Appleton\Taxes\Countries\US\NewYork\NewYorkIncome\NewYorkIncome;
 use Appleton\Taxes\Countries\US\NewYork\Yonkers\Yonkers;
 use Appleton\Taxes\Models\Countries\US\NewYork\NewYorkIncomeTaxInformation;
-use Appleton\Taxes\Tests\Unit\Countries\IncomeParameters;
-use Appleton\Taxes\Tests\Unit\Countries\IncomeParametersBuilder;
+use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
+use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
 use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
 
 class YonkersTest extends TaxTestCase
@@ -37,7 +37,7 @@ class YonkersTest extends TaxTestCase
     /**
      * @dataProvider provideWorkInYonkersTestData
      */
-    public function testTax_work_in_yonkers(IncomeParameters $parameters): void
+    public function testTax_work_in_yonkers(TestParameters $parameters): void
     {
         $this->validate($parameters);
     }
@@ -45,7 +45,7 @@ class YonkersTest extends TaxTestCase
     /**
      * @dataProvider provideWorkInDifferentStateTestData
      */
-    public function testTax_work_in_different_state(IncomeParameters $parameters): void
+    public function testTax_work_in_different_state(TestParameters $parameters): void
     {
         $this->disableTestQueryRunner();
         $this->validate($parameters);
@@ -53,7 +53,7 @@ class YonkersTest extends TaxTestCase
 
     public function provideWorkInYonkersTestData(): array
     {
-        $builder = new IncomeParametersBuilder();
+        $builder = new TestParametersBuilder();
         $builder
             ->setDate(self::DATE)
             ->setTaxClass(self::TAX_CLASS)
@@ -146,7 +146,7 @@ class YonkersTest extends TaxTestCase
 
     public function provideWorkInDifferentStateTestData(): array
     {
-        $builder = new IncomeParametersBuilder();
+        $builder = new TestParametersBuilder();
         $builder
             ->setDate(self::DATE)
             ->setTaxClass(self::TAX_CLASS)

@@ -4,7 +4,7 @@ namespace Appleton\Taxes\Tests\Unit\Countries\US\Kentucky\V20190101;
 
 use Appleton\Taxes\Countries\US\Kentucky\BooneCountySchoolDistrict\BooneCountySchoolDistrict;
 use Appleton\Taxes\Models\Countries\US\Kentucky\KentuckyIncomeTaxInformation;
-use Appleton\Taxes\Tests\Unit\Countries\IncomeParametersBuilder;
+use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
 use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
 
 class BooneCountySchoolDistrictTest extends TaxTestCase
@@ -28,7 +28,7 @@ class BooneCountySchoolDistrictTest extends TaxTestCase
         ], $this->user);
 
         $this->validate(
-            (new IncomeParametersBuilder())
+            (new TestParametersBuilder())
                 ->setDate(self::DATE)
                 ->setHomeLocation(self::LOCATION)
                 ->setTaxClass(self::TAX_CLASS)
@@ -48,7 +48,7 @@ class BooneCountySchoolDistrictTest extends TaxTestCase
         ], $this->user);
 
         $this->validate(
-            (new IncomeParametersBuilder())
+            (new TestParametersBuilder())
                 ->setDate(self::DATE)
                 ->setHomeLocation(self::LOCATION)
                 ->setTaxClass(self::TAX_CLASS)

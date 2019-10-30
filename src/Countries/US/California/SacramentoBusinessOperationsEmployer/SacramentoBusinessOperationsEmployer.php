@@ -52,6 +52,26 @@ abstract class SacramentoBusinessOperationsEmployer extends BasePayrollLiability
 
     public function getWages(Collection $tax_areas): int
     {
-        return $this->company_payroll->getWages($tax_areas->first()->workGovernmentalUnitArea);
+        $governmental_unit_area = $tax_areas->first()->governmental_unit_area;
+        $wages = $this->company_payroll->getWages($governmental_unit_area);
+
+        if ($wages === 0) {
+            return 0;
+        }
+
+        $ytd_wages = $this->company_payroll->getYtdWages($governmental_unit_area);
+        $ytd_liabilities = $this->company_payroll->getYtdLiabilities(BaseSacramentoPayrollEmployer::class);
+        $total_wages = $ytd_wages + $wages;
+
+        if ($total_wages < $this->getStartAmount()) {
+            if ($ytd_liabilities === 0) {
+                return $wages;
+            }
+
+            return 0;
+        }
+
+        $max_wages = $this->getMaxLiability() / $this->getTaxAmount();
+        return min(max($total_wages - $this->getStartAmount(), 0), $max_wages);
     }
 }

@@ -5,7 +5,7 @@ namespace Appleton\Taxes\Tests\Unit\Countries\US\Maryland\V20190101;
 use Appleton\Taxes\Countries\US\Maryland\AnneArundel\AnneArundel;
 use Appleton\Taxes\Countries\US\Maryland\MarylandIncome\MarylandIncome;
 use Appleton\Taxes\Models\Countries\US\Maryland\MarylandIncomeTaxInformation;
-use Appleton\Taxes\Tests\Unit\Countries\IncomeParametersBuilder;
+use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
 use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
 
 class AnneArundelTest extends TaxTestCase
@@ -32,7 +32,7 @@ class AnneArundelTest extends TaxTestCase
     public function testTax(): void
     {
         $this->validate(
-            (new IncomeParametersBuilder())
+            (new TestParametersBuilder())
                 ->setDate(self::DATE)
                 ->setHomeLocation(self::HOME_LOCATION)
                 ->setHomeLocation(self::WORK_LOCATION)

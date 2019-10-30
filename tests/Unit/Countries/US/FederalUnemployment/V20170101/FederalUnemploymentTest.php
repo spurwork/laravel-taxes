@@ -5,7 +5,7 @@ namespace Appleton\Taxes\Tests\Unit\Countries\US\FederalUnemployment\V20170101;
 use Appleton\Taxes\Countries\US\Alabama\AlabamaUnemployment\AlabamaUnemployment;
 use Appleton\Taxes\Countries\US\Alabama\AlabamaUnemployment\V20170101\AlabamaUnemployment as AlabamaUnemployment2017;
 use Appleton\Taxes\Countries\US\FederalUnemployment\FederalUnemployment;
-use Appleton\Taxes\Tests\Unit\Countries\WageBaseParameters;
+use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
 use Appleton\Taxes\Tests\Unit\Countries\WageBaseTaxTestCase;
 
 class FederalUnemploymentTest extends WageBaseTaxTestCase
@@ -24,7 +24,7 @@ class FederalUnemploymentTest extends WageBaseTaxTestCase
     /**
      * @dataProvider provideData
      */
-    public function testWageBase(WageBaseParameters $parameters): void
+    public function testWageBase(TestParameters $parameters): void
     {
         $this->validateWageBase($parameters);
     }

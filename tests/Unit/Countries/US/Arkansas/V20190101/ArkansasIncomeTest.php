@@ -6,8 +6,8 @@ use Appleton\Taxes\Classes\WorkerTaxes\GeoPoint;
 use Appleton\Taxes\Classes\WorkerTaxes\TaxResult;
 use Appleton\Taxes\Countries\US\Arkansas\ArkansasIncome\ArkansasIncome;
 use Appleton\Taxes\Models\Countries\US\Arkansas\ArkansasIncomeTaxInformation;
-use Appleton\Taxes\Tests\Unit\Countries\IncomeParameters;
-use Appleton\Taxes\Tests\Unit\Countries\IncomeParametersBuilder;
+use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
+use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
 use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
 use Carbon\Carbon;
 use ReflectionClass;
@@ -37,7 +37,7 @@ class ArkansasIncomeTest extends TaxTestCase
     /**
      * @dataProvider provideTestData
      */
-    public function testTax(IncomeParameters $parameters): void
+    public function testTax(TestParameters $parameters): void
     {
         $this->validate($parameters);
     }
@@ -45,7 +45,7 @@ class ArkansasIncomeTest extends TaxTestCase
     /**
      * @dataProvider provideTexarkanaTestData
      */
-    public function testTax_texarkana(IncomeParameters $parameters): void
+    public function testTax_texarkana(TestParameters $parameters): void
     {
         $this->disableTestQueryRunner();
         $this->validate($parameters);
@@ -100,7 +100,7 @@ class ArkansasIncomeTest extends TaxTestCase
 
     public function provideTestData(): array
     {
-        $builder = new IncomeParametersBuilder();
+        $builder = new TestParametersBuilder();
         $builder
             ->setDate(self::DATE)
             ->setHomeLocation(self::LOCATION_ARKANSAS)
@@ -190,7 +190,7 @@ class ArkansasIncomeTest extends TaxTestCase
 
     public function provideTexarkanaTestData(): array
     {
-        $builder = new IncomeParametersBuilder();
+        $builder = new TestParametersBuilder();
         $builder
             ->setDate(self::DATE)
             ->setTaxClass(self::TAX_CLASS)

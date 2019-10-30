@@ -27,7 +27,7 @@ class WageBaseTaxTestCase extends UnitTestCase
         $this->taxes = app(Taxes::class);
     }
 
-    protected function validateWageBase(WageBaseParameters $parameters): void
+    protected function validateWageBase(TestParameters $parameters): void
     {
         Carbon::setTestNow($parameters->getDate());
 
@@ -88,6 +88,12 @@ class WageBaseTaxTestCase extends UnitTestCase
             self::identicalTo($parameters->getExpectedAmountInCents()),
             $short_name.' expected '.$parameters->getExpectedAmountInCents()
             .' tax amount but got '.$result->getAmountInCents());
+
+        self::assertThat(
+            $result->getEarningsInCents(),
+            self::identicalTo($parameters->getExpectedEarningsInCents()),
+            $short_name.' expected '.$parameters->getExpectedEarningsInCents()
+            .' earnings but got '.$result->getEarningsInCents());
     }
 
     protected function wageBaseBoundariesTestCases(
@@ -97,7 +103,7 @@ class WageBaseTaxTestCase extends UnitTestCase
         int $wage_base_in_cents,
         float $tax_rate): array
     {
-        $builder = new WageBaseParametersBuilder();
+        $builder = new TestParametersBuilder();
         $builder
             ->setDate($date)
             ->setHomeLocation($home_location)
@@ -109,6 +115,7 @@ class WageBaseTaxTestCase extends UnitTestCase
                     ->setWagesInCents($wage_base_in_cents - 1000)
                     ->setYtdWagesInCents(null)
                     ->setExpectedAmountInCents($this->calculate($wage_base_in_cents - 1000, $tax_rate))
+                    ->setExpectedEarningsInCents($wage_base_in_cents - 1000)
                     ->build()
             ],
             'current wages meet wage base' => [
@@ -116,6 +123,7 @@ class WageBaseTaxTestCase extends UnitTestCase
                     ->setWagesInCents($wage_base_in_cents)
                     ->setYtdWagesInCents(null)
                     ->setExpectedAmountInCents($this->calculate($wage_base_in_cents, $tax_rate))
+                    ->setExpectedEarningsInCents($wage_base_in_cents)
                     ->build()
             ],
             'current wages exceed wage base' => [
@@ -123,6 +131,7 @@ class WageBaseTaxTestCase extends UnitTestCase
                     ->setWagesInCents($wage_base_in_cents + 1000)
                     ->setYtdWagesInCents(null)
                     ->setExpectedAmountInCents($this->calculate($wage_base_in_cents, $tax_rate))
+                    ->setExpectedEarningsInCents($wage_base_in_cents)
                     ->build()
             ],
             'total wages not meet wage base' => [
@@ -130,6 +139,7 @@ class WageBaseTaxTestCase extends UnitTestCase
                     ->setWagesInCents(1000)
                     ->setYtdWagesInCents($wage_base_in_cents - 2000)
                     ->setExpectedAmountInCents($this->calculate(1000, $tax_rate))
+                    ->setExpectedEarningsInCents(1000)
                     ->build()
             ],
             'total wages meet wage base' => [
@@ -137,6 +147,7 @@ class WageBaseTaxTestCase extends UnitTestCase
                     ->setWagesInCents(1000)
                     ->setYtdWagesInCents($wage_base_in_cents - 1000)
                     ->setExpectedAmountInCents($this->calculate(1000, $tax_rate))
+                    ->setExpectedEarningsInCents(1000)
                     ->build()
             ],
             'total wages cross wage base' => [
@@ -144,6 +155,7 @@ class WageBaseTaxTestCase extends UnitTestCase
                     ->setWagesInCents(2000)
                     ->setYtdWagesInCents($wage_base_in_cents - 1000)
                     ->setExpectedAmountInCents($this->calculate(1000, $tax_rate))
+                    ->setExpectedEarningsInCents(1000)
                     ->build()
             ],
             'ytd wages meet wage base' => [
@@ -151,6 +163,7 @@ class WageBaseTaxTestCase extends UnitTestCase
                     ->setWagesInCents(1000)
                     ->setYtdWagesInCents($wage_base_in_cents)
                     ->setExpectedAmountInCents(null)
+                    ->setExpectedEarningsInCents(null)
                     ->build()
             ],
             'ytd wages exceed wage base' => [
@@ -158,6 +171,7 @@ class WageBaseTaxTestCase extends UnitTestCase
                     ->setWagesInCents(1000)
                     ->setYtdWagesInCents($wage_base_in_cents + 1000)
                     ->setExpectedAmountInCents(null)
+                    ->setExpectedEarningsInCents(null)
                     ->build()
             ],
         ];
@@ -170,7 +184,7 @@ class WageBaseTaxTestCase extends UnitTestCase
         int $wage_base_in_cents,
         float $tax_rate): array
     {
-        $builder = new WageBaseParametersBuilder();
+        $builder = new TestParametersBuilder();
         $builder
             ->setDate($date)
             ->setHomeLocation($home_location)
@@ -182,6 +196,7 @@ class WageBaseTaxTestCase extends UnitTestCase
                     ->setWagesInCents($wage_base_in_cents - 10000)
                     ->setYtdWagesInCents(null)
                     ->setExpectedAmountInCents($this->roundToDollar($this->calculate($wage_base_in_cents - 10000, $tax_rate)))
+                    ->setExpectedEarningsInCents($wage_base_in_cents - 10000)
                     ->build()
             ],
             'current wages meet wage base' => [
@@ -189,6 +204,7 @@ class WageBaseTaxTestCase extends UnitTestCase
                     ->setWagesInCents($wage_base_in_cents)
                     ->setYtdWagesInCents(null)
                     ->setExpectedAmountInCents($this->roundToDollar($this->calculate($wage_base_in_cents, $tax_rate)))
+                    ->setExpectedEarningsInCents($wage_base_in_cents)
                     ->build()
             ],
             'current wages exceed wage base' => [
@@ -196,6 +212,7 @@ class WageBaseTaxTestCase extends UnitTestCase
                     ->setWagesInCents($wage_base_in_cents + 10000)
                     ->setYtdWagesInCents(null)
                     ->setExpectedAmountInCents($this->roundToDollar($this->calculate($wage_base_in_cents, $tax_rate)))
+                    ->setExpectedEarningsInCents($wage_base_in_cents)
                     ->build()
             ],
             'total wages not meet wage base' => [
@@ -203,6 +220,7 @@ class WageBaseTaxTestCase extends UnitTestCase
                     ->setWagesInCents(10000)
                     ->setYtdWagesInCents($wage_base_in_cents - 20000)
                     ->setExpectedAmountInCents($this->roundToDollar($this->calculate(10000, $tax_rate)))
+                    ->setExpectedEarningsInCents(10000)
                     ->build()
             ],
             'total wages meet wage base' => [
@@ -210,6 +228,7 @@ class WageBaseTaxTestCase extends UnitTestCase
                     ->setWagesInCents(10000)
                     ->setYtdWagesInCents($wage_base_in_cents - 10000)
                     ->setExpectedAmountInCents($this->roundToDollar($this->calculate(10000, $tax_rate)))
+                    ->setExpectedEarningsInCents(10000)
                     ->build()
             ],
             'total wages cross wage base' => [
@@ -217,6 +236,7 @@ class WageBaseTaxTestCase extends UnitTestCase
                     ->setWagesInCents(20000)
                     ->setYtdWagesInCents($wage_base_in_cents - 10000)
                     ->setExpectedAmountInCents($this->roundToDollar($this->calculate(10000, $tax_rate)))
+                    ->setExpectedEarningsInCents(10000)
                     ->build()
             ],
             'ytd wages meet wage base' => [
@@ -224,6 +244,7 @@ class WageBaseTaxTestCase extends UnitTestCase
                     ->setWagesInCents(10000)
                     ->setYtdWagesInCents($wage_base_in_cents)
                     ->setExpectedAmountInCents(null)
+                    ->setExpectedEarningsInCents(null)
                     ->build()
             ],
             'ytd wages exceed wage base' => [
@@ -231,6 +252,7 @@ class WageBaseTaxTestCase extends UnitTestCase
                     ->setWagesInCents(10000)
                     ->setYtdWagesInCents($wage_base_in_cents + 10000)
                     ->setExpectedAmountInCents(null)
+                    ->setExpectedEarningsInCents(null)
                     ->build()
             ],
         ];

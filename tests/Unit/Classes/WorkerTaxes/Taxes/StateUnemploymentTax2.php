@@ -13,6 +13,7 @@ class StateUnemploymentTax2 extends BaseStateUnemployment
     public const TYPE = TaxType::STATE;
     public const WITHHELD = false;
     public const TAX_RATE = 0.1;
+    public const WAGE_BASE = 1000000;
 
     public function compute(Collection $tax_areas)
     {

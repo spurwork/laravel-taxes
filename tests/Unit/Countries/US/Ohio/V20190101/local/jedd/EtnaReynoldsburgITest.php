@@ -3,7 +3,7 @@
 namespace Appleton\Taxes\Tests\Unit\Countries\US\Ohio\V20190101\JEDD;
 
 use Appleton\Taxes\Countries\US\Ohio\JEDD\EtnaReynoldsburgI\EtnaReynoldsburgI;
-use Appleton\Taxes\Tests\Unit\Countries\IncomeParametersBuilder;
+use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
 use Appleton\Taxes\Tests\Unit\Countries\US\Ohio\JeddTaxTestCase;
 
 class EtnaReynoldsburgITest extends JeddTaxTestCase
@@ -15,7 +15,7 @@ class EtnaReynoldsburgITest extends JeddTaxTestCase
     public function testTax(): void
     {
         $this->validate(
-            (new IncomeParametersBuilder())
+            (new TestParametersBuilder())
                 ->setDate(self::DATE)
                 ->setHomeLocation(self::LOCATION)
                 ->setTaxClass(self::TAX_CLASS)

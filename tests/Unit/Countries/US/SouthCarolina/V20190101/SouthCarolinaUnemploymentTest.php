@@ -4,7 +4,7 @@ namespace Appleton\Taxes\Tests\Unit\Countries\US\SouthCarolina\V20190101;
 
 use Appleton\Taxes\Countries\US\SouthCarolina\SouthCarolinaUnemployment\SouthCarolinaUnemployment;
 use Appleton\Taxes\Tests\Unit\Countries\UnemploymentTaxTestCase;
-use Appleton\Taxes\Tests\Unit\Countries\WageBaseParameters;
+use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
 
 class SouthCarolinaUnemploymentTest extends UnemploymentTaxTestCase
 {
@@ -23,7 +23,7 @@ class SouthCarolinaUnemploymentTest extends UnemploymentTaxTestCase
     /**
      * @dataProvider provideData
      */
-    public function testWageBase(WageBaseParameters $parameters): void
+    public function testWageBase(TestParameters $parameters): void
     {
         $this->validateWageBase($parameters);
     }

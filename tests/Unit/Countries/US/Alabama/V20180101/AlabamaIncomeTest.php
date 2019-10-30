@@ -6,9 +6,9 @@ use Appleton\Taxes\Countries\US\Alabama\AlabamaIncome\AlabamaIncome;
 use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome;
 use Appleton\Taxes\Models\Countries\US\Alabama\AlabamaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\FederalIncomeTaxInformation;
-use Appleton\Taxes\Tests\Unit\Countries\IncomeParameters;
-use Appleton\Taxes\Tests\Unit\Countries\IncomeParametersBuilder;
 use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
+use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
+use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
 
 class AlabamaIncomeTest extends TaxTestCase
 {
@@ -40,7 +40,7 @@ class AlabamaIncomeTest extends TaxTestCase
     /**
      * @dataProvider provideTestData
      */
-    public function testTax(IncomeParameters $parameters): void
+    public function testTax(TestParameters $parameters): void
     {
         $this->validate($parameters);
     }
@@ -49,7 +49,7 @@ class AlabamaIncomeTest extends TaxTestCase
     {
         return [
             '01' => [
-                (new IncomeParametersBuilder())
+                (new TestParametersBuilder())
                     ->setDate(self::DATE)
                     ->setHomeLocation(self::LOCATION)
                     ->setTaxClass(self::TAX_CLASS)

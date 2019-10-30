@@ -4,7 +4,7 @@ namespace Appleton\Taxes\Tests\Unit\Countries\US\Virginia\V20190101;
 
 use Appleton\Taxes\Countries\US\Virginia\VirginiaUnemployment\VirginiaUnemployment;
 use Appleton\Taxes\Tests\Unit\Countries\UnemploymentTaxTestCase;
-use Appleton\Taxes\Tests\Unit\Countries\WageBaseParameters;
+use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
 
 class VirginiaUnemploymentTest extends UnemploymentTaxTestCase
 {
@@ -23,7 +23,7 @@ class VirginiaUnemploymentTest extends UnemploymentTaxTestCase
     /**
      * @dataProvider provideData
      */
-    public function testWageBase(WageBaseParameters $parameters): void
+    public function testWageBase(TestParameters $parameters): void
     {
         $this->validateWageBase($parameters);
     }

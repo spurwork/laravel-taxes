@@ -3,7 +3,7 @@
 namespace Appleton\Taxes\Tests\Unit\Countries\US\Alabama\V20170101;
 
 use Appleton\Taxes\Countries\US\Alabama\BeavertonOccupational\BeavertonOccupational;
-use Appleton\Taxes\Tests\Unit\Countries\IncomeParametersBuilder;
+use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
 use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
 
 class BeavertonOccupationalTest extends TaxTestCase
@@ -17,7 +17,7 @@ class BeavertonOccupationalTest extends TaxTestCase
     public function testBeavertonOccupational(): void
     {
         $this->validate(
-            (new IncomeParametersBuilder())
+            (new TestParametersBuilder())
                 ->setDate('2017-01-01')
                 ->setHomeLocation('us.alabama.beaverton')
                 ->setTaxClass(BeavertonOccupational::class)

@@ -5,8 +5,8 @@ namespace Appleton\Taxes\Tests\Unit\Countries\US\Maryland\V20190101;
 use Appleton\Taxes\Countries\US\Maryland\MarylandIncome\MarylandIncome;
 use Appleton\Taxes\Models\Countries\US\FederalIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\Maryland\MarylandIncomeTaxInformation;
-use Appleton\Taxes\Tests\Unit\Countries\IncomeParameters;
-use Appleton\Taxes\Tests\Unit\Countries\IncomeParametersBuilder;
+use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
+use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
 use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
 
 class MarylandIncomeTest extends TaxTestCase
@@ -32,7 +32,7 @@ class MarylandIncomeTest extends TaxTestCase
     /**
      * @dataProvider provideTestData
      */
-    public function testTax(IncomeParameters $parameters): void
+    public function testTax(TestParameters $parameters): void
     {
         $this->validate($parameters);
     }
@@ -42,7 +42,7 @@ class MarylandIncomeTest extends TaxTestCase
         FederalIncomeTaxInformation::forUser($this->user)->delete();
 
         $this->validate(
-            (new IncomeParametersBuilder())
+            (new TestParametersBuilder())
                 ->setDate(self::DATE)
                 ->setHomeLocation(self::LOCATION)
                 ->setTaxClass(self::TAX_CLASS)
@@ -59,7 +59,7 @@ class MarylandIncomeTest extends TaxTestCase
         FederalIncomeTaxInformation::forUser($this->user)->delete();
 
         $this->validate(
-            (new IncomeParametersBuilder())
+            (new TestParametersBuilder())
                 ->setDate(self::DATE)
                 ->setHomeLocation(self::LOCATION)
                 ->setWorkLocation('us.delaware')
@@ -74,7 +74,7 @@ class MarylandIncomeTest extends TaxTestCase
 
     public function provideTestData(): array
     {
-        $builder = new IncomeParametersBuilder();
+        $builder = new TestParametersBuilder();
         $builder
             ->setDate(self::DATE)
             ->setHomeLocation(self::LOCATION)

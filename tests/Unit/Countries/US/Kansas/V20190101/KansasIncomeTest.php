@@ -4,8 +4,8 @@ namespace Appleton\Taxes\Tests\Unit\Countries\US\Kansas\V20190101;
 
 use Appleton\Taxes\Countries\US\Kansas\KansasIncome\KansasIncome;
 use Appleton\Taxes\Models\Countries\US\Kansas\KansasIncomeTaxInformation;
-use Appleton\Taxes\Tests\Unit\Countries\IncomeParameters;
-use Appleton\Taxes\Tests\Unit\Countries\IncomeParametersBuilder;
+use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
+use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
 use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
 
 class KansasIncomeTest extends TaxTestCase
@@ -31,14 +31,14 @@ class KansasIncomeTest extends TaxTestCase
     /**
      * @dataProvider provideTestData
      */
-    public function testTax(IncomeParameters $parameters): void
+    public function testTax(TestParameters $parameters): void
     {
         $this->validate($parameters);
     }
 
     public function provideTestData(): array
     {
-        $builder = new IncomeParametersBuilder();
+        $builder = new TestParametersBuilder();
         $builder
             ->setDate(self::DATE)
             ->setHomeLocation(self::LOCATION)
@@ -125,7 +125,7 @@ class KansasIncomeTest extends TaxTestCase
                     ->build()
             ],
             'pay periods' => [
-                (new IncomeParametersBuilder())
+                (new TestParametersBuilder())
                     ->setDate(self::DATE)
                     ->setHomeLocation(self::LOCATION)
                     ->setTaxClass(self::TAX_CLASS)

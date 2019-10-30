@@ -4,8 +4,8 @@ namespace Appleton\Taxes\Tests\Unit\Countries\US\Delaware\V20190101;
 
 use Appleton\Taxes\Countries\US\Delaware\DelawareIncome\DelawareIncome;
 use Appleton\Taxes\Models\Countries\US\Delaware\DelawareIncomeTaxInformation;
-use Appleton\Taxes\Tests\Unit\Countries\IncomeParameters;
-use Appleton\Taxes\Tests\Unit\Countries\IncomeParametersBuilder;
+use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
+use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
 use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
 
 class DelawareIncomeTest extends TaxTestCase
@@ -31,14 +31,14 @@ class DelawareIncomeTest extends TaxTestCase
     /**
      * @dataProvider provideTestData
      */
-    public function testTax(IncomeParameters $parameters): void
+    public function testTax(TestParameters $parameters): void
     {
         $this->validate($parameters);
     }
 
     public function provideTestData(): array
     {
-        $builder = new IncomeParametersBuilder();
+        $builder = new TestParametersBuilder();
         $builder
             ->setDate(self::DATE)
             ->setHomeLocation(self::LOCATION)

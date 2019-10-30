@@ -3,7 +3,7 @@
 namespace Appleton\Taxes\Tests\Unit\Countries\US\Alabama\V20170101;
 
 use Appleton\Taxes\Countries\US\Alabama\IrondaleOccupational\IrondaleOccupational;
-use Appleton\Taxes\Tests\Unit\Countries\IncomeParametersBuilder;
+use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
 use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
 
 class IrondaleOccupationalTest extends TaxTestCase
@@ -17,7 +17,7 @@ class IrondaleOccupationalTest extends TaxTestCase
     public function testIrondaleOccupational(): void
     {
         $this->validate(
-            (new IncomeParametersBuilder())
+            (new TestParametersBuilder())
                 ->setDate('2017-01-01')
                 ->setHomeLocation('us.alabama.irondale')
                 ->setTaxClass(IrondaleOccupational::class)

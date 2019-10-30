@@ -3,7 +3,7 @@
 namespace Appleton\Taxes\Tests\Unit\Countries\US\Alabama\V20170101;
 
 use Appleton\Taxes\Countries\US\Alabama\LynnOccupational\LynnOccupational;
-use Appleton\Taxes\Tests\Unit\Countries\IncomeParametersBuilder;
+use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
 use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
 
 class LynnOccupationalTest extends TaxTestCase
@@ -17,7 +17,7 @@ class LynnOccupationalTest extends TaxTestCase
     public function testLynnOccupational(): void
     {
         $this->validate(
-            (new IncomeParametersBuilder())
+            (new TestParametersBuilder())
                 ->setDate('2017-01-01')
                 ->setHomeLocation('us.alabama.lynn')
                 ->setTaxClass(LynnOccupational::class)

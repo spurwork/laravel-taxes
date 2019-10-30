@@ -68,6 +68,11 @@ class ColoradoLocalTaxTestCase extends TaxTestCase
             self::identicalTo($parameters->getExpectedAmountInCents()),
             $short_name.' expected '.$parameters->getExpectedAmountInCents()
             .' tax amount but got '.$result->getAmountInCents());
+        self::assertThat(
+            $result->getEarningsInCents(),
+            self::identicalTo($parameters->getColoradoEarningsInCents() + $parameters->getLocalEarningsInCents()),
+            $short_name.' expected '.($parameters->getColoradoEarningsInCents() + $parameters->getLocalEarningsInCents())
+            .' earnings but got '.$result->getEarningsInCents());
     }
 
     public function standardColoradoLocalTestCases(

@@ -3,8 +3,8 @@
 namespace Appleton\Taxes\Tests\Unit\Countries\US\Alabama\V20170101;
 
 use Appleton\Taxes\Countries\US\Alabama\BirminghamOccupational\BirminghamOccupational;
-use Appleton\Taxes\Tests\Unit\Countries\IncomeParameters;
-use Appleton\Taxes\Tests\Unit\Countries\IncomeParametersBuilder;
+use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
+use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
 use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
 
 class BirminghamOccupationalTest extends TaxTestCase
@@ -18,7 +18,7 @@ class BirminghamOccupationalTest extends TaxTestCase
     /**
      * @dataProvider provideTestData
      */
-    public function testBirminghamOccupational(IncomeParameters $parameters): void
+    public function testBirminghamOccupational(TestParameters $parameters): void
     {
         $this->validate($parameters);
     }
@@ -27,7 +27,7 @@ class BirminghamOccupationalTest extends TaxTestCase
     {
         return [
             '01' => [
-                (new IncomeParametersBuilder())
+                (new TestParametersBuilder())
                     ->setDate('2017-01-01')
                     ->setHomeLocation('us.alabama.birmingham')
                     ->setTaxClass(BirminghamOccupational::class)
@@ -37,7 +37,7 @@ class BirminghamOccupationalTest extends TaxTestCase
                     ->build()
             ],
             '02' => [
-                (new IncomeParametersBuilder())
+                (new TestParametersBuilder())
                     ->setDate('2017-01-01')
                     ->setHomeLocation('us.alabama.birmingham')
                     ->setTaxClass(BirminghamOccupational::class)

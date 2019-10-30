@@ -24,13 +24,14 @@ class TaxManager
                 $tax_implementation = app($taxable_income->getTax()->class);
 
                 $amount_in_cents = bcmul($tax_implementation->compute($taxable_income->getTax()->taxAreas), 100);
+                $earnings_in_cents = bcmul($tax_implementation->getEarnings(), 100);
 
                 $tax_result = new TaxResult(
                     $taxable_income->getTax()->class,
                     $taxable_income->getTax()->name,
                     $tax_implementation,
                     $amount_in_cents,
-                    bcmul($payroll->getEarnings(), 100));
+                    $earnings_in_cents);
 
                 app()->instance($taxable_income->getTax()->class, $tax_implementation);
 

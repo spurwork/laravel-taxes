@@ -82,8 +82,9 @@ class PayrollLiabilities
             ->each(static function ($tax) use (&$results) {
                 $tax_implementation = app($tax->class);
                 $amount = $tax_implementation->compute($tax->taxAreas);
+                $wages = $tax_implementation->getWages($tax->taxAreas);
 
-                $liability = new PayrollLiability($tax->class, $amount, $tax_implementation->getWages($tax->taxAreas));
+                $liability = new PayrollLiability($tax->class, $amount, $wages);
                 $results->put($tax->class, $liability);
                 app()->instance($tax->class, $tax_implementation);
             });
