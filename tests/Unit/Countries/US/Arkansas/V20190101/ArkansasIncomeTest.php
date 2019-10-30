@@ -6,9 +6,11 @@ use Appleton\Taxes\Classes\WorkerTaxes\GeoPoint;
 use Appleton\Taxes\Classes\WorkerTaxes\TaxResult;
 use Appleton\Taxes\Countries\US\Arkansas\ArkansasIncome\ArkansasIncome;
 use Appleton\Taxes\Models\Countries\US\Arkansas\ArkansasIncomeTaxInformation;
+use Appleton\Taxes\Tests\Unit\Countries\IncomeParameters;
+use Appleton\Taxes\Tests\Unit\Countries\IncomeParametersBuilder;
+use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
 use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
 use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
-use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
 use Carbon\Carbon;
 use ReflectionClass;
 
