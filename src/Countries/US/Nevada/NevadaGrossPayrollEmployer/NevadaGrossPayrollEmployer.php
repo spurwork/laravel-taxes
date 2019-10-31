@@ -29,7 +29,7 @@ abstract class NevadaGrossPayrollEmployer extends BasePayrollLiabilityState
 
     public function getWages(Collection $tax_areas): int
     {
-        $governmental_unit_area = $tax_areas->first()->governmental_unit_area;
+        $governmental_unit_area = $tax_areas->first()->workGovernmentalUnitArea;
         $wages = $this->company_payroll->getQtdWages($governmental_unit_area) + $this->company_payroll->getWages($governmental_unit_area);
         return max($wages - $this->getStartAmount(), 0);
     }
