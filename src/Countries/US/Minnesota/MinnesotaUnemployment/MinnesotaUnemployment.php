@@ -2,8 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\Minnesota\MinnesotaUnemployment;
 
-use Appleton\Taxes\Classes\BaseStateUnemployment;
-use Illuminate\Database\Eloquent\Collection;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseStateUnemployment;
 
 class MinnesotaUnemployment extends BaseStateUnemployment
 {

@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\NewJersey\NewJerseyUnemployment\V20190101;
 
-use Appleton\Taxes\Classes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
 use Appleton\Taxes\Countries\US\NewJersey\NewJerseyUnemployment\NewJerseyUnemployment as BaseNewJerseyUnemployment;
 
 class NewJerseyUnemployment extends BaseNewJerseyUnemployment

@@ -2,8 +2,8 @@
 
 namespace Appleton\Taxes\Countries\US\FederalUnemployment\V20170101;
 
-use Appleton\Taxes\Classes\Payroll;
-use Appleton\Taxes\Classes\StateUnemployment;
+use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\StateUnemployment;
 use Appleton\Taxes\Countries\US\FederalUnemployment\FederalUnemployment as BaseFederalUnemployment;
 use Appleton\Taxes\Traits\HasWageBase;
 use Illuminate\Database\Eloquent\Collection;

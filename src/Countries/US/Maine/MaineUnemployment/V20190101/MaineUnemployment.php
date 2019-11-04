@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\Maine\MaineUnemployment\V20190101;
 
-use Appleton\Taxes\Classes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
 use Appleton\Taxes\Countries\US\Maine\MaineUnemployment\MaineUnemployment as BaseMaineUnemployment;
 
 class MaineUnemployment extends BaseMaineUnemployment

@@ -2,47 +2,37 @@
 
 namespace Appleton\Taxes\Countries\US\Colorado;
 
-use Appleton\Taxes\Classes\BaseLocal;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseLocal;
+use Appleton\Taxes\Models\GovernmentalUnitArea;
 use Illuminate\Database\Eloquent\Collection;
-use stdClass;
 
 abstract class ColoradoLocalIncome extends BaseLocal
 {
-    abstract protected function getMonthlyWageAmount(): int;
+    abstract public function getMonthlyWageAmount(): int;
 
-    abstract protected function getMonthlyTaxAmount(): int;
+    abstract public function getMonthlyTaxAmount(): int;
 
-    abstract protected function getLocalGovernmentalUnitArea(): stdClass;
+    abstract protected function getLocalGovernmentalUnitArea(): GovernmentalUnitArea;
 
     public function compute(Collection $tax_areas): float
     {
         $colorado = $tax_areas->first()->workGovernmentalUnitArea;
         $local_governmental_unit_area = $this->getLocalGovernmentalUnitArea();
 
-        $local_mtd = $this->payroll->getMtdEarnings($local_governmental_unit_area, true);
-        if ($local_mtd === 0) {
+        $local_earnings = $this->payroll->getEarnings($local_governmental_unit_area);
+        $local_mtd_earnings = $this->payroll->getMtdEarnings($local_governmental_unit_area);
+        $colorado_mtd_earnings = $this->payroll->getMtdEarnings($colorado);
+        $colorado_earnings = $this->payroll->getEarnings($colorado);
+
+        $monthly_wage_amount = $this->getMonthlyWageAmount() / 100;
+        if (($local_earnings === 0.0 && $local_mtd_earnings === 0.0)
+            || $colorado_mtd_earnings >= $monthly_wage_amount
+            || $colorado_earnings + $colorado_mtd_earnings < $monthly_wage_amount) {
             return 0;
         }
 
-        $local_mtd_previous = $this->payroll->getMtdEarnings($local_governmental_unit_area);
-        $colorado_mtd = $this->payroll->getMtdEarnings($colorado, true);
-
-        $first_local_wages_with_colorado_wages_over_amount = $local_mtd_previous === 0
-            && $colorado_mtd >= $this->getMonthlyWageAmount();
-        if ($first_local_wages_with_colorado_wages_over_amount) {
-            $this->payroll->withholdTax($this->getMonthlyTaxAmount() / 100);
-            return round($this->getMonthlyTaxAmount() / 100, 2);
-        }
-
-        $colorado_mtd_previous = $this->payroll->getMtdEarnings($colorado);
-
-        $colorado_wages_cross_amount = $colorado_mtd_previous < $this->getMonthlyWageAmount()
-            && $colorado_mtd >= $this->getMonthlyWageAmount();
-        if ($colorado_wages_cross_amount) {
-            $this->payroll->withholdTax($this->getMonthlyTaxAmount() / 100);
-            return round($this->getMonthlyTaxAmount() / 100, 2);
-        }
-
-        return 0;
+        $monthly_tax_amount = $this->getMonthlyTaxAmount() / 100;
+        $this->payroll->withholdTax($monthly_tax_amount);
+        return round($monthly_tax_amount, 2);
     }
 }

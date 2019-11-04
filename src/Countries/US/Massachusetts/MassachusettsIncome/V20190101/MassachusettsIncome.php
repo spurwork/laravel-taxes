@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\Massachusetts\MassachusettsIncome\V20190101;
 
-use Appleton\Taxes\Classes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
 use Appleton\Taxes\Countries\US\Massachusetts\MassachusettsIncome\MassachusettsIncome as BaseMassachusettsIncome;
 use Appleton\Taxes\Countries\US\Medicare\Medicare;
 use Appleton\Taxes\Countries\US\SocialSecurity\SocialSecurity;

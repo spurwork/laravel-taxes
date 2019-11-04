@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Models\Countries\US\WestVirginia;
 
-use Appleton\Taxes\Classes\BaseTaxInformationModel;
+use Appleton\Taxes\Classes\WorkerTaxes\BaseTaxInformationModel;
 use Appleton\Taxes\Countries\US\WestVirginia\WestVirginiaIncome\WestVirginiaIncome;
 
 class WestVirginiaIncomeTaxInformation extends BaseTaxInformationModel

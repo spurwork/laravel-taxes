@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\NorthCarolina\NorthCarolinaIncome;
 
-use Appleton\Taxes\Classes\BaseStateIncome;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseStateIncome;
 
 abstract class NorthCarolinaIncome extends BaseStateIncome
 {

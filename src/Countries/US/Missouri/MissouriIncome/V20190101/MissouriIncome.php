@@ -2,9 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\Missouri\MissouriIncome\V20190101;
 
-use Appleton\Taxes\Classes\Payroll;
 use Appleton\Taxes\Countries\US\Missouri\MissouriIncome\MissouriIncome as BaseMissouriIncome;
-use Appleton\Taxes\Models\Countries\US\Missouri\MissouriIncomeTaxInformation;
 use Illuminate\Database\Eloquent\Collection;
 
 class MissouriIncome extends BaseMissouriIncome

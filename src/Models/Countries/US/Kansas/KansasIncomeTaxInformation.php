@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Models\Countries\US\Kansas;
 
-use Appleton\Taxes\Classes\BaseTaxInformationModel;
+use Appleton\Taxes\Classes\WorkerTaxes\BaseTaxInformationModel;
 use Appleton\Taxes\Countries\US\Kansas\KansasIncome\KansasIncome;
 
 class KansasIncomeTaxInformation extends BaseTaxInformationModel

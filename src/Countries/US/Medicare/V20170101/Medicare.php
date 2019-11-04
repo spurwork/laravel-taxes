@@ -2,10 +2,9 @@
 
 namespace Appleton\Taxes\Countries\US\Medicare\V20170101;
 
-use Appleton\Taxes\Classes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
 use Appleton\Taxes\Countries\US\Medicare\Medicare as BaseMedicare;
 use Appleton\Taxes\Models\Countries\US\FederalIncomeTaxInformation;
-
 use Illuminate\Database\Eloquent\Collection;
 
 class Medicare extends BaseMedicare

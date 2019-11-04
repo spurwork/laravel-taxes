@@ -2,8 +2,8 @@
 
 namespace Appleton\Taxes\Models\Countries\US\Arizona;
 
+use Appleton\Taxes\Classes\WorkerTaxes\BaseTaxInformationModel;
 use Appleton\Taxes\Countries\US\Arizona\ArizonaIncome\ArizonaIncome;
-use Appleton\Taxes\Classes\BaseTaxInformationModel;
 
 class ArizonaIncomeTaxInformation extends BaseTaxInformationModel
 {

@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\Connecticut\ConnecticutUnemployment\V20190101;
 
-use Appleton\Taxes\Classes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
 use Appleton\Taxes\Countries\US\Connecticut\ConnecticutUnemployment\ConnecticutUnemployment as BaseConnecticutUnemployment;
 
 class ConnecticutUnemployment extends BaseConnecticutUnemployment

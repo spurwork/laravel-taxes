@@ -3,7 +3,6 @@
 namespace Appleton\Taxes\Countries\US\Oregon\OregonTransit\V20190701;
 
 use Appleton\Taxes\Countries\US\Oregon\OregonTransit\OregonTransit as BaseOregonTransit;
-use Appleton\Taxes\Traits\HasWageBase;
 use Illuminate\Database\Eloquent\Collection;
 
 class OregonTransit extends BaseOregonTransit

@@ -1,62 +1,70 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\SocialSecurity\V20190101;
+namespace Appleton\Taxes\Tests\Unit\Countries\US\SocialSecurity\V20190101;
 
-use Appleton\Taxes\Countries\US\SocialSecurity\SocialSecurityEmployer as ParentSocialSecurityEmployer;
+use Appleton\Taxes\Countries\US\SocialSecurity\SocialSecurityEmployer;
+use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
+use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
+use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
 
-class SocialSecurityEmployerTest extends \TestCase
+class SocialSecurityEmployerTest extends TaxTestCase
 {
-    public function testCaseStudy2019A()
-    {
-        $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us'));
-            $taxes->setWorkLocation($this->getLocation('us'));
-            $taxes->setUser($this->user);
-            $taxes->setEarnings(640);
-            $taxes->setDate($this->date('2019-01-01'));
-        });
+    private const DATE = '2019-01-01';
+    private const LOCATION = 'us';
+    private const TAX_CLASS = SocialSecurityEmployer::class;
 
-        $this->assertSame(39.68, $results->getTax(ParentSocialSecurityEmployer::class));
+    public function setUp(): void
+    {
+        parent::setUp();
+        $this->query_runner->addTax(self::TAX_CLASS);
     }
 
-    public function testCaseStudy2019B()
+    /**
+     * @dataProvider provideData
+     */
+    public function testWageBase(TestParameters $parameters): void
     {
-        $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us'));
-            $taxes->setWorkLocation($this->getLocation('us'));
-            $taxes->setUser($this->user);
-            $taxes->setEarnings(774.28);
-            $taxes->setDate($this->date('2019-01-01'));
-        });
-
-        $this->assertSame(48.01, $results->getTax(ParentSocialSecurityEmployer::class));
+        $this->validate($parameters);
     }
 
-    public function testCaseStudy2019C()
+    public function provideData(): array
     {
-        $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us'));
-            $taxes->setWorkLocation($this->getLocation('us'));
-            $taxes->setUser($this->user);
-            $taxes->setEarnings(640);
-            $taxes->setYtdEarnings(133000);
-            $taxes->setDate($this->date('2019-01-01'));
-        });
+        $builder = new TestParametersBuilder();
+        $builder
+            ->setDate(self::DATE)
+            ->setHomeLocation(self::LOCATION)
+            ->setTaxClass(self::TAX_CLASS)
+            ->setPayPeriods(52);
 
-        $this->assertSame(null, $results->getTax(ParentSocialSecurityEmployer::class));
-    }
-
-    public function testCaseStudy2019D()
-    {
-        $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us'));
-            $taxes->setWorkLocation($this->getLocation('us'));
-            $taxes->setUser($this->user);
-            $taxes->setEarnings(774.28);
-            $taxes->setYtdEarnings(133000);
-            $taxes->setDate($this->date('2019-01-01'));
-        });
-
-        $this->assertSame(null, $results->getTax(ParentSocialSecurityEmployer::class));
+        return [
+            'case study A' => [
+                $builder
+                    ->setWagesInCents(64000)
+                    ->setYtdWagesInCents(0)
+                    ->setExpectedAmountInCents(3968)
+                    ->build()
+            ],
+            'case study B' => [
+                $builder
+                    ->setWagesInCents(77428)
+                    ->setYtdWagesInCents(0)
+                    ->setExpectedAmountInCents(4801)
+                    ->build()
+            ],
+            'case study C' => [
+                $builder
+                    ->setWagesInCents(64000)
+                    ->setYtdWagesInCents(13300000)
+                    ->setExpectedAmountInCents(null)
+                    ->build()
+            ],
+            'case study D' => [
+                $builder
+                    ->setWagesInCents(77428)
+                    ->setYtdWagesInCents(13300000)
+                    ->setExpectedAmountInCents(null)
+                    ->build()
+            ],
+        ];
     }
 }

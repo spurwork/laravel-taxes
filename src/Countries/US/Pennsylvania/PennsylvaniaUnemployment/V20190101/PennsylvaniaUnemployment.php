@@ -1,7 +1,7 @@
 <?php
 namespace Appleton\Taxes\Countries\US\Pennsylvania\PennsylvaniaUnemployment\V20190101;
 
-use Appleton\Taxes\Classes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
 use Appleton\Taxes\Countries\US\Pennsylvania\PennsylvaniaUnemployment\PennsylvaniaUnemployment as BasePennsylvaniaUnemployment;
 
 class PennsylvaniaUnemployment extends BasePennsylvaniaUnemployment

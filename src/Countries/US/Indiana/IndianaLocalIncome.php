@@ -2,8 +2,8 @@
 
 namespace Appleton\Taxes\Countries\US\Indiana;
 
-use Appleton\Taxes\Classes\BaseLocalIncome;
-use Appleton\Taxes\Classes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseLocalIncome;
 use Appleton\Taxes\Countries\US\Indiana\AdamsIncome\AdamsIncome;
 use Appleton\Taxes\Countries\US\Indiana\AllenIncome\AllenIncome;
 use Appleton\Taxes\Countries\US\Indiana\BartholomewIncome\BartholomewIncome;

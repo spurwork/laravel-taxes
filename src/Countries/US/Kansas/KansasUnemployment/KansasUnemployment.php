@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\Kansas\KansasUnemployment;
 
-use Appleton\Taxes\Classes\BaseStateUnemployment;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseStateUnemployment;
 
 abstract class KansasUnemployment extends BaseStateUnemployment
 {

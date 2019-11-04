@@ -2,9 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\Ohio\OhioIncome\V20190101;
 
-use Appleton\Taxes\Classes\Payroll;
 use Appleton\Taxes\Countries\US\Ohio\OhioIncome\OhioIncome as BaseOhioIncome;
-use Appleton\Taxes\Models\Countries\US\Ohio\OhioIncomeTaxInformation;
 use Illuminate\Database\Eloquent\Collection;
 
 class OhioIncome extends BaseOhioIncome

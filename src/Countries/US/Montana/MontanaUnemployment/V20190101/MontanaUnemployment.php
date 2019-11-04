@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\Montana\MontanaUnemployment\V20190101;
 
-use Appleton\Taxes\Classes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
 use Appleton\Taxes\Countries\US\Montana\MontanaUnemployment\MontanaUnemployment as BaseMontanaUnemployment;
 
 class MontanaUnemployment extends BaseMontanaUnemployment

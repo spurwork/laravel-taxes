@@ -1,9 +1,7 @@
 <?php
 namespace Appleton\Taxes\Countries\US\WashingtonDC\WashingtonDCIncome\V20190101;
 
-use Appleton\Taxes\Classes\Payroll;
 use Appleton\Taxes\Countries\US\WashingtonDC\WashingtonDCIncome\WashingtonDCIncome as BaseWashingtonDCIncome;
-use Appleton\Taxes\Models\Countries\US\WashingtonDC\WashingtonDCIncomeTaxInformation;
 use Illuminate\Database\Eloquent\Collection;
 
 class WashingtonDCIncome extends BaseWashingtonDCIncome

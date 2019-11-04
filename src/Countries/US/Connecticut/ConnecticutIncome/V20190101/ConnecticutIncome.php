@@ -2,9 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\Connecticut\ConnecticutIncome\V20190101;
 
-use Appleton\Taxes\Classes\Payroll;
 use Appleton\Taxes\Countries\US\Connecticut\ConnecticutIncome\ConnecticutIncome as BaseConnecticutIncome;
-use Appleton\Taxes\Models\Countries\US\Connecticut\ConnecticutIncomeTaxInformation;
 use Illuminate\Database\Eloquent\Collection;
 
 class ConnecticutIncome extends BaseConnecticutIncome

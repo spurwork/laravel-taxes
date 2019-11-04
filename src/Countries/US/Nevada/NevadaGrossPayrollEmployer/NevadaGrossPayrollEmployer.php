@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\Nevada\NevadaGrossPayrollEmployer;
 
-use Appleton\Taxes\Classes\BasePayrollLiabilityState;
+use Appleton\Taxes\Classes\PayrollLiabilities\Liabilities\BasePayrollLiabilityState;
 use Illuminate\Support\Collection;
 
 abstract class NevadaGrossPayrollEmployer extends BasePayrollLiabilityState
@@ -29,6 +29,8 @@ abstract class NevadaGrossPayrollEmployer extends BasePayrollLiabilityState
 
     public function getWages(Collection $tax_areas): int
     {
-        return $this->company_payroll->getWages($tax_areas->first()->workGovernmentalUnitArea);
+        $governmental_unit_area = $tax_areas->first()->workGovernmentalUnitArea;
+        $wages = $this->company_payroll->getQtdWages($governmental_unit_area) + $this->company_payroll->getWages($governmental_unit_area);
+        return max($wages - $this->getStartAmount(), 0);
     }
 }

@@ -36,11 +36,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Appleton\\Taxes\\": "tests"
-        },
-        "classmap": [
-            "tests/TestCase.php"
-        ]
+            "Appleton\\Taxes\\Tests\\Unit\\": "tests/Unit"
+        }
     },
     "scripts": {
         "init_db": "@php init_db.php",

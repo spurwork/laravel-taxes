@@ -2,8 +2,8 @@
 
 namespace Appleton\Taxes\Countries\US\Georgia\GeorgiaIncome;
 
-use Appleton\Taxes\Classes\BaseStateIncome;
-use Appleton\Taxes\Classes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseStateIncome;
 use Appleton\Taxes\Models\Countries\US\Georgia\GeorgiaIncomeTaxInformation;
 
 abstract class GeorgiaIncome extends BaseStateIncome

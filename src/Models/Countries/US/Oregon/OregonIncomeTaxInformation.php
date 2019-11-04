@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Models\Countries\US\Oregon;
 
-use Appleton\Taxes\Classes\BaseTaxInformationModel;
+use Appleton\Taxes\Classes\WorkerTaxes\BaseTaxInformationModel;
 use Appleton\Taxes\Countries\US\Oregon\OregonIncome\OregonIncome;
 
 class OregonIncomeTaxInformation extends BaseTaxInformationModel
@@ -13,7 +13,7 @@ class OregonIncomeTaxInformation extends BaseTaxInformationModel
     {
         $tax_information = new self();
         $tax_information->exempt = false;
-        $tax_information->dependents = 0;
+        $tax_information->exemptions = 0;
         $tax_information->additional_withholding = 0;
         $tax_information->filing_status = OregonIncome::FILING_SINGLE;
 

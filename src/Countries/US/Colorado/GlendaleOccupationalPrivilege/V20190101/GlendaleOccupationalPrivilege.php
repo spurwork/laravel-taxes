@@ -3,27 +3,26 @@
 namespace Appleton\Taxes\Countries\US\Colorado\GlendaleOccupationalPrivilege\V20190101;
 
 use Appleton\Taxes\Countries\US\Colorado\GlendaleOccupationalPrivilege\GlendaleOccupationalPrivilege as BaseGlendaleOccupationalPrivilege;
-use Illuminate\Support\Facades\DB;
-use stdClass;
+use Appleton\Taxes\Models\GovernmentalUnitArea;
 
 class GlendaleOccupationalPrivilege extends BaseGlendaleOccupationalPrivilege
 {
     private const MONTHLY_WAGE_AMOUNT = 75000;
     private const MONTHLY_TAX_AMOUNT = 500;
 
-    protected function getMonthlyWageAmount(): int
+    public function getMonthlyWageAmount(): int
     {
         return self::MONTHLY_WAGE_AMOUNT;
     }
 
-    protected function getMonthlyTaxAmount(): int
+    public function getMonthlyTaxAmount(): int
     {
         return self::MONTHLY_TAX_AMOUNT;
     }
 
-    protected function getLocalGovernmentalUnitArea(): stdClass
+    protected function getLocalGovernmentalUnitArea(): GovernmentalUnitArea
     {
-        return DB::table('governmental_unit_areas')
+        return GovernmentalUnitArea::query()
             ->where('name', 'Glendale, CO')
             ->first();
     }

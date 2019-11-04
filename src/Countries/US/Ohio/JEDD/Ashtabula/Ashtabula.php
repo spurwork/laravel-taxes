@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\Ohio\JEDD\Ashtabula;
 
-use Appleton\Taxes\Classes\BaseOccupational;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseOccupational;
 
 abstract class Ashtabula extends BaseOccupational
 {

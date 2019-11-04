@@ -3,24 +3,23 @@
 namespace Appleton\Taxes\Countries\US\Colorado\GreenwoodVillageOccupationalPrivilegeEmployer\V20180101;
 
 use Appleton\Taxes\Countries\US\Colorado\GreenwoodVillageOccupationalPrivilegeEmployer\GreenwoodVillageOccupationalPrivilegeEmployer as BaseGreenwoodVillageOccupationalPrivilegeEmployer;
-use Illuminate\Support\Facades\DB;
-use stdClass;
+use Appleton\Taxes\Models\GovernmentalUnitArea;
 
 class GreenwoodVillageOccupationalPrivilegeEmployer extends BaseGreenwoodVillageOccupationalPrivilegeEmployer
 {
-    protected function getMonthlyWageAmount(): int
+    public function getMonthlyWageAmount(): int
     {
         return 0;
     }
 
-    protected function getMonthlyTaxAmount(): int
+    public function getMonthlyTaxAmount(): int
     {
         return 0;
     }
 
-    protected function getLocalGovernmentalUnitArea(): stdClass
+    protected function getLocalGovernmentalUnitArea(): GovernmentalUnitArea
     {
-        return DB::table('governmental_unit_areas')
+        return GovernmentalUnitArea::query()
             ->where('name', 'Greenwood Village, CO')
             ->first();
     }

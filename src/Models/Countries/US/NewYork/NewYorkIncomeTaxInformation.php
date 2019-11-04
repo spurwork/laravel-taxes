@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Models\Countries\US\NewYork;
 
-use Appleton\Taxes\Classes\BaseTaxInformationModel;
+use Appleton\Taxes\Classes\WorkerTaxes\BaseTaxInformationModel;
 use Appleton\Taxes\Countries\US\NewYork\NewYorkIncome\NewYorkIncome;
 
 class NewYorkIncomeTaxInformation extends BaseTaxInformationModel

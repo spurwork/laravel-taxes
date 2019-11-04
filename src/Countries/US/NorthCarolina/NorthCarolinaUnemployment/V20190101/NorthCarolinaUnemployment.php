@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\NorthCarolina\NorthCarolinaUnemployment\V20190101;
 
-use Appleton\Taxes\Classes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
 use Appleton\Taxes\Countries\US\NorthCarolina\NorthCarolinaUnemployment\NorthCarolinaUnemployment as BaseNorthCarolinaUnemployment;
 
 class NorthCarolinaUnemployment extends BaseNorthCarolinaUnemployment

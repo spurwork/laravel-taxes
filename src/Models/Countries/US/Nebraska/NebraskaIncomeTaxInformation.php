@@ -2,8 +2,8 @@
 
 namespace Appleton\Taxes\Models\Countries\US\Nebraska;
 
+use Appleton\Taxes\Classes\WorkerTaxes\BaseTaxInformationModel;
 use Appleton\Taxes\Countries\US\Nebraska\NebraskaIncome\NebraskaIncome;
-use Appleton\Taxes\Classes\BaseTaxInformationModel;
 
 class NebraskaIncomeTaxInformation extends BaseTaxInformationModel
 {

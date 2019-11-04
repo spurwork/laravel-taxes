@@ -3,7 +3,6 @@
 namespace Appleton\Taxes\Countries\US\Pennsylvania\PennsylvaniaEmployeeSuta\V20190101;
 
 use Appleton\Taxes\Countries\US\Pennsylvania\PennsylvaniaEmployeeSuta\PennsylvaniaEmployeeSuta as BasePennsylvaniaEmployeeSuta;
-use Appleton\Taxes\Traits\HasWageBase;
 use Illuminate\Database\Eloquent\Collection;
 
 class PennsylvaniaEmployeeSuta extends BasePennsylvaniaEmployeeSuta

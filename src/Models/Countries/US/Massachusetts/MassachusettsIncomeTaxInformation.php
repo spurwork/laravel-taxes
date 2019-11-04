@@ -2,8 +2,8 @@
 
 namespace Appleton\Taxes\Models\Countries\US\Massachusetts;
 
+use Appleton\Taxes\Classes\WorkerTaxes\BaseTaxInformationModel;
 use Appleton\Taxes\Countries\US\Massachusetts\MassachusettsIncome\MassachusettsIncome;
-use Appleton\Taxes\Classes\BaseTaxInformationModel;
 
 class MassachusettsIncomeTaxInformation extends BaseTaxInformationModel
 {

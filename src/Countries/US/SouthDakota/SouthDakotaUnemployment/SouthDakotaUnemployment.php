@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\SouthDakota\SouthDakotaUnemployment;
 
-use Appleton\Taxes\Classes\BaseStateUnemployment;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseStateUnemployment;
 
 class SouthDakotaUnemployment extends BaseStateUnemployment
 {

@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Models\Countries\US\Utah;
 
-use Appleton\Taxes\Classes\BaseTaxInformationModel;
+use Appleton\Taxes\Classes\WorkerTaxes\BaseTaxInformationModel;
 use Appleton\Taxes\Countries\US\Utah\UtahIncome\UtahIncome;
 
 class UtahIncomeTaxInformation extends BaseTaxInformationModel

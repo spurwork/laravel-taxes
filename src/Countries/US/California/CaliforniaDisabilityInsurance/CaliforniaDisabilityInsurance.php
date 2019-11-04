@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\California\CaliforniaDisabilityInsurance;
 
-use Appleton\Taxes\Classes\BaseTax;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseTax;
 
 abstract class CaliforniaDisabilityInsurance extends BaseTax
 {

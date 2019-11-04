@@ -2,8 +2,8 @@
 
 namespace Appleton\Taxes\Countries\US\FederalIncome;
 
-use Appleton\Taxes\Classes\BaseIncome;
-use Appleton\Taxes\Classes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseIncome;
 use Appleton\Taxes\Models\Countries\US\FederalIncomeTaxInformation;
 
 abstract class FederalIncome extends BaseIncome

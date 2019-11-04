@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\Pennsylvania\PennsylvaniaEmployeeSuta;
 
-use Appleton\Taxes\Classes\BaseStateUnemployment;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseStateUnemployment;
 
 abstract class PennsylvaniaEmployeeSuta extends BaseStateUnemployment
 {
