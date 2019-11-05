@@ -52,7 +52,7 @@ abstract class SacramentoBusinessOperationsEmployer extends BasePayrollLiability
 
     public function getWages(Collection $tax_areas): int
     {
-        $governmental_unit_area = $tax_areas->first()->governmental_unit_area;
+        $governmental_unit_area = $tax_areas->first()->workGovernmentalUnitArea;
         $wages = $this->company_payroll->getWages($governmental_unit_area);
 
         if ($wages === 0) {
