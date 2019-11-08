@@ -9,7 +9,7 @@ use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
 
 class EugeneTest extends TaxTestCase
 {
-    private const DATE = '2019-01-01';
+    private const DATE = '2019-07-09';
     private const EUGENE_LOCATION = 'us.oregon.eugene';
     private const OREGON_LOCATION = 'us.oregon';
     private const ALABAMA_LOCATION = 'us.alabama';
@@ -19,7 +19,6 @@ class EugeneTest extends TaxTestCase
     {
         parent::setUp();
         $this->query_runner->addTax(self::TAX_CLASS);
-        $this->disableTestQueryRunner();
     }
 
     /**
@@ -27,6 +26,16 @@ class EugeneTest extends TaxTestCase
      */
     public function testEugeneTax(TestParameters $parameters): void
     {
+        $this->validate($parameters);
+    }
+
+    /**
+     * @dataProvider provideTestDataOutOfArea
+     */
+
+    public function testEugeneTaxOutOfArea(TestParameters $parameters): void
+    {
+        $this->disableTestQueryRunner();
         $this->validate($parameters);
     }
 
@@ -54,28 +63,50 @@ class EugeneTest extends TaxTestCase
                     ->setWorkLocation(self::EUGENE_LOCATION)
                     ->setWagesInCents(35000)
                     ->setPayRate(1200)
+                    // need to delete this line and uncomment
+                    // the null line after Tasie tests
                     ->setExpectedAmountInCents(105)
+
+                    // ->setExpectedAmountInCents(null)
+
                     ->build()
             ],
-            // '02' => [
-            //     $builder
-            //         ->setHomeLocation(self::EUGENE_LOCATION)
-            //         ->setWorkLocation(self::ALABAMA_LOCATION)
-            //         ->setWagesInCents(35000)
-            //         ->setPayRate(1200)
-            //         ->setExpectedAmountInCents(null)
-            //         ->build()
-            // ],
-            '03' => [
+            '02' => [
                 $builder
                     ->setHomeLocation(self::OREGON_LOCATION)
                     ->setWorkLocation(self::EUGENE_LOCATION)
                     ->setWagesInCents(35000)
                     ->setPayRate(1600)
+                    // need to delete this line and uncomment
+                    // the null line after Tasie tests
                     ->setExpectedAmountInCents(154)
+
+                    // ->setExpectedAmountInCents(null)
+
                     ->build()
             ],
-            '04' => [
+        ];
+    }
+
+    public function provideTestDataOutOfArea(): array
+    {
+        $builder = new TestParametersBuilder();
+        $builder
+            ->setDate(self::DATE)
+            ->setTaxClass(self::TAX_CLASS)
+            ->setPayPeriods(52);
+
+        return [
+            '00' => [
+                $builder
+                    ->setHomeLocation(self::EUGENE_LOCATION)
+                    ->setWorkLocation(self::ALABAMA_LOCATION)
+                    ->setWagesInCents(35000)
+                    ->setPayRate(1200)
+                    ->setExpectedAmountInCents(null)
+                    ->build()
+            ],
+            '01' => [
                 $builder
                     ->setHomeLocation(self::EUGENE_LOCATION)
                     ->setWorkLocation(self::OREGON_LOCATION)
@@ -86,31 +117,4 @@ class EugeneTest extends TaxTestCase
             ],
         ];
     }
-
-    //         '4' => [
-    //             'January 1, 2019 8am',
-    //             1200,
-    //             350,
-    //             'us.oregon.eugene',
-    //             'us.oregon',
-    //             null,
-    //         ],
-    //         '5' => [
-    //             'January 1, 2019 8am',
-    //             1600,
-    //             350,
-    //             'us.oregon',
-    //             'us.oregon.eugene',
-    //             1.54,
-    //         ],
-    //         '6' => [
-    //             'January 1, 2019 8am',
-    //             1600,
-    //             350,
-    //             'us.oregon.eugene',
-    //             'us.oregon',
-    //             null,
-    //         ],
-    //     ];
-    // }
 }

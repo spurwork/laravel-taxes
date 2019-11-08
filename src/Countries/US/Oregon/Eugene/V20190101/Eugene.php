@@ -13,7 +13,7 @@ class Eugene extends BaseEugene
     //     return 0.0;
     // }
 
-    // this and below needs to be removed and the commented section above needs to uncommented
+    // this and below needs to be removed and the commented section above needs to uncommented after tasie tests
 
     const TAX_RATE_BETWEEN = 0.003;
     const TAX_RATE_OVER = 0.0044;
@@ -22,13 +22,11 @@ class Eugene extends BaseEugene
 
     public function compute(Collection $tax_areas)
     {
-        // dump('in compute');
         if ($this->payroll->getPayRate() <= self::MIN_WAGE) {
             return;
         } elseif ($this->payroll->getPayRate() > self::MIN_WAGE && $this->payroll->getPayRate() < self::HOURLY_WAGE_CAP) {
             $this->tax_total = $this->payroll->withholdTax($this->payroll->getEarnings() * static::TAX_RATE_BETWEEN);
         } else {
-            // dump('in else');
             $this->tax_total = $this->payroll->withholdTax($this->payroll->getEarnings() * static::TAX_RATE_OVER);
         }
 

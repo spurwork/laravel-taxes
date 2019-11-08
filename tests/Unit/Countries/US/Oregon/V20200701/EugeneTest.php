@@ -12,6 +12,7 @@ class EugeneTest extends TaxTestCase
     private const DATE = '2020-07-07';
     private const EUGENE_LOCATION = 'us.oregon.eugene';
     private const OREGON_LOCATION = 'us.oregon';
+    private const ALABAMA_LOCATION = 'us.alabama';
     private const TAX_CLASS = Eugene::class;
 
     public function setUp(): void
@@ -24,6 +25,15 @@ class EugeneTest extends TaxTestCase
      * @dataProvider provideTestData
      */
     public function testEugeneTax(TestParameters $parameters): void
+    {
+        $this->validate($parameters);
+    }
+
+    /**
+     * @dataProvider provideTestDataOutOfArea
+     */
+
+    public function testEugeneTaxOutOfArea(TestParameters $parameters): void
     {
         $this->disableTestQueryRunner();
         $this->validate($parameters);
@@ -38,46 +48,58 @@ class EugeneTest extends TaxTestCase
             ->setPayPeriods(52);
 
         return [
-            // '00' => [
-            //     $builder
-            //         ->setHomeLocation(self::OREGON_LOCATION)
-            //         ->setWorkLocation(self::EUGENE_LOCATION)
-            //         ->setWagesInCents(35000)
-            //         ->setPayRate(1125)
-            //         ->setExpectedAmountInCents(null)
-            //         ->build()
-            // ],
-            // '01' => [
-            //     $builder
-            //         ->setHomeLocation(self::OREGON_LOCATION)
-            //         ->setWorkLocation(self::EUGENE_LOCATION)
-            //         ->setWagesInCents(35000)
-            //         ->setPayRate(1200)
-            //         ->setExpectedAmountInCents(105)
-            //         ->build()
-            // ],
+            '00' => [
+                $builder
+                    ->setHomeLocation(self::OREGON_LOCATION)
+                    ->setWorkLocation(self::EUGENE_LOCATION)
+                    ->setWagesInCents(35000)
+                    ->setPayRate(1125)
+                    ->setExpectedAmountInCents(null)
+                    ->build()
+            ],
+            '01' => [
+                $builder
+                    ->setHomeLocation(self::OREGON_LOCATION)
+                    ->setWorkLocation(self::EUGENE_LOCATION)
+                    ->setWagesInCents(35000)
+                    ->setPayRate(1200)
+                    ->setExpectedAmountInCents(105)
+                    ->build()
+            ],
             '02' => [
                 $builder
+                    ->setHomeLocation(self::OREGON_LOCATION)
+                    ->setWorkLocation(self::EUGENE_LOCATION)
+                    ->setWagesInCents(35000)
+                    ->setPayRate(1600)
+                    ->setExpectedAmountInCents(154)
+                    ->build()
+            ],
+        ];
+    }
+
+    public function provideTestDataOutOfArea(): array
+    {
+        $builder = new TestParametersBuilder();
+        $builder
+            ->setDate(self::DATE)
+            ->setTaxClass(self::TAX_CLASS)
+            ->setPayPeriods(52);
+
+        return [
+            '00' => [
+                $builder
                     ->setHomeLocation(self::EUGENE_LOCATION)
-                    ->setWorkLocation(self::OREGON_LOCATION)
+                    ->setWorkLocation(self::ALABAMA_LOCATION)
                     ->setWagesInCents(35000)
                     ->setPayRate(1200)
                     ->setExpectedAmountInCents(null)
                     ->build()
             ],
-            // '03' => [
-            //     $builder
-            //         ->setHomeLocation(self::OREGON_LOCATION)
-            //         ->setWorkLocation(self::EUGENE_LOCATION)
-            //         ->setWagesInCents(35000)
-            //         ->setPayRate(1600)
-            //         ->setExpectedAmountInCents(154)
-            //         ->build()
-            // ],
-            '04' => [
+            '01' => [
                 $builder
-                    ->setHomeLocation(self::OREGON_LOCATION)
-                    ->setWorkLocation(self::EUGENE_LOCATION)
+                    ->setHomeLocation(self::EUGENE_LOCATION)
+                    ->setWorkLocation(self::OREGON_LOCATION)
                     ->setWagesInCents(35000)
                     ->setPayRate(1600)
                     ->setExpectedAmountInCents(null)
@@ -85,31 +107,4 @@ class EugeneTest extends TaxTestCase
             ],
         ];
     }
-
-    //         '4' => [
-    //             'January 1, 2019 8am',
-    //             1200,
-    //             350,
-    //             'us.oregon.eugene',
-    //             'us.oregon',
-    //             null,
-    //         ],
-    //         '5' => [
-    //             'January 1, 2019 8am',
-    //             1600,
-    //             350,
-    //             'us.oregon',
-    //             'us.oregon.eugene',
-    //             1.54,
-    //         ],
-    //         '6' => [
-    //             'January 1, 2019 8am',
-    //             1600,
-    //             350,
-    //             'us.oregon.eugene',
-    //             'us.oregon',
-    //             null,
-    //         ],
-    //     ];
-    // }
 }
