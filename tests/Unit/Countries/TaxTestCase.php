@@ -69,6 +69,8 @@ abstract class TaxTestCase extends UnitTestCase
             $historical_wages->push($this->makeWage($work_location, $parameters->getYtdWagesInCents()));
         }
 
+        $tip_amount = $parameters->getTipAmount();
+
         $results = $this->taxes->calculate(
             Carbon::now(),
             Carbon::now()->addWeek(),
@@ -81,15 +83,18 @@ abstract class TaxTestCase extends UnitTestCase
             $parameters->getPayPeriods(),
             collect([]),
             collect([]),
-            collect([])
+            collect([]),
+            $tip_amount
         );
 
         $short_name = (new ReflectionClass($parameters->getTaxClass()))->getShortName();
 
         if ($parameters->getExpectedAmountInCents() === null ||
             $parameters->getExpectedAmountInCents() === 0) {
-            self::assertNull($results->get($parameters->getTaxClass()),
-                'tax results for '.$short_name.' found, none expected');
+            self::assertNull(
+                $results->get($parameters->getTaxClass()),
+                'tax results for '.$short_name.' found, none expected'
+            );
             return;
         }
 
@@ -101,21 +106,23 @@ abstract class TaxTestCase extends UnitTestCase
             $result->getAmountInCents(),
             self::identicalTo($parameters->getExpectedAmountInCents()),
             $short_name.' expected '.$parameters->getExpectedAmountInCents()
-            .' tax amount but got '.$result->getAmountInCents());
+            .' tax amount but got '.$result->getAmountInCents()
+        );
 
         if ($parameters->getExpectedEarningsInCents() === null) {
             self::assertThat(
                 $result->getEarningsInCents(),
                 self::identicalTo($parameters->getWagesInCents()),
                 $short_name.' expected '.$parameters->getWagesInCents()
-                .' earnings but got '.$result->getEarningsInCents());
+                .' earnings but got '.$result->getEarningsInCents()
+            );
         } else {
             self::assertThat(
                 $result->getEarningsInCents(),
                 self::identicalTo($parameters->getExpectedEarningsInCents()),
                 $short_name.' expected '.$parameters->getExpectedEarningsInCents()
-                .' earnings but got '.$result->getEarningsInCents());
-
+                .' earnings but got '.$result->getEarningsInCents()
+            );
         }
     }
 }

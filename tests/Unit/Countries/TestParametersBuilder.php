@@ -23,6 +23,7 @@ class TestParametersBuilder
     private $expected_earnings_in_cents;
     private $qtd_wage_in_cents;
     private $ytd_liabilities_in_cents;
+    private $tip_amount;
 
     public function build(): TestParameters
     {
@@ -43,7 +44,8 @@ class TestParametersBuilder
             $this->expected_earnings_in_cents,
             $this->pay_periods,
             $this->qtd_wage_in_cents,
-            $this->ytd_liabilities_in_cents
+            $this->ytd_liabilities_in_cents,
+            $this->tip_amount
         );
     }
 
@@ -146,6 +148,12 @@ class TestParametersBuilder
     public function setYtdLiabilitiesInCents(?int $ytd_liabilities_in_cents)
     {
         $this->ytd_liabilities_in_cents = $ytd_liabilities_in_cents;
+        return $this;
+    }
+
+    public function setTipAmount(?int $tip_amount)
+    {
+        $this->tip_amount = $tip_amount;
         return $this;
     }
 }
