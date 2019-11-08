@@ -21,8 +21,8 @@ class Taxes
         TaxableIncomeManager $taxable_income_manager,
         AreaIncomeManager $area_income_manager,
         TaxOverrideManager $tax_override_manager,
-        BindManager $bind_manager)
-    {
+        BindManager $bind_manager
+    ) {
         $this->tax_manager = $tax_manager;
         $this->wage_manager = $wage_manager;
         $this->area_income_manager = $area_income_manager;
@@ -43,8 +43,9 @@ class Taxes
         int $pay_periods,
         Collection $reciprocal_agreements,
         Collection $disabled_taxes,
-        Collection $exemptions): Collection
-    {
+        Collection $tip_amount,
+        Collection $exemptions
+    ): Collection {
         $wages_by_lat_long = $this->wage_manager->groupLatLong($wages);
         $historical_wages_by_lat_long = $this->wage_manager->groupLatLong($historical_wages);
 
@@ -56,10 +57,18 @@ class Taxes
 
         $home_areas = $this->area_income_manager->getHomeAreas($home_location);
 
-        $this->tax_override_manager->replaceSutaUnemploymentTaxes($suta_location, $taxable_incomes,
-            $wages, $historical_wages);
-        $this->tax_override_manager->addStateIncomeTax($home_location, $taxable_incomes,
-            $wages, $historical_wages);
+        $this->tax_override_manager->replaceSutaUnemploymentTaxes(
+            $suta_location,
+            $taxable_incomes,
+            $wages,
+            $historical_wages
+        );
+        $this->tax_override_manager->addStateIncomeTax(
+            $home_location,
+            $taxable_incomes,
+            $wages,
+            $historical_wages
+        );
         $this->tax_override_manager->processReciprocalAgreements($reciprocal_agreements, $taxable_incomes);
         $this->tax_override_manager->removeDisabledTaxes($disabled_taxes, $taxable_incomes);
 
@@ -77,6 +86,7 @@ class Taxes
             'home_areas' => $home_areas,
             'start_date' => $start_date,
             'end_date' => $end_date,
+            'tip_amount' => $tip_amount,
             'total_earnings' => $this->wage_manager->calculateEarnings($wages)
         ], $this->wage_manager);
 
