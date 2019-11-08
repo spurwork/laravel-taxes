@@ -51,7 +51,7 @@ class MississippiIncomeTest extends TaxTestCase
                 $builder
                     ->setTaxInfoOptions(['exempt' => true])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             '01' => [
@@ -102,7 +102,7 @@ class MississippiIncomeTest extends TaxTestCase
                         'total_exemption_amount_dollars' => 10000,
                     ])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             '07' => [
@@ -132,7 +132,7 @@ class MississippiIncomeTest extends TaxTestCase
                         'total_exemption_amount_dollars' => 10000,
                     ])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             '10' => [

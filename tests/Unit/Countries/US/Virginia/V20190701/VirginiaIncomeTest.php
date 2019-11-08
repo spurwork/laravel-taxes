@@ -130,7 +130,7 @@ class VirginiaIncomeTest extends TaxTestCase
                 $builder
                     ->setTaxInfoOptions(['exemptions' => 2])
                     ->setWagesInCents(10000)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             'test case 12' => [
@@ -140,7 +140,7 @@ class VirginiaIncomeTest extends TaxTestCase
                         'sixty_five_plus_or_blind_exemptions' => 2,
                     ])
                     ->setWagesInCents(13000)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             'test case 13' => [
@@ -151,7 +151,7 @@ class VirginiaIncomeTest extends TaxTestCase
                         'exempt' => true,
                     ])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
         ];

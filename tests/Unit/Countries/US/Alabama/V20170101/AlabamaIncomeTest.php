@@ -100,7 +100,7 @@ class AlabamaIncomeTest extends TaxTestCase
             'non-negative' => [
                 $builder
                     ->setWagesInCents(1000)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             'no exemptions' => [
@@ -118,7 +118,7 @@ class AlabamaIncomeTest extends TaxTestCase
                         'exempt' => true,
                     ])
                     ->setWagesInCents(6668)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             'exempt false' => [
@@ -150,7 +150,7 @@ class AlabamaIncomeTest extends TaxTestCase
             'additional withholding no earnings' => [
                 $builder
                     ->setWagesInCents(0)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             'additional withholding 02' => [

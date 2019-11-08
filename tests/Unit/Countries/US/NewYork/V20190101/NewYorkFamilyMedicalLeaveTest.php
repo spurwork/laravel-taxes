@@ -40,7 +40,7 @@ class NewYorkFamilyMedicalLeaveTest extends TaxTestCase
             '00' => [
                 $builder
                     ->setWagesInCents(0)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->setExpectedEarningsInCents(null)
                     ->build()
             ],

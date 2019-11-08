@@ -72,7 +72,7 @@ class LouisianaIncomeTest extends TaxTestCase
                 $builder
                     ->setTaxInfoOptions(['exempt' => true])
                     ->setWagesInCents(230000)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             '03' => [

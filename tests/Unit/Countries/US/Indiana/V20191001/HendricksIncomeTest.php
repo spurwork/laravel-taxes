@@ -39,6 +39,24 @@ class HendricksIncomeTest extends TaxTestCase
         $this->validate($parameters);
     }
 
+    public function testTax_taxes_taken_from_home_county(): void
+    {
+        $this->validateNoTax(
+            (new TestParametersBuilder())
+                ->setDate(self::DATE)
+                ->setHomeLocation(self::LOCATION)
+                ->setTaxClass(self::TAX_CLASS)
+                ->setTaxInfoClass(self::TAX_INFO_CLASS)
+                ->setPayPeriods(52)
+                ->setTaxInfoOptions([
+                    'county_lived' => 2,
+                    'county_worked' => 1,
+                ])
+                ->setWagesInCents(30000)
+                ->build()
+        );
+    }
+
     public function provideTestData(): array
     {
         $builder = new TestParametersBuilder();
@@ -58,16 +76,6 @@ class HendricksIncomeTest extends TaxTestCase
                     ])
                     ->setWagesInCents(30000)
                     ->setExpectedAmountInCents(510)
-                    ->build()
-            ],
-            'county worked but taxes taken from home county' => [
-                $builder
-                    ->setTaxInfoOptions([
-                        'county_lived' => 2,
-                        'county_worked' => 32,
-                    ])
-                    ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(null)
                     ->build()
             ],
             'county worked and taxes not taken from home county' => [

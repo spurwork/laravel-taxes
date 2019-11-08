@@ -106,7 +106,7 @@ class CaliforniaIncomeTest extends TaxTestCase
                 $builder
                     ->setTaxInfoOptions(null)
                     ->setWagesInCents(28025)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             'test case 02' => [
@@ -133,7 +133,7 @@ class CaliforniaIncomeTest extends TaxTestCase
                         'filing_status' => CaliforniaIncome::FILING_MARRIED,
                     ])
                     ->setWagesInCents(28025)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             'test case 06' => [
@@ -143,7 +143,7 @@ class CaliforniaIncomeTest extends TaxTestCase
                         'allowances' => 2,
                     ])
                     ->setWagesInCents(56050)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             'test case 07' => [
@@ -173,7 +173,7 @@ class CaliforniaIncomeTest extends TaxTestCase
                         'filing_status' => CaliforniaIncome::FILING_HEAD_OF_HOUSEHOLD,
                     ])
                     ->setWagesInCents(56050)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             'test case 10' => [
