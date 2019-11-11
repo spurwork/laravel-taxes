@@ -166,9 +166,7 @@ class Payroll
             return 0;
         }
 
-        return $this->wage_manager->getPayRate(
-            $area_income->getWages()
-        );
+        return $this->wage_manager->getPayRate($area_income->getWages());
     }
 
     public function determineEarnings(TaxableIncome $taxable_income): void

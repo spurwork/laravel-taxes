@@ -103,6 +103,6 @@ class WageManager
     {
         return $wages->avg(static function (Wage $wage) {
             return $wage->getAmountInCents();
-        }) / 100;
+        });
     }
 }
