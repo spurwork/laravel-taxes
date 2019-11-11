@@ -91,8 +91,8 @@ class EugeneTest extends TaxTestCase
                 $builder
                     ->setHomeLocation(self::EUGENE_LOCATION)
                     ->setWorkLocation(self::ALABAMA_LOCATION)
-                    ->setWagesInCents(35000)
-                    ->setMinutesWorked(1200)
+                    ->setWagesInCents(1200)
+                    ->setMinutesWorked(60)
                     ->setExpectedAmountInCents(null)
                     ->build()
             ],
@@ -100,8 +100,8 @@ class EugeneTest extends TaxTestCase
                 $builder
                     ->setHomeLocation(self::EUGENE_LOCATION)
                     ->setWorkLocation(self::OREGON_LOCATION)
-                    ->setWagesInCents(35000)
-                    ->setMinutesWorked(1600)
+                    ->setWagesInCents(1600)
+                    ->setMinutesWorked(60)
                     ->setExpectedAmountInCents(null)
                     ->build()
             ],
