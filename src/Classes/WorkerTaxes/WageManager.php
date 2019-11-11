@@ -99,10 +99,27 @@ class WageManager
         return count($worked_days);
     }
 
-    public function getPayRate(Collection $wages)
+    public function calculatePayRate(Collection $wages)
     {
-        return $wages->avg(static function (Wage $wage) {
-            return $wage->getAmountInCents();
+        $cents_earned = 0;
+        $minutes_worked = 0;
+
+        $wages->sum(function (Wage $wage) {
+            return $wage->getTakeHomeTipAmountInCents();
         });
+
+        $wages->each(static function (Wage $wage) use (&$cents_earned, &$minutes_worked) {
+            switch ($wage->getType()) {
+                case WageType::SHIFT:
+                case WageType::SALARY:
+                    $cents_earned += $wage->getAmountInCents();
+                    $minutes_worked += $wage->getWorkTimeInMinutes();
+                    return;
+                default:
+                    return;
+            }
+        });
+
+        return ($cents_earned / 100) / ($minutes_worked / 60);
     }
 }

@@ -8,6 +8,7 @@ use Appleton\Taxes\Classes\WorkerTaxes\WageType;
 use Appleton\Taxes\Models\TaxArea;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use SebastianBergmann\CodeCoverage\Report\Xml\Unit;
 
 trait TestModelCreator
 {
@@ -49,9 +50,28 @@ trait TestModelCreator
         ]);
     }
 
-    protected function makeWage(GeoPoint $location,
-                                int $amount_in_cents = UnitTestCase::DEFAULT_SHIFT_WAGES): Wage
-    {
+    protected function makeWage(
+        GeoPoint $location,
+        int $amount_in_cents = UnitTestCase::DEFAULT_SHIFT_WAGES,
+        ?int $minutes_worked
+    ): Wage {
+        return new Wage(
+            WageType::SHIFT,
+            Carbon::now(),
+            $location,
+            $amount_in_cents,
+            0,
+            0,
+            $minutes_worked === null ? UnitTestCase::DEFAULT_MINUTES_WORKED : $minutes_worked,
+            collect([])
+        );
+    }
+
+    protected function makeWageWithAdditionalTax(
+        GeoPoint $location,
+        string $additional_tax,
+        int $amount_in_cents = UnitTestCase::DEFAULT_SHIFT_WAGES
+    ): Wage {
         return new Wage(
             WageType::SHIFT,
             Carbon::now(),
@@ -60,27 +80,14 @@ trait TestModelCreator
             0,
             0,
             0,
-            collect([]));
+            collect([$additional_tax])
+        );
     }
 
-    protected function makeWageWithAdditionalTax(GeoPoint $location,
-                                                 string $additional_tax,
-                                                 int $amount_in_cents = UnitTestCase::DEFAULT_SHIFT_WAGES): Wage
-    {
-        return new Wage(
-            WageType::SHIFT,
-            Carbon::now(),
-            $location,
-            $amount_in_cents,
-            0,
-            0,
-            0,
-            collect([$additional_tax]));
-    }
-
-    protected function makeSupplementalWage(GeoPoint $location,
-                                            int $amount_in_cents): Wage
-    {
+    protected function makeSupplementalWage(
+        GeoPoint $location,
+        int $amount_in_cents
+    ): Wage {
         return new Wage(
             WageType::SUPPLEMENTAL,
             Carbon::now(),
@@ -89,13 +96,15 @@ trait TestModelCreator
             0,
             0,
             0,
-            collect([]));
+            collect([])
+        );
     }
 
-    protected function makeWageAtDate(Carbon $date,
-                                      GeoPoint $location,
-                                      int $amount_in_cents = UnitTestCase::DEFAULT_SHIFT_WAGES): Wage
-    {
+    protected function makeWageAtDate(
+        Carbon $date,
+        GeoPoint $location,
+        int $amount_in_cents = UnitTestCase::DEFAULT_SHIFT_WAGES
+    ): Wage {
         return new Wage(
             WageType::SHIFT,
             $date,
@@ -104,13 +113,15 @@ trait TestModelCreator
             0,
             0,
             0,
-            collect([]));
+            collect([])
+        );
     }
 
-    protected function makeAdjustmentWageAtDate(Carbon $date,
-                                                GeoPoint $location,
-                                                int $amount_in_cents): Wage
-    {
+    protected function makeAdjustmentWageAtDate(
+        Carbon $date,
+        GeoPoint $location,
+        int $amount_in_cents
+    ): Wage {
         return new Wage(
             WageType::ADJUSTMENT,
             $date,
@@ -119,6 +130,7 @@ trait TestModelCreator
             0,
             0,
             0,
-            collect([]));
+            collect([])
+        );
     }
 }

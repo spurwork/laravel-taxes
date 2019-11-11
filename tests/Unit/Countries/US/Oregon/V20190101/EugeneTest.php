@@ -53,7 +53,7 @@ class EugeneTest extends TaxTestCase
                     ->setHomeLocation(self::OREGON_LOCATION)
                     ->setWorkLocation(self::EUGENE_LOCATION)
                     ->setWagesInCents(35000)
-                    ->setPayRate(1125)
+                    ->setMinutesWorked(1125)
                     ->setExpectedAmountInCents(null)
                     ->build()
             ],
@@ -62,7 +62,7 @@ class EugeneTest extends TaxTestCase
                     ->setHomeLocation(self::OREGON_LOCATION)
                     ->setWorkLocation(self::EUGENE_LOCATION)
                     ->setWagesInCents(35000)
-                    ->setPayRate(1200)
+                    ->setMinutesWorked(1200)
                     // need to delete this line and uncomment
                     // the null line after Tasie tests
                     ->setExpectedAmountInCents(105)
@@ -76,7 +76,7 @@ class EugeneTest extends TaxTestCase
                     ->setHomeLocation(self::OREGON_LOCATION)
                     ->setWorkLocation(self::EUGENE_LOCATION)
                     ->setWagesInCents(35000)
-                    ->setPayRate(1600)
+                    ->setMinutesWorked(1600)
                     // need to delete this line and uncomment
                     // the null line after Tasie tests
                     ->setExpectedAmountInCents(154)
@@ -102,7 +102,7 @@ class EugeneTest extends TaxTestCase
                     ->setHomeLocation(self::EUGENE_LOCATION)
                     ->setWorkLocation(self::ALABAMA_LOCATION)
                     ->setWagesInCents(35000)
-                    ->setPayRate(1200)
+                    ->setMinutesWorked(1200)
                     ->setExpectedAmountInCents(null)
                     ->build()
             ],
@@ -111,7 +111,7 @@ class EugeneTest extends TaxTestCase
                     ->setHomeLocation(self::EUGENE_LOCATION)
                     ->setWorkLocation(self::OREGON_LOCATION)
                     ->setWagesInCents(35000)
-                    ->setPayRate(1600)
+                    ->setMinutesWorked(1600)
                     ->setExpectedAmountInCents(null)
                     ->build()
             ],

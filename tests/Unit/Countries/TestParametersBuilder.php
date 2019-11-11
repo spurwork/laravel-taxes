@@ -23,7 +23,7 @@ class TestParametersBuilder
     private $expected_earnings_in_cents;
     private $qtd_wage_in_cents;
     private $ytd_liabilities_in_cents;
-    private $pay_rate;
+    private $minutes_worked;
 
     public function build(): TestParameters
     {
@@ -45,7 +45,7 @@ class TestParametersBuilder
             $this->pay_periods,
             $this->qtd_wage_in_cents,
             $this->ytd_liabilities_in_cents,
-            $this->pay_rate
+            $this->minutes_worked
         );
     }
 
@@ -151,9 +151,9 @@ class TestParametersBuilder
         return $this;
     }
 
-    public function setPayRate(?int $pay_rate)
+    public function setMinutesWorked(?int $minutes_worked)
     {
-        $this->pay_rate = $pay_rate;
+        $this->minutes_worked = $minutes_worked;
         return $this;
     }
 }

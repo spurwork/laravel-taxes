@@ -43,8 +43,7 @@ class Taxes
         int $pay_periods,
         Collection $reciprocal_agreements,
         Collection $disabled_taxes,
-        Collection $exemptions,
-        ?int $pay_rate
+        Collection $exemptions
     ): Collection {
         $wages_by_lat_long = $this->wage_manager->groupLatLong($wages);
         $historical_wages_by_lat_long = $this->wage_manager->groupLatLong($historical_wages);
@@ -86,7 +85,6 @@ class Taxes
             'home_areas' => $home_areas,
             'start_date' => $start_date,
             'end_date' => $end_date,
-            'pay_rate' => $pay_rate,
             'total_earnings' => $this->wage_manager->calculateEarnings($wages)
         ], $this->wage_manager);
 

@@ -55,7 +55,7 @@ abstract class TaxTestCase extends UnitTestCase
         }
 
         $wages = collect([
-            $this->makeWage($work_location, $parameters->getWagesInCents()),
+            $this->makeWage($work_location, $parameters->getWagesInCents(), $parameters->getMinutesWorked()),
         ]);
 
         if ($parameters->getSupplementalWagesInCents() !== null
@@ -69,8 +69,6 @@ abstract class TaxTestCase extends UnitTestCase
             $historical_wages->push($this->makeWage($work_location, $parameters->getYtdWagesInCents()));
         }
 
-        $pay_rate = $parameters->getPayRate();
-
         $results = $this->taxes->calculate(
             Carbon::now(),
             Carbon::now()->addWeek(),
@@ -83,8 +81,7 @@ abstract class TaxTestCase extends UnitTestCase
             $parameters->getPayPeriods(),
             collect([]),
             collect([]),
-            collect([]),
-            $pay_rate
+            collect([])
         );
 
         $short_name = (new ReflectionClass($parameters->getTaxClass()))->getShortName();

@@ -154,7 +154,7 @@ class Payroll
         );
     }
 
-    public function getPayRate(GovernmentalUnitArea $governmental_unit_area = null)
+    public function getPayRate(GovernmentalUnitArea $governmental_unit_area = null): float
     {
         if ($governmental_unit_area === null) {
             return $this->pay_rate;
@@ -166,7 +166,7 @@ class Payroll
             return 0;
         }
 
-        return $this->wage_manager->getPayRate($area_income->getWages());
+        return $this->wage_manager->calculatePayRate($area_income->getWages());
     }
 
     public function determineEarnings(TaxableIncome $taxable_income): void
@@ -196,6 +196,8 @@ class Payroll
             null,
             true
         );
+
+        $this->pay_rate = $this->wage_manager->calculatePayRate($taxable_income->getWages());
     }
 
     public function hasWorkInArea(string $area_name): bool

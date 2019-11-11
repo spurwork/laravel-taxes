@@ -52,8 +52,8 @@ class EugeneTest extends TaxTestCase
                 $builder
                     ->setHomeLocation(self::OREGON_LOCATION)
                     ->setWorkLocation(self::EUGENE_LOCATION)
-                    ->setWagesInCents(35000)
-                    ->setPayRate(1125)
+                    ->setWagesInCents(1125)
+                    ->setMinutesWorked(60)
                     ->setExpectedAmountInCents(null)
                     ->build()
             ],
@@ -61,18 +61,18 @@ class EugeneTest extends TaxTestCase
                 $builder
                     ->setHomeLocation(self::OREGON_LOCATION)
                     ->setWorkLocation(self::EUGENE_LOCATION)
-                    ->setWagesInCents(35000)
-                    ->setPayRate(1200)
-                    ->setExpectedAmountInCents(105)
+                    ->setWagesInCents(1200)
+                    ->setMinutesWorked(60)
+                    ->setExpectedAmountInCents(4)
                     ->build()
             ],
             '02' => [
                 $builder
                     ->setHomeLocation(self::OREGON_LOCATION)
                     ->setWorkLocation(self::EUGENE_LOCATION)
-                    ->setWagesInCents(35000)
-                    ->setPayRate(1600)
-                    ->setExpectedAmountInCents(154)
+                    ->setWagesInCents(1600)
+                    ->setMinutesWorked(60)
+                    ->setExpectedAmountInCents(7)
                     ->build()
             ],
         ];
@@ -92,7 +92,7 @@ class EugeneTest extends TaxTestCase
                     ->setHomeLocation(self::EUGENE_LOCATION)
                     ->setWorkLocation(self::ALABAMA_LOCATION)
                     ->setWagesInCents(35000)
-                    ->setPayRate(1200)
+                    ->setMinutesWorked(1200)
                     ->setExpectedAmountInCents(null)
                     ->build()
             ],
@@ -101,7 +101,7 @@ class EugeneTest extends TaxTestCase
                     ->setHomeLocation(self::EUGENE_LOCATION)
                     ->setWorkLocation(self::OREGON_LOCATION)
                     ->setWagesInCents(35000)
-                    ->setPayRate(1600)
+                    ->setMinutesWorked(1600)
                     ->setExpectedAmountInCents(null)
                     ->build()
             ],
