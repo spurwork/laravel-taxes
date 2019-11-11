@@ -154,13 +154,21 @@ class Payroll
         );
     }
 
-    public function getPayRate()
+    public function getPayRate(GovernmentalUnitArea $governmental_unit_area = null)
     {
-        if (is_callable($this->pay_rate)) {
+        if ($governmental_unit_area === null) {
             return $this->pay_rate;
         }
 
-        return $this->pay_rate;
+        /** @var AreaIncome $area_income */
+        $area_income = $this->area_incomes->get($governmental_unit_area->name);
+        if ($area_income === null) {
+            return 0;
+        }
+
+        return $this->wage_manager->getPayRate(
+            $area_income->getWages()
+        );
     }
 
     public function determineEarnings(TaxableIncome $taxable_income): void
