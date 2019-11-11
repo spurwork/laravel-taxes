@@ -120,6 +120,10 @@ class WageManager
             }
         });
 
-        return ($cents_earned / 100) / ($minutes_worked / 60);
+        if ($cents_earned && $minutes_worked) {
+            return ($cents_earned / 100) / ($minutes_worked / 60);
+        } else {
+            return 0;
+        }
     }
 }
