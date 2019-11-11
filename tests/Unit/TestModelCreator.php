@@ -53,7 +53,7 @@ trait TestModelCreator
     protected function makeWage(
         GeoPoint $location,
         int $amount_in_cents = UnitTestCase::DEFAULT_SHIFT_WAGES,
-        ?int $minutes_worked
+        ?int $minutes_worked = UnitTestCase::DEFAULT_MINUTES_WORKED
     ): Wage {
         return new Wage(
             WageType::SHIFT,
