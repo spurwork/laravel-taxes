@@ -104,10 +104,6 @@ class WageManager
         $cents_earned = 0;
         $minutes_worked = 0;
 
-        $wages->sum(function (Wage $wage) {
-            return $wage->getTakeHomeTipAmountInCents();
-        });
-
         $wages->each(static function (Wage $wage) use (&$cents_earned, &$minutes_worked) {
             switch ($wage->getType()) {
                 case WageType::SHIFT:
