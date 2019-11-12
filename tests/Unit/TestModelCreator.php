@@ -8,7 +8,6 @@ use Appleton\Taxes\Classes\WorkerTaxes\WageType;
 use Appleton\Taxes\Models\TaxArea;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
-use SebastianBergmann\CodeCoverage\Report\Xml\Unit;
 
 trait TestModelCreator
 {

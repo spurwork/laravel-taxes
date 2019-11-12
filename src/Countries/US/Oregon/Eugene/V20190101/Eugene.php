@@ -22,9 +22,11 @@ class Eugene extends BaseEugene
 
     public function compute(Collection $tax_areas)
     {
-        if ($this->payroll->getPayRate($tax_areas->first()->workGovernmentalUnitArea) <= self::MIN_WAGE) {
+        $pay_rate = $this->payroll->getPayRate($tax_areas->first()->workGovernmentalUnitArea);
+
+        if ($pay_rate <= self::MIN_WAGE) {
             return;
-        } elseif ($this->payroll->getPayRate($tax_areas->first()->workGovernmentalUnitArea) > self::MIN_WAGE && $this->payroll->getPayRate() < self::HOURLY_WAGE_CAP) {
+        } elseif ($pay_rate > self::MIN_WAGE && $pay_rate < self::HOURLY_WAGE_CAP) {
             $this->tax_total = $this->payroll->withholdTax($this->payroll->getEarnings() * static::TAX_RATE_BETWEEN);
         } else {
             $this->tax_total = $this->payroll->withholdTax($this->payroll->getEarnings() * static::TAX_RATE_OVER);
