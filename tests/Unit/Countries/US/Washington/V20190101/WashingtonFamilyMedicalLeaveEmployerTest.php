@@ -7,7 +7,7 @@ use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
 use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
 use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
 
-class WashingtonFamilyMedicalLeaveTest extends TaxTestCase
+class WashingtonFamilyMedicalLeaveEmployerTest extends TaxTestCase
 {
     private const DATE = '2019-01-01';
     private const WASHINGTON_LOCATION = 'us.washington';
