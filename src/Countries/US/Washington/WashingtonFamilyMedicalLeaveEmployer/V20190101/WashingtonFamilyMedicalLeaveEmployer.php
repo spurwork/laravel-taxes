@@ -15,6 +15,8 @@ class WashingtonFamilyMedicalLeaveEmployer extends BaseWashingtonFamilyMedicalLe
 
     public function compute(Collection $tax_areas)
     {
-        return round($this->payroll->withholdTax(min(($this->payroll->getEarnings() - $this->payroll->getTipAmount()) * self::PERCENT, ($this->getBaseEarnings() - $this->payroll->getTipAmount()) * self::PERCENT) * self::TAX_RATE), 2);
+        $tip_amount = $this->payroll->getTipAmount($tax_areas->first()->workGovernmentalUnitArea);
+
+        return round($this->payroll->withholdTax(min(($this->payroll->getEarnings() - $tip_amount) * self::TAX_RATE, ($this->getBaseEarnings() - $tip_amount) * self::TAX_RATE) * self::PERCENT), 2);
     }
 }
