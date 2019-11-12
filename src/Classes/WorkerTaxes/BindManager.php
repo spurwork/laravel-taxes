@@ -6,10 +6,13 @@ use Illuminate\Support\Collection;
 
 class BindManager
 {
-    public function bind(Payroll $payroll, Collection $taxable_incomes): void
+    public function bindPayroll(Payroll $payroll): void
     {
         app()->instance(Payroll::class, $payroll);
+    }
 
+    public function bindTaxes(Collection $taxable_incomes): void
+    {
         $tax_names = $taxable_incomes->map(static function (TaxableIncome $taxable_income) {
             return $taxable_income->getTax()->class;
         });

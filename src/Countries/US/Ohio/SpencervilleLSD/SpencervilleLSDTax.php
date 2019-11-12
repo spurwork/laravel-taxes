@@ -2,18 +2,14 @@
 
 namespace Appleton\Taxes\Countries\US\Ohio\SpencervilleLSD;
 
-use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
-use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseOccupational;
-use Appleton\Taxes\Models\Countries\US\Ohio\OhioIncomeTaxInformation;
+use Appleton\Taxes\Countries\US\Ohio\OhioSchoolDistrictTraditionalTax;
 
-abstract class SpencervilleLSDTax extends BaseOccupational
+abstract class SpencervilleLSDTax extends OhioSchoolDistrictTraditionalTax
 {
-    protected $tax_information;
-    protected $payroll;
+    private const ID = '0209';
 
-    public function __construct(OhioIncomeTaxInformation $tax_information, Payroll $payroll)
+    protected function getId(): string
     {
-        parent::__construct($payroll);
-        $this->tax_information = $tax_information;
+        return self::ID;
     }
 }

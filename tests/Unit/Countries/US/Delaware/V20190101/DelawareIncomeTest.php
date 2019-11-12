@@ -51,7 +51,7 @@ class DelawareIncomeTest extends TaxTestCase
                 $builder
                     ->setTaxInfoOptions(['exempt' => true])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             '01' => [
@@ -72,7 +72,7 @@ class DelawareIncomeTest extends TaxTestCase
                 $builder
                     ->setTaxInfoOptions(['filing_status' => DelawareIncome::FILING_MARRIED_FILING_SEPARATELY])
                     ->setWagesInCents(3500)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             '04' => [

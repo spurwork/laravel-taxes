@@ -31,20 +31,20 @@ class ArkansasIncome extends BaseArkansasIncome
             return 0.00;
         }
 
+        $annual_gross = $this->payroll->getEarnings() * $this->payroll->pay_periods;
+
         if ($this->payroll->livesInArea(self::ARKANSAS)) {
             if ($this->payroll->livesInArea(self::TEXARKANA_AR)) {
                 if ($this->tax_information->ar_tx_exempt) {
-                    return 0.0;
+                    return $this->payroll->withholdTax(0.0);
                 }
             } else if (!$this->payroll->hasWorkInArea(self::ARKANSAS)) {
-                return 0.0;
+                return $this->payroll->withholdTax(0.0);
             }
-
         } else if ($this->payroll->livesInArea(self::TEXARKANA_TX)) {
-            $this->payroll->removeWages(self::TEXARKANA_AR);
+            $annual_gross -= $this->payroll->getEarningsForArea(self::TEXARKANA_AR) * $this->payroll->pay_periods;
         }
 
-        $annual_gross = $this->payroll->getEarnings() * $this->payroll->pay_periods;
         $net_taxable_income = $this->get50MidRange($annual_gross - self::STANDARD_DEDUCTION);
 
         $annual_gross_tax = $this->getTaxAmountFromTaxBrackets($net_taxable_income, $this->getTaxBrackets());

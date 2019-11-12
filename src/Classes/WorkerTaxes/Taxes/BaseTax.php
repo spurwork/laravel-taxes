@@ -37,4 +37,9 @@ abstract class BaseTax
     {
         return method_exists($this, 'getBaseEarnings') ? $this->getBaseEarnings() : $this->payroll->getEarnings();
     }
+
+    public function doesApply(Collection $tax_areas): bool
+    {
+        return true;
+    }
 }

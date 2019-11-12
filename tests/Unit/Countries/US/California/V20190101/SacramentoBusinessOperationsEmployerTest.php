@@ -42,7 +42,7 @@ class SacramentoBusinessOperationsEmployerTest extends PayrollLiabilityTestCase
                     ->setWagesInCents(0)
                     ->setYtdWagesInCents(0)
                     ->setYtdLiabilitiesInCents(0)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->setExpectedEarningsInCents(null)
                     ->build(),
             ],
@@ -51,7 +51,7 @@ class SacramentoBusinessOperationsEmployerTest extends PayrollLiabilityTestCase
                     ->setWagesInCents(100)
                     ->setYtdWagesInCents(999899)
                     ->setYtdLiabilitiesInCents(0)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->setExpectedEarningsInCents(null)
                     ->build(),
             ],
@@ -60,7 +60,7 @@ class SacramentoBusinessOperationsEmployerTest extends PayrollLiabilityTestCase
                     ->setWagesInCents(100)
                     ->setYtdWagesInCents(999900)
                     ->setYtdLiabilitiesInCents(0)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->setExpectedEarningsInCents(null)
                     ->build(),
             ],
@@ -78,7 +78,7 @@ class SacramentoBusinessOperationsEmployerTest extends PayrollLiabilityTestCase
                     ->setWagesInCents(999800)
                     ->setYtdWagesInCents(100)
                     ->setYtdLiabilitiesInCents(0)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->setExpectedEarningsInCents(null)
                     ->build(),
             ],
@@ -87,7 +87,7 @@ class SacramentoBusinessOperationsEmployerTest extends PayrollLiabilityTestCase
                     ->setWagesInCents(999900)
                     ->setYtdWagesInCents(100)
                     ->setYtdLiabilitiesInCents(0)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->setExpectedEarningsInCents(null)
                     ->build(),
             ],
@@ -123,7 +123,7 @@ class SacramentoBusinessOperationsEmployerTest extends PayrollLiabilityTestCase
                     ->setWagesInCents(100)
                     ->setYtdWagesInCents(1000000)
                     ->setYtdLiabilitiesInCents(500000)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->setExpectedEarningsInCents(null)
                     ->build(),
             ],

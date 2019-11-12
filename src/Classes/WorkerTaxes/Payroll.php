@@ -178,22 +178,16 @@ class Payroll
         return $this->home_areas->has($area_name);
     }
 
-    public function removeWages(string $area_name): void
+    public function getEarningsForArea(string $area_name): int
     {
         /** @var AreaIncome $area_income */
         $area_income = $this->area_incomes->get($area_name);
         if ($area_income === null) {
-            return;
+            return 0;
         }
 
-        $this->earnings -= $this->wage_manager->calculateEarnings($area_income->getWages());
-
-        $start_of_year = $this->start_date->copy()->startOfYear();
-        $this->ytd_earnings -= $this->wage_manager->calculateEarnings($area_income->getHistoricalWages(),
-            $start_of_year);
-
-        $start_of_month = $this->start_date->copy()->startOfMonth();
-        $this->mtd_earnings -= $this->wage_manager->calculateEarnings($area_income->getHistoricalWages(),
-            $start_of_month < $start_of_year ? $start_of_year : $start_of_month);
+        return $area_income->getWages()->sum(static function (Wage $gross_wage) {
+                return $gross_wage->getAmountInCents();
+            }) / 100;
     }
 }

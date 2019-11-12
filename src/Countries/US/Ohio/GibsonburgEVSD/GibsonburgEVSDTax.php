@@ -2,18 +2,14 @@
 
 namespace Appleton\Taxes\Countries\US\Ohio\GibsonburgEVSD;
 
-use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
-use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseOccupational;
-use Appleton\Taxes\Models\Countries\US\Ohio\OhioIncomeTaxInformation;
+use Appleton\Taxes\Countries\US\Ohio\OhioSchoolDistrictEarnedIncomeTax;
 
-abstract class GibsonburgEVSDTax extends BaseOccupational
+abstract class GibsonburgEVSDTax extends OhioSchoolDistrictEarnedIncomeTax
 {
-    protected $tax_information;
-    protected $payroll;
+    private const ID = '7203';
 
-    public function __construct(OhioIncomeTaxInformation $tax_information, Payroll $payroll)
+    protected function getId(): string
     {
-        parent::__construct($payroll);
-        $this->tax_information = $tax_information;
+        return self::ID;
     }
 }

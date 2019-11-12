@@ -127,7 +127,7 @@ class YonkersTest extends TaxTestCase
                 $builder
                     ->setTaxInfoOptions(null)
                     ->setWagesInCents(5000)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             '08' => [
