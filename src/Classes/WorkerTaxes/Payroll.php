@@ -166,7 +166,7 @@ class Payroll
             return 0;
         }
 
-        return $this->wage_manager->calculateTipAmount($area_income->getWages());
+        return $this->wage_manager->calculateTipAmount($area_income->getWages()) / 100;
     }
 
     public function determineEarnings(TaxableIncome $taxable_income): void

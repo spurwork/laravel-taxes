@@ -23,7 +23,8 @@ class TestParametersBuilder
     private $expected_earnings_in_cents;
     private $qtd_wage_in_cents;
     private $ytd_liabilities_in_cents;
-    private $tip_amount;
+    private $pay_check_tip_amount_in_cents;
+    private $take_home_tip_amount_in_cents;
 
     public function build(): TestParameters
     {
@@ -45,7 +46,8 @@ class TestParametersBuilder
             $this->pay_periods,
             $this->qtd_wage_in_cents,
             $this->ytd_liabilities_in_cents,
-            $this->tip_amount
+            $this->pay_check_tip_amount_in_cents,
+            $this->take_home_tip_amount_in_cents
         );
     }
 
@@ -151,9 +153,15 @@ class TestParametersBuilder
         return $this;
     }
 
-    public function setTipAmount(?int $tip_amount)
+    public function setPaycheckTipAmount(?int $pay_check_tip_amount_in_cents)
     {
-        $this->tip_amount = $tip_amount;
+        $this->pay_check_tip_amount_in_cents = $pay_check_tip_amount_in_cents;
+        return $this;
+    }
+
+    public function setTakeHomeTipAmount(?int $take_home_tip_amount_in_cents)
+    {
+        $this->take_home_tip_amount_in_cents = $take_home_tip_amount_in_cents;
         return $this;
     }
 }

@@ -101,5 +101,8 @@ class WageManager
 
     public function calculateTipAmount(Collection $wages)
     {
+        return $wages->sum(function (Wage $wage) {
+            return $wage->getTakeHomeTipAmountInCents() + $wage->getPayCheckTipAmountInCents();
+        });
     }
 }

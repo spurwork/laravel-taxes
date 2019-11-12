@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Oregon\V20190101;
+namespace Appleton\Taxes\Countries\US\Washington\V20190101;
 
-use Appleton\Taxes\Countries\US\Oregon\WashingtonFamilyMedicalLeave\WashingtonFamilyMedicalLeave;
+use Appleton\Taxes\Countries\US\Washington\WashingtonFamilyMedicalLeave\WashingtonFamilyMedicalLeave;
 use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
 use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
 use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
@@ -52,8 +52,9 @@ class WashingtonFamilyMedicalLeaveTest extends TaxTestCase
                     ->setHomeLocation(self::WASHINGTON_LOCATION)
                     ->setWorkLocation(self::WASHINGTON_LOCATION)
                     ->setWagesInCents(35000)
-                    ->setTipAmount(1125)
-                    ->setExpectedAmountInCents(null)
+                    ->setPaycheckTipAmount(625)
+                    ->setTakehomeTipAmount(500)
+                    ->setExpectedAmountInCents(86)
                     ->build()
             ],
             '01' => [
@@ -61,8 +62,9 @@ class WashingtonFamilyMedicalLeaveTest extends TaxTestCase
                     ->setHomeLocation(self::WASHINGTON_LOCATION)
                     ->setWorkLocation(self::WASHINGTON_LOCATION)
                     ->setWagesInCents(35000)
-                    ->setTipAmount(1200)
-                    ->setExpectedAmountInCents(105)
+                    ->setPaycheckTipAmount(100)
+                    ->setTakehomeTipAmount(100)
+                    ->setExpectedAmountInCents(88)
                     ->build()
             ],
             '02' => [
@@ -70,8 +72,9 @@ class WashingtonFamilyMedicalLeaveTest extends TaxTestCase
                     ->setHomeLocation(self::WASHINGTON_LOCATION)
                     ->setWorkLocation(self::WASHINGTON_LOCATION)
                     ->setWagesInCents(35000)
-                    ->setTipAmount(1600)
-                    ->setExpectedAmountInCents(154)
+                    ->setPaycheckTipAmount(800)
+                    ->setTakehomeTipAmount(800)
+                    ->setExpectedAmountInCents(85)
                     ->build()
             ],
         ];
@@ -91,7 +94,8 @@ class WashingtonFamilyMedicalLeaveTest extends TaxTestCase
                     ->setHomeLocation(self::WASHINGTON_LOCATION)
                     ->setWorkLocation(self::ALABAMA_LOCATION)
                     ->setWagesInCents(35000)
-                    ->setTipAmount(1200)
+                    ->setPaycheckTipAmount(800)
+                    ->setTakehomeTipAmount(800)
                     ->setExpectedAmountInCents(null)
                     ->build()
             ],
@@ -100,7 +104,8 @@ class WashingtonFamilyMedicalLeaveTest extends TaxTestCase
                     ->setHomeLocation(self::WASHINGTON_LOCATION)
                     ->setWorkLocation(self::ALABAMA_LOCATION)
                     ->setWagesInCents(35000)
-                    ->setTipAmount(1600)
+                    ->setPaycheckTipAmount(800)
+                    ->setTakehomeTipAmount(800)
                     ->setExpectedAmountInCents(null)
                     ->build()
             ],
