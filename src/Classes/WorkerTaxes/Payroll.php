@@ -154,12 +154,19 @@ class Payroll
         );
     }
 
-    public function getTipAmount()
+    public function getTipAmount(GovernmentalUnitArea $governmental_unit_area = null)
     {
-        if (is_callable($this->tip_amount)) {
-            return $this->tip_amount;
+        if ($governmental_unit_area === null) {
+            return 0;
         }
-        return $this->tip_amount;
+
+        /** @var AreaIncome $area_income */
+        $area_income = $this->area_incomes->get($governmental_unit_area->name);
+        if ($area_income === null) {
+            return 0;
+        }
+
+        return $this->wage_manager->calculateTipAmount($area_income->getWages());
     }
 
     public function determineEarnings(TaxableIncome $taxable_income): void
