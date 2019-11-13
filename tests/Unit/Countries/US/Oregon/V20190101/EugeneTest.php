@@ -35,7 +35,6 @@ class EugeneTest extends TaxTestCase
 
     public function testEugeneTaxOutOfArea(TestParameters $parameters): void
     {
-        $this->disableTestQueryRunner();
         $this->validate($parameters);
     }
 
@@ -54,7 +53,7 @@ class EugeneTest extends TaxTestCase
                     ->setWorkLocation(self::EUGENE_LOCATION)
                     ->setWagesInCents(1125)
                     ->setMinutesWorked(60)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             '01' => [
