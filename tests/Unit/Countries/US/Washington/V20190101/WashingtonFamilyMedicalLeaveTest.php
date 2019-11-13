@@ -31,10 +31,8 @@ class WashingtonFamilyMedicalLeaveTest extends TaxTestCase
     /**
      * @dataProvider provideTestDataOutOfArea
      */
-
     public function testWashingtonFamilyMedicalLeaveTaxOutOfArea(TestParameters $parameters): void
     {
-        $this->disableTestQueryRunner();
         $this->validate($parameters);
     }
 
@@ -96,7 +94,7 @@ class WashingtonFamilyMedicalLeaveTest extends TaxTestCase
                     ->setWagesInCents(35000)
                     ->setPaycheckTipAmount(800)
                     ->setTakehomeTipAmount(800)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             '01' => [
@@ -106,7 +104,7 @@ class WashingtonFamilyMedicalLeaveTest extends TaxTestCase
                     ->setWagesInCents(35000)
                     ->setPaycheckTipAmount(800)
                     ->setTakehomeTipAmount(800)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
         ];

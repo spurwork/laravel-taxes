@@ -3,8 +3,7 @@
 
 namespace Appleton\Taxes\Countries\US\Washington\WashingtonFamilyMedicalLeaveEmployer\V20190101;
 
-use Appleton\Taxes\Countries\US\Washington\WashingtonFamilyMedicalLeaveEmployer\WashingtonFamilyMedicalLeaveEmployer
-    as BaseWashingtonFamilyMedicalLeaveEmployer;
+use Appleton\Taxes\Countries\US\Washington\WashingtonFamilyMedicalLeaveEmployer\WashingtonFamilyMedicalLeaveEmployer as BaseWashingtonFamilyMedicalLeaveEmployer;
 use Illuminate\Database\Eloquent\Collection;
 
 class WashingtonFamilyMedicalLeaveEmployer extends BaseWashingtonFamilyMedicalLeaveEmployer
@@ -17,6 +16,6 @@ class WashingtonFamilyMedicalLeaveEmployer extends BaseWashingtonFamilyMedicalLe
     {
         $tip_amount = $this->payroll->getTipAmount($tax_areas->first()->workGovernmentalUnitArea);
 
-        return round($this->payroll->withholdTax(min(($this->payroll->getEarnings() - $tip_amount) * self::TAX_RATE, ($this->getBaseEarnings() - $tip_amount) * self::TAX_RATE) * self::PERCENT), 2);
+        return round($this->payroll->withholdTax(min(($this->payroll->getEarnings($tax_areas->first()->workGovernmentalUnitArea) - $tip_amount) * self::TAX_RATE, ($this->getBaseEarnings() - $tip_amount) * self::TAX_RATE) * self::PERCENT), 2);
     }
 }
