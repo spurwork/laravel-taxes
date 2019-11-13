@@ -34,6 +34,7 @@ use Appleton\Taxes\Tests\Unit\TestModelCreator;
 use Appleton\Taxes\Tests\Unit\UnitTestCase;
 use Carbon\Carbon;
 use Illuminate\Contracts\Container\BindingResolutionException;
+use ReflectionClass;
 
 /**
  * @property Taxes taxes
@@ -354,7 +355,8 @@ class TaxesTest extends UnitTestCase
 
     public function testCalculate_unresolvable_date(): void
     {
-        $this->expectExceptionMessage('The implementation could not be found.');
+        $short_name = (new ReflectionClass(AlabamaIncome::class))->getShortName();
+        $this->expectExceptionMessage("The implementation for $short_name 2016-01-01 could not be found.");
 
         $coords = $this->getLocation('us.alabama.birmingham');
         $location = new GeoPoint($coords[0], $coords[1]);
@@ -432,7 +434,7 @@ class TaxesTest extends UnitTestCase
             'filing_status' => AlabamaIncome::FILING_SINGLE,
         ], $this->user);
 
-        $coords = $this->getLocation('us.alabama.birmingham');
+        $coords = $this->getLocation('us.alabama');
         $location = new GeoPoint($coords[0], $coords[1]);
 
         $wage = $this->makeWage($location, 1000);
@@ -452,14 +454,14 @@ class TaxesTest extends UnitTestCase
             collect([])
         );
 
-        self::assertThat($results->count(), self::identicalTo(7));
+        self::assertThat($results->count(), self::identicalTo(8));
         self::assertThat($results->get(FederalIncome::class)->getAmountInCents(), self::identicalTo(923));
         self::assertThat($results->get(FederalUnemployment::class)->getAmountInCents(), self::identicalTo(6));
         self::assertThat($results->get(Medicare::class)->getAmountInCents(), self::identicalTo(15));
         self::assertThat($results->get(MedicareEmployer::class)->getAmountInCents(), self::identicalTo(15));
         self::assertThat($results->get(SocialSecurity::class)->getAmountInCents(), self::identicalTo(62));
         self::assertThat($results->get(SocialSecurityEmployer::class)->getAmountInCents(), self::identicalTo(62));
-        self::assertNull($results->get(AlabamaIncome::class));
+        self::assertThat($results->get(AlabamaIncome::class)->getAmountInCents(), self::identicalTo(0));
         self::assertThat($results->get(AlabamaUnemployment::class)->getAmountInCents(), self::identicalTo(27));
 
         $wage = $this->makeWage($location, 1100);
@@ -518,8 +520,8 @@ class TaxesTest extends UnitTestCase
             collect([])
         );
 
-        self::assertNull($results->get(FederalIncome::class));
-        self::assertNull($results->get(AlabamaIncome::class));
+        self::assertThat($results->get(FederalIncome::class)->getAmountInCents(), self::identicalTo(0));
+        self::assertThat($results->get(AlabamaIncome::class)->getAmountInCents(), self::identicalTo(0));
 
         $wage = $this->makeWage($location, 1100);
         $results = $this->taxes->calculate(
@@ -537,8 +539,8 @@ class TaxesTest extends UnitTestCase
             collect([])
         );
 
-        self::assertNull($results->get(FederalIncome::class));
-        self::assertNull($results->get(AlabamaIncome::class));
+        self::assertThat($results->get(FederalIncome::class)->getAmountInCents(), self::identicalTo(0));
+        self::assertThat($results->get(AlabamaIncome::class)->getAmountInCents(), self::identicalTo(0));
     }
 
     public function testCalculate_unbinds_payroll_after(): void
@@ -680,7 +682,7 @@ class TaxesTest extends UnitTestCase
             collect([])
         );
 
-        self::assertNull($results->get(FederalUnemployment::class));
+        self::assertThat($results->get(FederalUnemployment::class)->getAmountInCents(), self::identicalTo(0));
 
         $historical_wage = $this->makeWageAtDate(Carbon::now()->subMonth(), $location, 800000);
 
@@ -699,8 +701,8 @@ class TaxesTest extends UnitTestCase
             collect([])
         );
 
-        self::assertNull($results->get(FederalUnemployment::class));
-        self::assertNull($results->get(AlabamaUnemployment::class));
+        self::assertThat($results->get(FederalUnemployment::class)->getAmountInCents(), self::identicalTo(0));
+        self::assertThat($results->get(AlabamaUnemployment::class)->getAmountInCents(), self::identicalTo(0));
 
         $historical_wage = $this->makeWageAtDate(Carbon::now()->subMonth(), $location, 12720000);
 
@@ -719,10 +721,10 @@ class TaxesTest extends UnitTestCase
             collect([])
         );
 
-        self::assertNull($results->get(FederalUnemployment::class));
-        self::assertNull($results->get(AlabamaUnemployment::class));
-        self::assertNull($results->get(SocialSecurity::class));
-        self::assertNull($results->get(SocialSecurityEmployer::class));
+        self::assertThat($results->get(FederalUnemployment::class)->getAmountInCents(), self::identicalTo(0));
+        self::assertThat($results->get(AlabamaUnemployment::class)->getAmountInCents(), self::identicalTo(0));
+        self::assertThat($results->get(SocialSecurity::class)->getAmountInCents(), self::identicalTo(0));
+        self::assertThat($results->get(SocialSecurityEmployer::class)->getAmountInCents(), self::identicalTo(0));
 
         $historical_wage = $this->makeWageAtDate(Carbon::now()->subMonth(), $location, 20000000);
 
@@ -745,7 +747,7 @@ class TaxesTest extends UnitTestCase
         self::assertThat($results->get(Medicare::class)->getAmountInCents(), self::identicalTo(157));
         self::assertThat($results->get(MedicareEmployer::class)->getAmountInCents(), self::identicalTo(97));
         self::assertThat($results->get(AlabamaIncome::class)->getAmountInCents(), self::identicalTo(203));
-        self::assertNull($results->get(AlabamaUnemployment::class));
+        self::assertThat($results->get(AlabamaUnemployment::class)->getAmountInCents(), self::identicalTo(0));
         self::assertThat($results->get(BirminghamOccupational::class)->getAmountInCents(), self::identicalTo(67));
     }
 }

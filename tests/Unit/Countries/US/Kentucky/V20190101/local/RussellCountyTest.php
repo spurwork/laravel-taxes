@@ -41,7 +41,8 @@ class RussellCountyTest extends TaxTestCase
                 $builder
                     ->setWagesInCents(0)
                     ->setYtdWagesInCents(0)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
+                    ->setExpectedEarningsInCents(0)
                     ->build()
             ],
             '01' => [
@@ -49,6 +50,7 @@ class RussellCountyTest extends TaxTestCase
                     ->setWagesInCents(30000)
                     ->setYtdWagesInCents(500000)
                     ->setExpectedAmountInCents(225)
+                    ->setExpectedEarningsInCents(30000)
                     ->build()
             ],
             '02' => [
@@ -56,13 +58,15 @@ class RussellCountyTest extends TaxTestCase
                     ->setWagesInCents(90000)
                     ->setYtdWagesInCents(3243333)
                     ->setExpectedAmountInCents(675)
+                    ->setExpectedEarningsInCents(90000)
                     ->build()
             ],
-            '03' => [
+            'over wage base' => [
                 $builder
                     ->setWagesInCents(77100)
                     ->setYtdWagesInCents(3333333)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
+                    ->setExpectedEarningsInCents(0)
                     ->build()
             ],
         ];

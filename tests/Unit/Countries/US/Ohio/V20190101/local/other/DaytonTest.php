@@ -3,8 +3,9 @@
 namespace Appleton\Taxes\Tests\Unit\Countries\US\Ohio\V20190101;
 
 use Appleton\Taxes\Countries\US\Ohio\Dayton\Dayton;
-use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
 use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
+use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
+use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
 use Carbon\Carbon;
 
 class DaytonTest extends TaxTestCase
@@ -20,41 +21,60 @@ class DaytonTest extends TaxTestCase
     }
 
     /** @dataProvider dataProvider */
-    public function testTax(?Carbon $birth_date, ?int $amount): void
+    public function testTax(TestParameters $parameters): void
     {
-        $this->validate(
-            (new TestParametersBuilder())
-                ->setDate(self::DATE)
-                ->setBirthDate($birth_date)
-                ->setHomeLocation(self::LOCATION)
-                ->setTaxClass(self::TAX_CLASS)
-                ->setPayPeriods(52)
-                ->setWagesInCents(30000)
-                ->setExpectedAmountInCents($amount)
-                ->build()
+        $this->validate($parameters);
+    }
+
+    public function testTax_under_16(): void
+    {
+        $this->validateNoTax((new TestParametersBuilder())
+            ->setDate(self::DATE)
+            ->setHomeLocation(self::LOCATION)
+            ->setTaxClass(self::TAX_CLASS)
+            ->setPayPeriods(52)
+            ->setBirthDate(Carbon::now()->subYears(15))
+            ->setWagesInCents(30000)
+            ->setExpectedAmountInCents(0)
+            ->setExpectedEarningsInCents(30000)
+            ->build()
         );
     }
 
     public function dataProvider(): array
     {
         Carbon::setTestNow(Carbon::parse(self::DATE));
+        $builder = new TestParametersBuilder();
+        $builder
+            ->setDate(self::DATE)
+            ->setHomeLocation(self::LOCATION)
+            ->setTaxClass(self::TAX_CLASS)
+            ->setPayPeriods(52);
 
         return [
             'no birth date' => [
-                null,
-                750
+                $builder
+                    ->setBirthDate(null)
+                    ->setWagesInCents(30000)
+                    ->setExpectedAmountInCents(750)
+                    ->setExpectedEarningsInCents(30000)
+                    ->build()
             ],
             'over 16' => [
-                Carbon::now()->subYears(17),
-                750
+                $builder
+                    ->setBirthDate(Carbon::now()->subYears(17))
+                    ->setWagesInCents(30000)
+                    ->setExpectedAmountInCents(750)
+                    ->setExpectedEarningsInCents(30000)
+                    ->build()
             ],
             'exactly 16' => [
-                Carbon::now()->subYears(16),
-                750
-            ],
-            'under 16' => [
-                Carbon::now()->subYears(15),
-                null
+                $builder
+                    ->setBirthDate(Carbon::now()->subYears(16))
+                    ->setWagesInCents(30000)
+                    ->setExpectedAmountInCents(750)
+                    ->setExpectedEarningsInCents(30000)
+                    ->build()
             ],
         ];
     }

@@ -51,14 +51,14 @@ class KansasIncomeTest extends TaxTestCase
                 $builder
                     ->setTaxInfoOptions(['exempt' => true])
                     ->setWagesInCents(100000)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             'single bracket 01' => [
                 $builder
                     ->setTaxInfoOptions(null)
                     ->setWagesInCents(5000)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             'single bracket 02' => [
@@ -86,7 +86,7 @@ class KansasIncomeTest extends TaxTestCase
                 $builder
                     ->setTaxInfoOptions(['allowance_rate' => KansasIncome::ALLOWANCE_RATE_JOINT])
                     ->setWagesInCents(5000)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             'married bracket 02' => [

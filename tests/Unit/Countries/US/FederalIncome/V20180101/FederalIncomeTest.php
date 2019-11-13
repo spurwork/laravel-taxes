@@ -74,7 +74,7 @@ class FederalIncomeTest extends TaxTestCase
                         'filing_status' => FederalIncome::FILING_MARRIED,
                     ])
                     ->setWagesInCents(47525)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             'C' => [
@@ -83,7 +83,7 @@ class FederalIncomeTest extends TaxTestCase
                         'exemptions' => 2,
                     ])
                     ->setWagesInCents(11233)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             'D' => [
@@ -100,7 +100,7 @@ class FederalIncomeTest extends TaxTestCase
                         'filing_status' => FederalIncome::FILING_MARRIED,
                     ])
                     ->setWagesInCents(36757)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             'H' => [

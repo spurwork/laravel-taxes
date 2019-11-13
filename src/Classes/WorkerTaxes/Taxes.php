@@ -48,33 +48,10 @@ class Taxes
         $wages_by_lat_long = $this->wage_manager->groupLatLong($wages);
         $historical_wages_by_lat_long = $this->wage_manager->groupLatLong($historical_wages);
 
-        $taxable_incomes = $this->taxable_income_manager->groupWagesByTax(
-            $home_location,
-            $wages_by_lat_long,
-            $historical_wages_by_lat_long
-        );
-
-        $home_areas = $this->area_income_manager->getHomeAreas($home_location);
-
-        $this->tax_override_manager->replaceSutaUnemploymentTaxes(
-            $suta_location,
-            $taxable_incomes,
-            $wages,
-            $historical_wages
-        );
-        $this->tax_override_manager->addStateIncomeTax(
-            $home_location,
-            $taxable_incomes,
-            $wages,
-            $historical_wages
-        );
-        $this->tax_override_manager->processReciprocalAgreements($reciprocal_agreements, $taxable_incomes);
-        $this->tax_override_manager->removeDisabledTaxes($disabled_taxes, $taxable_incomes);
-
-        $this->taxable_income_manager->processExemptions($taxable_incomes, $exemptions);
-
         $area_incomes = $this->area_income_manager
             ->groupWagesByGovernmentalArea($wages_by_lat_long, $historical_wages_by_lat_long);
+
+        $home_areas = $this->area_income_manager->getHomeAreas($home_location);
 
         $payroll = new Payroll([
             'date' => $start_date,
@@ -87,8 +64,24 @@ class Taxes
             'end_date' => $end_date,
             'total_earnings' => $this->wage_manager->calculateEarnings($wages)
         ], $this->wage_manager);
+        $this->bind_manager->bindPayroll($payroll);
 
-        $this->bind_manager->bind($payroll, $taxable_incomes);
+        $taxable_incomes = $this->taxable_income_manager->groupWagesByTax(
+            $home_location,
+            $wages_by_lat_long,
+            $historical_wages_by_lat_long
+        );
+
+        $this->tax_override_manager->replaceSutaUnemploymentTaxes($suta_location, $taxable_incomes,
+            $wages, $historical_wages);
+        $this->tax_override_manager->addStateIncomeTax($home_location, $taxable_incomes,
+            $wages, $historical_wages);
+        $this->tax_override_manager->processReciprocalAgreements($reciprocal_agreements, $taxable_incomes);
+        $this->tax_override_manager->removeDisabledTaxes($disabled_taxes, $taxable_incomes);
+
+        $this->taxable_income_manager->processExemptions($taxable_incomes, $exemptions);
+
+        $this->bind_manager->bindTaxes($taxable_incomes);
         $tax_results = $this->tax_manager->computeTaxes($payroll, $taxable_incomes);
         $this->bind_manager->unbind($taxable_incomes);
 

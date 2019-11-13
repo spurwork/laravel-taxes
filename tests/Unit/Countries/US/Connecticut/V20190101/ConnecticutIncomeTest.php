@@ -51,7 +51,7 @@ class ConnecticutIncomeTest extends TaxTestCase
                 $builder
                     ->setTaxInfoOptions(['exempt' => true])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             '01' => [
@@ -89,7 +89,7 @@ class ConnecticutIncomeTest extends TaxTestCase
                 $builder
                     ->setTaxInfoOptions(['filing_status' => ConnecticutIncome::WITHHOLDING_CODE_B])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             '06' => [
@@ -106,7 +106,7 @@ class ConnecticutIncomeTest extends TaxTestCase
                         'reduced_withholding' => 20,
                     ])
                     ->setWagesInCents(57693)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             '08' => [
@@ -143,7 +143,7 @@ class ConnecticutIncomeTest extends TaxTestCase
                         'filing_status' => ConnecticutIncome::WITHHOLDING_CODE_C,
                     ])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             '12' => [
@@ -251,7 +251,7 @@ class ConnecticutIncomeTest extends TaxTestCase
                         'filing_status' => ConnecticutIncome::WITHHOLDING_CODE_E,
                     ])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             '24' => [
@@ -260,7 +260,7 @@ class ConnecticutIncomeTest extends TaxTestCase
                         'filing_status' => ConnecticutIncome::WITHHOLDING_CODE_E,
                     ])
                     ->setWagesInCents(57693)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             '25' => [
@@ -269,7 +269,7 @@ class ConnecticutIncomeTest extends TaxTestCase
                         'filing_status' => ConnecticutIncome::WITHHOLDING_CODE_E,
                     ])
                     ->setWagesInCents(115380)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             '26' => [
@@ -278,7 +278,7 @@ class ConnecticutIncomeTest extends TaxTestCase
                         'filing_status' => ConnecticutIncome::WITHHOLDING_CODE_E,
                     ])
                     ->setWagesInCents(673080)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
         ];
