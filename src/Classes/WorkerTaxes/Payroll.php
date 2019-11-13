@@ -157,7 +157,7 @@ class Payroll
     public function getTipAmount(GovernmentalUnitArea $governmental_unit_area = null)
     {
         if ($governmental_unit_area === null) {
-            return 0;
+            return $this->tip_amount;
         }
 
         /** @var AreaIncome $area_income */
@@ -196,6 +196,8 @@ class Payroll
             null,
             true
         );
+
+        $this->tip_amount = $this->wage_manager->calculateTipAmount($taxable_income->getWages());
     }
 
     public function hasWorkInArea(string $area_name): bool
