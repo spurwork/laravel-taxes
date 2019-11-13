@@ -42,6 +42,7 @@ class SocialSecurityEmployerTest extends TaxTestCase
                     ->setWagesInCents(64000)
                     ->setYtdWagesInCents(0)
                     ->setExpectedAmountInCents(3968)
+                    ->setExpectedEarningsInCents(64000)
                     ->build()
             ],
             'case study B' => [
@@ -49,20 +50,23 @@ class SocialSecurityEmployerTest extends TaxTestCase
                     ->setWagesInCents(77428)
                     ->setYtdWagesInCents(0)
                     ->setExpectedAmountInCents(4801)
+                    ->setExpectedEarningsInCents(77428)
                     ->build()
             ],
             'case study C' => [
                 $builder
                     ->setWagesInCents(64000)
                     ->setYtdWagesInCents(13300000)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
+                    ->setExpectedEarningsInCents(0)
                     ->build()
             ],
             'case study D' => [
                 $builder
                     ->setWagesInCents(77428)
                     ->setYtdWagesInCents(13300000)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
+                    ->setExpectedEarningsInCents(0)
                     ->build()
             ],
         ];

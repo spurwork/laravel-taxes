@@ -32,7 +32,7 @@ class SanFranciscoPayrollExpenseEmployerTest extends PayrollLiabilityTestCase
                 $builder
                     ->setWagesInCents(100)
                     ->setYtdWagesInCents(29999899)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->setExpectedEarningsInCents(null)
                     ->build(),
             ],
@@ -40,7 +40,7 @@ class SanFranciscoPayrollExpenseEmployerTest extends PayrollLiabilityTestCase
                 $builder
                     ->setWagesInCents(100)
                     ->setYtdWagesInCents(29999900)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->setExpectedEarningsInCents(null)
                     ->build(),
             ],
@@ -56,7 +56,7 @@ class SanFranciscoPayrollExpenseEmployerTest extends PayrollLiabilityTestCase
                 $builder
                     ->setWagesInCents(29999000)
                     ->setYtdWagesInCents(0)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->setExpectedEarningsInCents(null)
                     ->build(),
             ],
@@ -64,7 +64,7 @@ class SanFranciscoPayrollExpenseEmployerTest extends PayrollLiabilityTestCase
                 $builder
                     ->setWagesInCents(30000000)
                     ->setYtdWagesInCents(0)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->setExpectedEarningsInCents(null)
                     ->build(),
             ],

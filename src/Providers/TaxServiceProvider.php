@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use http\Exception\UnexpectedValueException;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
+use ReflectionClass;
 
 class TaxServiceProvider extends ServiceProvider
 {
@@ -1451,7 +1452,9 @@ class TaxServiceProvider extends ServiceProvider
                 return $namespace . '\\' . $implementation . '\\' . $basename;
             }
         }
-        throw new \Exception('The implementation could not be found.');
+
+        $short_name = (new ReflectionClass($interface))->getShortName();
+        throw new \Exception("The implementation for $short_name ".$date->toDateString().' could not be found.');
     }
 
     public function register()

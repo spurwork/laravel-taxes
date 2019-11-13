@@ -39,6 +39,6 @@ class JeffersonCounty extends BaseJeffersonCounty
             $this->tax_total = $this->payroll->getEarnings() * static::NONRESIDENT_TAX_RATE;
         }
 
-        return round($this->tax_total, 2);
+        return $this->payroll->withholdTax(round($this->tax_total, 2));
     }
 }

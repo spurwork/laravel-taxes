@@ -27,7 +27,7 @@ class MassachusettsFamilyMedicalLeaveEmployerTest extends TaxTestCase
                 ->setTaxClass(self::TAX_CLASS)
                 ->setPayPeriods(52)
                 ->setWagesInCents(230000)
-                ->setExpectedAmountInCents(null)
+                ->setExpectedAmountInCents(0)
                 ->build()
         );
     }

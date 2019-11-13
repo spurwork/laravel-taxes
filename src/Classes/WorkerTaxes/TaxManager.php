@@ -36,8 +36,6 @@ class TaxManager
                 app()->instance($taxable_income->getTax()->class, $tax_implementation);
 
                 return [$taxable_income->getTax()->class => $tax_result];
-            })->filter(static function (TaxResult $tax_result) {
-                return $tax_result->getAmountInCents() > 0;
             });
     }
 }

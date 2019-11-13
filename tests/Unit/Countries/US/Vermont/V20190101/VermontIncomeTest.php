@@ -137,7 +137,7 @@ class VermontIncomeTest extends TaxTestCase
                     ->setTaxInfoOptions(null)
                     ->setWagesInCents(5000)
                     ->setSupplementalWagesInCents(0)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             'additional withholding' => [
@@ -161,7 +161,7 @@ class VermontIncomeTest extends TaxTestCase
                     ->setTaxInfoOptions(['exempt' => true])
                     ->setWagesInCents(30000)
                     ->setSupplementalWagesInCents(0)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
         ];

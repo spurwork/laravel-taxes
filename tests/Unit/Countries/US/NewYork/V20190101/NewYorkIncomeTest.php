@@ -103,7 +103,7 @@ class NewYorkIncomeTest extends TaxTestCase
                 $builder
                     ->setTaxInfoOptions(['filing_status' => NewYorkIncome::FILING_MARRIED])
                     ->setWagesInCents(14500)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             '08' => [

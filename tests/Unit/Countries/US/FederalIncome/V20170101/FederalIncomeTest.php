@@ -66,7 +66,7 @@ class FederalIncomeTest extends TaxTestCase
                     ->setTaxInfoOptions(null)
                     ->setPayPeriods(1)
                     ->setWagesInCents(230000)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             'no taxes owed married' => [
@@ -76,7 +76,7 @@ class FederalIncomeTest extends TaxTestCase
                     ])
                     ->setPayPeriods(1)
                     ->setWagesInCents(865000)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             'taxes owed' => [
@@ -156,7 +156,7 @@ class FederalIncomeTest extends TaxTestCase
                     ])
                     ->setPayPeriods(24)
                     ->setWagesInCents(230000)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             'exempt false' => [
@@ -189,7 +189,7 @@ class FederalIncomeTest extends TaxTestCase
                         'additional_withholding' => 10,
                     ])
                     ->setWagesInCents(0)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             'additional withholding not enough wages 01' => [

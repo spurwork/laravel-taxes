@@ -6,6 +6,7 @@ use Appleton\Taxes\Classes\WorkerTaxes\GeoPoint;
 use Appleton\Taxes\Classes\WorkerTaxes\TaxResult;
 use Appleton\Taxes\Countries\US\Kentucky\CaneyvilleCity\CaneyvilleCity;
 use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
+use Appleton\Taxes\Tests\Unit\UnitTestCase;
 use Carbon\Carbon;
 use ReflectionClass;
 
@@ -46,7 +47,7 @@ class CaneyvilleCityTest extends TaxTestCase
         );
 
         $short_name = (new ReflectionClass(self::TAX_CLASS))->getShortName();
-        self::assertNull($results->get(self::TAX_CLASS), 'no tax results for '.$short_name.' expected');
+        self::assertNull($results->get(self::TAX_CLASS), "no results for $short_name expected");
     }
 
     public function testTax_three_days_worked(): void
@@ -82,6 +83,9 @@ class CaneyvilleCityTest extends TaxTestCase
         self::assertNotNull($result, 'no tax results for '.$short_name.' found');
         self::assertThat($result->getAmountInCents(), self::identicalTo(200),
             $short_name.' expected '. 200 .' tax but got '.$result->getAmountInCents());
+        self::assertThat($result->getEarningsInCents(), self::identicalTo(UnitTestCase::DEFAULT_SHIFT_WAGES * 3),
+            $short_name.' expected '.UnitTestCase::DEFAULT_SHIFT_WAGES * 3
+            .' earnings but got '.$result->getAmountInCents());
     }
 
     public function testTax_four_days_worked(): void
@@ -118,5 +122,8 @@ class CaneyvilleCityTest extends TaxTestCase
         self::assertNotNull($result, 'no tax results for '.$short_name.' found');
         self::assertThat($result->getAmountInCents(), self::identicalTo(400),
             $short_name.' expected '. 400 .' tax but got '.$result->getAmountInCents());
+        self::assertThat($result->getEarningsInCents(), self::identicalTo(UnitTestCase::DEFAULT_SHIFT_WAGES * 4),
+            $short_name.' expected '.UnitTestCase::DEFAULT_SHIFT_WAGES * 4
+            .' earnings but got '.$result->getAmountInCents());
     }
 }

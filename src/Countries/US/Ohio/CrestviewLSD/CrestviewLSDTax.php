@@ -2,18 +2,22 @@
 
 namespace Appleton\Taxes\Countries\US\Ohio\CrestviewLSD;
 
-use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
-use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseOccupational;
-use Appleton\Taxes\Models\Countries\US\Ohio\OhioIncomeTaxInformation;
+use Appleton\Taxes\Countries\US\Ohio\OhioSchoolDistrictTraditionalTax;
+use Illuminate\Database\Eloquent\Collection;
 
-abstract class CrestviewLSDTax extends BaseOccupational
+abstract class CrestviewLSDTax extends OhioSchoolDistrictTraditionalTax
 {
-    protected $tax_information;
-    protected $payroll;
+    private const ID1 = '1503';
+    private const ID2 = '8101';
 
-    public function __construct(OhioIncomeTaxInformation $tax_information, Payroll $payroll)
+    protected function getId(): string
     {
-        parent::__construct($payroll);
-        $this->tax_information = $tax_information;
+        return '';
+    }
+
+    public function doesApply(Collection $tax_areas): bool
+    {
+        return $this->tax_information->school_district_id === self::ID1
+            || $this->tax_information->school_district_id === self::ID2;
     }
 }
