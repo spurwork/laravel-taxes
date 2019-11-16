@@ -6,6 +6,7 @@ use Appleton\Taxes\Classes\WorkerTaxes\GeoPoint;
 use Appleton\Taxes\Classes\WorkerTaxes\Wage;
 use Appleton\Taxes\Classes\WorkerTaxes\WageType;
 use Appleton\Taxes\Models\TaxArea;
+use Appleton\Taxes\Tests\Unit\UnitTestCase;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -52,6 +53,8 @@ trait TestModelCreator
     protected function makeWage(
         GeoPoint $location,
         int $amount_in_cents = UnitTestCase::DEFAULT_SHIFT_WAGES,
+        int $pay_check_tip_amount_in_cents = null,
+        int $take_home_tip_amount_in_cents = null,
         ?int $minutes_worked = UnitTestCase::DEFAULT_MINUTES_WORKED
     ): Wage {
         return new Wage(
@@ -59,8 +62,8 @@ trait TestModelCreator
             Carbon::now(),
             $location,
             $amount_in_cents,
-            0,
-            0,
+            $pay_check_tip_amount_in_cents === null ? 0 : $pay_check_tip_amount_in_cents,
+            $take_home_tip_amount_in_cents === null ? 0 : $take_home_tip_amount_in_cents,
             $minutes_worked === null ? UnitTestCase::DEFAULT_MINUTES_WORKED : $minutes_worked,
             collect([])
         );

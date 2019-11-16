@@ -99,6 +99,13 @@ class WageManager
         return count($worked_days);
     }
 
+    public function calculateTipAmount(Collection $wages)
+    {
+        return $wages->sum(function (Wage $wage) {
+            return $wage->getTakeHomeTipAmountInCents() + $wage->getPayCheckTipAmountInCents();
+        });
+    }
+
     public function calculatePayRate(Collection $wages)
     {
         $cents_earned = 0;

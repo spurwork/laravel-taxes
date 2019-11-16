@@ -55,7 +55,7 @@ abstract class TaxTestCase extends UnitTestCase
         }
 
         $wages = collect([
-            $this->makeWage($work_location, $parameters->getWagesInCents(), $parameters->getMinutesWorked()),
+            $this->makeWage($work_location, $parameters->getWagesInCents(), $parameters->getPaycheckTipAmountInCents(), $parameters->getTakeHomeTipAmountInCents(), $parameters->getMinutesWorked()),
         ]);
 
         if ($parameters->getSupplementalWagesInCents() !== null

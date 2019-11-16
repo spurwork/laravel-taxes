@@ -23,6 +23,8 @@ class TestParameters
     private $expected_earnings_in_cents;
     private $qtd_wages_in_cents;
     private $ytd_liabilities_in_cents;
+    private $pay_check_tip_amount_in_cents;
+    private $take_home_tip_amount_in_cents;
     private $minutes_worked;
 
     public function __construct(
@@ -43,6 +45,8 @@ class TestParameters
         ?int $pay_periods,
         ?int $qtd_wage_in_cents,
         ?int $ytd_liabilities_in_cents,
+        ?int $pay_check_tip_amount_in_cents,
+        ?int $take_home_tip_amount_in_cents,
         ?int $minutes_worked
     ) {
         $this->date = $date;
@@ -62,6 +66,8 @@ class TestParameters
         $this->tax_rate = $tax_rate;
         $this->qtd_wages_in_cents = $qtd_wage_in_cents;
         $this->ytd_liabilities_in_cents = $ytd_liabilities_in_cents;
+        $this->pay_check_tip_amount_in_cents = $pay_check_tip_amount_in_cents;
+        $this->take_home_tip_amount_in_cents = $take_home_tip_amount_in_cents;
         $this->minutes_worked = $minutes_worked;
     }
 
@@ -148,6 +154,16 @@ class TestParameters
     public function getYtdLiabilitiesInCents(): ?int
     {
         return $this->ytd_liabilities_in_cents;
+    }
+
+    public function getPaycheckTipAmountInCents(): ?int
+    {
+        return $this->pay_check_tip_amount_in_cents;
+    }
+
+    public function getTakeHomeTipAmountInCents(): ?int
+    {
+        return $this->take_home_tip_amount_in_cents;
     }
 
     public function getMinutesWorked(): ?int
