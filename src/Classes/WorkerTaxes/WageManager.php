@@ -105,4 +105,28 @@ class WageManager
             return $wage->getTakeHomeTipAmountInCents() + $wage->getPayCheckTipAmountInCents();
         });
     }
+
+    public function calculatePayRate(Collection $wages)
+    {
+        $cents_earned = 0;
+        $minutes_worked = 0;
+
+        $wages->each(static function (Wage $wage) use (&$cents_earned, &$minutes_worked) {
+            switch ($wage->getType()) {
+                case WageType::SHIFT:
+                case WageType::SALARY:
+                    $cents_earned += $wage->getAmountInCents();
+                    $minutes_worked += $wage->getWorkTimeInMinutes();
+                    return;
+                default:
+                    return;
+            }
+        });
+
+        if ($cents_earned && $minutes_worked) {
+            return ($cents_earned / 100) / ($minutes_worked / 60);
+        } else {
+            return 0;
+        }
+    }
 }

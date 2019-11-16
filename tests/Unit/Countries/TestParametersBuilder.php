@@ -25,6 +25,7 @@ class TestParametersBuilder
     private $ytd_liabilities_in_cents;
     private $pay_check_tip_amount_in_cents;
     private $take_home_tip_amount_in_cents;
+    private $minutes_worked;
 
     public function build(): TestParameters
     {
@@ -47,7 +48,8 @@ class TestParametersBuilder
             $this->qtd_wage_in_cents,
             $this->ytd_liabilities_in_cents,
             $this->pay_check_tip_amount_in_cents,
-            $this->take_home_tip_amount_in_cents
+            $this->take_home_tip_amount_in_cents,
+            $this->minutes_worked
         );
     }
 
@@ -162,6 +164,11 @@ class TestParametersBuilder
     public function setTakeHomeTipAmount(?int $take_home_tip_amount_in_cents)
     {
         $this->take_home_tip_amount_in_cents = $take_home_tip_amount_in_cents;
+    }
+
+    public function setMinutesWorked(?int $minutes_worked)
+    {
+        $this->minutes_worked = $minutes_worked;
         return $this;
     }
 }

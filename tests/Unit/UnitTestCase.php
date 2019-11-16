@@ -13,6 +13,7 @@ class UnitTestCase extends BaseTestCase
     protected $user;
 
     public const DEFAULT_SHIFT_WAGES = 10000;
+    public const DEFAULT_MINUTES_WORKED = 480;
 
     use DatabaseTransactions, TestLocations, TestModelCreator;
 

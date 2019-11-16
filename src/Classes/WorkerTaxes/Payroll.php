@@ -20,6 +20,7 @@ class Payroll
     public $exempted_earnings;
     public $exempted_supplemental_earnings;
     public $tip_amount;
+    public $pay_rate;
 
     private $amount_withheld;
     private $start_date;
@@ -50,6 +51,7 @@ class Payroll
         $this->area_incomes = $parameters['area_incomes'] ?? collect([]);
         $this->home_areas = $parameters['home_areas'] ?? collect([]);
         $this->total_earnings = $parameters['total_earnings'] ?? 0;
+        $this->pay_rate = $parameters['pay_rate'] ?? 0;
 
         $this->amount_withheld = 0;
         $this->wage_manager = $wage_manager;
@@ -169,6 +171,21 @@ class Payroll
         return $this->wage_manager->calculateTipAmount($area_income->getWages()) / 100;
     }
 
+    public function getPayRate(GovernmentalUnitArea $governmental_unit_area = null): float
+    {
+        if ($governmental_unit_area === null) {
+            return $this->pay_rate;
+        }
+
+        /** @var AreaIncome $area_income */
+        $area_income = $this->area_incomes->get($governmental_unit_area->name);
+        if ($area_income === null) {
+            return 0;
+        }
+
+        return $this->wage_manager->calculatePayRate($area_income->getWages());
+    }
+
     public function determineEarnings(TaxableIncome $taxable_income): void
     {
         $this->earnings = $this->wage_manager->calculateEarnings($taxable_income->getWages());
@@ -198,6 +215,7 @@ class Payroll
         );
 
         $this->tip_amount = $this->wage_manager->calculateTipAmount($taxable_income->getWages());
+        $this->pay_rate = $this->wage_manager->calculatePayRate($taxable_income->getWages());
     }
 
     public function hasWorkInArea(string $area_name): bool
@@ -219,7 +237,7 @@ class Payroll
         }
 
         return $area_income->getWages()->sum(static function (Wage $gross_wage) {
-                return $gross_wage->getAmountInCents();
-            }) / 100;
+            return $gross_wage->getAmountInCents();
+        }) / 100;
     }
 }

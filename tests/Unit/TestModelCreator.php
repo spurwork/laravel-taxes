@@ -54,7 +54,8 @@ trait TestModelCreator
         GeoPoint $location,
         int $amount_in_cents = UnitTestCase::DEFAULT_SHIFT_WAGES,
         int $pay_check_tip_amount_in_cents = null,
-        int $take_home_tip_amount_in_cents = null
+        int $take_home_tip_amount_in_cents = null,
+        ?int $minutes_worked = UnitTestCase::DEFAULT_MINUTES_WORKED
     ): Wage {
         return new Wage(
             WageType::SHIFT,
@@ -63,7 +64,7 @@ trait TestModelCreator
             $amount_in_cents,
             $pay_check_tip_amount_in_cents === null ? 0 : $pay_check_tip_amount_in_cents,
             $take_home_tip_amount_in_cents === null ? 0 : $take_home_tip_amount_in_cents,
-            0,
+            $minutes_worked === null ? UnitTestCase::DEFAULT_MINUTES_WORKED : $minutes_worked,
             collect([])
         );
     }
