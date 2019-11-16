@@ -32,7 +32,6 @@ class EugeneTest extends TaxTestCase
     /**
      * @dataProvider provideTestDataOutOfArea
      */
-
     public function testEugeneTaxOutOfArea(TestParameters $parameters): void
     {
         $this->validate($parameters);
@@ -62,12 +61,7 @@ class EugeneTest extends TaxTestCase
                     ->setWorkLocation(self::EUGENE_LOCATION)
                     ->setWagesInCents(1200)
                     ->setMinutesWorked(60)
-                    // need to delete this line and uncomment
-                    // the null line after Tasie tests
-                    ->setExpectedAmountInCents(4)
-
-                    // ->setExpectedAmountInCents(null)
-
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             '02' => [
@@ -76,12 +70,7 @@ class EugeneTest extends TaxTestCase
                     ->setWorkLocation(self::EUGENE_LOCATION)
                     ->setWagesInCents(1600)
                     ->setMinutesWorked(60)
-                    // need to delete this line and uncomment
-                    // the null line after Tasie tests
-                    ->setExpectedAmountInCents(7)
-
-                    // ->setExpectedAmountInCents(null)
-
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
         ];

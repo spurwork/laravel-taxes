@@ -164,6 +164,7 @@ class TestParametersBuilder
     public function setTakeHomeTipAmount(?int $take_home_tip_amount_in_cents)
     {
         $this->take_home_tip_amount_in_cents = $take_home_tip_amount_in_cents;
+        return $this;
     }
 
     public function setMinutesWorked(?int $minutes_worked)
