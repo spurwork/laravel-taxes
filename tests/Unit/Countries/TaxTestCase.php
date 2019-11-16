@@ -55,7 +55,7 @@ abstract class TaxTestCase extends UnitTestCase
         }
 
         $wages = collect([
-            $this->makeWage($work_location, $parameters->getWagesInCents()),
+            $this->makeWage($work_location, $parameters->getWagesInCents(), $parameters->getMinutesWorked()),
         ]);
 
         if ($parameters->getSupplementalWagesInCents() !== null
@@ -96,20 +96,23 @@ abstract class TaxTestCase extends UnitTestCase
             $result->getAmountInCents(),
             self::identicalTo($parameters->getExpectedAmountInCents()),
             $short_name.' expected '.$parameters->getExpectedAmountInCents()
-            .' tax amount but got '.$result->getAmountInCents());
+            .' tax amount but got '.$result->getAmountInCents()
+        );
 
         if ($parameters->getExpectedEarningsInCents() === null) {
             self::assertThat(
                 $result->getEarningsInCents(),
                 self::identicalTo($parameters->getWagesInCents()),
                 $short_name.' expected '.$parameters->getWagesInCents()
-                .' earnings but got '.$result->getEarningsInCents());
+                .' earnings but got '.$result->getEarningsInCents()
+            );
         } else {
             self::assertThat(
                 $result->getEarningsInCents(),
                 self::identicalTo($parameters->getExpectedEarningsInCents()),
                 $short_name.' expected '.$parameters->getExpectedEarningsInCents()
-                .' earnings but got '.$result->getEarningsInCents());
+                .' earnings but got '.$result->getEarningsInCents()
+            );
         }
     }
 

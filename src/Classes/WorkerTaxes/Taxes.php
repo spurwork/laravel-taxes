@@ -21,8 +21,8 @@ class Taxes
         TaxableIncomeManager $taxable_income_manager,
         AreaIncomeManager $area_income_manager,
         TaxOverrideManager $tax_override_manager,
-        BindManager $bind_manager)
-    {
+        BindManager $bind_manager
+    ) {
         $this->tax_manager = $tax_manager;
         $this->wage_manager = $wage_manager;
         $this->area_income_manager = $area_income_manager;
@@ -43,8 +43,8 @@ class Taxes
         int $pay_periods,
         Collection $reciprocal_agreements,
         Collection $disabled_taxes,
-        Collection $exemptions): Collection
-    {
+        Collection $exemptions
+    ): Collection {
         $wages_by_lat_long = $this->wage_manager->groupLatLong($wages);
         $historical_wages_by_lat_long = $this->wage_manager->groupLatLong($historical_wages);
 

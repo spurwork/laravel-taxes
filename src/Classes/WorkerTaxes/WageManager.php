@@ -27,8 +27,8 @@ class WageManager
     public function calculateEarnings(
         Collection $wages,
         Carbon $date = null,
-        bool $supplemental = false): float
-    {
+        bool $supplemental = false
+    ): float {
         if ($supplemental) {
             $filtered_wages = $wages->filter(static function (Wage $wage) {
                 return $wage->getType() === WageType::SUPPLEMENTAL;
@@ -46,14 +46,15 @@ class WageManager
         }
 
         return $filtered_wages->sum(static function (Wage $gross_wage) {
-                return $gross_wage->getAmountInCents();
-            }) / 100;
+            return $gross_wage->getAmountInCents();
+        }) / 100;
     }
 
-    public function calculateDaysWorked(Collection $wages,
-                                        Carbon $start_date,
-                                        Carbon $end_date): int
-    {
+    public function calculateDaysWorked(
+        Collection $wages,
+        Carbon $start_date,
+        Carbon $end_date
+    ): int {
         $worked_days = [];
 
         $wages->each(static function (Wage $wage) use (&$worked_days, $start_date, $end_date) {
@@ -96,5 +97,29 @@ class WageManager
         });
 
         return count($worked_days);
+    }
+
+    public function calculatePayRate(Collection $wages)
+    {
+        $cents_earned = 0;
+        $minutes_worked = 0;
+
+        $wages->each(static function (Wage $wage) use (&$cents_earned, &$minutes_worked) {
+            switch ($wage->getType()) {
+                case WageType::SHIFT:
+                case WageType::SALARY:
+                    $cents_earned += $wage->getAmountInCents();
+                    $minutes_worked += $wage->getWorkTimeInMinutes();
+                    return;
+                default:
+                    return;
+            }
+        });
+
+        if ($cents_earned && $minutes_worked) {
+            return ($cents_earned / 100) / ($minutes_worked / 60);
+        } else {
+            return 0;
+        }
     }
 }

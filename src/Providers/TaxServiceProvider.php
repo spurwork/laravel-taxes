@@ -1399,6 +1399,7 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\Ohio\ZaneTraceLSD\ZaneTraceLSDTax::class,
         \Appleton\Taxes\Countries\US\Oklahoma\OklahomaIncome\OklahomaIncome::class,
         \Appleton\Taxes\Countries\US\Oklahoma\OklahomaUnemployment\OklahomaUnemployment::class,
+        \Appleton\Taxes\Countries\US\Oregon\Eugene\Eugene::class,
         \Appleton\Taxes\Countries\US\Oregon\EugeneEmployer\EugeneEmployer::class,
         \Appleton\Taxes\Countries\US\Oregon\OregonIncome\OregonIncome::class,
         \Appleton\Taxes\Countries\US\Oregon\OregonTransit\OregonTransit::class,
