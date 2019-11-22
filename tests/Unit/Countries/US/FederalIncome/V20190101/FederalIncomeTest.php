@@ -1,130 +1,134 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\FederalIncome\V20190101;
+namespace Appleton\Taxes\Tests\Unit\Countries\US\FederalIncome\V20190101;
 
-use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome as ParentFederalIncome;
+use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome;
 use Appleton\Taxes\Models\Countries\US\FederalIncomeTaxInformation;
+use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
+use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
+use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
 
-class FederalIncomeTest extends \TestCase
+class FederalIncomeTest extends TaxTestCase
 {
-    public function testTaxesOwed2019A()
+    private const DATE = '2019-01-01';
+    private const LOCATION = 'us.alabama';
+    private const TAX_CLASS = FederalIncome::class;
+    private const TAX_INFO_CLASS = FederalIncomeTaxInformation::class;
+
+    public function setUp(): void
     {
-        FederalIncomeTaxInformation::forUser($this->user)->update(['exemptions' => 1]);
+        parent::setUp();
+        $this->query_runner->addTax(self::TAX_CLASS);
 
-        $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us'));
-            $taxes->setWorkLocation($this->getLocation('us'));
-            $taxes->setUser($this->user);
-            $taxes->setEarnings(258.69);
-            $taxes->setPayPeriods(52);
-            $taxes->setDate($this->date('2019-01-01'));
-        });
-
-        $this->assertSame(10.48, $results->getTax(ParentFederalIncome::class));
+        FederalIncomeTaxInformation::createForUser([
+            'filing_status' => FederalIncome::FILING_SINGLE,
+            'exemptions' => 0,
+            'additional_withholding' => 0,
+            'non_resident_alien' => false,
+            'exempt' => false,
+        ], $this->user);
     }
 
-    public function testTaxesOwed2019B()
+    /**
+     * @dataProvider provideTestData
+     */
+    public function testTax(TestParameters $parameters): void
     {
-        FederalIncomeTaxInformation::forUser($this->user)->update([
-            'exemptions' => 4,
-            'filing_status' => ParentFederalIncome::FILING_MARRIED,
-        ]);
-
-        $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us'));
-            $taxes->setWorkLocation($this->getLocation('us'));
-            $taxes->setUser($this->user);
-            $taxes->setEarnings(475.25);
-            $taxes->setPayPeriods(52);
-            $taxes->setDate($this->date('2019-01-01'));
-        });
-
-        $this->assertSame(null, $results->getTax(ParentFederalIncome::class));
+        $this->validate($parameters);
     }
 
-    public function testTaxesOwed2019C()
+    /**
+     * @dataProvider provideUseDefaultTestData
+     */
+    public function testTax_use_default(TestParameters $parameters): void
     {
-        FederalIncomeTaxInformation::forUser($this->user)->update([
-            'exemptions' => 2,
-        ]);
-
-        $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us'));
-            $taxes->setWorkLocation($this->getLocation('us'));
-            $taxes->setUser($this->user);
-            $taxes->setEarnings(112.33);
-            $taxes->setPayPeriods(52);
-            $taxes->setDate($this->date('2019-01-01'));
-        });
-
-        $this->assertSame(null, $results->getTax(ParentFederalIncome::class));
-    }
-
-    public function testTaxesOwed2019D()
-    {
-        FederalIncomeTaxInformation::forUser($this->user)->update(['filing_status' => ParentFederalIncome::FILING_SEPERATE]);
-
-        $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us'));
-            $taxes->setWorkLocation($this->getLocation('us'));
-            $taxes->setUser($this->user);
-            $taxes->setEarnings(865.14);
-            $taxes->setPayPeriods(52);
-            $taxes->setDate($this->date('2019-01-01'));
-        });
-
-        $this->assertSame(94.60, $results->getTax(ParentFederalIncome::class));
-    }
-
-    public function testTaxesOwed2019E()
-    {
-        FederalIncomeTaxInformation::forUser($this->user)->update([
-            'exemptions' => 3,
-            'filing_status' => ParentFederalIncome::FILING_MARRIED,
-        ]);
-
-        $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us'));
-            $taxes->setWorkLocation($this->getLocation('us'));
-            $taxes->setUser($this->user);
-            $taxes->setEarnings(367.57);
-            $taxes->setPayPeriods(52);
-            $taxes->setDate($this->date('2019-01-01'));
-        });
-
-        $this->assertSame(null, $results->getTax(ParentFederalIncome::class));
-    }
-
-    public function testTaxesOwed2019H()
-    {
-        FederalIncomeTaxInformation::forUser($this->user)->update([
-            'exemptions' => 2,
-        ]);
-
-        $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us'));
-            $taxes->setWorkLocation($this->getLocation('us'));
-            $taxes->setUser($this->user);
-            $taxes->setEarnings(800);
-            $taxes->setPayPeriods(52);
-            $taxes->setDate($this->date('2019-01-01'));
-        });
-
-        $this->assertSame(64.11, $results->getTax(ParentFederalIncome::class));
-    }
-
-    public function testFederalIncomeUseDefault() {
         FederalIncomeTaxInformation::forUser($this->user)->delete();
 
-        $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us'));
-            $taxes->setWorkLocation($this->getLocation('us'));
-            $taxes->setUser($this->user);
-            $taxes->setEarnings(800);
-            $taxes->setPayPeriods(52);
-            $taxes->setDate($this->date('2019-01-01'));
-        });
+        $this->validate($parameters);
+    }
 
-        $this->assertSame(83.50, $results->getTax(ParentFederalIncome::class));
+    public function provideTestData(): array
+    {
+        $builder = new TestParametersBuilder();
+        $builder
+            ->setDate(self::DATE)
+            ->setHomeLocation(self::LOCATION)
+            ->setTaxClass(self::TAX_CLASS)
+            ->setTaxInfoClass(self::TAX_INFO_CLASS)
+            ->setPayPeriods(52);
+
+        return [
+            'A' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'exemptions' => 1,
+                    ])
+                    ->setWagesInCents(25869)
+                    ->setExpectedAmountInCents(1048)
+                    ->build()
+            ],
+            'B' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'exemptions' => 4,
+                        'filing_status' => FederalIncome::FILING_MARRIED,
+                    ])
+                    ->setWagesInCents(47525)
+                    ->setExpectedAmountInCents(0)
+                    ->build()
+            ],
+            'C' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'exemptions' => 2,
+                    ])
+                    ->setWagesInCents(11233)
+                    ->setExpectedAmountInCents(0)
+                    ->build()
+            ],
+            'D' => [
+                $builder
+                    ->setTaxInfoOptions(null)
+                    ->setWagesInCents(86514)
+                    ->setExpectedAmountInCents(9460)
+                    ->build()
+            ],
+            'E' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'exemptions' => 3,
+                        'filing_status' => FederalIncome::FILING_MARRIED,
+                    ])
+                    ->setWagesInCents(36757)
+                    ->setExpectedAmountInCents(0)
+                    ->build()
+            ],
+            'H' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'exemptions' => 2,
+                    ])
+                    ->setWagesInCents(80000)
+                    ->setExpectedAmountInCents(6411)
+                    ->build()
+            ],
+        ];
+    }
+
+    public function provideUseDefaultTestData(): array
+    {
+        return [
+            '01' => [
+                (new TestParametersBuilder())
+                    ->setDate(self::DATE)
+                    ->setHomeLocation(self::LOCATION)
+                    ->setTaxClass(self::TAX_CLASS)
+                    ->setTaxInfoClass(self::TAX_INFO_CLASS)
+                    ->setWagesInCents(80000)
+                    ->setPayPeriods(52)
+                    ->setExpectedAmountInCents(8350)
+                    ->build()
+            ],
+        ];
     }
 }

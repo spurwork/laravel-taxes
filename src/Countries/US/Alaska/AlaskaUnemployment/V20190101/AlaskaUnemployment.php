@@ -2,12 +2,12 @@
 
 namespace Appleton\Taxes\Countries\US\Alaska\AlaskaUnemployment\V20190101;
 
-use Appleton\Taxes\Classes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
 use Appleton\Taxes\Countries\US\Alaska\AlaskaUnemployment\AlaskaUnemployment as BaseAlaskaUnemployment;
 
 class AlaskaUnemployment extends BaseAlaskaUnemployment
 {
-    public const FUTA_CREDIT = 0.06;
+    public const FUTA_CREDIT = 0.054;
     public const TAX_RATE = 0.0132;
     public const WAGE_BASE = 39900;
 

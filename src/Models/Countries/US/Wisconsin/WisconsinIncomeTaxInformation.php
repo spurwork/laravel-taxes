@@ -2,8 +2,8 @@
 
 namespace Appleton\Taxes\Models\Countries\US\Wisconsin;
 
+use Appleton\Taxes\Classes\WorkerTaxes\BaseTaxInformationModel;
 use Appleton\Taxes\Countries\US\Wisconsin\WisconsinIncome\WisconsinIncome;
-use Appleton\Taxes\Classes\BaseTaxInformationModel;
 
 class WisconsinIncomeTaxInformation extends BaseTaxInformationModel
 {

@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\Kentucky\JeffersonCounty\V20190101;
 
-use Appleton\Taxes\Classes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
 use Appleton\Taxes\Countries\US\Kentucky\JeffersonCounty\JeffersonCounty as BaseJeffersonCounty;
 use Appleton\Taxes\Models\Countries\US\Kentucky\KentuckyIncomeTaxInformation;
 use Appleton\Taxes\Models\TaxArea;
@@ -39,6 +39,6 @@ class JeffersonCounty extends BaseJeffersonCounty
             $this->tax_total = $this->payroll->getEarnings() * static::NONRESIDENT_TAX_RATE;
         }
 
-        return round($this->tax_total, 2);
+        return $this->payroll->withholdTax(round($this->tax_total, 2));
     }
 }

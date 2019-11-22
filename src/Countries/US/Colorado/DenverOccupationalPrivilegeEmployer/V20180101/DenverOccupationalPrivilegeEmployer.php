@@ -3,24 +3,23 @@
 namespace Appleton\Taxes\Countries\US\Colorado\DenverOccupationalPrivilegeEmployer\V20180101;
 
 use Appleton\Taxes\Countries\US\Colorado\DenverOccupationalPrivilegeEmployer\DenverOccupationalPrivilegeEmployer as BaseDenverOccupationalPrivilegeEmployer;
-use Illuminate\Support\Facades\DB;
-use stdClass;
+use Appleton\Taxes\Models\GovernmentalUnitArea;
 
 class DenverOccupationalPrivilegeEmployer extends BaseDenverOccupationalPrivilegeEmployer
 {
-    protected function getMonthlyWageAmountInDollars(): int
+    public function getMonthlyWageAmount(): int
     {
         return 0;
     }
 
-    protected function getMonthlyTaxAmountInCents(): int
+    public function getMonthlyTaxAmount(): int
     {
         return 0;
     }
 
-    protected function getLocalGovernmentalUnitArea(): stdClass
+    protected function getLocalGovernmentalUnitArea(): GovernmentalUnitArea
     {
-        return DB::table('governmental_unit_areas')
+        return GovernmentalUnitArea::query()
             ->where('name', 'Denver, CO')
             ->first();
     }

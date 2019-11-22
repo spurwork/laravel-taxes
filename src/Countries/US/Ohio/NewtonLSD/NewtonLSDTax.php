@@ -2,18 +2,14 @@
 
 namespace Appleton\Taxes\Countries\US\Ohio\NewtonLSD;
 
-use Appleton\Taxes\Classes\BaseOccupational;
-use Appleton\Taxes\Classes\Payroll;
-use Appleton\Taxes\Models\Countries\US\Ohio\OhioIncomeTaxInformation;
+use Appleton\Taxes\Countries\US\Ohio\OhioSchoolDistrictTraditionalTax;
 
-abstract class NewtonLSDTax extends BaseOccupational
+abstract class NewtonLSDTax extends OhioSchoolDistrictTraditionalTax
 {
-    protected $tax_information;
-    protected $payroll;
+    private const ID = '5506';
 
-    public function __construct(OhioIncomeTaxInformation $tax_information, Payroll $payroll)
+    protected function getId(): string
     {
-        parent::__construct($payroll);
-        $this->tax_information = $tax_information;
+        return self::ID;
     }
 }

@@ -1,9 +1,7 @@
 <?php
 namespace Appleton\Taxes\Countries\US\Montana\MontanaIncome\V20190101;
 
-use Appleton\Taxes\Classes\Payroll;
 use Appleton\Taxes\Countries\US\Montana\MontanaIncome\MontanaIncome as BaseMontanaIncome;
-use Appleton\Taxes\Models\Countries\US\Montana\MontanaIncomeTaxInformation;
 use Illuminate\Database\Eloquent\Collection;
 
 class MontanaIncome extends BaseMontanaIncome

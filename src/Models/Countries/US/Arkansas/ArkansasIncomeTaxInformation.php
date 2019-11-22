@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Models\Countries\US\Arkansas;
 
-use Appleton\Taxes\Classes\BaseTaxInformationModel;
+use Appleton\Taxes\Classes\WorkerTaxes\BaseTaxInformationModel;
 use Appleton\Taxes\Countries\US\Arkansas\ArkansasIncome\ArkansasIncome;
 
 class ArkansasIncomeTaxInformation extends BaseTaxInformationModel
@@ -15,6 +15,7 @@ class ArkansasIncomeTaxInformation extends BaseTaxInformationModel
         $tax_information->exemptions = null;
         $tax_information->additional_withholding = 0;
         $tax_information->exempt = false;
+        $tax_information->ar_tx_exempt = false;
         return $tax_information;
     }
 

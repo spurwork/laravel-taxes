@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\Oklahoma\OklahomaIncome\V20190101;
 
-use Appleton\Taxes\Classes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
 use Appleton\Taxes\Countries\US\Oklahoma\OklahomaIncome\OklahomaIncome as BaseOklahomaIncome;
 use Appleton\Taxes\Models\Countries\US\Oklahoma\OklahomaIncomeTaxInformation;
 use Illuminate\Database\Eloquent\Collection;

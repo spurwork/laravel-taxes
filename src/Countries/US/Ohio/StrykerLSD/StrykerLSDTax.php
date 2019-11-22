@@ -2,18 +2,14 @@
 
 namespace Appleton\Taxes\Countries\US\Ohio\StrykerLSD;
 
-use Appleton\Taxes\Classes\BaseOccupational;
-use Appleton\Taxes\Classes\Payroll;
-use Appleton\Taxes\Models\Countries\US\Ohio\OhioIncomeTaxInformation;
+use Appleton\Taxes\Countries\US\Ohio\OhioSchoolDistrictTraditionalTax;
 
-abstract class StrykerLSDTax extends BaseOccupational
+abstract class StrykerLSDTax extends OhioSchoolDistrictTraditionalTax
 {
-    protected $tax_information;
-    protected $payroll;
+    private const ID = '8607';
 
-    public function __construct(OhioIncomeTaxInformation $tax_information, Payroll $payroll)
+    protected function getId(): string
     {
-        parent::__construct($payroll);
-        $this->tax_information = $tax_information;
+        return self::ID;
     }
 }

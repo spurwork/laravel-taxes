@@ -2,8 +2,8 @@
 
 namespace Appleton\Taxes\Models\Countries\US\Pennsylvania;
 
+use Appleton\Taxes\Classes\WorkerTaxes\BaseTaxInformationModel;
 use Appleton\Taxes\Countries\US\Pennsylvania\PennsylvaniaIncome\PennsylvaniaIncome;
-use Appleton\Taxes\Classes\BaseTaxInformationModel;
 
 class PennsylvaniaIncomeTaxInformation extends BaseTaxInformationModel
 {

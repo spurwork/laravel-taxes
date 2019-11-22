@@ -21,6 +21,10 @@ class ArkansasIncome extends BaseArkansasIncome
         [35100, 0.069, 940.44],
     ];
 
+    private const ARKANSAS = 'Arkansas';
+    private const TEXARKANA_AR = 'Texarkana, AR';
+    private const TEXARKANA_TX = 'Texarkana, TX';
+
     public function compute(Collection $tax_areas)
     {
         if ($this->isUserClaimingExemption()) {
@@ -28,6 +32,19 @@ class ArkansasIncome extends BaseArkansasIncome
         }
 
         $annual_gross = $this->payroll->getEarnings() * $this->payroll->pay_periods;
+
+        if ($this->payroll->livesInArea(self::ARKANSAS)) {
+            if ($this->payroll->livesInArea(self::TEXARKANA_AR)) {
+                if ($this->tax_information->ar_tx_exempt) {
+                    return $this->payroll->withholdTax(0.0);
+                }
+            } else if (!$this->payroll->hasWorkInArea(self::ARKANSAS)) {
+                return $this->payroll->withholdTax(0.0);
+            }
+        } else if ($this->payroll->livesInArea(self::TEXARKANA_TX)) {
+            $annual_gross -= $this->payroll->getEarningsForArea(self::TEXARKANA_AR) * $this->payroll->pay_periods;
+        }
+
         $net_taxable_income = $this->get50MidRange($annual_gross - self::STANDARD_DEDUCTION);
 
         $annual_gross_tax = $this->getTaxAmountFromTaxBrackets($net_taxable_income, $this->getTaxBrackets());

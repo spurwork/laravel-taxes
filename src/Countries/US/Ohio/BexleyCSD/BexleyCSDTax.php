@@ -2,18 +2,14 @@
 
 namespace Appleton\Taxes\Countries\US\Ohio\BexleyCSD;
 
-use Appleton\Taxes\Classes\BaseOccupational;
-use Appleton\Taxes\Classes\Payroll;
-use Appleton\Taxes\Models\Countries\US\Ohio\OhioIncomeTaxInformation;
+use Appleton\Taxes\Countries\US\Ohio\OhioSchoolDistrictTraditionalTax;
 
-abstract class BexleyCSDTax extends BaseOccupational
+abstract class BexleyCSDTax extends OhioSchoolDistrictTraditionalTax
 {
-    protected $tax_information;
-    protected $payroll;
+    private const ID = '2501';
 
-    public function __construct(OhioIncomeTaxInformation $tax_information, Payroll $payroll)
+    protected function getId(): string
     {
-        parent::__construct($payroll);
-        $this->tax_information = $tax_information;
+        return self::ID;
     }
 }

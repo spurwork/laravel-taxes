@@ -1,84 +1,55 @@
 <?php
 
-namespace Appleton\Taxes\Unit\Countries\US\Colorado\V20190101;
+namespace Appleton\Taxes\Tests\Unit\Countries\US\Colorado\V20190101;
 
-use Appleton\Taxes\Classes\TaxResults;
 use Appleton\Taxes\Countries\US\Colorado\GreenwoodVillageOccupationalPrivilege\GreenwoodVillageOccupationalPrivilege;
-use Carbon\Carbon;
-use TestCase;
+use Appleton\Taxes\Tests\Unit\Countries\US\Colorado\ColoradoLocalIncomeParameters;
+use Appleton\Taxes\Tests\Unit\Countries\US\Colorado\ColoradoLocalIncomeParametersBuilder;
+use Appleton\Taxes\Tests\Unit\Countries\US\Colorado\ColoradoLocalTaxTestCase;
 
-class GreenwoodVillageOccupationalPrivilegeTest extends TestCase
+class GreenwoodVillageOccupationalPrivilegeTest extends ColoradoLocalTaxTestCase
 {
+    private const DATE = '2019-05-25';
+    private const TAX_CLASS = GreenwoodVillageOccupationalPrivilege::class;
+    private const LOCATION = 'us.colorado.greenwood_village';
+
     public function setUp(): void
     {
         parent::setUp();
-
-        Carbon::setTestNow(Carbon::parse('2019-01-01'));
+        $this->query_runner->addTax(self::TAX_CLASS);
     }
 
-    public function testGreenwoodVillageOccupationalPrivilege_no_local_wages(): void
+    /**
+     * @dataProvider provideData
+     */
+    public function testColoradoLocal(ColoradoLocalIncomeParameters $parameters): void
     {
-        $results = $this->calculateTaxes(0, 0, 30000, 0);
-        $this->assertNull($results->getTax(GreenwoodVillageOccupationalPrivilege::class));
+        $this->validateColoradoLocal($parameters);
     }
 
-    public function testGreenwoodVillageOccupationalPrivilege_local_wages_already_taken(): void
+    public function testColoradoLocal_no_local_wages()
     {
-        $results = $this->calculateTaxes(10000, 30000, 10000, 30000);
-        $this->assertNull($results->getTax(GreenwoodVillageOccupationalPrivilege::class));
+        $this->validateColoradoLocalNoTax(
+            (new ColoradoLocalIncomeParametersBuilder())
+                ->setDate(self::DATE)
+                ->setLocalLocation(self::LOCATION)
+                ->setTaxClass(self::TAX_CLASS)
+                ->setLocalEarningsInCents(0)
+                ->setLocalMtdEarningsInCents(0)
+                ->setColoradoEarningsInCents(100)
+                ->setColoradoMtdEarningsInCents(200)
+                ->setExpectedAmountInCents(0)
+                ->build()
+        );
     }
 
-    public function testGreenwoodVillageOccupationalPrivilege_local_wages_at_limit(): void
+    public function provideData(): array
     {
-        $results = $this->calculateTaxes(25000, 0, 25000, 0);
-        $this->assertSame(2.0, $results->getTax(GreenwoodVillageOccupationalPrivilege::class));
-    }
-
-    public function testGreenwoodVillageOccupationalPrivilege_local_wages_cross_limit(): void
-    {
-        $results = $this->calculateTaxes(30000, 0, 30000, 0);
-        $this->assertSame(2.0, $results->getTax(GreenwoodVillageOccupationalPrivilege::class));
-    }
-
-    public function testGreenwoodVillageOccupationalPrivilege_other_wages_at_limit(): void
-    {
-        $results = $this->calculateTaxes(0, 100, 15000, 100);
-        $this->assertSame(2.0, $results->getTax(GreenwoodVillageOccupationalPrivilege::class));
-    }
-
-    public function testGreenwoodVillageOccupationalPrivilege_other_wages_cross_limit(): void
-    {
-        $results = $this->calculateTaxes(0, 100, 20000, 100);
-        $this->assertSame(2.0, $results->getTax(GreenwoodVillageOccupationalPrivilege::class));
-    }
-
-    public function testGreenwoodVillageOccupationalPrivilege_local_wages_not_enough(): void
-    {
-        $results = $this->calculateTaxes(10000, 10000, 10000, 10000);
-        $this->assertNull($results->getTax(GreenwoodVillageOccupationalPrivilege::class));
-    }
-
-    private function calculateTaxes(int $local_earnings, int $previous_local_earnings,
-                                    int $colorado_earnings, int $previous_colorado_earnings): TaxResults
-    {
-        return $this->taxes->calculate(function ($taxes) use ($local_earnings, $previous_local_earnings, $colorado_earnings, $previous_colorado_earnings) {
-            $taxes->setHomeLocation($this->getLocation('us.colorado'));
-            $taxes->setWorkLocation($this->getLocation('us.colorado'));
-            $taxes->setUser($this->user);
-            $taxes->setEarnings(10000);
-            $taxes->setPayPeriods(52);
-            $taxes->setMtdEarnings(static function ($governmental_unit_area, $include_current)
-            use ($local_earnings, $previous_local_earnings, $colorado_earnings, $previous_colorado_earnings) {
-                if ($governmental_unit_area->name === 'Greenwood Village, CO') {
-                    return $include_current ? $local_earnings + $previous_local_earnings : $previous_local_earnings;
-                }
-
-                if ($governmental_unit_area->name === 'Colorado') {
-                    return $include_current ? $colorado_earnings + $previous_colorado_earnings : $previous_colorado_earnings;
-                }
-
-                return 0.0;
-            });
-        });
+        return $this->standardColoradoLocalTestCases(
+            self::DATE,
+            self::LOCATION,
+            self::TAX_CLASS,
+            25000,
+            200);
     }
 }

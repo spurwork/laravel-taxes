@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Models\Countries\US\Indiana;
 
-use Appleton\Taxes\Classes\BaseTaxInformationModel;
+use Appleton\Taxes\Classes\WorkerTaxes\BaseTaxInformationModel;
 use Appleton\Taxes\Countries\US\Indiana\IndianaIncome\IndianaIncome;
 
 class IndianaIncomeTaxInformation extends BaseTaxInformationModel

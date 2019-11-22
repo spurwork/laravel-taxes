@@ -1,75 +1,41 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\SocialSecurity\V20170101;
+namespace Appleton\Taxes\Tests\Unit\Countries\US\SocialSecurity\V20170101;
 
-use Appleton\Taxes\Countries\US\SocialSecurity\SocialSecurity as ParentSocialSecurity;
+use Appleton\Taxes\Countries\US\SocialSecurity\SocialSecurity;
+use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
+use Appleton\Taxes\Tests\Unit\Countries\WageBaseTaxTestCase;
 
-class SocialSecurityTest extends \TestCase
+class SocialSecurityTest extends WageBaseTaxTestCase
 {
-    public function testSocialSecurity()
-    {
-        $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us.alabama'));
-            $taxes->setWorkLocation($this->getLocation('us.alabama'));
-            $taxes->setUser($this->user);
-            $taxes->setEarnings(2300);
-        });
+    private const DATE = '2017-01-01';
+    private const LOCATION = 'us.alabama';
+    private const TAX_CLASS = SocialSecurity::class;
+    private const WAGE_BASE_IN_CENTS = 12720000;
+    private const TAX_RATE = 0.062;
 
-        $this->assertSame(142.60, $results->getTax(ParentSocialSecurity::class));
+    public function setUp(): void
+    {
+        parent::setUp();
+        $this->query_runner->addTax(self::TAX_CLASS);
     }
 
-    public function testSocialSecurityMetWageBase()
+    /**
+     * @dataProvider provideTestData
+     */
+    public function testTax(TestParameters $parameters): void
     {
-        $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us.alabama'));
-            $taxes->setWorkLocation($this->getLocation('us.alabama'));
-            $taxes->setUser($this->user);
-            $taxes->setEarnings(100);
-            $taxes->setYtdEarnings(127100);
-        });
-
-        $this->assertSame(6.20, $results->getTax(ParentSocialSecurity::class));
-
-        $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us.alabama'));
-            $taxes->setWorkLocation($this->getLocation('us.alabama'));
-            $taxes->setUser($this->user);
-            $taxes->setEarnings(100);
-            $taxes->setYtdEarnings(127150);
-        });
-
-        $this->assertSame(3.10, $results->getTax(ParentSocialSecurity::class));
-
-        $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us.alabama'));
-            $taxes->setWorkLocation($this->getLocation('us.alabama'));
-            $taxes->setUser($this->user);
-            $taxes->setEarnings(100);
-            $taxes->setYtdEarnings(127200);
-        });
-
-        $this->assertSame(null, $results->getTax(ParentSocialSecurity::class));
-
-        $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us.alabama'));
-            $taxes->setWorkLocation($this->getLocation('us.alabama'));
-            $taxes->setUser($this->user);
-            $taxes->setEarnings(100);
-            $taxes->setYtdEarnings(127250);
-        });
-
-        $this->assertSame(null, $results->getTax(ParentSocialSecurity::class));
+        $this->validateWageBase($parameters);
     }
 
-    public function testCaseStudy1()
+    public function provideTestData(): array
     {
-        $results = $this->taxes->calculate(function ($taxes) {
-            $taxes->setHomeLocation($this->getLocation('us.alabama'));
-            $taxes->setWorkLocation($this->getLocation('us.alabama'));
-            $taxes->setUser($this->user);
-            $taxes->setEarnings(66.68);
-        });
-
-        $this->assertSame(4.13, $results->getTax(ParentSocialSecurity::class));
+        return $this->wageBaseBoundariesTestCases(
+            self::DATE,
+            self::LOCATION,
+            self::TAX_CLASS,
+            self::WAGE_BASE_IN_CENTS,
+            self::TAX_RATE
+        );
     }
 }

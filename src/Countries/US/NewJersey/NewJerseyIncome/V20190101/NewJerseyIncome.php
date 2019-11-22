@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\NewJersey\NewJerseyIncome\V20190101;
 
-use Appleton\Taxes\Classes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
 use Appleton\Taxes\Countries\US\NewJersey\NewJerseyIncome\NewJerseyIncome as BaseNewJerseyIncome;
 use Appleton\Taxes\Models\Countries\US\NewJersey\NewJerseyIncomeTaxInformation;
 use Illuminate\Database\Eloquent\Collection;

@@ -2,17 +2,14 @@
 
 namespace Appleton\Taxes\Countries\US\Ohio\AdaEVSD;
 
-use Appleton\Taxes\Classes\BaseOccupational;
-use Appleton\Taxes\Classes\Payroll;
-use Appleton\Taxes\Models\Countries\US\Ohio\OhioIncomeTaxInformation;
+use Appleton\Taxes\Countries\US\Ohio\OhioSchoolDistrictTraditionalTax;
 
-abstract class AdaEVSDTax extends BaseOccupational
+abstract class AdaEVSDTax extends OhioSchoolDistrictTraditionalTax
 {
-    protected $tax_information;
-    protected $payroll;
-    public function __construct(OhioIncomeTaxInformation $tax_information, Payroll $payroll)
+    private const ID = '3301';
+
+    protected function getId(): string
     {
-        parent::__construct($payroll);
-        $this->tax_information = $tax_information;
+        return self::ID;
     }
 }

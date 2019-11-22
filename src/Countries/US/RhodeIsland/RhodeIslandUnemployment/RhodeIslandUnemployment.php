@@ -2,8 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\RhodeIsland\RhodeIslandUnemployment;
 
-use Appleton\Taxes\Classes\BaseStateUnemployment;
-use Illuminate\Database\Eloquent\Collection;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseStateUnemployment;
 
 class RhodeIslandUnemployment extends BaseStateUnemployment
 {

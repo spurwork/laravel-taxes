@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Providers;
 
-use Appleton\Taxes\Classes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
 use Illuminate\Support\ServiceProvider;
 
 class TaxInformationServiceProvider extends ServiceProvider

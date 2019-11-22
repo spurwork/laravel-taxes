@@ -2,8 +2,8 @@
 
 namespace Appleton\Taxes\Models\Countries\US\NorthCarolina;
 
+use Appleton\Taxes\Classes\WorkerTaxes\BaseTaxInformationModel;
 use Appleton\Taxes\Countries\US\NorthCarolina\NorthCarolinaIncome\NorthCarolinaIncome;
-use Appleton\Taxes\Classes\BaseTaxInformationModel;
 
 class NorthCarolinaIncomeTaxInformation extends BaseTaxInformationModel
 {

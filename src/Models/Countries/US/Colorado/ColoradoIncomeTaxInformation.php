@@ -2,8 +2,8 @@
 
 namespace Appleton\Taxes\Models\Countries\US\Colorado;
 
+use Appleton\Taxes\Classes\WorkerTaxes\BaseTaxInformationModel;
 use Appleton\Taxes\Countries\US\Colorado\ColoradoIncome\ColoradoIncome;
-use Appleton\Taxes\Classes\BaseTaxInformationModel;
 
 class ColoradoIncomeTaxInformation extends BaseTaxInformationModel
 {

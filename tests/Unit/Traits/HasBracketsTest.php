@@ -1,8 +1,11 @@
 <?php
 
-namespace Appleton\Taxes\Traits;
+namespace Appleton\Taxes\Tests\Unit\Traits;
 
-class HasBracketsTest extends \TestCase
+use Appleton\Taxes\Tests\Unit\UnitTestCase;
+use Appleton\Taxes\Traits\HasBrackets;
+
+class HasBracketsTest extends UnitTestCase
 {
     /**
      * @dataProvider provideTestData

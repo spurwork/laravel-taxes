@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\Medicare;
 
-use Appleton\Taxes\Classes\BaseTax;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseTax;
 
 abstract class Medicare extends BaseTax
 {

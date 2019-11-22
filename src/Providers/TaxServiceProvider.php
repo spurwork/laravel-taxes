@@ -2,14 +2,17 @@
 
 namespace Appleton\Taxes\Providers;
 
-use Appleton\Taxes\Classes\BasePayrollLiability;
-use Appleton\Taxes\Classes\BaseTax;
-use Appleton\Taxes\Classes\Payroll;
-use Appleton\Taxes\Classes\CompanyPayroll;
+use Appleton\Taxes\Classes\PayrollLiabilities\CompanyPayroll;
+use Appleton\Taxes\Classes\PayrollLiabilities\Liabilities\BasePayrollLiability;
+use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseStateUnemployment;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseTax;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\StateUnemployment;
 use Carbon\Carbon;
 use http\Exception\UnexpectedValueException;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
+use ReflectionClass;
 
 class TaxServiceProvider extends ServiceProvider
 {
@@ -1002,7 +1005,7 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\Ohio\Milford\Milford::class,
         \Appleton\Taxes\Countries\US\Ohio\MilfordCenter\MilfordCenter::class,
         \Appleton\Taxes\Countries\US\Ohio\Millbury\Millbury::class,
-        \Appleton\Taxes\Countries\US\Ohio\MillcreekWestUnityLSD\MillcreekWestUnityLSDTax::class,
+        \Appleton\Taxes\Countries\US\Ohio\MillCreekWestUnityLSD\MillCreekWestUnityLSDTax::class,
         \Appleton\Taxes\Countries\US\Ohio\MillerCity\MillerCity::class,
         \Appleton\Taxes\Countries\US\Ohio\MillerCityNewClevelandLSD\MillerCityNewClevelandLSDTax::class,
         \Appleton\Taxes\Countries\US\Ohio\Millersburg\Millersburg::class,
@@ -1396,7 +1399,10 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\Ohio\ZaneTraceLSD\ZaneTraceLSDTax::class,
         \Appleton\Taxes\Countries\US\Oklahoma\OklahomaIncome\OklahomaIncome::class,
         \Appleton\Taxes\Countries\US\Oklahoma\OklahomaUnemployment\OklahomaUnemployment::class,
+        \Appleton\Taxes\Countries\US\Oregon\Eugene\Eugene::class,
+        \Appleton\Taxes\Countries\US\Oregon\EugeneEmployer\EugeneEmployer::class,
         \Appleton\Taxes\Countries\US\Oregon\OregonIncome\OregonIncome::class,
+        \Appleton\Taxes\Countries\US\Oregon\OregonTransit\OregonTransit::class,
         \Appleton\Taxes\Countries\US\Oregon\OregonUnemployment\OregonUnemployment::class,
         \Appleton\Taxes\Countries\US\Pennsylvania\PennsylvaniaEmployeeSuta\PennsylvaniaEmployeeSuta::class,
         \Appleton\Taxes\Countries\US\Pennsylvania\PennsylvaniaIncome\PennsylvaniaIncome::class,
@@ -1416,6 +1422,8 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\Vermont\VermontUnemployment\VermontUnemployment::class,
         \Appleton\Taxes\Countries\US\Virginia\VirginiaIncome\VirginiaIncome::class,
         \Appleton\Taxes\Countries\US\Virginia\VirginiaUnemployment\VirginiaUnemployment::class,
+        \Appleton\Taxes\Countries\US\Washington\WashingtonFamilyMedicalLeave\WashingtonFamilyMedicalLeave::class,
+        \Appleton\Taxes\Countries\US\Washington\WashingtonFamilyMedicalLeaveEmployer\WashingtonFamilyMedicalLeaveEmployer::class,
         \Appleton\Taxes\Countries\US\Washington\WashingtonUnemployment\WashingtonUnemployment::class,
         \Appleton\Taxes\Countries\US\WashingtonDC\WashingtonDCIncome\WashingtonDCIncome::class,
         \Appleton\Taxes\Countries\US\WashingtonDC\WashingtonDCUnemployment\WashingtonDCUnemployment::class,
@@ -1445,14 +1453,16 @@ class TaxServiceProvider extends ServiceProvider
                 return $namespace . '\\' . $implementation . '\\' . $basename;
             }
         }
-        throw new \Exception('The implementation could not be found.');
+
+        $short_name = (new ReflectionClass($interface))->getShortName();
+        throw new \Exception("The implementation for $short_name ".$date->toDateString().' could not be found.');
     }
 
     public function register()
     {
         $this->app->bind(
-            \Appleton\Taxes\Classes\StateUnemployment::class,
-            \Appleton\Taxes\Classes\BaseStateUnemployment::class
+            StateUnemployment::class,
+            BaseStateUnemployment::class
         );
 
         foreach ($this->interfaces as $interface) {
@@ -1460,7 +1470,7 @@ class TaxServiceProvider extends ServiceProvider
                 switch ($interface::SCOPE) {
                     case BaseTax::SCOPE:
                         $payroll = $app->make(Payroll::class);
-                        $implementation = $this->resolveImplementation($interface, $payroll->date);
+                        $implementation = $this->resolveImplementation($interface, $payroll->getStartDate());
                         break;
                     case BasePayrollLiability::SCOPE:
                         $payroll = $app->make(CompanyPayroll::class);

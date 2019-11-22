@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\Wisconsin\WisconsinUnemployment\V20180101;
 
-use Appleton\Taxes\Classes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
 use Appleton\Taxes\Countries\US\Wisconsin\WisconsinUnemployment\WisconsinUnemployment as BaseWisconsinUnemployment;
 
 class WisconsinUnemployment extends BaseWisconsinUnemployment

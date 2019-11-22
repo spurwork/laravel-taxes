@@ -2,9 +2,13 @@
 
 namespace Appleton\Taxes\Countries\US\Ohio\Dayton;
 
-use Appleton\Taxes\Classes\BaseOccupational;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseOccupational;
+use Illuminate\Database\Eloquent\Collection;
 
 abstract class Dayton extends BaseOccupational
 {
-
+    public function doesApply(Collection $tax_areas): bool
+    {
+        return $this->payroll->birth_date === null || $this->payroll->birth_date->age >= 16;
+    }
 }

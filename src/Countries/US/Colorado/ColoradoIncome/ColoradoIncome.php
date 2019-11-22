@@ -2,8 +2,8 @@
 
 namespace Appleton\Taxes\Countries\US\Colorado\ColoradoIncome;
 
-use Appleton\Taxes\Classes\BaseStateIncome;
-use Appleton\Taxes\Classes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseStateIncome;
 use Appleton\Taxes\Models\Countries\US\Colorado\ColoradoIncomeTaxInformation;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Arr;

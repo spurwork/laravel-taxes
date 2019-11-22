@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Models\Countries\US\Oklahoma;
 
-use Appleton\Taxes\Classes\BaseTaxInformationModel;
+use Appleton\Taxes\Classes\WorkerTaxes\BaseTaxInformationModel;
 use Appleton\Taxes\Countries\US\Oklahoma\OklahomaIncome\OklahomaIncome;
 
 class OklahomaIncomeTaxInformation extends BaseTaxInformationModel

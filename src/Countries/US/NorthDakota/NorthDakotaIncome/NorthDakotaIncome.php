@@ -2,8 +2,8 @@
 
 namespace Appleton\Taxes\Countries\US\NorthDakota\NorthDakotaIncome;
 
-use Appleton\Taxes\Classes\BaseStateIncome;
-use Appleton\Taxes\Classes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseStateIncome;
 use Appleton\Taxes\Models\Countries\US\NorthDakota\NorthDakotaIncomeTaxInformation;
 
 abstract class NorthDakotaIncome extends BaseStateIncome

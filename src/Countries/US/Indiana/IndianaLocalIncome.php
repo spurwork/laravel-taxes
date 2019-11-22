@@ -2,8 +2,8 @@
 
 namespace Appleton\Taxes\Countries\US\Indiana;
 
-use Appleton\Taxes\Classes\BaseLocalIncome;
-use Appleton\Taxes\Classes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseLocalIncome;
 use Appleton\Taxes\Countries\US\Indiana\AdamsIncome\AdamsIncome;
 use Appleton\Taxes\Countries\US\Indiana\AllenIncome\AllenIncome;
 use Appleton\Taxes\Countries\US\Indiana\BartholomewIncome\BartholomewIncome;
@@ -226,7 +226,7 @@ abstract class IndianaLocalIncome extends BaseLocalIncome
 
     abstract public function getTaxRate(): float;
 
-    public function compute(Collection $tax_areas)
+    public function doesApply(Collection $tax_areas): bool
     {
         if (array_key_exists($this->tax_information->county_lived, static::COUNTY_CODES)) {
             $local_tax_class = static::COUNTY_CODES[$this->tax_information->county_lived];
@@ -236,10 +236,6 @@ abstract class IndianaLocalIncome extends BaseLocalIncome
             $this->resident = false;
         }
 
-        if (!is_subclass_of(get_called_class(), $local_tax_class)) {
-            return 0;
-        }
-
-        return parent::compute($tax_areas);
+        return is_subclass_of(get_called_class(), $local_tax_class);
     }
 }

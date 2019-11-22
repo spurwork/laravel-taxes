@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Models\Countries\US\Michigan;
 
-use Appleton\Taxes\Classes\BaseTaxInformationModel;
+use Appleton\Taxes\Classes\WorkerTaxes\BaseTaxInformationModel;
 use Appleton\Taxes\Countries\US\Michigan\MichiganIncome\MichiganIncome;
 
 class MichiganIncomeTaxInformation extends BaseTaxInformationModel

@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\Mississippi\MississippiUnemployment;
 
-use Appleton\Taxes\Classes\BaseStateUnemployment;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseStateUnemployment;
 use Illuminate\Database\Eloquent\Collection;
 
 class MississippiUnemployment extends BaseStateUnemployment

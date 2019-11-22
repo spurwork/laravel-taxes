@@ -3,24 +3,23 @@
 namespace Appleton\Taxes\Countries\US\Colorado\SheridanOccupationalPrivilege\V20180101;
 
 use Appleton\Taxes\Countries\US\Colorado\SheridanOccupationalPrivilege\SheridanOccupationalPrivilege as BaseDenverOccupationalPrivilege;
-use Illuminate\Support\Facades\DB;
-use stdClass;
+use Appleton\Taxes\Models\GovernmentalUnitArea;
 
 class SheridanOccupationalPrivilege extends BaseDenverOccupationalPrivilege
 {
-    protected function getMonthlyWageAmountInDollars(): int
+    public function getMonthlyWageAmount(): int
     {
         return 0;
     }
 
-    protected function getMonthlyTaxAmountInCents(): int
+    public function getMonthlyTaxAmount(): int
     {
         return 0;
     }
 
-    protected function getLocalGovernmentalUnitArea(): stdClass
+    protected function getLocalGovernmentalUnitArea(): GovernmentalUnitArea
     {
-        return DB::table('governmental_unit_areas')
+        return GovernmentalUnitArea::query()
             ->where('name', 'Sheridan, CO')
             ->first();
     }

@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\Alabama\SouthsideOccupational;
 
-use Appleton\Taxes\Classes\BaseOccupational;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseOccupational;
 
 abstract class SouthsideOccupational extends BaseOccupational
 {

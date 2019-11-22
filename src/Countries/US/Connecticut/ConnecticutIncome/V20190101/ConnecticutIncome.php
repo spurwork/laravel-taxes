@@ -2,9 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\Connecticut\ConnecticutIncome\V20190101;
 
-use Appleton\Taxes\Classes\Payroll;
 use Appleton\Taxes\Countries\US\Connecticut\ConnecticutIncome\ConnecticutIncome as BaseConnecticutIncome;
-use Appleton\Taxes\Models\Countries\US\Connecticut\ConnecticutIncomeTaxInformation;
 use Illuminate\Database\Eloquent\Collection;
 
 class ConnecticutIncome extends BaseConnecticutIncome
@@ -39,7 +37,7 @@ class ConnecticutIncome extends BaseConnecticutIncome
         $annual_gross_tax_amount -= $this->tax_information->reduced_withholding;
         $annual_gross_tax_amount += $this->tax_information->additional_withholding;
 
-        return round($this->payroll->withholdTax($annual_gross_tax_amount), 2);
+        return round($this->payroll->withholdTax(max($annual_gross_tax_amount, 0)), 2);
     }
 
     public function getPersonalExemption()

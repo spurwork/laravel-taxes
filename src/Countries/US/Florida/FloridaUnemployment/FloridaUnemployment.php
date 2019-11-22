@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\Florida\FloridaUnemployment;
 
-use Appleton\Taxes\Classes\BaseStateUnemployment;
+use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseStateUnemployment;
 
 abstract class FloridaUnemployment extends BaseStateUnemployment
 {

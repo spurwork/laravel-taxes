@@ -2,9 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\NorthDakota\NorthDakotaIncome\V20190101;
 
-use Appleton\Taxes\Classes\Payroll;
 use Appleton\Taxes\Countries\US\NorthDakota\NorthDakotaIncome\NorthDakotaIncome as BaseNorthDakotaIncome;
-use Appleton\Taxes\Models\Countries\US\NorthDakota\NorthDakotaIncomeTaxInformation;
 use Illuminate\Database\Eloquent\Collection;
 
 class NorthDakotaIncome extends BaseNorthDakotaIncome
