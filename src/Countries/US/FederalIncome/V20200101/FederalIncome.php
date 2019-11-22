@@ -114,7 +114,7 @@ class FederalIncome extends BaseFederalIncome
             $taxable_wages = $this->getTentativeAmount($taxable_wages);
             $taxable_wages -= $this->tax_information->dependents;
             $taxable_wages = $taxable_wages > 0 ? $taxable_wages : 0;
-            $taxable_wages += $this->getAdditionalWithholding();
+            $taxable_wages += $this->tax_information->extra_withholding;
 
             $this->tax_total = $this->payroll->withholdTax($taxable_wages / $this->payroll->pay_periods);
         } elseif ($this->tax_information->form_version === self::FORM_VERSION_2019) {
@@ -131,7 +131,7 @@ class FederalIncome extends BaseFederalIncome
     public function getAdjustedWageAmount()
     {
         $taxable_wages = $this->payroll->getEarnings() * $this->payroll->pay_periods;
-        $taxable_wages += $this->tax_information->extra_withholding;
+        $taxable_wages += $this->tax_information->other_income;
         $taxable_wages -= $this->tax_information->deductions;
         $taxable_wages = $taxable_wages > 0 ? $taxable_wages : 0;
 
