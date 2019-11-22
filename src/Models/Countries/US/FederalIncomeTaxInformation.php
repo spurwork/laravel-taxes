@@ -16,6 +16,12 @@ class FederalIncomeTaxInformation extends BaseTaxInformationModel
         $tax_information->filing_status = FederalIncome::FILING_SINGLE;
         $tax_information->non_resident_alien = false;
         $tax_information->exempt = false;
+        $tax_information->dependents = 0;
+        $tax_information->other_income = 0;
+        $tax_information->deductions = 0;
+        $tax_information->extra_withholding = 0;
+        $tax_information->step_2_checked = false;
+        $tax_information->form_version = '2019';
         return $tax_information;
     }
 
@@ -27,6 +33,26 @@ class FederalIncomeTaxInformation extends BaseTaxInformationModel
     public function setAdditionalWithholding($value)
     {
         $this->attributes['additional_withholding'] = round($value / 100);
+    }
+
+    public function getOtherIncome($value)
+    {
+        return $value * 100;
+    }
+
+    public function setOtherIncome($value)
+    {
+        $this->attributes['other_income'] = round($value / 100);
+    }
+
+    public function getExtraWithholding($value)
+    {
+        return $value * 100;
+    }
+
+    public function setExtraWithholding($value)
+    {
+        $this->attributes['extra_withholding'] = round($value / 100);
     }
 
     public static function getTax()

@@ -1,10 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Tests\Unit\Countries\US\FederalIncome\V20170101;
+namespace Appleton\Taxes\Tests\Unit\Countries\US\FederalIncome\V20200101;
 
 use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome;
-use Appleton\Taxes\Countries\US\Medicare\Medicare;
-use Appleton\Taxes\Countries\US\SocialSecurity\SocialSecurity;
 use Appleton\Taxes\Models\Countries\US\FederalIncomeTaxInformation;
 use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
 use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
@@ -36,19 +34,15 @@ class FederalIncomeTest extends TaxTestCase
      */
     public function testTax(TestParameters $parameters): void
     {
-        $this->markTestSkipped();
         $this->validate($parameters);
     }
 
     /**
-     * @dataProvider provideAdditionalWithholdingTestData
+     * @dataProvider provideUseDefaultTestData
      */
-    public function testTax_additional_withholding(TestParameters $parameters): void
+    public function testTax_use_default(TestParameters $parameters): void
     {
-        $this->markTestSkipped();
-        // these tests rely on SocialSecurity and Medicare being withheld from the payroll
-        $this->query_runner->addTax(Medicare::class);
-        $this->query_runner->addTax(SocialSecurity::class);
+        FederalIncomeTaxInformation::forUser($this->user)->delete();
 
         $this->validate($parameters);
     }
@@ -60,175 +54,79 @@ class FederalIncomeTest extends TaxTestCase
             ->setDate(self::DATE)
             ->setHomeLocation(self::LOCATION)
             ->setTaxClass(self::TAX_CLASS)
-            ->setTaxInfoClass(self::TAX_INFO_CLASS);
+            ->setTaxInfoClass(self::TAX_INFO_CLASS)
+            ->setPayPeriods(52);
 
         return [
-            'no taxes owed' => [
+            'A' => [
                 $builder
-                    ->setTaxInfoOptions(null)
-                    ->setPayPeriods(1)
-                    ->setWagesInCents(230000)
+                    ->setTaxInfoOptions([
+                        'exemptions' => 1,
+                    ])
+                    ->setWagesInCents(26000)
                     ->setExpectedAmountInCents(0)
                     ->build()
             ],
-            'no taxes owed married' => [
-                $builder
-                    ->setTaxInfoOptions([
-                        'filing_status' => FederalIncome::FILING_MARRIED,
-                    ])
-                    ->setPayPeriods(1)
-                    ->setWagesInCents(865000)
-                    ->setExpectedAmountInCents(0)
-                    ->build()
-            ],
-            'taxes owed' => [
-                $builder
-                    ->setTaxInfoOptions(null)
-                    ->setPayPeriods(1)
-                    ->setWagesInCents(230100)
-                    ->setExpectedAmountInCents(10)
-                    ->build()
-            ],
-            'taxes owed married' => [
-                $builder
-                    ->setTaxInfoOptions([
-                        'filing_status' => FederalIncome::FILING_MARRIED,
-                    ])
-                    ->setPayPeriods(1)
-                    ->setWagesInCents(865100)
-                    ->setExpectedAmountInCents(10)
-                    ->build()
-            ],
-            'supplemental' => [
+            // 'B' => [
+            //     $builder
+            //         ->setTaxInfoOptions([
+            //             'exemptions' => 4,
+            //             'filing_status' => FederalIncome::FILING_MARRIED,
+            //         ])
+            //         ->setWagesInCents(47525)
+            //         ->setExpectedAmountInCents(0)
+            //         ->build()
+            // ],
+            // 'C' => [
+            //     $builder
+            //         ->setTaxInfoOptions([
+            //             'exemptions' => 2,
+            //         ])
+            //         ->setWagesInCents(11233)
+            //         ->setExpectedAmountInCents(0)
+            //         ->build()
+            // ],
+            // 'D' => [
+            //     $builder
+            //         ->setTaxInfoOptions(null)
+            //         ->setWagesInCents(86514)
+            //         ->setExpectedAmountInCents(9460)
+            //         ->build()
+            // ],
+            // 'E' => [
+            //     $builder
+            //         ->setTaxInfoOptions([
+            //             'exemptions' => 3,
+            //             'filing_status' => FederalIncome::FILING_MARRIED,
+            //         ])
+            //         ->setWagesInCents(36757)
+            //         ->setExpectedAmountInCents(0)
+            //         ->build()
+            // ],
+            // 'H' => [
+            //     $builder
+            //         ->setTaxInfoOptions([
+            //             'exemptions' => 2,
+            //         ])
+            //         ->setWagesInCents(80000)
+            //         ->setExpectedAmountInCents(6411)
+            //         ->build()
+            // ],
+        ];
+    }
+
+    public function provideUseDefaultTestData(): array
+    {
+        return [
+            '01' => [
                 (new TestParametersBuilder())
                     ->setDate(self::DATE)
                     ->setHomeLocation(self::LOCATION)
                     ->setTaxClass(self::TAX_CLASS)
-                    ->setTaxInfoOptions(null)
-                    ->setPayPeriods(1)
-                    ->setWagesInCents(10000)
-                    ->setSupplementalWagesInCents(10000)
-                    ->setExpectedAmountInCents(2500)
-                    ->build()
-            ],
-            'weekly' => [
-                $builder
-                    ->setTaxInfoOptions(null)
+                    ->setTaxInfoClass(self::TAX_INFO_CLASS)
+                    ->setWagesInCents(80000)
                     ->setPayPeriods(52)
-                    ->setWagesInCents(230000)
-                    ->setExpectedAmountInCents(49664)
-                    ->build()
-            ],
-            'bi-monthly' => [
-                $builder
-                    ->setTaxInfoOptions(null)
-                    ->setPayPeriods(24)
-                    ->setWagesInCents(230000)
-                    ->setExpectedAmountInCents(37348)
-                    ->build()
-            ],
-            'monthly' => [
-                $builder
-                    ->setTaxInfoOptions(null)
-                    ->setPayPeriods(12)
-                    ->setWagesInCents(230000)
-                    ->setExpectedAmountInCents(27739)
-                    ->build()
-            ],
-            'non-negative' => [
-                $builder
-                    ->setTaxInfoOptions(null)
-                    ->setPayPeriods(260)
-                    ->setWagesInCents(1000)
-                    ->setExpectedAmountInCents(11)
-                    ->build()
-            ],
-            'case study 01' => [
-                $builder
-                    ->setTaxInfoOptions(null)
-                    ->setPayPeriods(260)
-                    ->setWagesInCents(6668)
-                    ->setExpectedAmountInCents(688)
-                    ->build()
-            ],
-            'exempt true' => [
-                $builder
-                    ->setTaxInfoOptions([
-                        'exempt' => true,
-                    ])
-                    ->setPayPeriods(24)
-                    ->setWagesInCents(230000)
-                    ->setExpectedAmountInCents(0)
-                    ->build()
-            ],
-            'exempt false' => [
-                $builder
-                    ->setTaxInfoOptions([
-                        'exempt' => false,
-                    ])
-                    ->setPayPeriods(24)
-                    ->setWagesInCents(230000)
-                    ->setExpectedAmountInCents(37348)
-                    ->build()
-            ],
-        ];
-    }
-
-    public function provideAdditionalWithholdingTestData(): array
-    {
-        $builder = new TestParametersBuilder();
-        $builder
-            ->setDate(self::DATE)
-            ->setHomeLocation(self::LOCATION)
-            ->setTaxClass(self::TAX_CLASS)
-            ->setTaxInfoClass(self::TAX_INFO_CLASS)
-            ->setPayPeriods(1);
-
-        return [
-            'additional withholding no wages' => [
-                $builder
-                    ->setTaxInfoOptions([
-                        'additional_withholding' => 10,
-                    ])
-                    ->setWagesInCents(0)
-                    ->setExpectedAmountInCents(0)
-                    ->build()
-            ],
-            'additional withholding not enough wages 01' => [
-                $builder
-                    ->setTaxInfoOptions([
-                        'additional_withholding' => 10,
-                    ])
-                    ->setWagesInCents(100)
-                    ->setExpectedAmountInCents(92)
-                    ->build()
-            ],
-            'additional withholding not enough wages 02' => [
-                $builder
-                    ->setTaxInfoOptions([
-                        'additional_withholding' => 10,
-                    ])
-                    ->setWagesInCents(1000)
-                    ->setExpectedAmountInCents(923)
-                    ->build()
-            ],
-            'additional withholding single' => [
-                $builder
-                    ->setTaxInfoOptions([
-                        'additional_withholding' => 10,
-                    ])
-                    ->setWagesInCents(230100)
-                    ->setExpectedAmountInCents(1010)
-                    ->build()
-            ],
-            'additional withholding married' => [
-                $builder
-                    ->setTaxInfoOptions([
-                        'filing_status' => FederalIncome::FILING_MARRIED,
-                        'additional_withholding' => 20,
-                    ])
-                    ->setWagesInCents(865100)
-                    ->setExpectedAmountInCents(2010)
+                    ->setExpectedAmountInCents(8350)
                     ->build()
             ],
         ];

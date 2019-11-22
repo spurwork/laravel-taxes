@@ -5,10 +5,13 @@ namespace Appleton\Taxes\Countries\US\FederalIncome\V20200101;
 use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
 use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome as BaseFederalIncome;
 use Appleton\Taxes\Models\Countries\US\FederalIncomeTaxInformation;
+use Illuminate\Database\Eloquent\Collection;
 
 class FederalIncome extends BaseFederalIncome
 {
     const WEEKLY = 81;
+    const FORM_VERSION_2019 = '2019';
+    const FORM_VERSION_2020 = '2020';
 
     const SINGLE_BRACKETS_OLD = [
         [0, 0.0, 0],
@@ -106,81 +109,69 @@ class FederalIncome extends BaseFederalIncome
 
     public function compute(Collection $tax_areas)
     {
-        // new
-        $this->tax_total = $this->payroll->withholdTax($this->getAmountToWithhold());
+        if ($this->tax_information->form_version === self::FORM_VERSION_2020) {
+            $taxable_wages = $this->getAdjustedWageAmount();
+            $taxable_wages = $this->getTentativeAmount($taxable_wages);
+            $taxable_wages -= $this->tax_information->dependents;
+            $taxable_wages = $taxable_wages > 0 ? $taxable_wages : 0;
+            $taxable_wages += $this->getAdditionalWithholding();
 
-        // old
-        $this->tax_total = $this->payroll->withholdTax($this->getTentativeAmount() + $this->tax_information->additional_withholding);
+            $this->tax_total = $this->payroll->withholdTax($taxable_wages / $this->payroll->pay_periods);
+        } elseif ($this->tax_information->form_version === self::FORM_VERSION_2019) {
+            $taxable_wages = ($this->payroll->getEarnings() * $this->payroll->pay_periods) - ($this->tax_information->exemptions * self::WEEKLY);
+            $taxable_wages = $this->getTentativeAmount($taxable_wages);
+            $taxable_wages += $this->getAdditionalWithholding();
+
+            $this->tax_total = $this->payroll->withholdTax($taxable_wages / $this->payroll->pay_periods);
+        }
 
         return round($this->tax_total, 2);
     }
 
-    public function getTaxableWages()
+    public function getAdjustedWageAmount()
     {
-        // new
-        // adding $this->tax_information->other_income
-        // adding $this->tax_information->deductions
-        $taxable_wages = ($this->payroll->getEarnings() + ($this->tax_information->other_income / $this->payroll->pay_periods) - ($this->tax_information->deductions / $this->payroll->pay_periods));
+        $taxable_wages = $this->payroll->getEarnings() * $this->payroll->pay_periods;
+        $taxable_wages += $this->tax_information->extra_withholding;
+        $taxable_wages -= $this->tax_information->deductions;
+        $taxable_wages = $taxable_wages > 0 ? $taxable_wages : 0;
 
-        // old
-        $taxable_wages = $this->payroll->getEarnings() - ($this->tax_information->exemptions * self::WEEKLY);
-
-        return $taxable_wages > 0 ? $taxable_wages : 0;
+        return $taxable_wages;
     }
 
-    public function getAmountToWithhold()
+    public function getTentativeAmount($wages)
     {
-        // adding $this->tax_information->extra_withholding
-        return $this->tax_information->extra_withholding + $this->getTaxCredits();
-    }
-
-    public function getTaxCredits()
-    {
-        $tax_credit_amount = $this->getTentativeAmount() - ($this->tax_information->dependents_total / $this->payroll->pay_periods);
-
-        return $tax_credit_amount > 0 ? $tax_credit_amount : 0;
-    }
-
-    public function getTentativeAmount()
-    {
-        // new
-        if ($this->getTaxBrackets() === static::FILING_MARRIED) {
-            return $this->getTaxBracket($this->getTaxableWages(), self::MARRIED_BRACKETS_OLD);
-        } elseif ($this->getTaxBrackets() === static::FILING_SINGLE) {
-            return $this->getTaxBracket($this->getTaxableWages(), self::SINGLE_BRACKETS_OLD);
-        }
-
-        // old
-        // using tax_information to see if they checked box
-        // adding $this->tax_information->checked
-        // adding $this->tax_information->additional_withholding
-        if ($this->getTaxBrackets() === static::FILING_HEAD_OF_HOUSEHOLD && $this->tax_information->checked) {
-            return $this->getTaxBracket($this->getTaxableWages(), self::HEAD_OF_HOUSEHOLD_NEW_STEP_2_IS_CHECKED);
-        } elseif ($this->getTaxBrackets() === static::FILING_HEAD_OF_HOUSEHOLD && !$this->tax_information->checked) {
-            return $this->getTaxBracket($this->getTaxableWages(), self::HEAD_OF_HOUSEHOLD_NEW_STEP_2_NOT_CHECKED);
-        } elseif ($this->getTaxBrackets() === static::FILING_JOINTLY && $this->tax_information->checked) {
-            return $this->getTaxBracket($this->getTaxableWages(), self::MARRIED_FILING_JOINTLY_NEW_STEP_2_IS_CHECKED);
-        } elseif ($this->getTaxBrackets() === static::FILING_JOINTLY && !$this->tax_information->checked) {
-            return $this->getTaxBracket($this->getTaxableWages(), self::MARRIED_FILING_JOINTLY_NEW_STEP_2_NOT_CHECKED);
-        } elseif ($this->getTaxBrackets() === static::FILING_SINGLE && $this->tax_information->checked) {
-            return $this->getTaxBracket($this->getTaxableWages(), self::SINGLE_NEW_STEP_2_IS_CHECKED);
-        } elseif ($this->getTaxBrackets() === static::FILING_SINGLE && !$this->tax_information->checked) {
-            return $this->getTaxBracket($this->getTaxableWages(), self::SINGLE_NEW_STEP_2_NOT_CHECKED);
+        if ($this->tax_information->form_version === self::FORM_VERSION_2020) {
+            if ($this->tax_information->filing_status === static::FILING_HEAD_OF_HOUSEHOLD && $this->tax_information->step_2_checked) {
+                return $this->getBracketAmount($wages, self::HEAD_OF_HOUSEHOLD_NEW_STEP_2_IS_CHECKED);
+            } elseif ($this->tax_information->filing_status === static::FILING_HEAD_OF_HOUSEHOLD && !$this->tax_information->step_2_checked) {
+                return $this->getBracketAmount($wages, self::HEAD_OF_HOUSEHOLD_NEW_STEP_2_NOT_CHECKED);
+            } elseif ($this->tax_information->filing_status === static::FILING_JOINTLY && $this->tax_information->step_2_checked) {
+                return $this->getBracketAmount($wages, self::MARRIED_FILING_JOINTLY_NEW_STEP_2_IS_CHECKED);
+            } elseif ($this->tax_information->filing_status === static::FILING_JOINTLY && !$this->tax_information->step_2_checked) {
+                return $this->getBracketAmount($wages, self::MARRIED_FILING_JOINTLY_NEW_STEP_2_NOT_CHECKED);
+            } elseif ($this->tax_information->filing_status === static::FILING_SINGLE && $this->tax_information->step_2_checked) {
+                return $this->getBracketAmount($wages, self::SINGLE_NEW_STEP_2_IS_CHECKED);
+            } elseif ($this->tax_information->filing_status === static::FILING_SINGLE && !$this->tax_information->step_2_checked) {
+                return $this->getBracketAmount($wages, self::SINGLE_NEW_STEP_2_NOT_CHECKED);
+            }
+        } elseif ($this->tax_information->form_version === self::FORM_VERSION_2019) {
+            if ($this->tax_information->filing_status === static::FILING_MARRIED) {
+                return $this->getBracketAmount($wages, self::MARRIED_BRACKETS_OLD);
+            } elseif ($this->tax_information->filing_status === static::FILING_SINGLE) {
+                return $this->getBracketAmount($wages, self::SINGLE_BRACKETS_OLD);
+            }
         }
     }
 
     public function getTaxBrackets()
     {
-        // new
-        return ($this->tax_information->filing_status === static::FILING_MARRIED) ? static::MARRIED_BRACKETS : static::SINGLE_BRACKETS;
+        return;
+    }
 
-        // old
-        if ($this->tax_information->filing_status === static::FILING_JOINTLY) {
-            return static::FILING_JOINTLY;
-        } elseif ($this->tax_information->filing_status === static::FILING_HEAD_OF_HOUSEHOLD) {
-            return static::FILING_HEAD_OF_HOUSEHOLD;
-        } else {
-            return static::FILING_SINGLE;
-        }
+    public function getBracketAmount($wages, $table)
+    {
+        $bracket = $this->getTaxBracket($wages, $table);
+        $tax_amount = isset($bracket) ? ($wages - $bracket[0]) * $bracket[1] + $bracket[2] : 0;
+        return $tax_amount > 0 ? $tax_amount : 0;
     }
 }
