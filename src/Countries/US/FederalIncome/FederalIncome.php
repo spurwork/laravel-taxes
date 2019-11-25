@@ -14,7 +14,7 @@ abstract class FederalIncome extends BaseIncome
     const FILING_WIDOW = 1;
     const FILING_HEAD_OF_HOUSEHOLD = 2;
     const FILING_MARRIED = 3;
-    const FILING_SEPARATE = 4;
+    const FILING_SEPERATE = 4;
     const FILING_JOINTLY = 5;
 
     const FILING_STATUSES = [
@@ -22,7 +22,7 @@ abstract class FederalIncome extends BaseIncome
         self::FILING_WIDOW => 'FILING_WIDOW',
         self::FILING_HEAD_OF_HOUSEHOLD => 'FILING_HEAD_OF_HOUSEHOLD',
         self::FILING_MARRIED => 'FILING_MARRIED',
-        self::FILING_SEPARATE => 'FILING_SEPARATE',
+        self::FILING_SEPERATE => 'FILING_SEPERATE',
         self::FILING_JOINTLY => 'FILING_JOINTLY',
     ];
 
