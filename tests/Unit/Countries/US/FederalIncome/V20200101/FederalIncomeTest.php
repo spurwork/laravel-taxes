@@ -21,17 +21,17 @@ class FederalIncomeTest extends TaxTestCase
         $this->query_runner->addTax(self::TAX_CLASS);
 
         FederalIncomeTaxInformation::createForUser([
-            'non_resident_alien' => false, // not needed anymore
-            'exempt' => false, // either
-            'filing_status' => FederalIncome::FILING_SINGLE, // either
-            'form_version' => '2019', // either
-            'dependents' => 0, // new
-            'deductions' => 0, // new
-            'extra_withholding' => 0, // new
-            'step_2_checked' => false, // new
-            'other_income' => 0, // new
-            'additional_withholding' => 0, // old
-            'exemptions' => 0, // old
+            'non_resident_alien' => false,
+            'exempt' => false,
+            'filing_status' => FederalIncome::FILING_SINGLE,
+            'form_version' => '2019',
+            'dependents' => 0,
+            'deductions' => 0,
+            'extra_withholding' => 0,
+            'step_2_checked' => false,
+            'other_income' => 0,
+            'additional_withholding' => 0,
+            'exemptions' => 0,
         ], $this->user);
     }
 
@@ -81,55 +81,108 @@ class FederalIncomeTest extends TaxTestCase
                         'additional_withholding' => 0,
                         'exemptions' => 0,
                     ])
-                    ->setWagesInCents(26000)
-                    ->setExpectedAmountInCents(1870)
+                    ->setWagesInCents(30000)
+                    ->setExpectedAmountInCents(2350)
                     ->build()
             ],
-            // 'B' => [
-            //     $builder
-            //         ->setTaxInfoOptions([
-            //             'exemptions' => 4,
-            //             'filing_status' => FederalIncome::FILING_MARRIED,
-            //         ])
-            //         ->setWagesInCents(47525)
-            //         ->setExpectedAmountInCents(0)
-            //         ->build()
-            // ],
-            // 'C' => [
-            //     $builder
-            //         ->setTaxInfoOptions([
-            //             'exemptions' => 2,
-            //         ])
-            //         ->setWagesInCents(11233)
-            //         ->setExpectedAmountInCents(0)
-            //         ->build()
-            // ],
-            // 'D' => [
-            //     $builder
-            //         ->setTaxInfoOptions(null)
-            //         ->setWagesInCents(86514)
-            //         ->setExpectedAmountInCents(9460)
-            //         ->build()
-            // ],
-            // 'E' => [
-            //     $builder
-            //         ->setTaxInfoOptions([
-            //             'exemptions' => 3,
-            //             'filing_status' => FederalIncome::FILING_MARRIED,
-            //         ])
-            //         ->setWagesInCents(36757)
-            //         ->setExpectedAmountInCents(0)
-            //         ->build()
-            // ],
-            // 'H' => [
-            //     $builder
-            //         ->setTaxInfoOptions([
-            //             'exemptions' => 2,
-            //         ])
-            //         ->setWagesInCents(80000)
-            //         ->setExpectedAmountInCents(6411)
-            //         ->build()
-            // ],
+            'B' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'exempt' => false,
+                        'filing_status' => FederalIncome::FILING_SINGLE,
+                        'form_version' => '2019',
+                        'additional_withholding' => 0,
+                        'exemptions' => 0,
+                    ])
+                    ->setWagesInCents(300000)
+                    ->setExpectedAmountInCents(59042)
+                    ->build()
+            ],
+            'C' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'exempt' => false,
+                        'filing_status' => FederalIncome::FILING_SINGLE,
+                        'form_version' => '2019',
+                        'additional_withholding' => 0,
+                        'exemptions' => 2,
+                    ])
+                    ->setWagesInCents(30000)
+                    ->setExpectedAmountInCents(2313)
+                    ->build()
+            ],
+            'D' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'exempt' => false,
+                        'filing_status' => FederalIncome::FILING_SINGLE,
+                        'form_version' => '2019',
+                        'additional_withholding' => 100,
+                        'exemptions' => 2,
+                    ])
+                    ->setWagesInCents(30000)
+                    ->setExpectedAmountInCents(2505)
+                    ->build()
+            ],
+            'E' => [
+                $builder
+                    ->setTaxInfoOptions(null)
+                    ->setWagesInCents(86514)
+                    ->setExpectedAmountInCents(9461)
+                    ->build()
+            ],
+            'A2' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'exempt' => false,
+                        'filing_status' => FederalIncome::FILING_MARRIED,
+                        'form_version' => '2019',
+                        'additional_withholding' => 0,
+                        'exemptions' => 0,
+                    ])
+                    ->setWagesInCents(30000)
+                    ->setExpectedAmountInCents(731)
+                    ->build()
+            ],
+            'B2' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'exempt' => false,
+                        'filing_status' => FederalIncome::FILING_MARRIED,
+                        'form_version' => '2019',
+                        'additional_withholding' => 0,
+                        'exemptions' => 0,
+                    ])
+                    ->setWagesInCents(300000)
+                    ->setExpectedAmountInCents(45079)
+                    ->build()
+            ],
+            'C2' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'exempt' => false,
+                        'filing_status' => FederalIncome::FILING_MARRIED,
+                        'form_version' => '2019',
+                        'additional_withholding' => 0,
+                        'exemptions' => 2,
+                    ])
+                    ->setWagesInCents(30000)
+                    ->setExpectedAmountInCents(700)
+                    ->build()
+            ],
+            'D2' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'exempt' => false,
+                        'filing_status' => FederalIncome::FILING_MARRIED,
+                        'form_version' => '2019',
+                        'additional_withholding' => 100,
+                        'exemptions' => 2,
+                    ])
+                    ->setWagesInCents(30000)
+                    ->setExpectedAmountInCents(892)
+                    ->build()
+            ],
         ];
     }
 
@@ -150,61 +203,288 @@ class FederalIncomeTest extends TaxTestCase
                         'exempt' => false,
                         'filing_status' => FederalIncome::FILING_SINGLE,
                         'form_version' => '2020',
-                        'dependents' => 000,
-                        'deductions' => 000,
-                        'extra_withholding' => 000,
+                        'dependents' => 0,
+                        'deductions' => 0,
+                        'extra_withholding' => 0,
                         'step_2_checked' => false,
-                        'other_income' => 000,
+                        'other_income' => 0,
                     ])
-                    ->setWagesInCents(26000)
-                    ->setExpectedAmountInCents(1870)
+                    ->setWagesInCents(30000)
+                    ->setExpectedAmountInCents(650)
                     ->build()
             ],
-            // 'B' => [
-            //     $builder
-            //         ->setTaxInfoOptions([
-            //             'exemptions' => 4,
-            //             'filing_status' => FederalIncome::FILING_MARRIED,
-            //         ])
-            //         ->setWagesInCents(47525)
-            //         ->setExpectedAmountInCents(0)
-            //         ->build()
-            // ],
-            // 'C' => [
-            //     $builder
-            //         ->setTaxInfoOptions([
-            //             'exemptions' => 2,
-            //         ])
-            //         ->setWagesInCents(11233)
-            //         ->setExpectedAmountInCents(0)
-            //         ->build()
-            // ],
-            // 'D' => [
-            //     $builder
-            //         ->setTaxInfoOptions(null)
-            //         ->setWagesInCents(86514)
-            //         ->setExpectedAmountInCents(9460)
-            //         ->build()
-            // ],
-            // 'E' => [
-            //     $builder
-            //         ->setTaxInfoOptions([
-            //             'exemptions' => 3,
-            //             'filing_status' => FederalIncome::FILING_MARRIED,
-            //         ])
-            //         ->setWagesInCents(36757)
-            //         ->setExpectedAmountInCents(0)
-            //         ->build()
-            // ],
-            // 'H' => [
-            //     $builder
-            //         ->setTaxInfoOptions([
-            //             'exemptions' => 2,
-            //         ])
-            //         ->setWagesInCents(80000)
-            //         ->setExpectedAmountInCents(6411)
-            //         ->build()
-            // ],
+            'B' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'exempt' => false,
+                        'filing_status' => FederalIncome::FILING_SINGLE,
+                        'form_version' => '2020',
+                        'dependents' => 0,
+                        'deductions' => 0,
+                        'extra_withholding' => 0,
+                        'step_2_checked' => true,
+                        'other_income' => 0,
+                    ])
+                    ->setWagesInCents(30000)
+                    ->setExpectedAmountInCents(2009)
+                    ->build()
+            ],
+            'C' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'exempt' => false,
+                        'filing_status' => FederalIncome::FILING_SINGLE,
+                        'form_version' => '2020',
+                        'dependents' => 0,
+                        'deductions' => 500,
+                        'extra_withholding' => 0,
+                        'step_2_checked' => false,
+                        'other_income' => 1000,
+                    ])
+                    ->setWagesInCents(300000)
+                    ->setExpectedAmountInCents(55394)
+                    ->build()
+            ],
+            'D' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'exempt' => false,
+                        'filing_status' => FederalIncome::FILING_SINGLE,
+                        'form_version' => '2020',
+                        'dependents' => 0,
+                        'deductions' => 500,
+                        'extra_withholding' => 0,
+                        'step_2_checked' => true,
+                        'other_income' => 1000,
+                    ])
+                    ->setWagesInCents(300000)
+                    ->setExpectedAmountInCents(77377)
+                    ->build()
+            ],
+            'E' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'exempt' => false,
+                        'filing_status' => FederalIncome::FILING_SINGLE,
+                        'form_version' => '2020',
+                        'dependents' => 1000,
+                        'deductions' => 500,
+                        'extra_withholding' => 0,
+                        'step_2_checked' => true,
+                        'other_income' => 1000,
+                    ])
+                    ->setWagesInCents(300000)
+                    ->setExpectedAmountInCents(75454)
+                    ->build()
+            ],
+            'F' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'exempt' => false,
+                        'filing_status' => FederalIncome::FILING_SINGLE,
+                        'form_version' => '2020',
+                        'dependents' => 1000,
+                        'deductions' => 500,
+                        'extra_withholding' => 100,
+                        'step_2_checked' => true,
+                        'other_income' => 1000,
+                    ])
+                    ->setWagesInCents(300000)
+                    ->setExpectedAmountInCents(75646)
+                    ->build()
+            ],
+            'A2' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'exempt' => false,
+                        'filing_status' => FederalIncome::FILING_JOINTLY,
+                        'form_version' => '2020',
+                        'dependents' => 0,
+                        'deductions' => 0,
+                        'extra_withholding' => 0,
+                        'step_2_checked' => false,
+                        'other_income' => 0,
+                    ])
+                    ->setWagesInCents(30000)
+                    ->setExpectedAmountInCents(0)
+                    ->build()
+            ],
+            'B2' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'exempt' => false,
+                        'filing_status' => FederalIncome::FILING_JOINTLY,
+                        'form_version' => '2020',
+                        'dependents' => 0,
+                        'deductions' => 0,
+                        'extra_withholding' => 0,
+                        'step_2_checked' => true,
+                        'other_income' => 0,
+                    ])
+                    ->setWagesInCents(30000)
+                    ->setExpectedAmountInCents(650)
+                    ->build()
+            ],
+            'C2' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'exempt' => false,
+                        'filing_status' => FederalIncome::FILING_JOINTLY,
+                        'form_version' => '2020',
+                        'dependents' => 0,
+                        'deductions' => 500,
+                        'extra_withholding' => 0,
+                        'step_2_checked' => false,
+                        'other_income' => 1000,
+                    ])
+                    ->setWagesInCents(300000)
+                    ->setExpectedAmountInCents(39957)
+                    ->build()
+            ],
+            'D2' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'exempt' => false,
+                        'filing_status' => FederalIncome::FILING_JOINTLY,
+                        'form_version' => '2020',
+                        'dependents' => 0,
+                        'deductions' => 500,
+                        'extra_withholding' => 0,
+                        'step_2_checked' => true,
+                        'other_income' => 1000,
+                    ])
+                    ->setWagesInCents(300000)
+                    ->setExpectedAmountInCents(55394)
+                    ->build()
+            ],
+            'E2' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'exempt' => false,
+                        'filing_status' => FederalIncome::FILING_JOINTLY,
+                        'form_version' => '2020',
+                        'dependents' => 1000,
+                        'deductions' => 500,
+                        'extra_withholding' => 0,
+                        'step_2_checked' => true,
+                        'other_income' => 1000,
+                    ])
+                    ->setWagesInCents(300000)
+                    ->setExpectedAmountInCents(53471)
+                    ->build()
+            ],
+            'F2' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'exempt' => false,
+                        'filing_status' => FederalIncome::FILING_JOINTLY,
+                        'form_version' => '2020',
+                        'dependents' => 1000,
+                        'deductions' => 500,
+                        'extra_withholding' => 100,
+                        'step_2_checked' => true,
+                        'other_income' => 1000,
+                    ])
+                    ->setWagesInCents(300000)
+                    ->setExpectedAmountInCents(53663)
+                    ->build()
+            ],
+            'A3' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'exempt' => false,
+                        'filing_status' => FederalIncome::FILING_HEAD_OF_HOUSEHOLD,
+                        'form_version' => '2020',
+                        'dependents' => 0,
+                        'deductions' => 0,
+                        'extra_withholding' => 0,
+                        'step_2_checked' => false,
+                        'other_income' => 0,
+                    ])
+                    ->setWagesInCents(30000)
+                    ->setExpectedAmountInCents(0)
+                    ->build()
+            ],
+            'B3' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'exempt' => false,
+                        'filing_status' => FederalIncome::FILING_HEAD_OF_HOUSEHOLD,
+                        'form_version' => '2020',
+                        'dependents' => 0,
+                        'deductions' => 0,
+                        'extra_withholding' => 0,
+                        'step_2_checked' => true,
+                        'other_income' => 0,
+                    ])
+                    ->setWagesInCents(30000)
+                    ->setExpectedAmountInCents(1240)
+                    ->build()
+            ],
+            'C3' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'exempt' => false,
+                        'filing_status' => FederalIncome::FILING_HEAD_OF_HOUSEHOLD,
+                        'form_version' => '2020',
+                        'dependents' => 0,
+                        'deductions' => 500,
+                        'extra_withholding' => 0,
+                        'step_2_checked' => false,
+                        'other_income' => 1000,
+                    ])
+                    ->setWagesInCents(300000)
+                    ->setExpectedAmountInCents(49850)
+                    ->build()
+            ],
+            'D3' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'exempt' => false,
+                        'filing_status' => FederalIncome::FILING_HEAD_OF_HOUSEHOLD,
+                        'form_version' => '2020',
+                        'dependents' => 0,
+                        'deductions' => 500,
+                        'extra_withholding' => 0,
+                        'step_2_checked' => true,
+                        'other_income' => 1000,
+                    ])
+                    ->setWagesInCents(300000)
+                    ->setExpectedAmountInCents(73939)
+                    ->build()
+            ],
+            'E3' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'exempt' => false,
+                        'filing_status' => FederalIncome::FILING_HEAD_OF_HOUSEHOLD,
+                        'form_version' => '2020',
+                        'dependents' => 1000,
+                        'deductions' => 500,
+                        'extra_withholding' => 0,
+                        'step_2_checked' => true,
+                        'other_income' => 1000,
+                    ])
+                    ->setWagesInCents(300000)
+                    ->setExpectedAmountInCents(72016)
+                    ->build()
+            ],
+            'F3' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'exempt' => false,
+                        'filing_status' => FederalIncome::FILING_HEAD_OF_HOUSEHOLD,
+                        'form_version' => '2020',
+                        'dependents' => 1000,
+                        'deductions' => 500,
+                        'extra_withholding' => 100,
+                        'step_2_checked' => true,
+                        'other_income' => 1000,
+                    ])
+                    ->setWagesInCents(300000)
+                    ->setExpectedAmountInCents(72209)
+                    ->build()
+            ],
         ];
     }
 
