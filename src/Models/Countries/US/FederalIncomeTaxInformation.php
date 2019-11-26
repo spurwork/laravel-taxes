@@ -35,26 +35,6 @@ class FederalIncomeTaxInformation extends BaseTaxInformationModel
         $this->attributes['additional_withholding'] = round($value / 100);
     }
 
-    public function getOtherIncome($value)
-    {
-        return $value * 100;
-    }
-
-    public function setOtherIncome($value)
-    {
-        $this->attributes['other_income'] = round($value / 100);
-    }
-
-    public function getExtraWithholding($value)
-    {
-        return $value * 100;
-    }
-
-    public function setExtraWithholding($value)
-    {
-        $this->attributes['extra_withholding'] = round($value / 100);
-    }
-
     public static function getTax()
     {
         return FederalIncome::class;
