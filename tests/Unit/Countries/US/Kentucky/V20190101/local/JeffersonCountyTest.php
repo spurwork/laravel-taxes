@@ -4,9 +4,9 @@ namespace Appleton\Taxes\Tests\Unit\Countries\US\Kentucky\V20190101;
 
 use Appleton\Taxes\Countries\US\Kentucky\JeffersonCounty\JeffersonCounty;
 use Appleton\Taxes\Models\Countries\US\Kentucky\KentuckyIncomeTaxInformation;
+use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
 use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
 use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
-use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
 
 class JeffersonCountyTest extends TaxTestCase
 {
@@ -36,6 +36,14 @@ class JeffersonCountyTest extends TaxTestCase
     public function testTax(TestParameters $parameters): void
     {
         $this->validate($parameters);
+    }
+
+    /**
+     * @dataProvider provideNoTaxTestData
+     */
+    public function testNoTax(TestParameters $parameters): void
+    {
+        $this->validateNoTax($parameters);
     }
 
     public function provideTestData(): array
@@ -81,7 +89,7 @@ class JeffersonCountyTest extends TaxTestCase
                     ->setWorkLocation(self::JEFFERSON_COUNTY_LOCATION)
                     ->setTaxInfoOptions(['exempt' => true])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             '04' => [
@@ -90,7 +98,7 @@ class JeffersonCountyTest extends TaxTestCase
                     ->setWorkLocation(self::JEFFERSON_COUNTY_LOCATION)
                     ->setTaxInfoOptions(['exempt' => true])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             '05' => [
@@ -99,25 +107,33 @@ class JeffersonCountyTest extends TaxTestCase
                     ->setWorkLocation(self::JEFFERSON_COUNTY_LOCATION)
                     ->setTaxInfoOptions(['exempt' => true])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
-            '06' => [
+        ];
+    }
+
+    public function provideNoTaxTestData()
+    {
+        $builder = new TestParametersBuilder();
+        $builder
+            ->setDate(self::DATE)
+            ->setTaxClass(self::TAX_CLASS)
+            ->setPayPeriods(52);
+
+        return [
+            '00' => [
                 $builder
                     ->setHomeLocation(self::JEFFERSON_COUNTY_LOCATION)
                     ->setWorkLocation(self::KENTUCKY_LOCATION)
-                    ->setTaxInfoOptions(null)
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(null)
                     ->build()
             ],
-            '07' => [
+            '01' => [
                 $builder
                     ->setHomeLocation(self::KENTUCKY_LOCATION)
                     ->setWorkLocation(self::KENTUCKY_LOCATION)
-                    ->setTaxInfoOptions(null)
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(null)
                     ->build()
             ],
         ];

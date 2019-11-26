@@ -226,7 +226,7 @@ abstract class IndianaLocalIncome extends BaseLocalIncome
 
     abstract public function getTaxRate(): float;
 
-    public function compute(Collection $tax_areas)
+    public function doesApply(Collection $tax_areas): bool
     {
         if (array_key_exists($this->tax_information->county_lived, static::COUNTY_CODES)) {
             $local_tax_class = static::COUNTY_CODES[$this->tax_information->county_lived];
@@ -236,10 +236,6 @@ abstract class IndianaLocalIncome extends BaseLocalIncome
             $this->resident = false;
         }
 
-        if (!is_subclass_of(get_called_class(), $local_tax_class)) {
-            return 0;
-        }
-
-        return parent::compute($tax_areas);
+        return is_subclass_of(get_called_class(), $local_tax_class);
     }
 }

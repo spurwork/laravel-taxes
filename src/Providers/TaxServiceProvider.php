@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use http\Exception\UnexpectedValueException;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
+use ReflectionClass;
 
 class TaxServiceProvider extends ServiceProvider
 {
@@ -1398,6 +1399,7 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\Ohio\ZaneTraceLSD\ZaneTraceLSDTax::class,
         \Appleton\Taxes\Countries\US\Oklahoma\OklahomaIncome\OklahomaIncome::class,
         \Appleton\Taxes\Countries\US\Oklahoma\OklahomaUnemployment\OklahomaUnemployment::class,
+        \Appleton\Taxes\Countries\US\Oregon\Eugene\Eugene::class,
         \Appleton\Taxes\Countries\US\Oregon\EugeneEmployer\EugeneEmployer::class,
         \Appleton\Taxes\Countries\US\Oregon\OregonIncome\OregonIncome::class,
         \Appleton\Taxes\Countries\US\Oregon\OregonTransit\OregonTransit::class,
@@ -1420,6 +1422,8 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\Vermont\VermontUnemployment\VermontUnemployment::class,
         \Appleton\Taxes\Countries\US\Virginia\VirginiaIncome\VirginiaIncome::class,
         \Appleton\Taxes\Countries\US\Virginia\VirginiaUnemployment\VirginiaUnemployment::class,
+        \Appleton\Taxes\Countries\US\Washington\WashingtonFamilyMedicalLeave\WashingtonFamilyMedicalLeave::class,
+        \Appleton\Taxes\Countries\US\Washington\WashingtonFamilyMedicalLeaveEmployer\WashingtonFamilyMedicalLeaveEmployer::class,
         \Appleton\Taxes\Countries\US\Washington\WashingtonUnemployment\WashingtonUnemployment::class,
         \Appleton\Taxes\Countries\US\WashingtonDC\WashingtonDCIncome\WashingtonDCIncome::class,
         \Appleton\Taxes\Countries\US\WashingtonDC\WashingtonDCUnemployment\WashingtonDCUnemployment::class,
@@ -1449,7 +1453,9 @@ class TaxServiceProvider extends ServiceProvider
                 return $namespace . '\\' . $implementation . '\\' . $basename;
             }
         }
-        throw new \Exception('The implementation could not be found.');
+
+        $short_name = (new ReflectionClass($interface))->getShortName();
+        throw new \Exception("The implementation for $short_name ".$date->toDateString().' could not be found.');
     }
 
     public function register()

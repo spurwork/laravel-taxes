@@ -27,7 +27,7 @@ class EugeneEmployerTest extends TaxTestCase
                 ->setTaxClass(self::TAX_CLASS)
                 ->setPayPeriods(52)
                 ->setWagesInCents(30000)
-                ->setExpectedAmountInCents(null)
+                ->setExpectedAmountInCents(0)
                 ->build()
         );
     }

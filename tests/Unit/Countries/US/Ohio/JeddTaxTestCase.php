@@ -4,8 +4,8 @@ namespace Appleton\Taxes\Tests\Unit\Countries\US\Ohio;
 
 use Appleton\Taxes\Classes\WorkerTaxes\GeoPoint;
 use Appleton\Taxes\Classes\WorkerTaxes\TaxResult;
-use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
 use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
+use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
 use Carbon\Carbon;
 use ReflectionClass;
 
@@ -41,13 +41,14 @@ class JeddTaxTestCase extends TaxTestCase
 
         /** @var TaxResult $result */
         $result = $results->get($parameters->getTaxClass());
+        if ($result === null) {
+            self::fail('no tax results for '.$short_name.' found');
+        }
 
-        self::assertNotNull($result, 'no tax results for '.$short_name.' found');
         self::assertThat(
             $result->getAmountInCents(),
             self::identicalTo($parameters->getExpectedAmountInCents()),
             $short_name.' expected '.$parameters->getExpectedAmountInCents()
             .' tax amount but got '.$result->getAmountInCents());
     }
-
 }

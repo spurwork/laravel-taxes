@@ -65,7 +65,7 @@ class NorthCarolinaIncomeTest extends TaxTestCase
                 $builder
                     ->setTaxInfoOptions(['filing_status' => NorthCarolinaIncome::FILING_MARRIED])
                     ->setWagesInCents(16080)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             'case study D' => [

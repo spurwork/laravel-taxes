@@ -2,18 +2,14 @@
 
 namespace Appleton\Taxes\Countries\US\Ohio\SouthwestLSD;
 
-use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
-use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseOccupational;
-use Appleton\Taxes\Models\Countries\US\Ohio\OhioIncomeTaxInformation;
+use Appleton\Taxes\Countries\US\Ohio\OhioSchoolDistrictEarnedIncomeTax;
 
-abstract class SouthwestLSDTax extends BaseOccupational
+abstract class SouthwestLSDTax extends OhioSchoolDistrictEarnedIncomeTax
 {
-    protected $tax_information;
-    protected $payroll;
+    private const ID = '3118';
 
-    public function __construct(OhioIncomeTaxInformation $tax_information, Payroll $payroll)
+    protected function getId(): string
     {
-        parent::__construct($payroll);
-        $this->tax_information = $tax_information;
+        return self::ID;
     }
 }

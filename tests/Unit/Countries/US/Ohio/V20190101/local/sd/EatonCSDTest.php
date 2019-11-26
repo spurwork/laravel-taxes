@@ -35,6 +35,22 @@ class EatonCSDTest extends TaxTestCase
         $this->validate($parameters);
     }
 
+    public function testTax_different_district(): void
+    {
+        $this->validateNoTax((new TestParametersBuilder())
+            ->setDate(self::DATE)
+            ->setHomeLocation(self::LOCATION)
+            ->setTaxClass(self::TAX_CLASS)
+            ->setTaxInfoClass(self::TAX_INFO_CLASS)
+            ->setPayPeriods(52)
+            ->setTaxInfoOptions([
+                'school_district_id' => '0000',
+            ])
+            ->setWagesInCents(50000)
+            ->build()
+        );
+    }
+
     public function provideTestData(): array
     {
         $builder = new TestParametersBuilder();
@@ -50,7 +66,7 @@ class EatonCSDTest extends TaxTestCase
                 $builder
                     ->setTaxInfoOptions(['exempt' => true])
                     ->setWagesInCents(5000)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             '01' => [
@@ -65,16 +81,6 @@ class EatonCSDTest extends TaxTestCase
                     ->setTaxInfoOptions(['dependents' => 2])
                     ->setWagesInCents(50000)
                     ->setExpectedAmountInCents(713)
-                    ->build()
-            ],
-            '03' => [
-                $builder
-                    ->setTaxInfoOptions([
-                        'dependents' => 2,
-                        'school_district_id' => '0000',
-                    ])
-                    ->setWagesInCents(50000)
-                    ->setExpectedAmountInCents(null)
                     ->build()
             ],
         ];

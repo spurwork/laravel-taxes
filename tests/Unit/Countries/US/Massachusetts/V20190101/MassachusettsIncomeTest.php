@@ -63,7 +63,7 @@ class MassachusettsIncomeTest extends TaxTestCase
                 $builder
                     ->setTaxInfoOptions(['exemptions' => 1])
                     ->setWagesInCents(12500)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             '02' => [
@@ -80,7 +80,7 @@ class MassachusettsIncomeTest extends TaxTestCase
                         'exemptions' => 1,
                     ])
                     ->setWagesInCents(12500)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             '04' => [

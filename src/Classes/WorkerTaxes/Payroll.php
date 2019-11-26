@@ -19,6 +19,8 @@ class Payroll
     public $ytd_earnings;
     public $exempted_earnings;
     public $exempted_supplemental_earnings;
+    public $tip_amount;
+    public $pay_rate;
 
     private $amount_withheld;
     private $start_date;
@@ -42,12 +44,14 @@ class Payroll
         $this->ytd_earnings = $parameters['ytd_earnings'] ?? 0;
         $this->exempted_earnings = $parameters['exempted_earnings'] ?? 0;
         $this->exempted_supplemental_earnings = $parameters['exempted_supplemental_earnings'] ?? 0;
+        $this->tip_amount = $parameters['tip_amount'] ?? 0;
 
         $this->start_date = $parameters['start_date'];
         $this->end_date = $parameters['end_date'] ?? $parameters['start_date'];
         $this->area_incomes = $parameters['area_incomes'] ?? collect([]);
         $this->home_areas = $parameters['home_areas'] ?? collect([]);
         $this->total_earnings = $parameters['total_earnings'] ?? 0;
+        $this->pay_rate = $parameters['pay_rate'] ?? 0;
 
         $this->amount_withheld = 0;
         $this->wage_manager = $wage_manager;
@@ -128,8 +132,10 @@ class Payroll
         $start_of_month = $this->start_date->copy()->startOfMonth();
         $start_of_year = $this->start_date->copy()->startOfYear();
 
-        return $this->wage_manager->calculateEarnings($area_income->getHistoricalWages(),
-            $start_of_month < $start_of_year ? $start_of_year : $start_of_month);
+        return $this->wage_manager->calculateEarnings(
+            $area_income->getHistoricalWages(),
+            $start_of_month < $start_of_year ? $start_of_year : $start_of_month
+        );
     }
 
     public function getYtdEarnings(GovernmentalUnitArea $governmental_unit_area = null): float
@@ -144,8 +150,40 @@ class Payroll
             return 0;
         }
 
-        return $this->wage_manager->calculateEarnings($area_income->getHistoricalWages(),
-            $this->start_date->copy()->startOfYear());
+        return $this->wage_manager->calculateEarnings(
+            $area_income->getHistoricalWages(),
+            $this->start_date->copy()->startOfYear()
+        );
+    }
+
+    public function getTipAmount(GovernmentalUnitArea $governmental_unit_area = null)
+    {
+        if ($governmental_unit_area === null) {
+            return $this->tip_amount;
+        }
+
+        /** @var AreaIncome $area_income */
+        $area_income = $this->area_incomes->get($governmental_unit_area->name);
+        if ($area_income === null) {
+            return 0;
+        }
+
+        return $this->wage_manager->calculateTipAmount($area_income->getWages()) / 100;
+    }
+
+    public function getPayRate(GovernmentalUnitArea $governmental_unit_area = null): float
+    {
+        if ($governmental_unit_area === null) {
+            return $this->pay_rate;
+        }
+
+        /** @var AreaIncome $area_income */
+        $area_income = $this->area_incomes->get($governmental_unit_area->name);
+        if ($area_income === null) {
+            return 0;
+        }
+
+        return $this->wage_manager->calculatePayRate($area_income->getWages());
     }
 
     public function determineEarnings(TaxableIncome $taxable_income): void
@@ -153,19 +191,31 @@ class Payroll
         $this->earnings = $this->wage_manager->calculateEarnings($taxable_income->getWages());
 
         $this->exempted_earnings = min($taxable_income->getExemptionAmountInCents() / 100, $this->earnings);
-        $this->exempted_supplemental_earnings = min(($taxable_income->getExemptionAmountInCents() / 100) - $this->exempted_earnings,
-            $this->supplemental_earnings);
+        $this->exempted_supplemental_earnings = min(
+            ($taxable_income->getExemptionAmountInCents() / 100) - $this->exempted_earnings,
+            $this->supplemental_earnings
+        );
 
         $start_of_year = $this->start_date->copy()->startOfYear();
-        $this->ytd_earnings = $this->wage_manager->calculateEarnings($taxable_income->getHistoricalWages(),
-            $start_of_year);
+        $this->ytd_earnings = $this->wage_manager->calculateEarnings(
+            $taxable_income->getHistoricalWages(),
+            $start_of_year
+        );
 
         $start_of_month = $this->start_date->copy()->startOfMonth();
-        $this->mtd_earnings = $this->wage_manager->calculateEarnings($taxable_income->getHistoricalWages(),
-            $start_of_month < $start_of_year ? $start_of_year : $start_of_month);
+        $this->mtd_earnings = $this->wage_manager->calculateEarnings(
+            $taxable_income->getHistoricalWages(),
+            $start_of_month < $start_of_year ? $start_of_year : $start_of_month
+        );
 
-        $this->supplemental_earnings = $this->wage_manager->calculateEarnings($taxable_income->getWages(),
-            null, true);
+        $this->supplemental_earnings = $this->wage_manager->calculateEarnings(
+            $taxable_income->getWages(),
+            null,
+            true
+        );
+
+        $this->tip_amount = $this->wage_manager->calculateTipAmount($taxable_income->getWages());
+        $this->pay_rate = $this->wage_manager->calculatePayRate($taxable_income->getWages());
     }
 
     public function hasWorkInArea(string $area_name): bool
@@ -178,22 +228,16 @@ class Payroll
         return $this->home_areas->has($area_name);
     }
 
-    public function removeWages(string $area_name): void
+    public function getEarningsForArea(string $area_name): int
     {
         /** @var AreaIncome $area_income */
         $area_income = $this->area_incomes->get($area_name);
         if ($area_income === null) {
-            return;
+            return 0;
         }
 
-        $this->earnings -= $this->wage_manager->calculateEarnings($area_income->getWages());
-
-        $start_of_year = $this->start_date->copy()->startOfYear();
-        $this->ytd_earnings -= $this->wage_manager->calculateEarnings($area_income->getHistoricalWages(),
-            $start_of_year);
-
-        $start_of_month = $this->start_date->copy()->startOfMonth();
-        $this->mtd_earnings -= $this->wage_manager->calculateEarnings($area_income->getHistoricalWages(),
-            $start_of_month < $start_of_year ? $start_of_year : $start_of_month);
+        return $area_income->getWages()->sum(static function (Wage $gross_wage) {
+            return $gross_wage->getAmountInCents();
+        }) / 100;
     }
 }

@@ -51,7 +51,7 @@ class IdahoIncomeTest extends TaxTestCase
                 $builder
                     ->setTaxInfoOptions(['exempt' => true])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             '01' => [
@@ -79,7 +79,7 @@ class IdahoIncomeTest extends TaxTestCase
                 $builder
                     ->setTaxInfoOptions(['filing_status' => IdahoIncome::FILING_MARRIED])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             '05' => [
@@ -89,7 +89,7 @@ class IdahoIncomeTest extends TaxTestCase
                         'exemptions' => 2,
                     ])
                     ->setWagesInCents(50000)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             '06' => [

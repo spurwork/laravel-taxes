@@ -19,37 +19,30 @@ class HuntingtonCityServiceFeeTest extends TaxTestCase
         $this->query_runner->addTax(self::TAX_CLASS);
     }
 
-    /**
-     * @dataProvider provideTestData
-     */
-    public function testTax(TestParameters $parameters): void
+    public function testTax(): void
     {
-        $this->validate($parameters);
+        $this->validate(
+            (new TestParametersBuilder())
+                ->setDate(self::DATE)
+                ->setHomeLocation(self::LOCATION)
+                ->setTaxClass(self::TAX_CLASS)
+                ->setPayPeriods(52)
+                ->setWagesInCents(1)
+                ->setExpectedAmountInCents(500)
+                ->build()
+        );
     }
 
-    public function provideTestData(): array
+    public function testTax_no_wages(): void
     {
-        $builder = new TestParametersBuilder();
-        $builder
-            ->setDate(self::DATE)
-            ->setHomeLocation(self::LOCATION)
-            ->setTaxClass(self::TAX_CLASS)
-            ->setPayPeriods(52);
-
-        return [
-            'no wages' => [
-                $builder
-                    ->setWagesInCents(0)
-                    ->setExpectedAmountInCents(null)
-                    ->build()
-            ],
-            'wages' => [
-                $builder
-                    ->setWagesInCents(1)
-                    ->setExpectedAmountInCents(500)
-                    ->build()
-            ],
-        ];
+        $this->validateNoTax(
+            (new TestParametersBuilder())
+                ->setDate(self::DATE)
+                ->setHomeLocation(self::LOCATION)
+                ->setTaxClass(self::TAX_CLASS)
+                ->setPayPeriods(52)
+                ->setWagesInCents(0)
+                ->build()
+        );
     }
-
 }

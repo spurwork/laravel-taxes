@@ -58,7 +58,7 @@ class NewJerseyIncomeTest extends TaxTestCase
                 $builder
                     ->setTaxInfoOptions(['exempt' => true])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             '02' => [
@@ -151,7 +151,7 @@ class NewJerseyIncomeTest extends TaxTestCase
 
                     ])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             '13' => [

@@ -41,7 +41,8 @@ class BrooksvilleCityTest extends TaxTestCase
                 $builder
                     ->setWagesInCents(0)
                     ->setYtdWagesInCents(0)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
+                    ->setExpectedEarningsInCents(0)
                     ->build()
             ],
             '01' => [
@@ -49,6 +50,7 @@ class BrooksvilleCityTest extends TaxTestCase
                     ->setWagesInCents(30000)
                     ->setYtdWagesInCents(500000)
                     ->setExpectedAmountInCents(525)
+                    ->setExpectedEarningsInCents(30000)
                     ->build()
             ],
             '02' => [
@@ -56,13 +58,15 @@ class BrooksvilleCityTest extends TaxTestCase
                     ->setWagesInCents(90000)
                     ->setYtdWagesInCents(5052858)
                     ->setExpectedAmountInCents(1575)
+                    ->setExpectedEarningsInCents(90000)
                     ->build()
             ],
-            '03' => [
+            'over wage base' => [
                 $builder
                     ->setWagesInCents(77100)
                     ->setYtdWagesInCents(5142858)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
+                    ->setExpectedEarningsInCents(0)
                     ->build()
             ],
         ];

@@ -29,6 +29,14 @@ class EugeneEmployerTest extends TaxTestCase
         $this->validate($parameters);
     }
 
+    /**
+     * @dataProvider provideNoTaxTestData
+     */
+    public function testNoTax(TestParameters $parameters): void
+    {
+        $this->validateNoTax($parameters);
+    }
+
     public function provideTestData(): array
     {
         $builder = new TestParametersBuilder();
@@ -49,25 +57,34 @@ class EugeneEmployerTest extends TaxTestCase
             '01' => [
                 $builder
                     ->setHomeLocation(self::EUGENE_LOCATION)
-                    ->setWorkLocation(self::OREGON_LOCATION)
-                    ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(null)
+                    ->setWorkLocation(self::EUGENE_LOCATION)
+                    ->setWagesInCents(100000)
+                    ->setExpectedAmountInCents(210)
                     ->build()
             ],
-            '02' => [
+        ];
+    }
+    public function provideNoTaxTestData(): array
+    {
+        $builder = new TestParametersBuilder();
+        $builder
+            ->setDate(self::DATE)
+            ->setTaxClass(self::TAX_CLASS)
+            ->setPayPeriods(52);
+
+        return [
+            '00' => [
+                $builder
+                    ->setHomeLocation(self::EUGENE_LOCATION)
+                    ->setWorkLocation(self::OREGON_LOCATION)
+                    ->setWagesInCents(30000)
+                    ->build()
+            ],
+            '01' => [
                 $builder
                     ->setHomeLocation(self::OREGON_LOCATION)
                     ->setWorkLocation(self::OREGON_LOCATION)
                     ->setWagesInCents(55000)
-                    ->setExpectedAmountInCents(null)
-                    ->build()
-            ],
-            '03' => [
-                $builder
-                    ->setHomeLocation(self::EUGENE_LOCATION)
-                    ->setWorkLocation(self::EUGENE_LOCATION)
-                    ->setWagesInCents(100000)
-                    ->setExpectedAmountInCents(210)
                     ->build()
             ],
         ];

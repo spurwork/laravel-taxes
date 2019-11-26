@@ -1,19 +1,15 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\MillCreekWestUnityLSD;
+namespace Appleton\Taxes\Countries\US\Ohio\MillcreekWestUnityLSD;
 
-use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
-use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseOccupational;
-use Appleton\Taxes\Models\Countries\US\Ohio\OhioIncomeTaxInformation;
+use Appleton\Taxes\Countries\US\Ohio\OhioSchoolDistrictTraditionalTax;
 
-abstract class MillCreekWestUnityLSDTax extends BaseOccupational
+abstract class MillcreekWestUnityLSDTax extends OhioSchoolDistrictTraditionalTax
 {
-    protected $tax_information;
-    protected $payroll;
+    private const ID = '8604';
 
-    public function __construct(OhioIncomeTaxInformation $tax_information, Payroll $payroll)
+    protected function getId(): string
     {
-        parent::__construct($payroll);
-        $this->tax_information = $tax_information;
+        return self::ID;
     }
 }

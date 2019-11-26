@@ -11,7 +11,7 @@ class Wage
     private $amount_in_cents;
     private $pay_check_tip_amount_in_cents;
     private $take_home_tip_amount_in_cents;
-    private $pay_rate_per_hour_in_cents;
+    private $minutes_worked;
     private $type;
     private $date;
     private $additional_taxes;
@@ -23,16 +23,16 @@ class Wage
         int $amount_in_cents,
         int $pay_check_tip_amount_in_cents,
         int $take_home_tip_amount_in_cents,
-        int $pay_rate_per_hour_in_cents,
-        Collection $additional_taxes)
-    {
+        int $minutes_worked,
+        Collection $additional_taxes
+    ) {
         $this->type = $type;
         $this->date = $date;
         $this->location = $location;
         $this->amount_in_cents = $amount_in_cents;
         $this->pay_check_tip_amount_in_cents = $pay_check_tip_amount_in_cents;
         $this->take_home_tip_amount_in_cents = $take_home_tip_amount_in_cents;
-        $this->pay_rate_per_hour_in_cents = $pay_rate_per_hour_in_cents;
+        $this->minutes_worked = $minutes_worked;
         $this->additional_taxes = $additional_taxes;
     }
 
@@ -56,9 +56,9 @@ class Wage
         return $this->take_home_tip_amount_in_cents;
     }
 
-    public function getPayRatePerHourInCents(): int
+    public function getWorkTimeInMinutes(): int
     {
-        return $this->pay_rate_per_hour_in_cents;
+        return $this->minutes_worked;
     }
 
     public function getType(): string
