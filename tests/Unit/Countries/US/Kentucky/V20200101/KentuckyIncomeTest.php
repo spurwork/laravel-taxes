@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Tests\Unit\Countries\US\Kentucky\V20190101;
+namespace Appleton\Taxes\Tests\Unit\Countries\US\Kentucky\V20200101;
 
 use Appleton\Taxes\Countries\US\Kentucky\KentuckyIncome\KentuckyIncome;
 use Appleton\Taxes\Models\Countries\US\Kentucky\KentuckyIncomeTaxInformation;
@@ -10,7 +10,7 @@ use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
 
 class KentuckyIncomeTest extends TaxTestCase
 {
-    private const DATE = '2019-01-01';
+    private const DATE = '2020-01-01';
     private const LOCATION = 'us.kentucky';
     private const TAX_CLASS = KentuckyIncome::class;
     private const TAX_INFO_CLASS = KentuckyIncomeTaxInformation::class;
@@ -49,28 +49,21 @@ class KentuckyIncomeTest extends TaxTestCase
                 $builder
                     ->setTaxInfoOptions(null)
                     ->setWagesInCents(16668)
-                    ->setExpectedAmountInCents(584)
+                    ->setExpectedAmountInCents(578)
                     ->build()
             ],
             'have not met standard deduction' => [
                 $builder
                     ->setTaxInfoOptions(null)
-                    ->setWagesInCents(4660)
-                    ->setExpectedAmountInCents(0)
-                    ->build()
-            ],
-            'meet standard deduction' => [
-                $builder
-                    ->setTaxInfoOptions(null)
-                    ->setWagesInCents(4981)
+                    ->setWagesInCents(5000)
                     ->setExpectedAmountInCents(0)
                     ->build()
             ],
             'exceed standard deduction' => [
                 $builder
                     ->setTaxInfoOptions(null)
-                    ->setWagesInCents(5301)
-                    ->setExpectedAmountInCents(16)
+                    ->setWagesInCents(5200)
+                    ->setExpectedAmountInCents(5)
                     ->build()
             ],
             'exempt' => [
