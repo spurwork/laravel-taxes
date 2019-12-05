@@ -77,7 +77,7 @@ class NorthCarolinaIncomeTest extends TaxTestCase
                 $builder
                     ->setTaxInfoOptions(null)
                     ->setWagesInCents(6668)
-                    ->setExpectedAmountInCents(181)
+                    ->setExpectedAmountInCents(200)
                     ->build()
             ],
             'additional withholding no wages' => [
@@ -91,7 +91,7 @@ class NorthCarolinaIncomeTest extends TaxTestCase
                 $builder
                     ->setTaxInfoOptions(['additional_withholding' => 10])
                     ->setWagesInCents(6668)
-                    ->setExpectedAmountInCents(1181)
+                    ->setExpectedAmountInCents(1200)
                     ->build()
             ],
             'non negative' => [
@@ -126,7 +126,7 @@ class NorthCarolinaIncomeTest extends TaxTestCase
                 $builder
                     ->setTaxInfoOptions(null)
                     ->setWagesInCents(6668)
-                    ->setExpectedAmountInCents(181)
+                    ->setExpectedAmountInCents(200)
                     ->build()
             ],
         ];

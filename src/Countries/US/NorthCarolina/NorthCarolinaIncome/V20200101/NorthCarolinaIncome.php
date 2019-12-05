@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\NorthCarolina\NorthCarolinaIncome\V20190101;
+namespace Appleton\Taxes\Countries\US\NorthCarolina\NorthCarolinaIncome\V20200101;
 
 use Appleton\Taxes\Countries\US\NorthCarolina\NorthCarolinaIncome\NorthCarolinaIncome as BaseNorthCarolinaIncome;
 
@@ -11,10 +11,10 @@ class NorthCarolinaIncome extends BaseNorthCarolinaIncome
     private const SUPPLEMENTAL_TAX_RATE = 0.0535;
 
     private const STANDARD_DEDUCTIONS = [
-        self::FILING_SINGLE => 10000,
-        self::FILING_HEAD_OF_HOUSEHOLD => 15000,
-        self::FILING_MARRIED => 10000,
-        self::FILING_SEPERATE => 10000,
+        self::FILING_SINGLE => 10750,
+        self::FILING_HEAD_OF_HOUSEHOLD => 16125,
+        self::FILING_MARRIED => 21500,
+        self::FILING_SEPERATE => 10750,
     ];
 
     private const DEPENDENT_EXEMPTION_BRACKETS = [
