@@ -27,13 +27,13 @@ abstract class NorthCarolinaIncome extends BaseStateIncome
         $this->tax_information = $tax_information;
     }
 
-    abstract public function getSupplementalTaxRate();
+    abstract public function getSupplementalTaxRate(): float;
 
-    abstract public function getTaxRate();
+    abstract public function getTaxRate(): float;
 
-    abstract public function getStandardDeductions();
+    abstract public function getStandardDeductions(): array;
 
-    abstract public function getDependentExemptionBrackets();
+    abstract public function getDependentExemptionBrackets(): array;
 
     public function compute(Collection $tax_areas)
     {
