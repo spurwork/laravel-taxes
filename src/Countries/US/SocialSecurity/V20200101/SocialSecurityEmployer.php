@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\SocialSecurity\V20180101;
+namespace Appleton\Taxes\Countries\US\SocialSecurity\V20200101;
 
 use Appleton\Taxes\Countries\US\SocialSecurity\SocialSecurityEmployer as BaseSocialSecurityEmployer;
 
