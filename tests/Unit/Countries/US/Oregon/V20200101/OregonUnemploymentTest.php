@@ -11,7 +11,7 @@ class OregonUnemploymentTest extends UnemploymentTaxTestCase
     private const DATE = '2020-01-01';
     private const LOCATION = 'us.oregon';
     private const TAX_CLASS = OregonUnemployment::class;
-    private const TAX_RATE = 0.024;
+    private const TAX_RATE = 0.021;
     private const WAGE_BASE = 4210000;
 
     public function setUp(): void

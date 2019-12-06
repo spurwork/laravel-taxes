@@ -8,7 +8,7 @@ use Appleton\Taxes\Countries\US\Oregon\OregonUnemployment\OregonUnemployment as 
 class OregonUnemployment extends BaseOregonUnemployment
 {
     const FUTA_CREDIT = 0.054;
-    const NEW_EMPLOYER_RATE = 0.024;
+    const NEW_EMPLOYER_RATE = 0.021;
     const WAGE_BASE = 42100;
 
     public function __construct(Payroll $payroll)
