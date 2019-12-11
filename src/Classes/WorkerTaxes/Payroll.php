@@ -9,6 +9,7 @@ class Payroll
     public $birth_date;
     public $date;
     public $days_worked;
+    public $minutes_worked;
     public $earnings;
     public $exemptions;
     public $pay_periods;
@@ -21,6 +22,7 @@ class Payroll
     public $exempted_supplemental_earnings;
     public $tip_amount;
     public $pay_rate;
+    public $is_salaried;
 
     private $amount_withheld;
     private $start_date;
@@ -33,7 +35,8 @@ class Payroll
     public function __construct(array $parameters, WageManager $wage_manager)
     {
         $this->birth_date = $parameters['birth_date'] ?? null;
-        $this->days_worked = $parameters['days_worked'] ?? false;
+        $this->days_worked = $parameters['days_worked'] ?? 0;
+        $this->minutes_worked = $parameters['minutes_worked'] ?? 0;
         $this->earnings = $parameters['earnings'] ?? 0;
         $this->exemptions = collect($parameters['exemptions'] ?? []);
         $this->pay_periods = $parameters['pay_periods'] ?? 52;
@@ -45,6 +48,7 @@ class Payroll
         $this->exempted_earnings = $parameters['exempted_earnings'] ?? 0;
         $this->exempted_supplemental_earnings = $parameters['exempted_supplemental_earnings'] ?? 0;
         $this->tip_amount = $parameters['tip_amount'] ?? 0;
+        $this->is_salaried = $parameters['is_salaried'] ?? false;
 
         $this->start_date = $parameters['start_date'];
         $this->end_date = $parameters['end_date'] ?? $parameters['start_date'];
@@ -91,6 +95,25 @@ class Payroll
         });
 
         return ($earnings_in_cents / 100) - $this->exempted_earnings;
+    }
+
+    public function getHoursWorked(GovernmentalUnitArea $governmental_unit_area = null): float
+    {
+        if ($governmental_unit_area === null) {
+            return $this->minutes_worked / 60;
+        }
+
+        /** @var AreaIncome $area_wages */
+        $area_wages = $this->area_incomes->get($governmental_unit_area->name);
+        if ($area_wages === null) {
+            return 0;
+        }
+
+        $minutes_worked = $area_wages->getWages()->sum(static function (Wage $gross_wage) {
+            return $gross_wage->getWorkTimeInMinutes();
+        });
+
+        return $minutes_worked / 60;
     }
 
     public function getSupplementalEarnings(): float
@@ -239,5 +262,22 @@ class Payroll
         return $area_income->getWages()->sum(static function (Wage $gross_wage) {
             return $gross_wage->getAmountInCents();
         }) / 100;
+    }
+
+    public function isSalariedWorker(GovernmentalUnitArea $governmental_unit_area = null): bool
+    {
+        if ($governmental_unit_area === null) {
+            return $this->is_salaried;
+        }
+
+        /** @var AreaIncome $area_wages */
+        $area_wages = $this->area_incomes->get($governmental_unit_area->name);
+        if ($area_wages === null) {
+            return false;
+        }
+
+        return !is_null($area_wages->getWages()->first(static function (Wage $gross_wage) {
+            return $gross_wage->getType() === WageType::SALARY;
+        }));
     }
 }

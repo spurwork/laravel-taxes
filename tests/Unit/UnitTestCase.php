@@ -76,6 +76,7 @@ class UnitTestCase extends BaseTestCase
         $app['config']->set('taxes.tables.us.pennsylvania.pennsylvania_income_tax_information', 'pennsylvania_income_tax_information');
         $app['config']->set('taxes.tables.us.vermont.vermont_income_tax_information', 'vermont_income_tax_information');
         $app['config']->set('taxes.tables.us.virginia.virginia_income_tax_information', 'virginia_income_tax_information');
+        $app['config']->set('taxes.tables.us.washington.washington_workers_compensation_tax_information', 'washington_workers_compensation_tax_information');
         $app['config']->set('taxes.tables.us.washingtondc.washingtondc_income_tax_information', 'washingtondc_income_tax_information');
         $app['config']->set('taxes.tables.us.wisconsin.wisconsin_income_tax_information', 'wisconsin_income_tax_information');
     }

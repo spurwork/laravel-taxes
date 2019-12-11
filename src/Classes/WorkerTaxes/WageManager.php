@@ -99,6 +99,14 @@ class WageManager
         return count($worked_days);
     }
 
+    public function calculateMinutesWorked(
+        Collection $wages
+    ): int {
+        return $wages->sum(static function (Wage $gross_wage) {
+            return $gross_wage->getWorkTimeInMinutes();
+        });
+    }
+
     public function calculateTipAmount(Collection $wages)
     {
         return $wages->sum(function (Wage $wage) {
@@ -128,5 +136,12 @@ class WageManager
         } else {
             return 0;
         }
+    }
+
+    public function isSalaried($wages)
+    {
+        return !is_null($wages->first(function ($wage) {
+            return $wage->getType() === WageType::SALARY;
+        }));
     }
 }

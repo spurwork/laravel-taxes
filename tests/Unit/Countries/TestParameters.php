@@ -26,6 +26,7 @@ class TestParameters
     private $pay_check_tip_amount_in_cents;
     private $take_home_tip_amount_in_cents;
     private $minutes_worked;
+    private $wages_callback;
 
     public function __construct(
         string $date,
@@ -47,7 +48,8 @@ class TestParameters
         ?int $ytd_liabilities_in_cents,
         ?int $pay_check_tip_amount_in_cents,
         ?int $take_home_tip_amount_in_cents,
-        ?int $minutes_worked
+        ?int $minutes_worked,
+        ?callable $wages_callback
     ) {
         $this->date = $date;
         $this->tax_info_class = $tax_info_class;
@@ -69,6 +71,7 @@ class TestParameters
         $this->pay_check_tip_amount_in_cents = $pay_check_tip_amount_in_cents;
         $this->take_home_tip_amount_in_cents = $take_home_tip_amount_in_cents;
         $this->minutes_worked = $minutes_worked;
+        $this->wages_callback = $wages_callback;
     }
 
     public function getDate(): string
@@ -94,6 +97,11 @@ class TestParameters
     public function getTaxClass(): string
     {
         return $this->tax_class;
+    }
+
+    public function getWagesCallback(): ?callable
+    {
+        return $this->wages_callback;
     }
 
     public function getWagesInCents(): int

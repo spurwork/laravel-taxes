@@ -26,6 +26,7 @@ class TestParametersBuilder
     private $pay_check_tip_amount_in_cents;
     private $take_home_tip_amount_in_cents;
     private $minutes_worked;
+    private $wages_callback;
 
     public function build(): TestParameters
     {
@@ -49,7 +50,8 @@ class TestParametersBuilder
             $this->ytd_liabilities_in_cents,
             $this->pay_check_tip_amount_in_cents,
             $this->take_home_tip_amount_in_cents,
-            $this->minutes_worked
+            $this->minutes_worked,
+            $this->wages_callback
         );
     }
 
@@ -170,6 +172,12 @@ class TestParametersBuilder
     public function setMinutesWorked(?int $minutes_worked)
     {
         $this->minutes_worked = $minutes_worked;
+        return $this;
+    }
+
+    public function setWagesCallback(?callable $wages_callback)
+    {
+        $this->wages_callback = $wages_callback;
         return $this;
     }
 }
