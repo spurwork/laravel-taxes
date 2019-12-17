@@ -2,14 +2,15 @@
 
 namespace Appleton\Taxes\Countries\US\SocialSecurity\V20190101;
 
-use Illuminate\Database\Eloquent\Collection;
+use Appleton\Taxes\Countries\US\SocialSecurity\SocialSecurityEmployer as BaseSocialSecurityEmployer;
 
-class SocialSecurityEmployer extends SocialSecurity
+class SocialSecurityEmployer extends BaseSocialSecurityEmployer
 {
-    const WITHHELD = false;
+    public const TAX_RATE = SocialSecurity::TAX_RATE;
+    public const WAGE_BASE = SocialSecurity::WAGE_BASE;
 
-    public function compute(Collection $tax_areas)
+    protected function getTaxRate(): float
     {
-        return round($this->getAdjustedEarnings() * static::TAX_RATE, 2);
+        return self::TAX_RATE;
     }
 }
