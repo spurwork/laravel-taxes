@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Collection;
 
 class FederalIncome extends BaseFederalIncome
 {
+    const SUPPLEMENTAL_TAX_RATE = 0.22;
+
     const WEEKLY = 81;
     const FORM_VERSION_2019 = '2019';
     const FORM_VERSION_2020 = '2020';
