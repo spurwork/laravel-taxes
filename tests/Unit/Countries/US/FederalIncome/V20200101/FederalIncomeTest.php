@@ -499,7 +499,7 @@ class FederalIncomeTest extends TaxTestCase
                     ->setTaxInfoClass(self::TAX_INFO_CLASS)
                     ->setWagesInCents(80000)
                     ->setPayPeriods(52)
-                    ->setExpectedAmountInCents(8350)
+                    ->setExpectedAmountInCents(6408)
                     ->build()
             ],
         ];
