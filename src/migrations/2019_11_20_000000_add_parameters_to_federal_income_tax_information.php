@@ -12,7 +12,7 @@ class AddParametersToFederalIncomeTaxInformation extends Migration
     {
         Schema::table($this->federal_income_tax_information, function (Blueprint $table) {
             $table->integer('other_income')->nullable();
-            $table->integer('deductions')->nullable();
+            $table->integer('dependents_deduction_amount')->nullable();
             $table->integer('dependents')->nullable();
             $table->integer('extra_withholding')->nullable();
             $table->boolean('step_2_checked')->nullable();

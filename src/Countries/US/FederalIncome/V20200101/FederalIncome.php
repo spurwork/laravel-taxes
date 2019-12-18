@@ -11,7 +11,7 @@ class FederalIncome extends BaseFederalIncome
 {
     const SUPPLEMENTAL_TAX_RATE = 0;
 
-    const WEEKLY = 81;
+    const ANNUALLY = 4200;
     const FORM_VERSION_2019 = '2019';
     const FORM_VERSION_2020 = '2020';
 
@@ -116,11 +116,13 @@ class FederalIncome extends BaseFederalIncome
             $taxable_wages = $this->getTentativeAmount($taxable_wages);
             $taxable_wages -= $this->tax_information->dependents;
             $taxable_wages = $taxable_wages > 0 ? $taxable_wages : 0;
-            $taxable_wages += $this->tax_information->extra_withholding;
+            $taxable_wages = $taxable_wages > 0 ? $taxable_wages / $this->payroll->pay_periods : 0;
+            $taxable_wages += $this->tax_information->extra_withholding / 100;
 
-            $this->tax_total = $this->payroll->withholdTax($taxable_wages / $this->payroll->pay_periods);
+            $this->tax_total = $this->payroll->withholdTax($taxable_wages);
         } elseif ($this->tax_information->form_version === self::FORM_VERSION_2019) {
-            $taxable_wages = ($this->payroll->getEarnings() * $this->payroll->pay_periods) - ($this->tax_information->exemptions * self::WEEKLY);
+            $taxable_wages = ($this->payroll->getEarnings() * $this->payroll->pay_periods) - ($this->tax_information->exemptions * self::ANNUALLY);
+
             $taxable_wages = $this->getTentativeAmount($taxable_wages);
             $taxable_wages += $this->getAdditionalWithholding();
 
