@@ -16,7 +16,7 @@ class AddParametersToFederalIncomeTaxInformation extends Migration
             $table->integer('dependents')->nullable();
             $table->integer('extra_withholding')->nullable();
             $table->boolean('step_2_checked')->nullable();
-            $table->string('form_version')->default('2020')->nullable();
+            $table->string('form_version')->nullable();
         });
 
         DB::table($this->federal_income_tax_information)
@@ -26,7 +26,7 @@ class AddParametersToFederalIncomeTaxInformation extends Migration
         ]);
 
         Schema::table($this->federal_income_tax_information, function (Blueprint $table) {
-            $table->string('form_version')->nullable(false)->change();
+            $table->string('form_version')->nullable(false)->default('2020')->change();
         });
     }
 }
