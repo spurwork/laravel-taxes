@@ -14,7 +14,7 @@ class AddParametersToFederalIncomeTaxInformation extends Migration
             $table->integer('dependents')->nullable();
             $table->integer('extra_withholding')->nullable();
             $table->boolean('step_2_checked')->nullable();
-            $table->string('form_version')->default('2019');
+            $table->string('form_version')->default('2020');
         });
     }
 }
