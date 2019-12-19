@@ -17,6 +17,7 @@ class Medicare extends BaseMedicare
         self::FILING_HEAD_OF_HOUSEHOLD => 200000,
         self::FILING_MARRIED => 250000,
         self::FILING_SEPERATE => 125000,
+        self::FILING_JOINTLY => 250000,
     ];
 
     const ADDITIONAL_TAX_RATE = 0.009;
