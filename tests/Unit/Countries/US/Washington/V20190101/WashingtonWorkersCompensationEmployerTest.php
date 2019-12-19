@@ -3,17 +3,17 @@
 namespace Appleton\Taxes\Countries\US\Washington\V20190101;
 
 use Appleton\Taxes\Classes\WorkerTaxes\GeoPoint;
-use Appleton\Taxes\Countries\US\Washington\WashingtonWorkersCompensation\WashingtonWorkersCompensation;
+use Appleton\Taxes\Countries\US\Washington\WashingtonWorkersCompensationEmployer\WashingtonWorkersCompensationEmployer;
 use Appleton\Taxes\Models\Countries\US\Washington\WashingtonWorkersCompensationTaxInformation;
 use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
 use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
 use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
 
-class WashingtonWorkersCompensationTest extends TaxTestCase
+class WashingtonWorkersCompensationEmployerTest extends TaxTestCase
 {
     private const DATE = '2019-01-01';
     private const WASHINGTON_LOCATION = 'us.washington';
-    private const TAX_CLASS = WashingtonWorkersCompensation::class;
+    private const TAX_CLASS = WashingtonWorkersCompensationEmployer::class;
 
     public function setUp(): void
     {
@@ -29,7 +29,7 @@ class WashingtonWorkersCompensationTest extends TaxTestCase
     /**
      * @dataProvider provideTestData
      */
-    public function testWashingtonWorkersCompensationTax(TestParameters $parameters): void
+    public function testWashingtonWorkersCompensationEmployerTax(TestParameters $parameters): void
     {
         $this->validate($parameters);
     }

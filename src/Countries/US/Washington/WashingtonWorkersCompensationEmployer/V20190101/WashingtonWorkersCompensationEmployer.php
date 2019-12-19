@@ -17,7 +17,7 @@ class WashingtonWorkersCompensationEmployer extends BaseWashingtonWorkersCompens
 
     public function compute(Collection $tax_areas)
     {
-        $hourly_tax = $this->payroll->withholdTax($this->payroll->getHoursWorked($tax_areas->first()->workGovernmentalUnitArea) * ($this->tax_information->employer_rate / 100));
+        $hourly_tax = $this->payroll->withholdTax($this->payroll->getShiftHoursWorked($tax_areas->first()->workGovernmentalUnitArea) * ($this->tax_information->employer_rate / 100));
 
         if ($this->payroll->getStartDate()->weekOfMonth < 5 && $this->payroll->isSalariedWorker($tax_areas->first()->workGovernmentalUnitArea)) {
             $salaried_tax = $this->payroll->withholdTax(40 * ($this->tax_information->employer_rate / 100));

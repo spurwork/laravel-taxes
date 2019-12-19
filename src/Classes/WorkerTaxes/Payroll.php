@@ -116,6 +116,28 @@ class Payroll
         return $minutes_worked / 60;
     }
 
+    public function getShiftHoursWorked(GovernmentalUnitArea $governmental_unit_area = null): float
+    {
+        if ($governmental_unit_area === null) {
+            return $this->minutes_worked / 60;
+        }
+
+        /** @var AreaIncome $area_wages */
+        $area_wages = $this->area_incomes->get($governmental_unit_area->name);
+        if ($area_wages === null) {
+            return 0;
+        }
+
+        $minutes_worked = $area_wages->getWages()
+            ->filter(static function (Wage $gross_wage) {
+                return $gross_wage->getType() !== WageType::SALARY;
+            })->sum(static function (Wage $gross_wage) {
+                return $gross_wage->getWorkTimeInMinutes();
+            });
+
+        return $minutes_worked / 60;
+    }
+
     public function getSupplementalEarnings(): float
     {
         return $this->supplemental_earnings - $this->exempted_supplemental_earnings;
