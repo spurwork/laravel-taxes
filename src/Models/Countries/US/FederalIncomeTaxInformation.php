@@ -16,7 +16,7 @@ class FederalIncomeTaxInformation extends BaseTaxInformationModel
         $tax_information->filing_status = FederalIncome::FILING_SINGLE;
         $tax_information->non_resident_alien = false;
         $tax_information->exempt = false;
-        $tax_information->dependents = 0;
+        $tax_information->dependents_deduction_amount = 0;
         $tax_information->other_income = 0;
         $tax_information->deductions = 0;
         $tax_information->extra_withholding = 0;

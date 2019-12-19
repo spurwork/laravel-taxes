@@ -114,7 +114,7 @@ class FederalIncome extends BaseFederalIncome
         if ($this->tax_information->form_version === self::FORM_VERSION_2020) {
             $taxable_wages = $this->getAdjustedWageAmount();
             $taxable_wages = $this->getTentativeAmount($taxable_wages);
-            $taxable_wages -= $this->tax_information->dependents;
+            $taxable_wages -= $this->tax_information->dependents_deduction_amount;
             $taxable_wages = $taxable_wages > 0 ? $taxable_wages : 0;
             $taxable_wages = $taxable_wages > 0 ? $taxable_wages / $this->payroll->pay_periods : 0;
             $taxable_wages += $this->tax_information->extra_withholding / 100;
