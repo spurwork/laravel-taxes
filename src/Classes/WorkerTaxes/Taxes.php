@@ -62,7 +62,9 @@ class Taxes
             'home_areas' => $home_areas,
             'start_date' => $start_date,
             'end_date' => $end_date,
-            'total_earnings' => $this->wage_manager->calculateEarnings($wages)
+            'total_earnings' => $this->wage_manager->calculateEarnings($wages),
+            'minutes_worked' => $this->wage_manager->calculateMinutesWorked($wages),
+            'is_salaried' => $this->wage_manager->isSalaried($wages),
         ], $this->wage_manager);
         $this->bind_manager->bindPayroll($payroll);
 
