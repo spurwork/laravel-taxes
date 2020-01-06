@@ -11,7 +11,8 @@ class WilsonvilleEmployer extends BaseWilsonvilleEmployer
 
     public function compute(Collection $tax_areas)
     {
-        $this->tax_total = $this->payroll->getEarnings() * self::TAX_RATE;
+        $this->tax_total = $this->payroll->withholdTax($this->payroll->getEarnings() * self::TAX_RATE);
+
         return round($this->tax_total, 2);
     }
 }
