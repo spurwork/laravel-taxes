@@ -27,7 +27,7 @@ class NewMexicoWorkersCompensationTest extends TaxTestCase
                 ->setTaxClass(self::TAX_CLASS)
                 ->setPayPeriods(52)
                 ->setWagesInCents(10000)
-                ->setExpectedAmountInCents(230)
+                ->setExpectedAmountInCents(200)
                 ->build()
         );
     }
