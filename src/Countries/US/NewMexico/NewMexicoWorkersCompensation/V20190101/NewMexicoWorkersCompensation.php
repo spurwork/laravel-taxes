@@ -10,7 +10,7 @@ class NewMexicoWorkersCompensation extends BaseNewMexicoWorkersCompensation
     public function compute(Collection $tax_areas)
     {
         if ($this->payroll->getStartDate()->weekOfMonth === $this->payroll->getStartDate()->endOfQuarter()->weekOfMonth) {
-            return 2.00;
+            return $this->payroll->withholdTax(2.00);
         } else {
             return 0.00;
         }
