@@ -15,7 +15,7 @@ class AddWorkersCompAssessmentFunds extends Migration
     public function up()
     {
         $workers_comp_assessment_fund_tax_id = DB::table('taxes')->insertGetId([
-            'name' => 'Workers Compensation Assessment Fund Tax',
+            'name' => 'Oregon State Workers Compensation Assessment Fund Employee Tax',
             'class' => WorkersCompAssessmentFund::class,
         ]);
 
@@ -29,7 +29,7 @@ class AddWorkersCompAssessmentFunds extends Migration
         ]);
 
         $workers_comp_assessment_fund_employer_tax_id = DB::table('taxes')->insertGetId([
-            'name' => 'Workers Compensation Assessment Fund Employer Tax',
+            'name' => 'Oregon State Workers Compensation Assessment Fund Employer Tax',
             'class' => WorkersCompAssessmentFundEmployer::class,
         ]);
 
