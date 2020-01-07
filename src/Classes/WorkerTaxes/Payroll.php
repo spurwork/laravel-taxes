@@ -130,7 +130,7 @@ class Payroll
 
         $minutes_worked = $area_wages->getWages()
             ->filter(static function (Wage $gross_wage) {
-                return $gross_wage->getType() !== WageType::SALARY;
+                return $gross_wage->getType() === WageType::SHIFT;
             })->sum(static function (Wage $gross_wage) {
                 return $gross_wage->getWorkTimeInMinutes();
             });
