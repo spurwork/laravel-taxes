@@ -1088,6 +1088,7 @@ trait TestLocations
             'us.ohio.zanesville' => [39.9403453, -82.0131924],
             'us.oklahoma' => [35.4676, -97.5164],
             'us.oregon' => [43.8041, -120.5542],
+            'us.oregon.canby' => [45.2623, -122.6921],
             'us.oregon.eugene' => [44.0521, -123.0868],
             'us.oregon.sandy' => [45.3963, -122.2599],
             'us.oregon.wilsonville' => [45.3030, -122.7727],
