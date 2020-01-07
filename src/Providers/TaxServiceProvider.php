@@ -1409,6 +1409,8 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\Oregon\OregonUnemployment\OregonUnemployment::class,
         \Appleton\Taxes\Countries\US\Oregon\SandyEmployer\SandyEmployer::class,
         \Appleton\Taxes\Countries\US\Oregon\WilsonvilleEmployer\WilsonvilleEmployer::class,
+        \Appleton\Taxes\Countries\US\Oregon\WorkersCompAssessmentFund\WorkersCompAssessmentFund::class,
+        \Appleton\Taxes\Countries\US\Oregon\WorkersCompAssessmentFundEmployer\WorkersCompAssessmentFundEmployer::class,
         \Appleton\Taxes\Countries\US\Pennsylvania\PennsylvaniaEmployeeSuta\PennsylvaniaEmployeeSuta::class,
         \Appleton\Taxes\Countries\US\Pennsylvania\PennsylvaniaIncome\PennsylvaniaIncome::class,
         \Appleton\Taxes\Countries\US\Pennsylvania\PennsylvaniaUnemployment\PennsylvaniaUnemployment::class,
