@@ -55,7 +55,14 @@ class TaxableIncomeManager
             });
         });
 
-        return $taxable_incomes;
+        $filtered_taxable_incomes = collect([]);
+        $taxable_incomes->each(static function (TaxableIncome $taxable_income) use ($filtered_taxable_incomes) {
+            if (app($taxable_income->getTax()->class)->doesApply($taxable_income->getTax()->taxAreas)) {
+                $filtered_taxable_incomes->put($taxable_income->getTax()->class, $taxable_income);
+            }
+        });
+
+        return $filtered_taxable_incomes;
     }
 
     public function processExemptions(Collection $taxable_incomes, Collection $exemptions): void

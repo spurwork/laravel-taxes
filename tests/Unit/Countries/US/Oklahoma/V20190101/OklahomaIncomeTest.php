@@ -50,7 +50,7 @@ class OklahomaIncomeTest extends TaxTestCase
                 $builder
                     ->setTaxInfoOptions(['exempt' => true])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             '01' => [
@@ -71,14 +71,14 @@ class OklahomaIncomeTest extends TaxTestCase
                 $builder
                     ->setTaxInfoOptions(['dependents' => 9])
                     ->setWagesInCents(28846)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             '04' => [
                 $builder
                     ->setTaxInfoOptions(['filing_status' => OklahomaIncome::FILING_MARRIED])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             '05' => [
@@ -98,7 +98,7 @@ class OklahomaIncomeTest extends TaxTestCase
                         'dependents' => 9,
                     ])
                     ->setWagesInCents(28846)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
         ];

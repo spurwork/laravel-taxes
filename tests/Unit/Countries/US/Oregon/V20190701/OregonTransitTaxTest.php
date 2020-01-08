@@ -3,9 +3,9 @@
 namespace Appleton\Taxes\Tests\Unit\Countries\US\Oregon\V20190701;
 
 use Appleton\Taxes\Countries\US\Oregon\OregonTransit\OregonTransit;
+use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
 use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
 use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
-use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
 
 class OregonTransitTaxTest extends TaxTestCase
 {
@@ -29,6 +29,18 @@ class OregonTransitTaxTest extends TaxTestCase
         $this->validate($parameters);
     }
 
+    public function testNoTax(): void
+    {
+        $this->validateNoTax((new TestParametersBuilder())
+            ->setDate(self::DATE)
+            ->setTaxClass(self::TAX_CLASS)
+            ->setPayPeriods(52)
+            ->setHomeLocation(self::ALABAMA_LOCATION)
+            ->setWorkLocation(self::ALABAMA_LOCATION)
+            ->setWagesInCents(100000)
+            ->build());
+    }
+
     public function provideTestData(): array
     {
         $builder = new TestParametersBuilder();
@@ -43,7 +55,7 @@ class OregonTransitTaxTest extends TaxTestCase
                     ->setHomeLocation(self::OREGON_LOCATION)
                     ->setWorkLocation(self::OREGON_LOCATION)
                     ->setWagesInCents(0)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             '01' => [
@@ -76,14 +88,6 @@ class OregonTransitTaxTest extends TaxTestCase
                     ->setWorkLocation(self::ALABAMA_LOCATION)
                     ->setWagesInCents(1900000)
                     ->setExpectedAmountInCents(1900)
-                    ->build()
-            ],
-            '05' => [
-                $builder
-                    ->setHomeLocation(self::ALABAMA_LOCATION)
-                    ->setWorkLocation(self::ALABAMA_LOCATION)
-                    ->setWagesInCents(100000)
-                    ->setExpectedAmountInCents(null)
                     ->build()
             ],
         ];

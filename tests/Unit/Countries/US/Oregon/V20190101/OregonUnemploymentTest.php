@@ -38,16 +38,6 @@ class OregonUnemploymentTest extends UnemploymentTaxTestCase
         );
     }
 
-    public function testTaxRate(): void
-    {
-        $this->validateTaxRate(
-            self::DATE,
-            self::LOCATION,
-            self::TAX_CLASS,
-            0.0321
-        );
-    }
-
     public function provideData(): array
     {
         return $this->wageBaseBoundariesTestCases(

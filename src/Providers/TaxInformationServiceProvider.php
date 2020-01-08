@@ -50,6 +50,7 @@ class TaxInformationServiceProvider extends ServiceProvider
         \Appleton\Taxes\Models\Countries\US\Utah\UtahIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\Vermont\VermontIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\Virginia\VirginiaIncomeTaxInformation::class,
+        \Appleton\Taxes\Models\Countries\US\Washington\WashingtonWorkersCompensationTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\WashingtonDC\WashingtonDCIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\WestVirginia\WestVirginiaIncomeTaxInformation::class,
         \Appleton\Taxes\Models\Countries\US\Wisconsin\WisconsinIncomeTaxInformation::class,

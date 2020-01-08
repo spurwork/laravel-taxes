@@ -17,16 +17,12 @@ abstract class ColoradoLocalIncome extends BaseLocal
     public function compute(Collection $tax_areas): float
     {
         $colorado = $tax_areas->first()->workGovernmentalUnitArea;
-        $local_governmental_unit_area = $this->getLocalGovernmentalUnitArea();
 
-        $local_earnings = $this->payroll->getEarnings($local_governmental_unit_area);
-        $local_mtd_earnings = $this->payroll->getMtdEarnings($local_governmental_unit_area);
         $colorado_mtd_earnings = $this->payroll->getMtdEarnings($colorado);
         $colorado_earnings = $this->payroll->getEarnings($colorado);
 
         $monthly_wage_amount = $this->getMonthlyWageAmount() / 100;
-        if (($local_earnings === 0.0 && $local_mtd_earnings === 0.0)
-            || $colorado_mtd_earnings >= $monthly_wage_amount
+        if ($colorado_mtd_earnings >= $monthly_wage_amount
             || $colorado_earnings + $colorado_mtd_earnings < $monthly_wage_amount) {
             return 0;
         }
@@ -34,5 +30,15 @@ abstract class ColoradoLocalIncome extends BaseLocal
         $monthly_tax_amount = $this->getMonthlyTaxAmount() / 100;
         $this->payroll->withholdTax($monthly_tax_amount);
         return round($monthly_tax_amount, 2);
+    }
+
+    public function doesApply(Collection $tax_areas): bool
+    {
+        $local_governmental_unit_area = $this->getLocalGovernmentalUnitArea();
+
+        $local_earnings = $this->payroll->getEarnings($local_governmental_unit_area);
+        $local_mtd_earnings = $this->payroll->getMtdEarnings($local_governmental_unit_area);
+
+        return $local_earnings !== 0.0 || $local_mtd_earnings !== 0.0;
     }
 }

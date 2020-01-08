@@ -52,17 +52,12 @@ class ColoradoLocalTaxTestCase extends TaxTestCase
 
         $short_name = (new ReflectionClass($parameters->getTaxClass()))->getShortName();
 
-        if ($parameters->getExpectedAmountInCents() === null ||
-            $parameters->getExpectedAmountInCents() === 0) {
-            self::assertNull($results->get($parameters->getTaxClass()),
-                'tax results for '.$short_name.' found, none expected');
-            return;
-        }
-
         /** @var TaxResult $result */
         $result = $results->get($parameters->getTaxClass());
+        if ($result === null) {
+            self::fail('no tax results for '.$short_name.' found');
+        }
 
-        self::assertNotNull($result, 'no tax results for '.$short_name.' found');
         self::assertThat(
             $result->getAmountInCents(),
             self::identicalTo($parameters->getExpectedAmountInCents()),
@@ -73,6 +68,51 @@ class ColoradoLocalTaxTestCase extends TaxTestCase
             self::identicalTo($parameters->getColoradoEarningsInCents() + $parameters->getLocalEarningsInCents()),
             $short_name.' expected '.($parameters->getColoradoEarningsInCents() + $parameters->getLocalEarningsInCents())
             .' earnings but got '.$result->getEarningsInCents());
+    }
+
+    public function validateColoradoLocalNoTax(ColoradoLocalIncomeParameters $parameters): void
+    {
+        Carbon::setTestNow($parameters->getDate());
+
+        $colorado_location_array = $this->getLocation('us.colorado');
+        $local_location_array = $this->getLocation($parameters->getLocalLocation());
+
+        $colorado_location = new GeoPoint($colorado_location_array[0], $colorado_location_array[1]);
+        $local_location = new GeoPoint($local_location_array[0], $local_location_array[1]);
+
+        $wages = collect([
+            $this->makeWage($colorado_location, $parameters->getColoradoEarningsInCents()),
+            $this->makeWage($local_location, $parameters->getLocalEarningsInCents()),
+        ]);
+
+        $past_date = Carbon::now()->subWeek();
+
+        $historical_wages = collect([
+            $this->makeWageAtDate($past_date, $colorado_location, $parameters->getColoradoMtdEarningsInCents()),
+            $this->makeWageAtDate($past_date, $local_location, $parameters->getLocalMtdEarningsInCents()),
+        ]);
+
+        $results = $this->taxes->calculate(
+            Carbon::now(),
+            Carbon::now()->addWeek(),
+            $local_location,
+            $local_location,
+            $wages,
+            $historical_wages,
+            $this->user,
+            null,
+            52,
+            collect([]),
+            collect([]),
+            collect([])
+        );
+
+        $short_name = (new ReflectionClass($parameters->getTaxClass()))->getShortName();
+        if ($results->get($parameters->getTaxClass()) !== null) {
+            self::fail('tax results for '.$short_name.' found but not expected');
+        } else {
+            $this->addToAssertionCount(1);
+        }
     }
 
     public function standardColoradoLocalTestCases(
@@ -95,7 +135,7 @@ class ColoradoLocalTaxTestCase extends TaxTestCase
                     ->setLocalMtdEarningsInCents(0)
                     ->setColoradoEarningsInCents(0)
                     ->setColoradoMtdEarningsInCents(0)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             'local equal' => [
@@ -122,7 +162,7 @@ class ColoradoLocalTaxTestCase extends TaxTestCase
                     ->setLocalMtdEarningsInCents($wage_amount_in_dollars - 2)
                     ->setColoradoEarningsInCents(0)
                     ->setColoradoMtdEarningsInCents(0)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             'local mtd equal' => [
@@ -140,7 +180,7 @@ class ColoradoLocalTaxTestCase extends TaxTestCase
                     ->setLocalMtdEarningsInCents($wage_amount_in_dollars)
                     ->setColoradoEarningsInCents(0)
                     ->setColoradoMtdEarningsInCents(0)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             'local both under' => [
@@ -149,7 +189,7 @@ class ColoradoLocalTaxTestCase extends TaxTestCase
                     ->setLocalMtdEarningsInCents($wage_amount_in_dollars - 100 - 1)
                     ->setColoradoEarningsInCents(0)
                     ->setColoradoMtdEarningsInCents(0)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             'local both equal' => [
@@ -176,7 +216,7 @@ class ColoradoLocalTaxTestCase extends TaxTestCase
                     ->setLocalMtdEarningsInCents(1)
                     ->setColoradoEarningsInCents($wage_amount_in_dollars - 2)
                     ->setColoradoMtdEarningsInCents(0)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             'co equal' => [
@@ -203,7 +243,7 @@ class ColoradoLocalTaxTestCase extends TaxTestCase
                     ->setLocalMtdEarningsInCents(1)
                     ->setColoradoEarningsInCents(0)
                     ->setColoradoMtdEarningsInCents($wage_amount_in_dollars - 2)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             'co mtd equal' => [
@@ -212,7 +252,7 @@ class ColoradoLocalTaxTestCase extends TaxTestCase
                     ->setLocalMtdEarningsInCents(1)
                     ->setColoradoEarningsInCents(0)
                     ->setColoradoMtdEarningsInCents($wage_amount_in_dollars - 1)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             'co mtd over' => [
@@ -221,7 +261,7 @@ class ColoradoLocalTaxTestCase extends TaxTestCase
                     ->setLocalMtdEarningsInCents(1)
                     ->setColoradoEarningsInCents(0)
                     ->setColoradoMtdEarningsInCents($wage_amount_in_dollars)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             'co both under' => [
@@ -230,7 +270,7 @@ class ColoradoLocalTaxTestCase extends TaxTestCase
                     ->setLocalMtdEarningsInCents(1)
                     ->setColoradoEarningsInCents(100)
                     ->setColoradoMtdEarningsInCents($wage_amount_in_dollars - 100 - 2)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             'co both equal' => [
@@ -257,7 +297,7 @@ class ColoradoLocalTaxTestCase extends TaxTestCase
                     ->setLocalMtdEarningsInCents(100)
                     ->setColoradoEarningsInCents(100)
                     ->setColoradoMtdEarningsInCents(100)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             'all equal' => [
@@ -276,15 +316,6 @@ class ColoradoLocalTaxTestCase extends TaxTestCase
                     ->setColoradoEarningsInCents(100)
                     ->setColoradoMtdEarningsInCents(100)
                     ->setExpectedAmountInCents($tax_amount)
-                    ->build()
-            ],
-            'no local wages' => [
-                $builder
-                    ->setLocalEarningsInCents(0)
-                    ->setLocalMtdEarningsInCents(0)
-                    ->setColoradoEarningsInCents(100)
-                    ->setColoradoMtdEarningsInCents($wage_amount_in_dollars - 100)
-                    ->setExpectedAmountInCents(null)
                     ->build()
             ],
         ];

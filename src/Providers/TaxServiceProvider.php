@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use http\Exception\UnexpectedValueException;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
+use ReflectionClass;
 
 class TaxServiceProvider extends ServiceProvider
 {
@@ -498,6 +499,8 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\NewJersey\NewJerseyUnemploymentInsurance\NewJerseyUnemploymentInsurance::class,
         \Appleton\Taxes\Countries\US\NewMexico\NewMexicoIncome\NewMexicoIncome::class,
         \Appleton\Taxes\Countries\US\NewMexico\NewMexicoUnemployment\NewMexicoUnemployment::class,
+        \Appleton\Taxes\Countries\US\NewMexico\NewMexicoWorkersCompensation\NewMexicoWorkersCompensation::class,
+        \Appleton\Taxes\Countries\US\NewMexico\NewMexicoWorkersCompensationEmployer\NewMexicoWorkersCompensationEmployer::class,
         \Appleton\Taxes\Countries\US\NewYork\NewYorkCity\NewYorkCity::class,
         \Appleton\Taxes\Countries\US\NewYork\NewYorkDisabilityInsurance\NewYorkDisabilityInsurance::class,
         \Appleton\Taxes\Countries\US\NewYork\NewYorkFamilyMedicalLeave\NewYorkFamilyMedicalLeave::class,
@@ -1398,10 +1401,16 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\Ohio\ZaneTraceLSD\ZaneTraceLSDTax::class,
         \Appleton\Taxes\Countries\US\Oklahoma\OklahomaIncome\OklahomaIncome::class,
         \Appleton\Taxes\Countries\US\Oklahoma\OklahomaUnemployment\OklahomaUnemployment::class,
+        \Appleton\Taxes\Countries\US\Oregon\CanbyEmployer\CanbyEmployer::class,
+        \Appleton\Taxes\Countries\US\Oregon\Eugene\Eugene::class,
         \Appleton\Taxes\Countries\US\Oregon\EugeneEmployer\EugeneEmployer::class,
         \Appleton\Taxes\Countries\US\Oregon\OregonIncome\OregonIncome::class,
         \Appleton\Taxes\Countries\US\Oregon\OregonTransit\OregonTransit::class,
         \Appleton\Taxes\Countries\US\Oregon\OregonUnemployment\OregonUnemployment::class,
+        \Appleton\Taxes\Countries\US\Oregon\SandyEmployer\SandyEmployer::class,
+        \Appleton\Taxes\Countries\US\Oregon\WilsonvilleEmployer\WilsonvilleEmployer::class,
+        \Appleton\Taxes\Countries\US\Oregon\WorkersCompAssessmentFund\WorkersCompAssessmentFund::class,
+        \Appleton\Taxes\Countries\US\Oregon\WorkersCompAssessmentFundEmployer\WorkersCompAssessmentFundEmployer::class,
         \Appleton\Taxes\Countries\US\Pennsylvania\PennsylvaniaEmployeeSuta\PennsylvaniaEmployeeSuta::class,
         \Appleton\Taxes\Countries\US\Pennsylvania\PennsylvaniaIncome\PennsylvaniaIncome::class,
         \Appleton\Taxes\Countries\US\Pennsylvania\PennsylvaniaUnemployment\PennsylvaniaUnemployment::class,
@@ -1420,7 +1429,11 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\Vermont\VermontUnemployment\VermontUnemployment::class,
         \Appleton\Taxes\Countries\US\Virginia\VirginiaIncome\VirginiaIncome::class,
         \Appleton\Taxes\Countries\US\Virginia\VirginiaUnemployment\VirginiaUnemployment::class,
+        \Appleton\Taxes\Countries\US\Washington\WashingtonFamilyMedicalLeave\WashingtonFamilyMedicalLeave::class,
+        \Appleton\Taxes\Countries\US\Washington\WashingtonFamilyMedicalLeaveEmployer\WashingtonFamilyMedicalLeaveEmployer::class,
         \Appleton\Taxes\Countries\US\Washington\WashingtonUnemployment\WashingtonUnemployment::class,
+        \Appleton\Taxes\Countries\US\Washington\WashingtonWorkersCompensation\WashingtonWorkersCompensation::class,
+        \Appleton\Taxes\Countries\US\Washington\WashingtonWorkersCompensationEmployer\WashingtonWorkersCompensationEmployer::class,
         \Appleton\Taxes\Countries\US\WashingtonDC\WashingtonDCIncome\WashingtonDCIncome::class,
         \Appleton\Taxes\Countries\US\WashingtonDC\WashingtonDCUnemployment\WashingtonDCUnemployment::class,
         \Appleton\Taxes\Countries\US\WestVirginia\CharlestonCityServiceFee\CharlestonCityServiceFee::class,
@@ -1449,7 +1462,9 @@ class TaxServiceProvider extends ServiceProvider
                 return $namespace . '\\' . $implementation . '\\' . $basename;
             }
         }
-        throw new \Exception('The implementation could not be found.');
+
+        $short_name = (new ReflectionClass($interface))->getShortName();
+        throw new \Exception("The implementation for $short_name ".$date->toDateString().' could not be found.');
     }
 
     public function register()

@@ -41,7 +41,7 @@ class CarrollCountyTest extends TaxTestCase
                 $builder
                     ->setWagesInCents(30000)
                     ->setYtdWagesInCents(0)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             '01' => [
@@ -55,7 +55,7 @@ class CarrollCountyTest extends TaxTestCase
                 $builder
                     ->setWagesInCents(90000)
                     ->setYtdWagesInCents(5000000)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
         ];

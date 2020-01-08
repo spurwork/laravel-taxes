@@ -23,6 +23,10 @@ class TestParametersBuilder
     private $expected_earnings_in_cents;
     private $qtd_wage_in_cents;
     private $ytd_liabilities_in_cents;
+    private $pay_check_tip_amount_in_cents;
+    private $take_home_tip_amount_in_cents;
+    private $minutes_worked;
+    private $wages_callback;
 
     public function build(): TestParameters
     {
@@ -43,7 +47,11 @@ class TestParametersBuilder
             $this->expected_earnings_in_cents,
             $this->pay_periods,
             $this->qtd_wage_in_cents,
-            $this->ytd_liabilities_in_cents
+            $this->ytd_liabilities_in_cents,
+            $this->pay_check_tip_amount_in_cents,
+            $this->take_home_tip_amount_in_cents,
+            $this->minutes_worked,
+            $this->wages_callback
         );
     }
 
@@ -146,6 +154,30 @@ class TestParametersBuilder
     public function setYtdLiabilitiesInCents(?int $ytd_liabilities_in_cents)
     {
         $this->ytd_liabilities_in_cents = $ytd_liabilities_in_cents;
+        return $this;
+    }
+
+    public function setPaycheckTipAmount(?int $pay_check_tip_amount_in_cents)
+    {
+        $this->pay_check_tip_amount_in_cents = $pay_check_tip_amount_in_cents;
+        return $this;
+    }
+
+    public function setTakeHomeTipAmount(?int $take_home_tip_amount_in_cents)
+    {
+        $this->take_home_tip_amount_in_cents = $take_home_tip_amount_in_cents;
+        return $this;
+    }
+
+    public function setMinutesWorked(?int $minutes_worked)
+    {
+        $this->minutes_worked = $minutes_worked;
+        return $this;
+    }
+
+    public function setWagesCallback(?callable $wages_callback)
+    {
+        $this->wages_callback = $wages_callback;
         return $this;
     }
 }

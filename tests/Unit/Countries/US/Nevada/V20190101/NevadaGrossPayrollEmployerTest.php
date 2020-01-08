@@ -32,7 +32,7 @@ class NevadaGrossPayrollEmployerTest extends PayrollLiabilityTestCase
                 $builder
                     ->setWagesInCents(100)
                     ->setQtdWageInCents(4999800)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->setExpectedEarningsInCents(null)
                     ->build(),
             ],
@@ -40,7 +40,7 @@ class NevadaGrossPayrollEmployerTest extends PayrollLiabilityTestCase
                 $builder
                     ->setWagesInCents(100)
                     ->setQtdWageInCents(4999900)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->setExpectedEarningsInCents(null)
                     ->build(),
             ],
@@ -56,7 +56,7 @@ class NevadaGrossPayrollEmployerTest extends PayrollLiabilityTestCase
                 $builder
                     ->setWagesInCents(4999900)
                     ->setQtdWageInCents(0)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->setExpectedEarningsInCents(null)
                     ->build(),
             ],
@@ -64,7 +64,7 @@ class NevadaGrossPayrollEmployerTest extends PayrollLiabilityTestCase
                 $builder
                     ->setWagesInCents(5000000)
                     ->setQtdWageInCents(0)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->setExpectedEarningsInCents(null)
                     ->build(),
             ],

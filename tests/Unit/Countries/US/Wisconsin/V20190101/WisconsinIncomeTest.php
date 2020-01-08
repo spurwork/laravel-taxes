@@ -82,7 +82,7 @@ class WisconsinIncomeTest extends TaxTestCase
                         'exempt' => true,
                     ])
                     ->setWagesInCents(100000)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             'exempt false' => [

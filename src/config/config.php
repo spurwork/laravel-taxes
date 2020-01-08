@@ -297,7 +297,7 @@ return [
             ],
 
             'oregon' => [
-                'unemployment' => env('TAXES_OREGON_UNEMPLOYMENT_TAX_RATE', 0.024),
+                'unemployment' => env('TAXES_OREGON_UNEMPLOYMENT_TAX_RATE', 0.021),
             ],
 
             'pennsylvania' => [

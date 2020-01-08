@@ -51,7 +51,7 @@ class MissouriIncomeTest extends TaxTestCase
                 $builder
                     ->setTaxInfoOptions(['exempt' => true])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             '01' => [
@@ -65,7 +65,7 @@ class MissouriIncomeTest extends TaxTestCase
                 $builder
                     ->setTaxInfoOptions(['filing_status' => MissouriIncome::FILING_MARRIED_BOTH_SPOUSES_EMPLOYED])
                     ->setWagesInCents(10000)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             '03' => [
@@ -93,7 +93,7 @@ class MissouriIncomeTest extends TaxTestCase
                 $builder
                     ->setTaxInfoOptions(['filing_status' => MissouriIncome::FILING_HEAD_OF_HOUSEHOLD])
                     ->setWagesInCents(25000)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             '07' => [

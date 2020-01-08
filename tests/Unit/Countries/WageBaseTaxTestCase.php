@@ -72,17 +72,12 @@ class WageBaseTaxTestCase extends UnitTestCase
 
         $short_name = (new ReflectionClass($parameters->getTaxClass()))->getShortName();
 
-        if ($parameters->getExpectedAmountInCents() === null ||
-            $parameters->getExpectedAmountInCents() === 0) {
-            self::assertNull($results->get($parameters->getTaxClass()),
-                'tax results for '.$short_name.' found, none expected');
-            return;
-        }
-
         /** @var TaxResult $result */
         $result = $results->get($parameters->getTaxClass());
+        if ($result === null) {
+            self::fail('no tax results for '.$short_name.' found');
+        }
 
-        self::assertNotNull($result, 'no tax results for '.$short_name.' found');
         self::assertThat(
             $result->getAmountInCents(),
             self::identicalTo($parameters->getExpectedAmountInCents()),
@@ -162,16 +157,16 @@ class WageBaseTaxTestCase extends UnitTestCase
                 $builder
                     ->setWagesInCents(1000)
                     ->setYtdWagesInCents($wage_base_in_cents)
-                    ->setExpectedAmountInCents(null)
-                    ->setExpectedEarningsInCents(null)
+                    ->setExpectedAmountInCents(0)
+                    ->setExpectedEarningsInCents(0)
                     ->build()
             ],
             'ytd wages exceed wage base' => [
                 $builder
                     ->setWagesInCents(1000)
                     ->setYtdWagesInCents($wage_base_in_cents + 1000)
-                    ->setExpectedAmountInCents(null)
-                    ->setExpectedEarningsInCents(null)
+                    ->setExpectedAmountInCents(0)
+                    ->setExpectedEarningsInCents(0)
                     ->build()
             ],
         ];
@@ -243,16 +238,16 @@ class WageBaseTaxTestCase extends UnitTestCase
                 $builder
                     ->setWagesInCents(10000)
                     ->setYtdWagesInCents($wage_base_in_cents)
-                    ->setExpectedAmountInCents(null)
-                    ->setExpectedEarningsInCents(null)
+                    ->setExpectedAmountInCents(0)
+                    ->setExpectedEarningsInCents(0)
                     ->build()
             ],
             'ytd wages exceed wage base' => [
                 $builder
                     ->setWagesInCents(10000)
                     ->setYtdWagesInCents($wage_base_in_cents + 10000)
-                    ->setExpectedAmountInCents(null)
-                    ->setExpectedEarningsInCents(null)
+                    ->setExpectedAmountInCents(0)
+                    ->setExpectedEarningsInCents(0)
                     ->build()
             ],
         ];

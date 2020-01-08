@@ -70,7 +70,7 @@ class GeorgiaIncomeTest extends TaxTestCase
                     ])
                     ->setWagesInCents(0)
                     ->setPayPeriods(260)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             'additional withholding 02' => [
@@ -99,7 +99,7 @@ class GeorgiaIncomeTest extends TaxTestCase
                     ->setTaxInfoOptions(null)
                     ->setWagesInCents(900)
                     ->setPayPeriods(260)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             'no wages' => [
@@ -107,7 +107,7 @@ class GeorgiaIncomeTest extends TaxTestCase
                     ->setTaxInfoOptions(null)
                     ->setWagesInCents(0)
                     ->setPayPeriods(260)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             '08' => [
@@ -125,7 +125,7 @@ class GeorgiaIncomeTest extends TaxTestCase
                     ])
                     ->setWagesInCents(6668)
                     ->setPayPeriods(260)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             'married with allowance' => [

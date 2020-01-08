@@ -3,9 +3,8 @@
 namespace Appleton\Taxes\Tests\Unit\Countries\US\WestVirginia\V20190101;
 
 use Appleton\Taxes\Countries\US\WestVirginia\CharlestonCityServiceFee\CharlestonCityServiceFee;
-use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
-use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
 use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
+use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
 
 class CharlestonCityServiceFeeTest extends TaxTestCase
 {
@@ -19,36 +18,30 @@ class CharlestonCityServiceFeeTest extends TaxTestCase
         $this->query_runner->addTax(self::TAX_CLASS);
     }
 
-    /**
-     * @dataProvider provideTestData
-     */
-    public function testTax(TestParameters $parameters): void
+    public function testTax(): void
     {
-        $this->validate($parameters);
+        $this->validate(
+            (new TestParametersBuilder())
+                ->setDate(self::DATE)
+                ->setHomeLocation(self::LOCATION)
+                ->setTaxClass(self::TAX_CLASS)
+                ->setPayPeriods(52)
+                ->setWagesInCents(1)
+                ->setExpectedAmountInCents(300)
+                ->build()
+        );
     }
 
-    public function provideTestData(): array
+    public function testTax_no_wages(): void
     {
-        $builder = new TestParametersBuilder();
-        $builder
-            ->setDate(self::DATE)
-            ->setHomeLocation(self::LOCATION)
-            ->setTaxClass(self::TAX_CLASS)
-            ->setPayPeriods(52);
-
-        return [
-            'no wages' => [
-                $builder
-                    ->setWagesInCents(0)
-                    ->setExpectedAmountInCents(null)
-                    ->build()
-            ],
-            'wages' => [
-                $builder
-                    ->setWagesInCents(1)
-                    ->setExpectedAmountInCents(300)
-                    ->build()
-            ],
-        ];
+        $this->validateNoTax(
+            (new TestParametersBuilder())
+                ->setDate(self::DATE)
+                ->setHomeLocation(self::LOCATION)
+                ->setTaxClass(self::TAX_CLASS)
+                ->setPayPeriods(52)
+                ->setWagesInCents(0)
+                ->build()
+        );
     }
 }

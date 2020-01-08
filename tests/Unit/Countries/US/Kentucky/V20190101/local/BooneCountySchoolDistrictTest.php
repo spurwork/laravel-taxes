@@ -47,14 +47,13 @@ class BooneCountySchoolDistrictTest extends TaxTestCase
             'lives_in_bcsd' => false,
         ], $this->user);
 
-        $this->validate(
+        $this->validateNoTax(
             (new TestParametersBuilder())
                 ->setDate(self::DATE)
                 ->setHomeLocation(self::LOCATION)
                 ->setTaxClass(self::TAX_CLASS)
                 ->setPayPeriods(52)
                 ->setWagesInCents(30000)
-                ->setExpectedAmountInCents(null)
                 ->build()
         );
     }

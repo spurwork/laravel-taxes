@@ -151,7 +151,7 @@ class VirginiaIncomeTest extends TaxTestCase
                         'exempt' => true,
                     ])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
         ];

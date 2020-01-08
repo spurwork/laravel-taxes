@@ -56,28 +56,28 @@ class KentuckyIncomeTest extends TaxTestCase
                 $builder
                     ->setTaxInfoOptions(null)
                     ->setWagesInCents(4660)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             'meet standard deduction' => [
                 $builder
                     ->setTaxInfoOptions(null)
                     ->setWagesInCents(4981)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             'exceed standard deduction' => [
                 $builder
                     ->setTaxInfoOptions(null)
                     ->setWagesInCents(5301)
-                    ->setExpectedAmountInCents(15)
+                    ->setExpectedAmountInCents(16)
                     ->build()
             ],
             'exempt' => [
                 $builder
                     ->setTaxInfoOptions(['exempt' => true])
                     ->setWagesInCents(16668)
-                    ->setExpectedAmountInCents(null)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
         ];
