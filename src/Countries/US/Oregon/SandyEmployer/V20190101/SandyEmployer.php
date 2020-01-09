@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Oregon\SandyEmployer\V20200101;
+namespace Appleton\Taxes\Countries\US\Oregon\SandyEmployer\V20190101;
 
 use Appleton\Taxes\Countries\US\Oregon\SandyEmployer\SandyEmployer as BaseSandyEmployer;
 use Illuminate\Database\Eloquent\Collection;
