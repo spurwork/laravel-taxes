@@ -111,6 +111,10 @@ class FederalIncome extends BaseFederalIncome
 
     public function compute(Collection $tax_areas)
     {
+        if ($this->isUserClaimingExemption()) {
+            return 0.00;
+        }
+
         if ($this->tax_information->form_version === self::FORM_VERSION_2020) {
             $taxable_wages = $this->getAdjustedWageAmount();
             $taxable_wages = $this->getTentativeAmount($taxable_wages);
@@ -124,9 +128,10 @@ class FederalIncome extends BaseFederalIncome
             $taxable_wages = ($this->payroll->getEarnings() * $this->payroll->pay_periods) - ($this->tax_information->exemptions * self::ANNUALLY);
 
             $taxable_wages = $this->getTentativeAmount($taxable_wages);
-            $taxable_wages += $this->getAdditionalWithholding();
+            $taxable_wages /= $this->payroll->pay_periods;
+            $taxable_wages += $this->tax_information->additional_withholding / 100;
 
-            $this->tax_total = $this->payroll->withholdTax($taxable_wages / $this->payroll->pay_periods);
+            $this->tax_total = $this->payroll->withholdTax($taxable_wages);
         }
 
         return round($this->tax_total, 2);
@@ -161,7 +166,7 @@ class FederalIncome extends BaseFederalIncome
         } elseif ($this->tax_information->form_version === self::FORM_VERSION_2019) {
             if ($this->tax_information->filing_status === static::FILING_MARRIED) {
                 return $this->getBracketAmount($wages, self::MARRIED_BRACKETS_OLD);
-            } elseif ($this->tax_information->filing_status === static::FILING_SINGLE) {
+            } elseif ($this->tax_information->filing_status === static::FILING_SINGLE || $this->tax_information->filing_status === static::FILING_SEPERATE) {
                 return $this->getBracketAmount($wages, self::SINGLE_BRACKETS_OLD);
             }
         }
