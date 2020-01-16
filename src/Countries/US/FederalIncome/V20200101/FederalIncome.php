@@ -129,7 +129,6 @@ class FederalIncome extends BaseFederalIncome
 
             $taxable_wages = $this->getTentativeAmount($taxable_wages);
             $taxable_wages /= $this->payroll->pay_periods;
-            // dd($this->tax_information->additional_withholding);
             $taxable_wages += $this->tax_information->additional_withholding / 100;
 
             $this->tax_total = $this->payroll->withholdTax($taxable_wages);
