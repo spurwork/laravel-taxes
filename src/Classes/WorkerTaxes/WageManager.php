@@ -123,6 +123,7 @@ class WageManager
             switch ($wage->getType()) {
                 case WageType::SHIFT:
                 case WageType::SALARY:
+                case WageType::SICK_LEAVE:
                     $cents_earned += $wage->getAmountInCents();
                     $minutes_worked += $wage->getWorkTimeInMinutes();
                     return;
