@@ -117,7 +117,7 @@ class FederalIncomeTest extends TaxTestCase
                         'exempt' => false,
                         'filing_status' => FederalIncome::FILING_SINGLE,
                         'form_version' => '2019',
-                        'additional_withholding' => 1000,
+                        'additional_withholding' => 10,
                         'exemptions' => 2,
                     ])
                     ->setWagesInCents(30000)
@@ -176,7 +176,7 @@ class FederalIncomeTest extends TaxTestCase
                         'exempt' => false,
                         'filing_status' => FederalIncome::FILING_MARRIED,
                         'form_version' => '2019',
-                        'additional_withholding' => 1000,
+                        'additional_withholding' => 10,
                         'exemptions' => 2,
                     ])
                     ->setWagesInCents(30000)
@@ -189,7 +189,7 @@ class FederalIncomeTest extends TaxTestCase
                         'exempt' => true,
                         'filing_status' => FederalIncome::FILING_SEPERATE,
                         'form_version' => '2019',
-                        'additional_withholding' => 2000,
+                        'additional_withholding' => 20,
                         'exemptions' => 1,
                     ])
                     ->setWagesInCents(33572)
@@ -202,7 +202,7 @@ class FederalIncomeTest extends TaxTestCase
                         'exempt' => false,
                         'filing_status' => FederalIncome::FILING_SEPERATE,
                         'form_version' => '2019',
-                        'additional_withholding' => 2000,
+                        'additional_withholding' => 20,
                         'exemptions' => 1,
                     ])
                     ->setWagesInCents(33572)
@@ -311,12 +311,12 @@ class FederalIncomeTest extends TaxTestCase
                         'form_version' => '2020',
                         'dependents_deduction_amount' => 1000,
                         'deductions' => 500,
-                        'extra_withholding' => 100,
+                        'extra_withholding' => 10,
                         'step_2_checked' => true,
                         'other_income' => 1000,
                     ])
                     ->setWagesInCents(300000)
-                    ->setExpectedAmountInCents(75554)
+                    ->setExpectedAmountInCents(76454)
                     ->build()
             ],
             'A2' => [
@@ -407,7 +407,7 @@ class FederalIncomeTest extends TaxTestCase
                         'form_version' => '2020',
                         'dependents_deduction_amount' => 1000,
                         'deductions' => 500,
-                        'extra_withholding' => 1000,
+                        'extra_withholding' => 10,
                         'step_2_checked' => true,
                         'other_income' => 1000,
                     ])
@@ -503,7 +503,7 @@ class FederalIncomeTest extends TaxTestCase
                         'form_version' => '2020',
                         'dependents_deduction_amount' => 1000,
                         'deductions' => 500,
-                        'extra_withholding' => 1000,
+                        'extra_withholding' => 10,
                         'step_2_checked' => true,
                         'other_income' => 1000,
                     ])
