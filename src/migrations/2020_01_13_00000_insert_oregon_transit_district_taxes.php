@@ -17,17 +17,17 @@ class InsertOregonTransitDistrictTaxes extends Migration
     public function up()
     {
         DB::table($this->taxes)->insert([
-            'name' => 'Lane County Mass Transit District Tax',
+            'name' => 'Lane County Mass Oregon Transit District Tax',
             'class' => LaneCounty::class,
         ]);
 
         DB::table($this->taxes)->insert([
-            'name' => 'South Clackamas Transportation District Tax',
+            'name' => 'South Clackamas Oregon Transportation District Tax',
             'class' => SouthClackamas::class,
         ]);
 
         DB::table($this->taxes)->insert([
-            'name' => 'Tri-County Metropolitan Transportation District Tax',
+            'name' => 'Tri-County Metropolitan Oregon Transportation District Tax',
             'class' => TriMet::class,
         ]);
     }
