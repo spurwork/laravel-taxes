@@ -13,12 +13,18 @@ class ArkansasIncome extends BaseArkansasIncome
     private const EXEMPTION_AMOUNT = 26;
 
     private const BRACKETS = [
-        [0, 0.009, 0],
-        [4300, 0.024, 64.49],
-        [8400, 0.034, 148.48],
-        [12600, 0.044, 274.47],
-        [21000, 0.059, 589.45],
-        [35100, 0.069, 940.44],
+        [0, 0.00, 0],
+        [4300, 0.02, 91.98],
+        [9100, 0.03, 182.97],
+        [13700, 0.034, 237.77],
+        [22600, 0.05, 421.46],
+        [37900, 0.059, 762.55],
+        [80801, 0.066, 1243.4],
+        [81801, 0.066, 1143.4],
+        [82801, 0.066, 1043.4],
+        [84101, 0.066, 943.4],
+        [85201, 0.066, 843.4],
+        [86201, 0.066, 803.4],
     ];
 
     private const ARKANSAS = 'Arkansas';
@@ -38,10 +44,10 @@ class ArkansasIncome extends BaseArkansasIncome
                 if ($this->tax_information->ar_tx_exempt) {
                     return $this->payroll->withholdTax(0.0);
                 }
-            } else if (!$this->payroll->hasWorkInArea(self::ARKANSAS)) {
+            } elseif (!$this->payroll->hasWorkInArea(self::ARKANSAS)) {
                 return $this->payroll->withholdTax(0.0);
             }
-        } else if ($this->payroll->livesInArea(self::TEXARKANA_TX)) {
+        } elseif ($this->payroll->livesInArea(self::TEXARKANA_TX)) {
             $annual_gross -= $this->payroll->getEarningsForArea(self::TEXARKANA_AR) * $this->payroll->pay_periods;
         }
 
@@ -75,7 +81,7 @@ class ArkansasIncome extends BaseArkansasIncome
 
     private function get50MidRange(int $amount): int
     {
-        if ($amount >= 50000) {
+        if ($amount >= 87000) {
             return $amount;
         }
 
