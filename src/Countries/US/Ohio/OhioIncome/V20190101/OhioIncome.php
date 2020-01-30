@@ -32,8 +32,10 @@ class OhioIncome extends BaseOhioIncome
         }
 
         $this->tax_total = $this->payroll->withholdTax($this->getTaxAmountFromTaxBrackets(($this->getAdjustedEarnings() * $this->payroll->pay_periods) - $this->getDependentAllowance(), $this->getTaxBrackets()) / $this->payroll->pay_periods) * 1.075;
+        $this->tax_total += $this->tax_information->additional_withholding;
 
-        return round(intval($this->tax_total * 100) / 100, 2);
+        $this->tax_total = round(intval($this->tax_total * 100) / 100, 2);
+        return $this->payroll->withholdTax($this->tax_total);
     }
 
     public function getDependentAllowance()
