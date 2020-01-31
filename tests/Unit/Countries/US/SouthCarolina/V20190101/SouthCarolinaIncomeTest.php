@@ -56,42 +56,42 @@ class SouthCarolinaIncomeTest extends TaxTestCase
                 $builder
                     ->setTaxInfoOptions(null)
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(1351)
+                    ->setExpectedAmountInCents(1283)
                     ->build()
             ],
             '02' => [
                 $builder
                     ->setTaxInfoOptions(['exemptions' => 1])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(817)
+                    ->setExpectedAmountInCents(757)
                     ->build()
             ],
             '03' => [
                 $builder
                     ->setTaxInfoOptions(['exemptions' => 3])
                     ->setWagesInCents(55000)
-                    ->setExpectedAmountInCents(1702)
+                    ->setExpectedAmountInCents(1602)
                     ->build()
             ],
             '04' => [
                 $builder
                     ->setTaxInfoOptions(null)
                     ->setWagesInCents(15384)
-                    ->setExpectedAmountInCents(444)
+                    ->setExpectedAmountInCents(406)
                     ->build()
             ],
             '05' => [
                 $builder
                     ->setTaxInfoOptions(['exemptions' => 2])
                     ->setWagesInCents(67307)
-                    ->setExpectedAmountInCents(2819)
+                    ->setExpectedAmountInCents(2726)
                     ->build()
             ],
             '06' => [
                 $builder
                     ->setTaxInfoOptions(['exemptions' => 4])
                     ->setWagesInCents(100000)
-                    ->setExpectedAmountInCents(4432)
+                    ->setExpectedAmountInCents(4275)
                     ->build()
             ],
         ];

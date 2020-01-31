@@ -7,16 +7,16 @@ use Illuminate\Database\Eloquent\Collection;
 class SouthCarolinaIncome extends BaseSouthCarolinaIncome
 {
     const TAX_RATE = 0.05;
-    const STANDARD_DEDUCTION = 3470;
-    const DEDUCTION_ALLOWANCE = 2510;
+    const STANDARD_DEDUCTION = 3820;
+    const DEDUCTION_ALLOWANCE = 2590;
 
     const TAX_WITHHOLDING_BRACKET = [
-        [0, .011, 0],
-        [2450, .03, 26.95],
-        [4900, .04, 100.45],
-        [7350, .05, 198.45],
-        [9800, .06, 320.95],
-        [12250, .07, 467.95],
+        [0, .008, 0],
+        [2620, .03, 20.96],
+        [5240, .04, 99.56],
+        [7860, .05, 204.36],
+        [10490, .06, 335.86],
+        [13110, .07, 493.06],
     ];
 
     public function getTaxBrackets()
