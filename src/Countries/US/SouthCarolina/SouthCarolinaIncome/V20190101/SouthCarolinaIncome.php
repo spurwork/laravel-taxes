@@ -30,7 +30,7 @@ class SouthCarolinaIncome extends BaseSouthCarolinaIncome
             return 0;
         }
 
-        $this->tax_total = $this->payroll->withholdTax($this->getTaxAmountFromTaxBrackets($this->getGrossWages() - $this->getStandardDeduction() - $this->getExemptionsAllowance(), $this->getTaxBrackets()) / $this->payroll->pay_periods);
+        $this->tax_total = $this->payroll->withholdTax(($this->getTaxAmountFromTaxBrackets($this->getGrossWages() - $this->getStandardDeduction() - $this->getExemptionsAllowance(), $this->getTaxBrackets()) / $this->payroll->pay_periods) + $this->tax_information->additional_withholding);
 
         return round($this->tax_total, 2);
     }

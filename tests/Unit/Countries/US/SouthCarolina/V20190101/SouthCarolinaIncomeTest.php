@@ -23,6 +23,7 @@ class SouthCarolinaIncomeTest extends TaxTestCase
         SouthCarolinaIncomeTaxInformation::createForUser([
             'exemptions' => 0,
             'exempt' => false,
+            'additional_withholding' => 0,
         ], $this->user);
     }
 
@@ -92,6 +93,13 @@ class SouthCarolinaIncomeTest extends TaxTestCase
                     ->setTaxInfoOptions(['exemptions' => 4])
                     ->setWagesInCents(100000)
                     ->setExpectedAmountInCents(4275)
+                    ->build()
+            ],
+            '07' => [
+                $builder
+                    ->setTaxInfoOptions(['additional_withholding' => 20])
+                    ->setWagesInCents(30000)
+                    ->setExpectedAmountInCents(3283)
                     ->build()
             ],
         ];
