@@ -45,4 +45,21 @@ class KentTest extends TaxTestCase
                 ->build()
         );
     }
+
+    public function testTaxLocalExempt(): void
+    {
+        $this->validate(
+            (new TestParametersBuilder())
+                ->setDate(self::DATE)
+                ->setHomeLocation(self::HOME_LOCATION)
+                ->setHomeLocation(self::WORK_LOCATION)
+                ->setTaxClass(self::TAX_CLASS)
+                ->setTaxInfoClass(self::TAX_INFO_CLASS)
+                ->setTaxInfoOptions(['local_exempt' => true])
+                ->setPayPeriods(52)
+                ->setWagesInCents(30000)
+                ->setExpectedAmountInCents(0)
+                ->build()
+        );
+    }
 }
