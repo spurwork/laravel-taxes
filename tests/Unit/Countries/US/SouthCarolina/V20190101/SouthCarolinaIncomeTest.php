@@ -62,46 +62,47 @@ class SouthCarolinaIncomeTest extends TaxTestCase
             ],
             '02' => [
                 $builder
+                    ->setTaxInfoOptions(['additional_withholding' => 20])
+                    ->setWagesInCents(30000)
+                    ->setExpectedAmountInCents(3283)
+                    ->build()
+            ],
+            '03' => [
+                $builder
                     ->setTaxInfoOptions(['exemptions' => 1])
                     ->setWagesInCents(30000)
                     ->setExpectedAmountInCents(757)
                     ->build()
             ],
-            '03' => [
+            '04' => [
                 $builder
                     ->setTaxInfoOptions(['exemptions' => 3])
                     ->setWagesInCents(55000)
                     ->setExpectedAmountInCents(1602)
                     ->build()
             ],
-            '04' => [
+            '05' => [
                 $builder
                     ->setTaxInfoOptions(null)
                     ->setWagesInCents(15384)
                     ->setExpectedAmountInCents(406)
                     ->build()
             ],
-            '05' => [
+            '06' => [
                 $builder
                     ->setTaxInfoOptions(['exemptions' => 2])
                     ->setWagesInCents(67307)
                     ->setExpectedAmountInCents(2726)
                     ->build()
             ],
-            '06' => [
+            '07' => [
                 $builder
                     ->setTaxInfoOptions(['exemptions' => 4])
                     ->setWagesInCents(100000)
                     ->setExpectedAmountInCents(4275)
                     ->build()
             ],
-            '07' => [
-                $builder
-                    ->setTaxInfoOptions(['additional_withholding' => 20])
-                    ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(3283)
-                    ->build()
-            ],
+
         ];
     }
 }
