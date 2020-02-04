@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Tests\Unit\Countries\US\NewJersey\V20190101;
+namespace Appleton\Taxes\Tests\Unit\Countries\US\NewJersey\V20200101;
 
 use Appleton\Taxes\Countries\US\NewJersey\NewJerseyFamilyMedicalLeave\NewJerseyFamilyMedicalLeave;
 use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
