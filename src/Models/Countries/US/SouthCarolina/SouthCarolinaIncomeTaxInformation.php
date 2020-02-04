@@ -14,6 +14,7 @@ class SouthCarolinaIncomeTaxInformation extends BaseTaxInformationModel
         $tax_information = new self();
         $tax_information->exemptions = 0;
         $tax_information->exempt = false;
+        $tax_information->additional_withholding = 0;
         return $tax_information;
     }
 
