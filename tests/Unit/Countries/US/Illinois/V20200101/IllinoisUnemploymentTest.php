@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Tests\Unit\Countries\US\Illinois\V20120101;
+namespace Appleton\Taxes\Tests\Unit\Countries\US\Illinois\V20200101;
 
 use Appleton\Taxes\Countries\US\Illinois\IllinoisUnemployment\IllinoisUnemployment;
 use Appleton\Taxes\Tests\Unit\Countries\UnemploymentTaxTestCase;
