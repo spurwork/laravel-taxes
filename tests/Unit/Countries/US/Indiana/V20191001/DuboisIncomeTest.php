@@ -78,6 +78,17 @@ class DuboisIncomeTest extends TaxTestCase
                     ->setExpectedAmountInCents(360)
                     ->build()
             ],
+            'additional county withholding' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'county_lived' => 19,
+                        'county_worked' => 2,
+                        'additional_county_withholding' => 20,
+                    ])
+                    ->setWagesInCents(30000)
+                    ->setExpectedAmountInCents(2360)
+                    ->build()
+            ],
             'county worked and taxes not taken from home county' => [
                 $builder
                     ->setTaxInfoOptions([

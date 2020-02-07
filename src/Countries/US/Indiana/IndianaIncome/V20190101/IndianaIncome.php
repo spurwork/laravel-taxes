@@ -3,6 +3,7 @@
 namespace Appleton\Taxes\Countries\US\Indiana\IndianaIncome\V20190101;
 
 use Appleton\Taxes\Countries\US\Indiana\IndianaIncome\IndianaIncome as BaseIndianaIncome;
+use Illuminate\Database\Eloquent\Collection;
 
 class IndianaIncome extends BaseIndianaIncome
 {
@@ -24,5 +25,16 @@ class IndianaIncome extends BaseIndianaIncome
 
         $exemptions = ($personal_allowances + $dependent_allowances) / $this->payroll->pay_periods;
         return ($this->payroll->getEarnings() - $exemptions) * $this->payroll->pay_periods;
+    }
+
+    public function compute(Collection $tax_areas)
+    {
+        if ($this->isUserClaimingExemption()) {
+            return 0;
+        }
+
+        $this->tax_total = $this->payroll->withholdTax(($this->getTaxAmountFromTaxBrackets($this->getAdjustedEarnings(), $this->getTaxBrackets()) / $this->payroll->pay_periods) + $this->tax_information->additional_withholding);
+
+        return round(((int)($this->tax_total * 100)) / 100, 2);
     }
 }

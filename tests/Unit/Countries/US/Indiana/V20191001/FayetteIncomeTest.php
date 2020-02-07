@@ -78,6 +78,17 @@ class FayetteIncomeTest extends TaxTestCase
                     ->setExpectedAmountInCents(771)
                     ->build()
             ],
+            'additional county withholding' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'county_lived' => 21,
+                        'county_worked' => 2,
+                        'additional_county_withholding' => 20,
+                    ])
+                    ->setWagesInCents(30000)
+                    ->setExpectedAmountInCents(2771)
+                    ->build()
+            ],
             'county worked and taxes not taken from home county' => [
                 $builder
                     ->setTaxInfoOptions([
