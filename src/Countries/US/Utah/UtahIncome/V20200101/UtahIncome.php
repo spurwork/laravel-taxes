@@ -1,10 +1,10 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\UtahIncome\V20200101;
+namespace Appleton\Taxes\Countries\US\Utah\UtahIncome\V20200101;
 
 use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
-use Appleton\Taxes\Countries\US\UtahIncome\UtahIncome as BaseUtahIncome;
-use Appleton\Taxes\Models\Countries\US\UtahIncomeTaxInformation;
+use Appleton\Taxes\Countries\US\Utah\UtahIncome\UtahIncome as BaseUtahIncome;
+use Appleton\Taxes\Models\Countries\US\Utah\UtahIncomeTaxInformation;
 use Illuminate\Database\Eloquent\Collection;
 
 class UtahIncome extends BaseUtahIncome

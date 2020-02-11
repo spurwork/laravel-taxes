@@ -17,5 +17,13 @@ class AddParametersToUtahIncomeTaxInformation extends Migration
             $table->integer('extra_withholding')->nullable();
             $table->boolean('step_2_checked')->nullable();
         });
+
+        Schema::table($this->utah_income_tax_information, function (Blueprint $table) {
+            $table->dropColumn('filing_status');
+        });
+
+        Schema::table($this->utah_income_tax_information, function (Blueprint $table) {
+            $table->integer('filing_status')->default(0);
+        });
     }
 }
