@@ -8,8 +8,6 @@ use Appleton\Taxes\Models\Countries\US\Utah\UtahIncomeTaxInformation;
 
 abstract class UtahIncome extends BaseStateIncome
 {
-    const TYPE = 'federal';
-
     const FILING_SINGLE = 0;
     const FILING_WIDOW = 1;
     const FILING_HEAD_OF_HOUSEHOLD = 2;
