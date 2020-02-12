@@ -12,7 +12,6 @@ class UtahIncomeTaxInformation extends BaseTaxInformationModel
     public static function getDefault()
     {
         $tax_information = new self();
-        $tax_information->additional_withholding = 0;
         $tax_information->filing_status = UtahIncome::FILING_SINGLE;
         $tax_information->exempt = false;
         $tax_information->deductions = 0;

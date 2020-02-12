@@ -20,6 +20,7 @@ class AddParametersToUtahIncomeTaxInformation extends Migration
 
         Schema::table($this->utah_income_tax_information, function (Blueprint $table) {
             $table->dropColumn('filing_status');
+            $table->dropColumn('additional_withholding');
         });
 
         Schema::table($this->utah_income_tax_information, function (Blueprint $table) {
