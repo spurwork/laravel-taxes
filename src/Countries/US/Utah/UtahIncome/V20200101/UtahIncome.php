@@ -79,26 +79,19 @@ class UtahIncome extends BaseUtahIncome
         [264320, 0.37, 76185],
     ];
 
-    public function __construct(UtahIncomeTaxInformation $tax_information, Payroll $payroll)
-    {
-        parent::__construct($tax_information, $payroll);
-        $this->tax_information = $tax_information;
-    }
-
     public function compute(Collection $tax_areas)
     {
         if ($this->isUserClaimingExemption()) {
             return 0.00;
         }
 
-        $taxable_wages = $this->getAdjustedWageAmount();
-        $taxable_wages = $this->getTentativeAmount($taxable_wages);
-        $taxable_wages -= $this->tax_information->dependents_deduction_amount;
-        $taxable_wages = $taxable_wages > 0 ? $taxable_wages : 0;
-        $taxable_wages = $taxable_wages > 0 ? $taxable_wages / $this->payroll->pay_periods : 0;
-        $taxable_wages += $this->tax_information->extra_withholding;
+        $tax_amount = $this->getAdjustedWageAmount();
+        $tax_amount = $this->getTentativeAmount($tax_amount);
+        $tax_amount -= $this->tax_information->dependents_deduction_amount;
+        $tax_amount = $tax_amount > 0 ? $tax_amount / $this->payroll->pay_periods : 0;
+        $tax_amount += $this->tax_information->extra_withholding;
 
-        $this->tax_total = $this->payroll->withholdTax($taxable_wages);
+        $this->tax_total = $this->payroll->withholdTax($tax_amount);
 
         return round($this->tax_total, 2);
     }
