@@ -21,7 +21,6 @@ class UtahIncomeTest extends TaxTestCase
         $this->query_runner->addTax(self::TAX_CLASS);
 
         UtahIncomeTaxInformation::createForUser([
-            'additional_withholding' => 0,
             'filing_status' => UtahIncome::FILING_SINGLE,
             'exempt' => false,
             'other_income' => 0,
