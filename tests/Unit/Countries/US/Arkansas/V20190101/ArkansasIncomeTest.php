@@ -6,8 +6,6 @@ use Appleton\Taxes\Classes\WorkerTaxes\GeoPoint;
 use Appleton\Taxes\Classes\WorkerTaxes\TaxResult;
 use Appleton\Taxes\Countries\US\Arkansas\ArkansasIncome\ArkansasIncome;
 use Appleton\Taxes\Models\Countries\US\Arkansas\ArkansasIncomeTaxInformation;
-use Appleton\Taxes\Tests\Unit\Countries\IncomeParameters;
-use Appleton\Taxes\Tests\Unit\Countries\IncomeParametersBuilder;
 use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
 use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
 use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
@@ -96,8 +94,11 @@ class ArkansasIncomeTest extends TaxTestCase
         $result = $results->get(ArkansasIncome::class);
 
         self::assertNotNull($result, 'no tax results for '.$short_name.' found');
-        self::assertThat($result->getAmountInCents(), self::identicalTo(52),
-            $short_name.' expected 52 tax amount but got '.$result->getAmountInCents());
+        self::assertThat(
+            $result->getAmountInCents(),
+            self::identicalTo(0),
+            $short_name.' expected 0 tax amount but got '.$result->getAmountInCents()
+        );
     }
 
     public function provideTestData(): array
@@ -115,7 +116,7 @@ class ArkansasIncomeTest extends TaxTestCase
                 $builder
                     ->setTaxInfoOptions(null)
                     ->setWagesInCents(96154)
-                    ->setExpectedAmountInCents(4540)
+                    ->setExpectedAmountInCents(3962)
                     ->build()
             ],
             'test case 2' => [
@@ -124,49 +125,49 @@ class ArkansasIncomeTest extends TaxTestCase
                         'exemptions' => 3,
                     ])
                     ->setWagesInCents(96154)
-                    ->setExpectedAmountInCents(4390)
+                    ->setExpectedAmountInCents(3812)
                     ->build()
             ],
             'bracket 1' => [
                 $builder
                     ->setTaxInfoOptions(null)
                     ->setWagesInCents(7500)
-                    ->setExpectedAmountInCents(30)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             'bracket 2' => [
                 $builder
                     ->setTaxInfoOptions(null)
                     ->setWagesInCents(17500)
-                    ->setExpectedAmountInCents(196)
+                    ->setExpectedAmountInCents(90)
                     ->build()
             ],
             'bracket 3' => [
                 $builder
                     ->setTaxInfoOptions(null)
                     ->setWagesInCents(27500)
-                    ->setExpectedAmountInCents(508)
+                    ->setExpectedAmountInCents(349)
                     ->build()
             ],
             'bracket 4' => [
                 $builder
                     ->setTaxInfoOptions(null)
                     ->setWagesInCents(40000)
-                    ->setExpectedAmountInCents(1050)
+                    ->setExpectedAmountInCents(762)
                     ->build()
             ],
             'bracket 5' => [
                 $builder
                     ->setTaxInfoOptions(null)
                     ->setWagesInCents(70000)
-                    ->setExpectedAmountInCents(2752)
+                    ->setExpectedAmountInCents(2482)
                     ->build()
             ],
             'bracket 6' => [
                 $builder
                     ->setTaxInfoOptions(null)
                     ->setWagesInCents(100000)
-                    ->setExpectedAmountInCents(4806)
+                    ->setExpectedAmountInCents(4189)
                     ->build()
             ],
             'additional withholding' => [
@@ -175,7 +176,7 @@ class ArkansasIncomeTest extends TaxTestCase
                         'additional_withholding' => 10,
                     ])
                     ->setWagesInCents(96154)
-                    ->setExpectedAmountInCents(5540)
+                    ->setExpectedAmountInCents(4962)
                     ->build()
             ],
             'exempt' => [
@@ -205,8 +206,8 @@ class ArkansasIncomeTest extends TaxTestCase
                     ->setHomeLocation(self::LOCATION_ARKANSAS_TEXARKANA)
                     ->setWorkLocation(self::LOCATION_ARKANSAS_TEXARKANA)
                     ->setTaxInfoOptions(['ar_tx_exempt' => false])
-                    ->setWagesInCents(7500)
-                    ->setExpectedAmountInCents(30)
+                    ->setWagesInCents(75000)
+                    ->setExpectedAmountInCents(2732)
                     ->build()
             ],
             '02' => [
@@ -214,8 +215,8 @@ class ArkansasIncomeTest extends TaxTestCase
                     ->setHomeLocation(self::LOCATION_ARKANSAS_TEXARKANA)
                     ->setWorkLocation(self::LOCATION_ARKANSAS)
                     ->setTaxInfoOptions(['ar_tx_exempt' => false])
-                    ->setWagesInCents(7500)
-                    ->setExpectedAmountInCents(30)
+                    ->setWagesInCents(75000)
+                    ->setExpectedAmountInCents(2732)
                     ->build()
             ],
             '03' => [
@@ -223,8 +224,8 @@ class ArkansasIncomeTest extends TaxTestCase
                     ->setHomeLocation(self::LOCATION_ARKANSAS)
                     ->setWorkLocation(self::LOCATION_ARKANSAS_TEXARKANA)
                     ->setTaxInfoOptions(['ar_tx_exempt' => false])
-                    ->setWagesInCents(7500)
-                    ->setExpectedAmountInCents(30)
+                    ->setWagesInCents(75000)
+                    ->setExpectedAmountInCents(2732)
                     ->build()
             ],
             '04' => [
@@ -232,7 +233,7 @@ class ArkansasIncomeTest extends TaxTestCase
                     ->setHomeLocation(self::LOCATION_TEXAS_TEXARKANA)
                     ->setWorkLocation(self::LOCATION_ARKANSAS_TEXARKANA)
                     ->setTaxInfoOptions(['ar_tx_exempt' => false])
-                    ->setWagesInCents(7500)
+                    ->setWagesInCents(75000)
                     ->setExpectedAmountInCents(0)
                     ->build()
             ],
@@ -241,8 +242,8 @@ class ArkansasIncomeTest extends TaxTestCase
                     ->setHomeLocation(self::LOCATION_TEXAS)
                     ->setWorkLocation(self::LOCATION_ARKANSAS_TEXARKANA)
                     ->setTaxInfoOptions(['ar_tx_exempt' => false])
-                    ->setWagesInCents(7500)
-                    ->setExpectedAmountInCents(30)
+                    ->setWagesInCents(75000)
+                    ->setExpectedAmountInCents(2732)
                     ->build()
             ],
             '06' => [
@@ -250,8 +251,8 @@ class ArkansasIncomeTest extends TaxTestCase
                     ->setHomeLocation(self::LOCATION_ARKANSAS_TEXARKANA)
                     ->setWorkLocation(self::LOCATION_TEXAS)
                     ->setTaxInfoOptions(['ar_tx_exempt' => false])
-                    ->setWagesInCents(7500)
-                    ->setExpectedAmountInCents(30)
+                    ->setWagesInCents(75000)
+                    ->setExpectedAmountInCents(2732)
                     ->build()
             ],
             '07' => [
@@ -259,8 +260,8 @@ class ArkansasIncomeTest extends TaxTestCase
                     ->setHomeLocation(self::LOCATION_ARKANSAS_TEXARKANA)
                     ->setWorkLocation(self::LOCATION_TEXAS_TEXARKANA)
                     ->setTaxInfoOptions(['ar_tx_exempt' => false])
-                    ->setWagesInCents(7500)
-                    ->setExpectedAmountInCents(30)
+                    ->setWagesInCents(75000)
+                    ->setExpectedAmountInCents(2732)
                     ->build()
             ],
             '08' => [
@@ -268,7 +269,7 @@ class ArkansasIncomeTest extends TaxTestCase
                     ->setHomeLocation(self::LOCATION_ARKANSAS_TEXARKANA)
                     ->setWorkLocation(self::LOCATION_TEXAS_TEXARKANA)
                     ->setTaxInfoOptions(['ar_tx_exempt' => true])
-                    ->setWagesInCents(7500)
+                    ->setWagesInCents(75000)
                     ->setExpectedAmountInCents(0)
                     ->build()
             ],
@@ -277,7 +278,7 @@ class ArkansasIncomeTest extends TaxTestCase
                     ->setHomeLocation(self::LOCATION_ARKANSAS)
                     ->setWorkLocation(self::LOCATION_TEXAS)
                     ->setTaxInfoOptions(['ar_tx_exempt' => false])
-                    ->setWagesInCents(7500)
+                    ->setWagesInCents(75000)
                     ->setExpectedAmountInCents(0)
                     ->build()
             ],
@@ -286,7 +287,7 @@ class ArkansasIncomeTest extends TaxTestCase
                     ->setHomeLocation(self::LOCATION_ARKANSAS)
                     ->setWorkLocation(self::LOCATION_TEXAS_TEXARKANA)
                     ->setTaxInfoOptions(['ar_tx_exempt' => false])
-                    ->setWagesInCents(7500)
+                    ->setWagesInCents(75000)
                     ->setExpectedAmountInCents(0)
                     ->build()
             ],

@@ -6,6 +6,7 @@ use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
 use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseLocalIncome;
 use Appleton\Taxes\Countries\US\Maryland\MarylandIncome\HasMarylandIncome;
 use Appleton\Taxes\Models\Countries\US\Maryland\MarylandIncomeTaxInformation;
+use Illuminate\Database\Eloquent\Collection;
 
 abstract class BaseMarylandLocalIncome extends BaseLocalIncome
 {
@@ -31,4 +32,19 @@ abstract class BaseMarylandLocalIncome extends BaseLocalIncome
     }
 
     abstract public function getTaxRate();
+
+    public function compute(Collection $tax_areas)
+    {
+        if ($this->tax_information->local_exempt) {
+            return 0.00;
+        }
+
+        $this->worked_in_delaware = $this->payroll->hasWorkInArea('Delaware');
+
+        $this->tax_total = $this->payroll->withholdTax($this->getTaxAmountFromTaxBrackets($this->getAdjustedEarnings(), $this->getTaxBrackets()) / $this->payroll->pay_periods) +
+            $this->payroll->withholdTax($this->getSupplementalIncomeTax()) +
+            $this->payroll->withholdTax($this->getAdditionalWithholding());
+
+        return round(intval($this->tax_total * 100) / 100, 2);
+    }
 }

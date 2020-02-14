@@ -78,6 +78,17 @@ class WhitleyIncomeTest extends TaxTestCase
                     ->setExpectedAmountInCents(504)
                     ->build()
             ],
+            'additional county withholding' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'county_lived' => 92,
+                        'county_worked' => 2,
+                        'additional_county_withholding' => 20,
+                    ])
+                    ->setWagesInCents(30000)
+                    ->setExpectedAmountInCents(2504)
+                    ->build()
+            ],
             'county worked and taxes not taken from home county' => [
                 $builder
                     ->setTaxInfoOptions([
