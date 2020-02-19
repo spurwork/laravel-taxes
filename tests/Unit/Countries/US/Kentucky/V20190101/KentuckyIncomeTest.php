@@ -70,7 +70,7 @@ class KentuckyIncomeTest extends TaxTestCase
                 $builder
                     ->setTaxInfoOptions(null)
                     ->setWagesInCents(5301)
-                    ->setExpectedAmountInCents(15)
+                    ->setExpectedAmountInCents(16)
                     ->build()
             ],
             'exempt' => [

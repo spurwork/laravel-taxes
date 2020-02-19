@@ -78,6 +78,17 @@ class ClayIncomeTest extends TaxTestCase
                     ->setExpectedAmountInCents(705)
                     ->build()
             ],
+            'additional county withholding' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'county_lived' => 11,
+                        'county_worked' => 2,
+                        'additional_county_withholding' => 20,
+                    ])
+                    ->setWagesInCents(30000)
+                    ->setExpectedAmountInCents(2705)
+                    ->build()
+            ],
             'county worked and taxes not taken from home county' => [
                 $builder
                     ->setTaxInfoOptions([

@@ -16,6 +16,7 @@ class MarylandIncomeTaxInformation extends BaseTaxInformationModel
         $tax_information->additional_withholding = 0;
         $tax_information->filing_status = MarylandIncome::FILING_SINGLE;
         $tax_information->exempt = false;
+        $tax_information->local_exempt = false;
         return $tax_information;
     }
 

@@ -3,24 +3,14 @@
 namespace Appleton\Taxes\Countries\US\SocialSecurity\V20180101;
 
 use Appleton\Taxes\Countries\US\SocialSecurity\SocialSecurity as BaseSocialSecurity;
-use Appleton\Taxes\Traits\HasWageBase;
-use Illuminate\Database\Eloquent\Collection;
 
 class SocialSecurity extends BaseSocialSecurity
 {
-    use HasWageBase;
+    public const TAX_RATE = 0.062;
+    public const WAGE_BASE = 128400;
 
-    const TAX_RATE = 0.062;
-    const WAGE_BASE = 128400;
-
-    public function getAdjustedEarnings()
+    protected function getTaxRate(): float
     {
-        return min($this->payroll->getEarnings(), $this->getBaseEarnings());
-    }
-
-    public function compute(Collection $tax_areas)
-    {
-        $this->tax_total = $this->payroll->withholdTax($this->getAdjustedEarnings() * static::TAX_RATE);
-        return round($this->tax_total, 2);
+        return self::TAX_RATE;
     }
 }

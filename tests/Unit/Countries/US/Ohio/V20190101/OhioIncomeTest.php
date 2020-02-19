@@ -23,6 +23,7 @@ class OhioIncomeTest extends TaxTestCase
         OhioIncomeTaxInformation::createForUser([
             'dependents' => 0,
             'school_district_id' => 0,
+            'additional_withholding' => 0,
             'exempt' => false,
         ], $this->user);
     }
@@ -86,6 +87,20 @@ class OhioIncomeTest extends TaxTestCase
                     ->setTaxInfoOptions(['dependents' => 2])
                     ->setWagesInCents(70000)
                     ->setExpectedAmountInCents(1556)
+                    ->build()
+            ],
+            '06' => [
+                $builder
+                    ->setTaxInfoOptions(null)
+                    ->setWagesInCents(70000)
+                    ->setExpectedAmountInCents(1637)
+                    ->build()
+            ],
+            '07' => [
+                $builder
+                    ->setTaxInfoOptions(['additional_withholding' => 20])
+                    ->setWagesInCents(70000)
+                    ->setExpectedAmountInCents(3637)
                     ->build()
             ],
         ];

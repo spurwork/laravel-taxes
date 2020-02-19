@@ -2,25 +2,22 @@
 
 namespace Appleton\Taxes\Countries\US\NorthCarolina\NorthCarolinaIncome\V20190101;
 
-use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
 use Appleton\Taxes\Countries\US\NorthCarolina\NorthCarolinaIncome\NorthCarolinaIncome as BaseNorthCarolinaIncome;
-use Appleton\Taxes\Models\Countries\US\NorthCarolina\NorthCarolinaIncomeTaxInformation;
-use Illuminate\Database\Eloquent\Collection;
 
 class NorthCarolinaIncome extends BaseNorthCarolinaIncome
 {
-    const SUPPLEMENTAL_TAX_RATE = 0.0535;
+    public const TAX_RATE = 0.0535;
 
-    const TAX_RATE = 0.0535;
+    private const SUPPLEMENTAL_TAX_RATE = 0.0535;
 
-    const STANDARD_DEDUCTIONS = [
+    private const STANDARD_DEDUCTIONS = [
         self::FILING_SINGLE => 10000,
         self::FILING_HEAD_OF_HOUSEHOLD => 15000,
         self::FILING_MARRIED => 10000,
         self::FILING_SEPERATE => 10000,
     ];
 
-    const DEPENDENT_EXEMPTION_BRACKETS = [
+    private const DEPENDENT_EXEMPTION_BRACKETS = [
         self::FILING_SINGLE => [
             [0, 2500],
             [20000, 2000],
@@ -55,60 +52,23 @@ class NorthCarolinaIncome extends BaseNorthCarolinaIncome
         ],
     ];
 
-    public function __construct(NorthCarolinaIncomeTaxInformation $tax_information, Payroll $payroll)
+    public function getSupplementalTaxRate(): float
     {
-        parent::__construct($payroll);
-        $this->tax_information = $tax_information;
+        return self::SUPPLEMENTAL_TAX_RATE;
     }
 
-    public function getAdjustedEarnings()
+    public function getTaxRate(): float
     {
-        return $this->getGrossEarnings() - $this->getStandardDeduction() - $this->getDependentExemption();
+        return self::TAX_RATE;
     }
 
-    public function getSupplementalIncomeTax()
+    public function getStandardDeductions(): array
     {
-        return $this->payroll->getSupplementalEarnings() * self::SUPPLEMENTAL_TAX_RATE;
+        return self::STANDARD_DEDUCTIONS;
     }
 
-    public function getTaxBrackets()
+    public function getDependentExemptionBrackets(): array
     {
-        return [[0, self::TAX_RATE, 0]];
-    }
-
-    public function compute(Collection $tax_areas)
-    {
-        if ($this->isUserClaimingExemption()) {
-            return 0.00;
-        }
-
-        $tax_amount = round($this->getTaxAmountFromTaxBrackets($this->getAdjustedEarnings(), $this->getTaxBrackets())
-            / $this->payroll->pay_periods);
-        $this->tax_total = $this->payroll->withholdTax($tax_amount) +
-            $this->payroll->withholdTax($this->getSupplementalIncomeTax()) +
-            $this->payroll->withholdTax($this->getAdditionalWithholding());
-
-        return round(((int)($this->tax_total * 100)) / 100, 2);
-    }
-
-    private function getStandardDeduction()
-    {
-        if (array_key_exists($this->tax_information->filing_status, static::STANDARD_DEDUCTIONS)) {
-            return static::STANDARD_DEDUCTIONS[$this->tax_information->filing_status];
-        }
-
-        return 0;
-    }
-
-    private function getDependentExemption()
-    {
-        $gross_earnings = $this->getGrossEarnings();
-        $dependent_exemption = $this->getTaxBracket($gross_earnings, static::DEPENDENT_EXEMPTION_BRACKETS[$this->tax_information->filing_status]);
-        return $this->tax_information->dependents * $dependent_exemption[1];
-    }
-
-    private function getGrossEarnings()
-    {
-        return ($this->payroll->getEarnings() - $this->payroll->getSupplementalEarnings()) * $this->payroll->pay_periods;
+        return self::DEPENDENT_EXEMPTION_BRACKETS;
     }
 }

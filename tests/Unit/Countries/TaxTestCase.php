@@ -54,9 +54,13 @@ abstract class TaxTestCase extends UnitTestCase
             $work_location = new GeoPoint($work_location_array[0], $work_location_array[1]);
         }
 
-        $wages = collect([
-            $this->makeWage($work_location, $parameters->getWagesInCents(), $parameters->getPaycheckTipAmountInCents(), $parameters->getTakeHomeTipAmountInCents(), $parameters->getMinutesWorked()),
-        ]);
+        $wages = collect([]);
+
+        if ($parameters->getWagesCallback() !== null) {
+            call_user_func($parameters->getWagesCallback(), $parameters, $wages);
+        } else {
+            $wages->push($this->makeWage($work_location, $parameters->getWagesInCents(), $parameters->getPaycheckTipAmountInCents(), $parameters->getTakeHomeTipAmountInCents(), $parameters->getMinutesWorked()));
+        }
 
         if ($parameters->getSupplementalWagesInCents() !== null
             && $parameters->getSupplementalWagesInCents() !== 0) {

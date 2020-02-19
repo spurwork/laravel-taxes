@@ -14,6 +14,6 @@ class OregonUnemployment extends BaseOregonUnemployment
     public function __construct(Payroll $payroll)
     {
         parent::__construct($payroll);
-        $this->tax_rate = config('taxes.rates.us.oregon.unemployment', static::NEW_EMPLOYER_RATE);
+        $this->tax_rate = static::NEW_EMPLOYER_RATE;
     }
 }
