@@ -79,6 +79,7 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\Connecticut\ConnecticutUnemployment\ConnecticutUnemployment::class,
         \Appleton\Taxes\Countries\US\Delaware\DelawareIncome\DelawareIncome::class,
         \Appleton\Taxes\Countries\US\Delaware\DelawareUnemployment\DelawareUnemployment::class,
+        \Appleton\Taxes\Countries\US\Delaware\WilmingtonEmployerLicenseFee\WilmingtonEmployerLicenseFee::class,
         \Appleton\Taxes\Countries\US\FederalIncome\FederalIncome::class,
         \Appleton\Taxes\Countries\US\FederalUnemployment\FederalUnemployment::class,
         \Appleton\Taxes\Countries\US\Florida\FloridaUnemployment\FloridaUnemployment::class,
