@@ -1,18 +1,21 @@
-	<?php
+<?php
 
-namespace Appleton\Taxes\Countries\US\Delaware\Wilmington\V20200101;
+namespace Appleton\Taxes\Countries\US\Delaware\WilmingtonEmployerLicenseFee\V20200101;
 
-use Appleton\Taxes\Countries\US\Delaware\Wilmington\WilmingtonIncome as BaseWilmingtonIncome;
+use Appleton\Taxes\Countries\US\Delaware\WilmingtonEmployerLicenseFee\WilmingtonEmployerLicenseFee as BaseWilmingtonEmployerLicenseFee;
 
 use Illuminate\Database\Eloquent\Collection;
 
-class WilmingtonIncome extends BaseWilmingtonIncome
+class WilmingtonEmployerLicenseFee extends BaseWilmingtonEmployerLicenseFee
 {
     const LICENSE_FEE = 15;
 
     public function compute(Collection $tax_areas)
     {
-        $this->tax_total = $this->payroll->withholdTax($this->payroll->getEarnings() + self::LICENSE_FEE);
+        $wilmington = $tax_areas->first()->workGovernmentalUnitArea;
+
+        $wilmington_mtd_earnings = $this->payroll->getMtdEarnings($wilmington);
+        $this->tax_total = $wilmington_mtd_earnings === 0.0 ? $this->payroll->withholdTax(self::LICENSE_FEE) : 0.0;
 
         return round($this->tax_total, 2);
     }

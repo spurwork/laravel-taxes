@@ -73,6 +73,11 @@ abstract class TaxTestCase extends UnitTestCase
             $historical_wages->push($this->makeWage($work_location, $parameters->getYtdWagesInCents()));
         }
 
+        if ($parameters->getMtdWagesInCents() !== null
+            && $parameters->getMtdWagesInCents() !== 0) {
+            $historical_wages->push($this->makeWage($work_location, $parameters->getMtdWagesInCents()));
+        }
+
         $results = $this->taxes->calculate(
             Carbon::now(),
             Carbon::now()->addWeek(),
@@ -151,6 +156,11 @@ abstract class TaxTestCase extends UnitTestCase
         if ($parameters->getYtdWagesInCents() !== null
             && $parameters->getYtdWagesInCents() !== 0) {
             $historical_wages->push($this->makeWage($work_location, $parameters->getYtdWagesInCents()));
+        }
+
+        if ($parameters->getMtdWagesInCents() !== null
+            && $parameters->getMtdWagesInCents() !== 0) {
+            $historical_wages->push($this->makeWage($work_location, $parameters->getMtdWagesInCents()));
         }
 
         $results = $this->taxes->calculate(
