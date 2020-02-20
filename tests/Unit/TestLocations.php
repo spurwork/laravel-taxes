@@ -55,6 +55,7 @@ trait TestLocations
             'us.colorado.sheridan' => [39.6469, -105.0253],
             'us.connecticut' => [41.6032, -73.0877],
             'us.delaware' => [39.1582, -75.5244],
+            'us.delaware.wilmington' => [39.7447, -75.5484],
             'us.georgia' => [33.7490, -84.3880],
             'us.hawaii' => [19.8968, -155.5828],
             'us.florida' => [27.6648, -81.5158],
