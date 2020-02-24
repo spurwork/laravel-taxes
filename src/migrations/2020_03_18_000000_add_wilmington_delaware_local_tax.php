@@ -31,8 +31,9 @@ class AddWilmingtonDelawareLocalTax extends Migration
 
         DB::table($this->tax_areas)->insert([[
             'tax_id' => $wilmington_tax_id,
+            'home_governmental_unit_area_id' => $wilmington_gua_id,
             'work_governmental_unit_area_id' => $wilmington_gua_id,
-            'based' => TaxArea::BASED_ON_WORK_LOCATION,
+            'based' => TaxArea::BASED_ON_EITHER_LOCATION,
         ]]);
     }
 }
