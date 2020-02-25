@@ -13,6 +13,7 @@ class DelawareIncomeTaxInformation extends BaseTaxInformationModel
     {
         $tax_information = new self();
         $tax_information->exempt = false;
+        $tax_information->exemptions = 0;
         $tax_information->filing_status = DelawareIncome::FILING_SINGLE;
         $tax_information->deductions = 0;
         $tax_information->dependents_deduction_amount = 0;

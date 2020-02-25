@@ -21,7 +21,6 @@ class AddParametersToDelawareIncomeTaxInformation extends Migration
         Schema::table($this->delaware_income_tax_information, function (Blueprint $table) {
             $table->dropColumn('filing_status');
             $table->dropColumn('additional_withholding');
-            $table->dropColumn('exemptions');
         });
 
         Schema::table($this->delaware_income_tax_information, function (Blueprint $table) {
