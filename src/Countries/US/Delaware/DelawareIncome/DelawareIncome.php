@@ -8,31 +8,21 @@ use Appleton\Taxes\Models\Countries\US\Delaware\DelawareIncomeTaxInformation;
 
 abstract class DelawareIncome extends BaseStateIncome
 {
-    const FILING_SINGLE = 'S';
-    const FILING_MARRIED_FILING_JOINTLY = 'M';
-    const FILING_MARRIED_FILING_SEPARATELY = 'S';
+    const FILING_SINGLE = 0;
+    const FILING_WIDOW = 1;
+    const FILING_HEAD_OF_HOUSEHOLD = 2;
+    const FILING_MARRIED = 3;
+    const FILING_SEPERATE = 4;
+    const FILING_JOINTLY = 5;
 
     const FILING_STATUSES = [
-        self::FILING_SINGLE =>'S',
-        self::FILING_MARRIED_FILING_JOINTLY => 'M',
-        self::FILING_MARRIED_FILING_SEPARATELY => 'S',
+        self::FILING_SINGLE => 'FILING_SINGLE',
+        self::FILING_WIDOW => 'FILING_WIDOW',
+        self::FILING_HEAD_OF_HOUSEHOLD => 'FILING_HEAD_OF_HOUSEHOLD',
+        self::FILING_MARRIED => 'FILING_MARRIED',
+        self::FILING_SEPERATE => 'FILING_SEPERATE',
+        self::FILING_JOINTLY => 'FILING_JOINTLY',
     ];
-
-    const SINGLE_STANDARD_DEDUCTION = 3250;
-    const MARRIED_FILING_SEPARATELY_STANDARD_DEDUCTION = 3250;
-    const MARRIED_FILING_JOINTLY_STANDARD_DEDUCTION = 6500;
-
-    const WITHHOLDING_TABLE = [
-        [0, 0, 0],
-        [2000, 0.022, 0],
-        [5000, 0.039, 66],
-        [10000, 0.048, 261],
-        [20000, 0.052, 741],
-        [25000, 0.0555, 1001],
-        [60000, 0.066, 2943],
-    ];
-
-    const EXEMPTION_ALLOWANCE = 110;
 
     public function __construct(DelawareIncomeTaxInformation $tax_information, Payroll $payroll)
     {
