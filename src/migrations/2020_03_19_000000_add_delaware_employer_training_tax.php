@@ -19,9 +19,8 @@ class AddDelawareEmployerTrainingTax extends Migration
 
         DB::table('tax_areas')->insert([
             'tax_id' => $employer_training_tax,
-            'home_governmental_unit_area_id' => $delaware_id,
             'work_governmental_unit_area_id' => $delaware_id,
-            'based' => TaxArea::BASED_ON_EITHER_LOCATION,
+            'based' => TaxArea::BASED_ON_WORK_LOCATION,
         ]);
     }
 }
