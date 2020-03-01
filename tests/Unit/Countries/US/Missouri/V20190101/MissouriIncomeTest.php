@@ -24,6 +24,8 @@ class MissouriIncomeTest extends TaxTestCase
             'filing_status' => MissouriIncome::FILING_SINGLE,
             'allowances' => 0,
             'additional_withholding' => 0,
+            'has_reduced_withholding' => false,
+            'reduced_withholding' => 0,
             'exempt' => false,
         ], $this->user);
     }
@@ -47,60 +49,102 @@ class MissouriIncomeTest extends TaxTestCase
             ->setPayPeriods(52);
 
         return [
-            '00' => [
+            // '00' => [
+            //     $builder
+            //         ->setTaxInfoOptions(['exempt' => true])
+            //         ->setWagesInCents(30000)
+            //         ->setExpectedAmountInCents(0)
+            //         ->build()
+            // ],
+            // '01' => [
+            //     $builder
+            //         ->setTaxInfoOptions(['filing_status' => MissouriIncome::FILING_MARRIED_FILING_SEPARATE])
+            //         ->setWagesInCents(60000)
+            //         ->setExpectedAmountInCents(1600)
+            //         ->build()
+            // ],
+            // '02' => [
+            //     $builder
+            //         ->setTaxInfoOptions(['filing_status' => MissouriIncome::FILING_MARRIED_BOTH_SPOUSES_EMPLOYED])
+            //         ->setWagesInCents(10000)
+            //         ->setExpectedAmountInCents(0)
+            //         ->build()
+            // ],
+            // '03' => [
+            //     $builder
+            //         ->setTaxInfoOptions(['filing_status' => MissouriIncome::FILING_MARRIED_BOTH_SPOUSES_EMPLOYED])
+            //         ->setWagesInCents(70000)
+            //         ->setExpectedAmountInCents(2200)
+            //         ->build()
+            // ],
+            // '04' => [
+            //     $builder
+            //         ->setTaxInfoOptions(['filing_status' => MissouriIncome::FILING_MARRIED_ONE_SPOUSE_EMPLOYED])
+            //         ->setWagesInCents(90000)
+            //         ->setExpectedAmountInCents(2000)
+            //         ->build()
+            // ],
+            // '05' => [
+            //     $builder
+            //         ->setTaxInfoOptions(['filing_status' => MissouriIncome::FILING_MARRIED_ONE_SPOUSE_EMPLOYED])
+            //         ->setWagesInCents(100000)
+            //         ->setExpectedAmountInCents(2500)
+            //         ->build()
+            // ],
+            // '06' => [
+            //     $builder
+            //         ->setTaxInfoOptions(['filing_status' => MissouriIncome::FILING_HEAD_OF_HOUSEHOLD])
+            //         ->setWagesInCents(25000)
+            //         ->setExpectedAmountInCents(0)
+            //         ->build()
+            // ],
+            // '07' => [
+            //     $builder
+            //         ->setTaxInfoOptions(['filing_status' => MissouriIncome::FILING_MARRIED_ONE_SPOUSE_EMPLOYED])
+            //         ->setWagesInCents(96154)
+            //         ->setExpectedAmountInCents(2300)
+            //         ->build()
+            // ],
+            '08' => [
                 $builder
-                    ->setTaxInfoOptions(['exempt' => true])
-                    ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(0)
+                    ->setTaxInfoOptions(['has_reduced_withholding' => true, 'reduced_withholding' => 10])
+                    ->setWagesInCents(6154)
+                    ->setExpectedAmountInCents(1000)
                     ->build()
             ],
-            '01' => [
+            '09' => [
                 $builder
-                    ->setTaxInfoOptions(['filing_status' => MissouriIncome::FILING_MARRIED_FILING_SEPARATE])
-                    ->setWagesInCents(60000)
-                    ->setExpectedAmountInCents(1600)
+                    ->setTaxInfoOptions(['has_reduced_withholding' => true, 'reduced_withholding' => 100])
+                    ->setWagesInCents(6154)
+                    ->setExpectedAmountInCents(10000)
                     ->build()
             ],
-            '02' => [
+            '10' => [
                 $builder
-                    ->setTaxInfoOptions(['filing_status' => MissouriIncome::FILING_MARRIED_BOTH_SPOUSES_EMPLOYED])
-                    ->setWagesInCents(10000)
-                    ->setExpectedAmountInCents(0)
+                    ->setTaxInfoOptions(['has_reduced_withholding' => true, 'reduced_withholding' => 1000])
+                    ->setWagesInCents(6154)
+                    ->setExpectedAmountInCents(100000)
                     ->build()
             ],
-            '03' => [
+            '11' => [
                 $builder
-                    ->setTaxInfoOptions(['filing_status' => MissouriIncome::FILING_MARRIED_BOTH_SPOUSES_EMPLOYED])
-                    ->setWagesInCents(70000)
-                    ->setExpectedAmountInCents(2200)
+                    ->setTaxInfoOptions(['has_reduced_withholding' => true, 'reduced_withholding' => 10])
+                    ->setWagesInCents(6154)
+                    ->setExpectedAmountInCents(1000)
                     ->build()
             ],
-            '04' => [
+            '12' => [
                 $builder
-                    ->setTaxInfoOptions(['filing_status' => MissouriIncome::FILING_MARRIED_ONE_SPOUSE_EMPLOYED])
-                    ->setWagesInCents(90000)
-                    ->setExpectedAmountInCents(2000)
+                    ->setTaxInfoOptions(['has_reduced_withholding' => true, 'reduced_withholding' => 100])
+                    ->setWagesInCents(6154)
+                    ->setExpectedAmountInCents(10000)
                     ->build()
             ],
-            '05' => [
+            '13' => [
                 $builder
-                    ->setTaxInfoOptions(['filing_status' => MissouriIncome::FILING_MARRIED_ONE_SPOUSE_EMPLOYED])
-                    ->setWagesInCents(100000)
-                    ->setExpectedAmountInCents(2500)
-                    ->build()
-            ],
-            '06' => [
-                $builder
-                    ->setTaxInfoOptions(['filing_status' => MissouriIncome::FILING_HEAD_OF_HOUSEHOLD])
-                    ->setWagesInCents(25000)
-                    ->setExpectedAmountInCents(0)
-                    ->build()
-            ],
-            '07' => [
-                $builder
-                    ->setTaxInfoOptions(['filing_status' => MissouriIncome::FILING_MARRIED_ONE_SPOUSE_EMPLOYED])
-                    ->setWagesInCents(96154)
-                    ->setExpectedAmountInCents(2300)
+                    ->setTaxInfoOptions(['has_reduced_withholding' => true, 'reduced_withholding' => 1000])
+                    ->setWagesInCents(6154)
+                    ->setExpectedAmountInCents(100000)
                     ->build()
             ],
         ];
