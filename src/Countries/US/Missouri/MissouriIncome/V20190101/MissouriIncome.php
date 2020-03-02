@@ -14,8 +14,7 @@ class MissouriIncome extends BaseMissouriIncome
         }
 
         if ($this->tax_information->has_reduced_withholding) {
-            $this->tax_total = $this->tax_information->reduced_withholding;
-            $this->payroll->amount_withheld = $this->tax_information->reduced_withholding;
+            $this->tax_total = $this->payroll->withholdTax($this->tax_information->reduced_withholding);
         } else {
             $this->tax_total = $this->payroll->withholdTax($this->getTaxAmountFromTaxBrackets($this->getStandardDeduction(), $this->getTaxBrackets()) / $this->payroll->pay_periods + $this->tax_information->additional_withholding);
         }
