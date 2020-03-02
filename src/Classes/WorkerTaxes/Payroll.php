@@ -24,7 +24,7 @@ class Payroll
     public $pay_rate;
     public $is_salaried;
 
-    public $amount_withheld;
+    private $amount_withheld;
     private $start_date;
     private $end_date;
     private $area_incomes;

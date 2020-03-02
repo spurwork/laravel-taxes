@@ -115,36 +115,29 @@ class MissouriIncomeTest extends TaxTestCase
             '09' => [
                 $builder
                     ->setTaxInfoOptions(['has_reduced_withholding' => true, 'reduced_withholding' => 100])
-                    ->setWagesInCents(6154)
+                    ->setWagesInCents(96154)
                     ->setExpectedAmountInCents(10000)
                     ->build()
             ],
             '10' => [
                 $builder
-                    ->setTaxInfoOptions(['has_reduced_withholding' => true, 'reduced_withholding' => 1000])
-                    ->setWagesInCents(6154)
-                    ->setExpectedAmountInCents(100000)
+                    ->setTaxInfoOptions(['has_reduced_withholding' => true, 'reduced_withholding' => 10])
+                    ->setWagesInCents(96154)
+                    ->setExpectedAmountInCents(1000)
                     ->build()
             ],
             '11' => [
                 $builder
-                    ->setTaxInfoOptions(['has_reduced_withholding' => true, 'reduced_withholding' => 10])
-                    ->setWagesInCents(6154)
-                    ->setExpectedAmountInCents(1000)
+                    ->setTaxInfoOptions(['has_reduced_withholding' => true, 'reduced_withholding' => 100])
+                    ->setWagesInCents(96154)
+                    ->setExpectedAmountInCents(10000)
                     ->build()
             ],
             '12' => [
                 $builder
-                    ->setTaxInfoOptions(['has_reduced_withholding' => true, 'reduced_withholding' => 100])
-                    ->setWagesInCents(6154)
-                    ->setExpectedAmountInCents(10000)
-                    ->build()
-            ],
-            '13' => [
-                $builder
                     ->setTaxInfoOptions(['has_reduced_withholding' => true, 'reduced_withholding' => 1000])
                     ->setWagesInCents(6154)
-                    ->setExpectedAmountInCents(100000)
+                    ->setExpectedAmountInCents(6200)
                     ->build()
             ],
         ];
