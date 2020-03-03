@@ -77,6 +77,7 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\Colorado\SheridanOccupationalPrivilegeEmployer\SheridanOccupationalPrivilegeEmployer::class,
         \Appleton\Taxes\Countries\US\Connecticut\ConnecticutIncome\ConnecticutIncome::class,
         \Appleton\Taxes\Countries\US\Connecticut\ConnecticutUnemployment\ConnecticutUnemployment::class,
+        \Appleton\Taxes\Countries\US\Delaware\DelawareEmployerTrainingTax\DelawareEmployerTrainingTax::class,
         \Appleton\Taxes\Countries\US\Delaware\DelawareIncome\DelawareIncome::class,
         \Appleton\Taxes\Countries\US\Delaware\DelawareUnemployment\DelawareUnemployment::class,
         \Appleton\Taxes\Countries\US\Delaware\Wilmington\WilmingtonIncome::class,
