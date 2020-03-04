@@ -13,6 +13,8 @@ abstract class NewMexicoIncome extends BaseStateIncome
     const FILING_HEAD_OF_HOUSEHOLD = 2;
     const FILING_MARRIED = 3;
     const FILING_SEPERATE = 4;
+    const FILING_JOINTLY = 5;
+
 
     const FILING_STATUSES = [
         self::FILING_SINGLE => 'FILING_SINGLE',
@@ -20,6 +22,7 @@ abstract class NewMexicoIncome extends BaseStateIncome
         self::FILING_HEAD_OF_HOUSEHOLD => 'FILING_HEAD_OF_HOUSEHOLD',
         self::FILING_MARRIED => 'FILING_MARRIED',
         self::FILING_SEPERATE => 'FILING_SEPERATE',
+        self::FILING_JOINTLY => 'FILING_JOINTLY',
     ];
 
     public function __construct(NewMexicoIncomeTaxInformation $tax_information, Payroll $payroll)
