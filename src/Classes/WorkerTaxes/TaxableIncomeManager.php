@@ -17,8 +17,8 @@ class TaxableIncomeManager
     public function groupWagesByTax(
         GeoPoint $home_location,
         Collection $wages_by_lat_long,
-        Collection $historical_wages_by_lat_long): Collection
-    {
+        Collection $historical_wages_by_lat_long
+    ): Collection {
         $taxable_incomes = collect([]);
 
         $wages_by_lat_long->each(function (Collection $wages, string $location) use ($taxable_incomes, $home_location) {
@@ -77,7 +77,8 @@ class TaxableIncomeManager
                 return;
             }
 
-            $exemption_amount = $exemptions->first();
+            $exemption_amount = $applicable_exemptions->first();
+
             if ($exemption_amount > 0) {
                 $new_taxable_income = new TaxableIncome(
                     $taxable_income->getTax(),
@@ -95,8 +96,8 @@ class TaxableIncomeManager
         Collection $taxable_incomes,
         Tax $tax,
         Collection $wages,
-        Collection $historical_wages): void
-    {
+        Collection $historical_wages
+    ): void {
         if (!$taxable_incomes->has($tax->class)) {
             $empty_taxable_income = new TaxableIncome($tax, collect([]), collect([]), 0);
             $taxable_incomes->put($tax->class, $empty_taxable_income);
@@ -109,7 +110,8 @@ class TaxableIncomeManager
             $tax,
             $taxable_income->getWages()->concat($wages),
             $taxable_income->getHistoricalWages()->concat($historical_wages),
-            0);
+            0
+        );
 
         $taxable_incomes->put($tax->class, $new_taxable_income);
     }
