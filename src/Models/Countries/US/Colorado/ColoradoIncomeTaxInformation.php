@@ -13,9 +13,16 @@ class ColoradoIncomeTaxInformation extends BaseTaxInformationModel
     {
         $tax_information = new self();
         $tax_information->exemptions = 0;
-        $tax_information->additional_withholding = 0;
         $tax_information->filing_status = ColoradoIncome::FILING_SINGLE;
         $tax_information->exempt = false;
+        $tax_information->additional_withholding = 0;
+        $tax_information->dependents_deduction_amount = 0;
+        $tax_information->other_income = 0;
+        $tax_information->deductions = 0;
+        $tax_information->extra_withholding = 0;
+        $tax_information->step_2_checked = false;
+        $tax_information->form_version = '2020';
+
         return $tax_information;
     }
 

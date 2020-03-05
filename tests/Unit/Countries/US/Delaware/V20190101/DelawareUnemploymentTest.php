@@ -8,7 +8,7 @@ use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
 
 class DelawareUnemploymentTest extends UnemploymentTaxTestCase
 {
-    private const DATE = '2019-01-01';
+    private const DATE = '2020-01-01';
     private const LOCATION = 'us.delaware';
     private const TAX_CLASS = DelawareUnemployment::class;
     private const TAX_RATE = 0.015;
@@ -55,6 +55,7 @@ class DelawareUnemploymentTest extends UnemploymentTaxTestCase
             self::LOCATION,
             self::TAX_CLASS,
             self::WAGE_BASE,
-            self::TAX_RATE);
+            self::TAX_RATE
+        );
     }
 }
