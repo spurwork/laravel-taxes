@@ -80,6 +80,7 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\Delaware\DelawareEmployerTrainingTax\DelawareEmployerTrainingTax::class,
         \Appleton\Taxes\Countries\US\Delaware\DelawareIncome\DelawareIncome::class,
         \Appleton\Taxes\Countries\US\Delaware\DelawareUnemployment\DelawareUnemployment::class,
+        \Appleton\Taxes\Countries\US\Delaware\Wilmington\WilmingtonIncome::class,
         \Appleton\Taxes\Countries\US\FederalIncome\FederalIncome::class,
         \Appleton\Taxes\Countries\US\FederalUnemployment\FederalUnemployment::class,
         \Appleton\Taxes\Countries\US\Florida\FloridaUnemployment\FloridaUnemployment::class,
