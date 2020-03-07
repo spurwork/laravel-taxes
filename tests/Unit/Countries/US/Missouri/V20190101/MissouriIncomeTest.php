@@ -24,6 +24,8 @@ class MissouriIncomeTest extends TaxTestCase
             'filing_status' => MissouriIncome::FILING_SINGLE,
             'allowances' => 0,
             'additional_withholding' => 0,
+            'use_reduced_withholding' => false,
+            'reduced_withholding' => 0,
             'exempt' => false,
         ], $this->user);
     }
@@ -101,6 +103,41 @@ class MissouriIncomeTest extends TaxTestCase
                     ->setTaxInfoOptions(['filing_status' => MissouriIncome::FILING_MARRIED_ONE_SPOUSE_EMPLOYED])
                     ->setWagesInCents(96154)
                     ->setExpectedAmountInCents(2300)
+                    ->build()
+            ],
+            '08' => [
+                $builder
+                    ->setTaxInfoOptions(['use_reduced_withholding' => true, 'reduced_withholding' => 10])
+                    ->setWagesInCents(6154)
+                    ->setExpectedAmountInCents(1000)
+                    ->build()
+            ],
+            '09' => [
+                $builder
+                    ->setTaxInfoOptions(['use_reduced_withholding' => true, 'reduced_withholding' => 100])
+                    ->setWagesInCents(96154)
+                    ->setExpectedAmountInCents(10000)
+                    ->build()
+            ],
+            '10' => [
+                $builder
+                    ->setTaxInfoOptions(['use_reduced_withholding' => true, 'reduced_withholding' => 10])
+                    ->setWagesInCents(96154)
+                    ->setExpectedAmountInCents(1000)
+                    ->build()
+            ],
+            '11' => [
+                $builder
+                    ->setTaxInfoOptions(['use_reduced_withholding' => true, 'reduced_withholding' => 100])
+                    ->setWagesInCents(96154)
+                    ->setExpectedAmountInCents(10000)
+                    ->build()
+            ],
+            '12' => [
+                $builder
+                    ->setTaxInfoOptions(['use_reduced_withholding' => true, 'reduced_withholding' => 1000])
+                    ->setWagesInCents(6154)
+                    ->setExpectedAmountInCents(6200)
                     ->build()
             ],
         ];
