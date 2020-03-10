@@ -162,41 +162,22 @@ class Payroll
         );
     }
 
-    public function getPayrollCrossesMonths()
-    {
-        $start_date = $this->start_date->copy();
-        $end_date = $this->end_date->copy();
-        $start_of_month = $this->start_date->copy()->startOfMonth();
-        $start_of_next_month = $this->start_date->addMonth()->copy()->startOfMonth();
-        $start_of_year = $this->start_date->copy()->startOfYear();
-
-        if ($start_date < $start_of_year) {
-            return true;
-        } elseif ($start_date < $start_of_next_month && $end_date >= $start_of_next_month) {
-            return true;
-        }
-
-        return false;
-    }
-
     public function getMtdEarnings(GovernmentalUnitArea $governmental_unit_area = null): float
     {
         if ($governmental_unit_area === null) {
             return $this->mtd_earnings;
         }
-
         /** @var AreaIncome $area_income */
         $area_income = $this->area_incomes->get($governmental_unit_area->name);
         if ($area_income === null) {
             return 0;
         }
-
         $start_of_month = $this->start_date->copy()->startOfMonth();
         $start_of_year = $this->start_date->copy()->startOfYear();
 
         return $this->wage_manager->calculateEarnings(
             $area_income->getHistoricalWages(),
-            $start_of_month < $start_of_year ? $start_of_year : $start_of_month
+            $start_of_year->min($this->start_date->min($start_of_month))
         );
     }
 
@@ -205,7 +186,6 @@ class Payroll
         if ($governmental_unit_area === null) {
             return $this->ytd_earnings;
         }
-
         /** @var AreaIncome $area_income */
         $area_income = $this->area_incomes->get($governmental_unit_area->name);
         if ($area_income === null) {
@@ -214,7 +194,7 @@ class Payroll
 
         return $this->wage_manager->calculateEarnings(
             $area_income->getHistoricalWages(),
-            $this->start_date->copy()->startOfYear()
+            $this->start_date->min($this->start_date->copy()->startOfYear())
         );
     }
 
