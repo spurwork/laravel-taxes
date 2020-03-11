@@ -482,6 +482,7 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\Minnesota\MinnesotaUnemployment\MinnesotaUnemployment::class,
         \Appleton\Taxes\Countries\US\Mississippi\MississippiIncome\MississippiIncome::class,
         \Appleton\Taxes\Countries\US\Mississippi\MississippiUnemployment\MississippiUnemployment::class,
+        \Appleton\Taxes\Countries\US\Missouri\KansasCity\KansasCity::class,
         \Appleton\Taxes\Countries\US\Missouri\MissouriIncome\MissouriIncome::class,
         \Appleton\Taxes\Countries\US\Missouri\MissouriUnemployment\MissouriUnemployment::class,
         \Appleton\Taxes\Countries\US\Montana\MontanaIncome\MontanaIncome::class,
