@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 class StLouisEmployer extends BaseStLouisEmployer
 {
-    const TAX_RATE = 0.001;
+    const TAX_RATE = 0.0005;
 
     public function compute(Collection $tax_areas)
     {
