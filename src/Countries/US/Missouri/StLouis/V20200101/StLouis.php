@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 class StLouis extends BaseStLouis
 {
-    const TAX_RATE = 0.001;
+    const TAX_RATE = 0.01;
 
     public function compute(Collection $tax_areas)
     {

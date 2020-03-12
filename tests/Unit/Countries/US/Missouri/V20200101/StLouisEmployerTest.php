@@ -27,7 +27,7 @@ class StLouisEmployerTest extends TaxTestCase
                 ->setTaxClass(self::TAX_CLASS)
                 ->setPayPeriods(52)
                 ->setWagesInCents(30000)
-                ->setExpectedAmountInCents(15)
+                ->setExpectedAmountInCents(150)
                 ->build()
         );
     }

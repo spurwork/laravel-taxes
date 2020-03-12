@@ -35,7 +35,7 @@ class AddStLouisTaxes extends Migration
             'tax_id' => $st_louis_earnings_tax,
             'home_governmental_unit_area_id' => $st_louis_gua_id,
             'work_governmental_unit_area_id' => $st_louis_gua_id,
-            'based' => TaxArea::BASED_ON_WORK_LOCATION,
+            'based' => TaxArea::BASED_ON_EITHER_LOCATION,
         ]]);
 
         DB::table($this->tax_areas)->insert([[
