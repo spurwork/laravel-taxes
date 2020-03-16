@@ -8,6 +8,6 @@ class HenryIncome extends BaseHenryIncome
 {
     public function getTaxRate(): float
     {
-        return 0.0017;
+        return 0.017;
     }
 }

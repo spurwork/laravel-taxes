@@ -75,7 +75,7 @@ class HenryIncomeTest extends TaxTestCase
                         'county_worked' => 2,
                     ])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(51)
+                    ->setExpectedAmountInCents(510)
                     ->build()
             ],
             'additional county withholding' => [
@@ -86,7 +86,7 @@ class HenryIncomeTest extends TaxTestCase
                         'additional_county_withholding' => 20,
                     ])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(2051)
+                    ->setExpectedAmountInCents(2510)
                     ->build()
             ],
             'county worked and taxes not taken from home county' => [
@@ -96,7 +96,7 @@ class HenryIncomeTest extends TaxTestCase
                         'county_worked' => 33,
                     ])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(51)
+                    ->setExpectedAmountInCents(510)
                     ->build()
             ],
         ];

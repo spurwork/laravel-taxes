@@ -75,7 +75,7 @@ class HamiltonIncomeTest extends TaxTestCase
                         'county_worked' => 2,
                     ])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(33)
+                    ->setExpectedAmountInCents(330)
                     ->build()
             ],
             'additional county withholding' => [
@@ -86,7 +86,7 @@ class HamiltonIncomeTest extends TaxTestCase
                         'additional_county_withholding' => 20,
                     ])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(2032)
+                    ->setExpectedAmountInCents(2330)
                     ->build()
             ],
             'county worked and taxes not taken from home county' => [
@@ -96,7 +96,7 @@ class HamiltonIncomeTest extends TaxTestCase
                         'county_worked' => 29,
                     ])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(33)
+                    ->setExpectedAmountInCents(330)
                     ->build()
             ],
         ];

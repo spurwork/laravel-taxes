@@ -8,6 +8,6 @@ class HamiltonIncome extends BaseHamiltonIncome
 {
     public function getTaxRate(): float
     {
-        return 0.0011;
+        return 0.011;
     }
 }
