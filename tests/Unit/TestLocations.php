@@ -431,6 +431,7 @@ trait TestLocations
             'us.minnesota' => [46.7296, -94.6859],
             'us.mississippi' => [32.3547, -89.3985],
             'us.missouri' => [37.9643, -91.8318],
+            'us.missouri.kansas_city' => [39.0997, -94.5786],
             'us.missouri.st_louis' => [38.6270, -90.1994],
             'us.montana' => [46.8797, -110.3626],
             'us.nebraska' => [41.4925, -99.9018],
