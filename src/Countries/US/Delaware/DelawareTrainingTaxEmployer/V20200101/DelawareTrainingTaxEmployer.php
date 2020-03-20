@@ -1,12 +1,12 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Delaware\DelawareEmployerTrainingTax\V20200101;
+namespace Appleton\Taxes\Countries\US\Delaware\DelawareTrainingTaxEmployer\V20200101;
 
-use Appleton\Taxes\Countries\US\Delaware\DelawareEmployerTrainingTax\DelawareEmployerTrainingTax as BaseDelawareEmployerTrainingTax;
+use Appleton\Taxes\Countries\US\Delaware\DelawareTrainingTaxEmployer\DelawareTrainingTaxEmployer as BaseDelawareTrainingTaxEmployer;
 use Appleton\Taxes\Traits\HasWageBase;
 use Illuminate\Database\Eloquent\Collection;
 
-class DelawareEmployerTrainingTax extends BaseDelawareEmployerTrainingTax
+class DelawareTrainingTaxEmployer extends BaseDelawareTrainingTaxEmployer
 {
     use HasWageBase;
 
