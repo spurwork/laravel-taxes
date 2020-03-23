@@ -29,6 +29,7 @@ abstract class BaseTaxInformationModel extends Model
         $tax_information->user()->associate($user);
         $tax_information->information()->associate(app(get_called_class())->create($attributes));
         $tax_information->save();
+        return $tax_information;
     }
 
     public function scopeForUser($query, $user)
