@@ -2,15 +2,15 @@
 
 namespace Appleton\Taxes\Tests\Unit\Countries\US\Delaware\V20200101;
 
-use Appleton\Taxes\Countries\US\Delaware\DelawareEmployerTrainingTax\DelawareEmployerTrainingTax;
+use Appleton\Taxes\Countries\US\Delaware\DelawareTrainingTaxEmployer\DelawareTrainingTaxEmployer;
 use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
 use Appleton\Taxes\Tests\Unit\Countries\WageBaseTaxTestCase;
 
-class DelawareEmployerTrainingTaxTest extends WageBaseTaxTestCase
+class DelawareTrainingTaxEmployerTest extends WageBaseTaxTestCase
 {
     private const DATE = '2020-01-01';
     private const LOCATION = 'us.delaware';
-    private const TAX_CLASS = DelawareEmployerTrainingTax::class;
+    private const TAX_CLASS = DelawareTrainingTaxEmployer::class;
     private const TAX_RATE = 0.00095;
     private const WAGE_BASE = 1650000;
 

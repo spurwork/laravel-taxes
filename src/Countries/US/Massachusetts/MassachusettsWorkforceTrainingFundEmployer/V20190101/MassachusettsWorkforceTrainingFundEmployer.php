@@ -1,12 +1,12 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Massachusetts\MassachusettsWorkforceTrainingFund\V20190101;
+namespace Appleton\Taxes\Countries\US\Massachusetts\MassachusettsWorkforceTrainingFundEmployer\V20190101;
 
-use Appleton\Taxes\Countries\US\Massachusetts\MassachusettsWorkforceTrainingFund\MassachusettsWorkforceTrainingFund as BaseMassachusettsWorkforceTrainingFund;
+use Appleton\Taxes\Countries\US\Massachusetts\MassachusettsWorkforceTrainingFundEmployer\MassachusettsWorkforceTrainingFundEmployer as BaseMassachusettsWorkforceTrainingFundEmployer;
 use Appleton\Taxes\Traits\HasWageBase;
 use Illuminate\Database\Eloquent\Collection;
 
-class MassachusettsWorkforceTrainingFund extends BaseMassachusettsWorkforceTrainingFund
+class MassachusettsWorkforceTrainingFundEmployer extends BaseMassachusettsWorkforceTrainingFundEmployer
 {
     use HasWageBase;
 
