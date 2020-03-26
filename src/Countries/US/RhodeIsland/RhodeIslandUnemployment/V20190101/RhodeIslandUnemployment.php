@@ -8,8 +8,8 @@ use Appleton\Taxes\Countries\US\RhodeIsland\RhodeIslandUnemployment\RhodeIslandU
 class RhodeIslandUnemployment extends BaseRhodeIslandUnemployment
 {
     const FUTA_CREDIT = 0.054;
-    const NEW_EMPLOYER_RATE = 0.0117;
-    const WAGE_BASE = 23600;
+    const NEW_EMPLOYER_RATE = 0.0127;
+    const WAGE_BASE = 24000;
 
     public function __construct(Payroll $payroll)
     {

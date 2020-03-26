@@ -11,8 +11,8 @@ class RhodeIslandUnemploymentTest extends UnemploymentTaxTestCase
     private const DATE = '2019-01-01';
     private const LOCATION = 'us.rhode_island';
     private const TAX_CLASS = RhodeIslandUnemployment::class;
-    private const TAX_RATE = 0.0117;
-    private const WAGE_BASE = 2360000;
+    private const TAX_RATE = 0.0127;
+    private const WAGE_BASE = 2400000;
 
     public function setUp(): void
     {
