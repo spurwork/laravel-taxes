@@ -12,6 +12,7 @@ class MinnesotaIncomeTaxInformation extends BaseTaxInformationModel
     public static function getDefault()
     {
         $tax_information = new self();
+        $tax_information->additional_withholding = 0;
         $tax_information->allowances = 0;
         $tax_information->filing_status = 0;
         $tax_information->exempt = MinnesotaIncome::FILING_SINGLE;
