@@ -1,18 +1,18 @@
 <?php
 
-namespace Appleton\Taxes\Tests\Unit\Countries\US\Delaware\V20200101;
+namespace Appleton\Taxes\Tests\Unit\Countries\US\Massachusetts\V20190101;
 
-use Appleton\Taxes\Countries\US\Delaware\DelawareTrainingTaxEmployer\DelawareTrainingTaxEmployer;
+use Appleton\Taxes\Countries\US\Massachusetts\MassachusettsWorkforceTrainingFundEmployer\MassachusettsWorkforceTrainingFundEmployer;
 use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
 use Appleton\Taxes\Tests\Unit\Countries\WageBaseTaxTestCase;
 
-class DelawareTrainingTaxEmployerTest extends WageBaseTaxTestCase
+class MassachusettsWorkforceTrainingFundEmployerTest extends WageBaseTaxTestCase
 {
-    private const DATE = '2020-01-01';
-    private const LOCATION = 'us.delaware';
-    private const TAX_CLASS = DelawareTrainingTaxEmployer::class;
-    private const TAX_RATE = 0.00095;
-    private const WAGE_BASE = 1650000;
+    private const DATE = '2019-01-01';
+    private const LOCATION = 'us.massachusetts';
+    private const TAX_CLASS = MassachusettsWorkforceTrainingFundEmployer::class;
+    private const TAX_RATE = 0.00056;
+    private const WAGE_BASE = 1500000;
 
     public function setUp(): void
     {

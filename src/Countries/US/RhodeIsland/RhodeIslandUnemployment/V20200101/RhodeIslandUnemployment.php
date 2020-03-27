@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\RhodeIsland\RhodeIslandUnemployment\V20190101;
+namespace Appleton\Taxes\Countries\US\RhodeIsland\RhodeIslandUnemployment\V20200101;
 
 use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
 use Appleton\Taxes\Countries\US\RhodeIsland\RhodeIslandUnemployment\RhodeIslandUnemployment as BaseRhodeIslandUnemployment;

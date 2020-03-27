@@ -2,15 +2,15 @@
 
 namespace Appleton\Taxes\Tests\Unit\Countries\US\NewYork\V20190101;
 
-use Appleton\Taxes\Countries\US\NewYork\NewYorkMetropolitanCommuterTransportationMobility\NewYorkMetropolitanCommuterTransportationMobility;
+use Appleton\Taxes\Countries\US\NewYork\NewYorkMetropolitanCommuterTransportationMobilityEmployer\NewYorkMetropolitanCommuterTransportationMobilityEmployer;
 use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
 use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
 
-class NewYorkMetropolitanCommuterTransportationMobilityTest extends TaxTestCase
+class NewYorkMetropolitanCommuterTransportationMobilityEmployerTest extends TaxTestCase
 {
     private const DATE = '2019-01-01';
     private const LOCATION = 'us.new_york';
-    private const TAX_CLASS = NewYorkMetropolitanCommuterTransportationMobility::class;
+    private const TAX_CLASS = NewYorkMetropolitanCommuterTransportationMobilityEmployer::class;
 
     public function setUp(): void
     {

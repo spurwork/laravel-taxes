@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Tests\Unit\Countries\US\RhodeIsland\V20190101;
+namespace Appleton\Taxes\Tests\Unit\Countries\US\RhodeIsland\V20200101;
 
 use Appleton\Taxes\Countries\US\RhodeIsland\RhodeIslandUnemployment\RhodeIslandUnemployment;
 use Appleton\Taxes\Tests\Unit\Countries\UnemploymentTaxTestCase;
@@ -8,7 +8,7 @@ use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
 
 class RhodeIslandUnemploymentTest extends UnemploymentTaxTestCase
 {
-    private const DATE = '2019-01-01';
+    private const DATE = '2020-01-01';
     private const LOCATION = 'us.rhode_island';
     private const TAX_CLASS = RhodeIslandUnemployment::class;
     private const TAX_RATE = 0.0127;
@@ -55,6 +55,7 @@ class RhodeIslandUnemploymentTest extends UnemploymentTaxTestCase
             self::LOCATION,
             self::TAX_CLASS,
             self::WAGE_BASE,
-            self::TAX_RATE);
+            self::TAX_RATE
+        );
     }
 }

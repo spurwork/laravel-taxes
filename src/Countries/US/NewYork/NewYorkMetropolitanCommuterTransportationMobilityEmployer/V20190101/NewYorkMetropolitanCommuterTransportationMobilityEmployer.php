@@ -1,0 +1,11 @@
+<?php
+
+namespace Appleton\Taxes\Countries\US\NewYork\NewYorkMetropolitanCommuterTransportationMobilityEmployer\V20190101;
+
+use Appleton\Taxes\Countries\US\NewYork\NewYorkMetropolitanCommuterTransportationMobilityEmployer\NewYorkMetropolitanCommuterTransportationMobilityEmployer as BaseNewYorkMetropolitanCommuterTransportationMobilityEmployer;
+
+class NewYorkMetropolitanCommuterTransportationMobilityEmployer extends BaseNewYorkMetropolitanCommuterTransportationMobilityEmployer
+{
+    const TAX_RATE = 0.0034;
+
+}
