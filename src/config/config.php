@@ -305,7 +305,7 @@ return [
             ],
 
             'rhode_island' => [
-                'unemployment' => env('TAXES_RHODE_ISLAND_UNEMPLOYMENT_TAX_RATE', 0.0117),
+                'unemployment' => env('TAXES_RHODE_ISLAND_UNEMPLOYMENT_TAX_RATE', 0.0127),
             ],
 
             'south_carolina' => [
