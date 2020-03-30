@@ -8,11 +8,11 @@ use Illuminate\Support\Collection;
 
 class TestTaxOverrideManager extends TaxOverrideManager
 {
-    public function replaceSutaUnemploymentTaxes(GeoPoint $suta_location, Collection &$taxable_incomes, Collection $wages, Collection $historical_wages): void
+    public function replaceSutaUnemploymentTaxes(GeoPoint $suta_location, Collection &$taxable_incomes, Collection $wages, Collection $annual_wages): void
     {
     }
 
-    public function addStateIncomeTax(GeoPoint $home_location, Collection $taxable_income, Collection $wages, Collection $historical_wages): void
+    public function addStateIncomeTax(GeoPoint $home_location, Collection $taxable_income, Collection $wages, Collection $annual_wages): void
     {
     }
 

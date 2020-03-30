@@ -178,7 +178,7 @@ class Payroll
         $start_of_year = $this->start_date->copy()->startOfYear();
 
         return $this->wage_manager->calculateEarnings(
-            $area_income->getHistoricalWages(),
+            $area_income->getAnnualWages(),
             $start_of_month < $start_of_year ? $start_of_year : $start_of_month
         );
     }
@@ -196,7 +196,7 @@ class Payroll
         }
 
         return $this->wage_manager->calculateEarnings(
-            $area_income->getHistoricalWages(),
+            $area_income->getAnnualWages(),
             $this->start_date->copy()->startOfYear()
         );
     }
@@ -243,13 +243,13 @@ class Payroll
 
         $start_of_year = $this->start_date->copy()->startOfYear();
         $this->ytd_earnings = $this->wage_manager->calculateEarnings(
-            $taxable_income->getHistoricalWages(),
+            $taxable_income->getAnnualWages(),
             $start_of_year
         );
 
         $start_of_month = $this->start_date->copy()->startOfMonth();
         $this->mtd_earnings = $this->wage_manager->calculateEarnings(
-            $taxable_income->getHistoricalWages(),
+            $taxable_income->getAnnualWages(),
             $start_of_month < $start_of_year ? $start_of_year : $start_of_month
         );
 

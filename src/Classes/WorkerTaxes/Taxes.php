@@ -37,7 +37,7 @@ class Taxes
         GeoPoint $home_location,
         GeoPoint $suta_location,
         Collection $wages,
-        Collection $historical_wages,
+        Collection $annual_wages,
         $user,
         ?Carbon $birth_date,
         int $pay_periods,
@@ -46,10 +46,10 @@ class Taxes
         Collection $exemptions
     ): Collection {
         $wages_by_lat_long = $this->wage_manager->groupLatLong($wages);
-        $historical_wages_by_lat_long = $this->wage_manager->groupLatLong($historical_wages);
+        $annual_wages_by_lat_long = $this->wage_manager->groupLatLong($annual_wages);
 
         $area_incomes = $this->area_income_manager
-            ->groupWagesByGovernmentalArea($wages_by_lat_long, $historical_wages_by_lat_long);
+            ->groupWagesByGovernmentalArea($wages_by_lat_long, $annual_wages_by_lat_long);
 
         $home_areas = $this->area_income_manager->getHomeAreas($home_location);
 
@@ -71,13 +71,13 @@ class Taxes
         $taxable_incomes = $this->taxable_income_manager->groupWagesByTax(
             $home_location,
             $wages_by_lat_long,
-            $historical_wages_by_lat_long
+            $annual_wages_by_lat_long
         );
 
         $this->tax_override_manager->replaceSutaUnemploymentTaxes($suta_location, $taxable_incomes,
-            $wages, $historical_wages);
+            $wages, $annual_wages);
         $this->tax_override_manager->addStateIncomeTax($home_location, $taxable_incomes,
-            $wages, $historical_wages);
+            $wages, $annual_wages);
         $this->tax_override_manager->processReciprocalAgreements($reciprocal_agreements, $taxable_incomes);
         $this->tax_override_manager->removeDisabledTaxes($disabled_taxes, $taxable_incomes);
 
