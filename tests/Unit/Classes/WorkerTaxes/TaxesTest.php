@@ -34,6 +34,7 @@ use Appleton\Taxes\Tests\Unit\TestModelCreator;
 use Appleton\Taxes\Tests\Unit\UnitTestCase;
 use Carbon\Carbon;
 use Illuminate\Contracts\Container\BindingResolutionException;
+use Illuminate\Support\Collection;
 use ReflectionClass;
 
 /**
@@ -66,6 +67,7 @@ class TaxesTest extends UnitTestCase
             $home_location,
             $home_location,
             collect([$wage]),
+            collect([]),
             collect([]),
             $this->user,
             null,
@@ -104,6 +106,7 @@ class TaxesTest extends UnitTestCase
             $home_location,
             $home_location,
             collect([$wage_1, $wage_2]),
+            collect([]),
             collect([]),
             $this->user,
             null,
@@ -156,6 +159,7 @@ class TaxesTest extends UnitTestCase
             $home_location,
             collect([$wage]),
             collect([]),
+            collect([]),
             $this->user,
             null,
             52,
@@ -193,6 +197,7 @@ class TaxesTest extends UnitTestCase
             $location_with_state_income,
             $location_with_state_income,
             collect([$wage]),
+            collect([]),
             collect([]),
             $this->user,
             null,
@@ -233,6 +238,7 @@ class TaxesTest extends UnitTestCase
             $suta_location,
             collect([$wage]),
             collect([]),
+            collect([]),
             $this->user,
             null,
             52,
@@ -271,6 +277,7 @@ class TaxesTest extends UnitTestCase
             $location,
             collect([$wage]),
             collect([]),
+            collect([]),
             $this->user,
             null,
             52,
@@ -298,6 +305,7 @@ class TaxesTest extends UnitTestCase
             $location,
             $location,
             collect([$wage]),
+            collect([]),
             collect([]),
             $this->user,
             null,
@@ -334,6 +342,7 @@ class TaxesTest extends UnitTestCase
             $location,
             collect([$wage]),
             collect([]),
+            collect([]),
             $this->user,
             null,
             52,
@@ -368,6 +377,7 @@ class TaxesTest extends UnitTestCase
             $location,
             collect([]),
             collect([]),
+            collect([]),
             $this->user,
             null,
             52,
@@ -390,6 +400,7 @@ class TaxesTest extends UnitTestCase
             $location,
             $location,
             collect([$wage]),
+            collect([]),
             collect([]),
             null,
             null,
@@ -446,6 +457,7 @@ class TaxesTest extends UnitTestCase
             $location,
             collect([$wage]),
             collect([]),
+            collect([]),
             $this->user,
             null,
             1,
@@ -471,6 +483,7 @@ class TaxesTest extends UnitTestCase
             $location,
             $location,
             collect([$wage]),
+            collect([]),
             collect([]),
             $this->user,
             null,
@@ -512,6 +525,7 @@ class TaxesTest extends UnitTestCase
             $location,
             collect([$wage]),
             collect([]),
+            collect([]),
             $this->user,
             null,
             1,
@@ -530,6 +544,7 @@ class TaxesTest extends UnitTestCase
             $location,
             $location,
             collect([$wage]),
+            collect([]),
             collect([]),
             $this->user,
             null,
@@ -555,6 +570,7 @@ class TaxesTest extends UnitTestCase
             Carbon::now(),
             $location,
             $location,
+            collect([]),
             collect([]),
             collect([]),
             $this->user,
@@ -598,6 +614,7 @@ class TaxesTest extends UnitTestCase
             $location,
             collect([$wage, $supplemental_wage]),
             collect([]),
+            collect([]),
             $this->user,
             null,
             260,
@@ -629,6 +646,7 @@ class TaxesTest extends UnitTestCase
             $ga_location,
             $ga_location,
             collect([$wage]),
+            collect([]),
             collect([]),
             $this->user,
             null,
@@ -673,7 +691,8 @@ class TaxesTest extends UnitTestCase
             $location,
             $location,
             collect([$wage, $supplemental_wage]),
-            collect([$historical_wage]),
+            collect([]),
+            $this->makeAnnualTaxableWages(700000),
             $this->user,
             null,
             260,
@@ -692,7 +711,8 @@ class TaxesTest extends UnitTestCase
             $location,
             $location,
             collect([$wage, $supplemental_wage]),
-            collect([$historical_wage]),
+            collect([]),
+            $this->makeAnnualTaxableWages(800000),
             $this->user,
             null,
             260,
@@ -712,7 +732,8 @@ class TaxesTest extends UnitTestCase
             $location,
             $location,
             collect([$wage, $supplemental_wage]),
-            collect([$historical_wage]),
+            collect([]),
+            $this->makeAnnualTaxableWages(12720000),
             $this->user,
             null,
             260,
@@ -734,7 +755,8 @@ class TaxesTest extends UnitTestCase
             $location,
             $location,
             collect([$wage, $supplemental_wage]),
-            collect([$historical_wage]),
+            collect([]),
+            $this->makeAnnualTaxableWages(20000000),
             $this->user,
             null,
             260,
@@ -749,5 +771,37 @@ class TaxesTest extends UnitTestCase
         self::assertThat($results->get(AlabamaIncome::class)->getAmountInCents(), self::identicalTo(203));
         self::assertThat($results->get(AlabamaUnemployment::class)->getAmountInCents(), self::identicalTo(0));
         self::assertThat($results->get(BirminghamOccupational::class)->getAmountInCents(), self::identicalTo(67));
+    }
+
+    private function makeAnnualTaxableWages(int $amount): Collection
+    {
+        $annual_taxable_wages = collect([]);
+
+        $annual_taxable_wages->put(FederalUnemployment::class, collect([
+            $this->makeTaxableWageAtDate(Carbon::now()->subMonth(), FederalUnemployment::class, $amount),
+        ]));
+        $annual_taxable_wages->put(Medicare::class, collect([
+            $this->makeTaxableWageAtDate(Carbon::now()->subMonth(), Medicare::class, $amount),
+        ]));
+        $annual_taxable_wages->put(MedicareEmployer::class, collect([
+            $this->makeTaxableWageAtDate(Carbon::now()->subMonth(), MedicareEmployer::class, $amount),
+        ]));
+        $annual_taxable_wages->put(SocialSecurity::class, collect([
+            $this->makeTaxableWageAtDate(Carbon::now()->subMonth(), SocialSecurity::class, $amount),
+        ]));
+        $annual_taxable_wages->put(SocialSecurityEmployer::class, collect([
+            $this->makeTaxableWageAtDate(Carbon::now()->subMonth(), SocialSecurityEmployer::class, $amount),
+        ]));
+        $annual_taxable_wages->put(AlabamaIncome::class, collect([
+            $this->makeTaxableWageAtDate(Carbon::now()->subMonth(), AlabamaIncome::class, $amount),
+        ]));
+        $annual_taxable_wages->put(AlabamaUnemployment::class, collect([
+            $this->makeTaxableWageAtDate(Carbon::now()->subMonth(), AlabamaUnemployment::class, $amount),
+        ]));
+        $annual_taxable_wages->put(BirminghamOccupational::class, collect([
+            $this->makeTaxableWageAtDate(Carbon::now()->subMonth(), BirminghamOccupational::class, $amount),
+        ]));
+
+        return $annual_taxable_wages;
     }
 }

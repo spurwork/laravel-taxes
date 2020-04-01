@@ -80,6 +80,7 @@ class ArkansasIncomeTest extends TaxTestCase
             $home_location,
             $wages,
             $historical_wages,
+            collect([]),
             $this->user,
             null,
             52,

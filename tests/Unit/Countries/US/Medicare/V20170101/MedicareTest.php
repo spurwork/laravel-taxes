@@ -40,42 +40,42 @@ class MedicareTest extends TaxTestCase
             '01' => [
                 $parameters
                     ->setWagesInCents(230000)
-                    ->setYtdWagesInCents(0)
+                    ->setYtdLiabilitiesInCents(0)
                     ->setExpectedAmountInCents(3335)
                     ->build()
             ],
             'with additional tax 01' => [
                 $parameters
                     ->setWagesInCents(10000)
-                    ->setYtdWagesInCents(0)
+                    ->setYtdLiabilitiesInCents(0)
                     ->setExpectedAmountInCents(145)
                     ->build()
             ],
             'with additional tax 02' => [
                 $parameters
                     ->setWagesInCents(10000)
-                    ->setYtdWagesInCents(19995000)
+                    ->setYtdLiabilitiesInCents(19995000)
                     ->setExpectedAmountInCents(190)
                     ->build()
             ],
             'with additional tax 03' => [
                 $parameters
                     ->setWagesInCents(10000)
-                    ->setYtdWagesInCents(20000000)
+                    ->setYtdLiabilitiesInCents(20000000)
                     ->setExpectedAmountInCents(235)
                     ->build()
             ],
             'with additional tax 04' => [
                 $parameters
                     ->setWagesInCents(10000)
-                    ->setYtdWagesInCents(20005000)
+                    ->setYtdLiabilitiesInCents(20005000)
                     ->setExpectedAmountInCents(235)
                     ->build()
             ],
             'case study A' => [
                 $parameters
                     ->setWagesInCents(6668)
-                    ->setYtdWagesInCents(0)
+                    ->setYtdLiabilitiesInCents(0)
                     ->setExpectedAmountInCents(97)
                     ->build()
             ],

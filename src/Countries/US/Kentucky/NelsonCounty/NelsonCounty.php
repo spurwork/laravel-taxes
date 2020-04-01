@@ -1,8 +1,8 @@
 <?php
 namespace Appleton\Taxes\Countries\US\Kentucky\NelsonCounty;
 
-use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseOccupational;
+use Appleton\Taxes\Countries\US\Kentucky\BaseKentuckyLocalWithWageBase;
 
-abstract class NelsonCounty extends BaseOccupational
+abstract class NelsonCounty extends BaseKentuckyLocalWithWageBase
 {
 }

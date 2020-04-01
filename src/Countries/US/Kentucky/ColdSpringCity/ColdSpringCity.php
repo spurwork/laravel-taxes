@@ -1,8 +1,8 @@
 <?php
 namespace Appleton\Taxes\Countries\US\Kentucky\ColdSpringCity;
 
-use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseOccupational;
+use Appleton\Taxes\Countries\US\Kentucky\BaseKentuckyLocalWithWageBase;
 
-abstract class ColdSpringCity extends BaseOccupational
+abstract class ColdSpringCity extends BaseKentuckyLocalWithWageBase
 {
 }

@@ -29,6 +29,7 @@ class JeddTaxTestCase extends TaxTestCase
             $home_location,
             $wages,
             collect([]),
+            collect([]),
             $this->user,
             $parameters->getBirthDate(),
             $parameters->getPayPeriods(),

@@ -2,6 +2,7 @@
 
 namespace Appleton\Taxes\Tests\Unit\Traits;
 
+use Appleton\Taxes\Tests\Unit\Classes\WorkerTaxes\Taxes\StateTax1;
 use Appleton\Taxes\Tests\Unit\UnitTestCase;
 use Appleton\Taxes\Traits\HasBrackets;
 
@@ -32,7 +33,7 @@ class HasBracketsTest extends UnitTestCase
                     {
                         return $this->earnings;
                     }
-                    public function getYtdEarnings()
+                    public function getYtdTaxableWages()
                     {
                         return $this->ytd_earnings;
                     }
@@ -43,7 +44,7 @@ class HasBracketsTest extends UnitTestCase
         $mock->payroll->earnings = $earnings;
         $mock->payroll->ytd_earnings = $ytd_earnings;
 
-        $this->assertSame($result, $mock->getTaxAmountFromBrackets());
+        $this->assertSame($result, $mock->getTaxAmountFromBrackets(StateTax1::class));
     }
 
     public function provideTestData()

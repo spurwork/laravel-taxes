@@ -6,12 +6,15 @@ use Appleton\Taxes\Countries\US\Kentucky\CovingtonCity\CovingtonCity;
 use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
 use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
 use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
+use Appleton\Taxes\Tests\Unit\Countries\WageBaseTaxTestCase;
 
-class CovingtonCityTest extends TaxTestCase
+class CovingtonCityTest extends WageBaseTaxTestCase
 {
     private const DATE = '2019-01-01';
     private const LOCATION = 'us.kentucky.covington_city';
     private const TAX_CLASS = CovingtonCity::class;
+    private const TAX_RATE = 0.0245;
+    private const WAGE_BASE = 13290000;
 
     public function setUp(): void
     {
@@ -25,6 +28,14 @@ class CovingtonCityTest extends TaxTestCase
     public function testTax(TestParameters $parameters): void
     {
         $this->validate($parameters);
+    }
+
+    /**
+     * @dataProvider provideWageBaseData
+     */
+    public function testWageBase(TestParameters $parameters): void
+    {
+        $this->validateWageBase($parameters);
     }
 
     public function provideTestData(): array
@@ -61,14 +72,16 @@ class CovingtonCityTest extends TaxTestCase
                     ->setExpectedEarningsInCents(90000)
                     ->build()
             ],
-            'over wage base' => [
-                $builder
-                    ->setWagesInCents(77100)
-                    ->setYtdWagesInCents(13290000)
-                    ->setExpectedAmountInCents(0)
-                    ->setExpectedEarningsInCents(0)
-                    ->build()
-            ],
         ];
+    }
+
+    public function provideWageBaseData(): array
+    {
+        return $this->wageBaseBoundariesTestCases(
+            self::DATE,
+            self::LOCATION,
+            self::TAX_CLASS,
+            self::WAGE_BASE,
+            self::TAX_RATE);
     }
 }

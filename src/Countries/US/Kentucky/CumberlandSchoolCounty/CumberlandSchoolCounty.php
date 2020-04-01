@@ -1,8 +1,8 @@
 <?php
 namespace Appleton\Taxes\Countries\US\Kentucky\CumberlandSchoolCounty;
 
-use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseOccupational;
+use Appleton\Taxes\Countries\US\Kentucky\BaseKentuckyLocalWithWageBase;
 
-abstract class CumberlandSchoolCounty extends BaseOccupational
+abstract class CumberlandSchoolCounty extends BaseKentuckyLocalWithWageBase
 {
 }

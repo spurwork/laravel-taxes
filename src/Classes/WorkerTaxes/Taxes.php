@@ -38,6 +38,7 @@ class Taxes
         GeoPoint $suta_location,
         Collection $wages,
         Collection $annual_wages,
+        Collection $annual_taxable_wages,
         $user,
         ?Carbon $birth_date,
         int $pay_periods,
@@ -53,7 +54,7 @@ class Taxes
 
         $home_areas = $this->area_income_manager->getHomeAreas($home_location);
 
-        $payroll = new Payroll([
+        $parameters = [
             'date' => $start_date,
             'user' => $user,
             'birth_date' => $birth_date,
@@ -62,10 +63,13 @@ class Taxes
             'home_areas' => $home_areas,
             'start_date' => $start_date,
             'end_date' => $end_date,
+            'annual_taxable_wages' => $annual_taxable_wages,
             'total_earnings' => $this->wage_manager->calculateEarnings($wages),
             'minutes_worked' => $this->wage_manager->calculateMinutesWorked($wages),
             'is_salaried' => $this->wage_manager->isSalaried($wages),
-        ], $this->wage_manager);
+        ];
+
+        $payroll = new Payroll($parameters, $this->wage_manager, $this->tax_manager);
         $this->bind_manager->bindPayroll($payroll);
 
         $taxable_incomes = $this->taxable_income_manager->groupWagesByTax(
@@ -95,7 +99,7 @@ class Taxes
         app()->instance(Payroll::class, new Payroll([
             'start_date' => $date ?? Carbon::now(),
             'user' => $user,
-        ], $this->wage_manager));
+        ], $this->wage_manager, $this->tax_manager));
 
         try {
             $class = app($class);

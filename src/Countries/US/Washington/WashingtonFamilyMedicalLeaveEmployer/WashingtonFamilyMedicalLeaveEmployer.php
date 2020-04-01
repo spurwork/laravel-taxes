@@ -8,5 +8,6 @@ use Appleton\Taxes\Traits\HasWageBase;
 abstract class WashingtonFamilyMedicalLeaveEmployer extends BaseState
 {
     use HasWageBase;
+
     const WITHHELD = false;
 }

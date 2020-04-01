@@ -40,14 +40,14 @@ class MedicareTest extends TaxTestCase
             'case study A' => [
                 $builder
                     ->setWagesInCents(27167)
-                    ->setYtdWagesInCents(2489733)
+                    ->setYtdLiabilitiesInCents(2489733)
                     ->setExpectedAmountInCents(394)
                     ->build()
             ],
             'case study B' => [
                 $builder
                     ->setWagesInCents(76512)
-                    ->setYtdWagesInCents(20010000)
+                    ->setYtdLiabilitiesInCents(20010000)
                     ->setExpectedAmountInCents(1798)
                     ->build()
             ],

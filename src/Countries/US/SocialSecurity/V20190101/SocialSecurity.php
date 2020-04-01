@@ -8,9 +8,4 @@ class SocialSecurity extends BaseSocialSecurity
 {
     public const TAX_RATE = 0.062;
     public const WAGE_BASE = 132900;
-
-    protected function getTaxRate(): float
-    {
-        return self::TAX_RATE;
-    }
 }

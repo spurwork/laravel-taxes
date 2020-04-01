@@ -5,13 +5,15 @@ namespace Appleton\Taxes\Tests\Unit\Countries\US\SocialSecurity\V20200101;
 use Appleton\Taxes\Countries\US\SocialSecurity\SocialSecurityEmployer;
 use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
 use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
-use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
+use Appleton\Taxes\Tests\Unit\Countries\WageBaseTaxTestCase;
 
-class SocialSecurityEmployerTest extends TaxTestCase
+class SocialSecurityEmployerTest extends WageBaseTaxTestCase
 {
     private const DATE = '2020-01-01';
     private const LOCATION = 'us';
     private const TAX_CLASS = SocialSecurityEmployer::class;
+    private const TAX_RATE = 0.062;
+    private const WAGE_BASE = 13770000;
 
     public function setUp(): void
     {
@@ -22,9 +24,17 @@ class SocialSecurityEmployerTest extends TaxTestCase
     /**
      * @dataProvider provideData
      */
-    public function testWageBase(TestParameters $parameters): void
+    public function testCases(TestParameters $parameters): void
     {
         $this->validate($parameters);
+    }
+
+    /**
+     * @dataProvider provideWageBaseData
+     */
+    public function testWageBase(TestParameters $parameters): void
+    {
+        $this->validateWageBase($parameters);
     }
 
     public function provideData(): array
@@ -69,30 +79,17 @@ class SocialSecurityEmployerTest extends TaxTestCase
                     ->setExpectedEarningsInCents(77428)
                     ->build()
             ],
-            'under wage base' => [
-                $builder
-                    ->setWagesInCents(10000)
-                    ->setYtdWagesInCents(13769999)
-                    ->setExpectedAmountInCents(0)
-                    ->setExpectedEarningsInCents(1)
-                    ->build()
-            ],
-            'at wage base' => [
-                $builder
-                    ->setWagesInCents(10000)
-                    ->setYtdWagesInCents(13770000)
-                    ->setExpectedAmountInCents(0)
-                    ->setExpectedEarningsInCents(0)
-                    ->build()
-            ],
-            'over wage base' => [
-                $builder
-                    ->setWagesInCents(10000)
-                    ->setYtdWagesInCents(13770001)
-                    ->setExpectedAmountInCents(0)
-                    ->setExpectedEarningsInCents(0)
-                    ->build()
-            ],
         ];
+    }
+
+    public function provideWageBaseData(): array
+    {
+        return $this->wageBaseBoundariesTestCases(
+            self::DATE,
+            self::LOCATION,
+            self::TAX_CLASS,
+            self::WAGE_BASE,
+            self::TAX_RATE
+        );
     }
 }

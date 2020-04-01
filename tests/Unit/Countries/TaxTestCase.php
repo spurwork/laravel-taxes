@@ -67,10 +67,18 @@ abstract class TaxTestCase extends UnitTestCase
             $wages->push($this->makeSupplementalWage($work_location, $parameters->getSupplementalWagesInCents()));
         }
 
-        $historical_wages = collect([]);
+        $annual_wages = collect([]);
         if ($parameters->getYtdWagesInCents() !== null
             && $parameters->getYtdWagesInCents() !== 0) {
-            $historical_wages->push($this->makeWage($work_location, $parameters->getYtdWagesInCents()));
+            $annual_wages->push($this->makeWage($work_location, $parameters->getYtdWagesInCents()));
+        }
+
+        $annual_taxable_wages = collect([]);
+        if ($parameters->getYtdLiabilitiesInCents() !== null
+            && $parameters->getYtdLiabilitiesInCents() !== 0) {
+            $taxable_wage = $this->makeTaxableWage($parameters->getTaxClass(), $parameters->getYtdLiabilitiesInCents());
+
+            $annual_taxable_wages->put($parameters->getTaxClass(), collect([$taxable_wage]));
         }
 
         $results = $this->taxes->calculate(
@@ -79,7 +87,8 @@ abstract class TaxTestCase extends UnitTestCase
             $home_location,
             $home_location,
             $wages,
-            $historical_wages,
+            $annual_wages,
+            $annual_taxable_wages,
             $this->user,
             $parameters->getBirthDate(),
             $parameters->getPayPeriods(),
@@ -160,6 +169,7 @@ abstract class TaxTestCase extends UnitTestCase
             $home_location,
             $wages,
             $historical_wages,
+            collect([]),
             $this->user,
             $parameters->getBirthDate(),
             $parameters->getPayPeriods(),

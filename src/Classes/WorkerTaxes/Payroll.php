@@ -30,9 +30,15 @@ class Payroll
     private $area_incomes;
     private $home_areas;
     private $total_earnings;
-    private $wage_manager;
+    private $annual_taxable_wages;
 
-    public function __construct(array $parameters, WageManager $wage_manager)
+    private $wage_manager;
+    private $tax_manager;
+
+    public function __construct(
+        array $parameters,
+        WageManager $wage_manager,
+        TaxManager $tax_manager)
     {
         $this->birth_date = $parameters['birth_date'] ?? null;
         $this->days_worked = $parameters['days_worked'] ?? 0;
@@ -54,11 +60,13 @@ class Payroll
         $this->end_date = $parameters['end_date'] ?? $parameters['start_date'];
         $this->area_incomes = $parameters['area_incomes'] ?? collect([]);
         $this->home_areas = $parameters['home_areas'] ?? collect([]);
+        $this->annual_taxable_wages = $parameters['annual_taxable_wages'] ?? collect([]);
         $this->total_earnings = $parameters['total_earnings'] ?? 0;
         $this->pay_rate = $parameters['pay_rate'] ?? 0;
 
         $this->amount_withheld = 0;
         $this->wage_manager = $wage_manager;
+        $this->tax_manager = $tax_manager;
     }
 
     public function getStartDate()
@@ -199,6 +207,16 @@ class Payroll
             $area_income->getAnnualWages(),
             $this->start_date->copy()->startOfYear()
         );
+    }
+
+    public function getYtdTaxableWages(string $tax_class): float
+    {
+        return $this->tax_manager->computeYtdTaxableWages($this->annual_taxable_wages, $tax_class, $this->end_date);
+    }
+
+    public function getMtdTaxableWages(string $tax_class): float
+    {
+        return $this->tax_manager->computeMtdTaxableWages($this->annual_taxable_wages, $tax_class, $this->end_date);
     }
 
     public function getTipAmount(GovernmentalUnitArea $governmental_unit_area = null)
