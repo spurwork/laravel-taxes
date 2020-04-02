@@ -27,6 +27,7 @@ class Payroll
     private $amount_withheld;
     private $start_date;
     private $end_date;
+    private $pay_date;
     private $area_incomes;
     private $home_areas;
     private $total_earnings;
@@ -58,6 +59,7 @@ class Payroll
 
         $this->start_date = $parameters['start_date'];
         $this->end_date = $parameters['end_date'] ?? $parameters['start_date'];
+        $this->pay_date = $parameters['pay_date'] ?? $parameters['start_date'];
         $this->area_incomes = $parameters['area_incomes'] ?? collect([]);
         $this->home_areas = $parameters['home_areas'] ?? collect([]);
         $this->annual_taxable_wages = $parameters['annual_taxable_wages'] ?? collect([]);
@@ -211,12 +213,12 @@ class Payroll
 
     public function getYtdTaxableWages(string $tax_class): float
     {
-        return $this->tax_manager->computeYtdTaxableWages($this->annual_taxable_wages, $tax_class, $this->end_date);
+        return $this->tax_manager->computeYtdTaxableWages($this->annual_taxable_wages, $tax_class, $this->pay_date);
     }
 
     public function getMtdTaxableWages(string $tax_class): float
     {
-        return $this->tax_manager->computeMtdTaxableWages($this->annual_taxable_wages, $tax_class, $this->end_date);
+        return $this->tax_manager->computeMtdTaxableWages($this->annual_taxable_wages, $tax_class, $this->pay_date);
     }
 
     public function getTipAmount(GovernmentalUnitArea $governmental_unit_area = null)

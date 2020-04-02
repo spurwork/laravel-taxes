@@ -52,7 +52,7 @@ class TaxManager
 
         $start_of_year = $date->copy()->startOfYear();
 
-        $f = $taxable_wages
+        return $taxable_wages
                 ->get($tax_class)
                 ->filter(static function (TaxableWage $taxable_wage) use ($start_of_year, $date) {
                     return $taxable_wage->getDate()->gte($start_of_year)
@@ -60,7 +60,6 @@ class TaxManager
                 })->sum(static function (TaxableWage $taxable_wage) {
                     return $taxable_wage->getAmount();
                 }) / 100;
-        return $f;
     }
 
     public function computeMtdTaxableWages(

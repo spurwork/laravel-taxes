@@ -38,6 +38,7 @@ class ColoradoLocalTaxTestCase extends TaxTestCase
         $results = $this->taxes->calculate(
             Carbon::now(),
             Carbon::now()->addWeek(),
+            Carbon::now()->addWeek()->addDays(4),
             $local_location,
             $local_location,
             $wages,
@@ -96,6 +97,7 @@ class ColoradoLocalTaxTestCase extends TaxTestCase
         $results = $this->taxes->calculate(
             Carbon::now(),
             Carbon::now()->addWeek(),
+            Carbon::now()->addWeek()->addDays(4),
             $local_location,
             $local_location,
             $wages,

@@ -64,6 +64,7 @@ class TaxesTest extends UnitTestCase
         $tax_results = $this->taxes->calculate(
             Carbon::now(),
             Carbon::now()->addWeek(),
+            Carbon::now()->addWeek()->addDays(4),
             $home_location,
             $home_location,
             collect([$wage]),
@@ -103,6 +104,7 @@ class TaxesTest extends UnitTestCase
         $tax_results = $this->taxes->calculate(
             Carbon::now(),
             Carbon::now()->addWeek(),
+            Carbon::now()->addWeek()->addDays(4),
             $home_location,
             $home_location,
             collect([$wage_1, $wage_2]),
@@ -155,6 +157,7 @@ class TaxesTest extends UnitTestCase
         $tax_results = $this->taxes->calculate(
             Carbon::now(),
             Carbon::now()->addWeek(),
+            Carbon::now()->addWeek()->addDays(4),
             $home_location,
             $home_location,
             collect([$wage]),
@@ -194,6 +197,7 @@ class TaxesTest extends UnitTestCase
         $tax_results = $this->taxes->calculate(
             Carbon::now(),
             Carbon::now()->addWeek(),
+            Carbon::now()->addWeek()->addDays(4),
             $location_with_state_income,
             $location_with_state_income,
             collect([$wage]),
@@ -234,6 +238,7 @@ class TaxesTest extends UnitTestCase
         $tax_results = $this->taxes->calculate(
             Carbon::now(),
             Carbon::now()->addWeek(),
+            Carbon::now()->addWeek()->addDays(4),
             $work_location,
             $suta_location,
             collect([$wage]),
@@ -273,6 +278,7 @@ class TaxesTest extends UnitTestCase
         $tax_results = $this->taxes->calculate(
             Carbon::now(),
             Carbon::now()->addWeek(),
+            Carbon::now()->addWeek()->addDays(4),
             $location,
             $location,
             collect([$wage]),
@@ -302,6 +308,7 @@ class TaxesTest extends UnitTestCase
         $tax_results = $this->taxes->calculate(
             Carbon::now(),
             Carbon::now()->addWeek(),
+            Carbon::now()->addWeek()->addDays(4),
             $location,
             $location,
             collect([$wage]),
@@ -338,6 +345,7 @@ class TaxesTest extends UnitTestCase
         $tax_results = $this->taxes->calculate(
             Carbon::now(),
             Carbon::now()->addWeek(),
+            Carbon::now()->addWeek()->addDays(4),
             $location,
             $location,
             collect([$wage]),
@@ -373,6 +381,7 @@ class TaxesTest extends UnitTestCase
         $this->taxes->calculate(
             Carbon::parse('2016-01-01'),
             Carbon::parse('2016-01-01'),
+            Carbon::parse('2016-01-01'),
             $location,
             $location,
             collect([]),
@@ -395,6 +404,7 @@ class TaxesTest extends UnitTestCase
         $wage = $this->makeWage($location, 6668);
 
         $results = $this->taxes->calculate(
+            Carbon::parse('2017-01-01'),
             Carbon::parse('2017-01-01'),
             Carbon::parse('2017-01-01'),
             $location,
@@ -453,6 +463,7 @@ class TaxesTest extends UnitTestCase
         $results = $this->taxes->calculate(
             Carbon::parse('2017-01-01'),
             Carbon::parse('2017-01-01'),
+            Carbon::parse('2017-01-01'),
             $location,
             $location,
             collect([$wage]),
@@ -478,6 +489,7 @@ class TaxesTest extends UnitTestCase
 
         $wage = $this->makeWage($location, 1100);
         $results = $this->taxes->calculate(
+            Carbon::parse('2017-01-01'),
             Carbon::parse('2017-01-01'),
             Carbon::parse('2017-01-01'),
             $location,
@@ -521,6 +533,7 @@ class TaxesTest extends UnitTestCase
         $results = $this->taxes->calculate(
             Carbon::parse('2017-01-01'),
             Carbon::parse('2017-01-01'),
+            Carbon::parse('2017-01-01'),
             $location,
             $location,
             collect([$wage]),
@@ -539,6 +552,7 @@ class TaxesTest extends UnitTestCase
 
         $wage = $this->makeWage($location, 1100);
         $results = $this->taxes->calculate(
+            Carbon::parse('2017-01-01'),
             Carbon::parse('2017-01-01'),
             Carbon::parse('2017-01-01'),
             $location,
@@ -566,6 +580,7 @@ class TaxesTest extends UnitTestCase
         $location = new GeoPoint($coords[0], $coords[1]);
 
         $this->taxes->calculate(
+            Carbon::now(),
             Carbon::now(),
             Carbon::now(),
             $location,
@@ -610,6 +625,7 @@ class TaxesTest extends UnitTestCase
         $results = $this->taxes->calculate(
             Carbon::now(),
             Carbon::now(),
+            Carbon::now(),
             $location,
             $location,
             collect([$wage, $supplemental_wage]),
@@ -641,6 +657,7 @@ class TaxesTest extends UnitTestCase
         $wage = $this->makeWage($ga_location, 6668);
 
         $results = $this->taxes->calculate(
+            Carbon::now(),
             Carbon::now(),
             Carbon::now(),
             $ga_location,
@@ -688,6 +705,7 @@ class TaxesTest extends UnitTestCase
         $results = $this->taxes->calculate(
             Carbon::now(),
             Carbon::now(),
+            Carbon::now(),
             $location,
             $location,
             collect([$wage, $supplemental_wage]),
@@ -706,6 +724,7 @@ class TaxesTest extends UnitTestCase
         $historical_wage = $this->makeWageAtDate(Carbon::now()->subMonth(), $location, 800000);
 
         $results = $this->taxes->calculate(
+            Carbon::now(),
             Carbon::now(),
             Carbon::now(),
             $location,
@@ -729,6 +748,7 @@ class TaxesTest extends UnitTestCase
         $results = $this->taxes->calculate(
             Carbon::now(),
             Carbon::now(),
+            Carbon::now(),
             $location,
             $location,
             collect([$wage, $supplemental_wage]),
@@ -750,6 +770,7 @@ class TaxesTest extends UnitTestCase
         $historical_wage = $this->makeWageAtDate(Carbon::now()->subMonth(), $location, 20000000);
 
         $results = $this->taxes->calculate(
+            Carbon::now(),
             Carbon::now(),
             Carbon::now(),
             $location,

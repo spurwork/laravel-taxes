@@ -34,6 +34,7 @@ class Taxes
     public function calculate(
         Carbon $start_date,
         Carbon $end_date,
+        Carbon $pay_date,
         GeoPoint $home_location,
         GeoPoint $suta_location,
         Collection $wages,
@@ -63,6 +64,7 @@ class Taxes
             'home_areas' => $home_areas,
             'start_date' => $start_date,
             'end_date' => $end_date,
+            'pay_date' => $pay_date,
             'annual_taxable_wages' => $annual_taxable_wages,
             'total_earnings' => $this->wage_manager->calculateEarnings($wages),
             'minutes_worked' => $this->wage_manager->calculateMinutesWorked($wages),

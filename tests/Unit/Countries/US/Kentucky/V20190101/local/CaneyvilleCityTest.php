@@ -34,6 +34,7 @@ class CaneyvilleCityTest extends TaxTestCase
         $results = $this->taxes->calculate(
             Carbon::now(),
             Carbon::now()->addWeek(),
+            Carbon::now()->addWeek()->addDays(4),
             $home_location,
             $home_location,
             collect([$wage]),
@@ -65,6 +66,7 @@ class CaneyvilleCityTest extends TaxTestCase
         $results = $this->taxes->calculate(
             Carbon::now(),
             Carbon::now()->addWeek(),
+            Carbon::now()->addWeek()->addDays(4),
             $home_location,
             $home_location,
             collect([$wage_1, $wage_2, $wage_3]),
@@ -105,6 +107,7 @@ class CaneyvilleCityTest extends TaxTestCase
         $results = $this->taxes->calculate(
             Carbon::now(),
             Carbon::now()->addWeek(),
+            Carbon::now()->addWeek()->addDays(4),
             $home_location,
             $home_location,
             collect([$wage_1, $wage_2, $wage_3, $wage_4]),

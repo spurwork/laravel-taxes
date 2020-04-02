@@ -52,6 +52,7 @@ class WageBaseTaxTestCase extends TaxTestCase
         $results = $this->taxes->calculate(
             Carbon::now(),
             Carbon::now()->addWeek(),
+            Carbon::now()->addWeek()->addDays(4),
             $home_location,
             $home_location,
             $wages,
