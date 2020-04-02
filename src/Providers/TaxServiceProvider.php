@@ -257,6 +257,7 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\Kentucky\ElizabethtownCity\ElizabethtownCity::class,
         \Appleton\Taxes\Countries\US\Kentucky\ElkhornCity\ElkhornCity::class,
         \Appleton\Taxes\Countries\US\Kentucky\ElktonCity\ElktonCity::class,
+        \Appleton\Taxes\Countries\US\Kentucky\ElliottCounty\ElliottCounty::class,
         \Appleton\Taxes\Countries\US\Kentucky\ElsmereCity\ElsmereCity::class,
         \Appleton\Taxes\Countries\US\Kentucky\EminenceCity\EminenceCity::class,
         \Appleton\Taxes\Countries\US\Kentucky\ErlangerCity\ErlangerCity::class,

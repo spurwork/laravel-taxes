@@ -222,6 +222,7 @@ trait TestLocations
             'us.kentucky.elizabethtown_city' => [37.7030646, -85.8649408],
             'us.kentucky.elkhorn_city' => [37.303997, -82.3509794],
             'us.kentucky.elkton_city' => [36.8100425, -87.1541675],
+            'us.kentucky.elliott_county' => [38.1575, -883.1220],
             'us.kentucky.elsmere_city' => [39.0125608, -84.6046663],
             'us.kentucky.eminence_city' => [38.3700683, -85.1805105],
             'us.kentucky.erlanger_city' => [39.0167275, -84.6007773],
