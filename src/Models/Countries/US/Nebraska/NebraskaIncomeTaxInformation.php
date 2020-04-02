@@ -16,6 +16,7 @@ class NebraskaIncomeTaxInformation extends BaseTaxInformationModel
         $tax_information->filing_status = NebraskaIncome::FILING_SINGLE;
         $tax_information->exempt = false;
         $tax_information->lower_withholding_than_lb223 = false;
+        $tax_information->additional_withholding = 0;
         return $tax_information;
     }
 
