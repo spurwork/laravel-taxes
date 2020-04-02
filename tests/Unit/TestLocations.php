@@ -367,6 +367,7 @@ trait TestLocations
             'us.kentucky.silver_grove_city' => [39.0345062, -84.3902174],
             'us.kentucky.simpson_county' => [36.7772014, -86.6207943],
             'us.kentucky.simpsonville_city' => [38.22257, -85.3552349],
+            'us.kentucky.smiths_grove' => [37.0525, -86.2078],
             'us.kentucky.somerset_city' => [37.0920222, -84.6041084],
             'us.kentucky.southgate_city' => [39.072005, -84.4727195],
             'us.kentucky.spencer_county' => [38.0123167, -85.3136218],

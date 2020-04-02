@@ -406,6 +406,7 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\Kentucky\SilverGroveCity\SilverGroveCity::class,
         \Appleton\Taxes\Countries\US\Kentucky\SimpsonCounty\SimpsonCounty::class,
         \Appleton\Taxes\Countries\US\Kentucky\SimpsonvilleCity\SimpsonvilleCity::class,
+        \Appleton\Taxes\Countries\US\Kentucky\SmithsGrove\SmithsGrove::class,
         \Appleton\Taxes\Countries\US\Kentucky\SomersetCity\SomersetCity::class,
         \Appleton\Taxes\Countries\US\Kentucky\SouthgateCity\SouthgateCity::class,
         \Appleton\Taxes\Countries\US\Kentucky\SpencerCounty\SpencerCounty::class,
