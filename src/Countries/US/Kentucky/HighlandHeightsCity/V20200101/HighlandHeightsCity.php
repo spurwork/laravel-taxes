@@ -11,9 +11,4 @@ class HighlandHeightsCity extends BaseHighlandHeightsCity
 
     public const TAX_RATE = 0.01;
     const WAGE_BASE = 137700;
-
-    public function compute(Collection $tax_areas)
-    {
-        return round($this->payroll->withholdTax(min($this->payroll->getEarnings(), $this->getBaseEarnings($tax_areas->first()->workGovernmentalUnitArea)) * self::TAX_RATE), 2);
-    }
 }

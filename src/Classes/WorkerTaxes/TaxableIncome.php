@@ -9,18 +9,18 @@ class TaxableIncome
 {
     private $tax;
     private $wages;
-    private $historical_wages;
+    private $annual_wages;
     private $exemption_amount_in_cents;
 
     public function __construct(
         Tax $tax,
         Collection $wages,
-        Collection $historical_wages,
+        Collection $annual_wages,
         int $exemption_amount_in_cents)
     {
         $this->tax = $tax;
         $this->wages = $wages;
-        $this->historical_wages = $historical_wages;
+        $this->annual_wages = $annual_wages;
         $this->exemption_amount_in_cents = $exemption_amount_in_cents;
     }
 
@@ -39,8 +39,8 @@ class TaxableIncome
         return $this->wages;
     }
 
-    public function getHistoricalWages(): Collection
+    public function getAnnualWages(): Collection
     {
-        return $this->historical_wages;
+        return $this->annual_wages;
     }
 }

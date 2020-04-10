@@ -12,6 +12,6 @@ class MississippiUnemployment extends BaseStateUnemployment
 
     public function compute(Collection $tax_areas)
     {
-        return (int)round(intval(($this->getAdjustedEarnings() * $this->tax_rate) * 100) / 100, 0);
+        return $this->calculateRoundedToDollar();
     }
 }

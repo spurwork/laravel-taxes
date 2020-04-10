@@ -1,8 +1,8 @@
 <?php
 namespace Appleton\Taxes\Countries\US\Kentucky\BurkesvilleCity;
 
-use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseOccupational;
+use Appleton\Taxes\Countries\US\Kentucky\BaseKentuckyLocalWithWageBase;
 
-abstract class BurkesvilleCity extends BaseOccupational
+abstract class BurkesvilleCity extends BaseKentuckyLocalWithWageBase
 {
 }

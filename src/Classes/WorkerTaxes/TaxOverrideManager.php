@@ -25,15 +25,15 @@ class TaxOverrideManager
         GeoPoint $suta_location,
         Collection &$taxable_incomes,
         Collection $wages,
-        Collection $historical_wages): void
+        Collection $annual_wages): void
     {
         $taxable_incomes = $taxable_incomes->reject(static function (TaxableIncome $taxable_income) {
             return is_subclass_of($taxable_income->getTax()->class, BaseStateUnemployment::class);
         });
 
         $state_unemployment_taxes = $this->query_runner->lookupStateUnemploymentTaxes($suta_location);
-        $state_unemployment_taxes->each(static function (Tax $tax) use ($taxable_incomes, $wages, $historical_wages) {
-            $new_taxable_income = new TaxableIncome($tax, $wages, $historical_wages, 0);
+        $state_unemployment_taxes->each(static function (Tax $tax) use ($taxable_incomes, $wages, $annual_wages) {
+            $new_taxable_income = new TaxableIncome($tax, $wages, $annual_wages, 0);
             $taxable_incomes->put($tax->class, $new_taxable_income);
         });
     }
@@ -54,7 +54,7 @@ class TaxOverrideManager
         GeoPoint $home_location,
         Collection $taxable_income,
         Collection $wages,
-        Collection $historical_wages): void
+        Collection $annual_wages): void
     {
         $has_state_income_tax = $taxable_income->filter(static function (TaxableIncome $taxable_wages) {
             return is_subclass_of($taxable_wages->getTax()->class, BaseStateIncome::class);
@@ -67,7 +67,7 @@ class TaxOverrideManager
                 $new_taxable_income = new TaxableIncome(
                     $state_income_tax,
                     $wages,
-                    $historical_wages,
+                    $annual_wages,
                     0);
                 $taxable_income->put($state_income_tax->class, $new_taxable_income);
             }
@@ -110,16 +110,16 @@ class TaxOverrideManager
                 $taxable_income = $taxable_incomes->get($home_state_income->class);
 
                 $new_wages = $taxable_income->getWages()->concat($work_state_income_taxable_income->getWages());
-                $new_historical_wages = $taxable_income->getHistoricalWages()->concat($work_state_income_taxable_income->getHistoricalWages());
+                $new_annual_wages = $taxable_income->getAnnualWages()->concat($work_state_income_taxable_income->getAnnualWages());
             } else {
                 $new_wages = $work_state_income_taxable_income->getWages();
-                $new_historical_wages = $work_state_income_taxable_income->getHistoricalWages();
+                $new_annual_wages = $work_state_income_taxable_income->getAnnualWages();
             }
 
             $new_taxable_income = new TaxableIncome(
                 $home_state_income,
                 $new_wages,
-                $new_historical_wages,
+                $new_annual_wages,
                 0
             );
             $taxable_incomes->put($home_state_income->class, $new_taxable_income);

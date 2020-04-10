@@ -16,7 +16,7 @@ class AreaIncomeManager
 
     public function groupWagesByGovernmentalArea(
         Collection $wages_by_lat_long,
-        Collection $historical_wages_by_lat_long): Collection
+        Collection $annual_wages_by_lat_long): Collection
     {
         $area_incomes = collect([]);
 
@@ -32,15 +32,15 @@ class AreaIncomeManager
             });
         });
 
-        $historical_wages_by_lat_long->each(function (Collection $historical_wages) use ($area_incomes) {
-            if ($historical_wages->isEmpty()) {
+        $annual_wages_by_lat_long->each(function (Collection $annual_wages) use ($area_incomes) {
+            if ($annual_wages->isEmpty()) {
                 return;
             }
 
-            $location = $historical_wages->first()->getLocation();
+            $location = $annual_wages->first()->getLocation();
             $governmental_areas = $this->query_runner->lookupGovernmentalAreas($location);
-            $governmental_areas->each(function (GovernmentalUnitArea $area) use ($area_incomes, $historical_wages) {
-                $this->addWages($area_incomes, $area, collect([]), $historical_wages);
+            $governmental_areas->each(function (GovernmentalUnitArea $area) use ($area_incomes, $annual_wages) {
+                $this->addWages($area_incomes, $area, collect([]), $annual_wages);
             });
         });
 
@@ -51,7 +51,7 @@ class AreaIncomeManager
         Collection $area_incomes,
         GovernmentalUnitArea $governmental_unit_area,
         Collection $wages,
-        Collection $historical_wages): void
+        Collection $annual_wages): void
     {
         if (!$area_incomes->has($governmental_unit_area->name)) {
             $empty_area_income = new AreaIncome($governmental_unit_area, collect([]), collect([]));
@@ -64,7 +64,7 @@ class AreaIncomeManager
         $new_area_income = new AreaIncome(
             $area_income->getArea(),
             $area_income->getWages()->concat($wages),
-            $area_income->getHistoricalWages()->concat($historical_wages));
+            $area_income->getAnnualWages()->concat($annual_wages));
 
         $area_incomes->put($governmental_unit_area->name, $new_area_income);
     }

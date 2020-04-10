@@ -17,7 +17,7 @@ class TaxableIncomeManager
     public function groupWagesByTax(
         GeoPoint $home_location,
         Collection $wages_by_lat_long,
-        Collection $historical_wages_by_lat_long
+        Collection $annual_wages_by_lat_long
     ): Collection {
         $taxable_incomes = collect([]);
 
@@ -38,16 +38,16 @@ class TaxableIncomeManager
             });
         });
 
-        $historical_wages_by_lat_long->each(function (Collection $historical_wages, string $location) use ($taxable_incomes, $home_location) {
+        $annual_wages_by_lat_long->each(function (Collection $annual_wages, string $location) use ($taxable_incomes, $home_location) {
             $location_array = explode(',', $location);
             $work_location = new GeoPoint($location_array[0], $location_array[1]);
 
             $taxes = $this->query_runner->lookupTaxes($home_location, $work_location);
-            $taxes->each(function (Tax $tax) use ($taxable_incomes, $historical_wages) {
-                $this->addWages($taxable_incomes, $tax, collect([]), $historical_wages);
+            $taxes->each(function (Tax $tax) use ($taxable_incomes, $annual_wages) {
+                $this->addWages($taxable_incomes, $tax, collect([]), $annual_wages);
             });
 
-            $historical_wages->each(function (Wage $wage) use ($taxable_incomes) {
+            $annual_wages->each(function (Wage $wage) use ($taxable_incomes) {
                 $wage->getAdditionalTaxes()->each(function (string $additional_tax) use ($taxable_incomes, $wage) {
                     $tax = $this->query_runner->lookupTax($additional_tax);
                     $this->addWages($taxable_incomes, $tax, collect([]), collect([$wage]));
@@ -83,7 +83,7 @@ class TaxableIncomeManager
                 $new_taxable_income = new TaxableIncome(
                     $taxable_income->getTax(),
                     $taxable_income->getWages(),
-                    $taxable_income->getHistoricalWages(),
+                    $taxable_income->getAnnualWages(),
                     bcmul($exemption_amount, 100)
                 );
 
@@ -96,7 +96,7 @@ class TaxableIncomeManager
         Collection $taxable_incomes,
         Tax $tax,
         Collection $wages,
-        Collection $historical_wages
+        Collection $annual_wages
     ): void {
         if (!$taxable_incomes->has($tax->class)) {
             $empty_taxable_income = new TaxableIncome($tax, collect([]), collect([]), 0);
@@ -109,7 +109,7 @@ class TaxableIncomeManager
         $new_taxable_income = new TaxableIncome(
             $tax,
             $taxable_income->getWages()->concat($wages),
-            $taxable_income->getHistoricalWages()->concat($historical_wages),
+            $taxable_income->getAnnualWages()->concat($annual_wages),
             0
         );
 

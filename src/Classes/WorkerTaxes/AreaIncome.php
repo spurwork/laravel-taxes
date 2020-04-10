@@ -9,16 +9,16 @@ class AreaIncome
 {
     private $area;
     private $wages;
-    private $historical_wages;
+    private $annual_wages;
 
     public function __construct(
         GovernmentalUnitArea $area,
         Collection $wages,
-        Collection $historical_wages)
+        Collection $annual_wages)
     {
         $this->area = $area;
         $this->wages = $wages;
-        $this->historical_wages = $historical_wages;
+        $this->annual_wages = $annual_wages;
     }
 
     public function getArea(): GovernmentalUnitArea
@@ -31,8 +31,8 @@ class AreaIncome
         return $this->wages;
     }
 
-    public function getHistoricalWages(): Collection
+    public function getAnnualWages(): Collection
     {
-        return $this->historical_wages;
+        return $this->annual_wages;
     }
 }

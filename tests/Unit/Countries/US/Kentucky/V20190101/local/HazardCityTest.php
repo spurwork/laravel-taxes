@@ -40,14 +40,14 @@ class HazardCityTest extends TaxTestCase
             '00' => [
                 $builder
                     ->setWagesInCents(30000)
-                    ->setYtdWagesInCents(0)
+                    ->setYtdLiabilitiesInCents(0)
                     ->setExpectedAmountInCents(375)
                     ->build()
             ],
             '01' => [
                 $builder
                     ->setWagesInCents(30000)
-                    ->setYtdWagesInCents(6000000)
+                    ->setYtdLiabilitiesInCents(6000000)
                     ->setExpectedAmountInCents(150)
                     ->build()
             ],

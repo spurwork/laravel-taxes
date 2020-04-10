@@ -5,13 +5,15 @@ namespace Appleton\Taxes\Tests\Unit\Countries\US\SocialSecurity\V20190101;
 use Appleton\Taxes\Countries\US\SocialSecurity\SocialSecurityEmployer;
 use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
 use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
-use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
+use Appleton\Taxes\Tests\Unit\Countries\WageBaseTaxTestCase;
 
-class SocialSecurityEmployerTest extends TaxTestCase
+class SocialSecurityEmployerTest extends WageBaseTaxTestCase
 {
     private const DATE = '2019-01-01';
     private const LOCATION = 'us';
     private const TAX_CLASS = SocialSecurityEmployer::class;
+    private const TAX_RATE = 0.062;
+    private const WAGE_BASE = 13290000;
 
     public function setUp(): void
     {
@@ -22,9 +24,17 @@ class SocialSecurityEmployerTest extends TaxTestCase
     /**
      * @dataProvider provideData
      */
-    public function testWageBase(TestParameters $parameters): void
+    public function testCases(TestParameters $parameters): void
     {
         $this->validate($parameters);
+    }
+
+    /**
+     * @dataProvider provideWageBaseData
+     */
+    public function testWageBase(TestParameters $parameters): void
+    {
+        $this->validateWageBase($parameters);
     }
 
     public function provideData(): array
@@ -40,7 +50,7 @@ class SocialSecurityEmployerTest extends TaxTestCase
             'case study A' => [
                 $builder
                     ->setWagesInCents(64000)
-                    ->setYtdWagesInCents(0)
+                    ->setYtdLiabilitiesInCents(0)
                     ->setExpectedAmountInCents(3968)
                     ->setExpectedEarningsInCents(64000)
                     ->build()
@@ -48,7 +58,7 @@ class SocialSecurityEmployerTest extends TaxTestCase
             'case study B' => [
                 $builder
                     ->setWagesInCents(77428)
-                    ->setYtdWagesInCents(0)
+                    ->setYtdLiabilitiesInCents(0)
                     ->setExpectedAmountInCents(4801)
                     ->setExpectedEarningsInCents(77428)
                     ->build()
@@ -56,7 +66,7 @@ class SocialSecurityEmployerTest extends TaxTestCase
             'case study C' => [
                 $builder
                     ->setWagesInCents(64000)
-                    ->setYtdWagesInCents(13300000)
+                    ->setYtdLiabilitiesInCents(13300000)
                     ->setExpectedAmountInCents(0)
                     ->setExpectedEarningsInCents(0)
                     ->build()
@@ -64,11 +74,22 @@ class SocialSecurityEmployerTest extends TaxTestCase
             'case study D' => [
                 $builder
                     ->setWagesInCents(77428)
-                    ->setYtdWagesInCents(13300000)
+                    ->setYtdLiabilitiesInCents(13300000)
                     ->setExpectedAmountInCents(0)
                     ->setExpectedEarningsInCents(0)
                     ->build()
             ],
         ];
+    }
+
+    public function provideWageBaseData(): array
+    {
+        return $this->wageBaseBoundariesTestCases(
+            self::DATE,
+            self::LOCATION,
+            self::TAX_CLASS,
+            self::WAGE_BASE,
+            self::TAX_RATE
+        );
     }
 }

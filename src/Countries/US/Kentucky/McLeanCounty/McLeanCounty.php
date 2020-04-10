@@ -1,8 +1,8 @@
 <?php
 namespace Appleton\Taxes\Countries\US\Kentucky\McLeanCounty;
 
-use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseOccupational;
+use Appleton\Taxes\Countries\US\Kentucky\BaseKentuckyLocalWithWageBase;
 
-abstract class McLeanCounty extends BaseOccupational
+abstract class McLeanCounty extends BaseKentuckyLocalWithWageBase
 {
 }
