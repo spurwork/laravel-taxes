@@ -34,10 +34,12 @@ class Taxes
     public function calculate(
         Carbon $start_date,
         Carbon $end_date,
+        Carbon $pay_date,
         GeoPoint $home_location,
         GeoPoint $suta_location,
         Collection $wages,
-        Collection $historical_wages,
+        Collection $annual_wages,
+        Collection $annual_taxable_wages,
         $user,
         ?Carbon $birth_date,
         int $pay_periods,
@@ -46,14 +48,14 @@ class Taxes
         Collection $exemptions
     ): Collection {
         $wages_by_lat_long = $this->wage_manager->groupLatLong($wages);
-        $historical_wages_by_lat_long = $this->wage_manager->groupLatLong($historical_wages);
+        $annual_wages_by_lat_long = $this->wage_manager->groupLatLong($annual_wages);
 
         $area_incomes = $this->area_income_manager
-            ->groupWagesByGovernmentalArea($wages_by_lat_long, $historical_wages_by_lat_long);
+            ->groupWagesByGovernmentalArea($wages_by_lat_long, $annual_wages_by_lat_long);
 
         $home_areas = $this->area_income_manager->getHomeAreas($home_location);
 
-        $payroll = new Payroll([
+        $parameters = [
             'date' => $start_date,
             'user' => $user,
             'birth_date' => $birth_date,
@@ -62,22 +64,26 @@ class Taxes
             'home_areas' => $home_areas,
             'start_date' => $start_date,
             'end_date' => $end_date,
+            'pay_date' => $pay_date,
+            'annual_taxable_wages' => $annual_taxable_wages,
             'total_earnings' => $this->wage_manager->calculateEarnings($wages),
             'minutes_worked' => $this->wage_manager->calculateMinutesWorked($wages),
             'is_salaried' => $this->wage_manager->isSalaried($wages),
-        ], $this->wage_manager);
+        ];
+
+        $payroll = new Payroll($parameters, $this->wage_manager, $this->tax_manager);
         $this->bind_manager->bindPayroll($payroll);
 
         $taxable_incomes = $this->taxable_income_manager->groupWagesByTax(
             $home_location,
             $wages_by_lat_long,
-            $historical_wages_by_lat_long
+            $annual_wages_by_lat_long
         );
 
         $this->tax_override_manager->replaceSutaUnemploymentTaxes($suta_location, $taxable_incomes,
-            $wages, $historical_wages);
+            $wages, $annual_wages);
         $this->tax_override_manager->addStateIncomeTax($home_location, $taxable_incomes,
-            $wages, $historical_wages);
+            $wages, $annual_wages);
         $this->tax_override_manager->processReciprocalAgreements($reciprocal_agreements, $taxable_incomes);
         $this->tax_override_manager->removeDisabledTaxes($disabled_taxes, $taxable_incomes);
 
@@ -95,7 +101,7 @@ class Taxes
         app()->instance(Payroll::class, new Payroll([
             'start_date' => $date ?? Carbon::now(),
             'user' => $user,
-        ], $this->wage_manager));
+        ], $this->wage_manager, $this->tax_manager));
 
         try {
             $class = app($class);

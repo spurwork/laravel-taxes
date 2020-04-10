@@ -2,6 +2,7 @@
 
 namespace Appleton\Taxes\Classes\WorkerTaxes;
 
+use Carbon\Carbon;
 use Illuminate\Support\Collection;
 
 class TaxManager
@@ -37,5 +38,50 @@ class TaxManager
 
                 return [$taxable_income->getTax()->class => $tax_result];
             });
+    }
+
+    public function computeYtdTaxableWages(
+        Collection $taxable_wages,
+        string $tax_class,
+        Carbon $date
+    ): float
+    {
+        if (!$taxable_wages->has($tax_class)) {
+            return 0.0;
+        }
+
+        $start_of_year = $date->copy()->startOfYear();
+
+        return $taxable_wages
+                ->get($tax_class)
+                ->filter(static function (TaxableWage $taxable_wage) use ($start_of_year, $date) {
+                    return $taxable_wage->getDate()->gte($start_of_year)
+                        && $taxable_wage->getDate()->lte($date);
+                })->sum(static function (TaxableWage $taxable_wage) {
+                    return $taxable_wage->getAmount();
+                }) / 100;
+    }
+
+    public function computeMtdTaxableWages(
+        Collection $taxable_wages,
+        string $tax_class,
+        Carbon $date
+    ): float
+    {
+        if (!$taxable_wages->has($tax_class)) {
+            return 0.0;
+        }
+
+        $start_date = $date->copy()->startOfMonth();
+
+        return $taxable_wages
+                ->get($tax_class)
+                ->filter(static function (TaxableWage $taxable_wage) use ($start_date, $date) {
+                    return $taxable_wage->getDate()->gte($start_date)
+                        && $taxable_wage->getDate()->lte($date);
+                })
+                ->sum(static function (TaxableWage $taxable_wage) {
+                    return $taxable_wage->getAmount();
+                }) / 100;
     }
 }

@@ -17,6 +17,6 @@ class HazardCity extends BaseHazardCity
 
     public function compute(Collection $tax_areas)
     {
-        return round($this->payroll->withholdTax($this->getTaxAmountFromBrackets($tax_areas->first()->workGovernmentalUnitArea)), 2);
+        return round($this->payroll->withholdTax($this->getTaxAmountFromBrackets(BaseHazardCity::class)), 2);
     }
 }

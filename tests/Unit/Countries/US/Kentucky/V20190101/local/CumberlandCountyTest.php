@@ -5,13 +5,15 @@ namespace Appleton\Taxes\Tests\Unit\Countries\US\Kentucky\V20190101;
 use Appleton\Taxes\Countries\US\Kentucky\CumberlandCounty\CumberlandCounty;
 use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
 use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
-use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
+use Appleton\Taxes\Tests\Unit\Countries\WageBaseTaxTestCase;
 
-class CumberlandCountyTest extends TaxTestCase
+class CumberlandCountyTest extends WageBaseTaxTestCase
 {
     private const DATE = '2019-01-01';
     private const LOCATION = 'us.kentucky.cumberland_county';
     private const TAX_CLASS = CumberlandCounty::class;
+    private const TAX_RATE = 0.0125;
+    private const WAGE_BASE = 6000000;
 
     public function setUp(): void
     {
@@ -25,6 +27,14 @@ class CumberlandCountyTest extends TaxTestCase
     public function testTax(TestParameters $parameters): void
     {
         $this->validate($parameters);
+    }
+
+    /**
+     * @dataProvider provideWageBaseData
+     */
+    public function testWageBase(TestParameters $parameters): void
+    {
+        $this->validateWageBase($parameters);
     }
 
     public function provideTestData(): array
@@ -61,14 +71,16 @@ class CumberlandCountyTest extends TaxTestCase
                     ->setExpectedEarningsInCents(90000)
                     ->build()
             ],
-            'over wage base' => [
-                $builder
-                    ->setWagesInCents(77100)
-                    ->setYtdWagesInCents(6000000)
-                    ->setExpectedAmountInCents(0)
-                    ->setExpectedEarningsInCents(0)
-                    ->build()
-            ],
         ];
+    }
+
+    public function provideWageBaseData(): array
+    {
+        return $this->wageBaseBoundariesTestCases(
+            self::DATE,
+            self::LOCATION,
+            self::TAX_CLASS,
+            self::WAGE_BASE,
+            self::TAX_RATE);
     }
 }

@@ -3,15 +3,17 @@
 namespace Appleton\Taxes\Tests\Unit\Countries\US\RhodeIsland\V20200101;
 
 use Appleton\Taxes\Countries\US\RhodeIsland\RhodeIslandDisabilityInsurance\RhodeIslandDisabilityInsurance;
-use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
 use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
 use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
+use Appleton\Taxes\Tests\Unit\Countries\WageBaseTaxTestCase;
 
-class RhodeIslandDisabilityInsuranceTest extends TaxTestCase
+class RhodeIslandDisabilityInsuranceTest extends WageBaseTaxTestCase
 {
     private const DATE = '2020-01-01';
     private const LOCATION = 'us.rhode_island';
     private const TAX_CLASS = RhodeIslandDisabilityInsurance::class;
+    private const TAX_RATE = 0.013;
+    private const WAGE_BASE = 7230000;
 
     public function setUp(): void
     {
@@ -25,6 +27,25 @@ class RhodeIslandDisabilityInsuranceTest extends TaxTestCase
     public function testTax(TestParameters $parameters): void
     {
         $this->validate($parameters);
+    }
+
+    /**
+     * @dataProvider provideWageBaseData
+     */
+    public function testWageBase(TestParameters $parameters): void
+    {
+        $this->validateWageBase($parameters);
+    }
+
+    public function provideWageBaseData(): array
+    {
+        return $this->wageBaseBoundariesTestCases(
+            self::DATE,
+            self::LOCATION,
+            self::TAX_CLASS,
+            self::WAGE_BASE,
+            self::TAX_RATE
+        );
     }
 
     public function provideTestData(): array

@@ -1,8 +1,8 @@
 <?php
 namespace Appleton\Taxes\Countries\US\Kentucky\HighlandHeightsCity;
 
-use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseOccupational;
+use Appleton\Taxes\Countries\US\Kentucky\BaseKentuckyLocalWithWageBase;
 
-abstract class HighlandHeightsCity extends BaseOccupational
+abstract class HighlandHeightsCity extends BaseKentuckyLocalWithWageBase
 {
 }

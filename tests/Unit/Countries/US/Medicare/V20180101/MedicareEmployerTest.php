@@ -3,9 +3,9 @@
 namespace Appleton\Taxes\Tests\Unit\Countries\US\Medicare\V20180101;
 
 use Appleton\Taxes\Countries\US\Medicare\MedicareEmployer;
+use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
 use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
 use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
-use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
 
 class MedicareEmployerTest extends TaxTestCase
 {
@@ -40,14 +40,14 @@ class MedicareEmployerTest extends TaxTestCase
             'case study A' => [
                 $builder
                     ->setWagesInCents(27167)
-                    ->setYtdWagesInCents(2489733)
+                    ->setYtdLiabilitiesInCents(2489733)
                     ->setExpectedAmountInCents(394)
                     ->build()
             ],
             'case study B' => [
                 $builder
                     ->setWagesInCents(76512)
-                    ->setYtdWagesInCents(20010000)
+                    ->setYtdLiabilitiesInCents(20010000)
                     ->setExpectedAmountInCents(1109)
                     ->build()
             ],

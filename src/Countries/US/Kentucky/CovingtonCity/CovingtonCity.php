@@ -1,8 +1,8 @@
 <?php
 namespace Appleton\Taxes\Countries\US\Kentucky\CovingtonCity;
 
-use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseOccupational;
+use Appleton\Taxes\Countries\US\Kentucky\BaseKentuckyLocalWithWageBase;
 
-abstract class CovingtonCity extends BaseOccupational
+abstract class CovingtonCity extends BaseKentuckyLocalWithWageBase
 {
 }

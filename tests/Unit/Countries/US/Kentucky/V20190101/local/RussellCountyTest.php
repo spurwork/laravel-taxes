@@ -5,13 +5,15 @@ namespace Appleton\Taxes\Tests\Unit\Countries\US\Kentucky\V20190101;
 use Appleton\Taxes\Countries\US\Kentucky\RussellCounty\RussellCounty;
 use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
 use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
-use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
+use Appleton\Taxes\Tests\Unit\Countries\WageBaseTaxTestCase;
 
-class RussellCountyTest extends TaxTestCase
+class RussellCountyTest extends WageBaseTaxTestCase
 {
     private const DATE = '2019-01-01';
     private const LOCATION = 'us.kentucky.russell_county';
     private const TAX_CLASS = RussellCounty::class;
+    private const TAX_RATE = 0.0075;
+    private const WAGE_BASE = 3333333;
 
     public function setUp(): void
     {
@@ -25,6 +27,14 @@ class RussellCountyTest extends TaxTestCase
     public function testTax(TestParameters $parameters): void
     {
         $this->validate($parameters);
+    }
+
+    /**
+     * @dataProvider provideWageBaseData
+     */
+    public function testWageBase(TestParameters $parameters): void
+    {
+        $this->validateWageBase($parameters);
     }
 
     public function provideTestData(): array
@@ -61,14 +71,16 @@ class RussellCountyTest extends TaxTestCase
                     ->setExpectedEarningsInCents(90000)
                     ->build()
             ],
-            'over wage base' => [
-                $builder
-                    ->setWagesInCents(77100)
-                    ->setYtdWagesInCents(3333333)
-                    ->setExpectedAmountInCents(0)
-                    ->setExpectedEarningsInCents(0)
-                    ->build()
-            ],
         ];
+    }
+
+    public function provideWageBaseData(): array
+    {
+        return $this->wageBaseBoundariesTestCases(
+            self::DATE,
+            self::LOCATION,
+            self::TAX_CLASS,
+            self::WAGE_BASE,
+            self::TAX_RATE);
     }
 }

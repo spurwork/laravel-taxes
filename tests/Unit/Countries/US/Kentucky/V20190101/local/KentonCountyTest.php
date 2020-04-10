@@ -40,21 +40,21 @@ class KentonCountyTest extends TaxTestCase
             '00' => [
                 $builder
                     ->setWagesInCents(30000)
-                    ->setYtdWagesInCents(0)
+                    ->setYtdLiabilitiesInCents(0)
                     ->setExpectedAmountInCents(213)
                     ->build()
             ],
             '01' => [
                 $builder
                     ->setWagesInCents(30000)
-                    ->setYtdWagesInCents(2500000)
+                    ->setYtdLiabilitiesInCents(2500000)
                     ->setExpectedAmountInCents(33)
                     ->build()
             ],
             '02' => [
                 $builder
                     ->setWagesInCents(90000)
-                    ->setYtdWagesInCents(13290000)
+                    ->setYtdLiabilitiesInCents(13290000)
                     ->setExpectedAmountInCents(0)
                     ->build()
             ],

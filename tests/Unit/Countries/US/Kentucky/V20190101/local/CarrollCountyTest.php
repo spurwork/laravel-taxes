@@ -3,9 +3,9 @@
 namespace Appleton\Taxes\Tests\Unit\Countries\US\Kentucky\V20190101;
 
 use Appleton\Taxes\Countries\US\Kentucky\CarrollCounty\CarrollCounty;
+use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
 use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
 use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
-use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
 
 class CarrollCountyTest extends TaxTestCase
 {
@@ -37,25 +37,84 @@ class CarrollCountyTest extends TaxTestCase
             ->setPayPeriods(52);
 
         return [
-            '00' => [
+            'earnings not enough' => [
                 $builder
                     ->setWagesInCents(30000)
                     ->setYtdWagesInCents(0)
+                    ->setYtdLiabilitiesInCents(0)
                     ->setExpectedAmountInCents(0)
                     ->build()
             ],
-            '01' => [
+            'earnings at start' => [
                 $builder
-                    ->setWagesInCents(30000)
+                    ->setWagesInCents(500000)
+                    ->setYtdWagesInCents(0)
+                    ->setYtdLiabilitiesInCents(0)
+                    ->setExpectedAmountInCents(0)
+                    ->build()
+            ],
+            'earnings over start' => [
+                $builder
+                    ->setWagesInCents(510000)
+                    ->setYtdWagesInCents(0)
+                    ->setYtdLiabilitiesInCents(0)
+                    ->setExpectedAmountInCents(100)
+                    ->build()
+            ],
+            'total earnings not enough' => [
+                $builder
+                    ->setWagesInCents(200000)
+                    ->setYtdWagesInCents(200000)
+                    ->setYtdLiabilitiesInCents(0)
+                    ->setExpectedAmountInCents(0)
+                    ->build()
+            ],
+            'total earnings at start' => [
+                $builder
+                    ->setWagesInCents(250000)
+                    ->setYtdWagesInCents(250000)
+                    ->setYtdLiabilitiesInCents(0)
+                    ->setExpectedAmountInCents(0)
+                    ->build()
+            ],
+            'total earnings over start - earnings' => [
+                $builder
+                    ->setWagesInCents(250100)
+                    ->setYtdWagesInCents(250000)
+                    ->setYtdLiabilitiesInCents(0)
+                    ->setExpectedAmountInCents(1)
+                    ->build()
+            ],
+            'total earnings over start - ytd earnings' => [
+                $builder
+                    ->setWagesInCents(250000)
+                    ->setYtdWagesInCents(250100)
+                    ->setYtdLiabilitiesInCents(0)
+                    ->setExpectedAmountInCents(1)
+                    ->build()
+            ],
+            'ytd earnings at start' => [
+                $builder
+                    ->setWagesInCents(10000)
                     ->setYtdWagesInCents(500000)
-                    ->setExpectedAmountInCents(300)
+                    ->setYtdLiabilitiesInCents(0)
+                    ->setExpectedAmountInCents(100)
                     ->build()
             ],
-            '02' => [
+            'already started tax' => [
                 $builder
-                    ->setWagesInCents(90000)
-                    ->setYtdWagesInCents(5000000)
-                    ->setExpectedAmountInCents(0)
+                    ->setWagesInCents(10000)
+                    ->setYtdWagesInCents(0)
+                    ->setYtdLiabilitiesInCents(100)
+                    ->setExpectedAmountInCents(100)
+                    ->build()
+            ],
+            'over max tax' => [
+                $builder
+                    ->setWagesInCents(10000)
+                    ->setYtdWagesInCents(0)
+                    ->setYtdLiabilitiesInCents(5000000)
+                    ->setExpectedAmountInCents(100)
                     ->build()
             ],
         ];

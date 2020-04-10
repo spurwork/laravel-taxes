@@ -1,8 +1,8 @@
 <?php
 namespace Appleton\Taxes\Countries\US\Kentucky\FortWrightCity;
 
-use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseOccupational;
+use Appleton\Taxes\Countries\US\Kentucky\BaseKentuckyLocalWithWageBase;
 
-abstract class FortWrightCity extends BaseOccupational
+abstract class FortWrightCity extends BaseKentuckyLocalWithWageBase
 {
 }
