@@ -248,6 +248,97 @@ class NewJerseyIncomeTest extends TaxTestCase
                     ->setExpectedAmountInCents(5726)
                     ->build()
             ],
+            '22' => [
+                $builder
+                    ->setTaxInfoOptions(['exemptions' => 2])
+                    ->setWagesInCents(150000)
+                    ->setExpectedAmountInCents(5769)
+                    ->build()
+            ],
+            '23' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'filing_status' => NewJerseyIncome::FILING_MARRIED_CIVIL_UNION_COUPLE_JOINT,
+                        'tax_rate_table' => 'OTHER',
+                    ])
+                    ->setWagesInCents(30000)
+                    ->setExpectedAmountInCents(450)
+                    ->build()
+            ],
+            '24' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'filing_status' => NewJerseyIncome::FILING_MARRIED_CIVIL_UNION_COUPLE_JOINT,
+                        'exemptions' => 2,
+                        'tax_rate_table' => 'OTHER',
+                    ])
+                    ->setWagesInCents(150000)
+                    ->setExpectedAmountInCents(3219)
+                    ->build()
+            ],
+            '25' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'filing_status' => NewJerseyIncome::FILING_MARRIED_CIVIL_UNION_COUPLE_SEPARATE,
+                        'tax_rate_table' => 'OTHER',
+                    ])
+                    ->setWagesInCents(30000)
+                    ->setExpectedAmountInCents(450)
+                    ->build()
+            ],
+            '26' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'filing_status' => NewJerseyIncome::FILING_MARRIED_CIVIL_UNION_COUPLE_SEPARATE,
+                        'exemptions' => 2,
+                        'tax_rate_table' => 'OTHER',
+                    ])
+                    ->setWagesInCents(150000)
+                    ->setExpectedAmountInCents(5769)
+                    ->build()
+            ],
+            '27' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'filing_status' => NewJerseyIncome::FILING_HEAD_OF_HOUSEHOLD,
+                        'tax_rate_table' => 'OTHER',
+                    ])
+                    ->setWagesInCents(30000)
+                    ->setExpectedAmountInCents(450)
+                    ->build()
+            ],
+            '28' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'filing_status' => NewJerseyIncome::FILING_HEAD_OF_HOUSEHOLD,
+                        'exemptions' => 2,
+                        'tax_rate_table' => 'OTHER',
+                    ])
+                    ->setWagesInCents(150000)
+                    ->setExpectedAmountInCents(3219)
+                    ->build()
+            ],
+            '29' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'filing_status' => NewJerseyIncome::SURVIVING_SPOUSE_SURVIVING_CIVIL_UNION_PARENT,
+                        'tax_rate_table' => 'OTHER',
+                    ])
+                    ->setWagesInCents(30000)
+                    ->setExpectedAmountInCents(450)
+                    ->build()
+            ],
+            '30' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'filing_status' => NewJerseyIncome::SURVIVING_SPOUSE_SURVIVING_CIVIL_UNION_PARENT,
+                        'exemptions' => 12,
+                        'tax_rate_table' => 'OTHER',
+                    ])
+                    ->setWagesInCents(150000)
+                    ->setExpectedAmountInCents(2561)
+                    ->build()
+            ],
         ];
     }
 }
