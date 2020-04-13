@@ -14,7 +14,7 @@ class CarrollCounty extends BaseCarrollCounty
     public function compute(Collection $tax_areas)
     {
         $earnings = $this->payroll->getEarnings();
-        dump($this->payroll->getYtdTaxableWages(BaseCarrollCounty::class));
+
         $ytd_taxable_earnings = $this->payroll->getYtdTaxableWages(BaseCarrollCounty::class);
 
         if ($ytd_taxable_earnings === 0.0) {
