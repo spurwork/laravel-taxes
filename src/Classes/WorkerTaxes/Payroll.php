@@ -39,8 +39,8 @@ class Payroll
     public function __construct(
         array $parameters,
         WageManager $wage_manager,
-        TaxManager $tax_manager)
-    {
+        TaxManager $tax_manager
+    ) {
         $this->birth_date = $parameters['birth_date'] ?? null;
         $this->days_worked = $parameters['days_worked'] ?? 0;
         $this->minutes_worked = $parameters['minutes_worked'] ?? 0;
