@@ -46,21 +46,22 @@ class WilmingtonEmployerLicenseFeeTest extends TaxTestCase
             ->setPayPeriods(52);
 
         return [
-            // '00' => [
-            //     $builder
-            //         ->setHomeLocation(self::WILMINGTON_LOCATION)
-            //         ->setWorkLocation(self::WILMINGTON_LOCATION)
-            //         ->setWagesInCents(30000)
-            //         ->setMtdWagesInCents(null)
-            //         ->setExpectedAmountInCents(1500)
-            //         ->build()
-            // ],
+            '00' => [
+                $builder
+                    ->setHomeLocation(self::WILMINGTON_LOCATION)
+                    ->setWorkLocation(self::WILMINGTON_LOCATION)
+                    ->setWagesInCents(30000)
+                    ->setMtdWagesInCents(null)
+                    ->setExpectedAmountInCents(1500)
+                    ->build()
+            ],
             '01' => [
                 $builder
                     ->setHomeLocation(self::WILMINGTON_LOCATION)
                     ->setWorkLocation(self::WILMINGTON_LOCATION)
                     ->setWagesInCents(100000)
                     ->setMtdWagesInCents(10000)
+                    ->setMtdLiabilitiesInCents(10000)
                     ->setExpectedAmountInCents(0)
                     ->build()
             ]

@@ -16,8 +16,8 @@ class TaxManager
 
     public function computeTaxes(
         Payroll $payroll,
-        Collection $taxable_incomes): Collection
-    {
+        Collection $taxable_incomes
+    ): Collection {
         return $this->tax_sorter->sort($taxable_incomes)
             ->mapWithKeys(static function (TaxableIncome $taxable_income) use ($payroll) {
                 $payroll->determineEarnings($taxable_income);
@@ -32,7 +32,8 @@ class TaxManager
                     $taxable_income->getTax()->name,
                     $tax_implementation,
                     $amount_in_cents,
-                    $earnings_in_cents);
+                    $earnings_in_cents
+                );
 
                 app()->instance($taxable_income->getTax()->class, $tax_implementation);
 
@@ -44,8 +45,7 @@ class TaxManager
         Collection $taxable_wages,
         string $tax_class,
         Carbon $date
-    ): float
-    {
+    ): float {
         if (!$taxable_wages->has($tax_class)) {
             return 0.0;
         }
@@ -66,8 +66,7 @@ class TaxManager
         Collection $taxable_wages,
         string $tax_class,
         Carbon $date
-    ): float
-    {
+    ): float {
         if (!$taxable_wages->has($tax_class)) {
             return 0.0;
         }

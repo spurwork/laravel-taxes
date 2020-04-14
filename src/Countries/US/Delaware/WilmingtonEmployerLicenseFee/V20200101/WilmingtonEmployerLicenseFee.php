@@ -12,8 +12,8 @@ class WilmingtonEmployerLicenseFee extends BaseWilmingtonEmployerLicenseFee
 
     public function compute(Collection $tax_areas)
     {
-        $wilmington_mtd_earnings = $this->payroll->getMtdTaxableWages(BaseWilmingtonEmployerLicenseFee::class);
-        dd($wilmington_mtd_earnings);
+		$wilmington_mtd_earnings = $this->payroll->getMtdTaxableWages(BaseWilmingtonEmployerLicenseFee::class);
+
         $this->tax_total = $wilmington_mtd_earnings === 0.0 ? $this->payroll->withholdTax(self::LICENSE_FEE) : 0.0;
 
         return round($this->tax_total, 2);

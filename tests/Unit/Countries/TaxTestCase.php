@@ -63,20 +63,28 @@ abstract class TaxTestCase extends UnitTestCase
         }
 
         if ($parameters->getSupplementalWagesInCents() !== null
-            && $parameters->getSupplementalWagesInCents() !== 0) {
+        && $parameters->getSupplementalWagesInCents() !== 0) {
             $wages->push($this->makeSupplementalWage($work_location, $parameters->getSupplementalWagesInCents()));
         }
 
         $annual_wages = collect([]);
         if ($parameters->getYtdWagesInCents() !== null
-            && $parameters->getYtdWagesInCents() !== 0) {
+        && $parameters->getYtdWagesInCents() !== 0) {
             $annual_wages->push($this->makeWage($work_location, $parameters->getYtdWagesInCents()));
+        } elseif ($parameters->getMtdWagesInCents() !== null
+        && $parameters->getMtdWagesInCents() !== 0) {
+            $annual_wages->push($this->makeWage($work_location, $parameters->getMtdWagesInCents()));
         }
 
         $annual_taxable_wages = collect([]);
         if ($parameters->getYtdLiabilitiesInCents() !== null
-            && $parameters->getYtdLiabilitiesInCents() !== 0) {
+        && $parameters->getYtdLiabilitiesInCents() !== 0) {
             $taxable_wage = $this->makeTaxableWage($parameters->getTaxClass(), $parameters->getYtdLiabilitiesInCents());
+
+            $annual_taxable_wages->put($parameters->getTaxClass(), collect([$taxable_wage]));
+        } elseif ($parameters->getMtdLiabilitiesInCents() !== null
+        && $parameters->getMtdLiabilitiesInCents() !== 0) {
+            $taxable_wage = $this->makeTaxableWage($parameters->getTaxClass(), $parameters->getMtdLiabilitiesInCents());
 
             $annual_taxable_wages->put($parameters->getTaxClass(), collect([$taxable_wage]));
         }
