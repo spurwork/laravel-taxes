@@ -84,7 +84,7 @@ abstract class TaxTestCase extends UnitTestCase
             $annual_taxable_wages->put($parameters->getTaxClass(), collect([$taxable_wage]));
         } elseif ($parameters->getMtdLiabilitiesInCents() !== null
         && $parameters->getMtdLiabilitiesInCents() !== 0) {
-            $taxable_wage = $this->makeTaxableWage($parameters->getTaxClass(), $parameters->getMtdLiabilitiesInCents());
+            $taxable_wage = $this->makeTaxableWageAtDate(now(), $parameters->getTaxClass(), $parameters->getMtdLiabilitiesInCents());
 
             $annual_taxable_wages->put($parameters->getTaxClass(), collect([$taxable_wage]));
         }
