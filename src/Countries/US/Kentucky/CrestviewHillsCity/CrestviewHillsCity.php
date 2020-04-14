@@ -1,8 +1,8 @@
 <?php
 namespace Appleton\Taxes\Countries\US\Kentucky\CrestviewHillsCity;
 
-use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseOccupational;
+use Appleton\Taxes\Countries\US\Kentucky\BaseKentuckyLocalWithWageBase;
 
-abstract class CrestviewHillsCity extends BaseOccupational
+abstract class CrestviewHillsCity extends BaseKentuckyLocalWithWageBase
 {
 }

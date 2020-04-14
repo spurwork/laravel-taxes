@@ -1,8 +1,8 @@
 <?php
 namespace Appleton\Taxes\Countries\US\Kentucky\CampbellCounty;
 
-use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseOccupational;
+use Appleton\Taxes\Countries\US\Kentucky\BaseKentuckyLocalWithWageBase;
 
-abstract class CampbellCounty extends BaseOccupational
+abstract class CampbellCounty extends BaseKentuckyLocalWithWageBase
 {
 }

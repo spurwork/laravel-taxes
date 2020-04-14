@@ -15,14 +15,14 @@ trait HasBrackets
         return $earnings * $rate;
     }
 
-    public function getTaxAmountFromBrackets($governmental_unit_area = null)
+    public function getTaxAmountFromBrackets(string $tax_class)
     {
         $tax_amount = 0;
         $earnings = $this->payroll->getEarnings();
-        $ytd_earnings = $this->payroll->getYtdEarnings($governmental_unit_area);
+        $ytd_taxable_earnings = $this->payroll->getYtdTaxableWages($tax_class);
 
         foreach (self::BRACKETS as $index => [$start, $stop, $rate]) {
-            $tax_amount += $this->calculateTaxForBracket($start, $stop, $rate, $earnings, $ytd_earnings);
+            $tax_amount += $this->calculateTaxForBracket($start, $stop, $rate, $earnings, $ytd_taxable_earnings);
         }
 
         return round($tax_amount, 2);

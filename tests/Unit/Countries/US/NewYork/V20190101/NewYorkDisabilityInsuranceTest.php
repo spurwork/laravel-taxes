@@ -6,12 +6,15 @@ use Appleton\Taxes\Countries\US\NewYork\NewYorkDisabilityInsurance\NewYorkDisabi
 use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
 use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
 use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
+use Appleton\Taxes\Tests\Unit\Countries\WageBaseTaxTestCase;
 
-class NewYorkDisabilityInsuranceTest extends TaxTestCase
+class NewYorkDisabilityInsuranceTest extends WageBaseTaxTestCase
 {
     private const DATE = '2019-01-01';
     private const LOCATION = 'us.new_york';
     private const TAX_CLASS = NewYorkDisabilityInsurance::class;
+    private const TAX_RATE = 0.005;
+    private const WAGE_BASE = 12000;
 
     public function setUp(): void
     {
@@ -25,6 +28,14 @@ class NewYorkDisabilityInsuranceTest extends TaxTestCase
     public function testTax(TestParameters $parameters): void
     {
         $this->validate($parameters);
+    }
+
+    /**
+     * @dataProvider provideWageBaseData
+     */
+    public function testWageBase(TestParameters $parameters): void
+    {
+        $this->validateWageBase($parameters);
     }
 
     public function provideTestData(): array
@@ -59,5 +70,15 @@ class NewYorkDisabilityInsuranceTest extends TaxTestCase
                     ->build()
             ],
         ];
+    }
+
+    public function provideWageBaseData(): array
+    {
+        return $this->wageBaseBoundariesTestCases(
+            self::DATE,
+            self::LOCATION,
+            self::TAX_CLASS,
+            self::WAGE_BASE,
+            self::TAX_RATE);
     }
 }

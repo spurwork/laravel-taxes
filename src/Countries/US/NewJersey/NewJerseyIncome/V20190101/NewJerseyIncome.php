@@ -112,13 +112,20 @@ class NewJerseyIncome extends BaseNewJerseyIncome
                 return static::RATE_D_BRACKETS;
             } elseif ($this->tax_information->tax_rate_table === 'E') {
                 return static::RATE_E_BRACKETS;
+            } elseif ($this->tax_information->tax_rate_table === 'OTHER') {
+                return $this->getNoTaxTableBracket();
             }
         } else {
-            if ($this->tax_information->filing_status === static::FILING_SINGLE
-            || $this->tax_information->filing_status === static::FILING_MARRIED_CIVIL_UNION_COUPLE_SEPARATE) {
-                return static::SINGLE_BRACKETS;
-            }
-            return static::MARRIED_BRACKETS;
+            return $this->getNoTaxTableBracket();
         }
+    }
+
+    public function getNoTaxTableBracket()
+    {
+        if ($this->tax_information->filing_status === static::FILING_SINGLE
+            || $this->tax_information->filing_status === static::FILING_MARRIED_CIVIL_UNION_COUPLE_SEPARATE) {
+            return static::SINGLE_BRACKETS;
+        }
+        return static::MARRIED_BRACKETS;
     }
 }

@@ -4,14 +4,15 @@ namespace Appleton\Taxes\Tests\Unit\Countries\US\SocialSecurity\V20170101;
 
 use Appleton\Taxes\Countries\US\SocialSecurity\SocialSecurityEmployer;
 use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
-use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
-use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
+use Appleton\Taxes\Tests\Unit\Countries\WageBaseTaxTestCase;
 
-class SocialSecurityEmployerTest extends TaxTestCase
+class SocialSecurityEmployerTest extends WageBaseTaxTestCase
 {
     private const DATE = '2017-01-01';
     private const LOCATION = 'us.alabama';
     private const TAX_CLASS = SocialSecurityEmployer::class;
+    private const TAX_RATE = 0.062;
+    private const WAGE_BASE = 12720000;
 
     public function setUp(): void
     {
@@ -20,29 +21,21 @@ class SocialSecurityEmployerTest extends TaxTestCase
     }
 
     /**
-     * @dataProvider provideData
+     * @dataProvider provideWageBaseData
      */
     public function testWageBase(TestParameters $parameters): void
     {
-        $this->validate($parameters);
+        $this->validateWageBase($parameters);
     }
 
-    public function provideData(): array
+    public function provideWageBaseData(): array
     {
-        $builder = new TestParametersBuilder();
-        $builder
-            ->setDate(self::DATE)
-            ->setHomeLocation(self::LOCATION)
-            ->setTaxClass(self::TAX_CLASS)
-            ->setPayPeriods(52);
-
-        return [
-            '00' => [
-                $builder
-                    ->setWagesInCents(230000)
-                    ->setExpectedAmountInCents(14260)
-                    ->build()
-            ],
-        ];
+        return $this->wageBaseBoundariesTestCases(
+            self::DATE,
+            self::LOCATION,
+            self::TAX_CLASS,
+            self::WAGE_BASE,
+            self::TAX_RATE
+        );
     }
 }

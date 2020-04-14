@@ -40,7 +40,7 @@ class HighlandHeightsCityTest extends TaxTestCase
             '00' => [
                 $builder
                     ->setWagesInCents(0)
-                    ->setYtdWagesInCents(0)
+                    ->setYtdLiabilitiesInCents(0)
                     ->setExpectedAmountInCents(0)
                     ->setExpectedEarningsInCents(0)
                     ->build()
@@ -48,7 +48,7 @@ class HighlandHeightsCityTest extends TaxTestCase
             '01' => [
                 $builder
                     ->setWagesInCents(30000)
-                    ->setYtdWagesInCents(500000)
+                    ->setYtdLiabilitiesInCents(500000)
                     ->setExpectedAmountInCents(300)
                     ->setExpectedEarningsInCents(30000)
                     ->build()
@@ -56,7 +56,7 @@ class HighlandHeightsCityTest extends TaxTestCase
             '02' => [
                 $builder
                     ->setWagesInCents(90000)
-                    ->setYtdWagesInCents(9910000)
+                    ->setYtdLiabilitiesInCents(9910000)
                     ->setExpectedAmountInCents(900)
                     ->setExpectedEarningsInCents(90000)
                     ->build()
@@ -64,7 +64,7 @@ class HighlandHeightsCityTest extends TaxTestCase
             'over wage base' => [
                 $builder
                     ->setWagesInCents(77100)
-                    ->setYtdWagesInCents(13770000)
+                    ->setYtdLiabilitiesInCents(13770000)
                     ->setExpectedAmountInCents(0)
                     ->setExpectedEarningsInCents(0)
                     ->build()
