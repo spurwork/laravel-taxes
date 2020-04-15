@@ -50,6 +50,7 @@ class DenverOccupationalPrivilegeTest extends ColoradoLocalTaxTestCase
             self::LOCATION,
             self::TAX_CLASS,
             50000,
-            575);
+            575
+        );
     }
 }

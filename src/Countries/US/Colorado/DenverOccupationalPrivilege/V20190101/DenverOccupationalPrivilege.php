@@ -9,6 +9,7 @@ class DenverOccupationalPrivilege extends BaseDenverOccupationalPrivilege
 {
     private const MONTHLY_WAGE_AMOUNT = 50000;
     private const MONTHLY_TAX_AMOUNT = 575;
+    private const TAX_CLASS = BaseDenverOccupationalPrivilege::class;
 
     public function getMonthlyWageAmount(): int
     {
@@ -25,5 +26,10 @@ class DenverOccupationalPrivilege extends BaseDenverOccupationalPrivilege
         return GovernmentalUnitArea::query()
             ->where('name', 'Denver, CO')
             ->first();
+    }
+
+    protected function getTaxClass(): string
+    {
+        return self::TAX_CLASS;
     }
 }

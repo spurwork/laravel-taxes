@@ -218,6 +218,7 @@ class Payroll
 
     public function getMtdTaxableWages(string $tax_class): float
     {
+        // dd($this->annual_taxable_wages);
         return $this->tax_manager->computeMtdTaxableWages($this->annual_taxable_wages, $tax_class, $this->pay_date);
     }
 

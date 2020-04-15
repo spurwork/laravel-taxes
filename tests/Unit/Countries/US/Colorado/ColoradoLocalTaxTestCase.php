@@ -27,9 +27,10 @@ class ColoradoLocalTaxTestCase extends TaxTestCase
             $this->makeWage($colorado_location, $parameters->getColoradoEarningsInCents()),
             $this->makeWage($local_location, $parameters->getLocalEarningsInCents()),
         ]);
-
+        // dd($wages);
         $past_date = Carbon::now()->subWeek();
-
+        // dd($parameters->getLocalMtdEarningsInCents());
+        // dd($parameters->getColoradoMtdEarningsInCents());
         $historical_wages = collect([
             $this->makeWageAtDate($past_date, $colorado_location, $parameters->getColoradoMtdEarningsInCents()),
             $this->makeWageAtDate($past_date, $local_location, $parameters->getLocalMtdEarningsInCents()),
@@ -64,12 +65,14 @@ class ColoradoLocalTaxTestCase extends TaxTestCase
             $result->getAmountInCents(),
             self::identicalTo($parameters->getExpectedAmountInCents()),
             $short_name.' expected '.$parameters->getExpectedAmountInCents()
-            .' tax amount but got '.$result->getAmountInCents());
+            .' tax amount but got '.$result->getAmountInCents()
+        );
         self::assertThat(
             $result->getEarningsInCents(),
             self::identicalTo($parameters->getColoradoEarningsInCents() + $parameters->getLocalEarningsInCents()),
             $short_name.' expected '.($parameters->getColoradoEarningsInCents() + $parameters->getLocalEarningsInCents())
-            .' earnings but got '.$result->getEarningsInCents());
+            .' earnings but got '.$result->getEarningsInCents()
+        );
     }
 
     public function validateColoradoLocalNoTax(ColoradoLocalIncomeParameters $parameters): void
@@ -124,8 +127,8 @@ class ColoradoLocalTaxTestCase extends TaxTestCase
         string $local_location,
         string $tax_class,
         float $wage_amount_in_dollars,
-        float $tax_amount): array
-    {
+        float $tax_amount
+    ): array {
         $builder = new ColoradoLocalIncomeParametersBuilder();
         $builder
             ->setDate($date)
@@ -133,42 +136,42 @@ class ColoradoLocalTaxTestCase extends TaxTestCase
             ->setTaxClass($tax_class);
 
         return [
-            'local under' => [
-                $builder
-                    ->setLocalEarningsInCents($wage_amount_in_dollars - 1)
-                    ->setLocalMtdEarningsInCents(0)
-                    ->setColoradoEarningsInCents(0)
-                    ->setColoradoMtdEarningsInCents(0)
-                    ->setExpectedAmountInCents(0)
-                    ->build()
-            ],
-            'local equal' => [
-                $builder
-                    ->setLocalEarningsInCents($wage_amount_in_dollars)
-                    ->setLocalMtdEarningsInCents(0)
-                    ->setColoradoEarningsInCents(0)
-                    ->setColoradoMtdEarningsInCents(0)
-                    ->setExpectedAmountInCents($tax_amount)
-                    ->build()
-            ],
-            'local over' => [
-                $builder
-                    ->setLocalEarningsInCents($wage_amount_in_dollars + 1)
-                    ->setLocalMtdEarningsInCents(0)
-                    ->setColoradoEarningsInCents(0)
-                    ->setColoradoMtdEarningsInCents(0)
-                    ->setExpectedAmountInCents($tax_amount)
-                    ->build()
-            ],
-            'local mtd under' => [
-                $builder
-                    ->setLocalEarningsInCents(1)
-                    ->setLocalMtdEarningsInCents($wage_amount_in_dollars - 2)
-                    ->setColoradoEarningsInCents(0)
-                    ->setColoradoMtdEarningsInCents(0)
-                    ->setExpectedAmountInCents(0)
-                    ->build()
-            ],
+            // 'local under' => [
+            //     $builder
+            //         ->setLocalEarningsInCents($wage_amount_in_dollars - 1)
+            //         ->setLocalMtdEarningsInCents(0)
+            //         ->setColoradoEarningsInCents(0)
+            //         ->setColoradoMtdEarningsInCents(0)
+            //         ->setExpectedAmountInCents(0)
+            //         ->build()
+            // ],
+            // 'local equal' => [
+            //     $builder
+            //         ->setLocalEarningsInCents($wage_amount_in_dollars)
+            //         ->setLocalMtdEarningsInCents(0)
+            //         ->setColoradoEarningsInCents(0)
+            //         ->setColoradoMtdEarningsInCents(0)
+            //         ->setExpectedAmountInCents($tax_amount)
+            //         ->build()
+            // ],
+            // 'local over' => [
+            //     $builder
+            //         ->setLocalEarningsInCents($wage_amount_in_dollars + 1)
+            //         ->setLocalMtdEarningsInCents(0)
+            //         ->setColoradoEarningsInCents(0)
+            //         ->setColoradoMtdEarningsInCents(0)
+            //         ->setExpectedAmountInCents($tax_amount)
+            //         ->build()
+            // ],
+            // 'local mtd under' => [
+            //     $builder
+            //         ->setLocalEarningsInCents(1)
+            //         ->setLocalMtdEarningsInCents($wage_amount_in_dollars - 2)
+            //         ->setColoradoEarningsInCents(0)
+            //         ->setColoradoMtdEarningsInCents(0)
+            //         ->setExpectedAmountInCents(0)
+            //         ->build()
+            // ],
             'local mtd equal' => [
                 $builder
                     ->setLocalEarningsInCents(1)

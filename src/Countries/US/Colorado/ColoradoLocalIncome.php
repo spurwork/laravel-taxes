@@ -14,11 +14,13 @@ abstract class ColoradoLocalIncome extends BaseLocal
 
     abstract protected function getLocalGovernmentalUnitArea(): GovernmentalUnitArea;
 
+    abstract protected function getTaxClass(): string;
+
     public function compute(Collection $tax_areas): float
     {
         $colorado = $tax_areas->first()->workGovernmentalUnitArea;
-
-        $colorado_mtd_earnings = $this->payroll->getMtdEarnings($colorado);
+        dd($this->payroll->getMtdTaxableWages($this->getTaxClass()));
+        $colorado_mtd_earnings = $this->payroll->getMtdTaxableWages($this->getTaxClass());
         $colorado_earnings = $this->payroll->getEarnings($colorado);
 
         $monthly_wage_amount = $this->getMonthlyWageAmount() / 100;
