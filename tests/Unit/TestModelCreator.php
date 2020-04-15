@@ -72,8 +72,7 @@ trait TestModelCreator
     protected function makeTaxableWage(
         string $tax_class,
         int $amount
-    ): TaxableWage
-    {
+    ): TaxableWage {
         return new TaxableWage(
             $amount,
             Carbon::now(),
@@ -85,8 +84,7 @@ trait TestModelCreator
         Carbon $date,
         string $tax_class,
         int $amount
-    ): TaxableWage
-    {
+    ): TaxableWage {
         return new TaxableWage(
             $amount,
             $date,
@@ -98,8 +96,7 @@ trait TestModelCreator
         GeoPoint $location,
         string $additional_tax,
         int $amount_in_cents = UnitTestCase::DEFAULT_SHIFT_WAGES
-    ): Wage
-    {
+    ): Wage {
         return new Wage(
             WageType::SHIFT,
             Carbon::now(),

@@ -28,12 +28,22 @@ class ColoradoLocalTaxTestCase extends TaxTestCase
             $this->makeWage($local_location, $parameters->getLocalEarningsInCents()),
         ]);
 
-        $past_date = Carbon::now()->subWeek();
+        $annual_taxable_wages = collect([]);
+        $taxable_wage_amount = 0;
 
-        $historical_wages = collect([
-            $this->makeWageAtDate($past_date, $colorado_location, $parameters->getColoradoMtdEarningsInCents()),
-            $this->makeWageAtDate($past_date, $local_location, $parameters->getLocalMtdEarningsInCents()),
-        ]);
+        if ($parameters->getLocalMtdLiabilitiesInCents() !== null
+        && $parameters->getLocalMtdLiabilitiesInCents() !== 0) {
+            $taxable_wage_amount += $parameters->getLocalMtdLiabilitiesInCents();
+        }
+
+        if ($parameters->getColoradoMtdLiabilitiesInCents() !== null
+        && $parameters->getColoradoMtdLiabilitiesInCents() !== 0) {
+            $taxable_wage_amount += $parameters->getColoradoMtdLiabilitiesInCents();
+        }
+
+        $taxable_wage = $this->makeTaxableWageAtDate(now()->addWeek(), $parameters->getTaxClass(), $taxable_wage_amount);
+
+        $annual_taxable_wages->put($parameters->getTaxClass(), collect([$taxable_wage]));
 
         $results = $this->taxes->calculate(
             Carbon::now(),
@@ -42,8 +52,8 @@ class ColoradoLocalTaxTestCase extends TaxTestCase
             $local_location,
             $local_location,
             $wages,
-            $historical_wages,
             collect([]),
+            $annual_taxable_wages,
             $this->user,
             null,
             52,
@@ -92,8 +102,8 @@ class ColoradoLocalTaxTestCase extends TaxTestCase
         $past_date = Carbon::now()->subWeek();
 
         $historical_wages = collect([
-            $this->makeWageAtDate($past_date, $colorado_location, $parameters->getColoradoMtdEarningsInCents()),
-            $this->makeWageAtDate($past_date, $local_location, $parameters->getLocalMtdEarningsInCents()),
+            $this->makeWageAtDate($past_date, $colorado_location, $parameters->getColoradoMtdLiabilitiesInCents()),
+            $this->makeWageAtDate($past_date, $local_location, $parameters->getLocalMtdLiabilitiesInCents()),
         ]);
 
         $results = $this->taxes->calculate(
@@ -135,195 +145,195 @@ class ColoradoLocalTaxTestCase extends TaxTestCase
             ->setTaxClass($tax_class);
 
         return [
-            // 'local under' => [
-            //     $builder
-            //         ->setLocalEarningsInCents($wage_amount_in_dollars - 1)
-            //         ->setLocalMtdEarningsInCents(0)
-            //         ->setColoradoEarningsInCents(0)
-            //         ->setColoradoMtdEarningsInCents(0)
-            //         ->setExpectedAmountInCents(0)
-            //         ->build()
-            // ],
+            'local under' => [
+                $builder
+                    ->setLocalEarningsInCents($wage_amount_in_dollars - 1)
+                    ->setLocalMtdLiabilitiesInCents(0)
+                    ->setColoradoEarningsInCents(0)
+                    ->setColoradoMtdLiabilitiesInCents(0)
+                    ->setExpectedAmountInCents(0)
+                    ->build()
+            ],
             // 'local equal' => [
             //     $builder
             //         ->setLocalEarningsInCents($wage_amount_in_dollars)
-            //         ->setLocalMtdEarningsInCents(0)
+            //         ->setLocalMtdLiabilitiesInCents(0)
             //         ->setColoradoEarningsInCents(0)
-            //         ->setColoradoMtdEarningsInCents(0)
+            //         ->setColoradoMtdLiabilitiesInCents(0)
             //         ->setExpectedAmountInCents($tax_amount)
             //         ->build()
             // ],
             // 'local over' => [
             //     $builder
             //         ->setLocalEarningsInCents($wage_amount_in_dollars + 1)
-            //         ->setLocalMtdEarningsInCents(0)
+            //         ->setLocalMtdLiabilitiesInCents(0)
             //         ->setColoradoEarningsInCents(0)
-            //         ->setColoradoMtdEarningsInCents(0)
+            //         ->setColoradoMtdLiabilitiesInCents(0)
             //         ->setExpectedAmountInCents($tax_amount)
             //         ->build()
             // ],
             // 'local mtd under' => [
             //     $builder
             //         ->setLocalEarningsInCents(1)
-            //         ->setLocalMtdEarningsInCents($wage_amount_in_dollars - 2)
+            //         ->setLocalMtdLiabilitiesInCents($wage_amount_in_dollars - 2)
             //         ->setColoradoEarningsInCents(0)
-            //         ->setColoradoMtdEarningsInCents(0)
+            //         ->setColoradoMtdLiabilitiesInCents(0)
             //         ->setExpectedAmountInCents(0)
             //         ->build()
             // ],
-            'local mtd equal' => [
-                $builder
-                    ->setLocalEarningsInCents(1)
-                    ->setLocalMtdEarningsInCents($wage_amount_in_dollars - 1)
-                    ->setColoradoEarningsInCents(0)
-                    ->setColoradoMtdEarningsInCents(0)
-                    ->setExpectedAmountInCents($tax_amount)
-                    ->build()
-            ],
-            'local mtd over' => [
-                $builder
-                    ->setLocalEarningsInCents(1)
-                    ->setLocalMtdEarningsInCents($wage_amount_in_dollars)
-                    ->setColoradoEarningsInCents(0)
-                    ->setColoradoMtdEarningsInCents(0)
-                    ->setExpectedAmountInCents(0)
-                    ->build()
-            ],
-            'local both under' => [
-                $builder
-                    ->setLocalEarningsInCents(100)
-                    ->setLocalMtdEarningsInCents($wage_amount_in_dollars - 100 - 1)
-                    ->setColoradoEarningsInCents(0)
-                    ->setColoradoMtdEarningsInCents(0)
-                    ->setExpectedAmountInCents(0)
-                    ->build()
-            ],
-            'local both equal' => [
-                $builder
-                    ->setLocalEarningsInCents(100)
-                    ->setLocalMtdEarningsInCents($wage_amount_in_dollars - 100)
-                    ->setColoradoEarningsInCents(0)
-                    ->setColoradoMtdEarningsInCents(0)
-                    ->setExpectedAmountInCents($tax_amount)
-                    ->build()
-            ],
-            'local both over' => [
-                $builder
-                    ->setLocalEarningsInCents(100)
-                    ->setLocalMtdEarningsInCents($wage_amount_in_dollars - 100 + 1)
-                    ->setColoradoEarningsInCents(0)
-                    ->setColoradoMtdEarningsInCents(0)
-                    ->setExpectedAmountInCents($tax_amount)
-                    ->build()
-            ],
-            'co under' => [
-                $builder
-                    ->setLocalEarningsInCents(0)
-                    ->setLocalMtdEarningsInCents(1)
-                    ->setColoradoEarningsInCents($wage_amount_in_dollars - 2)
-                    ->setColoradoMtdEarningsInCents(0)
-                    ->setExpectedAmountInCents(0)
-                    ->build()
-            ],
-            'co equal' => [
-                $builder
-                    ->setLocalEarningsInCents(0)
-                    ->setLocalMtdEarningsInCents(1)
-                    ->setColoradoEarningsInCents($wage_amount_in_dollars - 1)
-                    ->setColoradoMtdEarningsInCents(0)
-                    ->setExpectedAmountInCents($tax_amount)
-                    ->build()
-            ],
-            'co over' => [
-                $builder
-                    ->setLocalEarningsInCents(0)
-                    ->setLocalMtdEarningsInCents(1)
-                    ->setColoradoEarningsInCents($wage_amount_in_dollars)
-                    ->setColoradoMtdEarningsInCents(0)
-                    ->setExpectedAmountInCents($tax_amount)
-                    ->build()
-            ],
+            // 'local mtd equal' => [
+            //     $builder
+            //         ->setLocalEarningsInCents(1)
+            //         ->setLocalMtdLiabilitiesInCents($wage_amount_in_dollars - 1)
+            //         ->setColoradoEarningsInCents(0)
+            //         ->setColoradoMtdLiabilitiesInCents(0)
+            //         ->setExpectedAmountInCents($tax_amount)
+            //         ->build()
+            // ],
+            // 'local mtd over' => [
+            //     $builder
+            //         ->setLocalEarningsInCents(1)
+            //         ->setLocalMtdLiabilitiesInCents($wage_amount_in_dollars)
+            //         ->setColoradoEarningsInCents(0)
+            //         ->setColoradoMtdLiabilitiesInCents(0)
+            //         ->setExpectedAmountInCents(0)
+            //         ->build()
+            // ],
+            // 'local both under' => [
+            //     $builder
+            //         ->setLocalEarningsInCents(100)
+            //         ->setLocalMtdLiabilitiesInCents($wage_amount_in_dollars - 100 - 1)
+            //         ->setColoradoEarningsInCents(0)
+            //         ->setColoradoMtdLiabilitiesInCents(0)
+            //         ->setExpectedAmountInCents(0)
+            //         ->build()
+            // ],
+            // 'local both equal' => [
+            //     $builder
+            //         ->setLocalEarningsInCents(100)
+            //         ->setLocalMtdLiabilitiesInCents($wage_amount_in_dollars - 100)
+            //         ->setColoradoEarningsInCents(0)
+            //         ->setColoradoMtdLiabilitiesInCents(0)
+            //         ->setExpectedAmountInCents($tax_amount)
+            //         ->build()
+            // ],
+            // 'local both over' => [
+            //     $builder
+            //         ->setLocalEarningsInCents(100)
+            //         ->setLocalMtdLiabilitiesInCents($wage_amount_in_dollars - 100 + 1)
+            //         ->setColoradoEarningsInCents(0)
+            //         ->setColoradoMtdLiabilitiesInCents(0)
+            //         ->setExpectedAmountInCents($tax_amount)
+            //         ->build()
+            // ],
+            // 'co under' => [
+            //     $builder
+            //         ->setLocalEarningsInCents(0)
+            //         ->setLocalMtdLiabilitiesInCents(1)
+            //         ->setColoradoEarningsInCents($wage_amount_in_dollars - 2)
+            //         ->setColoradoMtdLiabilitiesInCents(0)
+            //         ->setExpectedAmountInCents(0)
+            //         ->build()
+            // ],
+            // 'co equal' => [
+            //     $builder
+            //         ->setLocalEarningsInCents(0)
+            //         ->setLocalMtdLiabilitiesInCents(1)
+            //         ->setColoradoEarningsInCents($wage_amount_in_dollars - 1)
+            //         ->setColoradoMtdLiabilitiesInCents(0)
+            //         ->setExpectedAmountInCents($tax_amount)
+            //         ->build()
+            // ],
+            // 'co over' => [
+            //     $builder
+            //         ->setLocalEarningsInCents(0)
+            //         ->setLocalMtdLiabilitiesInCents(1)
+            //         ->setColoradoEarningsInCents($wage_amount_in_dollars)
+            //         ->setColoradoMtdLiabilitiesInCents(0)
+            //         ->setExpectedAmountInCents($tax_amount)
+            //         ->build()
+            // ],
             'co mtd under' => [
                 $builder
                     ->setLocalEarningsInCents(0)
-                    ->setLocalMtdEarningsInCents(1)
+                    ->setLocalMtdLiabilitiesInCents(1)
                     ->setColoradoEarningsInCents(0)
-                    ->setColoradoMtdEarningsInCents($wage_amount_in_dollars - 2)
+                    ->setColoradoMtdLiabilitiesInCents($wage_amount_in_dollars - 2)
                     ->setExpectedAmountInCents(0)
                     ->build()
             ],
-            'co mtd equal' => [
-                $builder
-                    ->setLocalEarningsInCents(0)
-                    ->setLocalMtdEarningsInCents(1)
-                    ->setColoradoEarningsInCents(0)
-                    ->setColoradoMtdEarningsInCents($wage_amount_in_dollars - 1)
-                    ->setExpectedAmountInCents(0)
-                    ->build()
-            ],
-            'co mtd over' => [
-                $builder
-                    ->setLocalEarningsInCents(0)
-                    ->setLocalMtdEarningsInCents(1)
-                    ->setColoradoEarningsInCents(0)
-                    ->setColoradoMtdEarningsInCents($wage_amount_in_dollars)
-                    ->setExpectedAmountInCents(0)
-                    ->build()
-            ],
-            'co both under' => [
-                $builder
-                    ->setLocalEarningsInCents(0)
-                    ->setLocalMtdEarningsInCents(1)
-                    ->setColoradoEarningsInCents(100)
-                    ->setColoradoMtdEarningsInCents($wage_amount_in_dollars - 100 - 2)
-                    ->setExpectedAmountInCents(0)
-                    ->build()
-            ],
-            'co both equal' => [
-                $builder
-                    ->setLocalEarningsInCents(0)
-                    ->setLocalMtdEarningsInCents(1)
-                    ->setColoradoEarningsInCents(100)
-                    ->setColoradoMtdEarningsInCents($wage_amount_in_dollars - 100 - 1)
-                    ->setExpectedAmountInCents($tax_amount)
-                    ->build()
-            ],
-            'co both over' => [
-                $builder
-                    ->setLocalEarningsInCents(0)
-                    ->setLocalMtdEarningsInCents(1)
-                    ->setColoradoEarningsInCents(100)
-                    ->setColoradoMtdEarningsInCents($wage_amount_in_dollars - 100)
-                    ->setExpectedAmountInCents($tax_amount)
-                    ->build()
-            ],
-            'all under' => [
-                $builder
-                    ->setLocalEarningsInCents($wage_amount_in_dollars - 300 - 1)
-                    ->setLocalMtdEarningsInCents(100)
-                    ->setColoradoEarningsInCents(100)
-                    ->setColoradoMtdEarningsInCents(100)
-                    ->setExpectedAmountInCents(0)
-                    ->build()
-            ],
-            'all equal' => [
-                $builder
-                    ->setLocalEarningsInCents($wage_amount_in_dollars - 300)
-                    ->setLocalMtdEarningsInCents(100)
-                    ->setColoradoEarningsInCents(100)
-                    ->setColoradoMtdEarningsInCents(100)
-                    ->setExpectedAmountInCents($tax_amount)
-                    ->build()
-            ],
-            'all over' => [
-                $builder
-                    ->setLocalEarningsInCents($wage_amount_in_dollars - 300 + 1)
-                    ->setLocalMtdEarningsInCents(100)
-                    ->setColoradoEarningsInCents(100)
-                    ->setColoradoMtdEarningsInCents(100)
-                    ->setExpectedAmountInCents($tax_amount)
-                    ->build()
-            ],
+            // 'co mtd equal' => [
+            //     $builder
+            //         ->setLocalEarningsInCents(0)
+            //         ->setLocalMtdLiabilitiesInCents(1)
+            //         ->setColoradoEarningsInCents(0)
+            //         ->setColoradoMtdLiabilitiesInCents($wage_amount_in_dollars - 1)
+            //         ->setExpectedAmountInCents(0)
+            //         ->build()
+            // ],
+            // 'co mtd over' => [
+            //     $builder
+            //         ->setLocalEarningsInCents(0)
+            //         ->setLocalMtdLiabilitiesInCents(1)
+            //         ->setColoradoEarningsInCents(0)
+            //         ->setColoradoMtdLiabilitiesInCents($wage_amount_in_dollars)
+            //         ->setExpectedAmountInCents(0)
+            //         ->build()
+            // ],
+            // 'co both under' => [
+            //     $builder
+            //         ->setLocalEarningsInCents(0)
+            //         ->setLocalMtdLiabilitiesInCents(1)
+            //         ->setColoradoEarningsInCents(100)
+            //         ->setColoradoMtdLiabilitiesInCents($wage_amount_in_dollars - 100 - 2)
+            //         ->setExpectedAmountInCents(0)
+            //         ->build()
+            // ],
+            // 'co both equal' => [
+            //     $builder
+            //         ->setLocalEarningsInCents(0)
+            //         ->setLocalMtdLiabilitiesInCents(1)
+            //         ->setColoradoEarningsInCents(100)
+            //         ->setColoradoMtdLiabilitiesInCents($wage_amount_in_dollars - 100 - 1)
+            //         ->setExpectedAmountInCents($tax_amount)
+            //         ->build()
+            // ],
+            // 'co both over' => [
+            //     $builder
+            //         ->setLocalEarningsInCents(0)
+            //         ->setLocalMtdLiabilitiesInCents(1)
+            //         ->setColoradoEarningsInCents(100)
+            //         ->setColoradoMtdLiabilitiesInCents($wage_amount_in_dollars - 100)
+            //         ->setExpectedAmountInCents($tax_amount)
+            //         ->build()
+            // ],
+            // 'all under' => [
+            //     $builder
+            //         ->setLocalEarningsInCents($wage_amount_in_dollars - 300 - 1)
+            //         ->setLocalMtdLiabilitiesInCents(100)
+            //         ->setColoradoEarningsInCents(100)
+            //         ->setColoradoMtdLiabilitiesInCents(100)
+            //         ->setExpectedAmountInCents(0)
+            //         ->build()
+            // ],
+            // 'all equal' => [
+            //     $builder
+            //         ->setLocalEarningsInCents($wage_amount_in_dollars - 300)
+            //         ->setLocalMtdLiabilitiesInCents(100)
+            //         ->setColoradoEarningsInCents(100)
+            //         ->setColoradoMtdLiabilitiesInCents(100)
+            //         ->setExpectedAmountInCents($tax_amount)
+            //         ->build()
+            // ],
+            // 'all over' => [
+            //     $builder
+            //         ->setLocalEarningsInCents($wage_amount_in_dollars - 300 + 1)
+            //         ->setLocalMtdLiabilitiesInCents(100)
+            //         ->setColoradoEarningsInCents(100)
+            //         ->setColoradoMtdLiabilitiesInCents(100)
+            //         ->setExpectedAmountInCents($tax_amount)
+            //         ->build()
+            // ],
         ];
     }
 }

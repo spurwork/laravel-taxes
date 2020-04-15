@@ -22,10 +22,11 @@ abstract class ColoradoLocalIncome extends BaseLocal
 
         $colorado_mtd_earnings = $this->payroll->getMtdTaxableWages($this->getTaxClass());
         $colorado_earnings = $this->payroll->getEarnings($colorado);
-
+        // dump($this->payroll->getEarnings($colorado));
+        // dump($this->payroll->getMtdTaxableWages($this->getTaxClass()));
         $monthly_wage_amount = $this->getMonthlyWageAmount() / 100;
         if ($colorado_mtd_earnings >= $monthly_wage_amount
-            || $colorado_earnings + $colorado_mtd_earnings < $monthly_wage_amount) {
+        || $colorado_earnings + $colorado_mtd_earnings < $monthly_wage_amount) {
             return 0;
         }
 

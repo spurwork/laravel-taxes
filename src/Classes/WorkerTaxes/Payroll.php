@@ -213,11 +213,15 @@ class Payroll
 
     public function getYtdTaxableWages(string $tax_class): float
     {
+        // dump($tax_class);
         return $this->tax_manager->computeYtdTaxableWages($this->annual_taxable_wages, $tax_class, $this->pay_date);
     }
 
     public function getMtdTaxableWages(string $tax_class): float
     {
+        dump($tax_class);
+        // dump($this->pay_date);
+        // dump($this->annual_taxable_wage);
         return $this->tax_manager->computeMtdTaxableWages($this->annual_taxable_wages, $tax_class, $this->pay_date);
     }
 
