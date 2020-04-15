@@ -17,7 +17,6 @@ class TestParametersBuilder
     private $additional_tax;
     private $tax_rate;
     private $wages_in_cents;
-    private $mtd_wages_in_cents;
     private $ytd_wages_in_cents;
     private $supplemental_wages_in_cents;
     private $expected_amount_in_cents;
@@ -43,7 +42,6 @@ class TestParametersBuilder
             $this->tax_rate,
             $this->additional_tax,
             $this->wages_in_cents,
-            $this->mtd_wages_in_cents,
             $this->ytd_wages_in_cents,
             $this->supplemental_wages_in_cents,
             $this->expected_amount_in_cents,
@@ -98,12 +96,6 @@ class TestParametersBuilder
     public function setWagesInCents(?int $wages_in_cents)
     {
         $this->wages_in_cents = $wages_in_cents;
-        return $this;
-    }
-
-    public function setMtdWagesInCents(?int $mtd_wages_in_cents)
-    {
-        $this->mtd_wages_in_cents = $mtd_wages_in_cents;
         return $this;
     }
 

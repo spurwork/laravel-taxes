@@ -71,9 +71,6 @@ abstract class TaxTestCase extends UnitTestCase
         if ($parameters->getYtdWagesInCents() !== null
         && $parameters->getYtdWagesInCents() !== 0) {
             $annual_wages->push($this->makeWage($work_location, $parameters->getYtdWagesInCents()));
-        } elseif ($parameters->getMtdWagesInCents() !== null
-        && $parameters->getMtdWagesInCents() !== 0) {
-            $annual_wages->push($this->makeWage($work_location, $parameters->getMtdWagesInCents()));
         }
 
         $annual_taxable_wages = collect([]);
