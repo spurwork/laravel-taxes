@@ -27,10 +27,9 @@ class ColoradoLocalTaxTestCase extends TaxTestCase
             $this->makeWage($colorado_location, $parameters->getColoradoEarningsInCents()),
             $this->makeWage($local_location, $parameters->getLocalEarningsInCents()),
         ]);
-        // dd($wages);
+
         $past_date = Carbon::now()->subWeek();
-        // dd($parameters->getLocalMtdEarningsInCents());
-        // dd($parameters->getColoradoMtdEarningsInCents());
+
         $historical_wages = collect([
             $this->makeWageAtDate($past_date, $colorado_location, $parameters->getColoradoMtdEarningsInCents()),
             $this->makeWageAtDate($past_date, $local_location, $parameters->getLocalMtdEarningsInCents()),
