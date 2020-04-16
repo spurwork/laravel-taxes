@@ -8,7 +8,7 @@ class ColoradoLocalIncomeParametersBuilder
     private $local_location;
     private $tax_class;
     private $local_earnings_in_cents;
-    private $local_mtd_liabilities_in_cents;
+    private $local_mtd_earnings_in_cents;
     private $colorado_earnings_in_cents;
     private $colorado_mtd_liabilities_in_cents;
     private $expected_amount_in_cents;
@@ -20,7 +20,7 @@ class ColoradoLocalIncomeParametersBuilder
             $this->local_location,
             $this->tax_class,
             $this->local_earnings_in_cents,
-            $this->local_mtd_liabilities_in_cents,
+            $this->local_mtd_earnings_in_cents,
             $this->colorado_earnings_in_cents,
             $this->colorado_mtd_liabilities_in_cents,
             $this->expected_amount_in_cents
@@ -51,9 +51,9 @@ class ColoradoLocalIncomeParametersBuilder
         return $this;
     }
 
-    public function setLocalMtdLiabilitiesInCents(int $local_mtd_liabilities_in_cents)
+    public function setLocalMtdEarningsInCents(int $local_mtd_earnings_in_cents)
     {
-        $this->local_mtd_liabilities_in_cents = $local_mtd_liabilities_in_cents;
+        $this->local_mtd_earnings_in_cents = $local_mtd_earnings_in_cents;
         return $this;
     }
 

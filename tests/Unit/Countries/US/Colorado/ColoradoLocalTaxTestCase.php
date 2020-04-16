@@ -4,6 +4,7 @@ namespace Appleton\Taxes\Tests\Unit\Countries\US\Colorado;
 
 use Appleton\Taxes\Classes\WorkerTaxes\GeoPoint;
 use Appleton\Taxes\Classes\WorkerTaxes\TaxResult;
+use Appleton\Taxes\Countries\US\Colorado\ColoradoIncome\ColoradoIncome;
 use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
 use Appleton\Taxes\Tests\Unit\TestModelCreator;
 use Carbon\Carbon;
@@ -28,22 +29,14 @@ class ColoradoLocalTaxTestCase extends TaxTestCase
             $this->makeWage($local_location, $parameters->getLocalEarningsInCents()),
         ]);
 
+        $annual_wages = collect([
+            $this->makeWageAtDate(Carbon::now()->subWeek(), $local_location, $parameters->getLocalMtdEarningsInCents()),
+        ]);
+
         $annual_taxable_wages = collect([]);
-        $taxable_wage_amount = 0;
-
-        if ($parameters->getLocalMtdLiabilitiesInCents() !== null
-        && $parameters->getLocalMtdLiabilitiesInCents() !== 0) {
-            $taxable_wage_amount += $parameters->getLocalMtdLiabilitiesInCents();
-        }
-
-        if ($parameters->getColoradoMtdLiabilitiesInCents() !== null
-        && $parameters->getColoradoMtdLiabilitiesInCents() !== 0) {
-            $taxable_wage_amount += $parameters->getColoradoMtdLiabilitiesInCents();
-        }
-
-        $taxable_wage = $this->makeTaxableWageAtDate(now()->addWeek(), $parameters->getTaxClass(), $taxable_wage_amount);
-
-        $annual_taxable_wages->put($parameters->getTaxClass(), collect([$taxable_wage]));
+        $annual_taxable_wages->put(ColoradoIncome::class, collect([
+            $this->makeTaxableWageAtDate(now()->addWeek(), ColoradoIncome::class, $parameters->getColoradoMtdLiabilitiesInCents())
+        ]));
 
         $results = $this->taxes->calculate(
             Carbon::now(),
@@ -52,7 +45,7 @@ class ColoradoLocalTaxTestCase extends TaxTestCase
             $local_location,
             $local_location,
             $wages,
-            collect([]),
+            $annual_wages,
             $annual_taxable_wages,
             $this->user,
             null,
@@ -103,7 +96,7 @@ class ColoradoLocalTaxTestCase extends TaxTestCase
 
         $historical_wages = collect([
             $this->makeWageAtDate($past_date, $colorado_location, $parameters->getColoradoMtdLiabilitiesInCents()),
-            $this->makeWageAtDate($past_date, $local_location, $parameters->getLocalMtdLiabilitiesInCents()),
+            $this->makeWageAtDate($past_date, $local_location, $parameters->getLocalMtdEarningsInCents()),
         ]);
 
         $results = $this->taxes->calculate(
@@ -148,7 +141,7 @@ class ColoradoLocalTaxTestCase extends TaxTestCase
             'local under' => [
                 $builder
                     ->setLocalEarningsInCents($wage_amount_in_dollars - 1)
-                    ->setLocalMtdLiabilitiesInCents(0)
+                    ->setLocalMtdEarningsInCents(0)
                     ->setColoradoEarningsInCents(0)
                     ->setColoradoMtdLiabilitiesInCents(0)
                     ->setExpectedAmountInCents(0)
@@ -256,7 +249,7 @@ class ColoradoLocalTaxTestCase extends TaxTestCase
             'co mtd under' => [
                 $builder
                     ->setLocalEarningsInCents(0)
-                    ->setLocalMtdLiabilitiesInCents(1)
+                    ->setLocalMtdEarningsInCents(1)
                     ->setColoradoEarningsInCents(0)
                     ->setColoradoMtdLiabilitiesInCents($wage_amount_in_dollars - 2)
                     ->setExpectedAmountInCents(0)

@@ -3,6 +3,7 @@
 namespace Appleton\Taxes\Countries\US\Colorado;
 
 use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseLocal;
+use Appleton\Taxes\Countries\US\Colorado\ColoradoIncome\ColoradoIncome;
 use Appleton\Taxes\Models\GovernmentalUnitArea;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -20,7 +21,7 @@ abstract class ColoradoLocalIncome extends BaseLocal
     {
         $colorado = $tax_areas->first()->workGovernmentalUnitArea;
 
-        $colorado_mtd_earnings = $this->payroll->getMtdTaxableWages($this->getTaxClass());
+        $colorado_mtd_earnings = $this->payroll->getMtdTaxableWages(ColoradoIncome::class);
         $colorado_earnings = $this->payroll->getEarnings($colorado);
         // dump($this->payroll->getEarnings($colorado));
         // dump($this->payroll->getMtdTaxableWages($this->getTaxClass()));

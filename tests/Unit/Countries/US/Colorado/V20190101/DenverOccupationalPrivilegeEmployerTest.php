@@ -35,7 +35,7 @@ class DenverOccupationalPrivilegeEmployerTest extends ColoradoLocalTaxTestCase
                 ->setLocalLocation(self::LOCATION)
                 ->setTaxClass(self::TAX_CLASS)
                 ->setLocalEarningsInCents(0)
-                ->setLocalMtdLiabilitiesInCents(0)
+                ->setLocalMtdEarningsInCents(0)
                 ->setColoradoEarningsInCents(100)
                 ->setColoradoMtdLiabilitiesInCents(200)
                 ->setExpectedAmountInCents(0)
