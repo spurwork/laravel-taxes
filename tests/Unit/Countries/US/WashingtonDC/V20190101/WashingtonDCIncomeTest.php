@@ -22,6 +22,7 @@ class WashingtonDCIncomeTest extends TaxTestCase
 
         WashingtonDCIncomeTaxInformation::createForUser([
             'filing_status' => WashingtonDCIncome::FILING_SINGLE,
+            'additional_withholding' => 0,
             'dependents' => 0,
             'exempt' => false,
         ], $this->user);
@@ -86,6 +87,63 @@ class WashingtonDCIncomeTest extends TaxTestCase
                     ->setTaxInfoOptions(['filing_status' => WashingtonDCIncome::FILING_MARRIED_FILING_SEPARATELY])
                     ->setWagesInCents(10000)
                     ->setExpectedAmountInCents(400)
+                    ->build()
+            ],
+            '06' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'exempt' => true,
+                        'additional_withholding' => 20,
+                    ])
+                    ->setWagesInCents(30000)
+                    ->setExpectedAmountInCents(0)
+                    ->build()
+            ],
+            '07' => [
+                $builder
+                    ->setTaxInfoOptions(['additional_withholding' => 20])
+                    ->setWagesInCents(30000)
+                    ->setExpectedAmountInCents(3415)
+                    ->build()
+            ],
+            '08' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'dependents' => 2,
+                        'additional_withholding' => 20,
+                    ])
+                    ->setWagesInCents(100000)
+                    ->setExpectedAmountInCents(6693)
+                    ->build()
+            ],
+            '09' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'dependents' => 2,
+                        'additional_withholding' => 20,
+                    ])
+                    ->setWagesInCents(200000)
+                    ->setExpectedAmountInCents(14566)
+                    ->build()
+            ],
+            '10' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'filing_status' => WashingtonDCIncome::FILING_MARRIED_FILING_JOINTLY,
+                        'additional_withholding' => 20,
+                    ])
+                    ->setWagesInCents(350000)
+                    ->setExpectedAmountInCents(28673)
+                    ->build()
+            ],
+            '11' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'filing_status' => WashingtonDCIncome::FILING_MARRIED_FILING_SEPARATELY,
+                        'additional_withholding' => 20,
+                    ])
+                    ->setWagesInCents(10000)
+                    ->setExpectedAmountInCents(2400)
                     ->build()
             ],
         ];
