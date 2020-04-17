@@ -17,10 +17,12 @@ class TestParameters
     private $additional_tax;
     private $tax_rate;
     private $wages_in_cents;
+    private $mtd_wages_in_cents;
     private $ytd_wages_in_cents;
     private $supplemental_wages_in_cents;
     private $expected_amount_in_cents;
     private $expected_earnings_in_cents;
+    private $mtd_liabilities_in_cents;
     private $qtd_wages_in_cents;
     private $ytd_liabilities_in_cents;
     private $pay_check_tip_amount_in_cents;
@@ -39,12 +41,14 @@ class TestParameters
         ?array $tax_rate,
         ?string $additional_tax,
         int $wages_in_cents,
+        ?int $mtd_wages_in_cents,
         ?int $ytd_wages_in_cents,
         ?int $supplemental_wages_in_cents,
         ?int $expected_amount_in_cents,
         ?int $expected_earnings_in_cents,
         ?int $pay_periods,
         ?int $qtd_wage_in_cents,
+        ?int $mtd_liabilities_in_cents,
         ?int $ytd_liabilities_in_cents,
         ?int $pay_check_tip_amount_in_cents,
         ?int $take_home_tip_amount_in_cents,
@@ -57,6 +61,7 @@ class TestParameters
         $this->home_location = $home_location;
         $this->tax_class = $tax_class;
         $this->wages_in_cents = $wages_in_cents;
+        $this->mtd_wages_in_cents = $mtd_wages_in_cents;
         $this->ytd_wages_in_cents = $ytd_wages_in_cents;
         $this->expected_amount_in_cents = $expected_amount_in_cents;
         $this->supplemental_wages_in_cents = $supplemental_wages_in_cents;
@@ -67,6 +72,7 @@ class TestParameters
         $this->expected_earnings_in_cents = $expected_earnings_in_cents;
         $this->tax_rate = $tax_rate;
         $this->qtd_wages_in_cents = $qtd_wage_in_cents;
+        $this->mtd_liabilities_in_cents = $mtd_liabilities_in_cents;
         $this->ytd_liabilities_in_cents = $ytd_liabilities_in_cents;
         $this->pay_check_tip_amount_in_cents = $pay_check_tip_amount_in_cents;
         $this->take_home_tip_amount_in_cents = $take_home_tip_amount_in_cents;
@@ -107,6 +113,11 @@ class TestParameters
     public function getWagesInCents(): int
     {
         return $this->wages_in_cents;
+    }
+
+    public function getMtdWagesInCents(): ?int
+    {
+        return $this->mtd_wages_in_cents;
     }
 
     public function getYtdWagesInCents(): ?int
@@ -157,6 +168,11 @@ class TestParameters
     public function getQtdWagesInCents(): ?int
     {
         return $this->qtd_wages_in_cents;
+    }
+
+    public function getMtdLiabilitiesInCents(): ?int
+    {
+        return $this->mtd_liabilities_in_cents;
     }
 
     public function getYtdLiabilitiesInCents(): ?int
