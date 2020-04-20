@@ -80,10 +80,18 @@ class Taxes
             $annual_wages_by_lat_long
         );
 
-        $this->tax_override_manager->replaceSutaUnemploymentTaxes($suta_location, $taxable_incomes,
-            $wages, $annual_wages);
-        $this->tax_override_manager->addStateIncomeTax($home_location, $taxable_incomes,
-            $wages, $annual_wages);
+        $this->tax_override_manager->replaceSutaUnemploymentTaxes(
+            $suta_location,
+            $taxable_incomes,
+            $wages,
+            $annual_wages
+        );
+        $this->tax_override_manager->addStateIncomeTax(
+            $home_location,
+            $taxable_incomes,
+            $wages,
+            $annual_wages
+        );
         $this->tax_override_manager->processReciprocalAgreements($reciprocal_agreements, $taxable_incomes);
         $this->tax_override_manager->removeDisabledTaxes($disabled_taxes, $taxable_incomes);
 

@@ -15,6 +15,7 @@ class WashingtonDCIncomeTaxInformation extends BaseTaxInformationModel
         $tax_information->exempt = false;
         $tax_information->filing_status = WashingtonDCIncome::FILING_SINGLE;
         $tax_information->dependents = 0;
+        $tax_information->additional_withholding = 0;
 
         return $tax_information;
     }
