@@ -24,6 +24,7 @@ class TestParameters
     private $expected_earnings_in_cents;
     private $mtd_liabilities_in_cents;
     private $qtd_wages_in_cents;
+    private $wtd_liabilities_in_cents;
     private $ytd_liabilities_in_cents;
     private $pay_check_tip_amount_in_cents;
     private $take_home_tip_amount_in_cents;
@@ -49,6 +50,7 @@ class TestParameters
         ?int $pay_periods,
         ?int $qtd_wage_in_cents,
         ?int $mtd_liabilities_in_cents,
+        ?int $wtd_liabilities_in_cents,
         ?int $ytd_liabilities_in_cents,
         ?int $pay_check_tip_amount_in_cents,
         ?int $take_home_tip_amount_in_cents,
@@ -73,6 +75,7 @@ class TestParameters
         $this->tax_rate = $tax_rate;
         $this->qtd_wages_in_cents = $qtd_wage_in_cents;
         $this->mtd_liabilities_in_cents = $mtd_liabilities_in_cents;
+        $this->wtd_liabilities_in_cents = $wtd_liabilities_in_cents;
         $this->ytd_liabilities_in_cents = $ytd_liabilities_in_cents;
         $this->pay_check_tip_amount_in_cents = $pay_check_tip_amount_in_cents;
         $this->take_home_tip_amount_in_cents = $take_home_tip_amount_in_cents;
@@ -173,6 +176,12 @@ class TestParameters
     public function getMtdLiabilitiesInCents(): ?int
     {
         return $this->mtd_liabilities_in_cents;
+    }
+
+    public function getWtdLiabilitiesInCents(): ?int
+    {
+        // dump($this->wtd_liabilities_in_cents);
+        return $this->wtd_liabilities_in_cents;
     }
 
     public function getYtdLiabilitiesInCents(): ?int

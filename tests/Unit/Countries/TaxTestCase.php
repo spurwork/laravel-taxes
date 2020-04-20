@@ -38,6 +38,7 @@ abstract class TaxTestCase extends UnitTestCase
 
     protected function validate(TestParameters $parameters): void
     {
+        // dump($parameters);
         Carbon::setTestNow($parameters->getDate());
 
         if ($parameters->getTaxInfoOptions() !== null && !empty($parameters->getTaxInfoOptions())) {
@@ -85,6 +86,11 @@ abstract class TaxTestCase extends UnitTestCase
         } elseif ($parameters->getMtdLiabilitiesInCents() !== null
         && $parameters->getMtdLiabilitiesInCents() !== 0) {
             $taxable_wage = $this->makeTaxableWageAtDate(now(), $parameters->getTaxClass(), $parameters->getMtdLiabilitiesInCents());
+
+            $annual_taxable_wages->put($parameters->getTaxClass(), collect([$taxable_wage]));
+        } elseif ($parameters->getWtdLiabilitiesInCents() !== null
+        && $parameters->getWtdLiabilitiesInCents() !== 0) {
+            $taxable_wage = $this->makeTaxableWageAtDate(now(), $parameters->getTaxClass(), $parameters->getWtdLiabilitiesInCents());
 
             $annual_taxable_wages->put($parameters->getTaxClass(), collect([$taxable_wage]));
         }
@@ -140,6 +146,8 @@ abstract class TaxTestCase extends UnitTestCase
 
     public function validateNoTax(TestParameters $parameters): void
     {
+        // dump($parameters);
+
         Carbon::setTestNow($parameters->getDate());
 
         if ($parameters->getTaxInfoOptions() !== null && !empty($parameters->getTaxInfoOptions())) {

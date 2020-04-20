@@ -50,8 +50,9 @@ class WilmingtonEmployerLicenseFeeTest extends TaxTestCase
                 $builder
                     ->setHomeLocation(self::WILMINGTON_LOCATION)
                     ->setWorkLocation(self::WILMINGTON_LOCATION)
-                    ->setWagesInCents(30000)
+                    ->setWagesInCents(80000)
                     ->setMtdWagesInCents(null)
+                    ->setMtdLiabilitiesInCents(null)
                     ->setExpectedAmountInCents(1500)
                     ->build()
             ],
@@ -59,7 +60,7 @@ class WilmingtonEmployerLicenseFeeTest extends TaxTestCase
                 $builder
                     ->setHomeLocation(self::WILMINGTON_LOCATION)
                     ->setWorkLocation(self::WILMINGTON_LOCATION)
-                    ->setWagesInCents(100000)
+                    ->setWagesInCents(200000)
                     ->setMtdWagesInCents(10000)
                     ->setMtdLiabilitiesInCents(10000)
                     ->setExpectedAmountInCents(0)

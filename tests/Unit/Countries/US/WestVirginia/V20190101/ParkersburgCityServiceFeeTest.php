@@ -8,8 +8,9 @@ use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
 
 class ParkersburgCityServiceFeeTest extends TaxTestCase
 {
-    private const DATE = '2019-01-01';
+    private const DATE = '2019-01-07';
     private const LOCATION = 'us.west_virginia.parkersburg';
+    private const OTHER_LOCATION = 'us.west_virginia';
     private const TAX_CLASS = ParkersburgCityServiceFee::class;
 
     public function setUp(): void
@@ -26,8 +27,9 @@ class ParkersburgCityServiceFeeTest extends TaxTestCase
                 ->setHomeLocation(self::LOCATION)
                 ->setTaxClass(self::TAX_CLASS)
                 ->setPayPeriods(52)
-                ->setWagesInCents(1)
-                ->setExpectedAmountInCents(250)
+                ->setWagesInCents(2000)
+                ->setWtdLiabilitiesInCents(2000)
+                ->setExpectedAmountInCents(0)
                 ->build()
         );
     }
@@ -38,9 +40,12 @@ class ParkersburgCityServiceFeeTest extends TaxTestCase
             (new TestParametersBuilder())
                 ->setDate(self::DATE)
                 ->setHomeLocation(self::LOCATION)
+                // ->setWorkLocation(self::OTHER_LOCATION)
                 ->setTaxClass(self::TAX_CLASS)
                 ->setPayPeriods(52)
-                ->setWagesInCents(0)
+                ->setWagesInCents(2000)
+                ->setWtdLiabilitiesInCents(0)
+                ->setExpectedAmountInCents(0)
                 ->build()
         );
     }

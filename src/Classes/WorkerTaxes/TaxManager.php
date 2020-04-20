@@ -83,4 +83,29 @@ class TaxManager
                     return $taxable_wage->getAmount();
                 }) / 100;
     }
+
+    public function computeWtdTaxableWages(
+        Collection $taxable_wages,
+        string $tax_class,
+        Carbon $date
+    ): float {
+        if (!$taxable_wages->has($tax_class)) {
+            dd('dead end');
+            return 0.0;
+        }
+
+        $start_date = $date->copy()->startOfWeek();
+
+        return $taxable_wages
+                ->get($tax_class)
+                ->filter(static function (TaxableWage $taxable_wage) use ($start_date, $date) {
+                    // dump($taxable_wage->getDate());
+                    // dd($start_date);
+                    return $taxable_wage->getDate()->gte($start_date)
+                        && $taxable_wage->getDate()->lte($date);
+                })
+                ->sum(static function (TaxableWage $taxable_wage) {
+                    return $taxable_wage->getAmount();
+                }) / 100;
+    }
 }

@@ -218,7 +218,13 @@ class Payroll
 
     public function getMtdTaxableWages(string $tax_class): float
     {
+        // dump($this->annual_taxable_wages);
         return $this->tax_manager->computeMtdTaxableWages($this->annual_taxable_wages, $tax_class, $this->pay_date);
+    }
+
+    public function getWtdTaxableWages(string $tax_class): float
+    {
+        return $this->tax_manager->computeWtdTaxableWages($this->annual_taxable_wages, $tax_class, $this->pay_date);
     }
 
     public function getTipAmount(GovernmentalUnitArea $governmental_unit_area = null)
