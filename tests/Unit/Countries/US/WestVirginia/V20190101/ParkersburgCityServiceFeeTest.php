@@ -27,7 +27,7 @@ class ParkersburgCityServiceFeeTest extends TaxTestCase
                 ->setHomeLocation(self::LOCATION)
                 ->setTaxClass(self::TAX_CLASS)
                 ->setPayPeriods(52)
-                ->setWagesInCents(2000)
+                ->setWagesInCents(1000)
                 ->setWtdLiabilitiesInCents(2000)
                 ->setExpectedAmountInCents(0)
                 ->build()

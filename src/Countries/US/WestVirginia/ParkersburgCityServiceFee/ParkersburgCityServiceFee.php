@@ -12,7 +12,8 @@ abstract class ParkersburgCityServiceFee extends BaseLocal
 
     public function doesApply(Collection $tax_areas): bool
     {
-        dump($this->payroll->getWtdTaxableWages(ParkersburgCityServiceFee::class).' does apply, should be more than 0');
-        return $this->payroll->getWtdTaxableWages(ParkersburgCityServiceFee::class) === 0.0;
+        dd($this->payroll->getWtdTaxableWages(ParkersburgCityServiceFee::class));
+        return $this->payroll->getEarnings($tax_areas->first()->workGovernmentalUnitArea) > 0
+            &&  $this->payroll->getWtdTaxableWages(ParkersburgCityServiceFee::class) === 0.0;
     }
 }

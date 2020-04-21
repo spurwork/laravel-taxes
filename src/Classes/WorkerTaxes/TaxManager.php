@@ -99,8 +99,11 @@ class TaxManager
         return $taxable_wages
                 ->get($tax_class)
                 ->filter(static function (TaxableWage $taxable_wage) use ($start_date, $date) {
-                    // dump($taxable_wage->getDate());
-                    // dd($start_date);
+                    dump($start_date);
+                    // dump($taxable_wage->getDate()->gte($start_date));
+                    dump($taxable_wage->getDate());
+                    dd($date);
+                    // dd($taxable_wage->getDate()->lte($date));
                     return $taxable_wage->getDate()->gte($start_date)
                         && $taxable_wage->getDate()->lte($date);
                 })
