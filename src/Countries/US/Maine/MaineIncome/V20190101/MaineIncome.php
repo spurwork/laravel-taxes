@@ -39,7 +39,7 @@ class MaineIncome extends BaseMaineIncome
         $this->gross_wages = $this->getGrossWages();
 
         if ($this->getAnnualWageAmount() > 0) {
-            $this->tax_total = $this->payroll->withholdTax($this->getTaxAmountFromTaxBrackets($this->getAnnualWageAmount(), $this->getTaxBrackets()) / $this->payroll->pay_periods);
+            $this->tax_total = $this->payroll->withholdTax($this->getTaxAmountFromTaxBrackets($this->getAnnualWageAmount(), $this->getTaxBrackets()) / $this->payroll->pay_periods)  + $this->getAdditionalWithholding();
 
             return (int)round(intval($this->tax_total * 100) / 100, 0);
         }

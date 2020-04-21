@@ -22,6 +22,7 @@ class MaineIncomeTest extends TaxTestCase
 
         MaineIncomeTaxInformation::createForUser([
             'filing_status' => MaineIncome::FILING_SINGLE,
+            'additional_withholding' => 0,
             'allowances' => 0,
             'exempt' => false,
         ], $this->user);
@@ -125,6 +126,106 @@ class MaineIncomeTest extends TaxTestCase
                     ])
                     ->setWagesInCents(450000)
                     ->setExpectedAmountInCents(27900)
+                    ->build()
+            ],
+             '10' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'exempt' => true,
+                        'additional_withholding' => 20,
+                    ])
+                    ->setWagesInCents(30000)
+                    ->setExpectedAmountInCents(0)
+                    ->build()
+            ],
+            '11' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'allowances' => 2,
+                        'additional_withholding' => 20,
+                    ])
+                    ->setWagesInCents(30000)
+                    ->setExpectedAmountInCents(0)
+                    ->build()
+            ],
+            '12' => [
+                $builder
+                    ->setTaxInfoOptions(['additional_withholding' => 20])
+                    ->setWagesInCents(30000)
+                    ->setExpectedAmountInCents(2700)
+                    ->build()
+            ],
+            '13' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'allowances' => 2,
+                        'additional_withholding' => 20,
+                    ])
+                    ->setWagesInCents(100000)
+                    ->setExpectedAmountInCents(6000)
+                    ->build()
+            ],
+            '14' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'allowances' => 2,
+                        'additional_withholding' => 20,
+                    ])
+                    ->setWagesInCents(200000)
+                    ->setExpectedAmountInCents(13400)
+                    ->build()
+            ],
+            '15' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'filing_status' => MaineIncome::FILING_MARRIED,
+                        'allowances' => 2,
+                        'additional_withholding' => 20,
+                    ])
+                    ->setWagesInCents(100000)
+                    ->setExpectedAmountInCents(4500)
+                    ->build()
+            ],
+            '16' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'filing_status' => MaineIncome::FILING_MARRIED,
+                        'additional_withholding' => 20,
+                    ])
+                    ->setWagesInCents(200000)
+                    ->setExpectedAmountInCents(11900)
+                    ->build()
+            ],
+            '17' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'filing_status' => MaineIncome::FILING_MARRIED,
+                        'allowances' => 2,
+                        'additional_withholding' => 20,
+                    ])
+                    ->setWagesInCents(200000)
+                    ->setExpectedAmountInCents(10800)
+                    ->build()
+            ],
+            '18' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'allowances' => 2,
+                        'additional_withholding' => 20,
+                    ])
+                    ->setWagesInCents(80000)
+                    ->setExpectedAmountInCents(4700)
+                    ->build()
+            ],
+            '19' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'filing_status' => MaineIncome::FILING_MARRIED,
+                        'allowances' => 2,
+                        'additional_withholding' => 20,
+                    ])
+                    ->setWagesInCents(450000)
+                    ->setExpectedAmountInCents(29900)
                     ->build()
             ],
         ];
