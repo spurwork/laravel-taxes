@@ -60,11 +60,11 @@ class MaineIncome extends BaseMaineIncome
 
     public function getStandardDeduction()
     {
-        if ($this->tax_information->filing_status === 'S' && $this->gross_wages <= 81540) {
+        if ($this->tax_information->filing_status === 'S' && $this->gross_wages <= 82900) {
             return 9550;
         } elseif ($this->tax_information->filing_status === 'S' && $this->gross_wages > 157900) {
             return 0;
-        } elseif ($this->tax_information->filing_status === 'S' && $this->gross_wages > 81540 && $this->gross_wages <= 157900) {
+        } elseif ($this->tax_information->filing_status === 'S' && $this->gross_wages > 82900 && $this->gross_wages <= 157900) {
             return round(9550 * (157900 - $this->gross_wages) / 75000, 4);
         }
 
