@@ -20,7 +20,7 @@ class TaxInformation extends Model
 
     public function user()
     {
-        return $this->belongsTo(config('taxes.user'), 'user_id');
+        return $this->belongsTo(config('taxes.user'), config('taxes.user_id'));
     }
 
     public function information()
@@ -30,7 +30,7 @@ class TaxInformation extends Model
 
     public function scopeForUser($query, $user)
     {
-        return $query->where('user_id', $user->id);
+        return $query->where(config('taxes.user_id'), $user->id);
     }
 
     public function scopeIsTypeOf($query, $information_type)
