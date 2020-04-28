@@ -26,7 +26,7 @@ class MontanaIncome extends BaseMontanaIncome
             return 0;
         }
 
-        $this->tax_total = $this->payroll->withholdTax($this->getTaxAmountFromTaxBrackets($this->getGrossWages() - $this->getStandardAllowance(), $this->getTaxBrackets()) / $this->payroll->pay_periods);
+        $this->tax_total = $this->payroll->withholdTax($this->getTaxAmountFromTaxBrackets($this->getGrossWages() - $this->getStandardAllowance(), $this->getTaxBrackets()) / $this->payroll->pay_periods) + $this->getAdditionalWithholding();
 
         return (int)round(intval($this->tax_total * 100) / 100, 0);
     }

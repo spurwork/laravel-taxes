@@ -21,6 +21,7 @@ class MontanaIncomeTest extends TaxTestCase
         $this->query_runner->addTax(self::TAX_CLASS);
 
         MontanaIncomeTaxInformation::createForUser([
+            'additional_withholding' => 0,
             'allowances' => 0,
             'exempt' => false,
         ], $this->user);
@@ -71,6 +72,40 @@ class MontanaIncomeTest extends TaxTestCase
                     ->setTaxInfoOptions(null)
                     ->setWagesInCents(70000)
                     ->setExpectedAmountInCents(3400)
+                    ->build()
+            ],
+            '04' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'exempt' => true,
+                        'additional_withholding' => 10
+                    ])
+                    ->setWagesInCents(30000)
+                    ->setExpectedAmountInCents(0)
+                    ->build()
+            ],
+            '05' => [
+                $builder
+                    ->setTaxInfoOptions(['additional_withholding' => 10])
+                    ->setWagesInCents(30000)
+                    ->setExpectedAmountInCents(2000)
+                    ->build()
+            ],
+            '06' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'allowances' => 2,
+                        'additional_withholding' => 10
+                    ])
+                    ->setWagesInCents(70000)
+                    ->setExpectedAmountInCents(4000)
+                    ->build()
+            ],
+            '07' => [
+                $builder
+                    ->setTaxInfoOptions(['additional_withholding' => 10])
+                    ->setWagesInCents(70000)
+                    ->setExpectedAmountInCents(4400)
                     ->build()
             ],
         ];
