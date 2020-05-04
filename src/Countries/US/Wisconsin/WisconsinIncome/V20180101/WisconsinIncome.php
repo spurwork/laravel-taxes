@@ -5,68 +5,74 @@ namespace Appleton\Taxes\Countries\US\Wisconsin\WisconsinIncome\V20180101;
 use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
 use Appleton\Taxes\Countries\US\Wisconsin\WisconsinIncome\WisconsinIncome as BaseWisconsinIncome;
 use Appleton\Taxes\Models\Countries\US\Wisconsin\WisconsinIncomeTaxInformation;
-use Illuminate\Support\Arr;
+use Illuminate\Database\Eloquent\Collection;
 
 class WisconsinIncome extends BaseWisconsinIncome
 {
-    const EXEMPTION_AMOUNT = 400;
-
-    const BRACKETS = [
-        self::FILING_SINGLE => [
-            [0, 0.04, 0],
-            [11230, 0.0584, 449.20],
-            [22470, 0.0627, 1105.616],
-            [247350, 0.0765, 15205.59],
-        ],
-        self::FILING_MARRIED => [
-            [0, 0.04, 0],
-            [14980, 0.0584, 599.20],
-            [29960, 0.0627, 1474.03],
-            [329810, 0.0765, 20274.63],
-        ],
-        self::FILING_SEPERATE => [
-            [0, 0.04, 0],
-            [7490, 0.0584, 299.60],
-            [14980, 0.0627, 737.02],
-            [164900, 0.0765, 10,137.00],
-        ],
-        self::FILING_HEAD_OF_HOUSEHOLD => [
-            [0, 0.04, 0],
-            [11230, 0.0584, 449.20],
-            [22470, 0.0627, 1105.62],
-            [247350, 0.0765, 15205.59],
-        ],
-    ];
-
     public function __construct(WisconsinIncomeTaxInformation $tax_information, Payroll $payroll)
     {
         parent::__construct($tax_information, $payroll);
         $this->tax_information = $tax_information;
     }
 
-    public function getAdjustedEarnings()
+    public function compute(Collection $tax_areas)
     {
-        // For Wisconsin, standard deduction is built into the tables.
-        return $this->getGrossEarnings() - ($this->tax_information->exemptions * self::EXEMPTION_AMOUNT);
+        if ($this->isUserClaimingExemption()) {
+            return 0.00;
+        }
+
+        $this->tax_total = $this->payroll->withholdTax($this->getTaxableIncome($this->getAmountForTaxableIncome())  / $this->payroll->pay_periods) + $this->getAdditionalWithholding();
+
+        return round($this->tax_total, 2);
+    }
+
+    public function getAmountForTaxableIncome()
+    {
+        $amount = $this->getAnnualWages();
+        $amount -= $this->getStandardDeduction($amount);
+        $amount -= $this->getExemptionAmount();
+
+        return $amount > 0 ? $amount : 0.0;
+    }
+
+    public function getExemptionAmount()
+    {
+        return $this->tax_information->exemptions * self::EXEMPTION_AMOUNT;
+    }
+
+    public function getAnnualWages()
+    {
+        return $this->getAdjustedEarnings() * $this->payroll->pay_periods;
+    }
+
+    public function getTaxableIncome($amount)
+    {
+        return $this->getTaxAmountFromTaxBrackets($amount, self::TAX_BRACKET);
+    }
+
+    public function getStandardDeduction($amount)
+    {
+        if ($this->tax_information->filing_status === self::FILING_MARRIED) {
+            if ($amount <= 21400) {
+                return self::MARRIED_STANDARD_DEDUCTION_AMOUNT;
+            } elseif ($amount > 21400 && $amount < 60750) {
+                return self::MARRIED_STANDARD_DEDUCTION_AMOUNT - .2 * ($amount - 21400) ?? 0;
+            } else {
+                return 0.0;
+            }
+        } else {
+            if ($amount <= 15200) {
+                return self::SINGLE_STANDARD_DEDUCTION_AMOUNT;
+            } elseif ($amount > 15200 && $amount < 62950) {
+                return self::SINGLE_STANDARD_DEDUCTION_AMOUNT - .12 * ($amount - 15200) ?? 0;
+            } else {
+                return 0.0;
+            }
+        }
     }
 
     public function getTaxBrackets()
     {
-        if (array_key_exists($this->tax_information->filing_status, static::BRACKETS)) {
-            return Arr::get(static::BRACKETS, $this->tax_information->filing_status);
-        }
-
-        return static::BRACKETS[static::FILING_SINGLE];
-    }
-
-    public function getSupplementalIncomeTax()
-    {
-        // TODO
-        return 0;
-    }
-
-    private function getGrossEarnings()
-    {
-        return ($this->payroll->getEarnings() - $this->payroll->getSupplementalEarnings()) * $this->payroll->pay_periods;
+        return;
     }
 }
