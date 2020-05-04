@@ -1,5 +1,5 @@
 <?php
-namespace Appleton\Taxes\Countries\US\Maine\MaineIncome\V20190101;
+namespace Appleton\Taxes\Countries\US\Maine\MaineIncome\V20200101;
 
 use Appleton\Taxes\Countries\US\Maine\MaineIncome\MaineIncome as BaseMaineIncome;
 use Illuminate\Database\Eloquent\Collection;
@@ -8,18 +8,18 @@ class MaineIncome extends BaseMaineIncome
 {
     protected $gross_wages = 0;
 
-    const PERSONAL_ALLOWANCE = 4200;
+    const PERSONAL_ALLOWANCE = 4300;
 
     const SINGLE_TAX_WITHHOLDING_BRACKET = [
         [0, .058, 0],
-        [21850, .0675, 1267],
-        [51700, .0715, 3282],
+        [22200, .0675, 1288],
+        [52600, .0715, 3340],
     ];
 
     const MARRIED_TAX_WITHHOLDING_BRACKET = [
         [0, .058, 0],
-        [43700, .0675, 2535],
-        [103400, .0715, 6565],
+        [44450, .0675, 2578],
+        [105200, .0715, 6679],
     ];
 
     public function getTaxBrackets()
@@ -60,20 +60,20 @@ class MaineIncome extends BaseMaineIncome
 
     public function getStandardDeduction()
     {
-        if ($this->tax_information->filing_status === 'S' && $this->gross_wages <= 81540) {
-            return 9350;
-        } elseif ($this->tax_information->filing_status === 'S' && $this->gross_wages > 156450) {
+        if ($this->tax_information->filing_status === 'S' && $this->gross_wages <= 82900) {
+            return 9550;
+        } elseif ($this->tax_information->filing_status === 'S' && $this->gross_wages > 157900) {
             return 0;
-        } elseif ($this->tax_information->filing_status === 'S' && $this->gross_wages > 81540 && $this->gross_wages <= 156450) {
-            return round(9350 * (156450 - $this->gross_wages) / 75000, 4);
+        } elseif ($this->tax_information->filing_status === 'S' && $this->gross_wages > 82900 && $this->gross_wages <= 157900) {
+            return round(9550 * (157900 - $this->gross_wages) / 75000, 4);
         }
 
-        if ($this->tax_information->filing_status === 'M' && $this->gross_wages <= 162950) {
-            return 21550;
-        } elseif ($this->tax_information->filing_status === 'M' && $this->gross_wages > 312950) {
+        if ($this->tax_information->filing_status === 'M' && $this->gross_wages <= 165800) {
+            return 21950;
+        } elseif ($this->tax_information->filing_status === 'M' && $this->gross_wages > 315800) {
             return 0;
-        } elseif ($this->tax_information->filing_status === 'M' && $this->gross_wages > 162950 && $this->gross_wages <= 312950) {
-            return round(21550 * (312950 - $this->gross_wages) / 150000, 4);
+        } elseif ($this->tax_information->filing_status === 'M' && $this->gross_wages > 165800 && $this->gross_wages <= 315800) {
+            return round(21950 * (315800 - $this->gross_wages) / 150000, 4);
         }
     }
 
