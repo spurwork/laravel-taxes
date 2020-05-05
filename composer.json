@@ -15,11 +15,10 @@
             "role": "Developer"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
         "php": "^7.2",
-        "illuminate/database": "^5.0|^6.0",
-        "nesbot/carbon": "~1.39.0|^2.24.0"
+        "illuminate/database": "^6.0|^7.0",
+        "nesbot/carbon": "^2.24.0"
     },
     "require-dev": {
         "doctrine/dbal": "^2.9",
@@ -54,7 +53,10 @@
         }
     },
     "config": {
-        "process-timeout": 0,
-        "sort-packages": true
-    }
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "optimize-autoloader": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
