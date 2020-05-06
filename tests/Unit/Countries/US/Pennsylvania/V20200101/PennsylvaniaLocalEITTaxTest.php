@@ -114,10 +114,10 @@ class PennsylvaniaLocalEITTaxTest extends TaxTestCase
                     ->setExpectedAmountInCents(450)
                     ->build()
             ],
-            'exempt' => [
+            'exempt from eit tax' => [
                 $builder
                     ->setTaxInfoOptions([
-                        'exempt' => true,
+                        'exempt_from_eit' => true,
                         'resident_eit' => 1.5,
                         'non_resident_eit' => 1.5,
                     ])

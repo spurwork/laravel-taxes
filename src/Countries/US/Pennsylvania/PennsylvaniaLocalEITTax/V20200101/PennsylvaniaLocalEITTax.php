@@ -10,7 +10,7 @@ class PennsylvaniaLocalEITTax extends BasePennsylvaniaLocalEITTax
 {
     public function compute(Collection $tax_areas)
     {
-        if ($this->isUserClaimingExemption()) {
+        if ($this->tax_information->exempt_from_eit) {
             return 0.0;
         }
 
