@@ -10,6 +10,8 @@ class AddParametersToPennsylvaniaIncomeTaxInformation extends Migration
         Schema::table('pennsylvania_income_tax_information', function (Blueprint $table) {
             $table->float('non_resident_eit')->nullable();
             $table->float('resident_eit')->nullable();
+            $table->string('residential_psd')->default('');
+            $table->string('work_location_psd')->default('');
             $table->boolean('exempt_from_eit')->default(false);
         });
     }

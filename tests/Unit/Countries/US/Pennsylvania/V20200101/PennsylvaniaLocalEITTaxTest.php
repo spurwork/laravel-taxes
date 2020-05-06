@@ -25,6 +25,8 @@ class PennsylvaniaLocalEITTaxTest extends TaxTestCase
             'exempt' => false,
             'resident_eit' => null,
             'non_resident_eit' => null,
+            'residential_psd' => '1234356',
+            'work_location_psd' => '1234356',
         ], $this->user);
     }
 
@@ -96,7 +98,7 @@ class PennsylvaniaLocalEITTaxTest extends TaxTestCase
                         'resident_eit' => null,
                         'non_resident_eit' => null,
                     ])
-                    ->setHomeLocation(self::ALABAMA_LOCATION)
+                    ->setHomeLocation(self::PENNSYLVANIA_LOCATION)
                     ->setWorkLocation(self::PENNSYLVANIA_LOCATION)
                     ->setWagesInCents(16000)
                     ->setExpectedAmountInCents(0)
@@ -108,7 +110,7 @@ class PennsylvaniaLocalEITTaxTest extends TaxTestCase
                         'resident_eit' => 1.5,
                         'non_resident_eit' => 1.5,
                     ])
-                    ->setHomeLocation(self::ALABAMA_LOCATION)
+                    ->setHomeLocation(self::PENNSYLVANIA_LOCATION)
                     ->setWorkLocation(self::PENNSYLVANIA_LOCATION)
                     ->setWagesInCents(30000)
                     ->setExpectedAmountInCents(450)
@@ -121,7 +123,47 @@ class PennsylvaniaLocalEITTaxTest extends TaxTestCase
                         'resident_eit' => 1.5,
                         'non_resident_eit' => 1.5,
                     ])
-                    ->setHomeLocation(self::ALABAMA_LOCATION)
+                    ->setHomeLocation(self::PENNSYLVANIA_LOCATION)
+                    ->setWorkLocation(self::PENNSYLVANIA_LOCATION)
+                    ->setWagesInCents(16000)
+                    ->setExpectedAmountInCents(0)
+                    ->build()
+            ],
+            'philly special resident' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'resident_eit' => 1.5,
+                        'non_resident_eit' => 1.5,
+                        'residential_psd' => '510101',
+                    ])
+                    ->setHomeLocation(self::PENNSYLVANIA_LOCATION)
+                    ->setWorkLocation(self::PENNSYLVANIA_LOCATION)
+                    ->setWagesInCents(16000)
+                    ->setExpectedAmountInCents(0)
+                    ->build()
+            ],
+            'philly special work location' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'resident_eit' => 1.5,
+                        'non_resident_eit' => 1.5,
+                        'work_location_psd' => '510101',
+                    ])
+                    ->setHomeLocation(self::PENNSYLVANIA_LOCATION)
+                    ->setWorkLocation(self::PENNSYLVANIA_LOCATION)
+                    ->setWagesInCents(16000)
+                    ->setExpectedAmountInCents(0)
+                    ->build()
+            ],
+            'philly special both' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'resident_eit' => 1.5,
+                        'non_resident_eit' => 1.5,
+                        'residential_psd' => '510101',
+                        'work_location_psd' => '510101',
+                    ])
+                    ->setHomeLocation(self::PENNSYLVANIA_LOCATION)
                     ->setWorkLocation(self::PENNSYLVANIA_LOCATION)
                     ->setWagesInCents(16000)
                     ->setExpectedAmountInCents(0)
