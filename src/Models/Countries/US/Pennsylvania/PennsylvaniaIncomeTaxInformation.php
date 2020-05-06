@@ -13,6 +13,9 @@ class PennsylvaniaIncomeTaxInformation extends BaseTaxInformationModel
     {
         $tax_information = new self();
         $tax_information->exempt = false;
+        $tax_information->resident_eit = null;
+        $tax_information->non_resident_eit = null;
+
         return $tax_information;
     }
 
