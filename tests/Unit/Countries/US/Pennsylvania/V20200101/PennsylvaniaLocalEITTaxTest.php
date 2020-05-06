@@ -102,6 +102,31 @@ class PennsylvaniaLocalEITTaxTest extends TaxTestCase
                     ->setExpectedAmountInCents(0)
                     ->build()
             ],
+            'same rate' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'resident_eit' => 1.5,
+                        'non_resident_eit' => 1.5,
+                    ])
+                    ->setHomeLocation(self::ALABAMA_LOCATION)
+                    ->setWorkLocation(self::PENNSYLVANIA_LOCATION)
+                    ->setWagesInCents(30000)
+                    ->setExpectedAmountInCents(450)
+                    ->build()
+            ],
+            'exempt' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'exempt' => true,
+                        'resident_eit' => 1.5,
+                        'non_resident_eit' => 1.5,
+                    ])
+                    ->setHomeLocation(self::ALABAMA_LOCATION)
+                    ->setWorkLocation(self::PENNSYLVANIA_LOCATION)
+                    ->setWagesInCents(16000)
+                    ->setExpectedAmountInCents(0)
+                    ->build()
+            ],
         ];
     }
 

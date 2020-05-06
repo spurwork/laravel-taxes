@@ -10,6 +10,10 @@ class PennsylvaniaLocalEITTax extends BasePennsylvaniaLocalEITTax
 {
     public function compute(Collection $tax_areas)
     {
+        if ($this->isUserClaimingExemption()) {
+            return 0.0;
+        }
+
         $this->tax_total = $this->payroll->withholdTax($this->payroll->getEarnings() * $this->getEit());
 
         return round($this->tax_total, 2);
