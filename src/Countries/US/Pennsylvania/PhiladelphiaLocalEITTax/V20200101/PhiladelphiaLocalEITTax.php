@@ -23,7 +23,7 @@ class PhiladelphiaLocalEITTax extends BasePhiladelphiaLocalEITTax
     {
         if ($this->tax_information->residential_psd !== '510101' && $this->tax_information->work_location_psd === '510101') {
             return $this->tax_information->non_resident_eit / 100;
-        } elseif ($this->tax_information->residential_psd === '510101' && $this->tax_information->work_location_psd === '510101' || $this->tax_information->residential_psd === '510101' && $this->tax_information->work_location_psd !== '510101') {
+        } elseif ($this->tax_information->residential_psd === '510101') {
             return $this->tax_information->resident_eit / 100;
         }
     }
