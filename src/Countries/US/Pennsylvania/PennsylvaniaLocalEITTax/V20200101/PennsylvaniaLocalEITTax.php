@@ -10,7 +10,7 @@ class PennsylvaniaLocalEITTax extends BasePennsylvaniaLocalEITTax
 {
     public function compute(Collection $tax_areas)
     {
-        if ($this->tax_information->exempt_from_eit || $this->philadelphiaSpecialTaxRate()) {
+        if ($this->tax_information->exempt_from_lst || $this->philadelphiaSpecialTaxRate()) {
             return 0.0;
         }
 
@@ -21,11 +21,11 @@ class PennsylvaniaLocalEITTax extends BasePennsylvaniaLocalEITTax
 
     public function getEit()
     {
-        return max($this->tax_information->resident_eit / 100, $this->tax_information->non_resident_eit / 100);
+        return max($this->tax_information->resident_eit_rate / 100, $this->tax_information->employer_eit_rate / 100);
     }
 
     public function philadelphiaSpecialTaxRate()
     {
-        return $this->tax_information->residential_psd === '510101' || $this->tax_information->work_location_psd === '510101';
+        return $this->tax_information->resident_psd_code === '510101' || $this->tax_information->employer_psd_code === '510101';
     }
 }

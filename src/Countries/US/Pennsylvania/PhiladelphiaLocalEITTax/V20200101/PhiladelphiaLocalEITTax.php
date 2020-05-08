@@ -10,7 +10,7 @@ class PhiladelphiaLocalEITTax extends BasePhiladelphiaLocalEITTax
 {
     public function compute(Collection $tax_areas)
     {
-        if ($this->tax_information->exempt_from_eit) {
+        if ($this->tax_information->exempt_from_lst) {
             return 0.0;
         }
 
@@ -21,10 +21,10 @@ class PhiladelphiaLocalEITTax extends BasePhiladelphiaLocalEITTax
 
     public function getEit()
     {
-        if ($this->tax_information->residential_psd !== '510101' && $this->tax_information->work_location_psd === '510101') {
-            return $this->tax_information->non_resident_eit / 100;
-        } elseif ($this->tax_information->residential_psd === '510101') {
-            return $this->tax_information->resident_eit / 100;
+        if ($this->tax_information->resident_psd_code !== '510101' && $this->tax_information->employer_psd_code === '510101') {
+            return $this->tax_information->employer_eit_rate / 100;
+        } elseif ($this->tax_information->resident_psd_code === '510101') {
+            return $this->tax_information->resident_eit_rate / 100;
         }
     }
 }

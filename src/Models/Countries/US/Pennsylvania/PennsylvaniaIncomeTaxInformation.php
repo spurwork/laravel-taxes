@@ -13,10 +13,11 @@ class PennsylvaniaIncomeTaxInformation extends BaseTaxInformationModel
     {
         $tax_information = new self();
         $tax_information->exempt = false;
-        $tax_information->resident_eit = null;
-        $tax_information->non_resident_eit = null;
-        $tax_information->residential_psd = '';
-        $tax_information->work_location_psd = '';
+        $tax_information->exempt_from_lst = false;
+        $tax_information->resident_eit_rate = null;
+        $tax_information->employer_eit_rate = null;
+        $tax_information->resident_psd_code = '';
+        $tax_information->employer_psd_code = '';
 
         return $tax_information;
     }

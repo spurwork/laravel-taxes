@@ -23,10 +23,10 @@ class PhiladelphiaLocalEITTaxTest extends TaxTestCase
 
         PennsylvaniaIncomeTaxInformation::createForUser([
             'exempt' => false,
-            'resident_eit' => null,
-            'non_resident_eit' => null,
-            'residential_psd' => '',
-            'work_location_psd' => '',
+            'resident_eit_rate' => null,
+            'employer_eit_rate' => null,
+            'resident_psd_code' => '',
+            'employer_psd_code' => '',
         ], $this->user);
     }
 
@@ -59,10 +59,10 @@ class PhiladelphiaLocalEITTaxTest extends TaxTestCase
             'lives and works in philadelphia' => [
                 $builder
                     ->setTaxInfoOptions([
-                        'residential_psd' => '510101',
-                        'work_location_psd' => '510101',
-                        'resident_eit' => 1.5,
-                        'non_resident_eit' => .5,
+                        'resident_psd_code' => '510101',
+                        'employer_psd_code' => '510101',
+                        'resident_eit_rate' => 1.5,
+                        'employer_eit_rate' => .5,
                     ])
                     ->setHomeLocation(self::PENNSYLVANIA_LOCATION)
                     ->setWorkLocation(self::PENNSYLVANIA_LOCATION)
@@ -73,10 +73,10 @@ class PhiladelphiaLocalEITTaxTest extends TaxTestCase
             'lives in philadelphia' => [
                 $builder
                     ->setTaxInfoOptions([
-                        'residential_psd' => '510101',
-                        'work_location_psd' => '123456',
-                        'resident_eit' => 1.5,
-                        'non_resident_eit' => .5,
+                        'resident_psd_code' => '510101',
+                        'employer_psd_code' => '123456',
+                        'resident_eit_rate' => 1.5,
+                        'employer_eit_rate' => .5,
                     ])
                     ->setHomeLocation(self::PENNSYLVANIA_LOCATION)
                     ->setWorkLocation(self::PENNSYLVANIA_LOCATION)
@@ -87,10 +87,10 @@ class PhiladelphiaLocalEITTaxTest extends TaxTestCase
             'works in philadelphia' => [
                 $builder
                     ->setTaxInfoOptions([
-                        'residential_psd' => '123456',
-                        'work_location_psd' => '510101',
-                        'resident_eit' => 1.5,
-                        'non_resident_eit' => .5,
+                        'resident_psd_code' => '123456',
+                        'employer_psd_code' => '510101',
+                        'resident_eit_rate' => 1.5,
+                        'employer_eit_rate' => .5,
                     ])
                     ->setHomeLocation(self::PENNSYLVANIA_LOCATION)
                     ->setWorkLocation(self::PENNSYLVANIA_LOCATION)
@@ -101,10 +101,10 @@ class PhiladelphiaLocalEITTaxTest extends TaxTestCase
             'doesnt live or work in philadelphia' => [
                 $builder
                     ->setTaxInfoOptions([
-                        'residential_psd' => '123456',
-                        'work_location_psd' => '990909',
-                        'resident_eit' => 1.5,
-                        'non_resident_eit' => .5,
+                        'resident_psd_code' => '123456',
+                        'employer_psd_code' => '990909',
+                        'resident_eit_rate' => 1.5,
+                        'employer_eit_rate' => .5,
                     ])
                     ->setHomeLocation(self::PENNSYLVANIA_LOCATION)
                     ->setWorkLocation(self::PENNSYLVANIA_LOCATION)
@@ -115,10 +115,10 @@ class PhiladelphiaLocalEITTaxTest extends TaxTestCase
             'psd is empty' => [
                 $builder
                     ->setTaxInfoOptions([
-                        'residential_psd' => '',
-                        'work_location_psd' => '',
-                        'resident_eit' => 1.5,
-                        'non_resident_eit' => .5,
+                        'resident_psd_code' => '',
+                        'employer_psd_code' => '',
+                        'resident_eit_rate' => 1.5,
+                        'employer_eit_rate' => .5,
                     ])
                     ->setHomeLocation(self::PENNSYLVANIA_LOCATION)
                     ->setWorkLocation(self::PENNSYLVANIA_LOCATION)
