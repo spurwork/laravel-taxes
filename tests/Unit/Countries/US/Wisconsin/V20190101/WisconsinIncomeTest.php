@@ -50,29 +50,60 @@ class WisconsinIncomeTest extends TaxTestCase
             '00' => [
                 $builder
                     ->setTaxInfoOptions(null)
-                    ->setWagesInCents(100000)
-                    ->setExpectedAmountInCents(5686)
+                    ->setWagesInCents(10000)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
             '01' => [
                 $builder
-                    ->setTaxInfoOptions(['filing_status' => WisconsinIncome::FILING_MARRIED])
+                    ->setTaxInfoOptions(null)
                     ->setWagesInCents(100000)
-                    ->setExpectedAmountInCents(5492)
+                    ->setExpectedAmountInCents(5545)
                     ->build()
             ],
             '02' => [
                 $builder
-                    ->setTaxInfoOptions(['filing_status' => WisconsinIncome::FILING_SEPERATE])
-                    ->setWagesInCents(100000)
-                    ->setExpectedAmountInCents(5881)
+                    ->setTaxInfoOptions(null)
+                    ->setWagesInCents(500000)
+                    ->setExpectedAmountInCents(31309)
                     ->build()
             ],
-            'exemptions' => [
+            '03' => [
+                $builder
+                    ->setTaxInfoOptions(['filing_status' => WisconsinIncome::FILING_MARRIED])
+                    ->setWagesInCents(10000)
+                    ->setExpectedAmountInCents(0)
+                    ->build()
+            ],
+            '04' => [
+                $builder
+                    ->setTaxInfoOptions(['filing_status' => WisconsinIncome::FILING_MARRIED])
+                    ->setWagesInCents(100000)
+                    ->setExpectedAmountInCents(5493)
+                    ->build()
+            ],
+            '05' => [
+                $builder
+                    ->setTaxInfoOptions(['filing_status' => WisconsinIncome::FILING_MARRIED])
+                    ->setWagesInCents(500000)
+                    ->setExpectedAmountInCents(31309)
+                    ->build()
+            ],
+            'exemptions_single' => [
                 $builder
                     ->setTaxInfoOptions(['exemptions' => 1])
                     ->setWagesInCents(100000)
-                    ->setExpectedAmountInCents(5638)
+                    ->setExpectedAmountInCents(5497)
+                    ->build()
+            ],
+            'exemptions_married' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'filing_status' => WisconsinIncome::FILING_MARRIED,
+                        'exemptions' => 4,
+                    ])
+                    ->setWagesInCents(100000)
+                    ->setExpectedAmountInCents(5300)
                     ->build()
             ],
             'exempt true' => [
@@ -92,7 +123,7 @@ class WisconsinIncomeTest extends TaxTestCase
                         'exempt' => false,
                     ])
                     ->setWagesInCents(100000)
-                    ->setExpectedAmountInCents(5638)
+                    ->setExpectedAmountInCents(5497)
                     ->build()
             ],
         ];

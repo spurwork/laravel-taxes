@@ -12,6 +12,7 @@ class MontanaIncomeTaxInformation extends BaseTaxInformationModel
     public static function getDefault()
     {
         $tax_information = new self();
+        $tax_information->additional_withholding = 0;
         $tax_information->allowances = 0;
         $tax_information->exempt = false;
         return $tax_information;

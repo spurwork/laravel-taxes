@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Tests\Unit\Countries\US\Maine\V20190101;
+namespace Appleton\Taxes\Tests\Unit\Countries\US\Maine\V20200101;
 
 use Appleton\Taxes\Countries\US\Maine\MaineIncome\MaineIncome;
 use Appleton\Taxes\Models\Countries\US\Maine\MaineIncomeTaxInformation;
@@ -10,7 +10,7 @@ use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
 
 class MaineIncomeTest extends TaxTestCase
 {
-    private const DATE = '2019-01-01';
+    private const DATE = '2020-01-01';
     private const LOCATION = 'us.maine';
     private const TAX_CLASS = MaineIncome::class;
     private const TAX_INFO_CLASS = MaineIncomeTaxInformation::class;
@@ -89,7 +89,7 @@ class MaineIncomeTest extends TaxTestCase
                         'allowances' => 2,
                     ])
                     ->setWagesInCents(100000)
-                    ->setExpectedAmountInCents(2500)
+                    ->setExpectedAmountInCents(2400)
                     ->build()
             ],
             '06' => [
@@ -98,7 +98,7 @@ class MaineIncomeTest extends TaxTestCase
                         'filing_status' => MaineIncome::FILING_MARRIED,
                     ])
                     ->setWagesInCents(200000)
-                    ->setExpectedAmountInCents(9900)
+                    ->setExpectedAmountInCents(9800)
                     ->build()
             ],
             '07' => [
@@ -108,14 +108,14 @@ class MaineIncomeTest extends TaxTestCase
                         'allowances' => 2,
                     ])
                     ->setWagesInCents(200000)
-                    ->setExpectedAmountInCents(8800)
+                    ->setExpectedAmountInCents(8700)
                     ->build()
             ],
             '08' => [
                 $builder
                     ->setTaxInfoOptions(['allowances' => 2])
                     ->setWagesInCents(80000)
-                    ->setExpectedAmountInCents(2700)
+                    ->setExpectedAmountInCents(2600)
                     ->build()
             ],
             '09' => [
@@ -125,7 +125,7 @@ class MaineIncomeTest extends TaxTestCase
                         'allowances' => 2,
                     ])
                     ->setWagesInCents(450000)
-                    ->setExpectedAmountInCents(27900)
+                    ->setExpectedAmountInCents(27700)
                     ->build()
             ],
              '10' => [
@@ -183,7 +183,7 @@ class MaineIncomeTest extends TaxTestCase
                         'additional_withholding' => 20,
                     ])
                     ->setWagesInCents(100000)
-                    ->setExpectedAmountInCents(4500)
+                    ->setExpectedAmountInCents(4400)
                     ->build()
             ],
             '16' => [
@@ -193,7 +193,7 @@ class MaineIncomeTest extends TaxTestCase
                         'additional_withholding' => 20,
                     ])
                     ->setWagesInCents(200000)
-                    ->setExpectedAmountInCents(11900)
+                    ->setExpectedAmountInCents(11800)
                     ->build()
             ],
             '17' => [
@@ -204,7 +204,7 @@ class MaineIncomeTest extends TaxTestCase
                         'additional_withholding' => 20,
                     ])
                     ->setWagesInCents(200000)
-                    ->setExpectedAmountInCents(10800)
+                    ->setExpectedAmountInCents(10700)
                     ->build()
             ],
             '18' => [
@@ -214,7 +214,7 @@ class MaineIncomeTest extends TaxTestCase
                         'additional_withholding' => 20,
                     ])
                     ->setWagesInCents(80000)
-                    ->setExpectedAmountInCents(4700)
+                    ->setExpectedAmountInCents(4600)
                     ->build()
             ],
             '19' => [
@@ -225,7 +225,7 @@ class MaineIncomeTest extends TaxTestCase
                         'additional_withholding' => 20,
                     ])
                     ->setWagesInCents(450000)
-                    ->setExpectedAmountInCents(29900)
+                    ->setExpectedAmountInCents(29700)
                     ->build()
             ],
         ];
