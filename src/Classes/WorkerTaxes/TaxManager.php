@@ -90,7 +90,7 @@ class TaxManager
         Carbon $date
     ): float {
         if (!$taxable_wages->has($tax_class)) {
-            dd('dead end');
+            dump('dead end');
             return 0.0;
         }
 
@@ -102,7 +102,7 @@ class TaxManager
                     dump($start_date);
                     // dump($taxable_wage->getDate()->gte($start_date));
                     dump($taxable_wage->getDate());
-                    dd($date);
+                    dump($date);
                     // dd($taxable_wage->getDate()->lte($date));
                     return $taxable_wage->getDate()->gte($start_date)
                         && $taxable_wage->getDate()->lte($date);
