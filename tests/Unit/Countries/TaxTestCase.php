@@ -91,7 +91,6 @@ abstract class TaxTestCase extends UnitTestCase
         } elseif ($parameters->getWtdLiabilitiesInCents() !== null
         && $parameters->getWtdLiabilitiesInCents() !== 0) {
             $taxable_wage = $this->makeTaxableWageAtDate(now(), $parameters->getTaxClass(), $parameters->getWtdLiabilitiesInCents());
-
             $annual_taxable_wages->put($parameters->getTaxClass(), collect([$taxable_wage]));
         }
 
@@ -111,7 +110,7 @@ abstract class TaxTestCase extends UnitTestCase
             collect([]),
             collect([])
         );
-
+        // dd($results);
         $short_name = (new ReflectionClass($parameters->getTaxClass()))->getShortName();
 
         /** @var TaxResult $result */

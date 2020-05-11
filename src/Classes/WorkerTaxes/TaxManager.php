@@ -90,20 +90,14 @@ class TaxManager
         Carbon $date
     ): float {
         if (!$taxable_wages->has($tax_class)) {
-            dump('dead end');
             return 0.0;
         }
 
         $start_date = $date->copy()->startOfWeek();
-
+        dd($date);
         return $taxable_wages
                 ->get($tax_class)
                 ->filter(static function (TaxableWage $taxable_wage) use ($start_date, $date) {
-                    dump($start_date);
-                    // dump($taxable_wage->getDate()->gte($start_date));
-                    dump($taxable_wage->getDate());
-                    dump($date);
-                    // dd($taxable_wage->getDate()->lte($date));
                     return $taxable_wage->getDate()->gte($start_date)
                         && $taxable_wage->getDate()->lte($date);
                 })

@@ -8,7 +8,7 @@ use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
 
 class ParkersburgCityServiceFeeTest extends TaxTestCase
 {
-    private const DATE = '2019-01-07';
+    private const DATE = '2019-01-01';
     private const LOCATION = 'us.west_virginia.parkersburg';
     private const OTHER_LOCATION = 'us.west_virginia';
     private const TAX_CLASS = ParkersburgCityServiceFee::class;
