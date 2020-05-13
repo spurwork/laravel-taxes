@@ -2,10 +2,12 @@
 
 namespace Appleton\Taxes\Tests\Unit\Classes\WorkerTaxes;
 
+use Appleton\Taxes\Classes\WorkerTaxes\LiabilityAmount;
 use Appleton\Taxes\Classes\WorkerTaxes\TaxableWage;
 use Appleton\Taxes\Classes\WorkerTaxes\TaxManager;
 use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome;
 use Appleton\Taxes\Countries\US\FederalUnemployment\FederalUnemployment;
+use Appleton\Taxes\Countries\US\Pennsylvania\PennsylvaniaLocalEITTax\PennsylvaniaLocalEITTax;
 use Carbon\Carbon;
 use Faker\Factory;
 use PHPUnit\Framework\TestCase;
@@ -237,6 +239,28 @@ class TaxManagerTest extends TestCase
 
         $results = $this->tax_manager->computeMtdTaxableWages($tax_amounts, FederalIncome::class, Carbon::now());
 
+        self::assertThat($results, self::equalTo($tax_amount->getAmount() / 100));
+    }
+
+    public function testComputeYtdLiabilities(): void
+    {
+        $tax_amount = new LiabilityAmount(
+            $this->factory->numberBetween(100, 10000),
+            Carbon::now()->subDays(1),
+            PennsylvaniaLocalEITTax::class
+        );
+        // $tax_amount_other_tax = new LiabilityAmount(
+        //     $this->factory->numberBetween(100, 10000),
+        //     Carbon::now()->addDay(),
+        //     PennsylvaniaUnemployment::class
+        // );
+
+        $tax_amounts = collect([]);
+        $tax_amounts->put(PennsylvaniaLocalEITTax::class, collect([$tax_amount]));
+        // $tax_amounts->put(PennsylvaniaUnemployment::class, collect([$tax_amount_other_tax]));
+
+        $results = $this->tax_manager->computeYtdLiabilities($tax_amounts, PennsylvaniaLocalEITTax::class, Carbon::now());
+        dd($results);
         self::assertThat($results, self::equalTo($tax_amount->getAmount() / 100));
     }
 }

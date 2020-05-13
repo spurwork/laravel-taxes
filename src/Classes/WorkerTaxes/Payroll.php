@@ -32,6 +32,7 @@ class Payroll
     private $home_areas;
     private $total_earnings;
     private $annual_taxable_wages;
+    private $annual_liability_amounts;
 
     private $wage_manager;
     private $tax_manager;
@@ -63,6 +64,7 @@ class Payroll
         $this->area_incomes = $parameters['area_incomes'] ?? collect([]);
         $this->home_areas = $parameters['home_areas'] ?? collect([]);
         $this->annual_taxable_wages = $parameters['annual_taxable_wages'] ?? collect([]);
+        $this->annual_liability_amounts = $parameters['annual_liability_amounts'] ?? collect([]);
         $this->total_earnings = $parameters['total_earnings'] ?? 0;
         $this->pay_rate = $parameters['pay_rate'] ?? 0;
 
@@ -214,6 +216,11 @@ class Payroll
     public function getYtdTaxableWages(string $tax_class): float
     {
         return $this->tax_manager->computeYtdTaxableWages($this->annual_taxable_wages, $tax_class, $this->pay_date);
+    }
+
+    public function getYtdLiabilities(string $tax_class): float
+    {
+        return $this->tax_manager->computeYtdLiabilities($this->annual_liability_amounts, $tax_class, $this->pay_date);
     }
 
     public function getMtdTaxableWages(string $tax_class): float
