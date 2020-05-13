@@ -10,7 +10,7 @@ class PennsylvaniaLocalEITTax extends BasePennsylvaniaLocalEITTax
 {
     public function compute(Collection $tax_areas)
     {
-        if ($this->tax_information->exempt_from_lst || $this->philadelphiaSpecialTaxRate()) {
+        if ($this->philadelphiaSpecialTaxRate()) {
             return 0.0;
         }
 
@@ -26,6 +26,6 @@ class PennsylvaniaLocalEITTax extends BasePennsylvaniaLocalEITTax
 
     public function philadelphiaSpecialTaxRate()
     {
-        return $this->tax_information->resident_psd_code === '510101' || $this->tax_information->employer_psd_code === '510101';
+        return $this->tax_information->is_resident_psd_code_philadelphia || $this->tax_information->is_employer_psd_code_philadelphia;
     }
 }

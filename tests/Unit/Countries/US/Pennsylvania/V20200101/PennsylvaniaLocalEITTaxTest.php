@@ -25,8 +25,8 @@ class PennsylvaniaLocalEITTaxTest extends TaxTestCase
             'exempt' => false,
             'resident_eit_rate' => null,
             'employer_eit_rate' => null,
-            'resident_psd_code' => '1234356',
-            'employer_psd_code' => '1234356',
+            'is_resident_psd_code_philadelphia' => 'false',
+            'is_employer_psd_code_philadelphia' => 'false',
         ], $this->user);
     }
 
@@ -116,25 +116,12 @@ class PennsylvaniaLocalEITTaxTest extends TaxTestCase
                     ->setExpectedAmountInCents(450)
                     ->build()
             ],
-            'exempt from eit tax' => [
-                $builder
-                    ->setTaxInfoOptions([
-                        'exempt_from_lst' => true,
-                        'resident_eit_rate' => 1.5,
-                        'employer_eit_rate' => 1.5,
-                    ])
-                    ->setHomeLocation(self::PENNSYLVANIA_LOCATION)
-                    ->setWorkLocation(self::PENNSYLVANIA_LOCATION)
-                    ->setWagesInCents(16000)
-                    ->setExpectedAmountInCents(0)
-                    ->build()
-            ],
             'philly special resident' => [
                 $builder
                     ->setTaxInfoOptions([
                         'resident_eit_rate' => 1.5,
                         'employer_eit_rate' => 1.5,
-                        'resident_psd_code' => '510101',
+                        'is_resident_psd_code_philadelphia' => true,
                     ])
                     ->setHomeLocation(self::PENNSYLVANIA_LOCATION)
                     ->setWorkLocation(self::PENNSYLVANIA_LOCATION)
@@ -147,7 +134,7 @@ class PennsylvaniaLocalEITTaxTest extends TaxTestCase
                     ->setTaxInfoOptions([
                         'resident_eit_rate' => 1.5,
                         'employer_eit_rate' => 1.5,
-                        'employer_psd_code' => '510101',
+                        'is_employer_psd_code_philadelphia' => true,
                     ])
                     ->setHomeLocation(self::PENNSYLVANIA_LOCATION)
                     ->setWorkLocation(self::PENNSYLVANIA_LOCATION)
@@ -160,8 +147,8 @@ class PennsylvaniaLocalEITTaxTest extends TaxTestCase
                     ->setTaxInfoOptions([
                         'resident_eit_rate' => 1.5,
                         'employer_eit_rate' => 1.5,
-                        'resident_psd_code' => '510101',
-                        'employer_psd_code' => '510101',
+                        'is_resident_psd_code_philadelphia' => true,
+                        'is_employer_psd_code_philadelphia' => true,
                     ])
                     ->setHomeLocation(self::PENNSYLVANIA_LOCATION)
                     ->setWorkLocation(self::PENNSYLVANIA_LOCATION)

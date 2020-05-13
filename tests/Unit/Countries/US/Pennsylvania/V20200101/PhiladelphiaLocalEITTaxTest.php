@@ -25,8 +25,8 @@ class PhiladelphiaLocalEITTaxTest extends TaxTestCase
             'exempt' => false,
             'resident_eit_rate' => null,
             'employer_eit_rate' => null,
-            'resident_psd_code' => '',
-            'employer_psd_code' => '',
+            'is_resident_psd_code_philadelphia' => false,
+            'is_employer_psd_code_philadelphia' => false,
         ], $this->user);
     }
 
@@ -59,8 +59,8 @@ class PhiladelphiaLocalEITTaxTest extends TaxTestCase
             'lives and works in philadelphia' => [
                 $builder
                     ->setTaxInfoOptions([
-                        'resident_psd_code' => '510101',
-                        'employer_psd_code' => '510101',
+                        'is_resident_psd_code_philadelphia' => true,
+                        'is_employer_psd_code_philadelphia' => true,
                         'resident_eit_rate' => 1.5,
                         'employer_eit_rate' => .5,
                     ])
@@ -73,8 +73,8 @@ class PhiladelphiaLocalEITTaxTest extends TaxTestCase
             'lives in philadelphia' => [
                 $builder
                     ->setTaxInfoOptions([
-                        'resident_psd_code' => '510101',
-                        'employer_psd_code' => '123456',
+                        'is_resident_psd_code_philadelphia' => true,
+                        'is_employer_psd_code_philadelphia' => false,
                         'resident_eit_rate' => 1.5,
                         'employer_eit_rate' => .5,
                     ])
@@ -87,8 +87,8 @@ class PhiladelphiaLocalEITTaxTest extends TaxTestCase
             'works in philadelphia' => [
                 $builder
                     ->setTaxInfoOptions([
-                        'resident_psd_code' => '123456',
-                        'employer_psd_code' => '510101',
+                        'is_resident_psd_code_philadelphia' => false,
+                        'is_employer_psd_code_philadelphia' => true,
                         'resident_eit_rate' => 1.5,
                         'employer_eit_rate' => .5,
                     ])
@@ -101,8 +101,8 @@ class PhiladelphiaLocalEITTaxTest extends TaxTestCase
             'doesnt live or work in philadelphia' => [
                 $builder
                     ->setTaxInfoOptions([
-                        'resident_psd_code' => '123456',
-                        'employer_psd_code' => '990909',
+                        'is_resident_psd_code_philadelphia' => false,
+                        'is_employer_psd_code_philadelphia' => false,
                         'resident_eit_rate' => 1.5,
                         'employer_eit_rate' => .5,
                     ])
@@ -115,8 +115,8 @@ class PhiladelphiaLocalEITTaxTest extends TaxTestCase
             'psd is empty' => [
                 $builder
                     ->setTaxInfoOptions([
-                        'resident_psd_code' => '',
-                        'employer_psd_code' => '',
+                        'is_resident_psd_code_philadelphia' => false,
+                        'is_employer_psd_code_philadelphia' => false,
                         'resident_eit_rate' => 1.5,
                         'employer_eit_rate' => .5,
                     ])

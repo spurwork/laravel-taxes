@@ -21,9 +21,9 @@ class PhiladelphiaLocalEITTax extends BasePhiladelphiaLocalEITTax
 
     public function getEit()
     {
-        if ($this->tax_information->resident_psd_code !== '510101' && $this->tax_information->employer_psd_code === '510101') {
+        if (!$this->tax_information->is_resident_psd_code_philadelphia && $this->tax_information->is_employer_psd_code_philadelphia) {
             return $this->tax_information->employer_eit_rate / 100;
-        } elseif ($this->tax_information->resident_psd_code === '510101') {
+        } elseif ($this->tax_information->is_resident_psd_code_philadelphia) {
             return $this->tax_information->resident_eit_rate / 100;
         }
     }
