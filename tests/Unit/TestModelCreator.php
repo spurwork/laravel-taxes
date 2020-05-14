@@ -3,10 +3,12 @@
 namespace Appleton\Taxes\Tests\Unit;
 
 use Appleton\Taxes\Classes\WorkerTaxes\GeoPoint;
+use Appleton\Taxes\Classes\WorkerTaxes\LiabilityAmount;
 use Appleton\Taxes\Classes\WorkerTaxes\TaxableWage;
 use Appleton\Taxes\Classes\WorkerTaxes\Wage;
 use Appleton\Taxes\Classes\WorkerTaxes\WageType;
 use Appleton\Taxes\Models\TaxArea;
+use Appleton\Taxes\Tests\Unit\UnitTestCase;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -72,8 +74,7 @@ trait TestModelCreator
     protected function makeTaxableWage(
         string $tax_class,
         int $amount
-    ): TaxableWage
-    {
+    ): TaxableWage {
         return new TaxableWage(
             $amount,
             Carbon::now(),
@@ -85,9 +86,31 @@ trait TestModelCreator
         Carbon $date,
         string $tax_class,
         int $amount
-    ): TaxableWage
-    {
+    ): TaxableWage {
         return new TaxableWage(
+            $amount,
+            $date,
+            $tax_class
+        );
+    }
+
+    protected function makeLiabilityAmount(
+        string $tax_class,
+        int $amount
+    ): LiabilityAmount {
+        return new LiabilityAmount(
+            $amount,
+            Carbon::now(),
+            $tax_class
+        );
+    }
+
+    protected function makeLiabilityAmountAtDate(
+        Carbon $date,
+        string $tax_class,
+        int $amount
+    ): LiabilityAmount {
+        return new LiabilityAmount(
             $amount,
             $date,
             $tax_class
@@ -98,8 +121,7 @@ trait TestModelCreator
         GeoPoint $location,
         string $additional_tax,
         int $amount_in_cents = UnitTestCase::DEFAULT_SHIFT_WAGES
-    ): Wage
-    {
+    ): Wage {
         return new Wage(
             WageType::SHIFT,
             Carbon::now(),

@@ -58,6 +58,7 @@ class WageBaseTaxTestCase extends TaxTestCase
             $wages,
             $annual_wages,
             $annual_taxable_wages,
+            collect([]),
             $this->user,
             null,
             1,

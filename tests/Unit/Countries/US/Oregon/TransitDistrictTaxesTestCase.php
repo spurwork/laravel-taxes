@@ -31,6 +31,7 @@ class TransitDistrictTaxesTestCase extends TaxTestCase
             $wages,
             collect([]),
             collect([]),
+            collect([]),
             $this->user,
             $parameters->getBirthDate(),
             $parameters->getPayPeriods(),
