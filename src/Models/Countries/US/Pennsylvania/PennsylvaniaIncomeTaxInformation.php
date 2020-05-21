@@ -4,6 +4,7 @@ namespace Appleton\Taxes\Models\Countries\US\Pennsylvania;
 
 use Appleton\Taxes\Classes\WorkerTaxes\BaseTaxInformationModel;
 use Appleton\Taxes\Countries\US\Pennsylvania\PennsylvaniaIncome\PennsylvaniaIncome;
+use Carbon\Carbon;
 
 class PennsylvaniaIncomeTaxInformation extends BaseTaxInformationModel
 {
@@ -24,6 +25,8 @@ class PennsylvaniaIncomeTaxInformation extends BaseTaxInformationModel
         $tax_information->municipal_lst_lie_total = 0;
         $tax_information->school_district_lst_lie_total = 0;
         $tax_information->lst_paid_to_previous_employers = 0;
+        $tax_information->wages_from_previous_employers = 0;
+        $tax_information->exempt_from_lst_date = Carbon::now();
         return $tax_information;
     }
 

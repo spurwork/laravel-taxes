@@ -10,8 +10,11 @@ class PennsylvaniaLSTTaxEmployer extends BasePennsylvaniaLSTTaxEmployer
     const LST_TRIGGER_AMOUNT = 10;
     const PREVIOUSLY_PAID_LST_TOTAL = 52;
 
+    private $tax_areas;
+
     public function compute(Collection $tax_areas)
     {
+        $this->tax_areas = $tax_areas;
         $this->tax_total = $this->getAmountToWithhold();
         return round($this->tax_total, 2);
     }
@@ -31,10 +34,14 @@ class PennsylvaniaLSTTaxEmployer extends BasePennsylvaniaLSTTaxEmployer
                 return 0.0;
             }
             if ($this->getPreviouslyPaidLST() < self::PREVIOUSLY_PAID_LST_TOTAL) {
-                $previous_amount = self::PREVIOUSLY_PAID_LST_TOTAL - $this->getPreviouslyPaidLST();
+                $previous_amount = $amount_owed - $this->getPreviouslyPaidLST();
 
                 $amount_owed = min($amount_owed, $previous_amount);
             }
+        }
+
+        if ($amount_owed > $this->getTotalLSTOwed() + $this->getCatchUpAmount()) {
+            $amount_owed = $this->getTotalLSTOwed();
         }
 
         if ($this->getTotalLSTOwed() <= self::LST_TRIGGER_AMOUNT) {
@@ -46,17 +53,69 @@ class PennsylvaniaLSTTaxEmployer extends BasePennsylvaniaLSTTaxEmployer
 
     public function getTotalLSTOwed()
     {
-        if ($this->tax_information->exempt_from_municipal_lst && $this->tax_information->exempt_from_school_district_lst) {
-            return 0;
-        } elseif ($this->tax_information->exempt_from_municipal_lst) {
-            return $this->tax_information->school_district_lst_total;
-        }
-
         return $this->tax_information->municipal_lst_total + $this->tax_information->school_district_lst_total;
     }
 
     public function getPreviouslyPaidLST()
     {
         return $this->tax_information->lst_paid_to_previous_employers;
+    }
+
+    public function isExemptFromMunicipalLST()
+    {
+        if (!$this->tax_information->exempt_from_municipal_lst || !$this->tax_information->municipal_lst_lie_total || $this->tax_information->municipal_lst_lie_total === 0) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public function isExemptFromSchoolDistrictLST()
+    {
+        if (!$this->tax_information->exempt_from_school_district_lst || !$this->tax_information->school_district_lst_lie_total || $this->tax_information->school_district_lst_lie_total === 0) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public function previousAmountPaidTowardsLIETotal()
+    {
+        return $this->payroll->getYtdEarnings($this->tax_areas->first()->workGovernmentalUnitArea) + $this->tax_information->wages_from_previous_employers;
+    }
+
+    public function getCatchUpAmount()
+    {
+        $municipal_amount = 0;
+        $school_district_amount = 0;
+        $ytd_earnings = 0;
+
+        $ytd_earnings = $this->payroll->getYtdEarnings($this->tax_areas->first()->workGovernmentalUnitArea);
+        $ytd_earnings += $this->tax_information->wages_from_previous_employers;
+        $ytd_earnings += $this->payroll->getEarnings();
+
+        if ($this->isExemptFromMunicipalLST()) {
+            if ($ytd_earnings > $this->tax_information->municipal_lst_lie_total) {
+                if ($this->tax_information->municipal_lst_total <= self::LST_TRIGGER_AMOUNT) {
+                    $municipal_amount = $this->tax_information->municipal_lst_total;
+                } else {
+                    // $municipal_amount = $this->tax_information->municipal_lst_total / $this->payroll->weeks_exempt;
+                    $municipal_amount = $this->tax_information->municipal_lst_total / 6; // not sure how this will end up working
+                }
+            }
+        }
+
+        if ($this->isExemptFromSchoolDistrictLST()) {
+            if ($ytd_earnings > $this->tax_information->school_district_lst_lie_total) {
+                if ($this->tax_information->school_district_lst_total <= self::LST_TRIGGER_AMOUNT) {
+                    $school_district_amount = $this->tax_information->school_district_lst_total;
+                } else {
+                    // $school_district_amount = $this->tax_information->school_district_lst_total / $this->payroll->weeks_exempt;
+                    $school_district_amount = $this->tax_information->school_district_lst_total / 6; // not sure how this will end up working
+                }
+            }
+        }
+
+        return $municipal_amount + $school_district_amount;
     }
 }
