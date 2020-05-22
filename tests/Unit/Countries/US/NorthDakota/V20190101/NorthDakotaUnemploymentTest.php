@@ -8,7 +8,7 @@ use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
 
 class NorthDakotaUnemploymentTest extends UnemploymentTaxTestCase
 {
-    private const DATE = '2020-01-01';
+    private const DATE = '2019-01-01';
     private const LOCATION = 'us.north_dakota';
     private const TAX_CLASS = NorthDakotaUnemployment::class;
     private const TAX_RATE = 0.0121;
