@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Schema;
  */
 class UpdateColumnsInNorthDakotaIncomeTaxInformation extends Migration
 {
-    protected string $north_dakota_income_tax_information = 'north_dakota_income_tax_information';
+    protected $north_dakota_income_tax_information = 'north_dakota_income_tax_information';
     /**
      * Run the migrations.
      *
