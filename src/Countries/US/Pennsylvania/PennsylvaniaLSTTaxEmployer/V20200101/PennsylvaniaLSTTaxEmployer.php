@@ -29,6 +29,12 @@ class PennsylvaniaLSTTaxEmployer extends BasePennsylvaniaLSTTaxEmployer
 
         $amount_owed = min($amount_owed, $amount_owed - $this->payroll->getYtdLiabilities(BasePennsylvaniaLSTTaxEmployer::class));
 
+        if ($amount_owed + $this->getCatchUpAmount() <= $this->getTotalLSTOwed()) {
+            $amount_owed += $this->getCatchUpAmount();
+        } else {
+            $amount_owed = $this->getTotalLSTOwed();
+        }
+
         if ($this->getPreviouslyPaidLST() > 0) {
             if (self::PREVIOUSLY_PAID_LST_TOTAL - $this->getPreviouslyPaidLST() <= 0) {
                 return 0.0;
@@ -40,11 +46,10 @@ class PennsylvaniaLSTTaxEmployer extends BasePennsylvaniaLSTTaxEmployer
             }
         }
 
-        if ($amount_owed > $this->getTotalLSTOwed() + $this->getCatchUpAmount()) {
-            $amount_owed = $this->getTotalLSTOwed();
-        }
-
         if ($this->getTotalLSTOwed() <= self::LST_TRIGGER_AMOUNT) {
+            if ($amount_owed > $this->getTotalLSTOwed()) {
+                return $this->getTotalLSTOwed() - $this->getPreviouslyPaidLST();
+            }
             return $amount_owed > 0 ? $amount_owed : 0.0;
         } else {
             return $amount_owed > 0 ? $amount_owed / $this->payroll->pay_periods : 0.0;
@@ -99,8 +104,11 @@ class PennsylvaniaLSTTaxEmployer extends BasePennsylvaniaLSTTaxEmployer
                 if ($this->tax_information->municipal_lst_total <= self::LST_TRIGGER_AMOUNT) {
                     $municipal_amount = $this->tax_information->municipal_lst_total;
                 } else {
-                    // $municipal_amount = $this->tax_information->municipal_lst_total / $this->payroll->weeks_exempt;
-                    $municipal_amount = $this->tax_information->municipal_lst_total / 6; // not sure how this will end up working
+                    if ($this->tax_information->pay_periods_exempt > 0) {
+                        $municipal_amount = $this->tax_information->municipal_lst_total / $this->tax_information->pay_periods_exempt;
+                    } else {
+                        $municipal_amount = $this->tax_information->municipal_lst_total / self::PREVIOUSLY_PAID_LST_TOTAL;
+                    }
                 }
             }
         }
@@ -110,8 +118,11 @@ class PennsylvaniaLSTTaxEmployer extends BasePennsylvaniaLSTTaxEmployer
                 if ($this->tax_information->school_district_lst_total <= self::LST_TRIGGER_AMOUNT) {
                     $school_district_amount = $this->tax_information->school_district_lst_total;
                 } else {
-                    // $school_district_amount = $this->tax_information->school_district_lst_total / $this->payroll->weeks_exempt;
-                    $school_district_amount = $this->tax_information->school_district_lst_total / 6; // not sure how this will end up working
+                    if ($this->tax_information->pay_periods_exempt > 0) {
+                        $school_district_amount = $this->tax_information->school_district_lst_total / $this->tax_information->pay_periods_exempt;
+                    } else {
+                        $school_district_amount = $this->tax_information->school_district_lst_total / self::PREVIOUSLY_PAID_LST_TOTAL;
+                    }
                 }
             }
         }

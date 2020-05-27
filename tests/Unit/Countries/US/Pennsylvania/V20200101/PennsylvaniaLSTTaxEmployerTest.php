@@ -31,7 +31,7 @@ class PennsylvaniaLSTTaxEmployerTest extends TaxTestCase
             'wages_from_previous_employers' => 0,
             'municipal_lst_lie_total' => 0,
             'school_district_lst_lie_total' => 0,
-            'exempt_from_lst_date' => Carbon::now(),
+            'pay_periods_exempt' => 0,
         ], $this->user);
     }
 
@@ -52,8 +52,6 @@ class PennsylvaniaLSTTaxEmployerTest extends TaxTestCase
             ->setTaxClass(self::TAX_CLASS)
             ->setTaxInfoClass(self::TAX_INFO_CLASS);
 
-
-        //  will need to add tests around the exempt_from_lst_date field that isn't currently being used
         return [
             'no wages no tax' => [
                 $builder
@@ -73,6 +71,7 @@ class PennsylvaniaLSTTaxEmployerTest extends TaxTestCase
                         'wages_from_previous_employers' => 0,
                         'municipal_lst_lie_total' => 0,
                         'school_district_lst_lie_total' => 0,
+                        'pay_periods_exempt' => 0,
                     ])
                     ->setWagesInCents(0)
                     ->setYtdWagesInCents(0)
@@ -91,6 +90,7 @@ class PennsylvaniaLSTTaxEmployerTest extends TaxTestCase
                         'wages_from_previous_employers' => 0,
                         'municipal_lst_lie_total' => 0,
                         'school_district_lst_lie_total' => 0,
+                        'pay_periods_exempt' => 0,
                     ])
                     ->setWagesInCents(0)
                     ->setYtdWagesInCents(0)
@@ -109,6 +109,7 @@ class PennsylvaniaLSTTaxEmployerTest extends TaxTestCase
                         'wages_from_previous_employers' => 0,
                         'municipal_lst_lie_total' => 0,
                         'school_district_lst_lie_total' => 0,
+                        'pay_periods_exempt' => 0,
                     ])
                     ->setWagesInCents(0)
                     ->setYtdWagesInCents(0)
@@ -127,6 +128,7 @@ class PennsylvaniaLSTTaxEmployerTest extends TaxTestCase
                         'wages_from_previous_employers' => 0,
                         'municipal_lst_lie_total' => 0,
                         'school_district_lst_lie_total' => 0,
+                        'pay_periods_exempt' => 0,
                     ])
                     ->setWagesInCents(0)
                     ->setYtdWagesInCents(0)
@@ -145,6 +147,7 @@ class PennsylvaniaLSTTaxEmployerTest extends TaxTestCase
                         'wages_from_previous_employers' => 0,
                         'municipal_lst_lie_total' => 16000,
                         'school_district_lst_lie_total' => 0,
+                        'pay_periods_exempt' => 0,
                     ])
                     ->setWagesInCents(0)
                     ->setYtdWagesInCents(0)
@@ -163,6 +166,7 @@ class PennsylvaniaLSTTaxEmployerTest extends TaxTestCase
                         'wages_from_previous_employers' => 0,
                         'municipal_lst_lie_total' => 16000,
                         'school_district_lst_lie_total' => 0,
+                        'pay_periods_exempt' => 0,
                     ])
                     ->setWagesInCents(0)
                     ->setYtdWagesInCents(800000)
@@ -181,6 +185,7 @@ class PennsylvaniaLSTTaxEmployerTest extends TaxTestCase
                         'wages_from_previous_employers' => 8001,
                         'municipal_lst_lie_total' => 16000,
                         'school_district_lst_lie_total' => 0,
+                        'pay_periods_exempt' => 0,
                     ])
                     ->setWagesInCents(0)
                     ->setYtdWagesInCents(800100)
@@ -199,6 +204,7 @@ class PennsylvaniaLSTTaxEmployerTest extends TaxTestCase
                         'wages_from_previous_employers' => 0,
                         'municipal_lst_lie_total' => 16000,
                         'school_district_lst_lie_total' => 0,
+                        'pay_periods_exempt' => 0,
                     ])
                     ->setWagesInCents(0)
                     ->setYtdWagesInCents(1600100)
@@ -217,6 +223,7 @@ class PennsylvaniaLSTTaxEmployerTest extends TaxTestCase
                         'wages_from_previous_employers' => 0,
                         'municipal_lst_lie_total' => 16000,
                         'school_district_lst_lie_total' => 0,
+                        'pay_periods_exempt' => 0,
                     ])
                     ->setWagesInCents(0)
                     ->setYtdWagesInCents(1600100)
@@ -224,7 +231,7 @@ class PennsylvaniaLSTTaxEmployerTest extends TaxTestCase
                     ->setExpectedAmountInCents(500) // $9 is max, $4 has been previously paid, $5 left
                     ->build(),
             ],
-            'exempt from muni LIE, previous wages over LIE catch up needed, previous LST paid' => [
+            'exempt from muni LIE, previous wages over LIE catch up needed, all LST paid' => [
                 $builder
                     ->setTaxInfoOptions([
                         'municipal_lst_total' => 5,
@@ -235,11 +242,31 @@ class PennsylvaniaLSTTaxEmployerTest extends TaxTestCase
                         'wages_from_previous_employers' => 0,
                         'municipal_lst_lie_total' => 16000,
                         'school_district_lst_lie_total' => 0,
+                        'pay_periods_exempt' => 0,
                     ])
                     ->setWagesInCents(0)
                     ->setYtdWagesInCents(1600100)
                     ->setYtdLiabilitiesInCents(0)
                     ->setExpectedAmountInCents(0) // $9 is max, $9 has been previously paid
+                    ->build(),
+            ],
+            'exempt from muni LIE, previous wages over LIE catch up needed, previous LST paid, pay periods exempt' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'municipal_lst_total' => 40,
+                        'school_district_lst_total' => 12,
+                        'exempt_from_municipal_lst' => true,
+                        'exempt_from_school_district_lst' => false,
+                        'lst_paid_to_previous_employers' => 40,
+                        'wages_from_previous_employers' => 0,
+                        'municipal_lst_lie_total' => 16000,
+                        'school_district_lst_lie_total' => 0,
+                        'pay_periods_exempt' => 4,
+                    ])
+                    ->setWagesInCents(0)
+                    ->setYtdWagesInCents(1600100)
+                    ->setYtdLiabilitiesInCents(200)
+                    ->setExpectedAmountInCents(23) // $52 is max, $40 has been previously paid, $12 left + (municipal_lst_total / pay periods exempt) / pay periods
                     ->build(),
             ],
             'exempt from school district no LIE, no previous wages, no liability' => [
@@ -253,6 +280,7 @@ class PennsylvaniaLSTTaxEmployerTest extends TaxTestCase
                         'wages_from_previous_employers' => 0,
                         'municipal_lst_lie_total' => 0,
                         'school_district_lst_lie_total' => 0,
+                        'pay_periods_exempt' => 0,
                     ])
                     ->setWagesInCents(0)
                     ->setYtdWagesInCents(0)
@@ -271,6 +299,7 @@ class PennsylvaniaLSTTaxEmployerTest extends TaxTestCase
                         'wages_from_previous_employers' => 0,
                         'municipal_lst_lie_total' => 0,
                         'school_district_lst_lie_total' => 0,
+                        'pay_periods_exempt' => 0,
                     ])
                     ->setWagesInCents(0)
                     ->setYtdWagesInCents(0)
@@ -290,6 +319,7 @@ class PennsylvaniaLSTTaxEmployerTest extends TaxTestCase
                         'wages_from_previous_employers' => 0,
                         'municipal_lst_lie_total' => 0,
                         'school_district_lst_lie_total' => 0,
+                        'pay_periods_exempt' => 0,
                     ])
                     ->setWagesInCents(0)
                     ->setYtdWagesInCents(0)
@@ -308,6 +338,7 @@ class PennsylvaniaLSTTaxEmployerTest extends TaxTestCase
                         'wages_from_previous_employers' => 0,
                         'municipal_lst_lie_total' => 0,
                         'school_district_lst_lie_total' => 0,
+                        'pay_periods_exempt' => 0,
                     ])
                     ->setWagesInCents(0)
                     ->setYtdWagesInCents(0)
@@ -326,6 +357,7 @@ class PennsylvaniaLSTTaxEmployerTest extends TaxTestCase
                         'wages_from_previous_employers' => 0,
                         'municipal_lst_lie_total' => 0,
                         'school_district_lst_lie_total' => 16000,
+                        'pay_periods_exempt' => 0,
                     ])
                     ->setWagesInCents(0)
                     ->setYtdWagesInCents(0)
@@ -344,6 +376,7 @@ class PennsylvaniaLSTTaxEmployerTest extends TaxTestCase
                         'wages_from_previous_employers' => 0,
                         'municipal_lst_lie_total' => 0,
                         'school_district_lst_lie_total' => 16000,
+                        'pay_periods_exempt' => 0,
                     ])
                     ->setWagesInCents(0)
                     ->setYtdWagesInCents(800000)
@@ -362,6 +395,7 @@ class PennsylvaniaLSTTaxEmployerTest extends TaxTestCase
                         'wages_from_previous_employers' => 8001,
                         'municipal_lst_lie_total' => 0,
                         'school_district_lst_lie_total' => 16000,
+                        'pay_periods_exempt' => 0,
                     ])
                     ->setWagesInCents(0)
                     ->setYtdWagesInCents(800100)
@@ -380,6 +414,7 @@ class PennsylvaniaLSTTaxEmployerTest extends TaxTestCase
                         'wages_from_previous_employers' => 0,
                         'municipal_lst_lie_total' => 0,
                         'school_district_lst_lie_total' => 16000,
+                        'pay_periods_exempt' => 0,
                     ])
                     ->setWagesInCents(0)
                     ->setYtdWagesInCents(1600100)
@@ -398,11 +433,31 @@ class PennsylvaniaLSTTaxEmployerTest extends TaxTestCase
                         'wages_from_previous_employers' => 0,
                         'municipal_lst_lie_total' => 0,
                         'school_district_lst_lie_total' => 16000,
+                        'pay_periods_exempt' => 0,
                     ])
                     ->setWagesInCents(0)
                     ->setYtdWagesInCents(1600100)
                     ->setYtdLiabilitiesInCents(0)
                     ->setExpectedAmountInCents(23) // $52 is max, $40 has been previously paid, $12 left / pay periods
+                    ->build(),
+            ],
+            'exempt from school district LIE, previous wages over LIE catch up needed, previous LST paid, pay periods exempt' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'municipal_lst_total' => 40,
+                        'school_district_lst_total' => 12,
+                        'exempt_from_municipal_lst' => false,
+                        'exempt_from_school_district_lst' => true,
+                        'lst_paid_to_previous_employers' => 40,
+                        'wages_from_previous_employers' => 0,
+                        'municipal_lst_lie_total' => 0,
+                        'school_district_lst_lie_total' => 16000,
+                        'pay_periods_exempt' => 4,
+                    ])
+                    ->setWagesInCents(0)
+                    ->setYtdWagesInCents(1600100)
+                    ->setYtdLiabilitiesInCents(400)
+                    ->setExpectedAmountInCents(21) // $52 is max, $44 has been previously paid, $9 left + (school_district_lst_total / pay periods exempt) / pay periods
                     ->build(),
             ],
             'exempt from school district LIE, previous wages over LIE catch up needed, previous LST paid' => [
@@ -416,6 +471,7 @@ class PennsylvaniaLSTTaxEmployerTest extends TaxTestCase
                         'wages_from_previous_employers' => 0,
                         'municipal_lst_lie_total' => 0,
                         'school_district_lst_lie_total' => 16000,
+                        'pay_periods_exempt' => 0,
                     ])
                     ->setWagesInCents(0)
                     ->setYtdWagesInCents(1600100)

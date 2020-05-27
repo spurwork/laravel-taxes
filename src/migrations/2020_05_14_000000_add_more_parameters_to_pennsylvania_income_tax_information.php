@@ -12,7 +12,7 @@ class AddMoreParametersToPennsylvaniaIncomeTaxInformation extends Migration
             $table->boolean('exempt_from_municipal_lst')->default(false);
             $table->boolean('exempt_from_school_district_lst')->default(false);
             $table->integer('wages_from_previous_employers')->nullable();
-            $table->datetime('exempt_from_lst_date')->nullable();
+            $table->integer('pay_periods_exempt')->nullable();
         });
     }
 }
