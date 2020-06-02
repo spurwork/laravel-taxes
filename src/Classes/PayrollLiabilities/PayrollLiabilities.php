@@ -15,6 +15,7 @@ class PayrollLiabilities
     private $ytd_wages;
     private $ytd_liabilities;
     private $work_location;
+    private $pay_periods_exempt;
 
     public function setDate(Carbon $date): void
     {
@@ -44,6 +45,11 @@ class PayrollLiabilities
     public function setYtdLiabilities($ytd_earnings): void
     {
         $this->ytd_liabilities = $ytd_earnings;
+    }
+
+    public function setPayPeriodsExempt($pay_periods_exempt): void
+    {
+        $this->pay_periods_exempt = $pay_periods_exempt;
     }
 
     private function getDate()
@@ -102,8 +108,13 @@ class PayrollLiabilities
 
     private function bindPayrollData(): void
     {
-        app()->instance(CompanyPayroll::class, new CompanyPayroll($this->getDate(),
-            $this->wages, $this->qtd_wages, $this->ytd_wages, $this->ytd_liabilities));
+        app()->instance(CompanyPayroll::class, new CompanyPayroll(
+            $this->getDate(),
+            $this->wages,
+            $this->qtd_wages,
+            $this->ytd_wages,
+            $this->ytd_liabilities
+        ));
     }
 
     private function bindInterfaces(Collection $taxes): void

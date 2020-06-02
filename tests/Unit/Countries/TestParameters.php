@@ -29,6 +29,7 @@ class TestParameters
     private $take_home_tip_amount_in_cents;
     private $minutes_worked;
     private $wages_callback;
+    private $pay_periods_exempt;
 
     public function __construct(
         string $date,
@@ -53,7 +54,8 @@ class TestParameters
         ?int $pay_check_tip_amount_in_cents,
         ?int $take_home_tip_amount_in_cents,
         ?int $minutes_worked,
-        ?callable $wages_callback
+        ?callable $wages_callback,
+        ?int $pay_periods_exempt
     ) {
         $this->date = $date;
         $this->tax_info_class = $tax_info_class;
@@ -178,6 +180,11 @@ class TestParameters
     public function getYtdLiabilitiesInCents(): ?int
     {
         return $this->ytd_liabilities_in_cents;
+    }
+
+    public function getPayPeriodsExempt(): ?int
+    {
+        return $this->pay_periods_exempt;
     }
 
     public function getPaycheckTipAmountInCents(): ?int

@@ -33,6 +33,7 @@ class Payroll
     private $total_earnings;
     private $annual_taxable_wages;
     private $annual_liability_amounts;
+    private $pay_periods_exempt;
 
     private $wage_manager;
     private $tax_manager;
@@ -67,6 +68,7 @@ class Payroll
         $this->annual_liability_amounts = $parameters['annual_liability_amounts'] ?? collect([]);
         $this->total_earnings = $parameters['total_earnings'] ?? 0;
         $this->pay_rate = $parameters['pay_rate'] ?? 0;
+        $this->pay_periods_exempt = $parameters['pay_periods_exempt'] ?? 0;
 
         $this->amount_withheld = 0;
         $this->wage_manager = $wage_manager;
@@ -328,5 +330,14 @@ class Payroll
         return !is_null($area_wages->getWages()->first(static function (Wage $gross_wage) {
             return $gross_wage->getType() === WageType::SALARY;
         }));
+    }
+
+    public function getPayPeriodsExempt(string $tax_class = null): int
+    {
+        if (is_callable($this->pay_periods_exempt)) {
+            return ($this->pay_periods_exempt)($tax_class);
+        }
+
+        return $this->pay_periods_exempt;
     }
 }
