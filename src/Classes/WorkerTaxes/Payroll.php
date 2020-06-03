@@ -332,6 +332,11 @@ class Payroll
         }));
     }
 
+    public function setPayPeriodsExempt($pay_periods_exempt): void
+    {
+        $this->pay_periods_exempt = $pay_periods_exempt;
+    }
+
     public function getPayPeriodsExempt(string $tax_class = null): int
     {
         if (is_callable($this->pay_periods_exempt)) {
