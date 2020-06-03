@@ -102,6 +102,8 @@ abstract class TaxTestCase extends UnitTestCase
             $annual_liability_amounts->put($parameters->getTaxClass(), collect([$taxable_wage]));
         }
 
+        $pay_periods_exempt = $parameters->getPayPeriodsExempt() !== null ? $parameters->getPayPeriodsExempt() : 0;
+
         $results = $this->taxes->calculate(
             Carbon::now(),
             Carbon::now()->addWeek(),
@@ -117,7 +119,8 @@ abstract class TaxTestCase extends UnitTestCase
             $parameters->getPayPeriods(),
             collect([]),
             collect([]),
-            collect([])
+            collect([]),
+            $pay_periods_exempt
         );
 
         $short_name = (new ReflectionClass($parameters->getTaxClass()))->getShortName();
@@ -200,7 +203,8 @@ abstract class TaxTestCase extends UnitTestCase
             $parameters->getPayPeriods(),
             collect([]),
             collect([]),
-            collect([])
+            collect([]),
+            0
         );
 
         $short_name = (new ReflectionClass($parameters->getTaxClass()))->getShortName();

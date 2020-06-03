@@ -64,7 +64,8 @@ class WageBaseTaxTestCase extends TaxTestCase
             1,
             collect([]),
             collect([]),
-            collect([])
+            collect([]),
+            0
         );
 
         $short_name = (new ReflectionClass($parameters->getTaxClass()))->getShortName();

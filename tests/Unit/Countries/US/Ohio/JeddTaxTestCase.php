@@ -37,7 +37,8 @@ class JeddTaxTestCase extends TaxTestCase
             $parameters->getPayPeriods(),
             collect([]),
             collect([]),
-            collect([])
+            collect([]),
+            0
         );
 
         $short_name = (new ReflectionClass($parameters->getTaxClass()))->getShortName();

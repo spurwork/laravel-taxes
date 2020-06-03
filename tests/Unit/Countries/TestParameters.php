@@ -80,6 +80,7 @@ class TestParameters
         $this->take_home_tip_amount_in_cents = $take_home_tip_amount_in_cents;
         $this->minutes_worked = $minutes_worked;
         $this->wages_callback = $wages_callback;
+        $this->pay_periods_exempt = $pay_periods_exempt;
     }
 
     public function getDate(): string

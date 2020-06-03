@@ -88,7 +88,8 @@ class ArkansasIncomeTest extends TaxTestCase
             52,
             collect([]),
             collect([]),
-            collect([])
+            collect([]),
+            0
         );
 
         $short_name = (new ReflectionClass(ArkansasIncome::class))->getShortName();

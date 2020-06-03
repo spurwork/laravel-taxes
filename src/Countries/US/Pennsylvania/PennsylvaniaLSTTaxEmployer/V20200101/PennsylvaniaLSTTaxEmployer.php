@@ -120,7 +120,6 @@ class PennsylvaniaLSTTaxEmployer extends BasePennsylvaniaLSTTaxEmployer
                 if ($this->tax_information->school_district_lst_total <= self::LST_TRIGGER_AMOUNT) {
                     $school_district_amount = $this->tax_information->school_district_lst_total;
                 } else {
-                    dd($this->payroll->getPayPeriodsExempt(BasePennsylvaniaLSTTaxEmployer::class));
                     if ($this->payroll->getPayPeriodsExempt(BasePennsylvaniaLSTTaxEmployer::class) > 0) {
                         $school_district_amount = $this->tax_information->school_district_lst_total / $this->payroll->getPayPeriodsExempt(BasePennsylvaniaLSTTaxEmployer::class);
                     } elseif ($this->tax_information->pay_periods_exempt > 0) {

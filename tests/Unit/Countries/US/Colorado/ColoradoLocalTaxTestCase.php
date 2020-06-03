@@ -50,7 +50,8 @@ class ColoradoLocalTaxTestCase extends TaxTestCase
             52,
             collect([]),
             collect([]),
-            collect([])
+            collect([]),
+            0
         );
 
         $short_name = (new ReflectionClass($parameters->getTaxClass()))->getShortName();
@@ -110,7 +111,8 @@ class ColoradoLocalTaxTestCase extends TaxTestCase
             52,
             collect([]),
             collect([]),
-            collect([])
+            collect([]),
+            0
         );
 
         $short_name = (new ReflectionClass($parameters->getTaxClass()))->getShortName();

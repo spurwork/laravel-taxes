@@ -46,7 +46,8 @@ class CaneyvilleCityTest extends TaxTestCase
             52,
             collect([]),
             collect([]),
-            collect([])
+            collect([]),
+            0
         );
 
         $short_name = (new ReflectionClass(self::TAX_CLASS))->getShortName();
@@ -79,7 +80,8 @@ class CaneyvilleCityTest extends TaxTestCase
             52,
             collect([]),
             collect([]),
-            collect([])
+            collect([]),
+            0
         );
 
         /** @var TaxResult $result */
@@ -121,7 +123,8 @@ class CaneyvilleCityTest extends TaxTestCase
             52,
             collect([]),
             collect([]),
-            collect([])
+            collect([]),
+            0
         );
 
         /** @var TaxResult $result */

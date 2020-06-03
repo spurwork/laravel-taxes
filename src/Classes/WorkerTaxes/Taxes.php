@@ -46,7 +46,8 @@ class Taxes
         int $pay_periods,
         Collection $reciprocal_agreements,
         Collection $disabled_taxes,
-        Collection $exemptions
+        Collection $exemptions,
+        int $pay_periods_exempt
     ): Collection {
         $wages_by_lat_long = $this->wage_manager->groupLatLong($wages);
         $annual_wages_by_lat_long = $this->wage_manager->groupLatLong($annual_wages);
@@ -71,6 +72,7 @@ class Taxes
             'total_earnings' => $this->wage_manager->calculateEarnings($wages),
             'minutes_worked' => $this->wage_manager->calculateMinutesWorked($wages),
             'is_salaried' => $this->wage_manager->isSalaried($wages),
+            'pay_periods_exempt' => $pay_periods_exempt,
         ];
 
         $payroll = new Payroll($parameters, $this->wage_manager, $this->tax_manager);
