@@ -118,7 +118,8 @@ class TaxesTest extends UnitTestCase
             52,
             collect([]),
             collect([]),
-            collect([])
+            collect([]),
+            0
         );
 
         self::assertThat($tax_results->count(), self::identicalTo(2));
