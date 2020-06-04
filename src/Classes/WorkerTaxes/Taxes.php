@@ -47,7 +47,7 @@ class Taxes
         Collection $reciprocal_agreements,
         Collection $disabled_taxes,
         Collection $exemptions,
-        int $pay_periods_exempt
+        $pay_periods_exempt
     ): Collection {
         $wages_by_lat_long = $this->wage_manager->groupLatLong($wages);
         $annual_wages_by_lat_long = $this->wage_manager->groupLatLong($annual_wages);

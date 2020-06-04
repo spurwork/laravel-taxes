@@ -25,7 +25,7 @@ class PennsylvaniaIncomeTaxInformation extends BaseTaxInformationModel
         $tax_information->school_district_lst_lie_total = 0;
         $tax_information->lst_paid_to_previous_employers = 0;
         $tax_information->wages_from_previous_employers = 0;
-        $tax_information->pay_periods_exempt = 0;
+        $tax_information->exempt_for_low_income = false;
         return $tax_information;
     }
 
