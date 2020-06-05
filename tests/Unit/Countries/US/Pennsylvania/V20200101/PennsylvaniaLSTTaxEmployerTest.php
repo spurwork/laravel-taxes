@@ -267,7 +267,7 @@ class PennsylvaniaLSTTaxEmployerTest extends TaxTestCase
                     ->setYtdWagesInCents(1600100)
                     ->setYtdLiabilitiesInCents(200)
                     ->setPayPeriodsExempt(6)
-                    ->setExpectedAmountInCents(32) // $52 is max, $40 has been previously paid, $12 left + (municipal_lst_total / pay periods exempt) / pay periods
+                    ->setExpectedAmountInCents(28) // $52 is max, $40 has been previously paid, $12 left + (municipal_lst_total / pay periods exempt) / pay periods
                     ->build(),
             ],
             'exempt from school district no LIE, no previous wages, no liability' => [
@@ -459,7 +459,7 @@ class PennsylvaniaLSTTaxEmployerTest extends TaxTestCase
                     ->setPayPeriodsExempt(6)
                     ->setYtdWagesInCents(1600100)
                     ->setYtdLiabilitiesInCents(400)
-                    ->setExpectedAmountInCents(19) // $52 is max, $44 has been previously paid, $8 left + (school_district_lst_total / pay periods exempt) / pay periods
+                    ->setExpectedAmountInCents(18) // $52 is max, $44 has been previously paid, $8 left + (school_district_lst_total / pay periods exempt) / pay periods
                     ->build(),
             ],
             'exempt from municipal and school district LIE, previous wages over LIE catch up needed, previous LST paid, pay periods exempt' => [
@@ -479,7 +479,7 @@ class PennsylvaniaLSTTaxEmployerTest extends TaxTestCase
                     ->setPayPeriodsExempt(6)
                     ->setYtdWagesInCents(1600100)
                     ->setYtdLiabilitiesInCents(400)
-                    ->setExpectedAmountInCents(58) // $52 is max, $24 has been previously paid, $28 left  + (municipal_lst_total / pay periods exempt) + (school_district_lst_total / pay periods exempt) / pay periods
+                    ->setExpectedAmountInCents(57) // $52 is max, $24 has been previously paid, $28 left  + (municipal_lst_total / pay periods exempt) + (school_district_lst_total / pay periods exempt) / pay periods
                     ->build(),
             ],
             'exempt from school district LIE, previous wages over LIE catch up needed, previous LST paid' => [

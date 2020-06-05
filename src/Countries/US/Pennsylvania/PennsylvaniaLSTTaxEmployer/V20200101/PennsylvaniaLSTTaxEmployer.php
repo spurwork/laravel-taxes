@@ -93,11 +93,7 @@ class PennsylvaniaLSTTaxEmployer extends BasePennsylvaniaLSTTaxEmployer
                 if ($this->tax_information->municipal_lst_total <= self::LST_TRIGGER_AMOUNT) {
                     $municipal_amount = $this->tax_information->municipal_lst_total;
                 } else {
-                    if ($this->payroll->getPayPeriodsExempt(BasePennsylvaniaLSTTaxEmployer::class) > 0) {
-                        $municipal_amount = $this->tax_information->municipal_lst_total / $this->payroll->getPayPeriodsExempt(BasePennsylvaniaLSTTaxEmployer::class);
-                    } else {
-                        $municipal_amount = $this->tax_information->municipal_lst_total / self::PREVIOUSLY_PAID_LST_TOTAL;
-                    }
+                    $municipal_amount = ($this->tax_information->municipal_lst_total / $this->payroll->pay_periods) * $this->payroll->getPayPeriodsExempt(BasePennsylvaniaLSTTaxEmployer::class);
                 }
             }
         }
@@ -107,11 +103,7 @@ class PennsylvaniaLSTTaxEmployer extends BasePennsylvaniaLSTTaxEmployer
                 if ($this->tax_information->school_district_lst_total <= self::LST_TRIGGER_AMOUNT) {
                     $school_district_amount = $this->tax_information->school_district_lst_total;
                 } else {
-                    if ($this->payroll->getPayPeriodsExempt(BasePennsylvaniaLSTTaxEmployer::class) > 0) {
-                        $school_district_amount = $this->tax_information->school_district_lst_total / $this->payroll->getPayPeriodsExempt(BasePennsylvaniaLSTTaxEmployer::class);
-                    } else {
-                        $school_district_amount = $this->tax_information->school_district_lst_total / self::PREVIOUSLY_PAID_LST_TOTAL;
-                    }
+                    $school_district_amount = ($this->tax_information->school_district_lst_total / $this->payroll->pay_periods) * $this->payroll->getPayPeriodsExempt(BasePennsylvaniaLSTTaxEmployer::class);
                 }
             }
         }
