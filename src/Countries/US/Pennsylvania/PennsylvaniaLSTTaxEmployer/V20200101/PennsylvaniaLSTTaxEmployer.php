@@ -11,6 +11,9 @@ class PennsylvaniaLSTTaxEmployer extends BasePennsylvaniaLSTTaxEmployer
     const PREVIOUSLY_PAID_LST_TOTAL = 52;
 
     private $tax_areas;
+    private $municipal_exempt_amount_paid = false;
+    private $school_district_exempt_amount_paid = false;
+
 
     public function compute(Collection $tax_areas)
     {
@@ -88,8 +91,9 @@ class PennsylvaniaLSTTaxEmployer extends BasePennsylvaniaLSTTaxEmployer
         $ytd_earnings += $this->tax_information->wages_from_previous_employers;
         $ytd_earnings += $this->payroll->getEarnings();
 
-        if ($this->isExemptFromMunicipalLST() && $this->tax_information->exempt_for_low_income) {
+        if ($this->isExemptFromMunicipalLST() && $this->tax_information->exempt_for_low_income && !$this->municipal_exempt_amount_paid) {
             if ($ytd_earnings > $this->tax_information->municipal_lst_lie_total) {
+                $this->municipal_exempt_amount_paid = true;
                 if ($this->tax_information->municipal_lst_total <= self::LST_TRIGGER_AMOUNT) {
                     $municipal_amount = $this->tax_information->municipal_lst_total;
                 } else {
@@ -98,8 +102,9 @@ class PennsylvaniaLSTTaxEmployer extends BasePennsylvaniaLSTTaxEmployer
             }
         }
 
-        if ($this->isExemptFromSchoolDistrictLST() && $this->tax_information->exempt_for_low_income) {
+        if ($this->isExemptFromSchoolDistrictLST() && $this->tax_information->exempt_for_low_income && !$this->school_district_exempt_amount_paid) {
             if ($ytd_earnings > $this->tax_information->school_district_lst_lie_total) {
+                $this->school_district_exempt_amount_paid = true;
                 if ($this->tax_information->school_district_lst_total <= self::LST_TRIGGER_AMOUNT) {
                     $school_district_amount = $this->tax_information->school_district_lst_total;
                 } else {
