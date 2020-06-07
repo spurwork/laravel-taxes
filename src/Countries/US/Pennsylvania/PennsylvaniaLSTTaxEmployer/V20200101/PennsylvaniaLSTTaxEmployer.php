@@ -39,7 +39,7 @@ class PennsylvaniaLSTTaxEmployer extends BasePennsylvaniaLSTTaxEmployer
 
         if ($this->getTotalLSTOwed() <= self::LST_TRIGGER_AMOUNT) {
             if ($amount_owed > 0 && $catch_up_amount > 0) {
-                return $catch_up_amount + ($amount_owed / $this->payroll->pay_periods);
+                return $catch_up_amount + $amount_owed;
             } elseif ($amount_owed <= 0 && $catch_up_amount > 0) {
                 return $catch_up_amount;
             } elseif ($amount_owed > 0 && $catch_up_amount <= 0) {

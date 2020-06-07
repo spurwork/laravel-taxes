@@ -136,7 +136,7 @@ class PennsylvaniaLSTTaxEmployerTest extends TaxTestCase
                     ->setWagesInCents(0)
                     ->setYtdWagesInCents(800100)
                     ->setYtdLiabilitiesInCents(0)
-                    ->setExpectedAmountInCents(508) // school district / pay periods + municipal catch up
+                    ->setExpectedAmountInCents(900) // school district + municipal catch up
                     ->build(),
             ],
             'exempt from muni LIE, previous wages over LIE catch up needed, no liabilities paid' => [
@@ -155,7 +155,7 @@ class PennsylvaniaLSTTaxEmployerTest extends TaxTestCase
                     ->setWagesInCents(0)
                     ->setYtdWagesInCents(1600100)
                     ->setYtdLiabilitiesInCents(0)
-                    ->setExpectedAmountInCents(508) // school district / pay periods + municipal catch up
+                    ->setExpectedAmountInCents(900) // school district + municipal catch up
                     ->build(),
             ],
             'exempt from muni LIE, previous wages over LIE catch up needed, previous LST paid' => [
