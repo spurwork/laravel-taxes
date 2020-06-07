@@ -24,28 +24,53 @@ class PennsylvaniaLSTTaxEmployer extends BasePennsylvaniaLSTTaxEmployer
 
     public function getAmountToWithhold()
     {
-        $amount_owed = $this->getTotalLSTOwed();
-
-        if ($amount_owed === 0 || $amount_owed <= $this->payroll->getYtdLiabilities(BasePennsylvaniaLSTTaxEmployer::class) || $amount_owed <= $this->payroll->getYtdLiabilities(BasePennsylvaniaLSTTaxEmployer::class) + $this->getPreviouslyPaidLST()) {
+        $catch_up_amount = $this->getCatchUpAmount();
+        $amount_owed = $this->getTotalLSTOwedAfterExemptions();
+        if ($amount_owed === 0 && $catch_up_amount === 0 || $amount_owed < $this->payroll->getYtdLiabilities(BasePennsylvaniaLSTTaxEmployer::class) || $this->getPreviouslyPaidLST() >= self::PREVIOUSLY_PAID_LST_TOTAL) {
             return 0.0;
         }
 
-        $amount_owed -= $this->payroll->getYtdLiabilities(BasePennsylvaniaLSTTaxEmployer::class) + $this->getPreviouslyPaidLST();
+        $amount_owed -= $this->payroll->getYtdLiabilities(BasePennsylvaniaLSTTaxEmployer::class);
 
-        if ($amount_owed + $this->getCatchUpAmount() <= $this->getTotalLSTOwed()) {
-            $amount_owed += $this->getCatchUpAmount();
-        } else {
-            $amount_owed = $this->getTotalLSTOwed();
+        if ($amount_owed + $catch_up_amount > $this->getTotalLSTOwed()) {
+            $catch_up_amount = 0;
+            $amount_owed = $this->getTotalLSTOwed() - $this->payroll->getYtdLiabilities(BasePennsylvaniaLSTTaxEmployer::class);
         }
 
         if ($this->getTotalLSTOwed() <= self::LST_TRIGGER_AMOUNT) {
-            if ($amount_owed > $this->getTotalLSTOwed()) {
-                return $this->getTotalLSTOwed() - $this->getPreviouslyPaidLST();
+            if ($amount_owed > 0 && $catch_up_amount > 0) {
+                return $catch_up_amount + ($amount_owed / $this->payroll->pay_periods);
+            } elseif ($amount_owed <= 0 && $catch_up_amount > 0) {
+                return $catch_up_amount;
+            } elseif ($amount_owed > 0 && $catch_up_amount <= 0) {
+                return $amount_owed;
+            } else {
+                return 0.0;
             }
-            return $amount_owed > 0 ? $amount_owed : 0.0;
         } else {
-            return $amount_owed > 0 ? $amount_owed / $this->payroll->pay_periods : 0.0;
+            if ($amount_owed > 0 && $catch_up_amount > 0) {
+                return $catch_up_amount + ($amount_owed / $this->payroll->pay_periods);
+            } elseif ($amount_owed <= 0 && $catch_up_amount > 0) {
+                return $catch_up_amount;
+            } elseif ($amount_owed > 0 && $catch_up_amount <= 0) {
+                return $amount_owed / $this->payroll->pay_periods;
+            } else {
+                return 0.0;
+            }
         }
+    }
+
+    public function getTotalLSTOwedAfterExemptions()
+    {
+        if ($this->tax_information->exempt_from_municipal_lst && $this->tax_information->exempt_from_school_district_lst) {
+            return 0;
+        } elseif ($this->tax_information->exempt_from_municipal_lst) {
+            return $this->tax_information->school_district_lst_total;
+        } elseif ($this->tax_information->exempt_from_school_district_lst) {
+            return $this->tax_information->municipal_lst_total;
+        }
+
+        return $this->tax_information->municipal_lst_total + $this->tax_information->school_district_lst_total;
     }
 
     public function getTotalLSTOwed()
@@ -76,20 +101,13 @@ class PennsylvaniaLSTTaxEmployer extends BasePennsylvaniaLSTTaxEmployer
         return true;
     }
 
-    public function previousAmountPaidTowardsLIETotal()
-    {
-        return $this->payroll->getYtdEarnings($this->tax_areas->first()->workGovernmentalUnitArea) + $this->tax_information->wages_from_previous_employers;
-    }
-
     public function getCatchUpAmount()
     {
         $municipal_amount = 0;
         $school_district_amount = 0;
         $ytd_earnings = 0;
 
-        $ytd_earnings = $this->payroll->getYtdEarnings($this->tax_areas->first()->workGovernmentalUnitArea);
-        $ytd_earnings += $this->tax_information->wages_from_previous_employers;
-        $ytd_earnings += $this->payroll->getEarnings();
+        $ytd_earnings = $this->payroll->getYtdEarnings($this->tax_areas->first()->workGovernmentalUnitArea) + $this->tax_information->wages_from_previous_employers + $this->payroll->getEarnings();
 
         if ($this->isExemptFromMunicipalLST() && $this->tax_information->exempt_for_low_income && !$this->municipal_exempt_amount_paid) {
             if ($ytd_earnings > $this->tax_information->municipal_lst_lie_total) {
