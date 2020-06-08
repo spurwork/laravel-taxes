@@ -24,6 +24,10 @@ class PennsylvaniaLSTTaxEmployer extends BasePennsylvaniaLSTTaxEmployer
 
     public function getAmountToWithhold()
     {
+        if ($this->isExempt()) {
+            return 0.0;
+        }
+
         $catch_up_amount = $this->getCatchUpAmount();
         $amount_owed = $this->getTotalLSTOwedAfterExemptions();
         if ($amount_owed === 0 && $catch_up_amount === 0 || $amount_owed < $this->payroll->getYtdLiabilities(BasePennsylvaniaLSTTaxEmployer::class) || $this->getPreviouslyPaidLST() >= self::PREVIOUSLY_PAID_LST_TOTAL) {
@@ -56,6 +60,15 @@ class PennsylvaniaLSTTaxEmployer extends BasePennsylvaniaLSTTaxEmployer
                 return $amount_owed / $this->payroll->pay_periods;
             } else {
                 return 0.0;
+            }
+        }
+    }
+
+    public function isExempt()
+    {
+        if ($this->tax_information->exempt_from_municipal_lst || $this->tax_information->exempt_from_school_district_lst) {
+            if (!$this->tax_information->exempt_for_low_income) {
+                return true;
             }
         }
     }
