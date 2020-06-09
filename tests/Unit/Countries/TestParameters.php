@@ -183,7 +183,7 @@ class TestParameters
         return $this->ytd_liabilities_in_cents;
     }
 
-    public function getPayPeriodsExempt(): ?int
+    public function getPayPeriodsCount(): ?int
     {
         return $this->pay_periods_exempt;
     }

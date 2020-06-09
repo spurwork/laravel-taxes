@@ -332,10 +332,10 @@ class Payroll
         }));
     }
 
-    public function getPayPeriodsExempt(string $tax_class = null): int
+    public function getPayPeriodsCount($start_date): int
     {
         if (is_callable($this->pay_periods_exempt)) {
-            return ($this->pay_periods_exempt)($tax_class);
+            return ($this->pay_periods_exempt)($start_date);
         }
 
         return $this->pay_periods_exempt;

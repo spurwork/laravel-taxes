@@ -236,25 +236,6 @@ class PennsylvaniaLSTTaxEmployerTest extends TaxTestCase
                     ->setExpectedAmountInCents(3715) // $52 is max, $40 has been previously paid, $12 left / pay periods + muni catch up
                     ->build(),
             ],
-            'not exempt from school district no LIE, no previous wages, no liability' => [
-                $builder
-                    ->setTaxInfoOptions([
-                        'municipal_lst_total' => 40,
-                        'school_district_lst_total' => 12,
-                        'exempt_from_municipal_lst' => false,
-                        'exempt_from_school_district_lst' => false,
-                        'lst_paid_to_previous_employers' => 0,
-                        'wages_from_previous_employers' => 0,
-                        'municipal_lst_lie_total' => 0,
-                        'school_district_lst_lie_total' => 0,
-                        'exempt_for_low_income' => false,
-                    ])
-                    ->setWagesInCents(0)
-                    ->setYtdWagesInCents(0)
-                    ->setYtdLiabilitiesInCents(0)
-                    ->setExpectedAmountInCents(100) // 1 because total LST is greater than 10 so it's total lst amount / pay periods
-                    ->build(),
-            ],
             'exempt from school district no LIE, no previous wages, partial liabilities paid' => [
                 $builder
                     ->setTaxInfoOptions([
@@ -388,7 +369,7 @@ class PennsylvaniaLSTTaxEmployerTest extends TaxTestCase
                     ->setYtdWagesInCents(1600100)
                     ->setYtdLiabilitiesInCents(0)
                     ->setPayPeriodsExempt(6)
-                    ->setExpectedAmountInCents(215) // $52 is max, $40 has been previously paid, $12 left / pay periods + catch up amount
+                    ->setExpectedAmountInCents(162) // $52 is max, $40 has been previously paid, $12 left / pay periods + catch up amount
                     ->build(),
             ],
             'exempt from school district LIE, previous wages over LIE catch up needed, previous LST paid, pay periods exempt' => [
@@ -408,7 +389,7 @@ class PennsylvaniaLSTTaxEmployerTest extends TaxTestCase
                     ->setPayPeriodsExempt(6)
                     ->setYtdWagesInCents(1600100)
                     ->setYtdLiabilitiesInCents(900)
-                    ->setExpectedAmountInCents(198) // $40 is max, $9 has been previously paid, $31 left pay periods + catch up
+                    ->setExpectedAmountInCents(144) // $40 is max, $9 has been previously paid, $31 left pay periods + catch up
                     ->build(),
             ],
             'exempt from municipal and school district LIE, previous wages over LIE catch up needed, previous LST paid, pay periods exempt' => [
@@ -448,6 +429,63 @@ class PennsylvaniaLSTTaxEmployerTest extends TaxTestCase
                     ->setYtdWagesInCents(1600100)
                     ->setYtdLiabilitiesInCents(0)
                     ->setExpectedAmountInCents(0) // $52 is max, $52 has been previously paid
+                    ->build(),
+            ],
+            'not exempt  no LIE, no previous wages, no liability' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'municipal_lst_total' => 40,
+                        'school_district_lst_total' => 12,
+                        'exempt_from_municipal_lst' => false,
+                        'exempt_from_school_district_lst' => false,
+                        'lst_paid_to_previous_employers' => 0,
+                        'wages_from_previous_employers' => 0,
+                        'municipal_lst_lie_total' => 0,
+                        'school_district_lst_lie_total' => 0,
+                        'exempt_for_low_income' => false,
+                    ])
+                    ->setWagesInCents(0)
+                    ->setYtdWagesInCents(0)
+                    ->setYtdLiabilitiesInCents(0)
+                    ->setExpectedAmountInCents(100) // 1 because total LST is greater than 10 so it's total lst amount / pay periods
+                    ->build(),
+            ],
+            'not exempt, no LIE, no previous wages, no liability, lst from previous employer under 10 lst' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'municipal_lst_total' => 4,
+                        'school_district_lst_total' => 4,
+                        'exempt_from_municipal_lst' => false,
+                        'exempt_from_school_district_lst' => false,
+                        'lst_paid_to_previous_employers' => 50,
+                        'wages_from_previous_employers' => 0,
+                        'municipal_lst_lie_total' => 0,
+                        'school_district_lst_lie_total' => 0,
+                        'exempt_for_low_income' => false,
+                    ])
+                    ->setWagesInCents(0)
+                    ->setYtdWagesInCents(0)
+                    ->setYtdLiabilitiesInCents(0)
+                    ->setExpectedAmountInCents(200) // $52 total 50 previously paid by employers, only $2 left for the year
+                    ->build(),
+            ],
+            'not exempt, no LIE, no previous wages, no liability, lst from previous employer over 10 lst' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'municipal_lst_total' => 40,
+                        'school_district_lst_total' => 12,
+                        'exempt_from_municipal_lst' => false,
+                        'exempt_from_school_district_lst' => false,
+                        'lst_paid_to_previous_employers' => 40,
+                        'wages_from_previous_employers' => 0,
+                        'municipal_lst_lie_total' => 0,
+                        'school_district_lst_lie_total' => 0,
+                        'exempt_for_low_income' => false,
+                    ])
+                    ->setWagesInCents(0)
+                    ->setYtdWagesInCents(0)
+                    ->setYtdLiabilitiesInCents(0)
+                    ->setExpectedAmountInCents(23) // $52 total 40 previously paid by employers, $12 / number of pay periods
                     ->build(),
             ],
         ];

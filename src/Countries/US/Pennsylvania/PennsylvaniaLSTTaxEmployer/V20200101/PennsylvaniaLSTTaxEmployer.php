@@ -30,9 +30,12 @@ class PennsylvaniaLSTTaxEmployer extends BasePennsylvaniaLSTTaxEmployer
 
         $catch_up_amount = $this->getCatchUpAmount();
         $amount_owed = $this->getTotalLSTOwedAfterExemptions();
+
         if ($amount_owed === 0 && $catch_up_amount === 0 || $amount_owed < $this->payroll->getYtdLiabilities(BasePennsylvaniaLSTTaxEmployer::class) || $this->getPreviouslyPaidLST() >= self::PREVIOUSLY_PAID_LST_TOTAL) {
             return 0.0;
         }
+
+        $amount_owed = min($amount_owed, self::PREVIOUSLY_PAID_LST_TOTAL - $this->getPreviouslyPaidLST());
 
         $amount_owed -= $this->payroll->getYtdLiabilities(BasePennsylvaniaLSTTaxEmployer::class);
 
@@ -128,7 +131,7 @@ class PennsylvaniaLSTTaxEmployer extends BasePennsylvaniaLSTTaxEmployer
                 if ($this->tax_information->municipal_lst_total <= self::LST_TRIGGER_AMOUNT) {
                     $municipal_amount = $this->tax_information->municipal_lst_total;
                 } else {
-                    $municipal_amount = ($this->tax_information->municipal_lst_total / $this->payroll->pay_periods) * $this->payroll->getPayPeriodsExempt(BasePennsylvaniaLSTTaxEmployer::class);
+                    $municipal_amount = ($this->tax_information->municipal_lst_total / $this->payroll->pay_periods) * $this->payroll->getPayPeriodsCount($this->tax_information->exempt_from_municipal_lst_date);
                 }
             }
         }
@@ -139,7 +142,7 @@ class PennsylvaniaLSTTaxEmployer extends BasePennsylvaniaLSTTaxEmployer
                 if ($this->tax_information->school_district_lst_total <= self::LST_TRIGGER_AMOUNT) {
                     $school_district_amount = $this->tax_information->school_district_lst_total;
                 } else {
-                    $school_district_amount = ($this->tax_information->school_district_lst_total / $this->payroll->pay_periods) * $this->payroll->getPayPeriodsExempt(BasePennsylvaniaLSTTaxEmployer::class);
+                    $school_district_amount = ($this->tax_information->school_district_lst_total / $this->payroll->pay_periods) * $this->payroll->getPayPeriodsCount($this->tax_information->exempt_from_school_district_lst_date);
                 }
             }
         }
