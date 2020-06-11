@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 class WorkersCompAssessmentFundEmployer extends BaseWorkersCompAssessmentFundEmployer
 {
-    const HOURLY_RATE_MODIFIER = 1.1;
+    const HOURLY_RATE_MODIFIER = .011;
 
     public function compute(Collection $tax_areas)
     {
