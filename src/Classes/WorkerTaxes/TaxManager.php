@@ -2,6 +2,8 @@
 
 namespace Appleton\Taxes\Classes\WorkerTaxes;
 
+use Appleton\Taxes\Classes\PayrollLiabilities\PayrollLiability;
+use Appleton\Taxes\Classes\WorkerTaxes\LiabilityAmount;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 
@@ -59,6 +61,27 @@ class TaxManager
                         && $taxable_wage->getDate()->lte($date);
                 })->sum(static function (TaxableWage $taxable_wage) {
                     return $taxable_wage->getAmount();
+                }) / 100;
+    }
+
+    public function computeYtdLiabilities(
+        Collection $liabilities,
+        string $tax_class,
+        Carbon $date
+    ): float {
+        if (!$liabilities->has($tax_class)) {
+            return 0.0;
+        }
+
+        $start_of_year = $date->copy()->startOfYear();
+
+        return $liabilities
+                ->get($tax_class)
+                ->filter(static function (LiabilityAmount $liability) use ($start_of_year, $date) {
+                    return $liability->getDate()->gte($start_of_year)
+                        && $liability->getDate()->lte($date);
+                })->sum(static function (LiabilityAmount $liability) {
+                    return $liability->getAmount();
                 }) / 100;
     }
 

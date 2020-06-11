@@ -102,8 +102,13 @@ class PayrollLiabilities
 
     private function bindPayrollData(): void
     {
-        app()->instance(CompanyPayroll::class, new CompanyPayroll($this->getDate(),
-            $this->wages, $this->qtd_wages, $this->ytd_wages, $this->ytd_liabilities));
+        app()->instance(CompanyPayroll::class, new CompanyPayroll(
+            $this->getDate(),
+            $this->wages,
+            $this->qtd_wages,
+            $this->ytd_wages,
+            $this->ytd_liabilities
+        ));
     }
 
     private function bindInterfaces(Collection $taxes): void
