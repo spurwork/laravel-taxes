@@ -31,12 +31,14 @@ class TransitDistrictTaxesTestCase extends TaxTestCase
             $wages,
             collect([]),
             collect([]),
+            collect([]),
             $this->user,
             $parameters->getBirthDate(),
             $parameters->getPayPeriods(),
             collect([]),
             collect([]),
-            collect([])
+            collect([]),
+            0
         );
 
         $short_name = (new ReflectionClass($parameters->getTaxClass()))->getShortName();

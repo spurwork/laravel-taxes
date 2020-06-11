@@ -29,6 +29,7 @@ class TestParametersBuilder
     private $take_home_tip_amount_in_cents;
     private $minutes_worked;
     private $wages_callback;
+    private $pay_periods_exempt;
 
     public function build(): TestParameters
     {
@@ -55,7 +56,8 @@ class TestParametersBuilder
             $this->pay_check_tip_amount_in_cents,
             $this->take_home_tip_amount_in_cents,
             $this->minutes_worked,
-            $this->wages_callback
+            $this->wages_callback,
+            $this->pay_periods_exempt
         );
     }
 
@@ -170,6 +172,12 @@ class TestParametersBuilder
     public function setYtdLiabilitiesInCents(?int $ytd_liabilities_in_cents)
     {
         $this->ytd_liabilities_in_cents = $ytd_liabilities_in_cents;
+        return $this;
+    }
+
+    public function setPayPeriodsExempt(?int $pay_periods_exempt)
+    {
+        $this->pay_periods_exempt = $pay_periods_exempt;
         return $this;
     }
 

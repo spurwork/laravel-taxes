@@ -2,10 +2,12 @@
 
 namespace Appleton\Taxes\Tests\Unit\Classes\WorkerTaxes;
 
+use Appleton\Taxes\Classes\WorkerTaxes\LiabilityAmount;
 use Appleton\Taxes\Classes\WorkerTaxes\TaxableWage;
 use Appleton\Taxes\Classes\WorkerTaxes\TaxManager;
 use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome;
 use Appleton\Taxes\Countries\US\FederalUnemployment\FederalUnemployment;
+use Appleton\Taxes\Countries\US\Pennsylvania\PennsylvaniaLSTTaxEmployer\PennsylvaniaLSTTaxEmployer;
 use Carbon\Carbon;
 use Faker\Factory;
 use PHPUnit\Framework\TestCase;
@@ -236,6 +238,22 @@ class TaxManagerTest extends TestCase
         $tax_amounts->put(FederalUnemployment::class, collect([$tax_amount_other_tax]));
 
         $results = $this->tax_manager->computeMtdTaxableWages($tax_amounts, FederalIncome::class, Carbon::now());
+
+        self::assertThat($results, self::equalTo($tax_amount->getAmount() / 100));
+    }
+
+    public function testComputeYtdLiabilities(): void
+    {
+        $tax_amount = new LiabilityAmount(
+            $this->factory->numberBetween(100, 10000),
+            Carbon::now()->subDays(1),
+            PennsylvaniaLSTTaxEmployer::class
+        );
+
+        $tax_amounts = collect([]);
+        $tax_amounts->put(PennsylvaniaLSTTaxEmployer::class, collect([$tax_amount]));
+
+        $results = $this->tax_manager->computeYtdLiabilities($tax_amounts, PennsylvaniaLSTTaxEmployer::class, Carbon::now());
 
         self::assertThat($results, self::equalTo($tax_amount->getAmount() / 100));
     }
