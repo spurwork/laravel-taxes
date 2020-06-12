@@ -6,8 +6,8 @@ use Appleton\Taxes\Countries\US\Michigan\Albion\AlbionTax as BaseAlbionTax;
 
 class AlbionTax extends BaseAlbionTax
 {
-    public const RESIDENCY_TAX_RATE = 0.1;
-    public const NONRESIDENCY_TAX_RATE = 0.05;
+    public const RESIDENCY_TAX_RATE = 0.01;
+    public const NONRESIDENCY_TAX_RATE = 0.005;
     public const EXEMPTION_AMOUNT = 600;
 
 

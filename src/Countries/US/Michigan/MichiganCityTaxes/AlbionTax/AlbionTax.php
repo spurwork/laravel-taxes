@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes;
+namespace Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\AlbionTax;
 
 use Appleton\Taxes\Countries\US\Michigan\MichiganCityTax;
 
