@@ -8,6 +8,8 @@ abstract class GrandRapidsTax extends MichiganCityTax
 {
     private const CITY_NAME = 'GrandRapids';
 
+    protected $special_city = true;
+
     protected function getCityName(): string
     {
         return self::CITY_NAME;

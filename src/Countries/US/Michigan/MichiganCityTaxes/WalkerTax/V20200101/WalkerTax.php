@@ -16,12 +16,12 @@ class WalkerTax extends BaseWalkerTax
         return self::RESIDENCY_TAX_RATE;
     }
 
-    protected function getNonResidencyTaxRate(): float
+    protected function getNonresidencyTaxRate(): float
     {
         return self::NONRESIDENCY_TAX_RATE;
     }
 
-    protected function getExemptionAmount(): float
+    protected function getExemptionAmount(): int
     {
         return self::EXEMPTION_AMOUNT;
     }

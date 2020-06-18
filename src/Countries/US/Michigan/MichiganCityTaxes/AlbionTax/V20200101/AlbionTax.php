@@ -10,18 +10,17 @@ class AlbionTax extends BaseAlbionTax
     public const NONRESIDENCY_TAX_RATE = 0.005;
     public const EXEMPTION_AMOUNT = 600;
 
-
     protected function getResidencyTaxRate(): float
     {
         return self::RESIDENCY_TAX_RATE;
     }
 
-    protected function getNonResidencyTaxRate(): float
+    protected function getNonresidencyTaxRate(): float
     {
         return self::NONRESIDENCY_TAX_RATE;
     }
 
-    protected function getExemptionAmount(): float
+    protected function getExemptionAmount(): int
     {
         return self::EXEMPTION_AMOUNT;
     }
