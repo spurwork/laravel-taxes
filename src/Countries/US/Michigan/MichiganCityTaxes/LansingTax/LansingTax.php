@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\LansingTax;
 
-use Appleton\Taxes\Countries\US\Michigan\MichiganCityTax;
+use Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\MichiganCityTax;
 
 abstract class LansingTax extends MichiganCityTax
 {

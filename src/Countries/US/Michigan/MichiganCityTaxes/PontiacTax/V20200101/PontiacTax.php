@@ -2,7 +2,7 @@
 
 namespace Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\Pontiac\V20200101;
 
-use Appleton\Taxes\Countries\US\Michigan\Pontiac\PontiacTax as BasePontiacTax;
+use Appleton\Taxes\Countries\US\Michigan\PontiacTax\PontiacTax as BasePontiacTax;
 
 class PontiacTax extends BasePontiacTax
 {

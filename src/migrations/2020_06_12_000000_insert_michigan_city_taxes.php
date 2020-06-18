@@ -25,7 +25,7 @@ class InsertMichiganCityTaxes extends Migration
         'Lapeer City Tax' => \Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\LapeerTax\LapeerTax::class,
         'Muskegon City Tax' => \Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\MuskegonTax\MuskegonTax::class,
         'Muskegon Heights City Tax' => \Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\MuskegonHeightsTax\MuskegonHeightsTax::class,
-        'Ponitac City Tax' => \Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\PonitacTax\PonitacTax::class,
+        'Pontiac City Tax' => \Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\PontiacTax\PontiacTax::class,
         'Port Huron City Tax' => \Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\PortHuronTax\PortHuronTax::class,
         'Portland City Tax' => \Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\PortlandTax\PortlandTax::class,
         'Saginaw City Tax' => \Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\SaginawTax\SaginawTax::class,

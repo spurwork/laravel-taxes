@@ -497,7 +497,7 @@ class TaxServiceProvider extends ServiceProvider
         \Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\LapeerTax\LapeerTax::class,
         \Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\MuskegonTax\MuskegonTax::class,
         \Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\MuskegonHeightsTax\MuskegonHeightsTax::class,
-        \Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\PonitacTax\PonitacTax::class,
+        \Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\PontiacTax\PontiacTax::class,
         \Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\PortHuronTax\PortHuronTax::class,
         \Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\PortlandTax\PortlandTax::class,
         \Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\SaginawTax\SaginawTax::class,
