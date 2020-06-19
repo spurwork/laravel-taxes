@@ -89,6 +89,21 @@ abstract class TaxTestCase extends UnitTestCase
             $annual_taxable_wages->put($parameters->getTaxClass(), collect([$taxable_wage]));
         }
 
+        $annual_liability_amounts = collect([]);
+        if ($parameters->getYtdLiabilitiesInCents() !== null
+        && $parameters->getYtdLiabilitiesInCents() !== 0) {
+            $taxable_wage = $this->makeLiabilityAmount($parameters->getTaxClass(), $parameters->getYtdLiabilitiesInCents());
+
+            $annual_liability_amounts->put($parameters->getTaxClass(), collect([$taxable_wage]));
+        } elseif ($parameters->getMtdLiabilitiesInCents() !== null
+        && $parameters->getMtdLiabilitiesInCents() !== 0) {
+            $taxable_wage = $this->makeLiabilityAmountAtDate(now(), $parameters->getTaxClass(), $parameters->getMtdLiabilitiesInCents());
+
+            $annual_liability_amounts->put($parameters->getTaxClass(), collect([$taxable_wage]));
+        }
+
+        $pay_periods_exempt = $parameters->getPayPeriodsCount() !== null ? $parameters->getPayPeriodsCount() : 0;
+
         $results = $this->taxes->calculate(
             Carbon::now(),
             Carbon::now()->addWeek(),
@@ -98,12 +113,14 @@ abstract class TaxTestCase extends UnitTestCase
             $wages,
             $annual_wages,
             $annual_taxable_wages,
+            $annual_liability_amounts,
             $this->user,
             $parameters->getBirthDate(),
             $parameters->getPayPeriods(),
             collect([]),
             collect([]),
-            collect([])
+            collect([]),
+            $pay_periods_exempt
         );
 
         $short_name = (new ReflectionClass($parameters->getTaxClass()))->getShortName();
@@ -180,12 +197,14 @@ abstract class TaxTestCase extends UnitTestCase
             $wages,
             $historical_wages,
             collect([]),
+            collect([]),
             $this->user,
             $parameters->getBirthDate(),
             $parameters->getPayPeriods(),
             collect([]),
             collect([]),
-            collect([])
+            collect([]),
+            0
         );
 
         $short_name = (new ReflectionClass($parameters->getTaxClass()))->getShortName();

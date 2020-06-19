@@ -51,8 +51,8 @@ class WorkersCompAssessmentFundTest extends TaxTestCase
                     ->setHomeLocation(self::OREGON_LOCATION)
                     ->setWorkLocation(self::OREGON_LOCATION)
                     ->setWagesInCents(1125)
-                    ->setMinutesWorked(60)
-                    ->setExpectedAmountInCents(110)
+                    ->setMinutesWorked(480) // 8 hours
+                    ->setExpectedAmountInCents(9)
                     ->build()
             ],
             '01' => [
@@ -60,8 +60,8 @@ class WorkersCompAssessmentFundTest extends TaxTestCase
                     ->setHomeLocation(self::OREGON_LOCATION)
                     ->setWorkLocation(self::OREGON_LOCATION)
                     ->setWagesInCents(1200)
-                    ->setMinutesWorked(90)
-                    ->setExpectedAmountInCents(165)
+                    ->setMinutesWorked(960) // 16 hours
+                    ->setExpectedAmountInCents(18)
                     ->build()
             ],
             '02' => [
@@ -69,8 +69,8 @@ class WorkersCompAssessmentFundTest extends TaxTestCase
                     ->setHomeLocation(self::OREGON_LOCATION)
                     ->setWorkLocation(self::OREGON_LOCATION)
                     ->setWagesInCents(1600)
-                    ->setMinutesWorked(480)
-                    ->setExpectedAmountInCents(880)
+                    ->setMinutesWorked(2400) // 40 hours
+                    ->setExpectedAmountInCents(44)
                     ->build()
             ],
         ];
