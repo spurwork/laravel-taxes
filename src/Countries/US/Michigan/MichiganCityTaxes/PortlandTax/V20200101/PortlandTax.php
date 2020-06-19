@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\Portland\V20200101;
+namespace Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\PortlandTax\V20200101;
 
-use Appleton\Taxes\Countries\US\Michigan\Portland\PortlandTax as BasePortlandTax;
+use Appleton\Taxes\Countries\US\Michigan\PortlandTax\PortlandTax as BasePortlandTax;
 
 class PortlandTax extends BasePortlandTax
 {

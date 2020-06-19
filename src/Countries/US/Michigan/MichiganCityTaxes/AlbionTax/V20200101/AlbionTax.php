@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\Albion\V20200101;
+namespace Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\AlbionTax\V20200101;
 
-use Appleton\Taxes\Countries\US\Michigan\Albion\AlbionTax as BaseAlbionTax;
+use Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\AlbionTax\AlbionTax as BaseAlbionTax;
 
 class AlbionTax extends BaseAlbionTax
 {

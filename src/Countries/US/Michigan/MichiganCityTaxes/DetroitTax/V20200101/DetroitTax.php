@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\Detroit\V20200101;
+namespace Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\DetroitTax\V20200101;
 
-use Appleton\Taxes\Countries\US\Michigan\Detroit\DetroitTax as BaseDetroitTax;
+use Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\DetroitTax\DetroitTax as BaseDetroitTax;
 
 class DetroitTax extends BaseDetroitTax
 {

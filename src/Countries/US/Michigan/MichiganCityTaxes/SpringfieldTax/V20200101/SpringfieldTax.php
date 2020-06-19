@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\Springfield\V20200101;
+namespace Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\SpringfieldTax\V20200101;
 
-use Appleton\Taxes\Countries\US\Michigan\Springfield\SpringfieldTax as BaseSpringfieldTax;
+use Appleton\Taxes\Countries\US\Michigan\SpringfieldTax\SpringfieldTax as BaseSpringfieldTax;
 
 class SpringfieldTax extends BaseSpringfieldTax
 {

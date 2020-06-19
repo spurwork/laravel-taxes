@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\Ionia\V20200101;
+namespace Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\IoniaTax\V20200101;
 
-use Appleton\Taxes\Countries\US\Michigan\Ionia\IoniaTax as BaseIoniaTax;
+use Appleton\Taxes\Countries\US\Michigan\IoniaTax\IoniaTax as BaseIoniaTax;
 
 class IoniaTax extends BaseIoniaTax
 {

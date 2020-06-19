@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\Jackson\V20200101;
+namespace Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\JacksonTax\V20200101;
 
-use Appleton\Taxes\Countries\US\Michigan\Jackson\JacksonTax as BaseJacksonTax;
+use Appleton\Taxes\Countries\US\Michigan\JacksonTax\JacksonTax as BaseJacksonTax;
 
 class JacksonTax extends BaseJacksonTax
 {

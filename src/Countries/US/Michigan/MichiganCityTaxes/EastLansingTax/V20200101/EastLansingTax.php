@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\EastLansing\V20200101;
+namespace Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\EastLansingTax\V20200101;
 
-use Appleton\Taxes\Countries\US\Michigan\EastLansing\EastLansingTax as BaseEastLansingTax;
+use Appleton\Taxes\Countries\US\Michigan\EastLansingTax\EastLansingTax as BaseEastLansingTax;
 
 class EastLansingTax extends BaseEastLansingTax
 {

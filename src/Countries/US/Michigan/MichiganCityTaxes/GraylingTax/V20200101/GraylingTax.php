@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\Grayling\V20200101;
+namespace Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\GraylingTax\V20200101;
 
-use Appleton\Taxes\Countries\US\Michigan\Grayling\GraylingTax as BaseGraylingTax;
+use Appleton\Taxes\Countries\US\Michigan\GraylingTax\GraylingTax as BaseGraylingTax;
 
 class GraylingTax extends BaseGraylingTax
 {

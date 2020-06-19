@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\PortHuron\V20200101;
+namespace Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\PortHuronTax\V20200101;
 
-use Appleton\Taxes\Countries\US\Michigan\PortHuron\PortHuronTax as BasePortHuronTax;
+use Appleton\Taxes\Countries\US\Michigan\PortHuronTax\PortHuronTax as BasePortHuronTax;
 
 class PortHuronTax extends BasePortHuronTax
 {

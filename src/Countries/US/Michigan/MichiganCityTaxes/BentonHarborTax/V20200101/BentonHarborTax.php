@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\BentonHarbor\V20200101;
+namespace Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\BentonHarborTax\V20200101;
 
-use Appleton\Taxes\Countries\US\Michigan\BentonHarbor\BentonHarborTax as BaseBentonHarborTax;
+use Appleton\Taxes\Countries\US\Michigan\BentonHarborTax\BentonHarborTax as BaseBentonHarborTax;
 
 class BentonHarborTax extends BaseBentonHarborTax
 {

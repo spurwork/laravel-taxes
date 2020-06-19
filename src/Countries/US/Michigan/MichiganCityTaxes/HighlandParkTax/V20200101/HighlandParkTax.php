@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\HighlandPark\V20200101;
+namespace Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\HighlandParkTax\V20200101;
 
-use Appleton\Taxes\Countries\US\Michigan\HighlandPark\HighlandParkTax as BaseHighlandParkTax;
+use Appleton\Taxes\Countries\US\Michigan\HighlandParkTax\HighlandParkTax as BaseHighlandParkTax;
 
 class HighlandParkTax extends BaseHighlandParkTax
 {

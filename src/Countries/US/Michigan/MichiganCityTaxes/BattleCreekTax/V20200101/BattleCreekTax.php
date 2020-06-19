@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\BattleCreek\V20200101;
+namespace Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\BattleCreekTax\V20200101;
 
-use Appleton\Taxes\Countries\US\Michigan\BattleCreek\BattleCreekTax as BaseBattleCreekTax;
+use Appleton\Taxes\Countries\US\Michigan\BattleCreekTax\BattleCreekTax as BaseBattleCreekTax;
 
 class BattleCreekTax extends BaseBattleCreekTax
 {

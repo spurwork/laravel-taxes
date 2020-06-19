@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\Muskegon\V20200101;
+namespace Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\MuskegonTax\V20200101;
 
-use Appleton\Taxes\Countries\US\Michigan\Muskegon\MuskegonTax as BaseMuskegonTax;
+use Appleton\Taxes\Countries\US\Michigan\MuskegonTax\MuskegonTax as BaseMuskegonTax;
 
 class MuskegonTax extends BaseMuskegonTax
 {

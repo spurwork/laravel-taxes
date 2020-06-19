@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\MuskegonHeights\V20200101;
+namespace Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\MuskegonHeightsTax\V20200101;
 
-use Appleton\Taxes\Countries\US\Michigan\MuskegonHeights\MuskegonHeightsTax as BaseMuskegonHeightsTax;
+use Appleton\Taxes\Countries\US\Michigan\MuskegonHeightsTax\MuskegonHeightsTax as BaseMuskegonHeightsTax;
 
 class MuskegonHeightsTax extends BaseMuskegonHeightsTax
 {

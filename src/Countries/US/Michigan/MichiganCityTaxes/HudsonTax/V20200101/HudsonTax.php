@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\Hudson\V20200101;
+namespace Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\HudsonTax\V20200101;
 
-use Appleton\Taxes\Countries\US\Michigan\Hudson\HudsonTax as BaseHudsonTax;
+use Appleton\Taxes\Countries\US\Michigan\HudsonTax\HudsonTax as BaseHudsonTax;
 
 class HudsonTax extends BaseHudsonTax
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\Hamtramck\V20200101;
+namespace Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\HamtramckTax\V20200101;
 
-use Appleton\Taxes\Countries\US\Michigan\Hamtramck\HamtramckTax as BaseHamtramckTax;
+use Appleton\Taxes\Countries\US\Michigan\HamtramckTax\HamtramckTax as BaseHamtramckTax;
 
 class HamtramckTax extends BaseHamtramckTax
 {

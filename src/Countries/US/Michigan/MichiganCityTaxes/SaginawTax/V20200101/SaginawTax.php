@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\Saginaw\V20200101;
+namespace Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\SaginawTax\V20200101;
 
-use Appleton\Taxes\Countries\US\Michigan\Saginaw\SaginawTax as BaseSaginawTax;
+use Appleton\Taxes\Countries\US\Michigan\SaginawTax\SaginawTax as BaseSaginawTax;
 
 class SaginawTax extends BaseSaginawTax
 {

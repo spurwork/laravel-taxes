@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\Walker\V20200101;
+namespace Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\WalkerTax\V20200101;
 
-use Appleton\Taxes\Countries\US\Michigan\Walker\WalkerTax as BaseWalkerTax;
+use Appleton\Taxes\Countries\US\Michigan\WalkerTax\WalkerTax as BaseWalkerTax;
 
 class WalkerTax extends BaseWalkerTax
 {

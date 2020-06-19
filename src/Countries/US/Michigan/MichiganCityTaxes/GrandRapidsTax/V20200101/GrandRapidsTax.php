@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\GrandRapids\V20200101;
+namespace Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\GrandRapidsTax\V20200101;
 
-use Appleton\Taxes\Countries\US\Michigan\GrandRapids\GrandRapidsTax as BaseGrandRapidsTax;
+use Appleton\Taxes\Countries\US\Michigan\GrandRapidsTax\GrandRapidsTax as BaseGrandRapidsTax;
 
 class GrandRapidsTax extends BaseGrandRapidsTax
 {

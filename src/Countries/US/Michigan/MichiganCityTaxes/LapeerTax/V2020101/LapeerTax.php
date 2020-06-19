@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\Lapeer\V20200101;
+namespace Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\LapeerTax\V20200101;
 
-use Appleton\Taxes\Countries\US\Michigan\Lapeer\LapeerTax as BaseLapeerTax;
+use Appleton\Taxes\Countries\US\Michigan\LapeerTax\LapeerTax as BaseLapeerTax;
 
 class LapeerTax extends BaseLapeerTax
 {

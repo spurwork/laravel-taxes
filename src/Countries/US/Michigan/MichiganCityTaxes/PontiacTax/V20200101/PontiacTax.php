@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\Pontiac\V20200101;
+namespace Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\PontiacTax\V20200101;
 
 use Appleton\Taxes\Countries\US\Michigan\PontiacTax\PontiacTax as BasePontiacTax;
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\Flint\V20200101;
+namespace Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\FlintTax\V20200101;
 
-use Appleton\Taxes\Countries\US\Michigan\Flint\FlintTax as BaseFlintTax;
+use Appleton\Taxes\Countries\US\Michigan\FlintTax\FlintTax as BaseFlintTax;
 
 class FlintTax extends BaseFlintTax
 {
