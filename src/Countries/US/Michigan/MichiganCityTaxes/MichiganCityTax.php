@@ -60,67 +60,78 @@ abstract class MichiganCityTax extends BaseLocal
         return false;
     }
 
+    public function getCityEarnings($is_resident_city, $percentage_worked = null)
+    {
+        if ($is_resident_city) {
+            return $this->payroll->getEarnings() - $this->getExemptionAmountTotal($this->tax_information->resident_exemptions);
+        } else {
+            if ($percentage_worked) {
+                return ($this->payroll->getEarnings() * $percentage_worked) - $this->getExemptionAmountTotal($this->tax_information->nonresident_exemptions);
+            } else {
+                return $this->payroll->getEarnings() - $this->getExemptionAmountTotal($this->tax_information->nonresident_exemptions);
+            }
+        }
+    }
+
     public function compute(Collection $tax_areas)
     {
         if ($this->tax_information->exempt) {
             return 0.0;
         }
 
-        // return round(($this->payroll->getEarnings() - $this->getExemptionAmountTotal()) * $this->getRate(), 2);
-
         if ($this->tax_information->resident_city === $this->getCityName()) {
             if ($this->resident_city_only_living_and_working_with_tax || $this->resident_city_no_work_has_tax_and_works_in_different_city_with_no_tax) {
-                return round(($this->payroll->getEarnings() - ($this->getExemptionAmountTotal($this->tax_information->resident_exemptions))) * $this->getResidencyTaxRate(), 2);
+                return round($this->getCityEarnings(true) * $this->getResidencyTaxRate(), 2);
             } elseif ($this->resident_city_no_work_has_tax_and_works_in_different_city_with_tax && $this->isSpecialCity($this->tax_information->resident_city)) {
-                return round(($this->payroll->getEarnings() - ($this->getExemptionAmountTotal($this->tax_information->resident_exemptions))) * $this->getSpecialCityRate($this->tax_information->resident_city, $this->tax_information->primary_nonresident_city, true), 2);
+                return round($this->getCityEarnings(true) * $this->getSpecialCityRate($this->tax_information->resident_city, $this->tax_information->primary_nonresident_city, true), 2);
             } elseif ($this->resident_city_no_work_has_tax_and_works_in_different_city_with_tax) {
-                return round(($this->payroll->getEarnings() - ($this->getExemptionAmountTotal($this->tax_information->resident_exemptions))) * self::DEFAULT_TAX_RATE, 2);
+                return round($this->getCityEarnings(true) * self::DEFAULT_TAX_RATE, 2);
             } elseif ($this->resident_city_is_primary_work_city_with_tax_works_in_different_city_with_tax && $this->isSpecialCity($this->tax_information->resident_city)) {
-                return round(($this->payroll->getEarnings() - ($this->getExemptionAmountTotal($this->tax_information->resident_exemptions))) * $this->getSpecialCityRate($this->tax_information->resident_city, $this->tax_information->secondary_nonresident_city, true), 2);
+                return round($this->getCityEarnings(true) * $this->getSpecialCityRate($this->tax_information->resident_city, $this->tax_information->secondary_nonresident_city, true), 2);
             } elseif ($this->resident_city_is_primary_work_city_with_tax_works_in_different_city_with_tax) {
-                return round(($this->payroll->getEarnings() - ($this->getExemptionAmountTotal($this->tax_information->resident_exemptions))) * self::DEFAULT_TAX_RATE, 2);
+                return round($this->getCityEarnings(true) * self::DEFAULT_TAX_RATE, 2);
             } elseif ($this->resident_city_no_work_has_tax_works_in_2_other_cities_that_have_tax && $this->isSpecialCity($this->tax_information->resident_city)) {
-                return round(($this->payroll->getEarnings() - ($this->getExemptionAmountTotal($this->tax_information->resident_exemptions))) * $this->getSpecialCityRate($this->tax_information->resident_city, $this->tax_information->secondary_nonresident_city, true), 2);
+                return round($this->getCityEarnings(true) * $this->getSpecialCityRate($this->tax_information->resident_city, $this->tax_information->secondary_nonresident_city, true), 2);
             } elseif ($this->resident_city_no_work_has_tax_works_in_2_other_cities_that_have_tax) {
-                return round(($this->payroll->getEarnings() - ($this->getExemptionAmountTotal($this->tax_information->resident_exemptions))) * self::DEFAULT_TAX_RATE, 2);
+                return round($this->getCityEarnings(true) * self::DEFAULT_TAX_RATE, 2);
             }
         } elseif ($this->tax_information->primary_nonresident_city === $this->getCityName()) {
             if ($this->resident_city_no_tax_primary_city_has_tax) {
-                return round(($this->payroll->getEarnings() - $this->getExemptionAmountTotal($this->tax_information->nonresident_exemptions)) * $this->getNonresidencyTaxRate(), 2);
+                return round($this->getCityEarnings(false) * $this->getNonresidencyTaxRate(), 2);
             } elseif ($this->resident_city_no_work_has_tax_and_works_in_different_city_with_tax && $this->isSpecialCity($this->tax_information->primary_nonresident_city)) {
-                return round(($this->payroll->getEarnings() - $this->getExemptionAmountTotal($this->tax_information->nonresident_exemptions)) * $this->getSpecialCityRate($this->tax_information->resident_city, $this->tax_information->primary_nonresident_city, false), 2);
+                return round($this->getCityEarnings(false) * $this->getSpecialCityRate($this->tax_information->resident_city, $this->tax_information->primary_nonresident_city, false), 2);
             } elseif ($this->resident_city_no_work_has_tax_and_works_in_different_city_with_tax) {
-                return round(($this->payroll->getEarnings() - $this->getExemptionAmountTotal($this->tax_information->nonresident_exemptions)) * self::DEFAULT_TAX_RATE, 2);
+                return round($this->getCityEarnings(false) * self::DEFAULT_TAX_RATE, 2);
             } elseif ($this->resident_city_no_work_has_tax_works_in_2_other_cities_that_have_tax && $this->isSpecialCity($this->tax_information->primary_nonresident_city)) {
                 if ($this->primary_nonresident_city_percentage_worked >= $this->secondary_nonresident_city_percentage_worked) {
-                    return round(($this->payroll->getEarnings() * $this->primary_nonresident_city_percentage_worked - ($this->getExemptionAmountTotal($this->tax_information->nonresident_exemptions))) * $this->getSpecialCityRate($this->tax_information->resident_city, $this->tax_information->primary_nonresident_city, false), 2);
+                    return round($this->getCityEarnings(false, $this->primary_nonresident_city_percentage_worked) * $this->getSpecialCityRate($this->tax_information->resident_city, $this->tax_information->primary_nonresident_city, false), 2);
                 }
             } elseif ($this->resident_city_no_work_has_tax_works_in_2_other_cities_that_have_tax) {
                 if ($this->primary_nonresident_city_percentage_worked >= $this->secondary_nonresident_city_percentage_worked) {
-                    return round(($this->payroll->getEarnings() * $this->primary_nonresident_city_percentage_worked - ($this->getExemptionAmountTotal($this->tax_information->nonresident_exemptions))) * self::DEFAULT_TAX_RATE, 2);
+                    return round($this->getCityEarnings(false, $this->primary_nonresident_city_percentage_worked) * self::DEFAULT_TAX_RATE, 2);
                 }
             } elseif ($this->resident_city_no_work_no_tax_works_in_2_other_cities_that_have_tax  && $this->isSpecialCity($this->tax_information->primary_nonresident_city)) {
-                return round(($this->payroll->getEarnings() * $this->primary_nonresident_city_percentage_worked - ($this->getExemptionAmountTotal($this->tax_information->nonresident_exemptions))) * $this->getSpecialCityRate($this->tax_information->primary_nonresident_city, $this->tax_information->secondary_nonresident_city, false), 2);
+                return round($this->getCityEarnings(false, $this->primary_nonresident_city_percentage_worked) * $this->getSpecialCityRate($this->tax_information->primary_nonresident_city, $this->tax_information->secondary_nonresident_city, false), 2);
             } elseif ($this->resident_city_no_work_no_tax_works_in_2_other_cities_that_have_tax) {
-                return round(($this->payroll->getEarnings() * $this->primary_nonresident_city_percentage_worked - ($this->getExemptionAmountTotal($this->tax_information->nonresident_exemptions))) * self::DEFAULT_TAX_RATE, 2);
+                return round($this->getCityEarnings(false, $this->primary_nonresident_city_percentage_worked) * self::DEFAULT_TAX_RATE, 2);
             }
         } elseif ($this->tax_information->secondary_nonresident_city === $this->getCityName()) {
             if ($this->resident_city_is_primary_work_city_with_tax_works_in_different_city_with_tax && $this->isSpecialCity($this->tax_information->secondary_nonresident_city)) {
-                return round(($this->payroll->getEarnings() * $this->secondary_nonresident_city_percentage_worked - ($this->getExemptionAmountTotal($this->tax_information->nonresident_exemptions))) * $this->getSpecialCityRate($this->tax_information->resident_city, $this->tax_information->secondary_nonresident_city, false), 2);
+                return round($this->getCityEarnings(false, $this->secondary_nonresident_city_percentage_worked) * $this->getSpecialCityRate($this->tax_information->resident_city, $this->tax_information->secondary_nonresident_city, false), 2);
             } elseif ($this->resident_city_is_primary_work_city_with_tax_works_in_different_city_with_tax) {
-                return round(($this->payroll->getEarnings() * $this->secondary_nonresident_city_percentage_worked - ($this->getExemptionAmountTotal($this->tax_information->nonresident_exemptions))) * self::DEFAULT_TAX_RATE, 2);
+                return round($this->getCityEarnings(false, $this->secondary_nonresident_city_percentage_worked) * self::DEFAULT_TAX_RATE, 2);
             } elseif ($this->resident_city_no_work_has_tax_works_in_2_other_cities_that_have_tax && $this->isSpecialCity($this->tax_information->secondary_nonresident_city)) {
                 if ($this->secondary_nonresident_city_percentage_worked > $this->primary_nonresident_city_percentage_worked) {
-                    return round(($this->payroll->getEarnings() * $this->secondary_nonresident_city_percentage_worked - ($this->getExemptionAmountTotal($this->tax_information->nonresident_exemptions))) * $this->getSpecialCityRate($this->tax_information->resident_city, $this->tax_information->secondary_nonresident_city, false), 2);
+                    return round($this->getCityEarnings(false, $this->secondary_nonresident_city_percentage_worked) * $this->getSpecialCityRate($this->tax_information->resident_city, $this->tax_information->secondary_nonresident_city, false), 2);
                 }
             } elseif ($this->resident_city_no_work_has_tax_works_in_2_other_cities_that_have_tax) {
                 if ($this->secondary_nonresident_city_percentage_worked > $this->primary_nonresident_city_percentage_worked) {
-                    return round(($this->payroll->getEarnings() * $this->secondary_nonresident_city_percentage_worked - ($this->getExemptionAmountTotal($this->tax_information->nonresident_exemptions))) * self::DEFAULT_TAX_RATE, 2);
+                    return round($this->getCityEarnings(false, $this->secondary_nonresident_city_percentage_worked) * self::DEFAULT_TAX_RATE, 2);
                 }
             } elseif ($this->resident_city_no_work_no_tax_works_in_2_other_cities_that_have_tax  && $this->isSpecialCity($this->tax_information->secondary_nonresident_city)) {
-                return round(($this->payroll->getEarnings() * $this->secondary_nonresident_city_percentage_worked - ($this->getExemptionAmountTotal($this->tax_information->nonresident_exemptions))) * $this->getSpecialCityRate($this->tax_information->primary_nonresident_city, $this->tax_information->secondary_nonresident_city, false), 2);
+                return round($this->getCityEarnings(false, $this->secondary_nonresident_city_percentage_worked) * $this->getSpecialCityRate($this->tax_information->primary_nonresident_city, $this->tax_information->secondary_nonresident_city, false), 2);
             } elseif ($this->resident_city_no_work_no_tax_works_in_2_other_cities_that_have_tax) {
-                return round(($this->payroll->getEarnings() * $this->secondary_nonresident_city_percentage_worked - ($this->getExemptionAmountTotal($this->tax_information->nonresident_exemptions))) * self::DEFAULT_TAX_RATE, 2);
+                return round($this->getCityEarnings(false, $this->secondary_nonresident_city_percentage_worked) * self::DEFAULT_TAX_RATE, 2);
             }
         }
     }
@@ -130,10 +141,7 @@ abstract class MichiganCityTax extends BaseLocal
         $resident_city_resident_rate = 0;
         $resident_city_nonresident_rate = 0;
         $work_city_nonresident_rate = 0;
-        // detroit r = .024 n = .012
-        // GrandRapids r = .015 n = .0075
-        // HighlandPark r = .02 n = .01
-        // Saginaw r = .015 n = .0075
+
         if ($resident_city === 'Detroit') {
             $resident_city_resident_rate = 0.024;
             $resident_city_nonresident_rate = 0.012;
