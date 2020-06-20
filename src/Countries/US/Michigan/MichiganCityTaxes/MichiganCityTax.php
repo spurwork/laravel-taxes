@@ -19,10 +19,11 @@ abstract class MichiganCityTax extends BaseLocal
     protected $resident_city_no_work_has_tax_works_in_2_other_cities_that_have_tax = false;
     protected $resident_city_no_work_no_tax_works_in_2_other_cities_that_have_tax = false;
 
-    protected $tax_information;
     protected $payroll;
-    protected $secondary_nonresident_city_percentage_worked;
+    protected $percentage_worked;
     protected $primary_nonresident_city_percentage_worked;
+    protected $secondary_nonresident_city_percentage_worked;
+    protected $tax_information;
 
     abstract protected function getCityName(): string;
     abstract protected function getExemptionAmount(): int;
@@ -60,13 +61,13 @@ abstract class MichiganCityTax extends BaseLocal
         return false;
     }
 
-    public function getCityEarnings($is_resident_city, $percentage_worked = null)
+    public function getCityEarnings($is_resident_city)
     {
         if ($is_resident_city) {
             return $this->payroll->getEarnings() - $this->getExemptionAmountTotal($this->tax_information->resident_exemptions);
         } else {
-            if ($percentage_worked) {
-                return ($this->payroll->getEarnings() * $percentage_worked) - $this->getExemptionAmountTotal($this->tax_information->nonresident_exemptions);
+            if ($this->percentage_worked > 0) {
+                return ($this->payroll->getEarnings() * $this->percentage_worked) - $this->getExemptionAmountTotal($this->tax_information->nonresident_exemptions);
             } else {
                 return $this->payroll->getEarnings() - $this->getExemptionAmountTotal($this->tax_information->nonresident_exemptions);
             }
@@ -80,9 +81,9 @@ abstract class MichiganCityTax extends BaseLocal
         }
 
         if ($this->tax_information->resident_city === $this->getCityName()) {
-            return round($this->getCityEarnings(true) * $this->getRate(), 2);
+            return round($this->getRate() * $this->getCityEarnings(true), 2);
         }
-        return round($this->getCityEarnings(false) * $this->getRate(), 2);
+        return round($this->getRate() * $this->getCityEarnings(false), 2);
     }
 
     public function getRate()
@@ -110,15 +111,18 @@ abstract class MichiganCityTax extends BaseLocal
                 return self::DEFAULT_TAX_RATE;
             } elseif ($this->resident_city_no_work_has_tax_works_in_2_other_cities_that_have_tax && $this->isSpecialCity($this->tax_information->primary_nonresident_city)) {
                 if ($this->primary_nonresident_city_percentage_worked >= $this->secondary_nonresident_city_percentage_worked) {
+                    $this->percentage_worked = $this->primary_nonresident_city_percentage_worked;
                     return $this->getSpecialCityRate($this->tax_information->resident_city, $this->tax_information->primary_nonresident_city, false);
                 }
             } elseif ($this->resident_city_no_work_has_tax_works_in_2_other_cities_that_have_tax) {
                 if ($this->primary_nonresident_city_percentage_worked >= $this->secondary_nonresident_city_percentage_worked) {
+                    $this->percentage_worked = $this->primary_nonresident_city_percentage_worked;
                     return self::DEFAULT_TAX_RATE;
                 }
             } elseif ($this->resident_city_no_work_no_tax_works_in_2_other_cities_that_have_tax  && $this->isSpecialCity($this->tax_information->primary_nonresident_city)) {
                 return $this->getSpecialCityRate($this->tax_information->primary_nonresident_city, $this->tax_information->secondary_nonresident_city, false);
             } elseif ($this->resident_city_no_work_no_tax_works_in_2_other_cities_that_have_tax) {
+                $this->percentage_worked = $this->primary_nonresident_city_percentage_worked;
                 return self::DEFAULT_TAX_RATE;
             }
         } elseif ($this->tax_information->secondary_nonresident_city === $this->getCityName()) {
@@ -128,15 +132,19 @@ abstract class MichiganCityTax extends BaseLocal
                 return self::DEFAULT_TAX_RATE;
             } elseif ($this->resident_city_no_work_has_tax_works_in_2_other_cities_that_have_tax && $this->isSpecialCity($this->tax_information->secondary_nonresident_city)) {
                 if ($this->secondary_nonresident_city_percentage_worked > $this->primary_nonresident_city_percentage_worked) {
+                    $this->percentage_worked = $this->secondary_nonresident_city_percentage_worked;
                     return $this->getSpecialCityRate($this->tax_information->resident_city, $this->tax_information->secondary_nonresident_city, false);
                 }
             } elseif ($this->resident_city_no_work_has_tax_works_in_2_other_cities_that_have_tax) {
                 if ($this->secondary_nonresident_city_percentage_worked > $this->primary_nonresident_city_percentage_worked) {
+                    $this->percentage_worked = $this->secondary_nonresident_city_percentage_worked;
+
                     return self::DEFAULT_TAX_RATE;
                 }
             } elseif ($this->resident_city_no_work_no_tax_works_in_2_other_cities_that_have_tax  && $this->isSpecialCity($this->tax_information->secondary_nonresident_city)) {
                 return $this->getSpecialCityRate($this->tax_information->primary_nonresident_city, $this->tax_information->secondary_nonresident_city, false);
             } elseif ($this->resident_city_no_work_no_tax_works_in_2_other_cities_that_have_tax) {
+                $this->percentage_worked = $this->secondary_nonresident_city_percentage_worked;
                 return self::DEFAULT_TAX_RATE;
             }
         }
