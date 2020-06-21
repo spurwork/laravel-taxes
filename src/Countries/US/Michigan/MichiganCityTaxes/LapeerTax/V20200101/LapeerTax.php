@@ -2,14 +2,13 @@
 
 namespace Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\LapeerTax\V20200101;
 
-use Appleton\Taxes\Countries\US\Michigan\LapeerTax\LapeerTax as BaseLapeerTax;
+use Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\LapeerTax\LapeerTax as BaseLapeerTax;
 
 class LapeerTax extends BaseLapeerTax
 {
     public const RESIDENCY_TAX_RATE = 0.01;
     public const NONRESIDENCY_TAX_RATE = 0.005;
     public const EXEMPTION_AMOUNT = 600;
-
 
     protected static function getResidencyTaxRate(): float
     {

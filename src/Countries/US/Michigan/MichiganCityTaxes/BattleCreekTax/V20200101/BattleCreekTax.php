@@ -2,14 +2,13 @@
 
 namespace Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\BattleCreekTax\V20200101;
 
-use Appleton\Taxes\Countries\US\Michigan\BattleCreekTax\BattleCreekTax as BaseBattleCreekTax;
+use Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\BattleCreekTax\BattleCreekTax as BaseBattleCreekTax;
 
 class BattleCreekTax extends BaseBattleCreekTax
 {
     public const RESIDENCY_TAX_RATE = 0.01;
     public const NONRESIDENCY_TAX_RATE = 0.005;
     public const EXEMPTION_AMOUNT = 750;
-
 
     protected static function getResidencyTaxRate(): float
     {

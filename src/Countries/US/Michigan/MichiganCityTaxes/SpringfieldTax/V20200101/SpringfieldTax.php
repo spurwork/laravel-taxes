@@ -2,14 +2,13 @@
 
 namespace Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\SpringfieldTax\V20200101;
 
-use Appleton\Taxes\Countries\US\Michigan\SpringfieldTax\SpringfieldTax as BaseSpringfieldTax;
+use Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\SpringfieldTax\SpringfieldTax as BaseSpringfieldTax;
 
 class SpringfieldTax extends BaseSpringfieldTax
 {
     public const RESIDENCY_TAX_RATE = 0.01;
     public const NONRESIDENCY_TAX_RATE = 0.005;
     public const EXEMPTION_AMOUNT = 750;
-
 
     protected static function getResidencyTaxRate(): float
     {
