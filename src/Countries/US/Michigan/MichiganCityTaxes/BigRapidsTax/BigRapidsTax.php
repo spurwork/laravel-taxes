@@ -8,7 +8,7 @@ abstract class BigRapidsTax extends MichiganCityTax
 {
     private const CITY_NAME = 'BigRapids';
 
-    protected function getCityName(): string
+    protected static function getCityName(): string
     {
         return self::CITY_NAME;
     }

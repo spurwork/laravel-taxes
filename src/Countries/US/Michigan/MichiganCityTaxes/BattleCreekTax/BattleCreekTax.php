@@ -8,7 +8,7 @@ abstract class BattleCreekTax extends MichiganCityTax
 {
     private const CITY_NAME = 'BattleCreek';
 
-    protected function getCityName(): string
+    protected static function getCityName(): string
     {
         return self::CITY_NAME;
     }

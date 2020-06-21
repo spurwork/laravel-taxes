@@ -4,6 +4,13 @@ namespace Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes;
 
 use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
 use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseLocal;
+use Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\DetroitTax\DetroitTax;
+use Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\DetroitTax\V20200101\DetroitTax as DetroitCityTax;
+use Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\GrandRapidsTax\GrandRapidsTax;
+use Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\GrandRapidsTax\V20200101\GrandRapidsTax as GrandRapidsCityTax;
+use Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\HighlandParkTax\HighlandParkTax;
+use Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\HighlandParkTax\V20200101\HighlandParkTax as HighlandParkCityTax;
+use Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\SaginawTax\SaginawTax;
 use Appleton\Taxes\Models\Countries\US\Michigan\MichiganIncomeTaxInformation;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -23,10 +30,10 @@ abstract class MichiganCityTax extends BaseLocal
     protected $percentage_worked;
     protected $tax_information;
 
-    abstract protected function getCityName(): string;
-    abstract protected function getExemptionAmount(): int;
-    abstract protected function getResidencyTaxRate(): float;
-    abstract protected function getNonresidencyTaxRate(): float;
+    abstract protected static function getCityName(): string;
+    abstract protected static function getExemptionAmount(): int;
+    abstract protected static function getResidencyTaxRate(): float;
+    abstract protected static function getNonresidencyTaxRate(): float;
 
     public function __construct(MichiganIncomeTaxInformation $tax_information, Payroll $payroll)
     {
@@ -50,7 +57,7 @@ abstract class MichiganCityTax extends BaseLocal
 
     public function isSpecialCity($city)
     {
-        if ($city === 'Detroit' || $city === 'GrandRapids' || $city === 'Saginaw' || $city === 'HighlandPark') {
+        if ($city === DetroitTax::getCityName() || $city === GrandRapidsTax::getCityName() || $city === SaginawTax::getCityName() || $city === HighlandParkTax::getCityName()) {
             return true;
         }
 
@@ -152,23 +159,23 @@ abstract class MichiganCityTax extends BaseLocal
         $resident_city_nonresident_rate = 0;
         $work_city_nonresident_rate = 0;
 
-        if ($resident_city === 'Detroit') {
-            $resident_city_resident_rate = 0.024;
-            $resident_city_nonresident_rate = 0.012;
-        } elseif ($resident_city === 'GrandRapids' || $resident_city === 'Saginaw') {
-            $resident_city_resident_rate = 0.015;
-            $resident_city_nonresident_rate = 0.0075;
-        } elseif ($resident_city === 'HighlandPark') {
-            $resident_city_resident_rate = 0.02;
-            $resident_city_nonresident_rate = 0.01;
+        if ($resident_city === DetroitTax::getCityName()) {
+            $resident_city_resident_rate = DetroitCityTax::getResidencyTaxRate();
+            $resident_city_nonresident_rate = DetroitCityTax::getNonResidencyTaxRate();
+        } elseif ($resident_city === GrandRapidsTax::getCityName() || $resident_city === SaginawTax::getCityName()) {
+            $resident_city_resident_rate = GrandRapidsCityTax::getResidencyTaxRate();
+            $resident_city_nonresident_rate = GrandRapidsCityTax::getNonResidencyTaxRate();
+        } elseif ($resident_city === HighlandParkTax::getCityName()) {
+            $resident_city_resident_rate = HighlandParkCityTax::getResidencyTaxRate();
+            $resident_city_nonresident_rate = HighlandParkCityTax::getNonResidencyTaxRate();
         }
 
-        if ($work_city === 'Detroit') {
-            $work_city_nonresident_rate = 0.012;
-        } elseif ($work_city === 'GrandRapids' || $work_city === 'Saginaw') {
-            $work_city_nonresident_rate = 0.0075;
-        } elseif ($work_city === 'HighlandPark') {
-            $work_city_nonresident_rate = 0.01;
+        if ($work_city === DetroitTax::getCityName()) {
+            $work_city_nonresident_rate = DetroitCityTax::getNonResidencyTaxRate();
+        } elseif ($work_city === GrandRapidsTax::getCityName() || $work_city === SaginawTax::getCityName()) {
+            $work_city_nonresident_rate = GrandRapidsCityTax::getNonResidencyTaxRate();
+        } elseif ($work_city === HighlandParkTax::getCityName()) {
+            $work_city_nonresident_rate = HighlandParkCityTax::getNonResidencyTaxRate();
         }
 
         if ($work_city_nonresident_rate < $resident_city_nonresident_rate) {

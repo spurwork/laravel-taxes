@@ -8,7 +8,7 @@ abstract class HamtramckTax extends MichiganCityTax
 {
     private const CITY_NAME = 'Hamtramck';
 
-    protected function getCityName(): string
+    protected static function getCityName(): string
     {
         return self::CITY_NAME;
     }

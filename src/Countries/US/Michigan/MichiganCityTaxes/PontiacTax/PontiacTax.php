@@ -8,7 +8,7 @@ abstract class PontiacTax extends MichiganCityTax
 {
     private const CITY_NAME = 'Pontiac';
 
-    protected function getCityName(): string
+    protected static function getCityName(): string
     {
         return self::CITY_NAME;
     }

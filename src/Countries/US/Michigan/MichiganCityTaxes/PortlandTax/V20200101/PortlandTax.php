@@ -11,17 +11,17 @@ class PortlandTax extends BasePortlandTax
     public const EXEMPTION_AMOUNT = 1000;
 
 
-    protected function getResidencyTaxRate(): float
+    protected static function getResidencyTaxRate(): float
     {
         return self::RESIDENCY_TAX_RATE;
     }
 
-    protected function getNonresidencyTaxRate(): float
+    protected static function getNonresidencyTaxRate(): float
     {
         return self::NONRESIDENCY_TAX_RATE;
     }
 
-    protected function getExemptionAmount(): int
+    protected static function getExemptionAmount(): int
     {
         return self::EXEMPTION_AMOUNT;
     }

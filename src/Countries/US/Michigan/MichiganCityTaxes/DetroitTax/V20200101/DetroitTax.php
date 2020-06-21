@@ -10,18 +10,17 @@ class DetroitTax extends BaseDetroitTax
     public const NONRESIDENCY_TAX_RATE = 0.012;
     public const EXEMPTION_AMOUNT = 600;
 
-
-    protected function getResidencyTaxRate(): float
+    protected static function getResidencyTaxRate(): float
     {
         return self::RESIDENCY_TAX_RATE;
     }
 
-    protected function getNonresidencyTaxRate(): float
+    protected static function getNonresidencyTaxRate(): float
     {
         return self::NONRESIDENCY_TAX_RATE;
     }
 
-    protected function getExemptionAmount(): int
+    protected static function getExemptionAmount(): int
     {
         return self::EXEMPTION_AMOUNT;
     }

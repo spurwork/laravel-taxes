@@ -8,7 +8,7 @@ abstract class PortlandTax extends MichiganCityTax
 {
     private const CITY_NAME = 'Portland';
 
-    protected function getCityName(): string
+    protected static function getCityName(): string
     {
         return self::CITY_NAME;
     }

@@ -8,7 +8,7 @@ abstract class WalkerTax extends MichiganCityTax
 {
     private const CITY_NAME = 'Walker';
 
-    protected function getCityName(): string
+    protected static function getCityName(): string
     {
         return self::CITY_NAME;
     }
