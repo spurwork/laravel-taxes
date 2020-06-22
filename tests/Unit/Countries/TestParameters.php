@@ -17,6 +17,7 @@ class TestParameters
     private $additional_tax;
     private $tax_rate;
     private $wages_in_cents;
+    private $wtd_wages_in_cents;
     private $mtd_wages_in_cents;
     private $ytd_wages_in_cents;
     private $supplemental_wages_in_cents;
@@ -42,6 +43,7 @@ class TestParameters
         ?array $tax_rate,
         ?string $additional_tax,
         int $wages_in_cents,
+        ?int $wtd_wages_in_cents,
         ?int $mtd_wages_in_cents,
         ?int $ytd_wages_in_cents,
         ?int $supplemental_wages_in_cents,
@@ -63,6 +65,7 @@ class TestParameters
         $this->home_location = $home_location;
         $this->tax_class = $tax_class;
         $this->wages_in_cents = $wages_in_cents;
+        $this->wtd_wages_in_cents = $wtd_wages_in_cents;
         $this->mtd_wages_in_cents = $mtd_wages_in_cents;
         $this->ytd_wages_in_cents = $ytd_wages_in_cents;
         $this->expected_amount_in_cents = $expected_amount_in_cents;
@@ -116,6 +119,11 @@ class TestParameters
     public function getWagesInCents(): int
     {
         return $this->wages_in_cents;
+    }
+
+    public function getWtdWagesInCents(): ?int
+    {
+        return $this->wtd_wages_in_cents;
     }
 
     public function getMtdWagesInCents(): ?int

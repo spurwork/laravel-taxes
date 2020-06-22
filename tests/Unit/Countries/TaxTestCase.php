@@ -74,6 +74,9 @@ abstract class TaxTestCase extends UnitTestCase
         } elseif ($parameters->getMtdWagesInCents() !== null
         && $parameters->getMtdWagesInCents() !== 0) {
             $annual_wages->push($this->makeWage($work_location, $parameters->getMtdWagesInCents()));
+        } elseif ($parameters->getWtdWagesInCents() !== null
+        && $parameters->getWtdWagesInCents() !== 0) {
+            $annual_wages->push($this->makeWage($work_location, $parameters->getWtdWagesInCents()));
         }
 
         $annual_taxable_wages = collect([]);
@@ -186,6 +189,9 @@ abstract class TaxTestCase extends UnitTestCase
         if ($parameters->getYtdWagesInCents() !== null
             && $parameters->getYtdWagesInCents() !== 0) {
             $historical_wages->push($this->makeWage($work_location, $parameters->getYtdWagesInCents()));
+        } elseif ($parameters->getWtdWagesInCents() !== null
+            && $parameters->getWtdWagesInCents() !== 0) {
+            $historical_wages->push($this->makeWage($work_location, $parameters->getWtdWagesInCents()));
         }
 
         $results = $this->taxes->calculate(

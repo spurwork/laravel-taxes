@@ -26,13 +26,14 @@ class CharlestonCityServiceFeeTest extends TaxTestCase
                 ->setHomeLocation(self::LOCATION)
                 ->setTaxClass(self::TAX_CLASS)
                 ->setPayPeriods(52)
-                ->setWagesInCents(1)
+                ->setWagesInCents(0)
+                ->setWtdWagesInCents(0)
                 ->setExpectedAmountInCents(300)
                 ->build()
         );
     }
 
-    public function testTax_no_wages(): void
+    public function testTax_no_wages_this_week(): void
     {
         $this->validateNoTax(
             (new TestParametersBuilder())
@@ -40,7 +41,9 @@ class CharlestonCityServiceFeeTest extends TaxTestCase
                 ->setHomeLocation(self::LOCATION)
                 ->setTaxClass(self::TAX_CLASS)
                 ->setPayPeriods(52)
-                ->setWagesInCents(0)
+                ->setWagesInCents(10)
+                ->setWtdWagesInCents(1190)
+                ->setExpectedAmountInCents(300)
                 ->build()
         );
     }
