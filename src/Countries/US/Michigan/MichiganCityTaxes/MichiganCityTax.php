@@ -16,6 +16,8 @@ use Illuminate\Database\Eloquent\Collection;
 
 abstract class MichiganCityTax extends BaseLocal
 {
+    const WITHHELD = true;
+
     public const DEFAULT_TAX_RATE = 0.005;
 
     protected $resident_city_only_living_and_working_with_tax = false;
