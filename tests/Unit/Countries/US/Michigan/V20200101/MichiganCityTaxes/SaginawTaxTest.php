@@ -34,8 +34,6 @@ class SaginawTaxTest extends TaxTestCase
      */
     public function testTax(TestParameters $parameters): void
     {
-        $this->markTestSkipped('unique logic that needs to be vetted');
-
         $this->validate($parameters);
     }
 
@@ -56,7 +54,7 @@ class SaginawTaxTest extends TaxTestCase
                         'resident_city' => 'Saginaw',
                     ])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(720)
+                    ->setExpectedAmountInCents(450)
                     ->build()
             ],
             'resident living in a city that levies a tax resident exemptions' => [
@@ -66,7 +64,7 @@ class SaginawTaxTest extends TaxTestCase
                         'resident_exemptions' => '2',
                     ])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(665)
+                    ->setExpectedAmountInCents(408)
                     ->build()
             ],
             'resident living in a city that levies a tax nonresident exemptions' => [
@@ -76,7 +74,7 @@ class SaginawTaxTest extends TaxTestCase
                         'nonresident_exemptions' => '2',
                     ])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(720)
+                    ->setExpectedAmountInCents(450)
                     ->build()
             ],
             'resident living in a city that levies a tax and works in another city' => [
@@ -86,7 +84,7 @@ class SaginawTaxTest extends TaxTestCase
                         'primary_nonresident_city' => 'Saginaw',
                     ])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(720)
+                    ->setExpectedAmountInCents(450)
                     ->build()
             ],
             'resident living in a city that levies a tax and works in another city resident exemptions' => [
@@ -97,7 +95,7 @@ class SaginawTaxTest extends TaxTestCase
                         'resident_exemptions' => '2',
                     ])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(665)
+                    ->setExpectedAmountInCents(408)
                     ->build()
             ],
             'resident living in a city that levies a tax and works in another city nonresident exemptions' => [
@@ -108,7 +106,7 @@ class SaginawTaxTest extends TaxTestCase
                         'nonresident_exemptions' => '2',
                     ])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(720)
+                    ->setExpectedAmountInCents(450)
                     ->build()
             ],
             'nonresident working in a city that levies the local tax but does not live in a city that levies a local tax' => [
@@ -117,7 +115,7 @@ class SaginawTaxTest extends TaxTestCase
                         'primary_nonresident_city' => 'Saginaw',
                     ])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(360)
+                    ->setExpectedAmountInCents(225)
                     ->build()
             ],
             'nonresident working in a city that levies the local tax but does not live in a city that levies a local tax resident exemptions' => [
@@ -127,7 +125,7 @@ class SaginawTaxTest extends TaxTestCase
                         'resident_exemptions' => '2',
                     ])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(360)
+                    ->setExpectedAmountInCents(225)
                     ->build()
             ],
             'nonresident working in a city that levies the local tax but does not live in a city that levies a local tax nonresident exemptions' => [
@@ -137,7 +135,7 @@ class SaginawTaxTest extends TaxTestCase
                         'nonresident_exemptions' => '2',
                     ])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(332)
+                    ->setExpectedAmountInCents(204)
                     ->build()
             ],
             'resident living in a city that levies a tax and works in another city that levies a tax' => [
@@ -147,7 +145,7 @@ class SaginawTaxTest extends TaxTestCase
                         'primary_nonresident_city' => 'GrandRapids',
                     ])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(495)
+                    ->setExpectedAmountInCents(225)
                     ->build()
             ],
             'resident living in a city that levies a tax and works in another city that levies a tax resident exemptions' => [
@@ -158,7 +156,7 @@ class SaginawTaxTest extends TaxTestCase
                         'resident_exemptions' => '2',
                     ])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(457)
+                    ->setExpectedAmountInCents(204)
                     ->build()
             ],
             'resident living in a city that levies a tax and works in another city that levies a tax nonresident exemptions' => [
@@ -169,7 +167,7 @@ class SaginawTaxTest extends TaxTestCase
                         'nonresident_exemptions' => '2',
                     ])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(495)
+                    ->setExpectedAmountInCents(225)
                     ->build()
             ],
             'nonresident living in a city that levies a tax and works in another city that levies a tax' => [
@@ -179,7 +177,7 @@ class SaginawTaxTest extends TaxTestCase
                         'primary_nonresident_city' => 'Saginaw',
                     ])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(360)
+                    ->setExpectedAmountInCents(225)
                     ->build()
             ],
             'nonresident living in a city that levies a tax and works in another city that levies a tax resident exemptions' => [
@@ -190,7 +188,7 @@ class SaginawTaxTest extends TaxTestCase
                         'resident_exemptions' => '2',
                     ])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(360)
+                    ->setExpectedAmountInCents(225)
                     ->build()
             ],
             'nonresident living in a city that levies a tax and works in another city that levies a tax nonresident exemptions' => [
@@ -201,7 +199,7 @@ class SaginawTaxTest extends TaxTestCase
                         'nonresident_exemptions' => '2',
                     ])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(332)
+                    ->setExpectedAmountInCents(204)
                     ->build()
             ],
             'Lives AND works in a city that levies a tax AND works in another city that levies a tax' => [
@@ -212,7 +210,7 @@ class SaginawTaxTest extends TaxTestCase
                         'secondary_nonresident_city' => 'GrandRapids',
                     ])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(495)
+                    ->setExpectedAmountInCents(225)
                     ->build()
             ],
             'Lives AND works in a city that levies a tax AND works in another city that levies a tax resident exemptions' => [
@@ -224,7 +222,7 @@ class SaginawTaxTest extends TaxTestCase
                         'resident_exemptions' => '2',
                     ])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(457)
+                    ->setExpectedAmountInCents(204)
                     ->build()
             ],
             'Lives AND works in a city that levies a tax AND works in another city that levies a tax nonresident_exemptions' => [
@@ -236,7 +234,7 @@ class SaginawTaxTest extends TaxTestCase
                         'nonresident_exemptions' => '2',
                     ])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(495)
+                    ->setExpectedAmountInCents(225)
                     ->build()
             ],
             'Lives in a city that levies a tax AND works in 2 other cities that both levy a tax' => [
@@ -247,7 +245,7 @@ class SaginawTaxTest extends TaxTestCase
                         'secondary_nonresident_city' => 'Hamtramck',
                     ])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(720)
+                    ->setExpectedAmountInCents(450)
                     ->build()
             ],
             'Lives in a city that levies a tax AND works in 2 other cities that both levy a tax resident exemptions' => [
@@ -259,7 +257,7 @@ class SaginawTaxTest extends TaxTestCase
                         'resident_exemptions' => '2',
                     ])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(665)
+                    ->setExpectedAmountInCents(408)
                     ->build()
             ],
             'Lives in a city that levies a tax AND works in 2 other cities that both levy a tax nonresident_exemptions' => [
@@ -271,7 +269,7 @@ class SaginawTaxTest extends TaxTestCase
                         'nonresident_exemptions' => '2',
                     ])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(720)
+                    ->setExpectedAmountInCents(450)
                     ->build()
             ],
             'Lives in a city that levies a tax AND works in 2 other cities that both levy a tax not resident city primary higher percentage' => [
@@ -325,7 +323,7 @@ class SaginawTaxTest extends TaxTestCase
                         'secondary_nonresident_city_percentage_worked' => '60',
                     ])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(216)
+                    ->setExpectedAmountInCents(135)
                     ->build()
             ],
             'Lives in a city that levies a tax AND works in 2 other cities that both levy a tax not resident city secondary higher percentage resident exemptions' => [
@@ -339,7 +337,7 @@ class SaginawTaxTest extends TaxTestCase
                         'resident_exemptions' => '2',
                     ])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(216)
+                    ->setExpectedAmountInCents(135)
                     ->build()
             ],
             'Lives in a city that levies a tax AND works in 2 other cities that both levy a tax not resident city secondary higher percentage nonresident exemptions' => [
@@ -353,7 +351,7 @@ class SaginawTaxTest extends TaxTestCase
                         'nonresident_exemptions' => '2',
                     ])
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(188)
+                    ->setExpectedAmountInCents(114)
                     ->build()
             ],
         ];
