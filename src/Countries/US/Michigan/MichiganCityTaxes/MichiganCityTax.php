@@ -67,12 +67,12 @@ abstract class MichiganCityTax extends BaseLocal
     public function getCityEarnings($is_resident_city)
     {
         if ($is_resident_city) {
-            return $this->payroll->getEarnings() - $this->getExemptionAmountTotal($this->tax_information->resident_exemptions);
+            return max($this->payroll->getEarnings() - $this->getExemptionAmountTotal($this->tax_information->resident_exemptions), 0);
         } else {
             if ($this->percentage_worked > 0) {
-                return ($this->payroll->getEarnings() * ($this->percentage_worked  * 0.01)) - $this->getExemptionAmountTotal($this->tax_information->nonresident_exemptions);
+                return max(($this->payroll->getEarnings() * ($this->percentage_worked  * 0.01)) - $this->getExemptionAmountTotal($this->tax_information->nonresident_exemptions), 0);
             } else {
-                return $this->payroll->getEarnings() - $this->getExemptionAmountTotal($this->tax_information->nonresident_exemptions);
+                return max($this->payroll->getEarnings() - $this->getExemptionAmountTotal($this->tax_information->nonresident_exemptions), 0);
             }
         }
     }
@@ -84,12 +84,8 @@ abstract class MichiganCityTax extends BaseLocal
         }
 
         if ($this->tax_information->resident_city === $this->getCityName()) {
-            // dump($this->getRate());
-            // dd($this->getCityEarnings(true));
             return round($this->getRate() * $this->getCityEarnings(true), 2);
         }
-        // dump($this->getRate());
-        // dd($this->getCityEarnings(false));
 
         return round($this->getRate() * $this->getCityEarnings(false), 2);
     }
@@ -184,7 +180,7 @@ abstract class MichiganCityTax extends BaseLocal
 
         if ($work_city_nonresident_rate < $resident_city_nonresident_rate) {
             if ($is_resident_city) {
-                return $resident_city_resident_rate - $work_city_nonresident_rate;
+                return max($resident_city_resident_rate - $work_city_nonresident_rate, 0);
             } else {
                 return $work_city_nonresident_rate;
             }
