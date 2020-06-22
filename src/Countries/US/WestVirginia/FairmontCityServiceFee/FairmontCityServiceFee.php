@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Appleton\Taxes\Countries\US\WestVirginia\FairmontCityServiceFee;
 
 use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseLocal;
