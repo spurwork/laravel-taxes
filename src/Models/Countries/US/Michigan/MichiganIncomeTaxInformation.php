@@ -16,6 +16,13 @@ class MichiganIncomeTaxInformation extends BaseTaxInformationModel
         $tax_information->filing_status = MichiganIncome::FILING_SINGLE;
         $tax_information->exempt = false;
         $tax_information->additional_withholding = 0;
+        $tax_information->resident_city = '';
+        $tax_information->nonresident_city1 = '';
+        $tax_information->nonresident_city2 = '';
+        $tax_information->nonresident_city1_percentage_worked = 0;
+        $tax_information->nonresident_city2_percentage_worked = 0;
+        $tax_information->resident_exemptions = 0;
+        $tax_information->nonresident_exemptions = 0;
 
         return $tax_information;
     }
