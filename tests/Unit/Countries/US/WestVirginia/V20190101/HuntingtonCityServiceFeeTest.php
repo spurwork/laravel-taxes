@@ -33,7 +33,7 @@ class HuntingtonCityServiceFeeTest extends TaxTestCase
         );
     }
 
-    public function testTax_no_wages_this_week(): void
+    public function testTax_wtd_wages_no_tax(): void
     {
         $this->validateNoTax(
             (new TestParametersBuilder())
@@ -43,7 +43,7 @@ class HuntingtonCityServiceFeeTest extends TaxTestCase
                 ->setPayPeriods(52)
                 ->setWagesInCents(0)
                 ->setWtdWagesInCents(100000)
-                ->setExpectedAmountInCents(500)
+                ->setExpectedAmountInCents(0)
                 ->build()
         );
     }

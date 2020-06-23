@@ -33,7 +33,7 @@ class FairmontCityServiceFeeTest extends TaxTestCase
         );
     }
 
-    public function testTax_no_wages_this_week(): void
+    public function testTax_wtd_wages_no_tax(): void
     {
         $this->validateNoTax(
             (new TestParametersBuilder())
@@ -43,7 +43,7 @@ class FairmontCityServiceFeeTest extends TaxTestCase
                 ->setPayPeriods(52)
                 ->setWagesInCents(10)
                 ->setWtdWagesInCents(1111)
-                ->setExpectedAmountInCents(200)
+                ->setExpectedAmountInCents(0)
                 ->build()
         );
     }

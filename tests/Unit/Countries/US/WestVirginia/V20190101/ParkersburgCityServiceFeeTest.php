@@ -33,7 +33,7 @@ class ParkersburgCityServiceFeeTest extends TaxTestCase
         );
     }
 
-    public function testTax_no_wages_this_week(): void
+    public function testTax_wtd_wages_no_tax(): void
     {
         $this->validateNoTax(
             (new TestParametersBuilder())

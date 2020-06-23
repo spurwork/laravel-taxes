@@ -33,7 +33,7 @@ class MorgantownCityServiceFeeTest extends TaxTestCase
         );
     }
 
-    public function testTax_no_wages_this_week(): void
+    public function testTax_wtd_wages_no_tax(): void
     {
         $this->validateNoTax(
             (new TestParametersBuilder())
@@ -43,7 +43,7 @@ class MorgantownCityServiceFeeTest extends TaxTestCase
                 ->setPayPeriods(52)
                 ->setWagesInCents(0)
                 ->setWtdWagesInCents(10)
-                ->setExpectedAmountInCents(300)
+                ->setExpectedAmountInCents(0)
                 ->build()
         );
     }
