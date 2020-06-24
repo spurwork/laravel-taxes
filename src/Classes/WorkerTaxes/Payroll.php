@@ -188,7 +188,7 @@ class Payroll
             return 0;
         }
 
-        $start_of_week = $this->start_date->copy()->startOfWeek();
+        $start_of_week = $this->start_date->copy()->setTimezone('UTC');
         $start_of_year = $this->start_date->copy()->startOfYear();
 
         return $this->wage_manager->calculateEarnings(
