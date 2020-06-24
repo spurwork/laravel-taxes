@@ -26,13 +26,14 @@ class FairmontCityServiceFeeTest extends TaxTestCase
                 ->setHomeLocation(self::LOCATION)
                 ->setTaxClass(self::TAX_CLASS)
                 ->setPayPeriods(52)
-                ->setWagesInCents(1)
+                ->setWagesInCents(0)
+                ->setWtdWagesInCents(0)
                 ->setExpectedAmountInCents(200)
                 ->build()
         );
     }
 
-    public function testTax_no_wages(): void
+    public function testTax_wtd_wages_no_tax(): void
     {
         $this->validateNoTax(
             (new TestParametersBuilder())
@@ -40,7 +41,9 @@ class FairmontCityServiceFeeTest extends TaxTestCase
                 ->setHomeLocation(self::LOCATION)
                 ->setTaxClass(self::TAX_CLASS)
                 ->setPayPeriods(52)
-                ->setWagesInCents(0)
+                ->setWagesInCents(10)
+                ->setWtdWagesInCents(1111)
+                ->setExpectedAmountInCents(0)
                 ->build()
         );
     }

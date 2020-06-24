@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Appleton\Taxes\Countries\US\WestVirginia\HuntingtonCityServiceFee\V20190101;
 
 use Appleton\Taxes\Countries\US\WestVirginia\HuntingtonCityServiceFee\HuntingtonCityServiceFee as BaseHuntingtonCityServiceFee;

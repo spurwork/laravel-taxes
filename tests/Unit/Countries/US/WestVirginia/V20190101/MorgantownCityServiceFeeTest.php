@@ -3,7 +3,6 @@
 namespace Appleton\Taxes\Tests\Unit\Countries\US\WestVirginia\V20190101;
 
 use Appleton\Taxes\Countries\US\WestVirginia\MorgantownCityServiceFee\MorgantownCityServiceFee;
-use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
 use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
 use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
 
@@ -27,13 +26,14 @@ class MorgantownCityServiceFeeTest extends TaxTestCase
                 ->setHomeLocation(self::LOCATION)
                 ->setTaxClass(self::TAX_CLASS)
                 ->setPayPeriods(52)
-                ->setWagesInCents(1)
+                ->setWagesInCents(0)
+                ->setWtdWagesInCents(0)
                 ->setExpectedAmountInCents(300)
                 ->build()
         );
     }
 
-    public function testTax_no_wages(): void
+    public function testTax_wtd_wages_no_tax(): void
     {
         $this->validateNoTax(
             (new TestParametersBuilder())
@@ -42,6 +42,8 @@ class MorgantownCityServiceFeeTest extends TaxTestCase
                 ->setTaxClass(self::TAX_CLASS)
                 ->setPayPeriods(52)
                 ->setWagesInCents(0)
+                ->setWtdWagesInCents(10)
+                ->setExpectedAmountInCents(0)
                 ->build()
         );
     }

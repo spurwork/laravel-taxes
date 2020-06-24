@@ -176,6 +176,27 @@ class Payroll
         );
     }
 
+    public function getWtdEarnings(GovernmentalUnitArea $governmental_unit_area = null): float
+    {
+        if ($governmental_unit_area === null) {
+            return $this->wtd_earnings;
+        }
+
+        /** @var AreaIncome $area_income */
+        $area_income = $this->area_incomes->get($governmental_unit_area->name);
+        if ($area_income === null) {
+            return 0;
+        }
+
+        $start_of_week = $this->start_date->copy()->setTimezone('UTC');
+        $start_of_year = $this->start_date->copy()->startOfYear();
+
+        return $this->wage_manager->calculateEarnings(
+            $area_income->getAnnualWages(),
+            $start_of_week < $start_of_year ? $start_of_year : $start_of_week
+        );
+    }
+
     public function getMtdEarnings(GovernmentalUnitArea $governmental_unit_area = null): float
     {
         if ($governmental_unit_area === null) {

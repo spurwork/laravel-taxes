@@ -11,6 +11,6 @@ abstract class CharlestonCityServiceFee extends BaseLocal
 
     public function doesApply(Collection $tax_areas): bool
     {
-        return $this->payroll->getEarnings($tax_areas->first()->workGovernmentalUnitArea) > 0;
+        return $this->payroll->getWtdEarnings($tax_areas->first()->workGovernmentalUnitArea) === 0.0;
     }
 }

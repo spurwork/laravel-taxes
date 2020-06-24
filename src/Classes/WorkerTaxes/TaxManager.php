@@ -2,7 +2,6 @@
 
 namespace Appleton\Taxes\Classes\WorkerTaxes;
 
-use Appleton\Taxes\Classes\PayrollLiabilities\PayrollLiability;
 use Appleton\Taxes\Classes\WorkerTaxes\LiabilityAmount;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;

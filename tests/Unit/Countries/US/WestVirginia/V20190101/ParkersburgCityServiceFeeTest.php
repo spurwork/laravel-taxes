@@ -26,13 +26,14 @@ class ParkersburgCityServiceFeeTest extends TaxTestCase
                 ->setHomeLocation(self::LOCATION)
                 ->setTaxClass(self::TAX_CLASS)
                 ->setPayPeriods(52)
-                ->setWagesInCents(1)
+                ->setWagesInCents(0)
+                ->setWtdWagesInCents(0)
                 ->setExpectedAmountInCents(250)
                 ->build()
         );
     }
 
-    public function testTax_no_wages(): void
+    public function testTax_wtd_wages_no_tax(): void
     {
         $this->validateNoTax(
             (new TestParametersBuilder())
@@ -41,6 +42,8 @@ class ParkersburgCityServiceFeeTest extends TaxTestCase
                 ->setTaxClass(self::TAX_CLASS)
                 ->setPayPeriods(52)
                 ->setWagesInCents(0)
+                ->setWtdWagesInCents(12340)
+                ->setExpectedAmountInCents(0)
                 ->build()
         );
     }

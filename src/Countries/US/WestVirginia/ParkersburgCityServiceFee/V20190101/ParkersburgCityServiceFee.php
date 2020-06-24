@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Appleton\Taxes\Countries\US\WestVirginia\ParkersburgCityServiceFee\V20190101;
 
 use Appleton\Taxes\Countries\US\WestVirginia\ParkersburgCityServiceFee\ParkersburgCityServiceFee as BaseParkersburgCityServiceFee;
