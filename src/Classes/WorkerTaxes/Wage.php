@@ -15,6 +15,7 @@ class Wage
     private $type;
     private $date;
     private $additional_taxes;
+    private $position;
 
     public function __construct(
         string $type,
@@ -24,7 +25,8 @@ class Wage
         int $pay_check_tip_amount_in_cents,
         int $take_home_tip_amount_in_cents,
         int $minutes_worked,
-        Collection $additional_taxes
+        Collection $additional_taxes,
+        int $position = null
     ) {
         $this->type = $type;
         $this->date = $date;
@@ -34,6 +36,7 @@ class Wage
         $this->take_home_tip_amount_in_cents = $take_home_tip_amount_in_cents;
         $this->minutes_worked = $minutes_worked;
         $this->additional_taxes = $additional_taxes;
+        $this->position = $position;
     }
 
     public function getLocation(): GeoPoint

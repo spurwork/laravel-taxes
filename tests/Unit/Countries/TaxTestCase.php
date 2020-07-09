@@ -123,7 +123,8 @@ abstract class TaxTestCase extends UnitTestCase
             collect([]),
             collect([]),
             collect([]),
-            $pay_periods_exempt
+            $pay_periods_exempt,
+            $parameters->getWorkersCompRates()
         );
 
         $short_name = (new ReflectionClass($parameters->getTaxClass()))->getShortName();
@@ -210,7 +211,8 @@ abstract class TaxTestCase extends UnitTestCase
             collect([]),
             collect([]),
             collect([]),
-            0
+            0,
+            $parameters->getWorkersCompRates()
         );
 
         $short_name = (new ReflectionClass($parameters->getTaxClass()))->getShortName();

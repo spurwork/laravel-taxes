@@ -3,6 +3,7 @@
 namespace Appleton\Taxes\Tests\Unit\Countries;
 
 use Carbon\Carbon;
+use Illuminate\Support\Collection;
 
 class TestParametersBuilder
 {
@@ -31,6 +32,7 @@ class TestParametersBuilder
     private $minutes_worked;
     private $wages_callback;
     private $pay_periods_exempt;
+    private $workers_comp_rates;
 
     public function build(): TestParameters
     {
@@ -59,7 +61,8 @@ class TestParametersBuilder
             $this->take_home_tip_amount_in_cents,
             $this->minutes_worked,
             $this->wages_callback,
-            $this->pay_periods_exempt
+            $this->pay_periods_exempt,
+            $this->workers_comp_rates ?? collect([])
         );
     }
 
@@ -210,6 +213,12 @@ class TestParametersBuilder
     public function setWagesCallback(?callable $wages_callback)
     {
         $this->wages_callback = $wages_callback;
+        return $this;
+    }
+
+    public function setWorkersCompRates(?Collection $workers_comp_rates)
+    {
+        $this->workers_comp_rates = $workers_comp_rates;
         return $this;
     }
 }

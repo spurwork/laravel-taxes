@@ -3,6 +3,7 @@
 namespace Appleton\Taxes\Countries\US\Washington\V20190101;
 
 use Appleton\Taxes\Classes\WorkerTaxes\GeoPoint;
+use Appleton\Taxes\Classes\WorkerTaxes\WorkerCompRate;
 use Appleton\Taxes\Countries\US\Washington\WashingtonWorkersCompensation\WashingtonWorkersCompensation;
 use Appleton\Taxes\Models\Countries\US\Washington\WashingtonWorkersCompensationTaxInformation;
 use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
@@ -51,6 +52,9 @@ class WashingtonWorkersCompensationTest extends TaxTestCase
                     ->setPaycheckTipAmount(625)
                     ->setTakehomeTipAmount(500)
                     ->setExpectedAmountInCents(800)
+                    ->setWorkersCompRates(collect([
+                        $this->makeWorkersCompRate('WA', 1, '4567', '01', 100, 100)
+                    ]))
                     ->build()
             ],
             '01' => [
