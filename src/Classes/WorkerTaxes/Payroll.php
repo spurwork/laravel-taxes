@@ -386,7 +386,7 @@ class Payroll
             ->where('state', $state)
             ->where('position', $position)
             ->first();
-        if (!rate) {
+        if (!$rate) {
             throw new Exception('Missing workers comp rate for position. '.$position.'. in state '.$state);
         }
     }
