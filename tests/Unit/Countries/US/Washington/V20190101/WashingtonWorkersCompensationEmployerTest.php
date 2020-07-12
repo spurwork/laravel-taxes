@@ -50,16 +50,33 @@ class WashingtonWorkersCompensationEmployerTest extends TaxTestCase
                     ->setWagesInCents(35000)
                     ->setPaycheckTipAmount(625)
                     ->setTakehomeTipAmount(500)
-                    ->setExpectedAmountInCents(800)
+                    ->setExpectedAmountsInCents([800])
+                    ->setWorkersCompRates(collect([
+                        $this->makeWorkersCompRate('WA', 1, '4567', '01', 100, 100)
+                    ]))
                     ->build()
             ],
             '01' => [
                 $builder
                     ->setHomeLocation(self::WASHINGTON_LOCATION)
                     ->setWorkLocation(self::WASHINGTON_LOCATION)
-                    ->setExpectedAmountInCents(4000)
+                    ->setExpectedAmountsInCents([32000])
+                    ->setWorkersCompRates(collect([
+                        $this->makeWorkersCompRate('WA', 1, '4567', '01', 100, 100)
+                    ]))
                     ->setWagesCallback(function ($parameters, $wages) {
-                        $wages->push($this->makeSalary(new GeoPoint($this->getLocation($parameters->getWorkLocation())[0], $this->getLocation($parameters->getWorkLocation())[1]), $parameters->getWagesInCents(), $parameters->getPaycheckTipAmountInCents(), $parameters->getTakeHomeTipAmountInCents(), $parameters->getMinutesWorked()));
+                        $wages->push(
+                            $this->makeSalary(
+                                new GeoPoint(
+                                    $this->getLocation($parameters->getWorkLocation())[0],
+                                    $this->getLocation($parameters->getWorkLocation())[1]
+                                ),
+                                $parameters->getWagesInCents(),
+                                $parameters->getPaycheckTipAmountInCents(),
+                                $parameters->getTakeHomeTipAmountInCents(),
+                                $parameters->getMinutesWorked()
+                            )
+                        );
                     })
                     ->build()
             ],
