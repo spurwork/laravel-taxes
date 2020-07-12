@@ -3,8 +3,10 @@
 namespace Appleton\Taxes\Countries\US\Washington\WashingtonWorkersCompensation\V20190101;
 
 use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
+use Appleton\Taxes\Classes\WorkerTaxes\Wage;
+use Appleton\Taxes\Classes\WorkerTaxes\WageType;
 use Appleton\Taxes\Countries\US\Washington\WashingtonWorkersCompensation\WashingtonWorkersCompensation as BaseWashingtonWorkersCompensation;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection;
 
 class WashingtonWorkersCompensation extends BaseWashingtonWorkersCompensation
 {
@@ -15,15 +17,58 @@ class WashingtonWorkersCompensation extends BaseWashingtonWorkersCompensation
 
     public function compute(Collection $tax_areas)
     {
-        $rate = $this->payroll->getWorkerCompRate('WA', 1);
-        $hourly_tax = $this->payroll->withholdTax($this->payroll->getShiftHoursWorked($tax_areas->first()->workGovernmentalUnitArea) * ($rate->employee_rate / 100));
+        $hourly = $this->payroll
+            ->getWages($tax_areas->first()->workGovernmentalUnitArea, WageType::SHIFT)
+            ->groupBy(function (Wage $wage) {
+                return $wage->getPosition();
+            })
+            ->map(function (Collection $wages) {
+                $position = $wages->first()->getPosition();
+                $rate = $this->payroll->getWorkerCompRate('WA', $position);
+                $amount = $wages->sum(function (Wage $wage) {
+                            return $wage->getWorkTimeInMinutes();
+                }) / 60 * $rate->employee_rate / 100;
+                $earnings = $wages->sum(function (Wage $wage) {
+                        return $wage->getAmountInCents();
+                }) / 100 - $this->payroll->exempted_earnings;
 
-        if ($this->payroll->getStartDate()->weekOfMonth < 5 && $this->payroll->isSalariedWorker($tax_areas->first()->workGovernmentalUnitArea)) {
-            $salaried_tax = $this->payroll->withholdTax(40 * ($rate->employee_rate / 100));
+                return [
+                    'position' => $position,
+                    'amount' => $amount,
+                    'earnings' => $earnings,
+                ];
+            });
+
+
+        if ($this->payroll->getStartDate()->weekOfMonth < 5
+            && $this->payroll->isSalariedWorker($tax_areas->first()->workGovernmentalUnitArea)) {
+            $salary = $this->payroll
+                ->getWages($tax_areas->first()->workGovernmentalUnitArea, WageType::SALARY)
+                ->groupBy(function (Wage $wage) {
+                    return $wage->getPosition();
+                })
+                ->map(function (Collection $wages) {
+                    $position = $wages->first()->getPosition();
+                    $rate = $this->payroll->getWorkerCompRate('WA', $position);
+                    return [
+                        'position' => $position,
+                        'amount' => ($wages->sum(function (Wage $wage) {
+                            return $wage->getWorkTimeInMinutes();
+                        }) / 60) * ($rate->employee_rate / 100),
+                        'earnings' => ($wages->sum(function (Wage $wage) {
+                            return $wage->getAmountInCents();
+                        })) / 100 - $this->payroll->exempted_earnings,
+                    ];
+                });
         } else {
-            $salaried_tax = 0;
+            $salary = collect([]);
         }
 
-        return round($hourly_tax + $salaried_tax, 2);
+        // TODO: combine salary and hourly
+        if ($hourly->isNotEmpty()) {
+            return $hourly;
+        }
+
+        return $salary;
     }
 }

@@ -3,6 +3,7 @@
 namespace Appleton\Taxes\Classes\WorkerTaxes;
 
 use Appleton\Taxes\Models\GovernmentalUnitArea;
+use Illuminate\Support\Collection;
 
 class Payroll
 {
@@ -94,7 +95,7 @@ class Payroll
         return max($this->total_earnings - $this->exempted_earnings - $this->amount_withheld, 0);
     }
 
-    public function getEarnings(GovernmentalUnitArea $governmental_unit_area = null): float
+    public function getEarnings(GovernmentalUnitArea $governmental_unit_area = null, int $position = null): float
     {
         if ($governmental_unit_area === null) {
             return $this->earnings - $this->exempted_earnings;
@@ -152,6 +153,20 @@ class Payroll
             });
 
         return $minutes_worked / 60;
+    }
+
+    public function getWages(GovernmentalUnitArea $governmental_unit_area, string $type): Collection
+    {
+        /** @var AreaIncome $area_wages */
+        $area_wages = $this->area_incomes->get($governmental_unit_area->name);
+        if ($area_wages === null) {
+            return collect([]);
+        }
+
+        return $area_wages->getWages()
+            ->filter(static function (Wage $gross_wage) use ($type) {
+                return $gross_wage->getType() === $type;
+            });
     }
 
     public function getSupplementalEarnings(): float

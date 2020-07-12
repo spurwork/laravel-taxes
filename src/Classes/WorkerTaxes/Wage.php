@@ -78,4 +78,9 @@ class Wage
     {
         return $this->additional_taxes;
     }
+
+    public function getPosition(): int
+    {
+        return $this->position;
+    }
 }

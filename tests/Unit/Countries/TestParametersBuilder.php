@@ -33,6 +33,7 @@ class TestParametersBuilder
     private $wages_callback;
     private $pay_periods_exempt;
     private $workers_comp_rates;
+    private $expected_amounts_in_cents;
 
     public function build(): TestParameters
     {
@@ -62,7 +63,8 @@ class TestParametersBuilder
             $this->minutes_worked,
             $this->wages_callback,
             $this->pay_periods_exempt,
-            $this->workers_comp_rates ?? collect([])
+            $this->workers_comp_rates ?? collect([]),
+            $this->expected_amounts_in_cents
         );
     }
 
@@ -129,6 +131,12 @@ class TestParametersBuilder
     public function setExpectedAmountInCents(?int $expected_amount_in_cents)
     {
         $this->expected_amount_in_cents = $expected_amount_in_cents;
+        return $this;
+    }
+
+    public function setExpectedAmountsInCents(?array $expected_amounts_in_cents)
+    {
+        $this->expected_amounts_in_cents = $expected_amounts_in_cents;
         return $this;
     }
 
