@@ -4,6 +4,7 @@ namespace Appleton\Taxes\Classes\WorkerTaxes;
 
 use Appleton\Taxes\Models\GovernmentalUnitArea;
 use Illuminate\Support\Collection;
+use mysql_xdevapi\Exception;
 
 class Payroll
 {
@@ -381,9 +382,12 @@ class Payroll
 
     public function getWorkerCompRate(string $state, int $position): WorkerCompRate
     {
-        return $this->workers_comp_rates
+        $rate = $this->workers_comp_rates
             ->where('state', $state)
             ->where('position', $position)
             ->first();
+        if (!rate) {
+            throw new Exception('Missing workers comp rate for position. '.$position.'. in state '.$state);
+        }
     }
 }
