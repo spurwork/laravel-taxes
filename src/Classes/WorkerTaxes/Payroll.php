@@ -380,7 +380,7 @@ class Payroll
         return $this->pay_periods_exempt;
     }
 
-    public function getWorkerCompRate(string $state, int $position): WorkerCompRate
+    public function getWorkerCompRate(string $state, int $position): ?WorkerCompRate
     {
         $rate = $this->workers_comp_rates
             ->where('state', $state)
@@ -389,5 +389,6 @@ class Payroll
         if (!$rate) {
             throw new Exception('Missing workers comp rate for position. '.$position.'. in state '.$state);
         }
+        return $rate;
     }
 }

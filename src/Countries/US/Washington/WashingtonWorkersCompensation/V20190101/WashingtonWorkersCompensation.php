@@ -6,7 +6,7 @@ use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
 use Appleton\Taxes\Classes\WorkerTaxes\Wage;
 use Appleton\Taxes\Classes\WorkerTaxes\WageType;
 use Appleton\Taxes\Countries\US\Washington\WashingtonWorkersCompensation\WashingtonWorkersCompensation as BaseWashingtonWorkersCompensation;
-use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Collection;
 
 class WashingtonWorkersCompensation extends BaseWashingtonWorkersCompensation
 {
@@ -22,7 +22,7 @@ class WashingtonWorkersCompensation extends BaseWashingtonWorkersCompensation
             ->groupBy(function (Wage $wage) {
                 return $wage->getPosition();
             })
-            ->map(function (Collection $wages) {
+            ->map(function ($wages) {
                 $position = $wages->first()->getPosition();
                 $rate = $this->payroll->getWorkerCompRate('WA', $position);
                 $amount = $wages->sum(function (Wage $wage) {
@@ -47,7 +47,7 @@ class WashingtonWorkersCompensation extends BaseWashingtonWorkersCompensation
                 ->groupBy(function (Wage $wage) {
                     return $wage->getPosition();
                 })
-                ->map(function (Collection $wages) {
+                ->map(function ($wages) {
                     $position = $wages->first()->getPosition();
                     $rate = $this->payroll->getWorkerCompRate('WA', $position);
                     return [
