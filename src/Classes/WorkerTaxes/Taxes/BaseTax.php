@@ -3,7 +3,7 @@
 namespace Appleton\Taxes\Classes\WorkerTaxes\Taxes;
 
 use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
-use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Collection;
 
 
 abstract class BaseTax
