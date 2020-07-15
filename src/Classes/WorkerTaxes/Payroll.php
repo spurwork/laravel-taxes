@@ -4,7 +4,6 @@ namespace Appleton\Taxes\Classes\WorkerTaxes;
 
 use Appleton\Taxes\Models\GovernmentalUnitArea;
 use Illuminate\Support\Collection;
-use mysql_xdevapi\Exception;
 
 class Payroll
 {
@@ -387,7 +386,7 @@ class Payroll
             ->where('position', $position)
             ->first();
         if (!$rate) {
-            throw new Exception('Missing workers comp rate for position. '.$position.'. in state '.$state);
+            throw new \Exception('Missing workers comp rate for position. '.$position.'. in state '.$state);
         }
         return $rate;
     }
