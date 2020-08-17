@@ -212,10 +212,6 @@ return [
                 'unemployment' => env('TAXES_DELAWARE_UNEMPLOYMENT_TAX_RATE', 0.015),
             ],
 
-            'florida' => [
-                'unemployment' => env('TAXES_FLORIDA_UNEMPLOYMENT_TAX_RATE', 0.001),
-            ],
-
             'georgia' => [
                 'unemployment' => env('TAXES_GEORGIA_UNEMPLOYMENT_TAX_RATE', 0.027),
             ],
@@ -226,10 +222,6 @@ return [
 
             'idaho' => [
                 'unemployment' => env('TAXES_IDAHO_UNEMPLOYMENT_TAX_RATE', 0.01),
-            ],
-
-            'illinois' => [
-                'unemployment' => env('TAXES_ILLINOIS_UNEMPLOYMENT_TAX_RATE', 0.03125),
             ],
 
             'iowa' => [
@@ -322,14 +314,6 @@ return [
 
             'south_dakota' => [
                 'unemployment' => env('TAXES_SOUTH_DAKOTA_UNEMPLOYMENT_TAX_RATE', 0.012),
-            ],
-
-            'texas' => [
-                'unemployment' => env('TAXES_TEXAS_UNEMPLOYMENT_TAX_RATE', 0.0031),
-            ],
-
-            'utah' => [
-                'unemployment' => env('TAXES_UTAH_UNEMPLOYMENT_TAX_RATE', 0.011),
             ],
 
             'vermont' => [
