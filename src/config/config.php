@@ -304,10 +304,6 @@ return [
                 'unemployment' => env('TAXES_NEW_YORK_UNEMPLOYMENT_TAX_RATE', 0.036),
             ],
 
-            'nevada' => [
-                'unemployment' => env('TAXES_NEVADA_UNEMPLOYMENT_TAX_RATE', 0.03),
-            ],
-
             'north_carolina' => [
                 'unemployment' => env('TAXES_NORTH_CAROLINA_UNEMPLOYMENT_TAX_RATE', 0.01),
             ],
@@ -344,6 +340,10 @@ return [
                 'unemployment' => env('TAXES_SOUTH_DAKOTA_UNEMPLOYMENT_TAX_RATE', 0.012),
             ],
 
+            'tennessee' => [
+                'unemployment' => env('TAXES_TEXAS_UNEMPLOYMENT_TAX_RATE', 0.027),
+            ],
+
             'texas' => [
                 'unemployment' => env('TAXES_TEXAS_UNEMPLOYMENT_TAX_RATE', 0.0031),
             ],
@@ -354,6 +354,10 @@ return [
 
             'vermont' => [
                 'unemployment' => env('TAXES_VERMONT_UNEMPLOYMENT_TAX_RATE', 0.01),
+            ],
+
+            'virginia' => [
+                'unemployment' => env('TAXES_VIRGINIA_UNEMPLOYMENT_TAX_RATE', 0.0251),
             ],
 
             'washingtondc' => [
