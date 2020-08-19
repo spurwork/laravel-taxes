@@ -89,6 +89,31 @@ class VanderburghIncomeTest extends TaxTestCase
                     ->setExpectedAmountInCents(360)
                     ->build()
             ],
+            'county worked and taxes not taken from home county low earnings multiple exemptions' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'personal_exemptions' => 3,
+                        'dependent_exemptions' => 3,
+                        'county_lived' => 0,
+                        'county_worked' => 82,
+                    ])
+                    ->setWagesInCents(3000)
+                    ->setExpectedAmountInCents(0)
+                    ->build()
+            ],
+            'county worked and taxes not taken from home county low earnings multiple exemptions with additional withholding' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'personal_exemptions' => 3,
+                        'dependent_exemptions' => 3,
+                        'county_lived' => 0,
+                        'county_worked' => 82,
+                        'additional_county_withholding' => 20,
+                    ])
+                    ->setWagesInCents(3000)
+                    ->setExpectedAmountInCents(2000)
+                    ->build()
+            ],
         ];
     }
 }
