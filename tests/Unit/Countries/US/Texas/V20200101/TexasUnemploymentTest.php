@@ -1,18 +1,18 @@
 <?php
 
-namespace Appleton\Taxes\Tests\Unit\Countries\US\Florida\V20180101;
+namespace Appleton\Taxes\Tests\Unit\Countries\US\Texas\V201200101;
 
-use Appleton\Taxes\Countries\US\Florida\FloridaUnemployment\FloridaUnemployment;
+use Appleton\Taxes\Countries\US\Texas\TexasUnemployment\TexasUnemployment;
 use Appleton\Taxes\Tests\Unit\Countries\UnemploymentTaxTestCase;
 use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
 
-class FloridaUnemploymentTest extends UnemploymentTaxTestCase
+class TexasUnemploymentTest extends UnemploymentTaxTestCase
 {
-    private const DATE = '2018-01-01';
-    private const LOCATION = 'us.florida';
-    private const TAX_CLASS = FloridaUnemployment::class;
-    private const TAX_RATE = 0.027;
-    private const WAGE_BASE = 700000;
+    private const DATE = '2020-01-01';
+    private const LOCATION = 'us.texas';
+    private const TAX_CLASS = TexasUnemployment::class;
+    private const TAX_RATE = 0.0031;
+    private const WAGE_BASE = 900000;
 
     public function setUp(): void
     {
@@ -55,6 +55,7 @@ class FloridaUnemploymentTest extends UnemploymentTaxTestCase
             self::LOCATION,
             self::TAX_CLASS,
             self::WAGE_BASE,
-            self::TAX_RATE);
+            self::TAX_RATE
+        );
     }
 }

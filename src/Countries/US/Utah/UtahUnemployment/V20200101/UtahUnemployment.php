@@ -8,7 +8,7 @@ use Appleton\Taxes\Countries\US\Utah\UtahUnemployment\UtahUnemployment as BaseUt
 class UtahUnemployment extends BaseUtahUnemployment
 {
     const FUTA_CREDIT = 0.054;
-    const NEW_EMPLOYER_RATE = 0.03;
+    const NEW_EMPLOYER_RATE = 0.011;
     const WAGE_BASE = 36600;
 
 
