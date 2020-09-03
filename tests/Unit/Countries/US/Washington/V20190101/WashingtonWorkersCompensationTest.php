@@ -60,7 +60,8 @@ class WashingtonWorkersCompensationTest extends TaxTestCase
                 $builder
                     ->setHomeLocation(self::WASHINGTON_LOCATION)
                     ->setWorkLocation(self::WASHINGTON_LOCATION)
-                    ->setExpectedAmountsInCents([32000])
+                    ->setExpectedAmountsInCents([4000])
+                    ->setMinutesWorked(2400)
                     ->setWagesCallback(function ($parameters, $wages) {
                         $geo_point = new GeoPoint(
                             $this->getLocation($parameters->getWorkLocation())[0],
