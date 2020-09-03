@@ -33,6 +33,7 @@ class WashingtonWorkersCompensationEmployer extends BaseWashingtonWorkersCompens
                 }) / 100 - $this->payroll->exempted_earnings;
 
                 return [
+                    'rate_id' => $rate->id,
                     'position' => $position,
                     'amount' => $amount,
                     'earnings' => $earnings,
@@ -57,6 +58,7 @@ class WashingtonWorkersCompensationEmployer extends BaseWashingtonWorkersCompens
                             return $wage->getAmountInCents();
                     }) / 100 - $this->payroll->exempted_earnings;
                     return [
+                        'rate_id' => $rate->id,
                         'position' => $position,
                         'amount' => $amount,
                         'earnings' => $earnings,
