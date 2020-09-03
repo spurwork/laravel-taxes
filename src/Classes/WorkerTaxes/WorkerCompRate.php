@@ -4,6 +4,7 @@ namespace Appleton\Taxes\Classes\WorkerTaxes;
 
 class WorkerCompRate
 {
+    public $id;
     public $state;
     public $position;
     public $class_code;
@@ -11,8 +12,16 @@ class WorkerCompRate
     public $employer_rate;
     public $employee_rate;
 
-    public function __construct($state, $position, $class_code, $sub_code, $employer_rate, $employee_rate)
-    {
+    public function __construct(
+        $id,
+        $state,
+        $position,
+        $class_code,
+        $sub_code,
+        $employer_rate,
+        $employee_rate
+    ) {
+        $this->id = $id;
         $this->state = $state;
         $this->position = $position;
         $this->class_code = $class_code;

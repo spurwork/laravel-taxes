@@ -3,7 +3,6 @@
 namespace Appleton\Taxes\Countries\US\Washington\V20190101;
 
 use Appleton\Taxes\Classes\WorkerTaxes\GeoPoint;
-use Appleton\Taxes\Classes\WorkerTaxes\WorkerCompRate;
 use Appleton\Taxes\Countries\US\Washington\WashingtonWorkersCompensation\WashingtonWorkersCompensation;
 use Appleton\Taxes\Models\Countries\US\Washington\WashingtonWorkersCompensationTaxInformation;
 use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
@@ -53,7 +52,7 @@ class WashingtonWorkersCompensationTest extends TaxTestCase
                     ->setTakehomeTipAmount(500)
                     ->setExpectedAmountsInCents([800])
                     ->setWorkersCompRates(collect([
-                        $this->makeWorkersCompRate('WA', 1, '4567', '01', 100, 100)
+                        $this->makeWorkersCompRate(42, 'WA', 1, '4567', '01', 100, 100)
                     ]))
                     ->build()
             ],
@@ -63,7 +62,17 @@ class WashingtonWorkersCompensationTest extends TaxTestCase
                     ->setWorkLocation(self::WASHINGTON_LOCATION)
                     ->setExpectedAmountsInCents([32000])
                     ->setWagesCallback(function ($parameters, $wages) {
-                        $wages->push($this->makeSalary(new GeoPoint($this->getLocation($parameters->getWorkLocation())[0], $this->getLocation($parameters->getWorkLocation())[1]), $parameters->getWagesInCents(), $parameters->getPaycheckTipAmountInCents(), $parameters->getTakeHomeTipAmountInCents(), $parameters->getMinutesWorked()));
+                        $geo_point = new GeoPoint(
+                            $this->getLocation($parameters->getWorkLocation())[0],
+                            $this->getLocation($parameters->getWorkLocation())[1]
+                        );
+                        $wages->push($this->makeSalary(
+                            $geo_point,
+                            $parameters->getWagesInCents(),
+                            $parameters->getPaycheckTipAmountInCents(),
+                            $parameters->getTakeHomeTipAmountInCents(),
+                            $parameters->getMinutesWorked()
+                        ));
                     })
                     ->build()
             ],
@@ -75,8 +84,8 @@ class WashingtonWorkersCompensationTest extends TaxTestCase
                     ->setTakehomeTipAmount(0)
                     ->setMinutesWorked(480)
                     ->setWorkersCompRates(collect([
-                        $this->makeWorkersCompRate('WA', 1, '4567', '01', 100, 100),
-                        $this->makeWorkersCompRate('WA', 2, '4567', '01', 200, 200)
+                        $this->makeWorkersCompRate(42, 'WA', 1, '4567', '01', 100, 100),
+                        $this->makeWorkersCompRate(43, 'WA', 2, '4567', '01', 200, 200)
                     ]))
                     ->setExpectedAmountsInCents([800, 1600])
                     ->setExpectedEarningsInCents(35000)
