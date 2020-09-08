@@ -51,9 +51,9 @@ class WashingtonWorkersCompensationEmployer extends BaseWashingtonWorkersCompens
                 ->map(function ($wages) {
                     $position = $wages->first()->getPosition();
                     $rate = $this->payroll->getWorkerCompRate('WA', $position);
-                    $amount = $wages->sum(function (Wage $wage) {
+                    $amount = ($wages->sum(function (Wage $wage) {
                             return $wage->getWorkTimeInMinutes();
-                    }) / 60 * $rate->employer_rate / 100 * 40;
+                    }) / 60) * ($rate->employer_rate / 100);
                     $earnings = $wages->sum(function (Wage $wage) {
                             return $wage->getAmountInCents();
                     }) / 100 - $this->payroll->exempted_earnings;

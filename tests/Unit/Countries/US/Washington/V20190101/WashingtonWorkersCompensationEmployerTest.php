@@ -60,7 +60,8 @@ class WashingtonWorkersCompensationEmployerTest extends TaxTestCase
                 $builder
                     ->setHomeLocation(self::WASHINGTON_LOCATION)
                     ->setWorkLocation(self::WASHINGTON_LOCATION)
-                    ->setExpectedAmountsInCents([32000])
+                    ->setExpectedAmountsInCents([4000])
+                    ->setMinutesWorked(2400)
                     ->setWorkersCompRates(collect([
                         $this->makeWorkersCompRate(42, 'WA', 1, '4567', '01', 100, 100)
                     ]))
