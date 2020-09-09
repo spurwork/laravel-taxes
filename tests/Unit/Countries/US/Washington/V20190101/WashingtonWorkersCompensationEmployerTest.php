@@ -29,7 +29,7 @@ class WashingtonWorkersCompensationEmployerTest extends TaxTestCase
     /**
      * @dataProvider provideTestData
      */
-    public function testWashingtonWorkersCompensationEmployerTax(TestParameters $parameters): void
+    public function testWashingtonWorkersCompensationTax(TestParameters $parameters): void
     {
         $this->validate($parameters);
     }
@@ -40,44 +40,70 @@ class WashingtonWorkersCompensationEmployerTest extends TaxTestCase
         $builder
             ->setDate(self::DATE)
             ->setTaxClass(self::TAX_CLASS)
-            ->setPayPeriods(52);
+            ->setPayPeriods(52)
+            ->setWorkersCompRates(collect([
+                $this->makeWorkersCompRate(42, 'WA', 1, '4567', '01', 100, 100),
+                $this->makeWorkersCompRate(43, 'WA', 2, '4567', '01', 200, 200)
+            ]));
+
+        $geo_point = new GeoPoint(
+            $this->getLocation(self::WASHINGTON_LOCATION)[0],
+            $this->getLocation(self::WASHINGTON_LOCATION)[1]
+        );
+
+        $hourly_wage_1 = $this->makeWage($geo_point, 35000, 0, 0, 480, 1);
+        $hourly_wage_2 = $this->makeWage($geo_point, 35000, 0, 0, 480, 2);
+        $salary_wage = $this->makeSalary($geo_point, 100000, 0, 0, 2400);
 
         return [
-            '00' => [
+            'hourly' => [
                 $builder
                     ->setHomeLocation(self::WASHINGTON_LOCATION)
                     ->setWorkLocation(self::WASHINGTON_LOCATION)
                     ->setWagesInCents(35000)
-                    ->setPaycheckTipAmount(625)
-                    ->setTakehomeTipAmount(500)
                     ->setExpectedAmountsInCents([800])
-                    ->setWorkersCompRates(collect([
-                        $this->makeWorkersCompRate(42, 'WA', 1, '4567', '01', 100, 100)
-                    ]))
+                    ->setExpectedEarningsInCents(35000)
+                    ->setWagesCallback(function ($parameters, $wages) use ($geo_point, $hourly_wage_1) {
+                        $wages->push($hourly_wage_1);
+                    })
                     ->build()
             ],
-            '01' => [
+            'salary' => [
                 $builder
                     ->setHomeLocation(self::WASHINGTON_LOCATION)
                     ->setWorkLocation(self::WASHINGTON_LOCATION)
                     ->setExpectedAmountsInCents([4000])
+                    ->setExpectedEarningsInCents(100000)
                     ->setMinutesWorked(2400)
-                    ->setWorkersCompRates(collect([
-                        $this->makeWorkersCompRate(42, 'WA', 1, '4567', '01', 100, 100)
-                    ]))
-                    ->setWagesCallback(function ($parameters, $wages) {
-                        $wages->push(
-                            $this->makeSalary(
-                                new GeoPoint(
-                                    $this->getLocation($parameters->getWorkLocation())[0],
-                                    $this->getLocation($parameters->getWorkLocation())[1]
-                                ),
-                                $parameters->getWagesInCents(),
-                                $parameters->getPaycheckTipAmountInCents(),
-                                $parameters->getTakeHomeTipAmountInCents(),
-                                $parameters->getMinutesWorked()
-                            )
-                        );
+                    ->setWagesCallback(function ($parameters, $wages) use ($geo_point, $salary_wage) {
+                        $wages->push($salary_wage);
+                    })
+                    ->build()
+            ],
+            'hourly and salary' => [
+                $builder
+                    ->setHomeLocation(self::WASHINGTON_LOCATION)
+                    ->setWorkLocation(self::WASHINGTON_LOCATION)
+                    ->setExpectedAmountsInCents([4000 + 800])
+                    ->setExpectedEarningsInCents(100000 + 35000)
+                    ->setWagesCallback(function ($parameters, $wages) use ($geo_point, $hourly_wage_1, $salary_wage) {
+                        $wages->push($hourly_wage_1);
+                        $wages->push($salary_wage);
+                    })
+                    ->build()
+            ],
+            'multiple rates' => [
+                $builder
+                    ->setHomeLocation(self::WASHINGTON_LOCATION)
+                    ->setWorkLocation(self::WASHINGTON_LOCATION)
+                    ->setPaycheckTipAmount(0)
+                    ->setTakehomeTipAmount(0)
+                    ->setMinutesWorked(480)
+                    ->setExpectedAmountsInCents([800, 1600])
+                    ->setExpectedEarningsInCents(35000)
+                    ->setWagesCallback(function ($parameters, $wages) use ($geo_point, $hourly_wage_1, $hourly_wage_2) {
+                        $wages->push($hourly_wage_1);
+                        $wages->push($hourly_wage_2);
                     })
                     ->build()
             ],
