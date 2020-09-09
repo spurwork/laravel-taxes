@@ -14,6 +14,6 @@ class WashingtonWorkersCompensationEmployer extends BaseWashingtonWorkersCompens
 
     protected function getTaxRate($rate): float
     {
-        return $rate->employee_rate;
+        return $rate->employer_rate;
     }
 }
