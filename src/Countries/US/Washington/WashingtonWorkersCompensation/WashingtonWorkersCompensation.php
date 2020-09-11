@@ -2,10 +2,10 @@
 
 namespace Appleton\Taxes\Countries\US\Washington\WashingtonWorkersCompensation;
 
-use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseTax;
+use Appleton\Taxes\Countries\US\Washington\AWashingtonWorkersCompensation;
 
-class WashingtonWorkersCompensation extends BaseTax
+abstract class WashingtonWorkersCompensation extends AWashingtonWorkersCompensation
 {
-	const TYPE = 'state';
-	const WITHHELD = true;
+    const TYPE = 'state';
+    const WITHHELD = true;
 }

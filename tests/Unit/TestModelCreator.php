@@ -214,6 +214,7 @@ trait TestModelCreator
     }
 
     protected function makeWorkersCompRate(
+        int $id,
         string $state,
         int $position,
         string $class_code,
@@ -221,6 +222,6 @@ trait TestModelCreator
         float $employer_amount,
         float $employee_amount
     ): WorkerCompRate {
-        return new WorkerCompRate($state, $position, $class_code, $sub_code, $employer_amount, $employee_amount);
+        return new WorkerCompRate($id, $state, $position, $class_code, $sub_code, $employer_amount, $employee_amount);
     }
 }

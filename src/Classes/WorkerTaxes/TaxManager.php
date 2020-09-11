@@ -2,7 +2,6 @@
 
 namespace Appleton\Taxes\Classes\WorkerTaxes;
 
-use Appleton\Taxes\Classes\WorkerTaxes\LiabilityAmount;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 
@@ -35,7 +34,8 @@ class TaxManager
                         $taxable_income->getTax()->name,
                         $tax_implementation,
                         $amount_in_cents,
-                        $earnings_in_cents
+                        $earnings_in_cents,
+                        null
                     );
 
                     app()->instance($taxable_income->getTax()->class, $tax_implementation);
@@ -50,7 +50,8 @@ class TaxManager
                             $taxable_income->getTax()->name,
                             $tax_implementation,
                             $amount_in_cents,
-                            $earnings_in_cents
+                            $earnings_in_cents,
+                            array_key_exists('rate_id', $data) ? $data['rate_id'] : null
                         );
                     });
 
