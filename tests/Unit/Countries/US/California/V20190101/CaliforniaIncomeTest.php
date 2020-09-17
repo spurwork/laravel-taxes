@@ -6,9 +6,9 @@ use Appleton\Taxes\Countries\US\California\CaliforniaIncome\CaliforniaIncome;
 use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome;
 use Appleton\Taxes\Models\Countries\US\California\CaliforniaIncomeTaxInformation;
 use Appleton\Taxes\Models\Countries\US\FederalIncomeTaxInformation;
+use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
 use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
 use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
-use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
 
 class CaliforniaIncomeTest extends TaxTestCase
 {
@@ -193,6 +193,17 @@ class CaliforniaIncomeTest extends TaxTestCase
                     ])
                     ->setWagesInCents(100000)
                     ->setExpectedAmountInCents(3787)
+                    ->build()
+            ],
+            'not enough wages' => [
+                $builder
+                    ->setTaxInfoOptions([
+                        'filing_status' => 'M',
+                        'allowances' => 8,
+                        'estimated_deductions' => 8,
+                    ])
+                    ->setWagesInCents(100000)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
         ];
