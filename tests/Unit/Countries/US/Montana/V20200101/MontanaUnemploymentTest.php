@@ -1,18 +1,18 @@
 <?php
 
-namespace Appleton\Taxes\Tests\Unit\Countries\US\Louisiana\V20190101;
+namespace Appleton\Taxes\Tests\Unit\Countries\US\Montana\V20200101;
 
-use Appleton\Taxes\Countries\US\Louisiana\LouisianaUnemployment\LouisianaUnemployment;
+use Appleton\Taxes\Countries\US\Montana\MontanaUnemployment\MontanaUnemployment;
 use Appleton\Taxes\Tests\Unit\Countries\UnemploymentTaxTestCase;
 use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
 
-class LouisianaUnemploymentTest extends UnemploymentTaxTestCase
+class MontanaUnemploymentTest extends UnemploymentTaxTestCase
 {
-    private const DATE = '2019-01-01';
-    private const LOCATION = 'us.louisiana';
-    private const TAX_CLASS = LouisianaUnemployment::class;
-    private const TAX_RATE = 0.03;
-    private const WAGE_BASE = 700000;
+    private const DATE = '2020-01-01';
+    private const LOCATION = 'us.montana';
+    private const TAX_CLASS = MontanaUnemployment::class;
+    private const TAX_RATE = 0.0258;
+    private const WAGE_BASE = 3410000;
 
     public function setUp(): void
     {
@@ -55,6 +55,7 @@ class LouisianaUnemploymentTest extends UnemploymentTaxTestCase
             self::LOCATION,
             self::TAX_CLASS,
             self::WAGE_BASE,
-            self::TAX_RATE);
+            self::TAX_RATE
+        );
     }
 }
