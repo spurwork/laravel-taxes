@@ -9,6 +9,7 @@ use Appleton\Taxes\Classes\WorkerTaxes\TaxOverrideManager;
 use Appleton\Taxes\Classes\WorkerTaxes\TaxResult;
 use Appleton\Taxes\Tests\Unit\UnitTestCase;
 use Carbon\Carbon;
+use Illuminate\Support\Collection;
 use ReflectionClass;
 
 /**
@@ -123,7 +124,8 @@ abstract class TaxTestCase extends UnitTestCase
             collect([]),
             collect([]),
             collect([]),
-            $pay_periods_exempt
+            $pay_periods_exempt,
+            $parameters->getWorkersCompRates()
         );
 
         $short_name = (new ReflectionClass($parameters->getTaxClass()))->getShortName();
@@ -134,27 +136,58 @@ abstract class TaxTestCase extends UnitTestCase
             self::fail('no tax results for '.$short_name.' found');
         }
 
-        self::assertThat(
-            $result->getAmountInCents(),
-            self::identicalTo($parameters->getExpectedAmountInCents()),
-            $short_name.' expected '.$parameters->getExpectedAmountInCents()
-            .' tax amount but got '.$result->getAmountInCents()
-        );
+        if ($result instanceof Collection) {
+            $the_results = $result;
 
-        if ($parameters->getExpectedEarningsInCents() === null) {
-            self::assertThat(
-                $result->getEarningsInCents(),
-                self::identicalTo($parameters->getWagesInCents()),
-                $short_name.' expected '.$parameters->getWagesInCents()
-                .' earnings but got '.$result->getEarningsInCents()
-            );
+            $i = 0;
+            $the_results->each(function (TaxResult $result) use ($short_name, $parameters, &$i) {
+                self::assertThat(
+                    $result->getAmountInCents(),
+                    self::identicalTo($parameters->getExpectedAmountsInCents()[$i]),
+                    $short_name.' expected '.$parameters->getExpectedAmountsInCents()[$i]
+                    .' tax amount but got '.$result->getAmountInCents()
+                );
+
+                if ($parameters->getExpectedEarningsInCents() === null) {
+                    self::assertThat(
+                        $result->getEarningsInCents(),
+                        self::identicalTo($parameters->getWagesInCents()),
+                        $short_name.' expected '.$parameters->getWagesInCents()
+                        .' earnings but got '.$result->getEarningsInCents()
+                    );
+                } else {
+                    self::assertThat(
+                        $result->getEarningsInCents(),
+                        self::identicalTo($parameters->getExpectedEarningsInCents()),
+                        $short_name.' expected '.$parameters->getExpectedEarningsInCents()
+                        .' earnings but got '.$result->getEarningsInCents()
+                    );
+                }
+                ++$i;
+            });
         } else {
             self::assertThat(
-                $result->getEarningsInCents(),
-                self::identicalTo($parameters->getExpectedEarningsInCents()),
-                $short_name.' expected '.$parameters->getExpectedEarningsInCents()
-                .' earnings but got '.$result->getEarningsInCents()
+                $result->getAmountInCents(),
+                self::identicalTo($parameters->getExpectedAmountInCents()),
+                $short_name.' expected '.$parameters->getExpectedAmountInCents()
+                .' tax amount but got '.$result->getAmountInCents()
             );
+
+            if ($parameters->getExpectedEarningsInCents() === null) {
+                self::assertThat(
+                    $result->getEarningsInCents(),
+                    self::identicalTo($parameters->getWagesInCents()),
+                    $short_name.' expected '.$parameters->getWagesInCents()
+                    .' earnings but got '.$result->getEarningsInCents()
+                );
+            } else {
+                self::assertThat(
+                    $result->getEarningsInCents(),
+                    self::identicalTo($parameters->getExpectedEarningsInCents()),
+                    $short_name.' expected '.$parameters->getExpectedEarningsInCents()
+                    .' earnings but got '.$result->getEarningsInCents()
+                );
+            }
         }
     }
 
@@ -210,7 +243,8 @@ abstract class TaxTestCase extends UnitTestCase
             collect([]),
             collect([]),
             collect([]),
-            0
+            0,
+            $parameters->getWorkersCompRates()
         );
 
         $short_name = (new ReflectionClass($parameters->getTaxClass()))->getShortName();

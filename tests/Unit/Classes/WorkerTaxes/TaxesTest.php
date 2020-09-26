@@ -77,7 +77,8 @@ class TaxesTest extends UnitTestCase
             collect([]),
             collect([]),
             collect([]),
-            0
+            0,
+            collect([])
         );
 
         self::assertThat($tax_results->count(), self::identicalTo(1));
@@ -119,7 +120,8 @@ class TaxesTest extends UnitTestCase
             collect([]),
             collect([]),
             collect([]),
-            0
+            0,
+            collect([])
         );
 
         self::assertThat($tax_results->count(), self::identicalTo(2));
@@ -174,7 +176,8 @@ class TaxesTest extends UnitTestCase
             collect([$reciprocal_agreement]),
             collect([]),
             collect([]),
-            0
+            0,
+            collect([])
         );
 
         self::assertThat($tax_results->count(), self::identicalTo(1));
@@ -216,7 +219,8 @@ class TaxesTest extends UnitTestCase
             collect([]),
             collect([]),
             collect([]),
-            0
+            0,
+            collect([])
         );
 
         self::assertThat($tax_results->count(), self::identicalTo(1));
@@ -259,7 +263,8 @@ class TaxesTest extends UnitTestCase
             collect([]),
             collect([]),
             collect([]),
-            0
+            0,
+            collect([])
         );
 
         self::assertThat($tax_results->count(), self::identicalTo(1));
@@ -301,7 +306,8 @@ class TaxesTest extends UnitTestCase
             collect([]),
             collect([StateIncomeTax1::class]),
             collect([]),
-            0
+            0,
+            collect([])
         );
 
         self::assertThat($tax_results->count(), self::identicalTo(1));
@@ -333,7 +339,8 @@ class TaxesTest extends UnitTestCase
             collect([]),
             collect([]),
             collect([StateIncomeTax1::class => 10]),
-            0
+            0,
+            collect([])
         );
 
         self::assertThat($tax_results->count(), self::identicalTo(1));
@@ -372,7 +379,8 @@ class TaxesTest extends UnitTestCase
             collect([]),
             collect([]),
             collect([BaseLocal::class => 10]),
-            0
+            0,
+            collect([])
         );
 
         self::assertThat($tax_results->count(), self::identicalTo(1));
@@ -410,7 +418,8 @@ class TaxesTest extends UnitTestCase
             collect([]),
             collect([]),
             collect([]),
-            0
+            0,
+            collect([])
         );
     }
 
@@ -437,7 +446,8 @@ class TaxesTest extends UnitTestCase
             collect([]),
             collect([]),
             collect([]),
-            0
+            0,
+            collect([])
         );
 
         self::assertThat($results->get(FederalIncome::class)->getAmountInCents(), self::identicalTo(688));
@@ -496,7 +506,8 @@ class TaxesTest extends UnitTestCase
             collect([]),
             collect([]),
             collect([]),
-            0
+            0,
+            collect([])
         );
 
         self::assertThat($results->count(), self::identicalTo(8));
@@ -526,7 +537,8 @@ class TaxesTest extends UnitTestCase
             collect([]),
             collect([]),
             collect([]),
-            0
+            0,
+            collect([])
         );
 
         self::assertThat($results->get(FederalIncome::class)->getAmountInCents(), self::identicalTo(1000));
@@ -570,7 +582,8 @@ class TaxesTest extends UnitTestCase
             collect([]),
             collect([]),
             collect([]),
-            0
+            0,
+            collect([])
         );
 
         self::assertThat($results->get(FederalIncome::class)->getAmountInCents(), self::identicalTo(0));
@@ -593,7 +606,8 @@ class TaxesTest extends UnitTestCase
             collect([]),
             collect([]),
             collect([]),
-            0
+            0,
+            collect([])
         );
 
         self::assertThat($results->get(FederalIncome::class)->getAmountInCents(), self::identicalTo(0));
@@ -623,7 +637,8 @@ class TaxesTest extends UnitTestCase
             collect([]),
             collect([]),
             collect([]),
-            0
+            0,
+            collect([])
         );
 
         app(Payroll::class);
@@ -668,7 +683,8 @@ class TaxesTest extends UnitTestCase
             collect([]),
             collect([]),
             collect([]),
-            0
+            0,
+            collect([])
         );
 
         self::assertThat($results->get(FederalIncome::class)->getAmountInCents(), self::identicalTo(754));
@@ -704,7 +720,8 @@ class TaxesTest extends UnitTestCase
             collect([]),
             collect([]),
             collect([]),
-            0
+            0,
+            collect([])
         );
 
         self::assertThat($results->get(ParentGeorgiaIncome::class)->getAmountInCents(), self::identicalTo(273));
@@ -752,7 +769,8 @@ class TaxesTest extends UnitTestCase
             collect([]),
             collect([]),
             collect([]),
-            0
+            0,
+            collect([])
         );
 
         self::assertThat($results->get(FederalUnemployment::class)->getAmountInCents(), self::identicalTo(0));
@@ -775,7 +793,8 @@ class TaxesTest extends UnitTestCase
             collect([]),
             collect([]),
             collect([]),
-            0
+            0,
+            collect([])
         );
 
         self::assertThat($results->get(FederalUnemployment::class)->getAmountInCents(), self::identicalTo(0));
@@ -799,7 +818,8 @@ class TaxesTest extends UnitTestCase
             collect([]),
             collect([]),
             collect([]),
-            0
+            0,
+            collect([])
         );
 
         self::assertThat($results->get(FederalUnemployment::class)->getAmountInCents(), self::identicalTo(0));
@@ -825,7 +845,8 @@ class TaxesTest extends UnitTestCase
             collect([]),
             collect([]),
             collect([]),
-            0
+            0,
+            collect([])
         );
 
         self::assertThat($results->get(FederalIncome::class)->getAmountInCents(), self::identicalTo(754));

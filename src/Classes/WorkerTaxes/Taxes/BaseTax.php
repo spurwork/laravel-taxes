@@ -5,6 +5,7 @@ namespace Appleton\Taxes\Classes\WorkerTaxes\Taxes;
 use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
 use Illuminate\Database\Eloquent\Collection;
 
+
 abstract class BaseTax
 {
     public const SCOPE = 'worker';

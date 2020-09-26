@@ -7,8 +7,8 @@ use Appleton\Taxes\Classes\WorkerTaxes\LiabilityAmount;
 use Appleton\Taxes\Classes\WorkerTaxes\TaxableWage;
 use Appleton\Taxes\Classes\WorkerTaxes\Wage;
 use Appleton\Taxes\Classes\WorkerTaxes\WageType;
+use Appleton\Taxes\Classes\WorkerTaxes\WorkerCompRate;
 use Appleton\Taxes\Models\TaxArea;
-use Appleton\Taxes\Tests\Unit\UnitTestCase;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -57,7 +57,8 @@ trait TestModelCreator
         int $amount_in_cents = UnitTestCase::DEFAULT_SHIFT_WAGES,
         int $pay_check_tip_amount_in_cents = null,
         int $take_home_tip_amount_in_cents = null,
-        ?int $minutes_worked = UnitTestCase::DEFAULT_MINUTES_WORKED
+        ?int $minutes_worked = UnitTestCase::DEFAULT_MINUTES_WORKED,
+        ?int $position = UnitTestCase::DEFAULT_POSITION
     ): Wage {
         return new Wage(
             WageType::SHIFT,
@@ -67,7 +68,8 @@ trait TestModelCreator
             $pay_check_tip_amount_in_cents === null ? 0 : $pay_check_tip_amount_in_cents,
             $take_home_tip_amount_in_cents === null ? 0 : $take_home_tip_amount_in_cents,
             $minutes_worked === null ? UnitTestCase::DEFAULT_MINUTES_WORKED : $minutes_worked,
-            collect([])
+            collect([]),
+            $position
         );
     }
 
@@ -120,7 +122,8 @@ trait TestModelCreator
     protected function makeWageWithAdditionalTax(
         GeoPoint $location,
         string $additional_tax,
-        int $amount_in_cents = UnitTestCase::DEFAULT_SHIFT_WAGES
+        int $amount_in_cents = UnitTestCase::DEFAULT_SHIFT_WAGES,
+        ?int $position = UnitTestCase::DEFAULT_POSITION
     ): Wage {
         return new Wage(
             WageType::SHIFT,
@@ -130,7 +133,8 @@ trait TestModelCreator
             0,
             0,
             0,
-            collect([$additional_tax])
+            collect([$additional_tax]),
+            $position
         );
     }
 
@@ -153,7 +157,8 @@ trait TestModelCreator
     protected function makeWageAtDate(
         Carbon $date,
         GeoPoint $location,
-        int $amount_in_cents = UnitTestCase::DEFAULT_SHIFT_WAGES
+        int $amount_in_cents = UnitTestCase::DEFAULT_SHIFT_WAGES,
+        ?int $position = UnitTestCase::DEFAULT_POSITION
     ): Wage {
         return new Wage(
             WageType::SHIFT,
@@ -163,14 +168,16 @@ trait TestModelCreator
             0,
             0,
             0,
-            collect([])
+            collect([]),
+            $position
         );
     }
 
     protected function makeAdjustmentWageAtDate(
         Carbon $date,
         GeoPoint $location,
-        int $amount_in_cents
+        int $amount_in_cents,
+        ?int $position = UnitTestCase::DEFAULT_POSITION
     ): Wage {
         return new Wage(
             WageType::ADJUSTMENT,
@@ -180,7 +187,8 @@ trait TestModelCreator
             0,
             0,
             0,
-            collect([])
+            collect([]),
+            $position
         );
     }
 
@@ -189,7 +197,8 @@ trait TestModelCreator
         int $amount_in_cents = UnitTestCase::DEFAULT_SHIFT_WAGES,
         int $pay_check_tip_amount_in_cents = null,
         int $take_home_tip_amount_in_cents = null,
-        ?int $minutes_worked = UnitTestCase::DEFAULT_MINUTES_WORKED
+        ?int $minutes_worked = UnitTestCase::DEFAULT_MINUTES_WORKED,
+        ?int $position = UnitTestCase::DEFAULT_POSITION
     ): Wage {
         return new Wage(
             WageType::SALARY,
@@ -199,7 +208,20 @@ trait TestModelCreator
             $pay_check_tip_amount_in_cents === null ? 0 : $pay_check_tip_amount_in_cents,
             $take_home_tip_amount_in_cents === null ? 0 : $take_home_tip_amount_in_cents,
             $minutes_worked === null ? UnitTestCase::DEFAULT_MINUTES_WORKED : $minutes_worked,
-            collect([])
+            collect([]),
+            $position
         );
+    }
+
+    protected function makeWorkersCompRate(
+        int $id,
+        string $state,
+        int $position,
+        string $class_code,
+        string $sub_code,
+        float $employer_amount,
+        float $employee_amount
+    ): WorkerCompRate {
+        return new WorkerCompRate($id, $state, $position, $class_code, $sub_code, $employer_amount, $employee_amount);
     }
 }

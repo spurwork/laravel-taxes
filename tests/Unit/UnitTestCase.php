@@ -14,6 +14,7 @@ class UnitTestCase extends BaseTestCase
 
     public const DEFAULT_SHIFT_WAGES = 10000;
     public const DEFAULT_MINUTES_WORKED = 480;
+    public const DEFAULT_POSITION = 1;
 
     use DatabaseTransactions, TestLocations, TestModelCreator;
 
