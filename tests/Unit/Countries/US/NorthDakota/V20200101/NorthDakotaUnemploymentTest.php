@@ -1,18 +1,18 @@
 <?php
 
-namespace Appleton\Taxes\Tests\Unit\Countries\US\Idaho\V20190101;
+namespace Appleton\Taxes\Tests\Unit\Countries\US\NorthDakota\V20200101;
 
-use Appleton\Taxes\Countries\US\Idaho\IdahoUnemployment\IdahoUnemployment;
+use Appleton\Taxes\Countries\US\NorthDakota\NorthDakotaUnemployment\NorthDakotaUnemployment;
 use Appleton\Taxes\Tests\Unit\Countries\UnemploymentTaxTestCase;
 use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
 
-class IdahoUnemploymentTest extends UnemploymentTaxTestCase
+class NorthDakotaUnemploymentTest extends UnemploymentTaxTestCase
 {
-    private const DATE = '2019-01-01';
-    private const LOCATION = 'us.idaho';
-    private const TAX_CLASS = IdahoUnemployment::class;
-    private const TAX_RATE = 0.01;
-    private const WAGE_BASE = 4000000;
+    private const DATE = '2020-01-01';
+    private const LOCATION = 'us.north_dakota';
+    private const TAX_CLASS = NorthDakotaUnemployment::class;
+    private const TAX_RATE = 0.0121;
+    private const WAGE_BASE = 3790000;
 
     public function setUp(): void
     {
@@ -55,6 +55,7 @@ class IdahoUnemploymentTest extends UnemploymentTaxTestCase
             self::LOCATION,
             self::TAX_CLASS,
             self::WAGE_BASE,
-            self::TAX_RATE);
+            self::TAX_RATE
+        );
     }
 }

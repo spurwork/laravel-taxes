@@ -221,8 +221,7 @@ abstract class IndianaLocalIncome extends BaseLocalIncome
         $dependent_allowances = self::DEPENDENT_EXEMPTION_AMOUNT * $this->tax_information->dependent_exemptions;
 
         $exemptions = ($personal_allowances + $dependent_allowances) / $this->payroll->pay_periods;
-
-        return (($this->payroll->getEarnings() - $exemptions) * $this->payroll->pay_periods);
+        return ((($this->payroll->getEarnings() - $exemptions) * $this->payroll->pay_periods) * $this->getTaxRate());
     }
 
     abstract public function getTaxRate(): float;
@@ -242,7 +241,11 @@ abstract class IndianaLocalIncome extends BaseLocalIncome
 
     public function compute(Collection $tax_areas)
     {
-        $this->tax_total = $this->payroll->withholdTax(($this->getAdjustedEarnings() * $this->getTaxRate() / $this->payroll->pay_periods) + $this->tax_information->additional_county_withholding);
+        if ($this->getAdjustedEarnings() > 0) {
+            $this->tax_total = $this->payroll->withholdTax(($this->getAdjustedEarnings() / $this->payroll->pay_periods) + $this->tax_information->additional_county_withholding);
+        } else {
+            $this->tax_total = $this->payroll->withholdTax($this->tax_information->additional_county_withholding);
+        }
 
         return round(((int)($this->tax_total * 100)) / 100, 2);
     }

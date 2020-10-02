@@ -59,8 +59,8 @@ abstract class CaliforniaIncome extends BaseStateIncome
         $taxable_income = $earnings - $this->getEstimatedDeductionAmount()
             - $this->getStandardDeductionAmount();
 
-        $annual_tax_amount = $this->getTaxAmountFromTaxBrackets($taxable_income, $this->getTaxBrackets())
-            - $this->getExemptionAllowanceAmount();
+        $annual_tax_amount = max($this->getTaxAmountFromTaxBrackets($taxable_income, $this->getTaxBrackets())
+            - $this->getExemptionAllowanceAmount(), 0);
         $pay_period_tax_amount = $annual_tax_amount / $this->payroll->pay_periods;
 
         $this->tax_total = $this->payroll->withholdTax($pay_period_tax_amount) +
