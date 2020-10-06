@@ -109,12 +109,20 @@ class CarrollCountyTest extends TaxTestCase
                     ->setExpectedAmountInCents(100)
                     ->build()
             ],
+            'close to max tax, take difference not full amount' => [
+                $builder
+                    ->setWagesInCents(10000)
+                    ->setYtdWagesInCents(0)
+                    ->setYtdLiabilitiesInCents(4999950)
+                    ->setExpectedAmountInCents(50)
+                    ->build()
+            ],
             'over max tax' => [
                 $builder
                     ->setWagesInCents(10000)
                     ->setYtdWagesInCents(0)
-                    ->setYtdLiabilitiesInCents(5000000)
-                    ->setExpectedAmountInCents(100)
+                    ->setYtdLiabilitiesInCents(5000100)
+                    ->setExpectedAmountInCents(0)
                     ->build()
             ],
         ];

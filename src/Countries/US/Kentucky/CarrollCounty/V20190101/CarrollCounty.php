@@ -27,6 +27,15 @@ class CarrollCounty extends BaseCarrollCounty
             $taxable_earnings = $earnings;
         }
 
+        if ($ytd_taxable_earnings >= self::MAX_TAX) {
+            return 0.0;
+        } elseif ($taxable_earnings * self::TAX_RATE + $ytd_taxable_earnings > self::MAX_TAX) {
+            $taxable_earnings = $taxable_earnings * self::TAX_RATE + $ytd_taxable_earnings - self::MAX_TAX;
+
+            $tax_amount = round($taxable_earnings, 2);
+            return round($this->payroll->withholdTax($tax_amount), 2);
+        }
+
         $tax_amount = round($taxable_earnings * self::TAX_RATE, 2);
 
         return round($this->payroll->withholdTax($tax_amount), 2);
