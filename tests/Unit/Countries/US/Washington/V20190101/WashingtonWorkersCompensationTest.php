@@ -50,9 +50,9 @@ class WashingtonWorkersCompensationTest extends TaxTestCase
                     ->setWagesInCents(35000)
                     ->setPaycheckTipAmount(625)
                     ->setTakehomeTipAmount(500)
-                    ->setExpectedAmountsInCents([800])
+                    ->setExpectedAmountsInCents([329])
                     ->setWorkersCompRates(collect([
-                        $this->makeWorkersCompRate(42, 'WA', 1, '4567', '01', 100, 100)
+                        $this->makeWorkersCompRate(42, 'WA', 1, '4567', '01', 100, 0.41223)
                     ]))
                     ->build()
             ],
@@ -60,7 +60,7 @@ class WashingtonWorkersCompensationTest extends TaxTestCase
                 $builder
                     ->setHomeLocation(self::WASHINGTON_LOCATION)
                     ->setWorkLocation(self::WASHINGTON_LOCATION)
-                    ->setExpectedAmountsInCents([32000])
+                    ->setExpectedAmountsInCents([329])
                     ->setWagesCallback(function ($parameters, $wages) {
                         $geo_point = new GeoPoint(
                             $this->getLocation($parameters->getWorkLocation())[0],
@@ -84,10 +84,10 @@ class WashingtonWorkersCompensationTest extends TaxTestCase
                     ->setTakehomeTipAmount(0)
                     ->setMinutesWorked(480)
                     ->setWorkersCompRates(collect([
-                        $this->makeWorkersCompRate(42, 'WA', 1, '4567', '01', 100, 100),
-                        $this->makeWorkersCompRate(43, 'WA', 2, '4567', '01', 200, 200)
+                        $this->makeWorkersCompRate(42, 'WA', 1, '4567', '01', 100, 0.0100),
+                        $this->makeWorkersCompRate(43, 'WA', 2, '4567', '01', 200, 0.0200)
                     ]))
-                    ->setExpectedAmountsInCents([800, 1600])
+                    ->setExpectedAmountsInCents([8, 16])
                     ->setExpectedEarningsInCents(35000)
                     ->setWagesCallback(function ($parameters, $wages) {
                         $point = new GeoPoint(

@@ -50,9 +50,9 @@ class WashingtonWorkersCompensationEmployerTest extends TaxTestCase
                     ->setWagesInCents(35000)
                     ->setPaycheckTipAmount(625)
                     ->setTakehomeTipAmount(500)
-                    ->setExpectedAmountsInCents([800])
+                    ->setExpectedAmountsInCents([98])
                     ->setWorkersCompRates(collect([
-                        $this->makeWorkersCompRate(42, 'WA', 1, '4567', '01', 100, 100)
+                        $this->makeWorkersCompRate(42, 'WA', 1, '4567', '01', 0.12345, 0.100)
                     ]))
                     ->build()
             ],
@@ -60,9 +60,9 @@ class WashingtonWorkersCompensationEmployerTest extends TaxTestCase
                 $builder
                     ->setHomeLocation(self::WASHINGTON_LOCATION)
                     ->setWorkLocation(self::WASHINGTON_LOCATION)
-                    ->setExpectedAmountsInCents([32000])
+                    ->setExpectedAmountsInCents([7498])
                     ->setWorkersCompRates(collect([
-                        $this->makeWorkersCompRate(42, 'WA', 1, '4567', '01', 100, 100)
+                        $this->makeWorkersCompRate(42, 'WA', 1, '4567', '01', 0.23433, 0.100)
                     ]))
                     ->setWagesCallback(function ($parameters, $wages) {
                         $wages->push(
