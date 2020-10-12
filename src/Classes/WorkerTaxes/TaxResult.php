@@ -53,4 +53,9 @@ class TaxResult
     {
         return $this->earnings_in_cents;
     }
+
+    public function getWorkerCompRateId(): ?int
+    {
+        return $this->workers_comp_rate_id;
+    }
 }
