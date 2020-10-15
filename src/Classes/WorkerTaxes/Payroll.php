@@ -3,6 +3,7 @@
 namespace Appleton\Taxes\Classes\WorkerTaxes;
 
 use Appleton\Taxes\Models\GovernmentalUnitArea;
+use Illuminate\Support\Collection;
 
 class Payroll
 {
@@ -34,6 +35,7 @@ class Payroll
     private $annual_taxable_wages;
     private $annual_liability_amounts;
     private $pay_periods_exempt;
+    private $workers_comp_rates;
 
     private $wage_manager;
     private $tax_manager;
@@ -69,6 +71,7 @@ class Payroll
         $this->total_earnings = $parameters['total_earnings'] ?? 0;
         $this->pay_rate = $parameters['pay_rate'] ?? 0;
         $this->pay_periods_exempt = $parameters['pay_periods_exempt'] ?? 0;
+        $this->workers_comp_rates = $parameters['workers_comp_rates'] ?? collect([]);
 
         $this->amount_withheld = 0;
         $this->wage_manager = $wage_manager;
@@ -92,7 +95,7 @@ class Payroll
         return max($this->total_earnings - $this->exempted_earnings - $this->amount_withheld, 0);
     }
 
-    public function getEarnings(GovernmentalUnitArea $governmental_unit_area = null): float
+    public function getEarnings(GovernmentalUnitArea $governmental_unit_area = null, int $position = null): float
     {
         if ($governmental_unit_area === null) {
             return $this->earnings - $this->exempted_earnings;
@@ -150,6 +153,20 @@ class Payroll
             });
 
         return $minutes_worked / 60;
+    }
+
+    public function getWages(GovernmentalUnitArea $governmental_unit_area, string $type): Collection
+    {
+        /** @var AreaIncome $area_wages */
+        $area_wages = $this->area_incomes->get($governmental_unit_area->name);
+        if ($area_wages === null) {
+            return collect([]);
+        }
+
+        return $area_wages->getWages()
+            ->filter(static function (Wage $gross_wage) use ($type) {
+                return $gross_wage->getType() === $type;
+            });
     }
 
     public function getSupplementalEarnings(): float
@@ -360,5 +377,17 @@ class Payroll
         }
 
         return $this->pay_periods_exempt;
+    }
+
+    public function getWorkerCompRate(string $state, int $position): ?WorkerCompRate
+    {
+        $rate = $this->workers_comp_rates
+            ->where('state', $state)
+            ->where('position', $position)
+            ->first();
+        if (!$rate) {
+            throw new \Exception('Missing workers comp rate for position. '.$position.'. in state '.$state);
+        }
+        return $rate;
     }
 }

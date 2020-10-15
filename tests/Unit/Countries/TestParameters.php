@@ -3,6 +3,7 @@
 namespace Appleton\Taxes\Tests\Unit\Countries;
 
 use Carbon\Carbon;
+use Illuminate\Support\Collection;
 
 class TestParameters
 {
@@ -31,6 +32,8 @@ class TestParameters
     private $minutes_worked;
     private $wages_callback;
     private $pay_periods_exempt;
+    private $workers_comp_rates;
+    private $expected_amounts_in_cents;
 
     public function __construct(
         string $date,
@@ -57,7 +60,9 @@ class TestParameters
         ?int $take_home_tip_amount_in_cents,
         ?int $minutes_worked,
         ?callable $wages_callback,
-        ?int $pay_periods_exempt
+        ?int $pay_periods_exempt,
+        ?Collection $workers_comp_rates,
+        ?array $expected_amounts_in_cents
     ) {
         $this->date = $date;
         $this->tax_info_class = $tax_info_class;
@@ -84,6 +89,8 @@ class TestParameters
         $this->minutes_worked = $minutes_worked;
         $this->wages_callback = $wages_callback;
         $this->pay_periods_exempt = $pay_periods_exempt;
+        $this->workers_comp_rates = $workers_comp_rates;
+        $this->expected_amounts_in_cents = $expected_amounts_in_cents;
     }
 
     public function getDate(): string
@@ -209,5 +216,15 @@ class TestParameters
     public function getMinutesWorked(): ?int
     {
         return $this->minutes_worked;
+    }
+
+    public function getWorkersCompRates(): ?Collection
+    {
+        return $this->workers_comp_rates;
+    }
+
+    public function getExpectedAmountsInCents(): ?array
+    {
+        return $this->expected_amounts_in_cents;
     }
 }
