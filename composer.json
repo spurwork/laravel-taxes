@@ -5,13 +5,13 @@
   "keywords": [
     "taxes"
   ],
-  "homepage": "https://github.com/appletonlearning/laravel-taxes",
+  "homepage": "https://github.com/spurwork/laravel-taxes",
   "license": "MIT",
   "authors": [
     {
-      "name": "Appleton",
-      "email": "support@appletontalent.com",
-      "homepage": "https://github.com/appletonlearning",
+      "name": "Spur",
+      "email": "info@spurwork.com",
+      "homepage": "https://github.com/spurwork",
       "role": "Developer"
     }
   ],
