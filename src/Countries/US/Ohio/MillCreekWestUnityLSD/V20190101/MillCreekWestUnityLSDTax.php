@@ -1,8 +1,8 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\MillcreekWestUnityLSD\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\MillCreekWestUnityLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\MillcreekWestUnityLSD\MillCreekWestUnityLSDTax as BaseMillcreekWestUnityLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\MillcreekWestUnityLSD\MillCreekWestUnityLSDTax as BaseMillCreekWestUnityLSDTax;
 
 class MillCreekWestUnityLSDTax extends BaseMillcreekWestUnityLSDTax
 {
