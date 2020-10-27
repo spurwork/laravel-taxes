@@ -1,10 +1,10 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\MillcreekWestUnityLSD;
+namespace Appleton\Taxes\Countries\US\Ohio\MillCreekWestUnityLSD;
 
 use Appleton\Taxes\Countries\US\Ohio\OhioSchoolDistrictTraditionalTax;
 
-abstract class MillcreekWestUnityLSDTax extends OhioSchoolDistrictTraditionalTax
+abstract class MillCreekWestUnityLSDTax extends OhioSchoolDistrictTraditionalTax
 {
     private const ID = '8604';
 
