@@ -2,7 +2,6 @@
 
 namespace Appleton\Taxes\Classes\WorkerTaxes;
 
-use Appleton\Taxes\Classes\WorkerTaxes\LiabilityAmount;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 
@@ -25,20 +24,41 @@ class TaxManager
 
                 $tax_implementation = app($taxable_income->getTax()->class);
 
-                $amount_in_cents = bcmul($tax_implementation->compute($taxable_income->getTax()->taxAreas), 100);
-                $earnings_in_cents = bcmul($tax_implementation->getEarnings(), 100);
+                $val = $tax_implementation->compute($taxable_income->getTax()->taxAreas);
+                if (! ($val instanceof Collection)) {
+                    $amount_in_cents = bcmul($val, 100);
+                    $earnings_in_cents = bcmul($tax_implementation->getEarnings(), 100);
 
-                $tax_result = new TaxResult(
-                    $taxable_income->getTax()->class,
-                    $taxable_income->getTax()->name,
-                    $tax_implementation,
-                    $amount_in_cents,
-                    $earnings_in_cents
-                );
+                    $tax_result = new TaxResult(
+                        $taxable_income->getTax()->class,
+                        $taxable_income->getTax()->name,
+                        $tax_implementation,
+                        $amount_in_cents,
+                        $earnings_in_cents,
+                        null
+                    );
 
-                app()->instance($taxable_income->getTax()->class, $tax_implementation);
+                    app()->instance($taxable_income->getTax()->class, $tax_implementation);
 
-                return [$taxable_income->getTax()->class => $tax_result];
+                    return [$taxable_income->getTax()->class => $tax_result];
+                } else {
+                    $tax_results = $val->map(function ($data) use ($tax_implementation, $taxable_income) {
+                        $amount_in_cents = bcmul($data['amount'], 100);
+                        $earnings_in_cents = bcmul($data['earnings'], 100);
+                        return new TaxResult(
+                            $taxable_income->getTax()->class,
+                            $taxable_income->getTax()->name,
+                            $tax_implementation,
+                            $amount_in_cents,
+                            $earnings_in_cents,
+                            array_key_exists('rate_id', $data) ? $data['rate_id'] : null
+                        );
+                    });
+
+                    app()->instance($taxable_income->getTax()->class, $tax_implementation);
+
+                    return [$taxable_income->getTax()->class => $tax_results];
+                }
             });
     }
 
