@@ -1,12 +1,12 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Pennsylvania\PennsylvaniaLocalEitTax\V20200101;
+namespace Appleton\Taxes\Countries\US\Pennsylvania\PennsylvaniaLocalEITTax\V20200101;
 
-use Appleton\Taxes\Countries\US\Pennsylvania\PennsylvaniaLocalEITTax\PennsylvaniaLocalEITTax as BasePennsylvaniaLocalEITTax;
+use Appleton\Taxes\Countries\US\Pennsylvania\PennsylvaniaLocalEITTax\PennsylvaniaLocalEITTax as BaseTax;
 
 use Illuminate\Database\Eloquent\Collection;
 
-class PennsylvaniaLocalEITTax extends BasePennsylvaniaLocalEITTax
+class PennsylvaniaLocalEITTax extends BaseTax
 {
     public function compute(Collection $tax_areas)
     {
@@ -26,6 +26,7 @@ class PennsylvaniaLocalEITTax extends BasePennsylvaniaLocalEITTax
 
     public function philadelphiaSpecialTaxRate()
     {
-        return $this->tax_information->is_resident_psd_code_philadelphia || $this->tax_information->is_employer_psd_code_philadelphia;
+        return $this->tax_information->is_resident_psd_code_philadelphia
+            || $this->tax_information->is_employer_psd_code_philadelphia;
     }
 }
