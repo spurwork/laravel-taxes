@@ -13,22 +13,21 @@ class CarrollCounty extends BaseCarrollCounty
 
     public function compute(Collection $tax_areas)
     {
+        $taxable_amount = 0;
         $earnings = $this->payroll->getEarnings();
-        $ytd_taxable_earnings = $this->payroll->getYtdTaxableWages(BaseCarrollCounty::class);
+        $ytd_earnings = $this->payroll->getYtdEarnings($tax_areas->first()->workGovernmentalUnitArea);
+        $ytd_taxable_wages = $this->payroll->getYtdTaxableWages(BaseCarrollCounty::class);
 
-        if ($ytd_taxable_earnings === 0.0) {
-            $ytd_earnings = $this->payroll->getYtdEarnings($tax_areas->first()->workGovernmentalUnitArea);
-            if ($earnings + $ytd_earnings <= self::MIN_WAGES) {
-                return 0.0;
-            }
-
-            $taxable_earnings = $earnings + $ytd_earnings - self::MIN_WAGES;
-        } else {
-            $taxable_earnings = $earnings;
+        if ($earnings + $ytd_earnings <= self::MIN_WAGES || $ytd_taxable_wages >= self::MAX_TAX) {
+            return 0.0;
         }
 
-        $tax_amount = round($taxable_earnings * self::TAX_RATE, 2);
+        if ($ytd_earnings < self::MIN_WAGES) {
+            $earnings = $earnings - (self::MIN_WAGES - $ytd_earnings);
+        }
 
-        return round($this->payroll->withholdTax($tax_amount), 2);
+        $taxable_amount = min($earnings * self::TAX_RATE, self::MAX_TAX - $ytd_taxable_wages);
+
+        return round($this->payroll->withholdTax($taxable_amount), 2);
     }
 }
