@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Tests\Unit\Countries\US\Kentucky\V20200101;
+namespace Appleton\Taxes\Tests\Unit\Countries\US\Kentucky\V20200101\local;
 
 use Appleton\Taxes\Countries\US\Kentucky\PendletonCounty\PendletonCounty;
 use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;

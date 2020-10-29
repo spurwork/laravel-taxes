@@ -110,7 +110,7 @@ class InsertOhioSchoolDistrictTaxes extends Migration
         'McComb LSD' => Appleton\Taxes\Countries\US\Ohio\McCombLSD\McCombLSDTax::class,
         'Mechanicsburg EVSD' => Appleton\Taxes\Countries\US\Ohio\MechanicsburgEVSD\MechanicsburgEVSDTax::class,
         'Miami East LSD' => Appleton\Taxes\Countries\US\Ohio\MiamiEastLSD\MiamiEastLSDTax::class,
-        'Millcreek-West Unity LSD' => Appleton\Taxes\Countries\US\Ohio\MillcreekWestUnityLSD\MillcreekWestUnityLSDTax::class,
+        'Millcreek-West Unity LSD' => Appleton\Taxes\Countries\US\Ohio\MillcreekWestUnityLSD\MillCreekWestUnityLSDTax::class,
         'Miller City-New Cleveland LSD' =>
         Appleton\Taxes\Countries\US\Ohio\MillerCityNewClevelandLSD\MillerCityNewClevelandLSDTax::class,
         'Milton-Union EVSD' => Appleton\Taxes\Countries\US\Ohio\MiltonUnionEVSD\MiltonUnionEVSDTax::class,

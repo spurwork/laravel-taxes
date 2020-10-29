@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Tests\Unit\Countries\US\Texas\V201200101;
+namespace Appleton\Taxes\Tests\Unit\Countries\US\Texas\V20200101;
 
 use Appleton\Taxes\Countries\US\Texas\TexasUnemployment\TexasUnemployment;
 use Appleton\Taxes\Tests\Unit\Countries\UnemploymentTaxTestCase;

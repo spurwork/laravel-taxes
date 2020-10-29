@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Tests\Unit\Countries\US\Kentucky\V20190101;
+namespace Appleton\Taxes\Tests\Unit\Countries\US\Kentucky\V20190101\local;
 
 use Appleton\Taxes\Countries\US\Kentucky\HighlandHeightsCity\HighlandHeightsCity;
 use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
@@ -81,6 +81,7 @@ class HighlandHeightsCityTest extends WageBaseTaxTestCase
             self::LOCATION,
             self::TAX_CLASS,
             self::WAGE_BASE,
-            self::TAX_RATE);
+            self::TAX_RATE
+        );
     }
 }

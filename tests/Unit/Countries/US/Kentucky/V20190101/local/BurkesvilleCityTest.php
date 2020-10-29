@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Tests\Unit\Countries\US\Kentucky\V20190101;
+namespace Appleton\Taxes\Tests\Unit\Countries\US\Kentucky\V20190101\local;
 
 use Appleton\Taxes\Countries\US\Kentucky\BurkesvilleCity\BurkesvilleCity;
 use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
