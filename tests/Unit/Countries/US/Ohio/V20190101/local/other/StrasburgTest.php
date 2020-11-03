@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Tests\Unit\Countries\US\Ohio\V20190101;
+namespace Appleton\Taxes\Tests\Unit\Countries\US\Ohio\V20190101\local\other;
 
 use Appleton\Taxes\Countries\US\Ohio\Strasburg\Strasburg;
 use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;

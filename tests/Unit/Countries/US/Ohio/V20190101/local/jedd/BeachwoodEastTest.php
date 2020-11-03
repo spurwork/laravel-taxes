@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Tests\Unit\Countries\US\Ohio\V20190101\JEDD;
+namespace Appleton\Taxes\Tests\Unit\Countries\US\Ohio\V20190101\local\jedd;
 
 use Appleton\Taxes\Countries\US\Ohio\JEDD\BeachwoodEast\BeachwoodEast;
 use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
