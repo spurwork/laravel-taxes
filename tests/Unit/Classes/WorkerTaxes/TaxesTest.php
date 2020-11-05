@@ -78,6 +78,7 @@ class TaxesTest extends UnitTestCase
             collect([]),
             collect([]),
             0,
+            collect([]),
             collect([])
         );
 
@@ -121,6 +122,7 @@ class TaxesTest extends UnitTestCase
             collect([]),
             collect([]),
             0,
+            collect([]),
             collect([])
         );
 
@@ -177,6 +179,7 @@ class TaxesTest extends UnitTestCase
             collect([]),
             collect([]),
             0,
+            collect([]),
             collect([])
         );
 
@@ -220,6 +223,7 @@ class TaxesTest extends UnitTestCase
             collect([]),
             collect([]),
             0,
+            collect([]),
             collect([])
         );
 
@@ -264,6 +268,7 @@ class TaxesTest extends UnitTestCase
             collect([]),
             collect([]),
             0,
+            collect([]),
             collect([])
         );
 
@@ -307,6 +312,7 @@ class TaxesTest extends UnitTestCase
             collect([StateIncomeTax1::class]),
             collect([]),
             0,
+            collect([]),
             collect([])
         );
 
@@ -340,6 +346,7 @@ class TaxesTest extends UnitTestCase
             collect([]),
             collect([StateIncomeTax1::class => 10]),
             0,
+            collect([]),
             collect([])
         );
 
@@ -380,6 +387,7 @@ class TaxesTest extends UnitTestCase
             collect([]),
             collect([BaseLocal::class => 10]),
             0,
+            collect([]),
             collect([])
         );
 
@@ -419,6 +427,7 @@ class TaxesTest extends UnitTestCase
             collect([]),
             collect([]),
             0,
+            collect([]),
             collect([])
         );
     }
@@ -447,7 +456,8 @@ class TaxesTest extends UnitTestCase
             collect([]),
             collect([]),
             0,
-            collect([])
+            collect([]),
+            collect(['AL' => 0.027])
         );
 
         self::assertThat($results->get(FederalIncome::class)->getAmountInCents(), self::identicalTo(688));
@@ -507,7 +517,8 @@ class TaxesTest extends UnitTestCase
             collect([]),
             collect([]),
             0,
-            collect([])
+            collect([]),
+            collect(['AL' => 0.027])
         );
 
         self::assertThat($results->count(), self::identicalTo(8));
@@ -538,7 +549,8 @@ class TaxesTest extends UnitTestCase
             collect([]),
             collect([]),
             0,
-            collect([])
+            collect([]),
+            collect(['AL' => 0.027])
         );
 
         self::assertThat($results->get(FederalIncome::class)->getAmountInCents(), self::identicalTo(1000));
@@ -583,7 +595,8 @@ class TaxesTest extends UnitTestCase
             collect([]),
             collect([]),
             0,
-            collect([])
+            collect([]),
+            collect(['AL' => 0.027])
         );
 
         self::assertThat($results->get(FederalIncome::class)->getAmountInCents(), self::identicalTo(0));
@@ -607,7 +620,8 @@ class TaxesTest extends UnitTestCase
             collect([]),
             collect([]),
             0,
-            collect([])
+            collect([]),
+            collect(['AL' => 0.027])
         );
 
         self::assertThat($results->get(FederalIncome::class)->getAmountInCents(), self::identicalTo(0));
@@ -638,7 +652,8 @@ class TaxesTest extends UnitTestCase
             collect([]),
             collect([]),
             0,
-            collect([])
+            collect([]),
+            collect(['AL' => 0.027])
         );
 
         app(Payroll::class);
@@ -684,7 +699,8 @@ class TaxesTest extends UnitTestCase
             collect([]),
             collect([]),
             0,
-            collect([])
+            collect([]),
+            collect(['AL' => 0.027])
         );
 
         self::assertThat($results->get(FederalIncome::class)->getAmountInCents(), self::identicalTo(754));
@@ -721,7 +737,11 @@ class TaxesTest extends UnitTestCase
             collect([]),
             collect([]),
             0,
-            collect([])
+            collect([]),
+            collect([
+                'AL' => 0.027,
+                'GA' => 0.027,
+            ])
         );
 
         self::assertThat($results->get(ParentGeorgiaIncome::class)->getAmountInCents(), self::identicalTo(273));
@@ -770,7 +790,8 @@ class TaxesTest extends UnitTestCase
             collect([]),
             collect([]),
             0,
-            collect([])
+            collect([]),
+            collect(['AL' => 0.027])
         );
 
         self::assertThat($results->get(FederalUnemployment::class)->getAmountInCents(), self::identicalTo(0));
@@ -794,7 +815,8 @@ class TaxesTest extends UnitTestCase
             collect([]),
             collect([]),
             0,
-            collect([])
+            collect([]),
+            collect(['AL' => 0.027])
         );
 
         self::assertThat($results->get(FederalUnemployment::class)->getAmountInCents(), self::identicalTo(0));
@@ -819,7 +841,8 @@ class TaxesTest extends UnitTestCase
             collect([]),
             collect([]),
             0,
-            collect([])
+            collect([]),
+            collect(['AL' => 0.027])
         );
 
         self::assertThat($results->get(FederalUnemployment::class)->getAmountInCents(), self::identicalTo(0));
@@ -846,7 +869,8 @@ class TaxesTest extends UnitTestCase
             collect([]),
             collect([]),
             0,
-            collect([])
+            collect([]),
+            collect(['AL' => 0.027])
         );
 
         self::assertThat($results->get(FederalIncome::class)->getAmountInCents(), self::identicalTo(754));

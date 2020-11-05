@@ -39,7 +39,8 @@ class TransitDistrictTaxesTestCase extends TaxTestCase
             collect([]),
             collect([]),
             0,
-            collect([])
+            collect([]),
+            collect(['OR' => 0])
         );
 
         $short_name = (new ReflectionClass($parameters->getTaxClass()))->getShortName();

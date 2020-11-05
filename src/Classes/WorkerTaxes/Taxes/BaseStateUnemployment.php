@@ -8,6 +8,8 @@ class BaseStateUnemployment extends BaseTax implements StateUnemployment
 {
     use HasWageBase;
 
+    protected $tax_rate;
+
     public function getTaxCredit()
     {
         return defined('static::FUTA_CREDIT') ? static::FUTA_CREDIT : 0;

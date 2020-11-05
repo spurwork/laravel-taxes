@@ -21,6 +21,7 @@ class UnemploymentTaxTestCase extends WageBaseTaxTestCase
                 ->setYtdLiabilitiesInCents(null)
                 ->setExpectedAmountInCents($this->calculate(1000, $tax_rate))
                 ->setExpectedEarningsInCents(1000)
+                ->addSutaRate($tax_class::STATE, $tax_rate)
                 ->build()
         );
     }
@@ -41,7 +42,7 @@ class UnemploymentTaxTestCase extends WageBaseTaxTestCase
                 ->setYtdLiabilitiesInCents(null)
                 ->setExpectedAmountInCents($this->calculate(230000, $tax_rate))
                 ->setExpectedEarningsInCents(230000)
-                ->setTaxRate(['taxes.rates.'.$location.'.unemployment' => $tax_rate])
+                ->addSutaRate($tax_class::STATE, $tax_rate)
                 ->build()
         );
     }
@@ -63,6 +64,7 @@ class UnemploymentTaxTestCase extends WageBaseTaxTestCase
                 ->setYtdLiabilitiesInCents(null)
                 ->setExpectedAmountInCents($this->roundToDollar($this->calculate(10000, $tax_rate)))
                 ->setExpectedEarningsInCents(10000)
+                ->addSutaRate($tax_class::STATE, $tax_rate)
                 ->build()
         );
     }
@@ -83,7 +85,8 @@ class UnemploymentTaxTestCase extends WageBaseTaxTestCase
                 ->setYtdLiabilitiesInCents(null)
                 ->setExpectedAmountInCents($this->roundToDollar($this->calculate(230000, $tax_rate)))
                 ->setExpectedEarningsInCents(230000)
-                ->setTaxRate(['taxes.rates.'.$location.'.unemployment' => $tax_rate])
+                ->addSutaRate($tax_class::STATE, $tax_rate)
+//                ->setTaxRate(['taxes.rates.'.$location.'.unemployment' => $tax_rate])
                 ->build()
         );
     }

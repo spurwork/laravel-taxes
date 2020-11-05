@@ -43,6 +43,7 @@ class AlabamaUnemploymentTest extends UnemploymentTaxTestCase
                 ->setYtdWagesInCents(null)
                 ->setExpectedAmountInCents(round(1000 * self::TAX_RATE))
                 ->setExpectedEarningsInCents(round(1000))
+                ->addSutaRate('AL', .027)
                 ->build()
         );
     }

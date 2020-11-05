@@ -73,6 +73,11 @@ class ArkansasIncomeTest extends TaxTestCase
 
         $historical_wages = collect([]);
 
+        $suta_rates = collect([
+            'TX' => 0,
+            'AK' => 0,
+        ]);
+
         $results = $this->taxes->calculate(
             Carbon::now(),
             Carbon::now()->addWeek(),
@@ -90,7 +95,8 @@ class ArkansasIncomeTest extends TaxTestCase
             collect([]),
             collect([]),
             0,
-            collect([])
+            collect([]),
+            $suta_rates,
         );
 
         $short_name = (new ReflectionClass(ArkansasIncome::class))->getShortName();

@@ -52,7 +52,8 @@ class ColoradoLocalTaxTestCase extends TaxTestCase
             collect([]),
             collect([]),
             0,
-            collect([])
+            collect([]),
+            collect(['CO'=> 0])
         );
 
         $short_name = (new ReflectionClass($parameters->getTaxClass()))->getShortName();
@@ -97,6 +98,9 @@ class ColoradoLocalTaxTestCase extends TaxTestCase
             $this->makeWageAtDate($past_date, $local_location, $parameters->getLocalMtdEarningsInCents()),
         ]);
 
+        $suta_rates = collect([]);
+        $suta_rates->put('CO', 0);
+
         $results = $this->taxes->calculate(
             Carbon::now(),
             Carbon::now()->addWeek(),
@@ -114,7 +118,8 @@ class ColoradoLocalTaxTestCase extends TaxTestCase
             collect([]),
             collect([]),
             0,
-            collect([])
+            collect([]),
+            $suta_rates
         );
 
         $short_name = (new ReflectionClass($parameters->getTaxClass()))->getShortName();

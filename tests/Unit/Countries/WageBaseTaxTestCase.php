@@ -66,7 +66,8 @@ class WageBaseTaxTestCase extends TaxTestCase
             collect([]),
             collect([]),
             0,
-            collect([])
+            collect([]),
+            $parameters->getSutaRates()
         );
 
         $short_name = (new ReflectionClass($parameters->getTaxClass()))->getShortName();
@@ -102,6 +103,10 @@ class WageBaseTaxTestCase extends TaxTestCase
             ->setDate($date)
             ->setHomeLocation($home_location)
             ->setTaxClass($tax_class);
+
+        if(defined("{$tax_class}::STATE")) {
+            $builder->addSutaRate($tax_class::STATE, $tax_rate);
+        }
 
         return [
             'current wages not meet wage base' => [
@@ -183,6 +188,10 @@ class WageBaseTaxTestCase extends TaxTestCase
             ->setDate($date)
             ->setHomeLocation($home_location)
             ->setTaxClass($tax_class);
+
+        if(defined("{$tax_class}::STATE")) {
+            $builder->addSutaRate($tax_class::STATE, $tax_rate);
+        }
 
         return [
             'current wages not meet wage base' => [
