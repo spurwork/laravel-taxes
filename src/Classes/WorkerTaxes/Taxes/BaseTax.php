@@ -5,13 +5,13 @@ namespace Appleton\Taxes\Classes\WorkerTaxes\Taxes;
 use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
 use Illuminate\Database\Eloquent\Collection;
 
-
 abstract class BaseTax
 {
     public const SCOPE = 'worker';
     public const PRIORITY = 9999;
 
     public $tax_total = 0;
+    protected $payroll;
 
     public function __construct(Payroll $payroll)
     {

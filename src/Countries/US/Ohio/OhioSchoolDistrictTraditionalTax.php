@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Collection;
 abstract class OhioSchoolDistrictTraditionalTax extends BaseOccupational
 {
     protected $tax_information;
-    protected $payroll;
 
     public function __construct(OhioIncomeTaxInformation $tax_information, Payroll $payroll)
     {

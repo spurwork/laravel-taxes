@@ -2,7 +2,6 @@
 
 namespace Appleton\Taxes\Countries\US\Minnesota\MinnesotaUnemployment;
 
-use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
 use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseStateUnemployment;
 
 class MinnesotaUnemployment extends BaseStateUnemployment
@@ -10,10 +9,4 @@ class MinnesotaUnemployment extends BaseStateUnemployment
     const TYPE = 'state';
     const WITHHELD = false;
     const STATE = 'MN';
-
-    public function __construct(Payroll $payroll)
-    {
-        parent::__construct($payroll);
-        $this->tax_rate = $payroll->getSutaRate(self::STATE);
-    }
 }
