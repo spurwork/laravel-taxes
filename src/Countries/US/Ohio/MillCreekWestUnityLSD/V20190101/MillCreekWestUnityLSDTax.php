@@ -1,10 +1,10 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Ohio\MillcreekWestUnityLSD\V20190101;
+namespace Appleton\Taxes\Countries\US\Ohio\MillCreekWestUnityLSD\V20190101;
 
-use Appleton\Taxes\Countries\US\Ohio\MillcreekWestUnityLSD\MillcreekWestUnityLSDTax as BaseMillcreekWestUnityLSDTax;
+use Appleton\Taxes\Countries\US\Ohio\MillcreekWestUnityLSD\MillCreekWestUnityLSDTax as BaseMillCreekWestUnityLSDTax;
 
-class MillcreekWestUnityLSDTax extends BaseMillcreekWestUnityLSDTax
+class MillCreekWestUnityLSDTax extends BaseMillcreekWestUnityLSDTax
 {
     public const TAX_RATE = 0.01;
 

@@ -6,7 +6,7 @@ use Appleton\Taxes\Countries\US\NewYork\NewYorkMetropolitanCommuterTransportatio
 use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
 use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
 
-class NewYorkMetropolitanCommuterTransportationMobilityEmployerTest extends TaxTestCase
+class NewYorkMetropolitanCommuterTransportationMobilityTest extends TaxTestCase
 {
     private const DATE = '2019-01-01';
     private const LOCATION = 'us.new_york';

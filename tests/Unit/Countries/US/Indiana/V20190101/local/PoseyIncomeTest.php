@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Tests\Unit\Countries\US\Indiana\V20190101;
+namespace Appleton\Taxes\Tests\Unit\Countries\US\Indiana\V20190101\local;
 
 use Appleton\Taxes\Countries\US\Indiana\PoseyIncome\PoseyIncome;
 use Appleton\Taxes\Models\Countries\US\Indiana\IndianaIncomeTaxInformation;

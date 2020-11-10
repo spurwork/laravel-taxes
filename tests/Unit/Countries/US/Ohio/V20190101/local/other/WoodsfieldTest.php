@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Tests\Unit\Countries\US\Ohio\V20190101;
+namespace Appleton\Taxes\Tests\Unit\Countries\US\Ohio\V20190101\local\other;
 
 use Appleton\Taxes\Countries\US\Ohio\Woodsfield\Woodsfield;
 use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
