@@ -26,10 +26,10 @@ class WashingtonWorkersCompensationEmployer extends BaseWashingtonWorkersCompens
                 $position = $wages->first()->getPosition();
                 $rate = $this->payroll->getWorkerCompRate('WA', $position);
                 $amount = $wages->sum(function (Wage $wage) {
-                        return $wage->getWorkTimeInMinutes();
+                    return $wage->getWorkTimeInMinutes();
                 }) / 60 * $rate->employer_rate;
                 $earnings = $wages->sum(function (Wage $wage) {
-                        return $wage->getAmountInCents();
+                    return $wage->getAmountInCents();
                 }) / 100 - $this->payroll->exempted_earnings;
 
                 return [
@@ -52,10 +52,10 @@ class WashingtonWorkersCompensationEmployer extends BaseWashingtonWorkersCompens
                     $position = $wages->first()->getPosition();
                     $rate = $this->payroll->getWorkerCompRate('WA', $position);
                     $amount = $wages->sum(function (Wage $wage) {
-                            return $wage->getWorkTimeInMinutes();
-                    }) / 60 * $rate->employer_rate * 40;
+                        return $wage->getWorkTimeInMinutes();
+                    }) / 60 * $rate->employer_rate;
                     $earnings = $wages->sum(function (Wage $wage) {
-                            return $wage->getAmountInCents();
+                        return $wage->getAmountInCents();
                     }) / 100 - $this->payroll->exempted_earnings;
                     return [
                         'rate_id' => $rate->id,
