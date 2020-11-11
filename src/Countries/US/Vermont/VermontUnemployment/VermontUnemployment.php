@@ -8,4 +8,5 @@ abstract class VermontUnemployment extends BaseStateUnemployment
 {
     public const TYPE = 'state';
     public const WITHHELD = false;
+    const STATE = 'VT';
 }

@@ -8,4 +8,5 @@ class NewHampshireUnemployment extends BaseStateUnemployment
 {
     const TYPE = 'state';
     const WITHHELD = false;
+    const STATE = 'NH';
 }

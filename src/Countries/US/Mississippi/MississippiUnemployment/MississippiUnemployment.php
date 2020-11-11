@@ -9,6 +9,7 @@ class MississippiUnemployment extends BaseStateUnemployment
 {
     const TYPE = 'state';
     const WITHHELD = false;
+    const STATE = 'MS';
 
     public function compute(Collection $tax_areas)
     {

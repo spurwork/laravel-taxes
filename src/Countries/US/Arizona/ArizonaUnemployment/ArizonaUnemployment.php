@@ -8,4 +8,5 @@ abstract class ArizonaUnemployment extends BaseStateUnemployment
 {
     const TYPE = 'state';
     const WITHHELD = false;
+    const STATE = 'AZ';
 }

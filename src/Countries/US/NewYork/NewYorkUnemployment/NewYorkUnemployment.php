@@ -8,4 +8,5 @@ abstract class NewYorkUnemployment extends BaseStateUnemployment
 {
     const TYPE = 'state';
     const WITHHELD = false;
+    const STATE = 'NY';
 }

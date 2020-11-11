@@ -28,7 +28,6 @@ abstract class MichiganCityTax extends BaseLocal
     protected $resident_city_no_work_has_tax_works_in_2_other_cities_that_have_tax = false;
     protected $resident_city_no_work_no_tax_works_in_2_other_cities_that_have_tax = false;
 
-    protected $payroll;
     protected $percentage_worked;
     protected $tax_information;
 

@@ -9,4 +9,5 @@ class OhioUnemployment extends BaseStateUnemployment
 {
     const TYPE = 'state';
     const WITHHELD = false;
+    const STATE = 'OH';
 }

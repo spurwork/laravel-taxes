@@ -8,4 +8,5 @@ class RhodeIslandUnemployment extends BaseStateUnemployment
 {
     const TYPE = 'state';
     const WITHHELD = false;
+    const STATE = 'RI';
 }

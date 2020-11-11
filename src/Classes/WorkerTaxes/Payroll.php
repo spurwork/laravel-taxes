@@ -3,6 +3,7 @@
 namespace Appleton\Taxes\Classes\WorkerTaxes;
 
 use Appleton\Taxes\Models\GovernmentalUnitArea;
+use Exception;
 use Illuminate\Support\Collection;
 
 class Payroll
@@ -36,6 +37,7 @@ class Payroll
     private $annual_liability_amounts;
     private $pay_periods_exempt;
     private $workers_comp_rates;
+    private $suta_rates;
 
     private $wage_manager;
     private $tax_manager;
@@ -76,6 +78,8 @@ class Payroll
         $this->amount_withheld = 0;
         $this->wage_manager = $wage_manager;
         $this->tax_manager = $tax_manager;
+
+        $this->suta_rates = $parameters['suta_rates'] ?? collect([]);
     }
 
     public function getStartDate()
@@ -349,8 +353,8 @@ class Payroll
         }
 
         return $area_income->getWages()->sum(static function (Wage $gross_wage) {
-            return $gross_wage->getAmountInCents();
-        }) / 100;
+                return $gross_wage->getAmountInCents();
+            }) / 100;
     }
 
     public function isSalariedWorker(GovernmentalUnitArea $governmental_unit_area = null): bool
@@ -387,6 +391,15 @@ class Payroll
             ->first();
         if (!$rate) {
             throw new \Exception('Missing workers comp rate for position. '.$position.'. in state '.$state);
+        }
+        return $rate;
+    }
+
+    public function getSutaRate(string $state)
+    {
+        $rate = $this->suta_rates->get($state);
+        if ($rate === null) {
+            throw new Exception("Missing SUTA rate for {$state}");
         }
         return $rate;
     }

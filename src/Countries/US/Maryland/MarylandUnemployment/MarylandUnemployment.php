@@ -8,4 +8,5 @@ class MarylandUnemployment extends BaseStateUnemployment
 {
     const TYPE = 'state';
     const WITHHELD = false;
+    const STATE = 'MD';
 }

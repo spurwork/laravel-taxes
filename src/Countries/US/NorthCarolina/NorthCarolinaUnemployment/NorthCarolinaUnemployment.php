@@ -8,4 +8,5 @@ abstract class NorthCarolinaUnemployment extends BaseStateUnemployment
 {
     const TYPE = 'state';
     const WITHHELD = false;
+    const STATE = 'NC';
 }

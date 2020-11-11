@@ -39,7 +39,8 @@ class JeddTaxTestCase extends TaxTestCase
             collect([]),
             collect([]),
             0,
-            collect([])
+            collect([]),
+            collect(['OH' => 0])
         );
 
         $short_name = (new ReflectionClass($parameters->getTaxClass()))->getShortName();

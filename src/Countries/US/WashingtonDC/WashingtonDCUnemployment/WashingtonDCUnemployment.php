@@ -7,4 +7,5 @@ class WashingtonDCUnemployment extends BaseStateUnemployment
 {
     const TYPE = 'state';
     const WITHHELD = false;
+    const STATE = 'DC';
 }

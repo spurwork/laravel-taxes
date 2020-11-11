@@ -8,4 +8,5 @@ abstract class ColoradoUnemployment extends BaseStateUnemployment
 {
     const TYPE = 'state';
     const WITHHELD = false;
+    const STATE = 'CO';
 }

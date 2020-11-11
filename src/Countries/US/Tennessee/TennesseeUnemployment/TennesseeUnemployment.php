@@ -8,4 +8,5 @@ abstract class TennesseeUnemployment extends BaseStateUnemployment
 {
     public const TYPE = 'state';
     public const WITHHELD = false;
+    const STATE = 'TN';
 }

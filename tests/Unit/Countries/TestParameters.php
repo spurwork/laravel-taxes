@@ -34,6 +34,7 @@ class TestParameters
     private $pay_periods_exempt;
     private $workers_comp_rates;
     private $expected_amounts_in_cents;
+    private $suta_rates;
 
     public function __construct(
         string $date,
@@ -62,7 +63,8 @@ class TestParameters
         ?callable $wages_callback,
         ?int $pay_periods_exempt,
         ?Collection $workers_comp_rates,
-        ?array $expected_amounts_in_cents
+        ?array $expected_amounts_in_cents,
+        Collection $suta_rates
     ) {
         $this->date = $date;
         $this->tax_info_class = $tax_info_class;
@@ -91,6 +93,7 @@ class TestParameters
         $this->pay_periods_exempt = $pay_periods_exempt;
         $this->workers_comp_rates = $workers_comp_rates;
         $this->expected_amounts_in_cents = $expected_amounts_in_cents;
+        $this->suta_rates = $suta_rates;
     }
 
     public function getDate(): string
@@ -226,5 +229,10 @@ class TestParameters
     public function getExpectedAmountsInCents(): ?array
     {
         return $this->expected_amounts_in_cents;
+    }
+
+    public function getSutaRates(): Collection
+    {
+        return $this->suta_rates;
     }
 }

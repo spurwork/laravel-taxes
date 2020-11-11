@@ -8,4 +8,5 @@ abstract class TexasUnemployment extends BaseStateUnemployment
 {
     const TYPE = 'state';
     const WITHHELD = false;
+    const STATE = 'TX';
 }

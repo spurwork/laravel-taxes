@@ -15,6 +15,6 @@ class BaseStateUnemployment extends BaseTax implements StateUnemployment
 
     protected function getTaxRate(): float
     {
-        return $this->tax_rate;
+        return $this->payroll->getSutaRate(static::STATE);
     }
 }

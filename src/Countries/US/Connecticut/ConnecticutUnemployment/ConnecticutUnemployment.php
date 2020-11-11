@@ -9,4 +9,5 @@ class ConnecticutUnemployment extends BaseStateUnemployment
 {
     const TYPE = 'state';
     const WITHHELD = false;
+    const STATE = 'CT';
 }

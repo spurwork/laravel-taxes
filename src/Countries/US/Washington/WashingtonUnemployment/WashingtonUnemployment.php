@@ -6,6 +6,7 @@ use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseStateUnemployment;
 
 class WashingtonUnemployment extends BaseStateUnemployment
 {
-	const TYPE = 'state';
-	const WITHHELD = false;
+    const TYPE = 'state';
+    const WITHHELD = false;
+    const STATE = 'WA';
 }

@@ -7,6 +7,12 @@ use Illuminate\Support\Collection;
 
 class TestParametersBuilder
 {
+    private const STATES = [
+        'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA',
+        'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK',
+        'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'DC', 'WV', 'WI', 'WY'
+    ];
+
     private $date;
     private $birth_date;
     private $home_location;
@@ -34,6 +40,16 @@ class TestParametersBuilder
     private $pay_periods_exempt;
     private $workers_comp_rates;
     private $expected_amounts_in_cents;
+    private $suta_rates;
+
+    public function __construct()
+    {
+        $this->suta_rates = collect([]);
+        collect(self::STATES)->each(function (string $state) {
+            $this->suta_rates->put($state, 0);
+        });
+    }
+
 
     public function build(): TestParameters
     {
@@ -64,7 +80,8 @@ class TestParametersBuilder
             $this->wages_callback,
             $this->pay_periods_exempt,
             $this->workers_comp_rates ?? collect([]),
-            $this->expected_amounts_in_cents
+            $this->expected_amounts_in_cents,
+            $this->suta_rates
         );
     }
 
@@ -227,6 +244,12 @@ class TestParametersBuilder
     public function setWorkersCompRates(?Collection $workers_comp_rates)
     {
         $this->workers_comp_rates = $workers_comp_rates;
+        return $this;
+    }
+
+    public function addSutaRate(string $state, float $percent)
+    {
+        $this->suta_rates->put($state, $percent);
         return $this;
     }
 }

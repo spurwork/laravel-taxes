@@ -8,4 +8,5 @@ class HawaiiUnemployment extends BaseStateUnemployment
 {
     const TYPE = 'state';
     const WITHHELD = false;
+    const STATE = 'HI';
 }
