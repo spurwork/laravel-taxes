@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Tests\Unit\Countries\US\California\V20190101;
+namespace Appleton\Taxes\Tests\Unit\Countries\US\California\V20200101;
 
 use Appleton\Taxes\Countries\US\California\SanFranciscoPayrollExpenseEmployer\SanFranciscoPayrollExpenseEmployer;
 use Appleton\Taxes\Tests\Unit\Countries\PayrollLiabilityTestCase;
@@ -9,7 +9,7 @@ use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
 
 class SanFranciscoPayrollExpenseEmployerTest extends PayrollLiabilityTestCase
 {
-    private const DATE = '2019-01-01';
+    private const DATE = '2020-01-01';
     private const LOCATION = 'us.california.san_francisco';
     private const TAX_CLASS = SanFranciscoPayrollExpenseEmployer::class;
 
