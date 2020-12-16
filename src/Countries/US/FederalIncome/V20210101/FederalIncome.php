@@ -80,7 +80,7 @@ class FederalIncome extends BaseFederalIncome
     public function compute(Collection $tax_areas)
     {
         if ($this->isUserClaimingExemption()) {
-            return 0.00;
+            return 0.0;
         }
 
         $tax_brackets = $this->getTaxBrackets();
@@ -117,8 +117,8 @@ class FederalIncome extends BaseFederalIncome
     public function getAdditionalWithholding(): float
     {
         $additional_withholding = $this->tax_information->form_version === self::FORM_VERSION_2020
-            ? $this->tax_information->extra_withholding
-            : $this->tax_information->additional_withholding;
+            ? $this->tax_information->extra_withholding ?? 0.0
+            : $this->tax_information->additional_withholding ?? 0.0;
 
         return max(min($this->payroll->getNetEarnings(), $additional_withholding), 0);
     }
