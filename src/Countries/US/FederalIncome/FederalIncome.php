@@ -26,7 +26,7 @@ abstract class FederalIncome extends BaseIncome
         self::FILING_JOINTLY => 'FILING_JOINTLY',
     ];
 
-    protected $tax_information;
+    public $tax_information;
 
     public function __construct(FederalIncomeTaxInformation $tax_information, Payroll $payroll)
     {

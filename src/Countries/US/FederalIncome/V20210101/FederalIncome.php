@@ -126,8 +126,8 @@ class FederalIncome extends BaseFederalIncome
     private function getTaxCredit(): float
     {
         return $this->tax_information->form_version === self::FORM_VERSION_2020
-            ? $this->tax_information->dependents_deduction_amount
-            : 0;
+            ? $this->tax_information->dependents_deduction_amount ?? 0.0
+            : 0.0;
     }
 
     public function getTaxBrackets(): array
