@@ -8,7 +8,7 @@ use Appleton\Taxes\Models\Countries\US\Pennsylvania\PennsylvaniaIncomeTaxInforma
 
 abstract class PennsylvaniaLSTTaxEmployer extends BaseLocal
 {
-    const WITHHELD = false;
+    const WITHHELD = true;
 
     public function __construct(PennsylvaniaIncomeTaxInformation $tax_information, Payroll $payroll)
     {
