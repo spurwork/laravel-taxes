@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 class FederalIncome extends BaseFederalIncome
 {
+    public const SUPPLEMENTAL_TAX_RATE = 0;
     private const FORM_VERSION_2020 = '2020';
 
     private const MARRIED_WITHOUT_STEP_2 = [
