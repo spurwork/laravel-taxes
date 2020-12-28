@@ -19,6 +19,7 @@
     "php": "^7.3",
     "doctrine/dbal": "^2.11",
     "illuminate/database": "^7.0|^8.0",
+    "mstaack/laravel-postgis": "^5.2",
     "nesbot/carbon": "^2.41"
   },
   "require-dev": {
