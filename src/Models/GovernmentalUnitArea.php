@@ -3,9 +3,12 @@
 namespace Appleton\Taxes\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use MStaack\LaravelPostgis\Eloquent\PostgisTrait;
 
 class GovernmentalUnitArea extends Model
 {
+    use PostgisTrait;
+
     protected $table = 'governmental_unit_areas';
 
     protected $guarded = [];
