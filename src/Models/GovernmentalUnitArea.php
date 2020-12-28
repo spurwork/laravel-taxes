@@ -15,6 +15,17 @@ class GovernmentalUnitArea extends Model
 
     public $timestamps = false;
 
+    protected $postgisFields = [
+        'area',
+    ];
+
+    protected $postgisTypes = [
+        'area' => [
+            'geomtype' => 'geometry',
+            'srid' => 4326,
+        ],
+    ];
+
     public function __construct() {
         parent::__construct();
         $this->table = config('taxes.tables.governmental_unit_areas');
