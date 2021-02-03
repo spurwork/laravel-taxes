@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5037e8439de8fc0b5d8690a7a915373d",
+    "content-hash": "ebba950fbe2739d517cf26b9054cff71",
     "packages": [
         {
             "name": "bosnadev/database",
