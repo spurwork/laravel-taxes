@@ -17,6 +17,7 @@
   ],
   "require": {
     "php": "^7.3",
+    "ext-bcmath": "*",
     "doctrine/dbal": "^2.11",
     "illuminate/database": "^8.24.0",
     "mstaack/laravel-postgis": "^5.2",

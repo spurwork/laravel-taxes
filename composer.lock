@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ebba950fbe2739d517cf26b9054cff71",
+    "content-hash": "4fd430f9f8dfe5e4769b5d098bb3a8a3",
     "packages": [
         {
             "name": "bosnadev/database",
@@ -8002,8 +8002,9 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.3"
+        "php": "^7.3",
+        "ext-bcmath": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.2.0"
 }
