@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Tests\Unit\Countries\US\Iowa\V2021101;
+namespace Appleton\Taxes\Tests\Unit\Countries\US\Iowa\V20210101;
 
 use Appleton\Taxes\Countries\US\Iowa\IowaUnemployment\IowaUnemployment;
 use Appleton\Taxes\Tests\Unit\Countries\UnemploymentTaxTestCase;
