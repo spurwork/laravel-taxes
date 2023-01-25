@@ -118,6 +118,11 @@ class Payroll
         return ($earnings_in_cents / 100) - $this->exempted_earnings;
     }
 
+    public function getAnnualGross(): float
+    {
+        return ($this->getEarnings() - $this->getSupplementalEarnings()) * $this->pay_periods;
+    }
+
     public function getHoursWorked(GovernmentalUnitArea $governmental_unit_area = null): float
     {
         if ($governmental_unit_area === null) {

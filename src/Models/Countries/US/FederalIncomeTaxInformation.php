@@ -25,6 +25,43 @@ class FederalIncomeTaxInformation extends BaseTaxInformationModel
         return $tax_information;
     }
 
+    public function getExemptions(): int
+    {
+        return $this->exemptions ?? 0;
+    }
+
+    public function getFilingStatus(): int
+    {
+        return $this->filing_status;
+    }
+
+    public function getDependentsDeductionAmount(): int
+    {
+        return $this->dependents_deduction_amount ?? 0;
+    }
+
+    public function getOtherIncome(): int
+    {
+        return $this->other_income ?? 0;
+    }
+
+    public function getDeductions(): int
+    {
+        return $this->deductions ?? 0;
+    }
+
+    public function getExtraWithholding(): int
+    {
+        return $this->is2020Version()
+            ? $this->extra_withholding ?? 0
+            : $this->additional_withholding ?? 0;
+    }
+
+    public function isStep2Checked(): bool
+    {
+        return $this->step_2_checked == true;
+    }
+
     public function getAdditionalWithholding($value)
     {
         return $value * 100;
@@ -38,5 +75,15 @@ class FederalIncomeTaxInformation extends BaseTaxInformationModel
     public static function getTax()
     {
         return FederalIncome::class;
+    }
+
+    public function isFilingMarriedJointly(): bool
+    {
+        return $this->filing_status === FederalIncome::FILING_JOINTLY;
+    }
+
+    public function is2020Version(): bool
+    {
+        return $this->form_version === FederalIncome::FORM_VERSION_2020;
     }
 }

@@ -5,6 +5,7 @@ namespace Appleton\Taxes\Countries\US\FederalIncome\V20170101;
 use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
 use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome as BaseFederalIncome;
 use Appleton\Taxes\Models\Countries\US\FederalIncomeTaxInformation;
+use Illuminate\Database\Eloquent\Collection;
 
 class FederalIncome extends BaseFederalIncome
 {
@@ -41,12 +42,17 @@ class FederalIncome extends BaseFederalIncome
         $this->tax_information = $tax_information;
     }
 
+    public function compute(Collection $tax_areas): float
+    {
+        return $this->computePrior2020($tax_areas);
+    }
+
     public function getAdjustedEarnings()
     {
         return (($this->payroll->getEarnings() - $this->payroll->getSupplementalEarnings()) * $this->payroll->pay_periods) - ($this->tax_information->exemptions * static::EXEMPTION_AMOUNT) + ($this->tax_information->non_resident_alien ? static::NON_RESIDENT_ALIEN_AMOUNT : 0);
     }
 
-    public function getTaxBrackets()
+    public function getTaxBrackets(): array
     {
         return ($this->tax_information->filing_status >= static::FILING_MARRIED) ? static::MARRIED_BRACKETS : static::SINGLE_BRACKETS;
     }

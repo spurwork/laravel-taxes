@@ -2,7 +2,6 @@
 
 namespace Appleton\Taxes\Countries\US\FederalIncome\V20210101;
 
-use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
 use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome as BaseFederalIncome;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
@@ -10,7 +9,6 @@ use Illuminate\Database\Eloquent\Collection;
 class FederalIncome extends BaseFederalIncome
 {
     public const SUPPLEMENTAL_TAX_RATE = 0;
-    private const FORM_VERSION_2020 = '2020';
 
     private const MARRIED_WITHOUT_STEP_2 = [
         [0, 0.0, 0],
@@ -78,7 +76,7 @@ class FederalIncome extends BaseFederalIncome
         [271200, 0.37, 78177.5],
     ];
 
-    public function compute(Collection $tax_areas)
+    public function compute(Collection $tax_areas): float
     {
         if ($this->isUserClaimingExemption()) {
             return 0.0;

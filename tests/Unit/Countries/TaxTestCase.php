@@ -17,8 +17,8 @@ use ReflectionClass;
  */
 abstract class TaxTestCase extends UnitTestCase
 {
-    protected $query_runner;
-    protected $taxes;
+    protected TaxesQueryRunner $query_runner;
+    protected Taxes $taxes;
 
     public function setUp(): void
     {

@@ -13,9 +13,14 @@ trait HasIncome
             return 0.00;
         }
 
-        $this->tax_total = $this->payroll->withholdTax($this->getTaxAmountFromTaxBrackets($this->getAdjustedEarnings(), $this->getTaxBrackets()) / $this->payroll->pay_periods) +
-            $this->payroll->withholdTax($this->getSupplementalIncomeTax()) +
-            $this->payroll->withholdTax($this->getAdditionalWithholding());
+        $this->tax_total = $this->payroll->withholdTax(
+                $this->getTaxAmountFromTaxBrackets(
+                    $this->getAdjustedEarnings(),
+                    $this->getTaxBrackets()
+                ) / $this->payroll->pay_periods
+            )
+            + $this->payroll->withholdTax($this->getSupplementalIncomeTax())
+            + $this->payroll->withholdTax($this->getAdditionalWithholding());
 
         return round(intval($this->tax_total * 100) / 100, 2);
     }
@@ -27,6 +32,7 @@ trait HasIncome
 
     public function getSupplementalIncomeTax()
     {
+        // supplemental income is not passed into the payroll, is it ever used?
         return $this->payroll->getSupplementalEarnings() * static::SUPPLEMENTAL_TAX_RATE;
     }
 

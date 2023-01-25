@@ -3,6 +3,7 @@
 namespace Appleton\Taxes\Tests\Unit\Countries;
 
 use Carbon\Carbon;
+use Closure;
 use Illuminate\Support\Collection;
 
 class TestParametersBuilder
@@ -13,34 +14,34 @@ class TestParametersBuilder
         'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'DC', 'WV', 'WI', 'WY'
     ];
 
-    private $date;
-    private $birth_date;
-    private $home_location;
-    private $work_location;
-    private $tax_class;
-    private $tax_info_class;
-    private $tax_info_options;
-    private $pay_periods;
-    private $additional_tax;
-    private $tax_rate;
-    private $wages_in_cents;
-    private $wtd_wages_in_cents;
-    private $mtd_wages_in_cents;
-    private $ytd_wages_in_cents;
-    private $supplemental_wages_in_cents;
-    private $expected_amount_in_cents;
-    private $expected_earnings_in_cents;
-    private $mtd_liabilities_in_cents;
-    private $qtd_wage_in_cents;
-    private $ytd_liabilities_in_cents;
-    private $pay_check_tip_amount_in_cents;
-    private $take_home_tip_amount_in_cents;
-    private $minutes_worked;
-    private $wages_callback;
-    private $pay_periods_exempt;
-    private $workers_comp_rates;
-    private $expected_amounts_in_cents;
-    private $suta_rates;
+    private string $date;
+    private ?Carbon $birth_date = null;
+    private string $home_location;
+    private ?string $work_location = null;
+    private ?string $tax_class = null;
+    private ?string $tax_info_class = null;
+    private ?array $tax_info_options = null;
+    private ?int $pay_periods = null;
+    private ?int $additional_tax = null;
+    private ?array $tax_rate = null;
+    private ?int $wages_in_cents = null;
+    private ?int $wtd_wages_in_cents = null;
+    private ?int $mtd_wages_in_cents = null;
+    private ?int $ytd_wages_in_cents = null;
+    private ?int $supplemental_wages_in_cents = null;
+    private ?int $expected_amount_in_cents = null;
+    private ?int $expected_earnings_in_cents = null;
+    private ?int $mtd_liabilities_in_cents = null;
+    private ?int $qtd_wage_in_cents = null;
+    private ?int $ytd_liabilities_in_cents = null;
+    private ?int $pay_check_tip_amount_in_cents = null;
+    private ?int $take_home_tip_amount_in_cents = null;
+    private ?int $minutes_worked = null;
+    private ?Closure $wages_callback = null;
+    private ?int $pay_periods_exempt = null;
+    private ?Collection $workers_comp_rates = null;
+    private ?array $expected_amounts_in_cents = null;
+    private Collection $suta_rates;
 
     public function __construct()
     {
@@ -85,169 +86,169 @@ class TestParametersBuilder
         );
     }
 
-    public function setDate(string $date)
+    public function setDate(string $date): static
     {
         $this->date = $date;
         return $this;
     }
 
-    public function setTaxInfoClass(?string $tax_info_class)
+    public function setTaxInfoClass(?string $tax_info_class): static
     {
         $this->tax_info_class = $tax_info_class;
         return $this;
     }
 
-    public function setTaxInfoOptions(?array $tax_info_options)
+    public function setTaxInfoOptions(?array $tax_info_options): static
     {
         $this->tax_info_options = $tax_info_options;
         return $this;
     }
 
-    public function setHomeLocation(string $home_location)
+    public function setHomeLocation(string $home_location): static
     {
         $this->home_location = $home_location;
         return $this;
     }
 
-    public function setWorkLocation(?string $work_location)
+    public function setWorkLocation(?string $work_location): static
     {
         $this->work_location = $work_location;
         return $this;
     }
 
-    public function setTaxClass(?string $tax_class)
+    public function setTaxClass(?string $tax_class): static
     {
         $this->tax_class = $tax_class;
         return $this;
     }
 
-    public function setWagesInCents(?int $wages_in_cents)
+    public function setWagesInCents(?int $wages_in_cents): static
     {
         $this->wages_in_cents = $wages_in_cents;
         return $this;
     }
 
-    public function setWtdWagesInCents(?int $wtd_wages_in_cents)
+    public function setWtdWagesInCents(?int $wtd_wages_in_cents): static
     {
         $this->wtd_wages_in_cents = $wtd_wages_in_cents;
         return $this;
     }
 
-    public function setMtdWagesInCents(?int $mtd_wages_in_cents)
+    public function setMtdWagesInCents(?int $mtd_wages_in_cents): static
     {
         $this->mtd_wages_in_cents = $mtd_wages_in_cents;
         return $this;
     }
 
-    public function setYtdWagesInCents(?int $ytd_wages_in_cents)
+    public function setYtdWagesInCents(?int $ytd_wages_in_cents): static
     {
         $this->ytd_wages_in_cents = $ytd_wages_in_cents;
         return $this;
     }
 
-    public function setExpectedAmountInCents(?int $expected_amount_in_cents)
+    public function setExpectedAmountInCents(?int $expected_amount_in_cents): static
     {
         $this->expected_amount_in_cents = $expected_amount_in_cents;
         return $this;
     }
 
-    public function setExpectedAmountsInCents(?array $expected_amounts_in_cents)
+    public function setExpectedAmountsInCents(?array $expected_amounts_in_cents): static
     {
         $this->expected_amounts_in_cents = $expected_amounts_in_cents;
         return $this;
     }
 
-    public function setSupplementalWagesInCents(?int $supplemental_wages_in_cents)
+    public function setSupplementalWagesInCents(?int $supplemental_wages_in_cents): static
     {
         $this->supplemental_wages_in_cents = $supplemental_wages_in_cents;
         return $this;
     }
 
-    public function setPayPeriods(?int $pay_periods)
+    public function setPayPeriods(?int $pay_periods): static
     {
         $this->pay_periods = $pay_periods;
         return $this;
     }
 
-    public function setAdditionalTax(?string $additional_tax)
+    public function setAdditionalTax(?string $additional_tax): static
     {
         $this->additional_tax = $additional_tax;
         return $this;
     }
 
-    public function setBirthDate(?Carbon $birth_date)
+    public function setBirthDate(?Carbon $birth_date): static
     {
         $this->birth_date = $birth_date;
         return $this;
     }
 
-    public function setExpectedEarningsInCents(?int $expected_earnings_in_cents)
+    public function setExpectedEarningsInCents(?int $expected_earnings_in_cents): static
     {
         $this->expected_earnings_in_cents = $expected_earnings_in_cents;
         return $this;
     }
 
-    public function setTaxRate(?array $tax_rate)
+    public function setTaxRate(?array $tax_rate): static
     {
         $this->tax_rate = $tax_rate;
         return $this;
     }
 
-    public function setQtdWageInCents(?int $qtd_wage_in_cents)
+    public function setQtdWageInCents(?int $qtd_wage_in_cents): static
     {
         $this->qtd_wage_in_cents = $qtd_wage_in_cents;
         return $this;
     }
 
-    public function setMtdLiabilitiesInCents(?int $mtd_liabilities_in_cents)
+    public function setMtdLiabilitiesInCents(?int $mtd_liabilities_in_cents): static
     {
         $this->mtd_liabilities_in_cents = $mtd_liabilities_in_cents;
         return $this;
     }
 
-    public function setYtdLiabilitiesInCents(?int $ytd_liabilities_in_cents)
+    public function setYtdLiabilitiesInCents(?int $ytd_liabilities_in_cents): static
     {
         $this->ytd_liabilities_in_cents = $ytd_liabilities_in_cents;
         return $this;
     }
 
-    public function setPayPeriodsExempt(?int $pay_periods_exempt)
+    public function setPayPeriodsExempt(?int $pay_periods_exempt): static
     {
         $this->pay_periods_exempt = $pay_periods_exempt;
         return $this;
     }
 
-    public function setPaycheckTipAmount(?int $pay_check_tip_amount_in_cents)
+    public function setPaycheckTipAmount(?int $pay_check_tip_amount_in_cents): static
     {
         $this->pay_check_tip_amount_in_cents = $pay_check_tip_amount_in_cents;
         return $this;
     }
 
-    public function setTakeHomeTipAmount(?int $take_home_tip_amount_in_cents)
+    public function setTakeHomeTipAmount(?int $take_home_tip_amount_in_cents): static
     {
         $this->take_home_tip_amount_in_cents = $take_home_tip_amount_in_cents;
         return $this;
     }
 
-    public function setMinutesWorked(?int $minutes_worked)
+    public function setMinutesWorked(?int $minutes_worked): static
     {
         $this->minutes_worked = $minutes_worked;
         return $this;
     }
 
-    public function setWagesCallback(?callable $wages_callback)
+    public function setWagesCallback(?callable $wages_callback): static
     {
         $this->wages_callback = $wages_callback;
         return $this;
     }
 
-    public function setWorkersCompRates(?Collection $workers_comp_rates)
+    public function setWorkersCompRates(?Collection $workers_comp_rates): static
     {
         $this->workers_comp_rates = $workers_comp_rates;
         return $this;
     }
 
-    public function addSutaRate(string $state, float $percent)
+    public function addSutaRate(string $state, float $percent): static
     {
         $this->suta_rates->put($state, $percent);
         return $this;
