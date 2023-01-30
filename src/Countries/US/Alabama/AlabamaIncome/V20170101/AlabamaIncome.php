@@ -9,7 +9,7 @@ use Appleton\Taxes\Models\Countries\US\Alabama\AlabamaIncomeTaxInformation;
 
 class AlabamaIncome extends BaseAlabamaIncome
 {
-    const SUPPLEMENTAL_TAX_RATE = 0.05;
+     const SUPPLEMENTAL_TAX_RATE = 0.05;
 
     const SINGLE_BRACKETS = [
         [0, 0.02, 0],
@@ -86,48 +86,14 @@ class AlabamaIncome extends BaseAlabamaIncome
     {
         $adjusted_earnings = $this->getGrossEarnings() - ($this->federal_income_tax * $this->payroll->pay_periods);
 
-        if ($this->tax_information->filing_status != static::FILING_ZERO) {
-            $adjusted_earnings = $adjusted_earnings - $this->getStandardDeduction() - $this->getPersonalExemptionAllowance() - $this->getDependentExemption();
+        if (!$this->tax_information->isFilingZero()) {
+            $adjusted_earnings = $adjusted_earnings - $this->getStandardDeduction() - $this->getPersonalExemption() - $this->getDependentExemption();
         }
 
         return $adjusted_earnings;
     }
 
-    public function getDependentExemption()
-    {
-        $gross_earnings = $this->getGrossEarnings();
-        $dependent_exemption = $this->getTaxBracket($gross_earnings, static::DEPENDENT_EXEMPTION_BRACKETS);
-        return $dependent_exemption[1] * $this->tax_information->dependents;
-    }
-
-    public function getStandardDeduction()
-    {
-        $gross_earnings = $this->getGrossEarnings();
-        $standard_deduction = static::STANDARD_DEDUCTIONS[$this->tax_information->filing_status];
-        $deduction = $standard_deduction['amount'];
-
-        if ($gross_earnings > $standard_deduction['base']) {
-            $deduction -= $standard_deduction['modifier']['amount'] * ceil(($gross_earnings - $standard_deduction['base']) / $standard_deduction['modifier']['per']);
-        }
-
-        return $deduction < $standard_deduction['floor'] ? $standard_deduction['floor'] : $deduction;
-    }
-
-    public function getPersonalExemptionAllowance()
-    {
-        if (array_key_exists($this->tax_information->filing_status, static::PERSONAL_EXEMPTION_ALLOWANCES)) {
-            return static::PERSONAL_EXEMPTION_ALLOWANCES[$this->tax_information->filing_status];
-        } else {
-            return 0;
-        }
-    }
-
-    public function getTaxBrackets()
-    {
-        return ($this->tax_information->filing_status === static::FILING_MARRIED) ? static::MARRIED_BRACKETS : static::SINGLE_BRACKETS;
-    }
-
-    private function getGrossEarnings()
+    private function getGrossEarnings(): float
     {
         return ($this->payroll->getEarnings() - $this->payroll->getSupplementalEarnings()) * $this->payroll->pay_periods;
     }

@@ -18,6 +18,36 @@ class AlabamaIncomeTaxInformation extends BaseTaxInformationModel
         return $tax_information;
     }
 
+    public function getDependents(): int
+    {
+        return $this->dependents ?? 0;
+    }
+
+    public function hasDependents(): int
+    {
+        return $this->getDependents() > 0;
+    }
+
+    public function getFilingStatus(): int
+    {
+        return $this->filing_status ?? AlabamaIncome::FILING_SINGLE;
+    }
+
+    public function isFilingZero(): bool
+    {
+        return $this->getFilingStatus() === AlabamaIncome::FILING_ZERO;
+    }
+
+    public function isFilingMarried(): bool
+    {
+        return $this->getFilingStatus() === AlabamaIncome::FILING_MARRIED;
+    }
+
+    public function isExempt(): bool
+    {
+        return $this->exempt == true;
+    }
+
     public function getAdditionalWithholding($value)
     {
         return $value * 100;

@@ -109,7 +109,7 @@ class FederalIncome extends BaseFederalIncome
         $this->tax_information = $tax_information;
     }
 
-    public function compute(Collection $tax_areas)
+    public function compute(Collection $tax_areas): float
     {
         if ($this->isUserClaimingExemption()) {
             return 0.00;
@@ -172,9 +172,9 @@ class FederalIncome extends BaseFederalIncome
         }
     }
 
-    public function getTaxBrackets()
+    public function getTaxBrackets(): array
     {
-        return;
+        return [];
     }
 
     public function getBracketAmount($wages, $table)
