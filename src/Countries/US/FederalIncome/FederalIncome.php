@@ -5,7 +5,6 @@ namespace Appleton\Taxes\Countries\US\FederalIncome;
 use Appleton\Taxes\Classes\WorkerTaxes\Payroll;
 use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseIncome;
 use Appleton\Taxes\Models\Countries\US\FederalIncomeTaxInformation;
-use Appleton\Taxes\Traits\HasIncome;
 use Illuminate\Database\Eloquent\Collection;
 
 abstract class FederalIncome extends BaseIncome
@@ -44,9 +43,10 @@ abstract class FederalIncome extends BaseIncome
             return 0.00;
         }
 
+        $withholding_amount = max($this->withholdingAmount($this->adjustedAnnualWages()) - $this->taxCredits(), 0);
+
         $this->tax_total = $this->payroll->withholdTax(
-            $this->withholdingAmount($this->adjustedAnnualWages())
-            - $this->taxCredits()
+            $withholding_amount
             + $this->tax_information->getExtraWithholding(),
         );
 
