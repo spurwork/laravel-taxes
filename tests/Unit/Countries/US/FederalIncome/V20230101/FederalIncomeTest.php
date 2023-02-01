@@ -28,6 +28,12 @@ class FederalIncomeTest extends TestCase
     public function provideTestData(): array
     {
         return [
+            'tax_credit_more_than_wages' => [[
+                'filing_status' => BaseFederalIncome::FILING_SINGLE,
+                'dependents_deduction_amount' => 2500,
+                'earnings' => 500,
+                'expected' => 0.0,
+            ]],
             'married' => [[
                 'filing_status' => BaseFederalIncome::FILING_JOINTLY,
                 'earnings' => 1000,
