@@ -3,7 +3,7 @@ language: php
 php:
   - 8.1
 
-dist: bionic
+dist: xenial
 
 sudo: true
 
