@@ -7,7 +7,6 @@ use Appleton\Taxes\Classes\WorkerTaxes\Taxes\BaseStateIncome;
 use Appleton\Taxes\Models\Countries\US\Alabama\AlabamaIncomeTaxInformation;
 use Illuminate\Support\Arr;
 
-
 abstract class AlabamaIncome extends BaseStateIncome
 {
     const FILING_ZERO = 0;
@@ -35,7 +34,7 @@ abstract class AlabamaIncome extends BaseStateIncome
 
     public function getAdjustedEarnings()
     {
-        return $this->payroll->getAnnualGross()
+        return $this->getAnnualGross()
             - $this->getStandardDeduction()
             - $this->getFederalWithholding()
             - $this->getPersonalExemption()
@@ -51,12 +50,13 @@ abstract class AlabamaIncome extends BaseStateIncome
 
     public function getStandardDeduction()
     {
-        $gross_earnings = $this->payroll->getAnnualGross();
+        $gross_earnings = $this->getAnnualGross();
         $standard_deduction = static::STANDARD_DEDUCTIONS[$this->tax_information->getFilingStatus()];
         $deduction = $standard_deduction['amount'];
 
         if ($gross_earnings > $standard_deduction['base']) {
-            $deduction -= $standard_deduction['modifier']['amount'] * ceil(($gross_earnings - $standard_deduction['base']) / $standard_deduction['modifier']['per']);
+            $deduction -= $standard_deduction['modifier']['amount']
+                * ceil(($gross_earnings - $standard_deduction['base']) / $standard_deduction['modifier']['per']);
         }
 
         return max($deduction, $standard_deduction['floor']);
@@ -87,9 +87,14 @@ abstract class AlabamaIncome extends BaseStateIncome
         }
 
         $dependent_bracket = $this->getTaxBracket(
-            $this->payroll->getAnnualGross(),
+            $this->getAnnualGross(),
             static::DEPENDENT_EXEMPTION_BRACKETS,
         );
         return $dependent_bracket[1] * $this->tax_information->getDependents();
+    }
+
+    public function getAnnualGross(): float
+    {
+        return $this->payroll->getAnnualGross();
     }
 }
