@@ -58,7 +58,8 @@ trait TestModelCreator
         int $pay_check_tip_amount_in_cents = null,
         int $take_home_tip_amount_in_cents = null,
         ?int $minutes_worked = UnitTestCase::DEFAULT_MINUTES_WORKED,
-        ?int $position = UnitTestCase::DEFAULT_POSITION
+        ?int $position = UnitTestCase::DEFAULT_POSITION,
+        ?bool $is_overtime = false,
     ): Wage {
         return new Wage(
             WageType::SHIFT,
@@ -69,7 +70,8 @@ trait TestModelCreator
             $take_home_tip_amount_in_cents === null ? 0 : $take_home_tip_amount_in_cents,
             $minutes_worked === null ? UnitTestCase::DEFAULT_MINUTES_WORKED : $minutes_worked,
             collect([]),
-            $position
+            $position,
+            $is_overtime,
         );
     }
 

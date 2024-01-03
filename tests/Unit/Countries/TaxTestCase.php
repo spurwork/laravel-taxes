@@ -7,10 +7,12 @@ use Appleton\Taxes\Classes\WorkerTaxes\Taxes;
 use Appleton\Taxes\Classes\WorkerTaxes\TaxesQueryRunner;
 use Appleton\Taxes\Classes\WorkerTaxes\TaxOverrideManager;
 use Appleton\Taxes\Classes\WorkerTaxes\TaxResult;
+use Appleton\Taxes\Classes\WorkerTaxes\Wage;
 use Appleton\Taxes\Tests\Unit\UnitTestCase;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use ReflectionClass;
+use ReflectionException;
 
 /**
  * @property Taxes taxes
@@ -37,11 +39,14 @@ abstract class TaxTestCase extends UnitTestCase
         $this->taxes = app(Taxes::class);
     }
 
+    /**
+     * @throws ReflectionException
+     */
     protected function validate(TestParameters $parameters): void
     {
         Carbon::setTestNow($parameters->getDate());
 
-        if ($parameters->getTaxInfoOptions() !== null && !empty($parameters->getTaxInfoOptions())) {
+        if (!empty($parameters->getTaxInfoOptions())) {
             $parameters->getTaxInfoClass()::forUser($this->user)->update($parameters->getTaxInfoOptions());
         }
 
@@ -60,7 +65,25 @@ abstract class TaxTestCase extends UnitTestCase
         if ($parameters->getWagesCallback() !== null) {
             call_user_func($parameters->getWagesCallback(), $parameters, $wages);
         } else {
-            $wages->push($this->makeWage($work_location, $parameters->getWagesInCents(), $parameters->getPaycheckTipAmountInCents(), $parameters->getTakeHomeTipAmountInCents(), $parameters->getMinutesWorked()));
+            $wages->push($this->makeWage(
+                $work_location,
+                $parameters->getWagesInCents(),
+                $parameters->getPaycheckTipAmountInCents(),
+                $parameters->getTakeHomeTipAmountInCents(),
+                $parameters->getMinutesWorked(),
+            ));
+        }
+
+        if (!empty($parameters->getOvertimeWagesInCents())) {
+            $wages->push($this->makeWage(
+                $work_location,
+                $parameters->getOvertimeWagesInCents(),
+                $parameters->getPaycheckTipAmountInCents(),
+                $parameters->getTakeHomeTipAmountInCents(),
+                $parameters->getMinutesWorked(),
+                UnitTestCase::DEFAULT_POSITION,
+                true,
+            ));
         }
 
         if ($parameters->getSupplementalWagesInCents() !== null
@@ -88,7 +111,11 @@ abstract class TaxTestCase extends UnitTestCase
             $annual_taxable_wages->put($parameters->getTaxClass(), collect([$taxable_wage]));
         } elseif ($parameters->getMtdLiabilitiesInCents() !== null
         && $parameters->getMtdLiabilitiesInCents() !== 0) {
-            $taxable_wage = $this->makeTaxableWageAtDate(now(), $parameters->getTaxClass(), $parameters->getMtdLiabilitiesInCents());
+            $taxable_wage = $this->makeTaxableWageAtDate(
+                now(),
+                $parameters->getTaxClass(),
+                $parameters->getMtdLiabilitiesInCents(),
+            );
 
             $annual_taxable_wages->put($parameters->getTaxClass(), collect([$taxable_wage]));
         }
@@ -96,12 +123,19 @@ abstract class TaxTestCase extends UnitTestCase
         $annual_liability_amounts = collect([]);
         if ($parameters->getYtdLiabilitiesInCents() !== null
         && $parameters->getYtdLiabilitiesInCents() !== 0) {
-            $taxable_wage = $this->makeLiabilityAmount($parameters->getTaxClass(), $parameters->getYtdLiabilitiesInCents());
+            $taxable_wage = $this->makeLiabilityAmount(
+                $parameters->getTaxClass(),
+                $parameters->getYtdLiabilitiesInCents(),
+            );
 
             $annual_liability_amounts->put($parameters->getTaxClass(), collect([$taxable_wage]));
         } elseif ($parameters->getMtdLiabilitiesInCents() !== null
         && $parameters->getMtdLiabilitiesInCents() !== 0) {
-            $taxable_wage = $this->makeLiabilityAmountAtDate(now(), $parameters->getTaxClass(), $parameters->getMtdLiabilitiesInCents());
+            $taxable_wage = $this->makeLiabilityAmountAtDate(
+                now(),
+                $parameters->getTaxClass(),
+                $parameters->getMtdLiabilitiesInCents(),
+            );
 
             $annual_liability_amounts->put($parameters->getTaxClass(), collect([$taxable_wage]));
         }
@@ -192,11 +226,14 @@ abstract class TaxTestCase extends UnitTestCase
         }
     }
 
+    /**
+     * @throws ReflectionException
+     */
     public function validateNoTax(TestParameters $parameters): void
     {
         Carbon::setTestNow($parameters->getDate());
 
-        if ($parameters->getTaxInfoOptions() !== null && !empty($parameters->getTaxInfoOptions())) {
+        if (!empty($parameters->getTaxInfoOptions())) {
             $parameters->getTaxInfoClass()::forUser($this->user)->update($parameters->getTaxInfoOptions());
         }
 

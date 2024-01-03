@@ -16,6 +16,7 @@ class Wage
     private $date;
     private $additional_taxes;
     private $position;
+    private $is_overtime;
 
     public function __construct(
         string $type,
@@ -26,7 +27,8 @@ class Wage
         int $take_home_tip_amount_in_cents,
         int $minutes_worked,
         Collection $additional_taxes,
-        int $position = null
+        int $position = null,
+        bool $is_overtime = false,
     ) {
         $this->type = $type;
         $this->date = $date;
@@ -37,6 +39,7 @@ class Wage
         $this->minutes_worked = $minutes_worked;
         $this->additional_taxes = $additional_taxes;
         $this->position = $position;
+        $this->is_overtime = $is_overtime;
     }
 
     public function getLocation(): GeoPoint
@@ -82,5 +85,10 @@ class Wage
     public function getPosition(): int
     {
         return $this->position;
+    }
+
+    public function isOvertime(): bool
+    {
+        return $this->is_overtime;
     }
 }

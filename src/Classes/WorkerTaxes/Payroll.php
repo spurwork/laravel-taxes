@@ -118,9 +118,33 @@ class Payroll
         return ($earnings_in_cents / 100) - $this->exempted_earnings;
     }
 
+    public function getRegularEarnings(GovernmentalUnitArea $governmental_unit_area = null):float
+    {
+        $earnings_in_cents = $this->area_incomes
+            ->filter(function (AreaIncome $income) use ($governmental_unit_area) {
+                return empty($governmental_unit_area)
+                    ? $income->getArea()->name === 'US'
+                    : $income->getArea()->id === $governmental_unit_area->id;
+            })
+            ->sum(function (AreaIncome $income) {
+                return $income->getWages()->sum(function (Wage $gross_wage) {
+                    return $gross_wage->isOvertime()
+                        ? 0
+                        : $gross_wage->getAmountInCents();
+                });
+            });
+
+        return ($earnings_in_cents / 100) - $this->exempted_earnings;
+    }
+
     public function getAnnualGross(): float
     {
         return ($this->getEarnings() - $this->getSupplementalEarnings()) * $this->pay_periods;
+    }
+
+    public function getAnnualRegularGross(): float
+    {
+        return ($this->getRegularEarnings() - $this->getSupplementalEarnings()) * $this->pay_periods;
     }
 
     public function getHoursWorked(GovernmentalUnitArea $governmental_unit_area = null): float
@@ -359,7 +383,7 @@ class Payroll
 
         return $area_income->getWages()->sum(static function (Wage $gross_wage) {
                 return $gross_wage->getAmountInCents();
-            }) / 100;
+        }) / 100;
     }
 
     public function isSalariedWorker(GovernmentalUnitArea $governmental_unit_area = null): bool
