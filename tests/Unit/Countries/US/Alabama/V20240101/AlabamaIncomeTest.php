@@ -9,6 +9,7 @@ use Appleton\Taxes\Models\Countries\US\FederalIncomeTaxInformation;
 use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
 use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
 use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
+use ReflectionException;
 
 class AlabamaIncomeTest extends TaxTestCase
 {
@@ -39,6 +40,7 @@ class AlabamaIncomeTest extends TaxTestCase
 
     /**
      * @dataProvider provideTestData
+     * @throws ReflectionException
      */
     public function testTax(TestParameters $parameters): void
     {
@@ -51,25 +53,25 @@ class AlabamaIncomeTest extends TaxTestCase
             'single_under_25999' => [
                 $this->paramsBuilder()
                     ->setWagesInCents(47500)
-                    ->setExpectedAmountInCents(1761)
+                    ->setExpectedAmountInCents(1768)
                     ->build()
             ],
             'single_between_25999_and_35500' => [
                 $this->paramsBuilder()
                     ->setWagesInCents(75000)
-                    ->setExpectedAmountInCents(3019)
+                    ->setExpectedAmountInCents(3029)
                     ->build()
             ],
             'single_over_35500' => [
                 $this->paramsBuilder()
                     ->setWagesInCents(100000)
-                    ->setExpectedAmountInCents(4119)
+                    ->setExpectedAmountInCents(4129)
                     ->build()
             ],
             'married_under_25999' => [
                 $this->paramsBuilder()
                     ->setWagesInCents(47500)
-                    ->setExpectedAmountInCents(1011)
+                    ->setExpectedAmountInCents(1018)
                     ->setTaxInfoOptions([
                         'filing_status' => AlabamaIncome::FILING_MARRIED,
                     ])
@@ -78,7 +80,7 @@ class AlabamaIncomeTest extends TaxTestCase
             'married_between_25999_and_35500' => [
                 $this->paramsBuilder()
                     ->setWagesInCents(75000)
-                    ->setExpectedAmountInCents(2557)
+                    ->setExpectedAmountInCents(2567)
                     ->setTaxInfoOptions([
                         'filing_status' => AlabamaIncome::FILING_MARRIED,
                     ])
@@ -87,7 +89,7 @@ class AlabamaIncomeTest extends TaxTestCase
             'married_over_35500' => [
                 $this->paramsBuilder()
                     ->setWagesInCents(100000)
-                    ->setExpectedAmountInCents(3657)
+                    ->setExpectedAmountInCents(3667)
                     ->setTaxInfoOptions([
                         'filing_status' => AlabamaIncome::FILING_MARRIED,
                     ])
@@ -105,7 +107,7 @@ class AlabamaIncomeTest extends TaxTestCase
             'separate_between_12999_and_17750' => [
                 $this->paramsBuilder()
                     ->setWagesInCents(30000)
-                    ->setExpectedAmountInCents(946)
+                    ->setExpectedAmountInCents(953)
                     ->setTaxInfoOptions([
                         'filing_status' => AlabamaIncome::FILING_SEPERATE,
                     ])
@@ -114,7 +116,7 @@ class AlabamaIncomeTest extends TaxTestCase
             'separate_over_17750' => [
                 $this->paramsBuilder()
                     ->setWagesInCents(40000)
-                    ->setExpectedAmountInCents(1471)
+                    ->setExpectedAmountInCents(1478)
                     ->setTaxInfoOptions([
                         'filing_status' => AlabamaIncome::FILING_SEPERATE,
                     ])
@@ -123,7 +125,7 @@ class AlabamaIncomeTest extends TaxTestCase
             'head_of_household_under_25999' => [
                 $this->paramsBuilder()
                     ->setWagesInCents(47500)
-                    ->setExpectedAmountInCents(1405)
+                    ->setExpectedAmountInCents(1412)
                     ->setTaxInfoOptions([
                         'filing_status' => AlabamaIncome::FILING_HEAD_OF_HOUSEHOLD,
                     ])
@@ -132,7 +134,7 @@ class AlabamaIncomeTest extends TaxTestCase
             'head_of_household_between_25999_and_35500' => [
                 $this->paramsBuilder()
                     ->setWagesInCents(75000)
-                    ->setExpectedAmountInCents(2875)
+                    ->setExpectedAmountInCents(2884)
                     ->setTaxInfoOptions([
                         'filing_status' => AlabamaIncome::FILING_HEAD_OF_HOUSEHOLD,
                     ])
@@ -141,7 +143,7 @@ class AlabamaIncomeTest extends TaxTestCase
             'head_of_household_over_35500' => [
                 $this->paramsBuilder()
                     ->setWagesInCents(100000)
-                    ->setExpectedAmountInCents(3975)
+                    ->setExpectedAmountInCents(3984)
                     ->setTaxInfoOptions([
                         'filing_status' => AlabamaIncome::FILING_HEAD_OF_HOUSEHOLD,
                     ])
@@ -150,7 +152,7 @@ class AlabamaIncomeTest extends TaxTestCase
             'zero' => [
                 $this->paramsBuilder()
                     ->setWagesInCents(100000)
-                    ->setExpectedAmountInCents(4263)
+                    ->setExpectedAmountInCents(4273)
                     ->setTaxInfoOptions([
                         'filing_status' => AlabamaIncome::FILING_ZERO,
                     ])
@@ -159,7 +161,7 @@ class AlabamaIncomeTest extends TaxTestCase
             'dependents_less_than_50000' => [
                 $this->paramsBuilder()
                     ->setWagesInCents(40000)
-                    ->setExpectedAmountInCents(1231)
+                    ->setExpectedAmountInCents(1238)
                     ->setTaxInfoOptions([
                         'dependents' => 2,
                     ])
@@ -168,7 +170,7 @@ class AlabamaIncomeTest extends TaxTestCase
             'dependents_between_50000_and_100000' => [
                 $this->paramsBuilder()
                     ->setWagesInCents(125000)
-                    ->setExpectedAmountInCents(5061)
+                    ->setExpectedAmountInCents(5101)
                     ->setTaxInfoOptions([
                         'dependents' => 2,
                     ])
@@ -177,7 +179,7 @@ class AlabamaIncomeTest extends TaxTestCase
             'dependents_over_100000' => [
                 $this->paramsBuilder()
                     ->setWagesInCents(200000)
-                    ->setExpectedAmountInCents(8024)
+                    ->setExpectedAmountInCents(8065)
                     ->setTaxInfoOptions([
                         'dependents' => 2,
                     ])
@@ -186,7 +188,7 @@ class AlabamaIncomeTest extends TaxTestCase
             'additional_withholding' => [
                 $this->paramsBuilder()
                     ->setWagesInCents(100000)
-                    ->setExpectedAmountInCents(6619)
+                    ->setExpectedAmountInCents(6629)
                     ->setTaxInfoOptions([
                         'additional_withholding' => 25,
                     ])
@@ -195,14 +197,14 @@ class AlabamaIncomeTest extends TaxTestCase
             'no_overtime' => [
                 $this->paramsBuilder()
                     ->setWagesInCents(40000)
-                    ->setExpectedAmountInCents(1423)
+                    ->setExpectedAmountInCents(1430)
                     ->build()
             ],
             'overtime' => [
                 $this->paramsBuilder()
                     ->setWagesInCents(40000)
                     ->setOvertimeWagesInCents(15000)
-                    ->setExpectedAmountInCents(1341)
+                    ->setExpectedAmountInCents(1351)
                     ->setExpectedEarningsInCents(55000)
                     ->build()
             ],
