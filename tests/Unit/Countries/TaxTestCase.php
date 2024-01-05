@@ -7,7 +7,6 @@ use Appleton\Taxes\Classes\WorkerTaxes\Taxes;
 use Appleton\Taxes\Classes\WorkerTaxes\TaxesQueryRunner;
 use Appleton\Taxes\Classes\WorkerTaxes\TaxOverrideManager;
 use Appleton\Taxes\Classes\WorkerTaxes\TaxResult;
-use Appleton\Taxes\Classes\WorkerTaxes\Wage;
 use Appleton\Taxes\Tests\Unit\UnitTestCase;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
