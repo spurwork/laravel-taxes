@@ -3,14 +3,13 @@
 namespace Appleton\Taxes;
 
 use Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables;
-use Orchestra\Database\ConsoleServiceProvider;
 use Orchestra\Testbench\TestCase;
 
 class InitDb extends TestCase
 {
     public static function initDb(): void
     {
-        $init_db = new self();
+        $init_db = new self('');
         $init_db->setUp();
 
         $init_db->artisan('migrate:fresh');
@@ -46,12 +45,5 @@ class InitDb extends TestCase
             'prefix' => '',
             'schema' => 'public',
         ]);
-    }
-
-    protected function getPackageProviders($app)
-    {
-        return [
-            ConsoleServiceProvider::class,
-        ];
     }
 }

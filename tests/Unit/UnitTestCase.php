@@ -5,7 +5,6 @@ namespace Appleton\Taxes\Tests\Unit;
 use Appleton\Taxes\Providers\TaxesServiceProvider;
 use Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Orchestra\Database\ConsoleServiceProvider;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 
 class UnitTestCase extends BaseTestCase
@@ -86,7 +85,6 @@ class UnitTestCase extends BaseTestCase
     protected function getPackageProviders($app)
     {
         return [
-            ConsoleServiceProvider::class,
             TaxesServiceProvider::class,
         ];
     }
