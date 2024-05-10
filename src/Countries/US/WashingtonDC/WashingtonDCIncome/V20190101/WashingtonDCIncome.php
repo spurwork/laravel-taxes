@@ -2,12 +2,9 @@
 namespace Appleton\Taxes\Countries\US\WashingtonDC\WashingtonDCIncome\V20190101;
 
 use Appleton\Taxes\Countries\US\WashingtonDC\WashingtonDCIncome\WashingtonDCIncome as BaseWashingtonDCIncome;
-use Illuminate\Database\Eloquent\Collection;
 
 class WashingtonDCIncome extends BaseWashingtonDCIncome
 {
-    const TAX_RATE = 0.0895;
-
     const TAX_WITHHOLDING_BRACKET = [
         [0, .04, 0],
         [10000, .06, 400],
@@ -17,15 +14,10 @@ class WashingtonDCIncome extends BaseWashingtonDCIncome
         [10000000, .0895, 85025],
     ];
 
-    public function compute(Collection $tax_areas)
+    public function getAdjustedEarnings()
     {
-        if ($this->isUserClaimingExemption()) {
-            return 0;
-        }
-
-        $this->tax_total = $this->payroll->withholdTax($this->getTaxAmountFromTaxBrackets(($this->getAdjustedEarnings() * $this->payroll->pay_periods) - $this->getDependentAllowance(), SELF::TAX_WITHHOLDING_BRACKET) / $this->payroll->pay_periods) + $this->getAdditionalWithholding();
-
-        return round(intval($this->tax_total * 100) / 100, 2);
+        return ($this->payroll->getEarnings() * $this->payroll->pay_periods)
+            - $this->getDependentAllowance();
     }
 
     public function getDependentAllowance()
@@ -35,6 +27,6 @@ class WashingtonDCIncome extends BaseWashingtonDCIncome
 
     public function getTaxBrackets()
     {
-        return [[0, self::TAX_RATE, 0]];
+        return self::TAX_WITHHOLDING_BRACKET;
     }
 }

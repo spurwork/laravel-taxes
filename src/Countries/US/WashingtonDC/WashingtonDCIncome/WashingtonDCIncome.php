@@ -24,4 +24,9 @@ abstract class WashingtonDCIncome extends BaseStateIncome
         parent::__construct($payroll);
         $this->tax_information = $tax_information;
     }
+
+    public function getSupplementalIncomeTax()
+    {
+        return 0;
+    }
 }
