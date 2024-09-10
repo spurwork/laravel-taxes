@@ -20,16 +20,16 @@ trait TestModelCreator
         $longitude = $location->getLongitude();
 
         return DB::table('governmental_unit_areas')->insertGetId([
-            'name' => "point (${latitude}, ${longitude})",
-            'area' => DB::raw("ST_SetSRID(ST_MakePoint(${latitude}, ${longitude}),4326)"),
+            'name' => "point ($latitude, $longitude)",
+            'area' => DB::raw("ST_SetSRID(ST_MakePoint($latitude, $longitude),4326)"),
         ]);
     }
 
     protected function makeAreaAtCircle(float $latitude, float $longitude): int
     {
         return DB::table('governmental_unit_areas')->insertGetId([
-            'name' => "circle (${latitude}, ${longitude}) 10km radius",
-            'area' => DB::raw("ST_Buffer(ST_SetSRID(ST_MakePoint(${latitude}, ${longitude}),4326), 10)"),
+            'name' => "circle ($latitude, $longitude) 10km radius",
+            'area' => DB::raw("ST_Buffer(ST_SetSRID(ST_MakePoint($latitude, $longitude),4326), 10)"),
         ]);
     }
 
