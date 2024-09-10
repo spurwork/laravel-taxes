@@ -20,10 +20,10 @@ env:
   global:
     - PGPORT=5433
     - PGUSER=travis
-    - DB_PORT=5433
-    - DB_DATABASE=travis_ci_test
-    - DB_USERNAME=travis
-    - DB_PASSWORD=travis
+    - TEST_DB_PORT=5433
+    - TEST_DB_DATABASE=travis_ci_test
+    - TEST_DB_USERNAME=travis
+    - TEST_DB_PASSWORD=travis
 before_install:
   - sudo sed -i -e '/local.*peer/s/postgres/all/' -e 's/peer\|md5/trust/g' /etc/postgresql/*/main/pg_hba.conf
   - sudo systemctl stop postgresql@15-main
