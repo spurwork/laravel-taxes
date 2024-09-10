@@ -51,7 +51,7 @@ class YonkersTest extends TaxTestCase
         $this->validate($parameters);
     }
 
-    public function provideWorkInYonkersTestData(): array
+    public static function provideWorkInYonkersTestData(): array
     {
         $builder = new TestParametersBuilder();
         $builder
@@ -144,7 +144,7 @@ class YonkersTest extends TaxTestCase
         ];
     }
 
-    public function provideWorkInDifferentStateTestData(): array
+    public static function provideWorkInDifferentStateTestData(): array
     {
         $builder = new TestParametersBuilder();
         $builder

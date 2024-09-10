@@ -37,7 +37,7 @@ class WorkersCompAssessmentFundTest extends TaxTestCase
         $this->validate($parameters);
     }
 
-    public function provideTestData(): array
+    public static function provideTestData(): array
     {
         $builder = new TestParametersBuilder();
         $builder
@@ -76,7 +76,7 @@ class WorkersCompAssessmentFundTest extends TaxTestCase
         ];
     }
 
-    public function provideTestDataOutOfArea(): array
+    public static function provideTestDataOutOfArea(): array
     {
         $builder = new TestParametersBuilder();
         $builder

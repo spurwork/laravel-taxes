@@ -25,7 +25,7 @@ class FederalIncomeTest extends TestCase
         self::assertThat($tax_amount, self::identicalTo($parameters['expected']));
     }
 
-    public function provideTestData(): array
+    public static function provideTestData(): array
     {
         return [
             'tax_credit_more_than_wages' => [[
@@ -129,7 +129,7 @@ class FederalIncomeTest extends TestCase
         self::assertThat($tax_amount, self::identicalTo($parameters['expected']));
     }
 
-    public function provideBracket2020Data(): array
+    public static function provideBracket2020Data(): array
     {
         $brackets = [
             BaseFederalIncome::FILING_JOINTLY => FederalIncome::BRACKETS_MARRIED,
@@ -185,7 +185,7 @@ class FederalIncomeTest extends TestCase
         self::assertThat($tax_amount, self::identicalTo($parameters['expected']));
     }
 
-    public function provideBracket2020Step2Data(): array
+    public static function provideBracket2020Step2Data(): array
     {
         $brackets = [
             BaseFederalIncome::FILING_JOINTLY => FederalIncome::BRACKETS_MARRIED_STEP_2,

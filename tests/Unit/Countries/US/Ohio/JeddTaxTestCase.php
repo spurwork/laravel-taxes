@@ -15,7 +15,7 @@ class JeddTaxTestCase extends TaxTestCase
     {
         Carbon::setTestNow($parameters->getDate());
 
-        $home_location_array = $this->getLocation($parameters->getHomeLocation());
+        $home_location_array = self::getLocation($parameters->getHomeLocation());
         $home_location = new GeoPoint($home_location_array[0], $home_location_array[1]);
 
         $wages = collect([

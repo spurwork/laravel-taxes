@@ -60,7 +60,7 @@ class NewMexicoIncomeTest extends TaxTestCase
         $this->validate($parameters);
     }
 
-    public function provideTestDataOldForm(): array
+    public static function provideTestDataOldForm(): array
     {
         $builder = new TestParametersBuilder();
         $builder
@@ -211,7 +211,7 @@ class NewMexicoIncomeTest extends TaxTestCase
         ];
     }
 
-    public function provideTestDataNewForm(): array
+    public static function provideTestDataNewForm(): array
     {
         $builder = new TestParametersBuilder();
         $builder
@@ -513,7 +513,7 @@ class NewMexicoIncomeTest extends TaxTestCase
         ];
     }
 
-    public function provideUseDefaultTestData(): array
+    public static function provideUseDefaultTestData(): array
     {
         return [
             '01' => [

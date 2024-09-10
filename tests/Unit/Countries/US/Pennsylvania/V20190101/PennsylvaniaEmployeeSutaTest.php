@@ -27,7 +27,7 @@ class PennsylvaniaEmployeeSutaTest extends TaxTestCase
         $this->validate($parameters);
     }
 
-    public function provideData(): array
+    public static function provideData(): array
     {
         $builder = new TestParametersBuilder();
         $builder

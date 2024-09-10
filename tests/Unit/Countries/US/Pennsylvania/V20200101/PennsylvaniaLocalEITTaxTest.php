@@ -46,7 +46,7 @@ class PennsylvaniaLocalEITTaxTest extends TaxTestCase
         $this->validate($parameters);
     }
 
-    public function provideTestData(): array
+    public static function provideTestData(): array
     {
         $builder = new TestParametersBuilder();
         $builder
@@ -159,7 +159,7 @@ class PennsylvaniaLocalEITTaxTest extends TaxTestCase
         ];
     }
 
-    public function provideTestDataOutOfArea(): array
+    public static function provideTestDataOutOfArea(): array
     {
         $builder = new TestParametersBuilder();
         $builder

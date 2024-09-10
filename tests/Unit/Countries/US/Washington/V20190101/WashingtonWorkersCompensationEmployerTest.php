@@ -8,6 +8,7 @@ use Appleton\Taxes\Models\Countries\US\Washington\WashingtonWorkersCompensationT
 use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
 use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
 use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
+use Closure;
 
 class WashingtonWorkersCompensationEmployerTest extends TaxTestCase
 {
@@ -29,12 +30,12 @@ class WashingtonWorkersCompensationEmployerTest extends TaxTestCase
     /**
      * @dataProvider provideTestData
      */
-    public function testWashingtonWorkersCompensationEmployerTax(TestParameters $parameters): void
+    public function testWashingtonWorkersCompensationEmployerTax(Closure $parameters): void
     {
-        $this->validate($parameters);
+        $this->validate($parameters->bindTo($this)());
     }
 
-    public function provideTestData(): array
+    public static function provideTestData(): array
     {
         $builder = new TestParametersBuilder();
         $builder
@@ -44,7 +45,7 @@ class WashingtonWorkersCompensationEmployerTest extends TaxTestCase
 
         return [
             '00' => [
-                $builder
+                fn() => $builder
                     ->setHomeLocation(self::WASHINGTON_LOCATION)
                     ->setWorkLocation(self::WASHINGTON_LOCATION)
                     ->setWagesInCents(35000)
@@ -57,7 +58,7 @@ class WashingtonWorkersCompensationEmployerTest extends TaxTestCase
                     ->build()
             ],
             '01' => [
-                $builder
+                fn() => $builder
                     ->setHomeLocation(self::WASHINGTON_LOCATION)
                     ->setWorkLocation(self::WASHINGTON_LOCATION)
                     ->setExpectedAmountsInCents([187])
@@ -68,8 +69,8 @@ class WashingtonWorkersCompensationEmployerTest extends TaxTestCase
                         $wages->push(
                             $this->makeSalary(
                                 new GeoPoint(
-                                    $this->getLocation($parameters->getWorkLocation())[0],
-                                    $this->getLocation($parameters->getWorkLocation())[1]
+                                    self::getLocation($parameters->getWorkLocation())[0],
+                                    self::getLocation($parameters->getWorkLocation())[1]
                                 ),
                                 $parameters->getWagesInCents(),
                                 $parameters->getPaycheckTipAmountInCents(),

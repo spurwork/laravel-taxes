@@ -53,7 +53,7 @@ class BindManagerTest extends TaxTestCase
         self::assertThat(app($base_class)::class, self::identicalTo($class));
     }
 
-    public function provideData(): array
+    public static function provideData(): array
     {
         return [
             'alabama_2017' => [2017, AlabamaIncome::class, AlabamaIncome2017::class],

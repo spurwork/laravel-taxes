@@ -49,13 +49,13 @@ abstract class TaxTestCase extends UnitTestCase
             $parameters->getTaxInfoClass()::forUser($this->user)->update($parameters->getTaxInfoOptions());
         }
 
-        $home_location_array = $this->getLocation($parameters->getHomeLocation());
+        $home_location_array = self::getLocation($parameters->getHomeLocation());
         $home_location = new GeoPoint($home_location_array[0], $home_location_array[1]);
 
         if ($parameters->getWorkLocation() === null) {
             $work_location = $home_location;
         } else {
-            $work_location_array = $this->getLocation($parameters->getWorkLocation());
+            $work_location_array = self::getLocation($parameters->getWorkLocation());
             $work_location = new GeoPoint($work_location_array[0], $work_location_array[1]);
         }
 
@@ -236,13 +236,13 @@ abstract class TaxTestCase extends UnitTestCase
             $parameters->getTaxInfoClass()::forUser($this->user)->update($parameters->getTaxInfoOptions());
         }
 
-        $home_location_array = $this->getLocation($parameters->getHomeLocation());
+        $home_location_array = self::getLocation($parameters->getHomeLocation());
         $home_location = new GeoPoint($home_location_array[0], $home_location_array[1]);
 
         if ($parameters->getWorkLocation() === null) {
             $work_location = $home_location;
         } else {
-            $work_location_array = $this->getLocation($parameters->getWorkLocation());
+            $work_location_array = self::getLocation($parameters->getWorkLocation());
             $work_location = new GeoPoint($work_location_array[0], $work_location_array[1]);
         }
 

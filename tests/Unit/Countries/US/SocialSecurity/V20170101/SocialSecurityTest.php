@@ -28,9 +28,9 @@ class SocialSecurityTest extends WageBaseTaxTestCase
         $this->validateWageBase($parameters);
     }
 
-    public function provideTestData(): array
+    public static function provideTestData(): array
     {
-        return $this->wageBaseBoundariesTestCases(
+        return self::wageBaseBoundariesTestCases(
             self::DATE,
             self::LOCATION,
             self::TAX_CLASS,

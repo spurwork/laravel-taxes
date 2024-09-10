@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d20477ba5d41005af93cd0b89dcbc484",
+    "content-hash": "ec9270e168a634a28b8a6167dd31862c",
     "packages": [
         {
             "name": "brick/math",
@@ -7178,6 +7178,68 @@
                 }
             ],
             "time": "2024-09-08T17:43:24+00:00"
+        },
+        {
+            "name": "robiningelbrecht/phpunit-pretty-print",
+            "version": "v1.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/robiningelbrecht/phpunit-pretty-print.git",
+                "reference": "e1a3bce1dbea57cff505f1596a07b89e4bc8bfb6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/robiningelbrecht/phpunit-pretty-print/zipball/e1a3bce1dbea57cff505f1596a07b89e4bc8bfb6",
+                "reference": "e1a3bce1dbea57cff505f1596a07b89e4bc8bfb6",
+                "shasum": ""
+            },
+            "require": {
+                "nunomaduro/collision": "^7.8|^8.0",
+                "php": "^8.1",
+                "phpunit/phpunit": "^10.3|^11.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.9",
+                "phpstan/phpstan": "^1.10",
+                "spatie/phpunit-snapshot-assertions": "^5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "RobinIngelbrecht\\PHPUnitPrettyPrint\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Robin Ingelbrecht",
+                    "email": "ingelbrecht_robin@hotmail.com"
+                }
+            ],
+            "description": "Prettify PHPUnit output",
+            "keywords": [
+                "php",
+                "phpunit",
+                "testing"
+            ],
+            "support": {
+                "issues": "https://github.com/robiningelbrecht/phpunit-pretty-print/issues",
+                "source": "https://github.com/robiningelbrecht/phpunit-pretty-print/tree/v1.3.1"
+            },
+            "funding": [
+                {
+                    "url": "https://www.buymeacoffee.com/ingelbrecht",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/robiningelbrecht",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-02-19T19:11:05+00:00"
         },
         {
             "name": "sebastian/cli-parser",

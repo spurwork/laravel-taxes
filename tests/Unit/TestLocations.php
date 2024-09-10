@@ -4,7 +4,7 @@ namespace Appleton\Taxes\Tests\Unit;
 
 trait TestLocations
 {
-    protected function getLocation($name)
+    protected static function getLocation($name)
     {
         $locations = [
             'us' => [37.0902, -95.7129],

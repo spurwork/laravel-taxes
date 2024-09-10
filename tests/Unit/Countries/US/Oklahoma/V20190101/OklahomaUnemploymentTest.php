@@ -48,9 +48,9 @@ class OklahomaUnemploymentTest extends UnemploymentTaxTestCase
         );
     }
 
-    public function provideData(): array
+    public static function provideData(): array
     {
-        return $this->roundedWageBaseBoundariesTestCases(
+        return self::roundedWageBaseBoundariesTestCases(
             self::DATE,
             self::LOCATION,
             self::TAX_CLASS,

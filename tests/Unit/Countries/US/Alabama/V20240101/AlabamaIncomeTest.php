@@ -47,7 +47,7 @@ class AlabamaIncomeTest extends TaxTestCase
         $this->validate($parameters);
     }
 
-    public function provideTestData(): array
+    public static function provideTestData(): array
     {
         return [
             'single_under_25999' => [

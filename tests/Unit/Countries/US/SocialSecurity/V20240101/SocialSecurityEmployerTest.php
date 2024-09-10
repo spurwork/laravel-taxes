@@ -37,7 +37,7 @@ class SocialSecurityEmployerTest extends WageBaseTaxTestCase
         $this->validateWageBase($parameters);
     }
 
-    public function provideData(): array
+    public static function provideData(): array
     {
         $builder = new TestParametersBuilder();
         $builder
@@ -82,9 +82,9 @@ class SocialSecurityEmployerTest extends WageBaseTaxTestCase
         ];
     }
 
-    public function provideWageBaseData(): array
+    public static function provideWageBaseData(): array
     {
-        return $this->wageBaseBoundariesTestCases(
+        return self::wageBaseBoundariesTestCases(
             self::DATE,
             self::LOCATION,
             self::TAX_CLASS,

@@ -47,7 +47,7 @@ class HasBracketsTest extends UnitTestCase
         $this->assertSame($result, $mock->getTaxAmountFromBrackets(StateTax1::class));
     }
 
-    public function provideTestData()
+    public static function provideTestData()
     {
         return [
             '0' => [
