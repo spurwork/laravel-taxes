@@ -2,11 +2,9 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTaxInformationTable extends Migration
-{
+return new class extends Migration {
     protected $tax_information = 'tax_information';
     protected $users = 'users';
 
@@ -38,4 +36,4 @@ class CreateTaxInformationTable extends Migration
     {
         Schema::drop($this->tax_information);
     }
-}
+};

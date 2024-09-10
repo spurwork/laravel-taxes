@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Washington\V20190101;
+namespace Appleton\Taxes\Tests\Unit\Countries\US\Washington\V20190101;
 
 use Appleton\Taxes\Countries\US\Washington\WashingtonFamilyMedicalLeave\WashingtonFamilyMedicalLeave;
 use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;

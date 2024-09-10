@@ -3,8 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class UpdateNyLocalFields extends Migration
-{
+return new class extends Migration {
     public function up(): void
     {
         Schema::table('new_york_income_tax_information', static function (Blueprint $table) {
@@ -29,4 +28,4 @@ class UpdateNyLocalFields extends Migration
             );
         });
     }
-}
+};

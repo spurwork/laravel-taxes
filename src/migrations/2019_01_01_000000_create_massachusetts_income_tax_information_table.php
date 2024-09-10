@@ -9,8 +9,7 @@ use Appleton\Taxes\Countries\US\Massachusetts\MassachusettsUnemployment\Massachu
 use Appleton\Taxes\Countries\US\Massachusetts\MassachusettsWorkforceTrainingFund\MassachusettsWorkforceTrainingFund;
 use Appleton\Taxes\Models\TaxArea;
 
-class CreateMassachusettsIncomeTaxInformationTable extends Migration
-{
+return new class extends Migration {
     protected $massachusetts_income_tax_information = 'massachusetts_income_tax_information';
     protected $governmental_unit_areas = 'governmental_unit_areas';
     protected $tax_areas = 'tax_areas';
@@ -68,4 +67,4 @@ class CreateMassachusettsIncomeTaxInformationTable extends Migration
         DB::table($this->tax_areas)->where('name', 'Massachusetts Workforce Training Fund Tax')->delete();
         DB::table($this->governmental_unit_areas)->where('name', 'Massachusetts')->delete();
     }
-}
+};

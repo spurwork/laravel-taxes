@@ -4,8 +4,7 @@ use Appleton\Taxes\Models\TaxArea;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
 
-class InsertOhioSchoolDistrictTaxes extends Migration
-{
+return new class extends Migration {
     private const CLASSES = [
         'Ada EVSD' => Appleton\Taxes\Countries\US\Ohio\AdaEVSD\AdaEVSDTax::class,
         'Anna LSD' => Appleton\Taxes\Countries\US\Ohio\AnnaLSD\AnnaLSDTax::class,
@@ -222,4 +221,4 @@ class InsertOhioSchoolDistrictTaxes extends Migration
             ]]);
         }
     }
-}
+};

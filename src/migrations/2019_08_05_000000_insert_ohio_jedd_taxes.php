@@ -50,14 +50,10 @@ use Appleton\Taxes\Countries\US\Ohio\JEDD\SpringfieldBeckley\SpringfieldBeckley;
 use Appleton\Taxes\Countries\US\Ohio\JEDD\WaltonHillsSagamoreHills\WaltonHillsSagamoreHills;
 use Appleton\Taxes\Countries\US\Ohio\JEDD\WestChesterI\WestChesterI;
 use Appleton\Taxes\Countries\US\Ohio\JEDD\Williamsburg\Williamsburg;
-use Appleton\Taxes\Models\TaxArea;
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 
-class InsertOhioJeddTaxes extends Migration
-{
+return new class extends Migration {
     protected $taxes = 'taxes';
 
     public function up()
@@ -312,4 +308,4 @@ class InsertOhioJeddTaxes extends Migration
             'class' => Williamsburg::class,
         ]);
     }
-}
+};

@@ -14,8 +14,7 @@ use Appleton\Taxes\Models\TaxArea;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
 
-class AddColoradoLocalTaxes extends Migration
-{
+return new class extends Migration {
     public function up(): void
     {
         $colorado_gua_id = DB::table('governmental_unit_areas')
@@ -221,4 +220,4 @@ class AddColoradoLocalTaxes extends Migration
 
         DB::table($this->governmental_unit_areas)->where('name', 'Aurora, CO')->delete();
     }
-}
+};

@@ -1,12 +1,11 @@
 <?php
 
-use \Appleton\Taxes\Countries\US\Oregon\OregonTransit\OregonTransit;
+use Appleton\Taxes\Countries\US\Oregon\OregonTransit\OregonTransit;
 use Appleton\Taxes\Models\TaxArea;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
 
-class AddOregonTransitTax extends Migration
-{
+return new class extends Migration {
     public function up()
     {
         $transit_tax_id = DB::table('taxes')->insertGetId([
@@ -35,4 +34,4 @@ class AddOregonTransitTax extends Migration
         DB::table('tax_areas')->where('tax_id', $tax_id)->delete();
         DB::table('taxes')->where('id', $tax_id)->delete();
     }
-}
+};

@@ -94,12 +94,9 @@ use Appleton\Taxes\Countries\US\Indiana\WhiteIncome\WhiteIncome;
 use Appleton\Taxes\Countries\US\Indiana\WhitleyIncome\WhitleyIncome;
 use Appleton\Taxes\Models\TaxArea;
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 
-class UpdateIndianaCounties extends Migration
-{
+return new class extends Migration {
     private const STATE_FILE = '2019_04_15_141321_indiana_counties.ini';
 
     private const CLASSES = [
@@ -252,4 +249,4 @@ class UpdateIndianaCounties extends Migration
         }
 
     }
-}
+};

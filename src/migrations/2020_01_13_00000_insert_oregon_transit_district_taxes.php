@@ -3,12 +3,10 @@
 use Appleton\Taxes\Countries\US\Oregon\TransitDistrictTaxes\LaneCounty\LaneCounty;
 use Appleton\Taxes\Countries\US\Oregon\TransitDistrictTaxes\SouthClackamas\SouthClackamas;
 use Appleton\Taxes\Countries\US\Oregon\TransitDistrictTaxes\TriMet\TriMet;
-use Appleton\Taxes\Models\TaxArea;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
 
-class InsertOregonTransitDistrictTaxes extends Migration
-{
+return new class extends Migration {
     protected $taxes = 'taxes';
 
     /**
@@ -31,4 +29,4 @@ class InsertOregonTransitDistrictTaxes extends Migration
             'class' => TriMet::class,
         ]);
     }
-}
+};

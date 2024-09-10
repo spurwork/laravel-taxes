@@ -5,8 +5,7 @@ use Appleton\Taxes\Models\TaxArea;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
 
-class AddNvPayrollTax extends Migration
-{
+return new class extends Migration {
     public function up(): void
     {
         $tax_id = DB::table('taxes')->insertGetId([
@@ -29,4 +28,4 @@ class AddNvPayrollTax extends Migration
         DB::table('tax_areas')->where('tax_id', $tax_id)->delete();
         DB::table('taxes')->where('id', $tax_id)->delete();
     }
-}
+};

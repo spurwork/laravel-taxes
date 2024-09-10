@@ -2,11 +2,9 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTaxAreasTable extends Migration
-{
+return new class extends Migration {
     protected $governmental_unit_areas = 'governmental_unit_areas';
     protected $tax_areas = 'tax_areas';
 
@@ -38,4 +36,4 @@ class CreateTaxAreasTable extends Migration
     {
         Schema::drop($this->tax_areas);
     }
-}
+};

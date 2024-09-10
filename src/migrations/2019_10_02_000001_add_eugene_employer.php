@@ -5,8 +5,7 @@ use Appleton\Taxes\Models\TaxArea;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
 
-class AddEugeneEmployer extends Migration
-{
+return new class extends Migration {
     protected $governmental_unit_areas = 'governmental_unit_areas';
     protected $taxes = 'taxes';
     protected $tax_areas = 'tax_areas';
@@ -46,4 +45,4 @@ class AddEugeneEmployer extends Migration
         DB::table('taxes')->where('id', $tax_id)->delete();
         DB::table($this->governmental_unit_areas)->where('name', 'Eugene, OR')->delete();
     }
-}
+};

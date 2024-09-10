@@ -1,5 +1,6 @@
 <?php
- use Appleton\Taxes\Countries\US\Ohio\OhioIncome\OhioIncome;
+
+use Appleton\Taxes\Countries\US\Ohio\OhioIncome\OhioIncome;
 use Appleton\Taxes\Countries\US\Ohio\OhioUnemployment\OhioUnemployment;
 use Appleton\Taxes\Models\TaxArea;
 use Illuminate\Database\Migrations\Migration;
@@ -7,8 +8,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class AddOhioIncomeTaxInformationTable extends Migration
-{
+return new class extends Migration {
     public function up()
     {
         Schema::create('ohio_income_tax_information', function (Blueprint $table) {
@@ -40,4 +40,4 @@ class AddOhioIncomeTaxInformationTable extends Migration
             'based' => TaxArea::BASED_ON_HOME_LOCATION,
         ]);
     }
-}
+};

@@ -1,15 +1,14 @@
 <?php
 
-use Appleton\Taxes\Countries\US\Washington\WashingtonWorkersCompensationEmployer\WashingtonWorkersCompensationEmployer;
 use Appleton\Taxes\Countries\US\Washington\WashingtonWorkersCompensation\WashingtonWorkersCompensation;
+use Appleton\Taxes\Countries\US\Washington\WashingtonWorkersCompensationEmployer\WashingtonWorkersCompensationEmployer;
 use Appleton\Taxes\Models\TaxArea;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class InsertWashingtonWorkersCompensationTax extends Migration
-{
+return new class extends Migration {
     protected $governmental_unit_areas = 'governmental_unit_areas';
     protected $tax_areas = 'tax_areas';
 
@@ -74,4 +73,4 @@ class InsertWashingtonWorkersCompensationTax extends Migration
         DB::table($this->tax_areas)->where('name', 'Washington Workers Compensation Tax')->delete();
         DB::table($this->tax_areas)->where('name', 'Washington Workers Compensation Employer Tax')->delete();
     }
-}
+};

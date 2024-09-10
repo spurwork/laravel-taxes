@@ -5,8 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFederalIncomeTaxInformationTable extends Migration
-{
+return new class extends Migration {
     protected $federal_income_tax_information = 'federal_income_tax_information';
 
     /**
@@ -34,4 +33,4 @@ class CreateFederalIncomeTaxInformationTable extends Migration
     {
         Schema::drop($this->federal_income_tax_information);
     }
-}
+};

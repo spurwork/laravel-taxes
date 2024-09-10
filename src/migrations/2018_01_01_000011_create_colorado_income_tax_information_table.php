@@ -8,8 +8,7 @@ use Appleton\Taxes\Countries\US\Colorado\ColoradoIncome\ColoradoIncome;
 use Appleton\Taxes\Countries\US\Colorado\ColoradoUnemployment\ColoradoUnemployment;
 use Appleton\Taxes\Models\TaxArea;
 
-class CreateColoradoIncomeTaxInformationTable extends Migration
-{
+return new class extends Migration {
     protected $colorado_income_tax_information = 'colorado_income_tax_information';
     protected $governmental_unit_areas = 'governmental_unit_areas';
     protected $tax_areas = 'tax_areas';
@@ -60,4 +59,4 @@ class CreateColoradoIncomeTaxInformationTable extends Migration
         DB::table($this->tax_areas)->where('name', 'Colorado Unemployment Tax')->delete();
         DB::table($this->governmental_unit_areas)->where('name', 'Colorado')->delete();
     }
-}
+};

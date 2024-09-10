@@ -8,8 +8,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class CreateKentuckyIncomeTaxInformation extends Migration
-{
+return new class extends Migration {
     public function up()
     {
         Schema::create('kentucky_income_tax_information', function (Blueprint $table) {
@@ -42,4 +41,4 @@ class CreateKentuckyIncomeTaxInformation extends Migration
             'based' => TaxArea::BASED_ON_HOME_LOCATION,
         ]);
     }
-}
+};

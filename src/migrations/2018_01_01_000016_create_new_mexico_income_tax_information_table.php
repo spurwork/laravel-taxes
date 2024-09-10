@@ -8,8 +8,7 @@ use Appleton\Taxes\Countries\US\NewMexico\NewMexicoIncome\NewMexicoIncome;
 use Appleton\Taxes\Countries\US\NewMexico\NewMexicoUnemployment\NewMexicoUnemployment;
 use Appleton\Taxes\Models\TaxArea;
 
-class CreateNewMexicoIncomeTaxInformationTable extends Migration
-{
+return new class extends Migration {
     protected $new_mexico_income_tax_information = 'new_mexico_income_tax_information';
     protected $governmental_unit_areas = 'governmental_unit_areas';
     protected $tax_areas = 'tax_areas';
@@ -60,4 +59,4 @@ class CreateNewMexicoIncomeTaxInformationTable extends Migration
         DB::table($this->tax_areas)->where('name', 'New Mexico Unemployment Tax')->delete();
         DB::table($this->governmental_unit_areas)->where('name', 'New Mexico')->delete();
     }
-}
+};

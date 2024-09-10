@@ -5,8 +5,7 @@ use Appleton\Taxes\Models\TaxArea;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
 
-class AddWashingtonIncomeTaxInformationTable extends Migration
-{
+return new class extends Migration {
     public function up()
     {
         $unemployment_tax_id = DB::table('taxes')->insertGetId([
@@ -30,4 +29,4 @@ class AddWashingtonIncomeTaxInformationTable extends Migration
         DB::table('tax_areas')->where('tax_id', $unemployment_tax_id)->delete();
         DB::table('taxes')->where('id', $unemployment_tax_id)->delete();
     }
-}
+};

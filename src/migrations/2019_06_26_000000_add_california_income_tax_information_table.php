@@ -8,8 +8,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class AddCaliforniaIncomeTaxInformationTable extends Migration
-{
+return new class extends Migration {
     public function up()
     {
         Schema::create('california_income_tax_information', static function (Blueprint $table) {
@@ -60,4 +59,4 @@ class AddCaliforniaIncomeTaxInformationTable extends Migration
 
         Schema::drop('california_income_tax_information');
     }
-}
+};

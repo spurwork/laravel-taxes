@@ -4,8 +4,7 @@ use Appleton\Taxes\Models\TaxArea;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
 
-class InsertOhioCityTaxes extends Migration
-{
+return new class extends Migration {
     private const STATE_FILE = '2019_07_16_000000_insert_ohio_city_taxes.ini';
 
     private const CLASSES = [
@@ -675,4 +674,4 @@ class InsertOhioCityTaxes extends Migration
             ]]);
         }
     }
-}
+};

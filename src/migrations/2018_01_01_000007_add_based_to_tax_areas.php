@@ -1,11 +1,5 @@
 <?php
 
-use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome;
-use Appleton\Taxes\Countries\US\FederalUnemployment\FederalUnemployment;
-use Appleton\Taxes\Countries\US\Medicare\Medicare;
-use Appleton\Taxes\Countries\US\Medicare\MedicareEmployer;
-use Appleton\Taxes\Countries\US\SocialSecurity\SocialSecurity;
-use Appleton\Taxes\Countries\US\SocialSecurity\SocialSecurityEmployer;
 use Appleton\Taxes\Countries\US\Alabama\AlabamaIncome\AlabamaIncome;
 use Appleton\Taxes\Countries\US\Alabama\AlabamaUnemployment\AlabamaUnemployment;
 use Appleton\Taxes\Countries\US\Alabama\AttallaOccupational\AttallaOccupational;
@@ -34,16 +28,21 @@ use Appleton\Taxes\Countries\US\Alabama\ShorterOccupational\ShorterOccupational;
 use Appleton\Taxes\Countries\US\Alabama\SouthsideOccupational\SouthsideOccupational;
 use Appleton\Taxes\Countries\US\Alabama\SulligentOccupational\SulligentOccupational;
 use Appleton\Taxes\Countries\US\Alabama\TuskegeeOccupational\TuskegeeOccupational;
+use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome;
+use Appleton\Taxes\Countries\US\FederalUnemployment\FederalUnemployment;
 use Appleton\Taxes\Countries\US\Georgia\GeorgiaIncome\GeorgiaIncome;
 use Appleton\Taxes\Countries\US\Georgia\GeorgiaUnemployment\GeorgiaUnemployment;
+use Appleton\Taxes\Countries\US\Medicare\Medicare;
+use Appleton\Taxes\Countries\US\Medicare\MedicareEmployer;
+use Appleton\Taxes\Countries\US\SocialSecurity\SocialSecurity;
+use Appleton\Taxes\Countries\US\SocialSecurity\SocialSecurityEmployer;
 use Appleton\Taxes\Models\TaxArea;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class AddBasedToTaxAreas extends Migration
-{
+return new class extends Migration {
     protected $tax_areas = 'tax_areas';
 
     /**
@@ -115,4 +114,4 @@ class AddBasedToTaxAreas extends Migration
             $table->dropColumn('based');
         });
     }
-}
+};

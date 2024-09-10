@@ -8,8 +8,7 @@ use Appleton\Taxes\Countries\US\NorthCarolina\NorthCarolinaIncome\NorthCarolinaI
 use Appleton\Taxes\Countries\US\NorthCarolina\NorthCarolinaUnemployment\NorthCarolinaUnemployment;
 use Appleton\Taxes\Models\TaxArea;
 
-class CreateNorthCarolinaIncomeTaxInformationTable extends Migration
-{
+return new class extends Migration {
     protected $north_carolina_income_tax_information = 'north_carolina_income_tax_information';
     protected $governmental_unit_areas = 'governmental_unit_areas';
     protected $tax_areas = 'tax_areas';
@@ -60,4 +59,4 @@ class CreateNorthCarolinaIncomeTaxInformationTable extends Migration
         DB::table($this->tax_areas)->where('name', 'North Carolina Unemployment Tax')->delete();
         DB::table($this->governmental_unit_areas)->where('name', 'North Carolina')->delete();
     }
-}
+};

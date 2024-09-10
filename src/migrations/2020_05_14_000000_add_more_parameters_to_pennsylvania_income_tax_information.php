@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddMoreParametersToPennsylvaniaIncomeTaxInformation extends Migration
-{
+return new class extends Migration {
     public function up()
     {
         Schema::table('pennsylvania_income_tax_information', function (Blueprint $table) {
@@ -17,4 +16,4 @@ class AddMoreParametersToPennsylvaniaIncomeTaxInformation extends Migration
             $table->dateTime('exempt_from_school_district_lst_date')->nullable();
         });
     }
-}
+};

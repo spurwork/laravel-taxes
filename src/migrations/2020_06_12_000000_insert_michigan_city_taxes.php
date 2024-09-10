@@ -4,8 +4,7 @@ use Appleton\Taxes\Models\TaxArea;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
 
-class InsertMichiganCityTaxes extends Migration
-{
+return new class extends Migration {
     private const CLASSES = [
         'Albion City Tax' => \Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\AlbionTax\AlbionTax::class,
         'Battle Creek City Tax' => \Appleton\Taxes\Countries\US\Michigan\MichiganCityTaxes\BattleCreekTax\BattleCreekTax::class,
@@ -51,4 +50,4 @@ class InsertMichiganCityTaxes extends Migration
             ]]);
         }
     }
-}
+};

@@ -7,8 +7,7 @@ use Illuminate\Support\Facades\Schema;
  * Class UpdateColumnsInNorthDakotaIncomeTaxInformation
  * Update the North Dakota income tax information table to include W4 clone columns.
  */
-class UpdateColumnsInNorthDakotaIncomeTaxInformation extends Migration
-{
+return new class extends Migration {
     protected $north_dakota_income_tax_information = 'north_dakota_income_tax_information';
     /**
      * Run the migrations.
@@ -30,4 +29,4 @@ class UpdateColumnsInNorthDakotaIncomeTaxInformation extends Migration
             $table->boolean('step_2_checked')->default(false);
         });
     }
-}
+};

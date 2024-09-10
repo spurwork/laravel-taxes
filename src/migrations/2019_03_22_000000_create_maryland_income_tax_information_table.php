@@ -8,8 +8,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMarylandIncomeTaxInformationTable extends Migration
-{
+return new class extends Migration {
     protected $maryland_income_tax_information = 'maryland_income_tax_information';
     protected $governmental_unit_areas = 'governmental_unit_areas';
     protected $tax_areas = 'tax_areas';
@@ -74,4 +73,4 @@ class CreateMarylandIncomeTaxInformationTable extends Migration
         DB::table($this->tax_areas)->where('tax_id', $maryland_income_tax_id)->delete();
         DB::table('taxes')->where('name', 'Maryland Income Tax')->delete();
     }
-}
+};

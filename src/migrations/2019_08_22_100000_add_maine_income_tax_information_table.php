@@ -1,5 +1,6 @@
 <?php
- use Appleton\Taxes\Countries\US\Maine\MaineIncome\MaineIncome;
+
+use Appleton\Taxes\Countries\US\Maine\MaineIncome\MaineIncome;
 use Appleton\Taxes\Countries\US\Maine\MaineUnemployment\MaineUnemployment;
 use Appleton\Taxes\Models\TaxArea;
 use Illuminate\Database\Migrations\Migration;
@@ -7,8 +8,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class AddMaineIncomeTaxInformationTable extends Migration
-{
+return new class extends Migration {
     public function up()
     {
         Schema::create('maine_income_tax_information', function (Blueprint $table) {
@@ -56,4 +56,4 @@ class AddMaineIncomeTaxInformationTable extends Migration
 
         Schema::drop('maine_income_tax_information');
     }
-}
+};

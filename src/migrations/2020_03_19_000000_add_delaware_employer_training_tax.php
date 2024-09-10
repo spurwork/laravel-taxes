@@ -5,8 +5,7 @@ use Appleton\Taxes\Models\TaxArea;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
 
-class AddDelawareEmployerTrainingTax extends Migration
-{
+return new class extends Migration {
     public function up()
     {
         $employer_training_tax = DB::table('taxes')->insertGetId([
@@ -24,4 +23,4 @@ class AddDelawareEmployerTrainingTax extends Migration
             'based' => TaxArea::BASED_ON_EITHER_LOCATION,
         ]);
     }
-}
+};

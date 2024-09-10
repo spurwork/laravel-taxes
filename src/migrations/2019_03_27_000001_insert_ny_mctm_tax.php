@@ -3,12 +3,9 @@
 use Appleton\Taxes\Countries\US\NewYork\NewYorkMetropolitanCommuterTransportationMobility\NewYorkMetropolitanCommuterTransportationMobility;
 use Appleton\Taxes\Models\TaxArea;
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 
-class InsertNyMctmTax extends Migration
-{
+return new class extends Migration {
     protected $governmental_unit_areas = 'governmental_unit_areas';
     protected $taxes = 'taxes';
     protected $tax_areas = 'tax_areas';
@@ -155,4 +152,4 @@ class InsertNyMctmTax extends Migration
         DB::table($this->governmental_unit_areas)->where('name', 'Dutchess County, NY')->delete();
         DB::table($this->governmental_unit_areas)->where('name', 'Westchester County, NY')->delete();
     }
-}
+};

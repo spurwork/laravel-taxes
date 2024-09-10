@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Oregon\V20190101;
+namespace Appleton\Taxes\Tests\Unit\Countries\US\Oregon\V20190101;
 
 use Appleton\Taxes\Countries\US\Oregon\Eugene\Eugene;
 use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;

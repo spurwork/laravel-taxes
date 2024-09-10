@@ -5,8 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGovernmentalUnitAreasTable extends Migration
-{
+return new class extends Migration {
     protected $governmental_unit_areas = 'governmental_unit_areas';
 
     /**
@@ -36,4 +35,4 @@ class CreateGovernmentalUnitAreasTable extends Migration
     {
         Schema::drop($this->governmental_unit_areas);
     }
-}
+};

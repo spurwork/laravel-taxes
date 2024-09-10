@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddParametersToUtahIncomeTaxInformation extends Migration
-{
+return new class extends Migration {
     protected $utah_income_tax_information = 'utah_income_tax_information';
 
     public function up()
@@ -27,4 +26,4 @@ class AddParametersToUtahIncomeTaxInformation extends Migration
             $table->integer('filing_status')->default(0);
         });
     }
-}
+};

@@ -8,8 +8,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class CreateIllinoisIncomeTaxInformation extends Migration
-{
+return new class extends Migration {
     public function up(): void
     {
         Schema::create('illinois_income_tax_information', static function (Blueprint $table) {
@@ -59,4 +58,4 @@ class CreateIllinoisIncomeTaxInformation extends Migration
 
         Schema::drop('illinois_income_tax_information');
     }
-}
+};

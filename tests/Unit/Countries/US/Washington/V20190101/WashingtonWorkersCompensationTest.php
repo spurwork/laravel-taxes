@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Washington\V20190101;
+namespace Appleton\Taxes\Tests\Unit\Countries\US\Washington\V20190101;
 
 use Appleton\Taxes\Classes\WorkerTaxes\GeoPoint;
 use Appleton\Taxes\Countries\US\Washington\WashingtonWorkersCompensation\WashingtonWorkersCompensation;

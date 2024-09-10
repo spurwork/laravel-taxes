@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddParametersToNewMexicoIncomeTaxInformation extends Migration
-{
+return new class extends Migration {
     protected $new_mexico_income_tax_information = 'new_mexico_income_tax_information';
 
     public function up()
@@ -29,4 +28,4 @@ class AddParametersToNewMexicoIncomeTaxInformation extends Migration
             $table->string('form_version')->nullable(false)->default('2020')->change();
         });
     }
-}
+};

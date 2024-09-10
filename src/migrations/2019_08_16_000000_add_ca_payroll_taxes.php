@@ -6,8 +6,7 @@ use Appleton\Taxes\Models\TaxArea;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
 
-class AddCaPayrollTaxes extends Migration
-{
+return new class extends Migration {
     private const CITIES = [
         'Sacramento' => [
             'class' => SacramentoBusinessOperationsEmployer::class,
@@ -52,4 +51,4 @@ class AddCaPayrollTaxes extends Migration
             DB::table('taxes')->where('id', $tax_id)->delete();
         }
     }
-}
+};

@@ -6,8 +6,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class UpdateTaxAreasTable extends Migration
-{
+return new class extends Migration {
     protected $taxes = 'taxes';
     protected $tax_areas = 'tax_areas';
 
@@ -134,4 +133,4 @@ class UpdateTaxAreasTable extends Migration
 
         Schema::drop($this->taxes);
     }
-}
+};

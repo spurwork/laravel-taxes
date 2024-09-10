@@ -1,13 +1,10 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use Appleton\Taxes\Countries\US\Alabama\MaconCountyOccupational\MaconCountyOccupational;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\DB;
 
-class InsertMaconCountyAlTax extends Migration
-{
+return new class extends Migration {
     protected $governmental_unit_areas = 'governmental_unit_areas';
     protected $tax_areas = 'tax_areas';
 
@@ -40,4 +37,4 @@ class InsertMaconCountyAlTax extends Migration
         DB::table($this->tax_areas)->where('name', 'Macon County Occupational Tax')->delete();
         DB::table($this->governmental_unit_areas)->where('name', 'Macon County, AL')->delete();
     }
-}
+};

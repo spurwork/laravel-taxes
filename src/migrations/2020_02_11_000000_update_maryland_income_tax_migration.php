@@ -2,8 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateMarylandIncomeTaxMigration extends Migration
-{
+return new class extends Migration {
     public function up()
     {
         DB::table('taxes')
@@ -20,4 +19,4 @@ class UpdateMarylandIncomeTaxMigration extends Migration
                 DB::table('taxes')->where('id', $tax->id)->update(['name' => 'Maryland Unemployment Tax']);
             });
     }
-}
+};

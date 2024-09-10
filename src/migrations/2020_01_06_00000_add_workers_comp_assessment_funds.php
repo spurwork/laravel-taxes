@@ -1,13 +1,12 @@
 <?php
 
-use Appleton\Taxes\Countries\US\Oregon\WorkersCompAssessmentFundEmployer\WorkersCompAssessmentFundEmployer;
 use Appleton\Taxes\Countries\US\Oregon\WorkersCompAssessmentFund\WorkersCompAssessmentFund;
+use Appleton\Taxes\Countries\US\Oregon\WorkersCompAssessmentFundEmployer\WorkersCompAssessmentFundEmployer;
 use Appleton\Taxes\Models\TaxArea;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
 
-class AddWorkersCompAssessmentFunds extends Migration
-{
+return new class extends Migration {
     protected $governmental_unit_areas = 'governmental_unit_areas';
     protected $taxes = 'taxes';
     protected $tax_areas = 'tax_areas';
@@ -39,4 +38,4 @@ class AddWorkersCompAssessmentFunds extends Migration
             'based' => TaxArea::BASED_ON_WORK_LOCATION,
         ]);
     }
-}
+};

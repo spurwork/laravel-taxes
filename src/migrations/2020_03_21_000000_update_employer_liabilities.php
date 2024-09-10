@@ -8,8 +8,7 @@ use Appleton\Taxes\Countries\US\Oregon\TransitDistrictTaxes\SouthClackamasEmploy
 use Appleton\Taxes\Countries\US\Oregon\TransitDistrictTaxes\TriMetEmployer\TriMetEmployer;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateEmployerLiabilities extends Migration
-{
+return new class extends Migration {
     protected $taxes = 'taxes';
 
     public function up()
@@ -55,4 +54,4 @@ class UpdateEmployerLiabilities extends Migration
             'class' => MassachusettsWorkforceTrainingFundEmployer::class,
         ]);
     }
-}
+};
