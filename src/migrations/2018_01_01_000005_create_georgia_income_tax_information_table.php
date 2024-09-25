@@ -7,8 +7,7 @@ use Illuminate\Support\Facades\Schema;
 use Appleton\Taxes\Countries\US\Georgia\GeorgiaIncome\GeorgiaIncome;
 use Appleton\Taxes\Countries\US\Georgia\GeorgiaUnemployment\GeorgiaUnemployment;
 
-class CreateGeorgiaIncomeTaxInformationTable extends Migration
-{
+return new class extends Migration {
     protected $georgia_income_tax_information = 'georgia_income_tax_information';
     protected $governmental_unit_areas = 'governmental_unit_areas';
     protected $tax_areas = 'tax_areas';
@@ -58,4 +57,4 @@ class CreateGeorgiaIncomeTaxInformationTable extends Migration
         DB::table($this->tax_areas)->where('name', 'Georgia Unemployment Tax')->delete();
         DB::table($this->governmental_unit_areas)->where('name', 'Georgia')->delete();
     }
-}
+};

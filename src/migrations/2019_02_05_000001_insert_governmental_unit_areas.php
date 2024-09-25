@@ -3,8 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
 
-class InsertGovernmentalUnitAreas extends Migration
-{
+return new class extends Migration {
     private const STATE_FILE = '2019_02_05_000001_states.ini';
     private $governmental_unit_areas = 'governmental_unit_areas';
 
@@ -23,4 +22,4 @@ class InsertGovernmentalUnitAreas extends Migration
             }
         }
     }
-}
+};

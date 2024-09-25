@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddParametersToWashingtonDCTaxIncomeInformation extends Migration
-{
+return new class extends Migration {
     protected $washingtondc_income_tax_information = 'washingtondc_income_tax_information';
 
     public function up()
@@ -14,4 +13,4 @@ class AddParametersToWashingtonDCTaxIncomeInformation extends Migration
             $table->integer('additional_withholding')->default(0);
         });
     }
-}
+};

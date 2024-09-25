@@ -1,5 +1,6 @@
 <?php
- use Appleton\Taxes\Countries\US\Montana\MontanaIncome\MontanaIncome;
+
+use Appleton\Taxes\Countries\US\Montana\MontanaIncome\MontanaIncome;
 use Appleton\Taxes\Countries\US\Montana\MontanaUnemployment\MontanaUnemployment;
 use Appleton\Taxes\Models\TaxArea;
 use Illuminate\Database\Migrations\Migration;
@@ -7,8 +8,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class AddMontanaIncomeTaxInformationTable extends Migration
-{
+return new class extends Migration {
     public function up()
     {
         Schema::create('montana_income_tax_information', function (Blueprint $table) {
@@ -41,4 +41,4 @@ class AddMontanaIncomeTaxInformationTable extends Migration
             'based' => TaxArea::BASED_ON_HOME_LOCATION,
         ]);
     }
-}
+};

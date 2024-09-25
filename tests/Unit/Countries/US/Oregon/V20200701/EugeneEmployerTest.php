@@ -37,7 +37,7 @@ class EugeneEmployerTest extends TaxTestCase
         $this->validateNoTax($parameters);
     }
 
-    public function provideTestData(): array
+    public static function provideTestData(): array
     {
         $builder = new TestParametersBuilder();
         $builder
@@ -64,7 +64,8 @@ class EugeneEmployerTest extends TaxTestCase
             ],
         ];
     }
-    public function provideNoTaxTestData(): array
+
+    public static function provideNoTaxTestData(): array
     {
         $builder = new TestParametersBuilder();
         $builder

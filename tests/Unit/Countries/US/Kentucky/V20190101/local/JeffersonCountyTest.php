@@ -46,7 +46,7 @@ class JeffersonCountyTest extends TaxTestCase
         $this->validateNoTax($parameters);
     }
 
-    public function provideTestData(): array
+    public static function provideTestData(): array
     {
         $builder = new TestParametersBuilder();
         $builder
@@ -113,7 +113,7 @@ class JeffersonCountyTest extends TaxTestCase
         ];
     }
 
-    public function provideNoTaxTestData()
+    public static function provideNoTaxTestData()
     {
         $builder = new TestParametersBuilder();
         $builder

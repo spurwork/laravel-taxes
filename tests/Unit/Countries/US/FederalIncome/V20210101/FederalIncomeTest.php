@@ -47,7 +47,7 @@ class FederalIncomeTest extends TestCase
         self::assertThat($tax_amount, self::identicalTo($parameters['expected']));
     }
 
-    public function provideTestData(): array
+    public static function provideTestData(): array
     {
         return [
             'married' => [[

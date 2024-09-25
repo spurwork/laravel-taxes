@@ -17,8 +17,8 @@ class ColoradoLocalTaxTestCase extends TaxTestCase
     {
         Carbon::setTestNow($parameters->getDate());
 
-        $colorado_location_array = $this->getLocation('us.colorado');
-        $local_location_array = $this->getLocation($parameters->getLocalLocation());
+        $colorado_location_array = self::getLocation('us.colorado');
+        $local_location_array = self::getLocation($parameters->getLocalLocation());
 
         $colorado_location = new GeoPoint($colorado_location_array[0], $colorado_location_array[1]);
         $local_location = new GeoPoint($local_location_array[0], $local_location_array[1]);
@@ -80,8 +80,8 @@ class ColoradoLocalTaxTestCase extends TaxTestCase
     {
         Carbon::setTestNow($parameters->getDate());
 
-        $colorado_location_array = $this->getLocation('us.colorado');
-        $local_location_array = $this->getLocation($parameters->getLocalLocation());
+        $colorado_location_array = self::getLocation('us.colorado');
+        $local_location_array = self::getLocation($parameters->getLocalLocation());
 
         $colorado_location = new GeoPoint($colorado_location_array[0], $colorado_location_array[1]);
         $local_location = new GeoPoint($local_location_array[0], $local_location_array[1]);
@@ -130,12 +130,13 @@ class ColoradoLocalTaxTestCase extends TaxTestCase
         }
     }
 
-    public function standardColoradoLocalTestCases(
+    public static function standardColoradoLocalTestCases(
         string $date,
         string $local_location,
         string $tax_class,
         float $wage_amount_in_dollars,
-        float $tax_amount): array
+        float $tax_amount,
+    ): array
     {
         $builder = new ColoradoLocalIncomeParametersBuilder();
         $builder

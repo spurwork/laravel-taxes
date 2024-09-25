@@ -8,8 +8,7 @@ use Appleton\Taxes\Countries\US\Wisconsin\WisconsinIncome\WisconsinIncome;
 use Appleton\Taxes\Countries\US\Wisconsin\WisconsinUnemployment\WisconsinUnemployment;
 use Appleton\Taxes\Models\TaxArea;
 
-class CreateWisconsinIncomeTaxInformationTable extends Migration
-{
+return new class extends Migration {
     protected $wisconsin_income_tax_information = 'wisconsin_income_tax_information';
     protected $governmental_unit_areas = 'governmental_unit_areas';
     protected $tax_areas = 'tax_areas';
@@ -60,4 +59,4 @@ class CreateWisconsinIncomeTaxInformationTable extends Migration
         DB::table($this->tax_areas)->where('name', 'Wisconsin Unemployment Tax')->delete();
         DB::table($this->governmental_unit_areas)->where('name', 'Wisconsin')->delete();
     }
-}
+};

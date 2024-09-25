@@ -37,7 +37,7 @@ class FederalIncomeTest extends TestCase
         self::assertEquals($this->taxAmount($parameters['expected']), $tax_amount);
     }
 
-    public function bracketJointData(): array
+    public static function bracketJointData(): array
     {
         // standard deduction is 12900
         return [
@@ -124,7 +124,7 @@ class FederalIncomeTest extends TestCase
         self::assertEquals($this->taxAmount($parameters['expected']), $tax_amount);
     }
 
-    public function bracketSingleData(): array
+    public static function bracketSingleData(): array
     {
         // standard deduction is 8600
         return [
@@ -211,7 +211,7 @@ class FederalIncomeTest extends TestCase
         self::assertEquals($this->taxAmount($parameters['expected']), $tax_amount);
     }
 
-    public function bracketHeadOfHouseholdData(): array
+    public static function bracketHeadOfHouseholdData(): array
     {
         // standard deduction is 8600
         return [
@@ -301,7 +301,7 @@ class FederalIncomeTest extends TestCase
         self::assertEquals($this->taxAmount($parameters['expected']), $tax_amount);
     }
 
-    public function bracketStep2JointData(): array
+    public static function bracketStep2JointData(): array
     {
         return [
             '0_percent_bracket_low' => [[
@@ -390,7 +390,7 @@ class FederalIncomeTest extends TestCase
         self::assertEquals($this->taxAmount($parameters['expected']), $tax_amount);
     }
 
-    public function bracketStep2SingleData(): array
+    public static function bracketStep2SingleData(): array
     {
         return [
             '0_percent_bracket_low' => [[
@@ -479,7 +479,7 @@ class FederalIncomeTest extends TestCase
         self::assertEquals($this->taxAmount($parameters['expected']), $tax_amount);
     }
 
-    public function bracketStep2HeadOfHouseholdData(): array
+    public static function bracketStep2HeadOfHouseholdData(): array
     {
         return [
             '0_percent_bracket_low' => [[

@@ -6,8 +6,7 @@ use Appleton\Taxes\Models\TaxArea;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
 
-class AddStLouisTaxes extends Migration
-{
+return new class extends Migration {
     protected $governmental_unit_areas = 'governmental_unit_areas';
     protected $tax_areas = 'tax_areas';
 
@@ -44,4 +43,4 @@ class AddStLouisTaxes extends Migration
             'based' => TaxArea::BASED_ON_WORK_LOCATION,
         ]]);
     }
-}
+};

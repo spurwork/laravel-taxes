@@ -22,7 +22,7 @@ class PayrollLiabilityTestCase extends UnitTestCase
 
         $results = $this->payroll_liabilities->calculate(function (PayrollLiabilities $payroll_liabilities)
         use ($parameters) {
-            $payroll_liabilities->setWorkLocation($this->getLocation($parameters->getHomeLocation()));
+            $payroll_liabilities->setWorkLocation(self::getLocation($parameters->getHomeLocation()));
             $payroll_liabilities->setWages($parameters->getWagesInCents());
             $payroll_liabilities->setQtdWages($parameters->getQtdWagesInCents() ?? 0);
             $payroll_liabilities->setYtdWages($parameters->getYtdWagesInCents() ?? 0);

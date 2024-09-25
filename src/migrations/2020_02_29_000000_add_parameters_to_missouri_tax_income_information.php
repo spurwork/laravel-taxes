@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddParametersToMissouriTaxIncomeInformation extends Migration
-{
+return new class extends Migration {
     protected $missouri_income_tax_information = 'missouri_income_tax_information';
 
     public function up()
@@ -15,4 +14,4 @@ class AddParametersToMissouriTaxIncomeInformation extends Migration
             $table->integer('reduced_withholding')->nullable();
         });
     }
-}
+};

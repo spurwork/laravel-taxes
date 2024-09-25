@@ -1,11 +1,9 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class UpdateTaxInformationForEmployee extends Migration
-{
+return new class extends Migration {
     public function up()
     {
         Schema::table('tax_information', function ($table) {
@@ -16,4 +14,4 @@ class UpdateTaxInformationForEmployee extends Migration
                 ->on('users')->onUpdate('restrict')->onDelete('restrict');
         });
     }
-}
+};

@@ -29,7 +29,7 @@ class GeorgiaIncomeTest extends TestCase
         self::assertThat($tax_amount, self::identicalTo($parameters['expected']));
     }
 
-    public function provideBracketData(): array
+    public static function provideBracketData(): array
     {
         $brackets = [
             GeorgiaIncome::FILING_SINGLE => GeorgiaIncome2023::SINGLE_BRACKETS,
@@ -87,7 +87,7 @@ class GeorgiaIncomeTest extends TestCase
         self::assertThat($tax_amount, self::identicalTo($parameters['expected']));
     }
 
-    public function providePersonalAllowanceData(): array
+    public static function providePersonalAllowanceData(): array
     {
         return [
             'single_no_allowances' => [[
@@ -188,7 +188,7 @@ class GeorgiaIncomeTest extends TestCase
         self::assertThat($tax_amount, self::identicalTo($parameters['expected']));
     }
 
-    public function provideAllowanceData(): array
+    public static function provideAllowanceData(): array
     {
         return [
             'single_one_dependent' => [[

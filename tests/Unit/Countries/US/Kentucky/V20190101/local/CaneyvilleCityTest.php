@@ -26,7 +26,7 @@ class CaneyvilleCityTest extends TaxTestCase
     {
         Carbon::setTestNow(self::DATE);
 
-        $home_location_array = $this->getLocation(self::LOCATION);
+        $home_location_array = self::getLocation(self::LOCATION);
         $home_location = new GeoPoint($home_location_array[0], $home_location_array[1]);
 
         $wage = $this->makeAdjustmentWageAtDate(Carbon::now(), $home_location, 30000);
@@ -60,7 +60,7 @@ class CaneyvilleCityTest extends TaxTestCase
     {
         Carbon::setTestNow(self::DATE);
 
-        $home_location_array = $this->getLocation(self::LOCATION);
+        $home_location_array = self::getLocation(self::LOCATION);
         $home_location = new GeoPoint($home_location_array[0], $home_location_array[1]);
 
         $wage_1 = $this->makeWageAtDate(Carbon::now(), $home_location);
@@ -104,7 +104,7 @@ class CaneyvilleCityTest extends TaxTestCase
     {
         Carbon::setTestNow(self::DATE);
 
-        $home_location_array = $this->getLocation(self::LOCATION);
+        $home_location_array = self::getLocation(self::LOCATION);
         $home_location = new GeoPoint($home_location_array[0], $home_location_array[1]);
 
         $wage_1 = $this->makeWageAtDate(Carbon::now(), $home_location);

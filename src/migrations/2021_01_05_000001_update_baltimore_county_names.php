@@ -3,8 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
 
-class UpdateBaltimoreCountyNames extends Migration
-{
+return new class extends Migration {
     private const NAMES = [
         'Allegany, MD' => 'Allegany County, MD',
         'Anne Arundel, MD' => 'Anne Arundel County, MD',
@@ -39,4 +38,4 @@ class UpdateBaltimoreCountyNames extends Migration
                 ->update(['name' => $new]);
         }
     }
-}
+};

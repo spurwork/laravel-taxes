@@ -21,13 +21,13 @@ class WageBaseTaxTestCase extends TaxTestCase
             config($parameters->getTaxRate());
         }
 
-        $home_location_array = $this->getLocation($parameters->getHomeLocation());
+        $home_location_array = self::getLocation($parameters->getHomeLocation());
         $home_location = new GeoPoint($home_location_array[0], $home_location_array[1]);
 
         if ($parameters->getWorkLocation() === null) {
             $work_location = $home_location;
         } else {
-            $work_location_array = $this->getLocation($parameters->getWorkLocation());
+            $work_location_array = self::getLocation($parameters->getWorkLocation());
             $work_location = new GeoPoint($work_location_array[0], $work_location_array[1]);
         }
 
@@ -82,21 +82,24 @@ class WageBaseTaxTestCase extends TaxTestCase
             $result->getAmountInCents(),
             self::identicalTo($parameters->getExpectedAmountInCents()),
             $short_name.' expected '.$parameters->getExpectedAmountInCents()
-            .' tax amount but got '.$result->getAmountInCents());
+            .' tax amount but got '.$result->getAmountInCents()
+        );
 
         self::assertThat(
             $result->getEarningsInCents(),
             self::identicalTo($parameters->getExpectedEarningsInCents()),
             $short_name.' expected '.$parameters->getExpectedEarningsInCents()
-            .' earnings but got '.$result->getEarningsInCents());
+            .' earnings but got '.$result->getEarningsInCents()
+        );
     }
 
-    protected function wageBaseBoundariesTestCases(
+    protected static function wageBaseBoundariesTestCases(
         string $date,
         string $home_location,
         string $tax_class,
         int $wage_base_in_cents,
-        float $tax_rate): array
+        float $tax_rate,
+    ): array
     {
         $builder = new TestParametersBuilder();
         $builder
@@ -104,7 +107,7 @@ class WageBaseTaxTestCase extends TaxTestCase
             ->setHomeLocation($home_location)
             ->setTaxClass($tax_class);
 
-        if(defined("{$tax_class}::STATE")) {
+        if (defined("{$tax_class}::STATE")) {
             $builder->addSutaRate($tax_class::STATE, $tax_rate);
         }
 
@@ -113,7 +116,7 @@ class WageBaseTaxTestCase extends TaxTestCase
                 $builder
                     ->setWagesInCents($wage_base_in_cents - 1000)
                     ->setYtdLiabilitiesInCents(null)
-                    ->setExpectedAmountInCents($this->calculate($wage_base_in_cents - 1000, $tax_rate))
+                    ->setExpectedAmountInCents(self::calculate($wage_base_in_cents - 1000, $tax_rate))
                     ->setExpectedEarningsInCents($wage_base_in_cents - 1000)
                     ->build()
             ],
@@ -121,7 +124,7 @@ class WageBaseTaxTestCase extends TaxTestCase
                 $builder
                     ->setWagesInCents($wage_base_in_cents)
                     ->setYtdLiabilitiesInCents(null)
-                    ->setExpectedAmountInCents($this->calculate($wage_base_in_cents, $tax_rate))
+                    ->setExpectedAmountInCents(self::calculate($wage_base_in_cents, $tax_rate))
                     ->setExpectedEarningsInCents($wage_base_in_cents)
                     ->build()
             ],
@@ -129,7 +132,7 @@ class WageBaseTaxTestCase extends TaxTestCase
                 $builder
                     ->setWagesInCents($wage_base_in_cents + 1000)
                     ->setYtdLiabilitiesInCents(null)
-                    ->setExpectedAmountInCents($this->calculate($wage_base_in_cents, $tax_rate))
+                    ->setExpectedAmountInCents(self::calculate($wage_base_in_cents, $tax_rate))
                     ->setExpectedEarningsInCents($wage_base_in_cents)
                     ->build()
             ],
@@ -137,7 +140,7 @@ class WageBaseTaxTestCase extends TaxTestCase
                 $builder
                     ->setWagesInCents(1000)
                     ->setYtdLiabilitiesInCents($wage_base_in_cents - 2000)
-                    ->setExpectedAmountInCents($this->calculate(1000, $tax_rate))
+                    ->setExpectedAmountInCents(self::calculate(1000, $tax_rate))
                     ->setExpectedEarningsInCents(1000)
                     ->build()
             ],
@@ -145,7 +148,7 @@ class WageBaseTaxTestCase extends TaxTestCase
                 $builder
                     ->setWagesInCents(1000)
                     ->setYtdLiabilitiesInCents($wage_base_in_cents - 1000)
-                    ->setExpectedAmountInCents($this->calculate(1000, $tax_rate))
+                    ->setExpectedAmountInCents(self::calculate(1000, $tax_rate))
                     ->setExpectedEarningsInCents(1000)
                     ->build()
             ],
@@ -153,7 +156,7 @@ class WageBaseTaxTestCase extends TaxTestCase
                 $builder
                     ->setWagesInCents(2000)
                     ->setYtdLiabilitiesInCents($wage_base_in_cents - 1000)
-                    ->setExpectedAmountInCents($this->calculate(1000, $tax_rate))
+                    ->setExpectedAmountInCents(self::calculate(1000, $tax_rate))
                     ->setExpectedEarningsInCents(1000)
                     ->build()
             ],
@@ -176,12 +179,13 @@ class WageBaseTaxTestCase extends TaxTestCase
         ];
     }
 
-    protected function roundedWageBaseBoundariesTestCases(
+    protected static function roundedWageBaseBoundariesTestCases(
         string $date,
         string $home_location,
         string $tax_class,
         int $wage_base_in_cents,
-        float $tax_rate): array
+        float $tax_rate,
+    ): array
     {
         $builder = new TestParametersBuilder();
         $builder
@@ -189,7 +193,7 @@ class WageBaseTaxTestCase extends TaxTestCase
             ->setHomeLocation($home_location)
             ->setTaxClass($tax_class);
 
-        if(defined("{$tax_class}::STATE")) {
+        if (defined("{$tax_class}::STATE")) {
             $builder->addSutaRate($tax_class::STATE, $tax_rate);
         }
 
@@ -198,7 +202,7 @@ class WageBaseTaxTestCase extends TaxTestCase
                 $builder
                     ->setWagesInCents($wage_base_in_cents - 10000)
                     ->setYtdLiabilitiesInCents(null)
-                    ->setExpectedAmountInCents($this->roundToDollar($this->calculate($wage_base_in_cents - 10000, $tax_rate)))
+                    ->setExpectedAmountInCents(self::roundToDollar(self::calculate($wage_base_in_cents - 10000, $tax_rate)))
                     ->setExpectedEarningsInCents($wage_base_in_cents - 10000)
                     ->build()
             ],
@@ -206,7 +210,7 @@ class WageBaseTaxTestCase extends TaxTestCase
                 $builder
                     ->setWagesInCents($wage_base_in_cents)
                     ->setYtdLiabilitiesInCents(null)
-                    ->setExpectedAmountInCents($this->roundToDollar($this->calculate($wage_base_in_cents, $tax_rate)))
+                    ->setExpectedAmountInCents(self::roundToDollar(self::calculate($wage_base_in_cents, $tax_rate)))
                     ->setExpectedEarningsInCents($wage_base_in_cents)
                     ->build()
             ],
@@ -214,7 +218,7 @@ class WageBaseTaxTestCase extends TaxTestCase
                 $builder
                     ->setWagesInCents($wage_base_in_cents + 10000)
                     ->setYtdLiabilitiesInCents(null)
-                    ->setExpectedAmountInCents($this->roundToDollar($this->calculate($wage_base_in_cents, $tax_rate)))
+                    ->setExpectedAmountInCents(self::roundToDollar(self::calculate($wage_base_in_cents, $tax_rate)))
                     ->setExpectedEarningsInCents($wage_base_in_cents)
                     ->build()
             ],
@@ -222,7 +226,7 @@ class WageBaseTaxTestCase extends TaxTestCase
                 $builder
                     ->setWagesInCents(10000)
                     ->setYtdLiabilitiesInCents($wage_base_in_cents - 20000)
-                    ->setExpectedAmountInCents($this->roundToDollar($this->calculate(10000, $tax_rate)))
+                    ->setExpectedAmountInCents(self::roundToDollar(self::calculate(10000, $tax_rate)))
                     ->setExpectedEarningsInCents(10000)
                     ->build()
             ],
@@ -230,7 +234,7 @@ class WageBaseTaxTestCase extends TaxTestCase
                 $builder
                     ->setWagesInCents(10000)
                     ->setYtdLiabilitiesInCents($wage_base_in_cents - 10000)
-                    ->setExpectedAmountInCents($this->roundToDollar($this->calculate(10000, $tax_rate)))
+                    ->setExpectedAmountInCents(self::roundToDollar(self::calculate(10000, $tax_rate)))
                     ->setExpectedEarningsInCents(10000)
                     ->build()
             ],
@@ -238,7 +242,7 @@ class WageBaseTaxTestCase extends TaxTestCase
                 $builder
                     ->setWagesInCents(20000)
                     ->setYtdLiabilitiesInCents($wage_base_in_cents - 10000)
-                    ->setExpectedAmountInCents($this->roundToDollar($this->calculate(10000, $tax_rate)))
+                    ->setExpectedAmountInCents(self::roundToDollar(self::calculate(10000, $tax_rate)))
                     ->setExpectedEarningsInCents(10000)
                     ->build()
             ],
@@ -261,12 +265,12 @@ class WageBaseTaxTestCase extends TaxTestCase
         ];
     }
 
-    protected function calculate($amount, $tax_rate)
+    protected static function calculate($amount, $tax_rate)
     {
         return bcmul(round(($amount / 100) * $tax_rate, 2), 100);
     }
 
-    protected function roundToDollar(int $cents)
+    protected static function roundToDollar(int $cents)
     {
         return round($cents, -2);
     }

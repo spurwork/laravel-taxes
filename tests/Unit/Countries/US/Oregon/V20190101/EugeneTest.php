@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Oregon\V20190101;
+namespace Appleton\Taxes\Tests\Unit\Countries\US\Oregon\V20190101;
 
 use Appleton\Taxes\Countries\US\Oregon\Eugene\Eugene;
 use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
@@ -37,7 +37,7 @@ class EugeneTest extends TaxTestCase
         $this->validate($parameters);
     }
 
-    public function provideTestData(): array
+    public static function provideTestData(): array
     {
         $builder = new TestParametersBuilder();
         $builder
@@ -76,7 +76,7 @@ class EugeneTest extends TaxTestCase
         ];
     }
 
-    public function provideTestDataOutOfArea(): array
+    public static function provideTestDataOutOfArea(): array
     {
         $builder = new TestParametersBuilder();
         $builder

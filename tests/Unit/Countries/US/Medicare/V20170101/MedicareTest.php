@@ -27,7 +27,7 @@ class MedicareTest extends TaxTestCase
         $this->validate($parameters);
     }
 
-    public function provideTestData(): array
+    public static function provideTestData(): array
     {
         $parameters = new TestParametersBuilder();
         $parameters

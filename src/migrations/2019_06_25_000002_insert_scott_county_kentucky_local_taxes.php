@@ -3,15 +3,13 @@
 use Appleton\Taxes\Countries\US\Kentucky\GeorgetownCity\GeorgetownCity;
 use Appleton\Taxes\Countries\US\Kentucky\ScottCounty\ScottCounty;
 use Appleton\Taxes\Countries\US\Kentucky\ScottCountySchoolDistrict\ScottCountySchoolDistrict;
-use Appleton\Taxes\Countries\US\Kentucky\FlorenceCity\FlorenceCity;
 use Appleton\Taxes\Models\TaxArea;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class InsertScottCountyKentuckyLocalTaxes extends Migration
-{
+return new class extends Migration {
     protected $governmental_unit_areas = 'governmental_unit_areas';
     protected $tax_areas = 'tax_areas';
     protected $tax_information = 'kentucky_income_tax_information';
@@ -67,4 +65,4 @@ class InsertScottCountyKentuckyLocalTaxes extends Migration
         ]);
 
     }
-}
+};

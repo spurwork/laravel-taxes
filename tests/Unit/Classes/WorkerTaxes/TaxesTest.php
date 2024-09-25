@@ -407,7 +407,7 @@ class TaxesTest extends UnitTestCase
         $short_name = (new ReflectionClass(AlabamaIncome::class))->getShortName();
         $this->expectExceptionMessage("The implementation for $short_name 2016-01-01 could not be found.");
 
-        $coords = $this->getLocation('us.alabama.birmingham');
+        $coords = self::getLocation('us.alabama.birmingham');
         $location = new GeoPoint($coords[0], $coords[1]);
 
         $this->taxes->calculate(
@@ -434,7 +434,7 @@ class TaxesTest extends UnitTestCase
 
     public function testCalculate_no_user(): void
     {
-        $coords = $this->getLocation('us.alabama.birmingham');
+        $coords = self::getLocation('us.alabama.birmingham');
         $location = new GeoPoint($coords[0], $coords[1]);
 
         $wage = $this->makeWage($location, 6668);
@@ -495,7 +495,7 @@ class TaxesTest extends UnitTestCase
             'filing_status' => AlabamaIncome::FILING_SINGLE,
         ], $this->user);
 
-        $coords = $this->getLocation('us.alabama');
+        $coords = self::getLocation('us.alabama');
         $location = new GeoPoint($coords[0], $coords[1]);
 
         $wage = $this->makeWage($location, 1000);
@@ -574,7 +574,7 @@ class TaxesTest extends UnitTestCase
             'filing_status' => AlabamaIncome::FILING_SINGLE,
         ], $this->user);
 
-        $coords = $this->getLocation('us.alabama.birmingham');
+        $coords = self::getLocation('us.alabama.birmingham');
         $location = new GeoPoint($coords[0], $coords[1]);
 
         $wage = $this->makeWage($location, 1000);
@@ -632,7 +632,7 @@ class TaxesTest extends UnitTestCase
     {
         $this->expectException(BindingResolutionException::class);
 
-        $coords = $this->getLocation('us.alabama');
+        $coords = self::getLocation('us.alabama');
         $location = new GeoPoint($coords[0], $coords[1]);
 
         $this->taxes->calculate(
@@ -676,7 +676,7 @@ class TaxesTest extends UnitTestCase
             'filing_status' => AlabamaIncome::FILING_SINGLE,
         ], $this->user);
 
-        $coords = $this->getLocation('us.alabama.birmingham');
+        $coords = self::getLocation('us.alabama.birmingham');
         $location = new GeoPoint($coords[0], $coords[1]);
 
         $wage = $this->makeWage($location, 6668);
@@ -715,7 +715,7 @@ class TaxesTest extends UnitTestCase
 
         Carbon::setTestNow('2018-01-01');
 
-        $coords = $this->getLocation('us.georgia');
+        $coords = self::getLocation('us.georgia');
         $ga_location = new GeoPoint($coords[0], $coords[1]);
 
         $wage = $this->makeWage($ga_location, 6668);
@@ -765,7 +765,7 @@ class TaxesTest extends UnitTestCase
             'filing_status' => AlabamaIncome::FILING_SINGLE,
         ], $this->user);
 
-        $coords = $this->getLocation('us.alabama.birmingham');
+        $coords = self::getLocation('us.alabama.birmingham');
         $location = new GeoPoint($coords[0], $coords[1]);
 
         $wage = $this->makeWage($location, 6668);

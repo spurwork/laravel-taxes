@@ -6,8 +6,7 @@ use Appleton\Taxes\Models\TaxArea;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
 
-class InsertMassachusettsFamilyMedicalLeaveTax extends Migration
-{
+return new class extends Migration {
     protected $governmental_unit_areas = 'governmental_unit_areas';
     protected $tax_areas = 'tax_areas';
 
@@ -41,4 +40,4 @@ class InsertMassachusettsFamilyMedicalLeaveTax extends Migration
         DB::table($this->tax_areas)->where('name', 'Massachusetts Family Medical Leave Tax')->delete();
         DB::table($this->tax_areas)->where('name', 'Massachusetts Family Medical Leave Employer Tax')->delete();
     }
-}
+};

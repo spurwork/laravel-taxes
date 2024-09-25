@@ -7,8 +7,7 @@ use Appleton\Taxes\Countries\US\Maryland\MarylandUnemployment\MarylandUnemployme
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
 
-class UpdateTaxNames extends Migration
-{
+return new class extends Migration {
     public function up(): void
     {
         DB::table('taxes')
@@ -76,4 +75,4 @@ class UpdateTaxNames extends Migration
                 DB::table('taxes')->where('id', $tax->id)->update(['name' => $new_name]);
             });
     }
-}
+};

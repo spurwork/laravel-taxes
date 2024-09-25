@@ -8,8 +8,7 @@ use Appleton\Taxes\Countries\US\NewYork\NewYorkIncome\NewYorkIncome;
 use Appleton\Taxes\Countries\US\NewYork\NewYorkUnemployment\NewYorkUnemployment;
 use Appleton\Taxes\Models\TaxArea;
 
-class CreateNewYorkIncomeTaxInformationTable extends Migration
-{
+return new class extends Migration {
     protected $new_york_income_tax_information = 'new_york_income_tax_information';
     protected $governmental_unit_areas = 'governmental_unit_areas';
     protected $tax_areas = 'tax_areas';
@@ -60,4 +59,4 @@ class CreateNewYorkIncomeTaxInformationTable extends Migration
         DB::table($this->tax_areas)->where('name', 'New York Unemployment Tax')->delete();
         DB::table($this->governmental_unit_areas)->where('name', 'New York')->delete();
     }
-}
+};

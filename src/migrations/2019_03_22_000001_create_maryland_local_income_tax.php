@@ -1,8 +1,5 @@
 <?php
 
-use Appleton\Taxes\Models\TaxArea;
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Support\Facades\DB;
 use Appleton\Taxes\Countries\US\Maryland\Allegany\Allegany;
 use Appleton\Taxes\Countries\US\Maryland\AnneArundel\AnneArundel;
 use Appleton\Taxes\Countries\US\Maryland\Baltimore\Baltimore;
@@ -21,15 +18,17 @@ use Appleton\Taxes\Countries\US\Maryland\Kent\Kent;
 use Appleton\Taxes\Countries\US\Maryland\Montgomery\Montgomery;
 use Appleton\Taxes\Countries\US\Maryland\PrinceGeorges\PrinceGeorges;
 use Appleton\Taxes\Countries\US\Maryland\QueenAnnes\QueenAnnes;
-use Appleton\Taxes\Countries\US\Maryland\StMarys\StMarys;
 use Appleton\Taxes\Countries\US\Maryland\Somerset\Somerset;
+use Appleton\Taxes\Countries\US\Maryland\StMarys\StMarys;
 use Appleton\Taxes\Countries\US\Maryland\Talbot\Talbot;
 use Appleton\Taxes\Countries\US\Maryland\Washington\Washington;
 use Appleton\Taxes\Countries\US\Maryland\Wicomico\Wicomico;
 use Appleton\Taxes\Countries\US\Maryland\Worcester\Worcester;
+use Appleton\Taxes\Models\TaxArea;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\DB;
 
-class CreateMarylandLocalIncomeTax extends Migration
-{
+return new class extends Migration {
     protected $governmental_unit_areas = 'governmental_unit_areas';
     protected $tax_areas = 'tax_areas';
     protected $taxes = 'taxes';
@@ -81,4 +80,4 @@ class CreateMarylandLocalIncomeTax extends Migration
             ]]);
         }
     }
-}
+};

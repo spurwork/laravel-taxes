@@ -41,7 +41,7 @@ class CincinnatiTest extends TaxTestCase
         );
     }
 
-    public function dataProvider(): array
+    public static function dataProvider(): array
     {
         Carbon::setTestNow(Carbon::parse(self::DATE));
         $builder = new TestParametersBuilder();

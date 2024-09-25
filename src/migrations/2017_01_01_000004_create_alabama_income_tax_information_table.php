@@ -5,8 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAlabamaIncomeTaxInformationTable extends Migration
-{
+return new class extends Migration {
     protected $alabama_income_tax_information = 'alabama_income_tax_information';
 
     /**
@@ -33,4 +32,4 @@ class CreateAlabamaIncomeTaxInformationTable extends Migration
     {
         Schema::drop($this->alabama_income_tax_information);
     }
-}
+};

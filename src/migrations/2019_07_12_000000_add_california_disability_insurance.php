@@ -5,8 +5,7 @@ use Appleton\Taxes\Models\TaxArea;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
 
-class AddCaliforniaDisabilityInsurance extends Migration
-{
+return new class extends Migration {
     protected $governmental_unit_areas = 'governmental_unit_areas';
     protected $taxes = 'taxes';
     protected $tax_areas = 'tax_areas';
@@ -53,4 +52,4 @@ class AddCaliforniaDisabilityInsurance extends Migration
         DB::table($this->governmental_unit_areas)->where('id', $california_gua_id)->delete();
         DB::table($this->tax_areas)->where('tax_id', $california_di_tax_id)->delete();
     }
-}
+};

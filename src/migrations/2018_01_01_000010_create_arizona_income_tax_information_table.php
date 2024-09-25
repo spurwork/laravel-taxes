@@ -8,8 +8,7 @@ use Appleton\Taxes\Countries\US\Arizona\ArizonaIncome\ArizonaIncome;
 use Appleton\Taxes\Countries\US\Arizona\ArizonaUnemployment\ArizonaUnemployment;
 use Appleton\Taxes\Models\TaxArea;
 
-class CreateArizonaIncomeTaxInformationTable extends Migration
-{
+return new class extends Migration {
     protected $arizona_income_tax_information = 'arizona_income_tax_information';
     protected $governmental_unit_areas = 'governmental_unit_areas';
     protected $tax_areas = 'tax_areas';
@@ -59,4 +58,4 @@ class CreateArizonaIncomeTaxInformationTable extends Migration
         DB::table($this->tax_areas)->where('name', 'Arizona Unemployment Tax')->delete();
         DB::table($this->governmental_unit_areas)->where('name', 'Arizona')->delete();
     }
-}
+};

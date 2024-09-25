@@ -23,8 +23,7 @@ use Appleton\Taxes\Models\TaxArea;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
 
-class InsertKentuckyLocalTaxesWithCap extends Migration
-{
+return new class extends Migration {
     private const STATE_FILE = '2019_07_18_000000_insert_kentucky_local_taxes_with_cap.ini';
 
     private const CLASSES = [
@@ -69,4 +68,4 @@ class InsertKentuckyLocalTaxesWithCap extends Migration
             ]]);
         }
     }
-}
+};

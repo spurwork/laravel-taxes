@@ -1,14 +1,11 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use Appleton\Taxes\Countries\US\Florida\FloridaUnemployment\FloridaUnemployment;
 use Appleton\Taxes\Models\TaxArea;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\DB;
 
-class InsertFloridaUnemploymentTax extends Migration
-{
+return new class extends Migration {
     protected $governmental_unit_areas = 'governmental_unit_areas';
     protected $tax_areas = 'tax_areas';
 
@@ -42,4 +39,4 @@ class InsertFloridaUnemploymentTax extends Migration
         DB::table($this->tax_areas)->where('name', 'Florida Unemployment Tax')->delete();
         DB::table($this->governmental_unit_areas)->where('name', 'Florida')->delete();
     }
-}
+};

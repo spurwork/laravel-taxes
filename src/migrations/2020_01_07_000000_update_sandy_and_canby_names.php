@@ -3,8 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
 
-class UpdateSandyAndCanbyNames extends Migration
-{
+return new class extends Migration {
     public function up()
     {
         DB::table('governmental_unit_areas')->where('name', 'Sandy Oregon Employer Tax')->update([
@@ -15,4 +14,4 @@ class UpdateSandyAndCanbyNames extends Migration
             'name' => 'Canby Oregon Employer Transit Tax',
         ]);
     }
-}
+};

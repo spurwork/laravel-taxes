@@ -57,13 +57,13 @@ class ArkansasIncomeTest extends TaxTestCase
 
         Carbon::setTestNow(self::DATE);
 
-        $home_location_array = $this->getLocation(self::LOCATION_TEXAS_TEXARKANA);
+        $home_location_array = self::getLocation(self::LOCATION_TEXAS_TEXARKANA);
         $home_location = new GeoPoint($home_location_array[0], $home_location_array[1]);
 
-        $texarkana_arkansas_location_array = $this->getLocation(self::LOCATION_ARKANSAS_TEXARKANA);
+        $texarkana_arkansas_location_array = self::getLocation(self::LOCATION_ARKANSAS_TEXARKANA);
         $texarkana_arkansas_location = new GeoPoint($texarkana_arkansas_location_array[0], $texarkana_arkansas_location_array[1]);
 
-        $arkansas_location_array = $this->getLocation(self::LOCATION_ARKANSAS);
+        $arkansas_location_array = self::getLocation(self::LOCATION_ARKANSAS);
         $arkansas_location = new GeoPoint($arkansas_location_array[0], $arkansas_location_array[1]);
 
         $wages = collect([
@@ -112,7 +112,7 @@ class ArkansasIncomeTest extends TaxTestCase
         );
     }
 
-    public function provideTestData(): array
+    public static function provideTestData(): array
     {
         $builder = new TestParametersBuilder();
         $builder
@@ -202,7 +202,7 @@ class ArkansasIncomeTest extends TaxTestCase
         ];
     }
 
-    public function provideTexarkanaTestData(): array
+    public static function provideTexarkanaTestData(): array
     {
         $builder = new TestParametersBuilder();
         $builder

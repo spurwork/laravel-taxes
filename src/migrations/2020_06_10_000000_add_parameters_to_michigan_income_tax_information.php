@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddParametersToMichiganIncomeTaxInformation extends Migration
-{
+return new class extends Migration {
     public function up()
     {
         Schema::table('michigan_income_tax_information', function (Blueprint $table) {
@@ -18,4 +17,4 @@ class AddParametersToMichiganIncomeTaxInformation extends Migration
             $table->integer('nonresident_exemptions')->default(0);
         });
     }
-}
+};

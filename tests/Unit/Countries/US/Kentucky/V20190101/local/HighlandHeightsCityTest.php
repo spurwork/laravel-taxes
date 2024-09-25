@@ -37,7 +37,7 @@ class HighlandHeightsCityTest extends WageBaseTaxTestCase
         $this->validateWageBase($parameters);
     }
 
-    public function provideTestData(): array
+    public static function provideTestData(): array
     {
         $builder = new TestParametersBuilder();
         $builder
@@ -74,9 +74,9 @@ class HighlandHeightsCityTest extends WageBaseTaxTestCase
         ];
     }
 
-    public function provideWageBaseData(): array
+    public static function provideWageBaseData(): array
     {
-        return $this->wageBaseBoundariesTestCases(
+        return self::wageBaseBoundariesTestCases(
             self::DATE,
             self::LOCATION,
             self::TAX_CLASS,

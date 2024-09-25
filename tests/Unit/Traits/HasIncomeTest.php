@@ -23,7 +23,7 @@ class HasIncomeTest extends UnitTestCase
         self::assertEquals($bracket, $expected);
     }
 
-    public function data():array
+    public static function data():array
     {
         return [
             '0' => [0, [0, 0, 0]],

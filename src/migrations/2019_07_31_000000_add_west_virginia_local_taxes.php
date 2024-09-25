@@ -5,8 +5,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
 
 
-class AddWestVirginiaLocalTaxes extends Migration
-{
+return new class extends Migration {
     protected $governmental_unit_areas = 'governmental_unit_areas';
     protected $taxes = 'taxes';
     protected $tax_areas = 'tax_areas';
@@ -71,4 +70,4 @@ class AddWestVirginiaLocalTaxes extends Migration
             }
         }
     }
-}
+};

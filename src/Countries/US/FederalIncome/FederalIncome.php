@@ -43,7 +43,7 @@ abstract class FederalIncome extends BaseIncome
             return 0.00;
         }
 
-        $withholding_amount = max($this->withholdingAmount($this->adjustedAnnualWages()) - $this->taxCredits(), 0);
+        $withholding_amount = max($this->withholdingAmount(intval($this->adjustedAnnualWages())) - $this->taxCredits(), 0);
 
         $this->tax_total = $this->payroll->withholdTax(
             $withholding_amount

@@ -3,8 +3,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class MakeMichiganIncomeTaxInformationColumnsNullable extends Migration
-{
+return new class extends Migration {
     /**
      * Make state tax columns nullable
      * @return void
@@ -18,4 +17,4 @@ class MakeMichiganIncomeTaxInformationColumnsNullable extends Migration
             $table->string('exempt')->nullable()->change();
         });
     }
-}
+};

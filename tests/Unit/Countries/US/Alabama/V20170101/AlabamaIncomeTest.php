@@ -69,7 +69,7 @@ class AlabamaIncomeTest extends TaxTestCase
         $this->validate($parameters);
     }
 
-    public function provideTestData(): array
+    public static function provideTestData(): array
     {
         $builder = new TestParametersBuilder();
         $builder
@@ -133,7 +133,7 @@ class AlabamaIncomeTest extends TaxTestCase
         ];
     }
 
-    public function provideAdditionalWithholdingTestData(): array
+    public static function provideAdditionalWithholdingTestData(): array
     {
         $builder = new TestParametersBuilder();
         $builder
@@ -177,7 +177,7 @@ class AlabamaIncomeTest extends TaxTestCase
         ];
     }
 
-    public function provideUseDefaultTestData(): array
+    public static function provideUseDefaultTestData(): array
     {
         return [
             'default tax information' => [

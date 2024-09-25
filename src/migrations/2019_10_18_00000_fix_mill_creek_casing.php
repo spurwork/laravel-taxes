@@ -4,8 +4,7 @@ use Appleton\Taxes\Countries\US\Ohio\MillCreekWestUnityLSD\MillCreekWestUnityLSD
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
 
-class FixMillCreekCasing extends Migration
-{
+return new class extends Migration {
     public function up()
     {
         DB::table('taxes')->where('name', 'Millcreek-West Unity LSD')->update([
@@ -13,4 +12,4 @@ class FixMillCreekCasing extends Migration
             'class' => MillCreekWestUnityLSDTax::class,
         ]);
     }
-}
+};

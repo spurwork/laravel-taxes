@@ -47,7 +47,7 @@ class FederalIncomeTest extends TaxTestCase
         $this->validate($parameters);
     }
 
-    public function provideTestData(): array
+    public static function provideTestData(): array
     {
         $builder = new TestParametersBuilder();
         $builder
@@ -115,7 +115,7 @@ class FederalIncomeTest extends TaxTestCase
         ];
     }
 
-    public function provideUseDefaultTestData(): array
+    public static function provideUseDefaultTestData(): array
     {
         return [
             '01' => [

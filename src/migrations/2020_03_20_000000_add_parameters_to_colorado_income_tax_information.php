@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddParametersToColoradoIncomeTaxInformation extends Migration
-{
+return new class extends Migration {
     protected $colorado_income_tax_information = 'colorado_income_tax_information';
 
     public function up()
@@ -29,4 +28,4 @@ class AddParametersToColoradoIncomeTaxInformation extends Migration
             $table->string('form_version')->nullable(false)->default('2020')->change();
         });
     }
-}
+};

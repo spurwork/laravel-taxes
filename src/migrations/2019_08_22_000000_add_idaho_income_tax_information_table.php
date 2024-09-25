@@ -1,5 +1,6 @@
 <?php
- use Appleton\Taxes\Countries\US\Idaho\IdahoIncome\IdahoIncome;
+
+use Appleton\Taxes\Countries\US\Idaho\IdahoIncome\IdahoIncome;
 use Appleton\Taxes\Countries\US\Idaho\IdahoUnemployment\IdahoUnemployment;
 use Appleton\Taxes\Models\TaxArea;
 use Illuminate\Database\Migrations\Migration;
@@ -7,8 +8,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class AddIdahoIncomeTaxInformationTable extends Migration
-{
+return new class extends Migration {
     public function up()
     {
         Schema::create('idaho_income_tax_information', function (Blueprint $table) {
@@ -57,4 +57,4 @@ class AddIdahoIncomeTaxInformationTable extends Migration
 
         Schema::drop('idaho_income_tax_information');
     }
-}
+};

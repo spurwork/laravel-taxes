@@ -48,9 +48,9 @@ class NewMexicoUnemploymentTest extends UnemploymentTaxTestCase
         );
     }
 
-    public function provideData(): array
+    public static function provideData(): array
     {
-        return $this->wageBaseBoundariesTestCases(
+        return self::wageBaseBoundariesTestCases(
             self::DATE,
             self::LOCATION,
             self::TAX_CLASS,

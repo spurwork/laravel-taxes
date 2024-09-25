@@ -40,7 +40,7 @@ class PennsylvaniaLSTTaxEmployerTest extends TaxTestCase
         $this->validate($parameters);
     }
 
-    public function dataProvider(): array
+    public static function dataProvider(): array
     {
         $builder = new TestParametersBuilder();
         $builder

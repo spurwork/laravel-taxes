@@ -1,18 +1,15 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use Appleton\Taxes\Countries\US\Alabama\BeavertonOccupational\BeavertonOccupational;
 use Appleton\Taxes\Countries\US\Alabama\FortDepositOccupational\FortDepositOccupational;
 use Appleton\Taxes\Countries\US\Alabama\HobsonCityOccupational\HobsonCityOccupational;
 use Appleton\Taxes\Countries\US\Alabama\IrondaleOccupational\IrondaleOccupational;
 use Appleton\Taxes\Countries\US\Alabama\TarrantOccupational\TarrantOccupational;
 use Appleton\Taxes\Models\TaxArea;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\DB;
 
-class InsertMoreAlabamaAreas extends Migration
-{
+return new class extends Migration {
     protected $governmental_unit_areas = 'governmental_unit_areas';
     protected $tax_areas = 'tax_areas';
 
@@ -96,4 +93,4 @@ class InsertMoreAlabamaAreas extends Migration
         DB::table($this->tax_areas)->where('name', 'Tarrant Occupational Tax')->delete();
         DB::table($this->governmental_unit_areas)->where('name', 'Tarrant, AL')->delete();
     }
-}
+};

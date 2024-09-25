@@ -1,7 +1,7 @@
 <?php
 
-use Appleton\Taxes\Countries\US\Kentucky\BooneCountyOrdinance\BooneCountyOrdinance;
 use Appleton\Taxes\Countries\US\Kentucky\BooneCountyMentalHealth\BooneCountyMentalHealth;
+use Appleton\Taxes\Countries\US\Kentucky\BooneCountyOrdinance\BooneCountyOrdinance;
 use Appleton\Taxes\Countries\US\Kentucky\BooneCountySchoolDistrict\BooneCountySchoolDistrict;
 use Appleton\Taxes\Countries\US\Kentucky\FlorenceCity\FlorenceCity;
 use Appleton\Taxes\Models\TaxArea;
@@ -10,8 +10,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class InsertBooneCountyKentuckyLocalTaxes extends Migration
-{
+return new class extends Migration {
     protected $governmental_unit_areas = 'governmental_unit_areas';
     protected $tax_areas = 'tax_areas';
     protected $tax_information = 'kentucky_income_tax_information';
@@ -77,4 +76,4 @@ class InsertBooneCountyKentuckyLocalTaxes extends Migration
             'based' => TaxArea::BASED_ON_WORK_LOCATION,
         ]);
     }
-}
+};

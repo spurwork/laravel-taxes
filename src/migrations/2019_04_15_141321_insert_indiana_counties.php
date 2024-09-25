@@ -96,8 +96,7 @@ use Appleton\Taxes\Models\TaxArea;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
 
-class InsertIndianaCounties extends Migration
-{
+return new class extends Migration {
     private const STATE_FILE = '2019_04_15_141321_indiana_counties.ini';
 
     private const CLASSES = [
@@ -242,4 +241,4 @@ class InsertIndianaCounties extends Migration
             DB::table('governmental_unit_areas')->where('id', $area_id)->delete();
         }
     }
-}
+};

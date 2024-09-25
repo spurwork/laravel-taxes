@@ -3,11 +3,9 @@
 namespace Appleton\Taxes\Tests\Unit\Countries\US\Alabama\V20170101;
 
 use Appleton\Taxes\Countries\US\Alabama\AlabamaUnemployment\AlabamaUnemployment;
-use Appleton\Taxes\Tests\Unit\Countries\UnemploymentTaxTestCase;
-use Appleton\Taxes\Tests\Unit\Countries\MinTestParameters;
-use Appleton\Taxes\Tests\Unit\Countries\MinTestParametersBuilder;
 use Appleton\Taxes\Tests\Unit\Countries\TestParameters;
 use Appleton\Taxes\Tests\Unit\Countries\TestParametersBuilder;
+use Appleton\Taxes\Tests\Unit\Countries\UnemploymentTaxTestCase;
 
 class AlabamaUnemploymentTest extends UnemploymentTaxTestCase
 {
@@ -58,13 +56,14 @@ class AlabamaUnemploymentTest extends UnemploymentTaxTestCase
         );
     }
 
-    public function provideData(): array
+    public static function provideData(): array
     {
-        return $this->wageBaseBoundariesTestCases(
+        return self::wageBaseBoundariesTestCases(
             self::DATE,
             self::LOCATION,
             self::TAX_CLASS,
             self::WAGE_BASE,
-            self::TAX_RATE);
+            self::TAX_RATE,
+        );
     }
 }

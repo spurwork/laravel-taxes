@@ -23,7 +23,7 @@ class BirminghamOccupationalTest extends TaxTestCase
         $this->validate($parameters);
     }
 
-    public function provideTestData():array
+    public static function provideTestData():array
     {
         return [
             '01' => [

@@ -43,13 +43,14 @@ class AuroraOccupationalPrivilegeEmployerTest extends ColoradoLocalTaxTestCase
         );
     }
 
-    public function provideData(): array
+    public static function provideData(): array
     {
-        return $this->standardColoradoLocalTestCases(
+        return self::standardColoradoLocalTestCases(
             self::DATE,
             self::LOCATION,
             self::TAX_CLASS,
             25000,
-            200);
+            200,
+        );
     }
 }

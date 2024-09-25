@@ -1,5 +1,6 @@
 <?php
- use Appleton\Taxes\Countries\US\Utah\UtahIncome\UtahIncome;
+
+use Appleton\Taxes\Countries\US\Utah\UtahIncome\UtahIncome;
 use Appleton\Taxes\Countries\US\Utah\UtahUnemployment\UtahUnemployment;
 use Appleton\Taxes\Models\TaxArea;
 use Illuminate\Database\Migrations\Migration;
@@ -7,8 +8,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class AddUtahIncomeTaxInformationTable extends Migration
-{
+return new class extends Migration {
     public function up()
     {
         Schema::create('utah_income_tax_information', function (Blueprint $table) {
@@ -56,4 +56,4 @@ class AddUtahIncomeTaxInformationTable extends Migration
 
         Schema::drop('utah_income_tax_information');
     }
-}
+};

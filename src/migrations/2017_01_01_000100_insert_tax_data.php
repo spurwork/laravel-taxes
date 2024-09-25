@@ -1,11 +1,5 @@
 <?php
 
-use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome;
-use Appleton\Taxes\Countries\US\FederalUnemployment\FederalUnemployment;
-use Appleton\Taxes\Countries\US\Medicare\Medicare;
-use Appleton\Taxes\Countries\US\Medicare\MedicareEmployer;
-use Appleton\Taxes\Countries\US\SocialSecurity\SocialSecurity;
-use Appleton\Taxes\Countries\US\SocialSecurity\SocialSecurityEmployer;
 use Appleton\Taxes\Countries\US\Alabama\AlabamaIncome\AlabamaIncome;
 use Appleton\Taxes\Countries\US\Alabama\AlabamaUnemployment\AlabamaUnemployment;
 use Appleton\Taxes\Countries\US\Alabama\AttallaOccupational\AttallaOccupational;
@@ -33,11 +27,16 @@ use Appleton\Taxes\Countries\US\Alabama\ShorterOccupational\ShorterOccupational;
 use Appleton\Taxes\Countries\US\Alabama\SouthsideOccupational\SouthsideOccupational;
 use Appleton\Taxes\Countries\US\Alabama\SulligentOccupational\SulligentOccupational;
 use Appleton\Taxes\Countries\US\Alabama\TuskegeeOccupational\TuskegeeOccupational;
+use Appleton\Taxes\Countries\US\FederalIncome\FederalIncome;
+use Appleton\Taxes\Countries\US\FederalUnemployment\FederalUnemployment;
+use Appleton\Taxes\Countries\US\Medicare\Medicare;
+use Appleton\Taxes\Countries\US\Medicare\MedicareEmployer;
+use Appleton\Taxes\Countries\US\SocialSecurity\SocialSecurity;
+use Appleton\Taxes\Countries\US\SocialSecurity\SocialSecurityEmployer;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
 
-class InsertTaxData extends Migration
-{
+return new class extends Migration {
     protected $governmental_unit_areas = 'governmental_unit_areas';
     protected $tax_areas = 'tax_areas';
 
@@ -439,4 +438,4 @@ class InsertTaxData extends Migration
         DB::table($this->governmental_unit_areas)->where('name', 'Sulligent, AL')->delete();
         DB::table($this->governmental_unit_areas)->where('name', 'Tuskegee, AL')->delete();
     }
-}
+};

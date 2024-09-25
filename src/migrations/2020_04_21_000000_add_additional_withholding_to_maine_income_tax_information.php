@@ -3,8 +3,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddAdditionalWithholdingToMaineIncomeTaxInformation extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -16,4 +15,4 @@ class AddAdditionalWithholdingToMaineIncomeTaxInformation extends Migration
             $table->integer('additional_withholding');
         });
     }
-}
+};

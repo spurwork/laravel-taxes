@@ -58,7 +58,7 @@ class ShelbyIncomeTest extends TaxTestCase
         );
     }
 
-    public function provideTestData(): array
+    public static function provideTestData(): array
     {
         $builder = new TestParametersBuilder();
         $builder

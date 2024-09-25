@@ -1,6 +1,6 @@
 <?php
 
-namespace Appleton\Taxes\Countries\US\Washington\V20190101;
+namespace Appleton\Taxes\Tests\Unit\Countries\US\Washington\V20190101;
 
 use Appleton\Taxes\Countries\US\Washington\WashingtonFamilyMedicalLeaveEmployer\WashingtonFamilyMedicalLeaveEmployer;
 use Appleton\Taxes\Tests\Unit\Countries\TaxTestCase;
@@ -37,7 +37,7 @@ class WashingtonFamilyMedicalLeaveEmployerTest extends TaxTestCase
         $this->validate($parameters);
     }
 
-    public function provideTestData(): array
+    public static function provideTestData(): array
     {
         $builder = new TestParametersBuilder();
         $builder
@@ -79,7 +79,7 @@ class WashingtonFamilyMedicalLeaveEmployerTest extends TaxTestCase
         ];
     }
 
-    public function provideTestDataOutOfArea(): array
+    public static function provideTestDataOutOfArea(): array
     {
         $builder = new TestParametersBuilder();
         $builder

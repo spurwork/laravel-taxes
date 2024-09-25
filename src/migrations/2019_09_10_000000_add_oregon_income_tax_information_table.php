@@ -1,5 +1,6 @@
 <?php
- use Appleton\Taxes\Countries\US\Oregon\OregonIncome\OregonIncome;
+
+use Appleton\Taxes\Countries\US\Oregon\OregonIncome\OregonIncome;
 use Appleton\Taxes\Countries\US\Oregon\OregonUnemployment\OregonUnemployment;
 use Appleton\Taxes\Models\TaxArea;
 use Illuminate\Database\Migrations\Migration;
@@ -7,8 +8,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class AddOregonIncomeTaxInformationTable extends Migration
-{
+return new class extends Migration {
     public function up()
     {
         Schema::create('oregon_income_tax_information', function (Blueprint $table) {
@@ -42,4 +42,4 @@ class AddOregonIncomeTaxInformationTable extends Migration
             'based' => TaxArea::BASED_ON_HOME_LOCATION,
         ]);
     }
-}
+};

@@ -2,11 +2,9 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class AddExemptToIncomeTaxInformation extends Migration
-{
+return new class extends Migration {
     private $alabama_income_tax_information = 'alabama_income_tax_information';
     private $georgia_income_tax_information = 'georgia_income_tax_information';
     private $federal_income_tax_information = 'federal_income_tax_information';
@@ -47,4 +45,4 @@ class AddExemptToIncomeTaxInformation extends Migration
             $table->dropColumn($this->exempt_column);
         });        
     }
-}
+};
