@@ -1,0 +1,33 @@
+services:
+  spur-taxes:
+    image: php:8.3-fpm
+    container_name: spur-taxes
+    build:
+      context: .
+      args:
+        user: "${DOCKER_USER}"
+        uid: "${DOCKER_UID:-1000}"
+      dockerfile: Dockerfile
+    volumes:
+      - ".:/var/www/html"
+    working_dir: /var/www/html
+    environment:
+      - APP_ENV=local
+    ports:
+      - "9000:9000"
+    depends_on:
+      - spur-taxes-db
+#    command: bash -c "docker-php-ext-install pdo_pgsql pgsql && php-fpm"
+  spur-taxes-db:
+    image: postgis/postgis:15-3.5
+    container_name: spur-taxes-db
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: laravel-taxes
+    ports:
+      - "5435:5432"
+    volumes:
+      - spur-taxes-db-data:/var/lib/postgresql/data
+volumes:
+  spur-taxes-db-data:
