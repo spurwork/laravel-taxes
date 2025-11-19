@@ -70,7 +70,7 @@ jobs:
       
       - name: Create test database
         run: |
-          PGPASSWORD=travis psql -h localhost -p 5433 -U travis -c 'CREATE DATABASE travis_ci_test;'
+          PGPASSWORD=travis psql -h localhost -p 5433 -U travis -d postgres -c 'CREATE DATABASE travis_ci_test;'
           PGPASSWORD=travis psql -h localhost -p 5433 -U travis -d travis_ci_test -c 'CREATE EXTENSION postgis;'
       
       - name: Initialize database
