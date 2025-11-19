@@ -52,7 +52,7 @@ jobs:
       - name: Install system dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y openssl libssl-dev libonig5 postgresql-client-15
+          sudo apt-get install -y openssl libssl-dev libonig5 postgresql-client
       
       - name: Configure Composer
         run: composer self-update --2
