@@ -25,6 +25,9 @@ env:
 jobs:
   test:
     runs-on: ubuntu-22.04
+    # Skip PR events for same-repo PRs (push event will handle it instead)
+    # Only run PR events for forks (where head.repo != base.repo)
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name
     
     services:
       postgres:
