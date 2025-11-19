@@ -30,6 +30,7 @@ jobs:
       postgres:
         image: postgis/postgis:15-3.3
         env:
+          # Note: Services can't reference workflow-level env vars, so values must match env section above
           POSTGRES_USER: travis
           POSTGRES_PASSWORD: travis
           POSTGRES_DB: postgres
@@ -73,8 +74,8 @@ jobs:
       
       - name: Create test database
         run: |
-          PGPASSWORD=travis psql -h localhost -p 5433 -U travis -d postgres -c 'CREATE DATABASE travis_ci_test;'
-          PGPASSWORD=travis psql -h localhost -p 5433 -U travis -d travis_ci_test -c 'CREATE EXTENSION postgis;'
+          PGPASSWORD=$PG_PASSWORD psql -h $TEST_DB_HOST -p $PGPORT -U $PGUSER -d postgres -c "CREATE DATABASE $TEST_DB_DATABASE;"
+          PGPASSWORD=$PG_PASSWORD psql -h $TEST_DB_HOST -p $PGPORT -U $PGUSER -d $TEST_DB_DATABASE -c 'CREATE EXTENSION postgis;'
       
       - name: Initialize database
         run: php init_db.php
