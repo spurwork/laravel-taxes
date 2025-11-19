@@ -12,6 +12,9 @@ on:
 env:
   PGPORT: 5433
   PGUSER: travis
+  PG_USER: travis
+  PG_PASSWORD: travis
+  TEST_DB_HOST: localhost
   TEST_DB_PORT: 5433
   TEST_DB_DATABASE: travis_ci_test
   TEST_DB_USERNAME: travis
