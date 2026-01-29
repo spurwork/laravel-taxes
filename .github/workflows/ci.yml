@@ -1,0 +1,85 @@
+name: CI
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - '*'
+  pull_request:
+    branches:
+      - '*'
+
+env:
+  PGPORT: 5433
+  PGUSER: travis
+  PG_USER: travis
+  PG_PASSWORD: travis
+  TEST_DB_HOST: localhost
+  TEST_DB_PORT: 5433
+  TEST_DB_DATABASE: travis_ci_test
+  TEST_DB_USERNAME: travis
+  TEST_DB_PASSWORD: travis
+  OPENSSL_CONF: /etc/ssl/
+  APP_ENV: testing
+
+jobs:
+  test:
+    runs-on: ubuntu-22.04
+    
+    services:
+      postgres:
+        image: postgis/postgis:15-3.3
+        env:
+          # Note: Services can't reference workflow-level env vars, so values must match env section above
+          POSTGRES_USER: travis
+          POSTGRES_PASSWORD: travis
+          POSTGRES_DB: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5433:5432
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: redis, pdo, pdo_pgsql, pgsql, mbstring, xml, ctype, iconv, intl, bcmath
+          coverage: none
+      
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y openssl libssl-dev libonig5 postgresql-client
+      
+      - name: Configure Composer
+        run: composer self-update --2
+      
+      - name: Cache Composer dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.composer/cache
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+      
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-interaction
+      
+      - name: Create test database
+        run: |
+          PGPASSWORD=$PG_PASSWORD psql -h $TEST_DB_HOST -p $PGPORT -U $PGUSER -d postgres -c "CREATE DATABASE $TEST_DB_DATABASE;"
+          PGPASSWORD=$PG_PASSWORD psql -h $TEST_DB_HOST -p $PGPORT -U $PGUSER -d $TEST_DB_DATABASE -c 'CREATE EXTENSION postgis;'
+      
+      - name: Initialize database
+        run: php init_db.php
+      
+      - name: Run tests
+        run: vendor/phpunit/phpunit/phpunit --stop-on-error --stop-on-failure
+
