@@ -99,7 +99,7 @@ class Payroll
         return max($this->total_earnings - $this->exempted_earnings - $this->amount_withheld, 0);
     }
 
-    public function getEarnings(GovernmentalUnitArea $governmental_unit_area = null, int $position = null): float
+    public function getEarnings(?GovernmentalUnitArea $governmental_unit_area = null, ?int $position = null): float
     {
         if ($governmental_unit_area === null) {
             return $this->earnings - $this->exempted_earnings;
@@ -118,7 +118,7 @@ class Payroll
         return ($earnings_in_cents / 100) - $this->exempted_earnings;
     }
 
-    public function getRegularEarnings(GovernmentalUnitArea $governmental_unit_area = null):float
+    public function getRegularEarnings(?GovernmentalUnitArea $governmental_unit_area = null):float
     {
         $earnings_in_cents = $this->area_incomes
             ->filter(function (AreaIncome $income) use ($governmental_unit_area) {
@@ -147,7 +147,7 @@ class Payroll
         return ($this->getRegularEarnings() - $this->getSupplementalEarnings()) * $this->pay_periods;
     }
 
-    public function getHoursWorked(GovernmentalUnitArea $governmental_unit_area = null): float
+    public function getHoursWorked(?GovernmentalUnitArea $governmental_unit_area = null): float
     {
         if ($governmental_unit_area === null) {
             return $this->minutes_worked / 60;
@@ -166,7 +166,7 @@ class Payroll
         return $minutes_worked / 60;
     }
 
-    public function getShiftHoursWorked(GovernmentalUnitArea $governmental_unit_area = null): float
+    public function getShiftHoursWorked(?GovernmentalUnitArea $governmental_unit_area = null): float
     {
         if ($governmental_unit_area === null) {
             return $this->minutes_worked / 60;
@@ -207,7 +207,7 @@ class Payroll
         return $this->supplemental_earnings - $this->exempted_supplemental_earnings;
     }
 
-    public function getDaysWorked(string $tax_class, GovernmentalUnitArea $governmental_unit_area = null)
+    public function getDaysWorked(string $tax_class, ?GovernmentalUnitArea $governmental_unit_area = null)
     {
         if ($governmental_unit_area === null) {
             return $this->days_worked;
@@ -226,7 +226,7 @@ class Payroll
         );
     }
 
-    public function getWtdEarnings(GovernmentalUnitArea $governmental_unit_area = null): float
+    public function getWtdEarnings(?GovernmentalUnitArea $governmental_unit_area = null): float
     {
         if ($governmental_unit_area === null) {
             return $this->wtd_earnings;
@@ -247,7 +247,7 @@ class Payroll
         );
     }
 
-    public function getMtdEarnings(GovernmentalUnitArea $governmental_unit_area = null): float
+    public function getMtdEarnings(?GovernmentalUnitArea $governmental_unit_area = null): float
     {
         if ($governmental_unit_area === null) {
             return $this->mtd_earnings;
@@ -268,7 +268,7 @@ class Payroll
         );
     }
 
-    public function getYtdEarnings(GovernmentalUnitArea $governmental_unit_area = null): float
+    public function getYtdEarnings(?GovernmentalUnitArea $governmental_unit_area = null): float
     {
         if ($governmental_unit_area === null) {
             return $this->ytd_earnings;
@@ -301,7 +301,7 @@ class Payroll
         return $this->tax_manager->computeMtdTaxableWages($this->annual_taxable_wages, $tax_class, $this->pay_date);
     }
 
-    public function getTipAmount(GovernmentalUnitArea $governmental_unit_area = null)
+    public function getTipAmount(?GovernmentalUnitArea $governmental_unit_area = null)
     {
         if ($governmental_unit_area === null) {
             return $this->tip_amount;
@@ -316,7 +316,7 @@ class Payroll
         return $this->wage_manager->calculateTipAmount($area_income->getWages()) / 100;
     }
 
-    public function getPayRate(GovernmentalUnitArea $governmental_unit_area = null): float
+    public function getPayRate(?GovernmentalUnitArea $governmental_unit_area = null): float
     {
         if ($governmental_unit_area === null) {
             return $this->pay_rate;
@@ -386,7 +386,7 @@ class Payroll
         }) / 100;
     }
 
-    public function isSalariedWorker(GovernmentalUnitArea $governmental_unit_area = null): bool
+    public function isSalariedWorker(?GovernmentalUnitArea $governmental_unit_area = null): bool
     {
         if ($governmental_unit_area === null) {
             return $this->is_salaried;

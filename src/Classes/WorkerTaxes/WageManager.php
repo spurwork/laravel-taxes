@@ -26,7 +26,7 @@ class WageManager
 
     public function calculateEarnings(
         Collection $wages,
-        Carbon $date = null,
+        ?Carbon $date = null,
         bool $supplemental = false
     ): float {
         if ($supplemental) {
