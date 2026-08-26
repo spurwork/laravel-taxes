@@ -26,7 +26,7 @@ class WageManager
 
     public function calculateEarnings(
         Collection $wages,
-        Carbon $date = null,
+        ?Carbon $date = null,
         bool $supplemental = false
     ): float {
         if ($supplemental) {
@@ -75,16 +75,17 @@ class WageManager
                         return;
                     }
 
-                    $start_of_week = $date->copy()->startOfWeek();
+                    $start_of_week = $date->copy()->startOfWeek(Carbon::MONDAY);
                     for ($i = 0; $i < 5; ++$i) {
                         $day = $start_of_week->copy()->addDays($i);
                         if ($day < $start_date
+                            || $day > $end_date
                             || in_array($day->toDateString(), $worked_days, true)
                         ) {
                             continue;
                         }
 
-                        $worked_days[] = $date->toDateString();
+                        $worked_days[] = $day->toDateString();
                         continue;
                     }
 

@@ -1497,7 +1497,9 @@ class TaxServiceProvider extends ServiceProvider
         $basename = class_basename($interface);
         $namespace = substr($interface, 0, -strlen($basename) - 1);
         foreach ($this->getImplementations($interface) as $implementation) {
-            if ($date->diffInDays(Carbon::createFromFormat('Ymd', substr($implementation, 1)), false) <= 0) {
+            $effective_date = Carbon::createFromFormat('Ymd', substr($implementation, 1))->startOfDay();
+
+            if ($effective_date->lessThanOrEqualTo($date->copy()->startOfDay())) {
                 return $namespace . '\\' . $implementation . '\\' . $basename;
             }
         }
