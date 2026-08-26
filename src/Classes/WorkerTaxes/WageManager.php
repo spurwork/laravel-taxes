@@ -79,6 +79,7 @@ class WageManager
                     for ($i = 0; $i < 5; ++$i) {
                         $day = $start_of_week->copy()->addDays($i);
                         if ($day < $start_date
+                            || $day > $end_date
                             || in_array($day->toDateString(), $worked_days, true)
                         ) {
                             continue;
